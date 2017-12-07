@@ -215,6 +215,17 @@ certificates that don't look familiar:
  | docker2017.holidayhackchallenge.com |                                | 35.190.163.207 |
  | chat.holidayhackchallenge.com       |                                |  35.196.73.180 |
 
+** Monitoring
+
+None of the 3 servers listed above are currently accessible on port 80
+or 443 (HTTP and HTTPS). We setup some monitoring using a free online
+service (uptimerobot.com). Every 5 minutes, it would try to connect to
+HTTP and HTTPs on the 3 servers listed above. Once the systems become
+available, it will text us and post a message to our Slack channel.
+
+Once that happens, the hack is on, and we'll be ready to hit the
+ground running.
+
 ** Recon Summary
 
 We can use the following indicators to search any clues we're later provided with:
