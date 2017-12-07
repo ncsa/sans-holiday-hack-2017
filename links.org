@@ -1,0 +1,36 @@
+* SANS PenTest Blog
+** Why You Need the Skills to Tinker with Publicly Released Exploit Code
+   https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code
+   Mentions Apache struts vulnerabilities, specifically CVE-2017-5638 and CVE-2017-9805
+   Code: https://github.com/chrisjd20/cve-2017-9805.py
+** Go To The Head Of The Class: LD_PRELOAD For The Win
+   https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win
+   LD_PRELOAD for time manipulation
+*** References:
+     preeny: https://github.com/zardus/preeny
+     libfaketime: https://github.com/wolfcw/libfaketime
+     retrace: https://github.com/riboseinc/retrace
+** A Spot of Tee
+   https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee
+   Restricted bash shell, and bypassing the I/O restriction with tee
+** Understanding and Exploiting Web-based LDAP
+   https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap
+   LDAP syntax, LDAP injection
+*** References:
+    LDAP injection Authentication Bypass: https://www.owasp.org/index.php/Testing_for_LDAP_Injection_(OTG-INPVAL-006)
+    OpenLDAP attributes: http://www.zytrax.com/books/ldap/ape/.
+    Ldap Query basics: https://technet.microsoft.com/en-us/library/aa996205(v=exchg.65).aspx
+    Active Directory Attributes: https://msdn.microsoft.com/en-us/library/ms675090(v=vs.85).aspx
+** Massively Scaling your Scanning
+   https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning
+   masscan
+** SCAPY Full Duplex Stream Reassembly
+   https://pen-testing.sans.org/blog/2017/10/13/scapy-full-duplex-stream-reassembly
+   "Follow TCP Stream" with SCAPY
+** SQLMAP Tamper Scripts for The Win
+   https://pen-testing.sans.org/blog/2017/10/13/sqlmap-tamper-scripts-for-the-win
+   sqlmap and tamper scripts
+   Code: https://gist.github.com/MarkBaggett/49aca627205aebaa2be1811511dbc422#file-custom_caesar-py
+** How to Guide: Cracking into Piles of Files
+   Password cracking
+
