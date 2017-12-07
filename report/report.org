@@ -1,0 +1,250 @@
+#+TITLE: SANS 2017 Holiday Hack Writeup
+#+AUTHOR: Vlad Grigorescu
+#+EMAIL: vladg@illinois.edu
+#+OPTIONS: timestamp:nil num:nil ^:nil toc:2 exports:both
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/htmlize.css"/>
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/readtheorg.css"/>
+#+HTML_HEAD: <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+#+HTML_HEAD: <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+#+HTML_HEAD: <script type="text/javascript" src="js/readtheorg.js"></script>
+#+HTML_HEAD: <style>#content{max-width:1200px;}</style>
+* Introduction
+* Answers
+* Pre-contest Reconnaissance
+#+CAPTION: SANS Holiday Hack Challenge December 5th Update
+[[./images/sans_holiday_hack_preview.png]]
+
+On December 5th, the SANS Holiday Hack Challenge was updated to tell
+us that the 2017 Hack was coming soon, and encouraging us to catch up
+on past challenges. The next day, we started doing just that. In
+addition to reviewing previous challenges, we also began some
+reconnaissance for the 2017 challenge.
+
+Recon is a crucial step of any good penetration test, and is one that
+often gets skipped in a "Capture the Flag" type of competition, since
+most of the information is provided. Nevertheless, let's see what we
+can find. The more information we have ahead of time, the better
+prepared we'll be, and the less work we'll have to do during the
+actual contest.
+
+Much like how attackers will have indicators of compromise (IOCs)
+which allow us to track and follow an individual attacker, the Counter
+Hack team also does similar things every year, and will leave behind
+some clues.
+
+** Whois Searching
+ For example, the 2016 contest made use of the domain
+ www.northpolewonderland.com. We can look at publicly available WHOIS
+ data for that domain:
+
+ #+BEGIN_SRC sh
+ whois northpolewonderland.com | grep Registrant
+ #+END_SRC
+
+ #+BEGIN_EXAMPLE
+ Registrant Name: Edward Skoudis
+ Registrant Organization: Counter Hack
+ Registrant Street: 2402 Alexandra Court
+ Registrant City: Howell
+ Registrant State/Province: New Jersey
+ Registrant Postal Code: 07731
+ Registrant Country: US
+ Registrant Phone: +1.7327511024
+ Registrant Phone Ext:
+ Registrant Fax: +1.7327511024
+ Registrant Fax Ext:
+ Registrant Email: edskoudis@yahoo.com
+ #+END_EXAMPLE
+
+ There are a few services that allow you to do a "reverse WHOIS"
+ search, to search for domains by WHOIS data. For instance to search
+ for other domains where "edskoudis@yahoo.com" shows up in the contact
+ info: 
+
+ | Domain Name                      | Creation Date | Registrar               |
+ |----------------------------------+---------------+-------------------------|
+ | northpolechristmastown.com       |    2017-10-19 | GODADDY.COM, LLC        |
+ | 1hrctf.com                       |    2016-04-08 | GODADDY.COM, LLC        |
+ | 1hrctf.org                       |    2016-04-08 | GODADDY.COM, LLC        |
+ | cranbian.org                     |    2016-11-22 | GODADDY.COM, LLC        |
+ | hackfestchallenge.com            |    2016-10-20 | GODADDY.COM, LLC        |
+ | onehourctf.org                   |    2016-04-08 | GODADDY.COM, LLC        |
+ | atnascorp.com                    |    2015-11-10 | GODADDY.COM, LLC        |
+ | ginormouselectronicssupplier.com |    2015-12-09 | GODADDY.COM, LLC        |
+ | holidayhackchallenge.com         |    2015-11-02 | GODADDY.COM, LLC        |
+ | holidayhackchallenge.org         |    2015-11-02 | GODADDY.COM, LLC        |
+ | digimeme.org                     |    2013-11-18 | GODADDY.COM, LLC        |
+ | syn-pi.org                       |    2013-11-18 | GODADDY.COM, LLC        |
+ | pseudovision.net                 |    2010-09-09 | GODADDY.COM, LLC        |
+ | counterhack.net                  |    2001-06-22 | NETWORK SOLUTIONS, LLC. |
+ | skoudis.com                      |    2001-06-22 | NETWORK SOLUTIONS, LLC. |
+ | counterhack.com                  |    2000-05-30 | GODADDY.COM, LLC        |
+
+ This isn't comprehensive, since northpolewonderland.com didn't show up
+ in the results, but cranbian.org was another domain from 2016 that
+ does show up.
+
+ There are a couple of new entries since the 2016 contest, 1hrctf and
+ northpolechristmastown.com. 1hrctf seems unrelated, but it's a good
+ bet that northpolechristmastown.com will show up in the 2017
+ challenge.
+
+ At this point, we have to proceed with extreme caution. Since the
+ contest hasn't started, nothing is in scope yet. Any further digging
+ should be as unintrusive as possible.
+
+** DNS Brute Forcing
+ Now that we have a domain we're interested in, let's look at DNS:
+
+ #+BEGIN_SRC sh
+ dig ANY northpolechristmastown.com
+ #+END_SRC
+
+ #+BEGIN_EXAMPLE
+ ;; ANSWER SECTION:
+ northpolechristmastown.com. 5	IN	TXT	"v=spf1 include:_spf.google.com -all"
+ northpolechristmastown.com. 5	IN	MX	30 ALT2.ASPMX.L.GOOGLE.com.
+ northpolechristmastown.com. 5	IN	MX	40 ASPMX2.GOOGLEMAIL.com.
+ northpolechristmastown.com. 5	IN	MX	20 ALT1.ASPMX.L.GOOGLE.com.
+ northpolechristmastown.com. 5	IN	MX	50 ASPMX3.GOOGLEMAIL.com.
+ northpolechristmastown.com. 5	IN	MX	10 ASPMX.L.GOOGLE.com.
+ northpolechristmastown.com. 5	IN	SOA	ns53.domaincontrol.com. dns.jomax.net. 2017120112 28800 7200 604800 600
+ northpolechristmastown.com. 5	IN	NS	ns54.domaincontrol.com.
+ northpolechristmastown.com. 5	IN	NS	ns53.domaincontrol.com.
+ #+END_EXAMPLE
+
+ From this, we can tell that GMail provides the e-mail for the domain,
+ and GoDaddy provides the DNS service. Of note, however, is that there
+ are no A or AAAA records, so northpolechristmastown.com does not
+ resolve to anything.
+
+ Next, we'll try some Google dorking. Googling for
+ site:northpolechristmastown.com reveals
+ nppd.northpolechristmastown.com, which is a Sign In page for the
+ North Pole Police Department. It looks like nppd uses Google OAuth
+ for authentication, and most pages are forbidden with a regular GMail
+ account.
+
+ Checking a few other common URLs on nppd, we can find some resources
+ that are available, including favicon.ico and robots.txt:
+ #+BEGIN_SRC
+ User-agent: hk-47
+ Disallow: /
+ Disallow: /needhelp
+ Disallow: /infractions
+ Disallow: /community
+ Disallow: /about
+
+ User-agent: threepio
+ Sand-Crawler-delay: 421
+
+ User-agent: artoo
+ Sand-Crawler-delay: 2187
+ #+END_SRC
+
+#+CAPTION: North Pole Police Department Logo
+[[./images/nppd_star.png]]
+
+ Everything here but /infractions is forbidden. Looking at that page
+ returns a list of infractions, such as "Unauthorized access to cookie
+ jar" or "Computer infraction: Accessing siblings files without
+ permission." We also see some interesting infractions that refer to
+ previous Holiday Hacks:
+
+ #+BEGIN_EXAMPLE
+	 {
+             "date": "2016-12-25T00:00:00",
+             "name": "Dr. Who",
+             "severity": 5.0,
+             "status": "closed",
+             "title": "Trying to ruin Christmas"
+         },
+	 {
+             "date": "2015-12-25T00:00:00",
+             "name": "Cindy Lou Who",
+             "severity": 5.0,
+             "status": "closed",
+             "title": "Trying to ruin Christmas"
+         }
+     ],
+     "query": "name:Who"
+ #+END_EXAMPLE
+
+ Going back to DNS< we can try to enumerate some hosts under the top
+ level domain. FuzzDB has a nice list of common DNS name, and we can
+ use an nmap script to try to query those:
+
+ #+BEGIN_SRC sh
+ $ nmap --script dns-brute --script-args dns-brute.domain=northpolechristmastown.com,dns-brute.threads=1,dns-brute.hostlist=fuzzdb/discovery/dns/dnsmapCommonSubdomains.txt
+ #+END_SRC
+
+ #+BEGIN_EXAMPLE
+ Starting Nmap 7.60 ( https://nmap.org ) at 2017-12-06 18:54 CST
+ Stats: 0:00:06 elapsed; 0 hosts completed (0 up), 0 undergoing Script Pre-Scan
+ NSE Timing: About 0.00% done
+ Pre-scan script results:
+ | dns-brute:
+ |   DNS Brute-force hostnames:
+ |     intranet.northpolechristmastown.com - 35.196.239.128
+ |     files.northpolechristmastown.com - 35.185.43.23
+ |     dev.northpolechristmastown.com - 35.185.84.51
+ |     admin.northpolechristmastown.com - 35.185.115.185
+ |_    mail.northpolechristmastown.com - 35.185.115.185
+ #+END_EXAMPLE
+
+** Certificate Transparency Logs
+
+ Next, let's turn our attention to the holidayhackchallenge.com
+ domain. Last year, there were some new hosts that appeared under this
+ domain (e.g. quest2016.holidayhackchallenge.com). Brute-forcing this
+ will likely not get us very far, so let's try a different approach:
+ certificate transparency logs. Many certificate authorities maintain
+ transparency systems, so that issued certificates can be publicly
+ reviewd. Symantec, for instance, has a free tool that will search the
+ logs of several certificate authorities:
+
+#+CAPTION: Symantec Crypto Report for holidayhackchallenge.com
+[[./images/recon_crypto_report.png]]
+
+Searching for holidayhackchallenge.com reveals the following
+certificates that don't look familiar:
+
+ | Common Name                         | Subject Alternate Names (SANs) |             IP |
+ |-------------------------------------+--------------------------------+----------------|
+ | 2017.holidayhackchallenge.com       | 2017, puzzler2017              |  35.196.67.150 |
+ | docker2017.holidayhackchallenge.com |                                | 35.190.163.207 |
+ | chat.holidayhackchallenge.com       |                                |  35.196.73.180 |
+
+** Recon Summary
+
+We can use the following indicators to search any clues we're later provided with:
+
+| Indicator                            | Type      | Source             |
+|--------------------------------------+-----------+--------------------|
+| northpolechristmastown.com           | Domain    | Reverse WHOIS      |
+| holidayhackchallenge.com             | Domain    | 2016 Hack          |
+| nppd.northpolechristmastown.com      | FQDN      | Google Search      |
+| intranet.northpolechristmastown.com  | FQDN      | DNS Brute Force    |
+| files.northpolechristmastown.com     | FQDN      | DNS Brute Force    |
+| dev.northpolechristmastown.com       | FQDN      | DNS Brute Force    |
+| admin.northpolechristmastown.com     | FQDN      | DNS Brute Force    |
+| mail.northpolechristmastown.com      | FQDN      | DNS Brute Force    |
+| 2017.holidayhackchallenge.com        | FQDN      | Cert Transparency  |
+| puzzler2017.holidayhackchallenge.com | FQDN      | Cert SAN           |
+| docker2017.holidayhackchallenge.com  | FQDN      | Cert Transparency  |
+| chat.holidayhackchallenge.com        | FQDN      | Cert Transparency  |
+| 35.196.239.128                       | IP        | DNS (intranet)     |
+| 35.185.43.23                         | IP        | DNS (files)        |
+| 35.185.84.51                         | IP        | DNS (dev)          |
+| 35.185.115.185                       | IP        | DNS (admin & mail) |
+| 35.196.67.150                        | IP        | DNS (2017)         |
+| 35.190.163.207                       | IP        | DNS (docker2017)   |
+| 35.196.73.18                         | IP        | DNS (chat)         |
+| HK-47 (Star Wars Droid)              | Reference | nppd robots.txt    |
+| Artoo (Star Wars Droid)              | Reference | nppd robots.txt    |
+| Threepio (Star Wars Droid)           | Reference | nppd robots.txt    |
+| Sand-Crawler (Star Wars Vehicle)     | Reference | nppd robots.txt    |
+| North Pole Police Department         | Reference | nppd /infractions  |
+| Cindy Lou Who (2015 Hack)            | Reference | nppd /infractions  |
+| Dr. Who (2016 Hack)                  | Reference | nppd /infractions  |
+
