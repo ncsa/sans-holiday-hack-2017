@@ -1,4 +1,12 @@
 * SANS PenTest Blog
+** Exploiting XXE Vulnerabilities in IIS/.NET
+   https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities
+   Including remote content in XML
+*** References:
+    OWASP: XML External Entity (XXE) Processing: https://www.owasp.org/index.php/XML_External_Entity_(XXE)_Processing
+    XML Security Cheat Sheet: https://www.owasp.org/index.php/XML_Security_Cheat_Sheet
+    Microsoft: ENTITY (XML) .NET Framework: https://msdn.microsoft.com/en-us/library/ms256483(v=vs.110).aspx
+    W3schools: XML DTD: https://www.w3schools.com/xml/xml_dtd.asp
 ** Why You Need the Skills to Tinker with Publicly Released Exploit Code
    https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code
    Mentions Apache struts vulnerabilities, specifically CVE-2017-5638 and CVE-2017-9805
