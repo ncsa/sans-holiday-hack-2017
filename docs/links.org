@@ -1,4 +1,10 @@
 * SANS PenTest Blog
+** Putting My Zero Cents In: Using the Free Tier on Amazon Web Services (EC2)
+   https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2
+   Spinning up an EC2 instance, but also a lot of emphasis on how to use SSH keys.
+** Your Pokemon Guide for Essential SQL Pen Test Commands
+   https://pen-testing.sans.org/blog/2017/12/09/your-pokemon-guide-for-essential-sql-pen-test-commands
+   SQL basics (SELECT, WHERE, wildcards, ORDER BY, GROUP BY, COUNT)
 ** Exploiting XXE Vulnerabilities in IIS/.NET
    https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities
    Including remote content in XML
