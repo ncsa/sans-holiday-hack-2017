@@ -192,6 +192,14 @@ some clues.
  |_    mail.northpolechristmastown.com - 35.185.115.185
  #+END_EXAMPLE
 
+A couple of other lists resulted in the following hostnames as well:
+
+#+BEGIN_EXAMPLE
+|   DNS Brute-force hostnames:
+|     emi.northpolechristmastown.com - 35.185.57.190
+|_    ewa.northpolechristmastown.com - 35.185.115.185
+#+END_EXAMPLE
+
 ** Certificate Transparency Logs
 
  Next, let's turn our attention to the holidayhackchallenge.com
@@ -230,32 +238,35 @@ ground running.
 
 We can use the following indicators to search any clues we're later provided with:
 
-| Indicator                            | Type      | Source             |
-|--------------------------------------+-----------+--------------------|
-| northpolechristmastown.com           | Domain    | Reverse WHOIS      |
-| holidayhackchallenge.com             | Domain    | 2016 Hack          |
-| nppd.northpolechristmastown.com      | FQDN      | Google Search      |
-| intranet.northpolechristmastown.com  | FQDN      | DNS Brute Force    |
-| files.northpolechristmastown.com     | FQDN      | DNS Brute Force    |
-| dev.northpolechristmastown.com       | FQDN      | DNS Brute Force    |
-| admin.northpolechristmastown.com     | FQDN      | DNS Brute Force    |
-| mail.northpolechristmastown.com      | FQDN      | DNS Brute Force    |
-| 2017.holidayhackchallenge.com        | FQDN      | Cert Transparency  |
-| puzzler2017.holidayhackchallenge.com | FQDN      | Cert SAN           |
-| docker2017.holidayhackchallenge.com  | FQDN      | Cert Transparency  |
-| chat.holidayhackchallenge.com        | FQDN      | Cert Transparency  |
-| 35.196.239.128                       | IP        | DNS (intranet)     |
-| 35.185.43.23                         | IP        | DNS (files)        |
-| 35.185.84.51                         | IP        | DNS (dev)          |
-| 35.185.115.185                       | IP        | DNS (admin & mail) |
-| 35.196.67.150                        | IP        | DNS (2017)         |
-| 35.190.163.207                       | IP        | DNS (docker2017)   |
-| 35.196.73.18                         | IP        | DNS (chat)         |
-| HK-47 (Star Wars Droid)              | Reference | nppd robots.txt    |
-| Artoo (Star Wars Droid)              | Reference | nppd robots.txt    |
-| Threepio (Star Wars Droid)           | Reference | nppd robots.txt    |
-| Sand-Crawler (Star Wars Vehicle)     | Reference | nppd robots.txt    |
-| North Pole Police Department         | Reference | nppd /infractions  |
-| Cindy Lou Who (2015 Hack)            | Reference | nppd /infractions  |
-| Dr. Who (2016 Hack)                  | Reference | nppd /infractions  |
+| Indicator                            | Type      | Source                 |
+|--------------------------------------+-----------+------------------------|
+| northpolechristmastown.com           | Domain    | Reverse WHOIS          |
+| holidayhackchallenge.com             | Domain    | 2016 Hack              |
+| nppd.northpolechristmastown.com      | FQDN      | Google Search          |
+| intranet.northpolechristmastown.com  | FQDN      | DNS Brute Force        |
+| files.northpolechristmastown.com     | FQDN      | DNS Brute Force        |
+| dev.northpolechristmastown.com       | FQDN      | DNS Brute Force        |
+| admin.northpolechristmastown.com     | FQDN      | DNS Brute Force        |
+| mail.northpolechristmastown.com      | FQDN      | DNS Brute Force        |
+| emi.northpolechristmastown.com       | FQDN      | DNS Brute Force        |
+| ewa.northpolechristmastown.com       | FQDN      | DNS Brute Force        |
+| 2017.holidayhackchallenge.com        | FQDN      | Cert Transparency      |
+| puzzler2017.holidayhackchallenge.com | FQDN      | Cert SAN               |
+| docker2017.holidayhackchallenge.com  | FQDN      | Cert Transparency      |
+| chat.holidayhackchallenge.com        | FQDN      | Cert Transparency      |
+| 35.185.43.23                         | IP        | DNS (files)            |
+| 35.185.57.190                        | IP        | DNS (emi)              |
+| 35.185.84.51                         | IP        | DNS (dev)              |
+| 35.185.115.185                       | IP        | DNS (admin, mail, ewa) |
+| 35.190.163.207                       | IP        | DNS (docker2017)       |
+| 35.196.67.150pub                     | IP        | DNS (2017)             |
+| 35.196.73.18                         | IP        | DNS (chat)             |
+| 35.196.239.128                       | IP        | DNS (intranet)         |
+| HK-47 (Star Wars Droid)              | Reference | nppd robots.txt        |
+| Artoo (Star Wars Droid)              | Reference | nppd robots.txt        |
+| Threepio (Star Wars Droid)           | Reference | nppd robots.txt        |
+| Sand-Crawler (Star Wars Vehicle)     | Reference | nppd robots.txt        |
+| North Pole Police Department         | Reference | nppd /infractions      |
+| Cindy Lou Who (2015 Hack)            | Reference | nppd /infractions      |
+| Dr. Who (2016 Hack)                  | Reference | nppd /infractions      |
 
