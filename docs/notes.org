@@ -133,3 +133,25 @@ ValueError: invalid format for web_safe_string, got True
   </body>
 </html>
 #+END_SRC
+* Actual Holiday Hack
+** Letters to Santa web-app
+*** Alex request 1
+#+BEGIN_SRC 
+curl 'https://l2s.northpolechristmastown.com/process.php' -H 'Host: l2s.northpolechristmastown.com' -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:58.0) Gecko/20100101 Firefox/58.0' -H 'Accept: */*' -H 'Accept-Language: en-US,en;q=0.7,ro;q=0.3' --compressed -H 'Referer: https://l2s.northpolechristmastown.com/' -H 'Content-Type: application/x-www-form-urlencoded; charset=UTF-8' -H 'X-Requested-With: XMLHttpRequest' -H 'DNT: 1' -H 'Connection: keep-alive' --data 'first_name=Alex&age=6&state=AL&city=US&toy=lots+of+cool+Legos&message=Fly+safely!&sex=girl'
+#+END_SRC
+#+BEGIN_SRC 
+
+#+END_SRC
+*** Maddie request 1
+#+BEGIN_SRC 
+curl 'https://l2s.northpolechristmastown.com/process.php' -H 'Host: l2s.northpolechristmastown.com' -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.13; rv:58.0) Gecko/20100101 Firefox/58.0' -H 'Accept: */*' -H 'Accept-Language: en-US,en;q=0.7,ro;q=0.3' --compressed -H 'Referer: https://l2s.northpolechristmastown.com/' -H 'Content-Type: application/x-www-form-urlencoded; charset=UTF-8' -H 'X-Requested-With: XMLHttpRequest' -H 'DNT: 1' -H 'Connection: keep-alive' --data 'first_name=maddie&age=10&state=AL&city=us&toy=phone&message=a+i+pone+8+fly+safely!!!!!!!!!&sex=girl'
+#+END_SRC
+#+BEGIN_SRC 
+first_name=maddie
+age=10
+state=AL
+city=us
+toy=phone
+message=a+i+pone+8+fly+safely!!!!!!!!!
+sex=girl
+#+END_SRC

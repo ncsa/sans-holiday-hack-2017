@@ -1,0 +1,507 @@
+
+Starting Nmap 7.40 ( https://nmap.org ) at 2017-12-15 02:26 UTC
+NSE: Loaded 143 scripts for scanning.
+NSE: Script Pre-scanning.
+Initiating NSE at 02:26
+Completed NSE at 02:26, 0.00s elapsed
+Initiating NSE at 02:26
+Completed NSE at 02:26, 0.00s elapsed
+Initiating Ping Scan at 02:26
+Scanning 256 hosts [2 ports/host]
+Completed Ping Scan at 02:26, 3.10s elapsed (256 total hosts)
+Initiating Parallel DNS resolution of 256 hosts. at 02:26
+Completed Parallel DNS resolution of 256 hosts. at 02:26, 0.01s elapsed
+Nmap scan report for 10.142.0.0 [host down]
+Nmap scan report for 10.142.0.1 [host down]
+Nmap scan report for 10.142.0.4 [host down]
+Nmap scan report for 10.142.0.7 [host down]
+Nmap scan report for 10.142.0.9 [host down]
+Nmap scan report for 10.142.0.10 [host down]
+Nmap scan report for 10.142.0.12 [host down]
+Nmap scan report for 10.142.0.14 [host down]
+Nmap scan report for 10.142.0.15 [host down]
+Nmap scan report for 10.142.0.16 [host down]
+Nmap scan report for 10.142.0.17 [host down]
+Nmap scan report for 10.142.0.18 [host down]
+Nmap scan report for 10.142.0.19 [host down]
+Nmap scan report for 10.142.0.20 [host down]
+Nmap scan report for 10.142.0.21 [host down]
+Nmap scan report for 10.142.0.22 [host down]
+Nmap scan report for 10.142.0.23 [host down]
+Nmap scan report for 10.142.0.24 [host down]
+Nmap scan report for 10.142.0.25 [host down]
+Nmap scan report for 10.142.0.26 [host down]
+Nmap scan report for 10.142.0.27 [host down]
+Nmap scan report for 10.142.0.28 [host down]
+Nmap scan report for 10.142.0.29 [host down]
+Nmap scan report for 10.142.0.30 [host down]
+Nmap scan report for 10.142.0.31 [host down]
+Nmap scan report for 10.142.0.32 [host down]
+Nmap scan report for 10.142.0.33 [host down]
+Nmap scan report for 10.142.0.34 [host down]
+Nmap scan report for 10.142.0.35 [host down]
+Nmap scan report for 10.142.0.36 [host down]
+Nmap scan report for 10.142.0.37 [host down]
+Nmap scan report for 10.142.0.38 [host down]
+Nmap scan report for 10.142.0.39 [host down]
+Nmap scan report for 10.142.0.40 [host down]
+Nmap scan report for 10.142.0.41 [host down]
+Nmap scan report for 10.142.0.42 [host down]
+Nmap scan report for 10.142.0.43 [host down]
+Nmap scan report for 10.142.0.44 [host down]
+Nmap scan report for 10.142.0.45 [host down]
+Nmap scan report for 10.142.0.46 [host down]
+Nmap scan report for 10.142.0.47 [host down]
+Nmap scan report for 10.142.0.48 [host down]
+Nmap scan report for 10.142.0.49 [host down]
+Nmap scan report for 10.142.0.50 [host down]
+Nmap scan report for 10.142.0.51 [host down]
+Nmap scan report for 10.142.0.52 [host down]
+Nmap scan report for 10.142.0.53 [host down]
+Nmap scan report for 10.142.0.54 [host down]
+Nmap scan report for 10.142.0.55 [host down]
+Nmap scan report for 10.142.0.56 [host down]
+Nmap scan report for 10.142.0.57 [host down]
+Nmap scan report for 10.142.0.58 [host down]
+Nmap scan report for 10.142.0.59 [host down]
+Nmap scan report for 10.142.0.60 [host down]
+Nmap scan report for 10.142.0.61 [host down]
+Nmap scan report for 10.142.0.62 [host down]
+Nmap scan report for 10.142.0.63 [host down]
+Nmap scan report for 10.142.0.64 [host down]
+Nmap scan report for 10.142.0.65 [host down]
+Nmap scan report for 10.142.0.66 [host down]
+Nmap scan report for 10.142.0.67 [host down]
+Nmap scan report for 10.142.0.68 [host down]
+Nmap scan report for 10.142.0.69 [host down]
+Nmap scan report for 10.142.0.70 [host down]
+Nmap scan report for 10.142.0.71 [host down]
+Nmap scan report for 10.142.0.72 [host down]
+Nmap scan report for 10.142.0.73 [host down]
+Nmap scan report for 10.142.0.74 [host down]
+Nmap scan report for 10.142.0.75 [host down]
+Nmap scan report for 10.142.0.76 [host down]
+Nmap scan report for 10.142.0.77 [host down]
+Nmap scan report for 10.142.0.78 [host down]
+Nmap scan report for 10.142.0.79 [host down]
+Nmap scan report for 10.142.0.80 [host down]
+Nmap scan report for 10.142.0.81 [host down]
+Nmap scan report for 10.142.0.82 [host down]
+Nmap scan report for 10.142.0.83 [host down]
+Nmap scan report for 10.142.0.84 [host down]
+Nmap scan report for 10.142.0.85 [host down]
+Nmap scan report for 10.142.0.86 [host down]
+Nmap scan report for 10.142.0.87 [host down]
+Nmap scan report for 10.142.0.88 [host down]
+Nmap scan report for 10.142.0.89 [host down]
+Nmap scan report for 10.142.0.90 [host down]
+Nmap scan report for 10.142.0.91 [host down]
+Nmap scan report for 10.142.0.92 [host down]
+Nmap scan report for 10.142.0.93 [host down]
+Nmap scan report for 10.142.0.94 [host down]
+Nmap scan report for 10.142.0.95 [host down]
+Nmap scan report for 10.142.0.96 [host down]
+Nmap scan report for 10.142.0.97 [host down]
+Nmap scan report for 10.142.0.98 [host down]
+Nmap scan report for 10.142.0.99 [host down]
+Nmap scan report for 10.142.0.100 [host down]
+Nmap scan report for 10.142.0.101 [host down]
+Nmap scan report for 10.142.0.102 [host down]
+Nmap scan report for 10.142.0.103 [host down]
+Nmap scan report for 10.142.0.104 [host down]
+Nmap scan report for 10.142.0.105 [host down]
+Nmap scan report for 10.142.0.106 [host down]
+Nmap scan report for 10.142.0.107 [host down]
+Nmap scan report for 10.142.0.108 [host down]
+Nmap scan report for 10.142.0.109 [host down]
+Nmap scan report for 10.142.0.110 [host down]
+Nmap scan report for 10.142.0.111 [host down]
+Nmap scan report for 10.142.0.112 [host down]
+Nmap scan report for 10.142.0.113 [host down]
+Nmap scan report for 10.142.0.114 [host down]
+Nmap scan report for 10.142.0.115 [host down]
+Nmap scan report for 10.142.0.116 [host down]
+Nmap scan report for 10.142.0.117 [host down]
+Nmap scan report for 10.142.0.118 [host down]
+Nmap scan report for 10.142.0.119 [host down]
+Nmap scan report for 10.142.0.120 [host down]
+Nmap scan report for 10.142.0.121 [host down]
+Nmap scan report for 10.142.0.122 [host down]
+Nmap scan report for 10.142.0.123 [host down]
+Nmap scan report for 10.142.0.124 [host down]
+Nmap scan report for 10.142.0.125 [host down]
+Nmap scan report for 10.142.0.126 [host down]
+Nmap scan report for 10.142.0.127 [host down]
+Nmap scan report for 10.142.0.128 [host down]
+Nmap scan report for 10.142.0.129 [host down]
+Nmap scan report for 10.142.0.130 [host down]
+Nmap scan report for 10.142.0.131 [host down]
+Nmap scan report for 10.142.0.132 [host down]
+Nmap scan report for 10.142.0.133 [host down]
+Nmap scan report for 10.142.0.134 [host down]
+Nmap scan report for 10.142.0.135 [host down]
+Nmap scan report for 10.142.0.136 [host down]
+Nmap scan report for 10.142.0.137 [host down]
+Nmap scan report for 10.142.0.138 [host down]
+Nmap scan report for 10.142.0.139 [host down]
+Nmap scan report for 10.142.0.140 [host down]
+Nmap scan report for 10.142.0.141 [host down]
+Nmap scan report for 10.142.0.142 [host down]
+Nmap scan report for 10.142.0.143 [host down]
+Nmap scan report for 10.142.0.144 [host down]
+Nmap scan report for 10.142.0.145 [host down]
+Nmap scan report for 10.142.0.146 [host down]
+Nmap scan report for 10.142.0.147 [host down]
+Nmap scan report for 10.142.0.148 [host down]
+Nmap scan report for 10.142.0.149 [host down]
+Nmap scan report for 10.142.0.150 [host down]
+Nmap scan report for 10.142.0.151 [host down]
+Nmap scan report for 10.142.0.152 [host down]
+Nmap scan report for 10.142.0.153 [host down]
+Nmap scan report for 10.142.0.154 [host down]
+Nmap scan report for 10.142.0.155 [host down]
+Nmap scan report for 10.142.0.156 [host down]
+Nmap scan report for 10.142.0.157 [host down]
+Nmap scan report for 10.142.0.158 [host down]
+Nmap scan report for 10.142.0.159 [host down]
+Nmap scan report for 10.142.0.160 [host down]
+Nmap scan report for 10.142.0.161 [host down]
+Nmap scan report for 10.142.0.162 [host down]
+Nmap scan report for 10.142.0.163 [host down]
+Nmap scan report for 10.142.0.164 [host down]
+Nmap scan report for 10.142.0.165 [host down]
+Nmap scan report for 10.142.0.166 [host down]
+Nmap scan report for 10.142.0.167 [host down]
+Nmap scan report for 10.142.0.168 [host down]
+Nmap scan report for 10.142.0.169 [host down]
+Nmap scan report for 10.142.0.170 [host down]
+Nmap scan report for 10.142.0.171 [host down]
+Nmap scan report for 10.142.0.172 [host down]
+Nmap scan report for 10.142.0.173 [host down]
+Nmap scan report for 10.142.0.174 [host down]
+Nmap scan report for 10.142.0.175 [host down]
+Nmap scan report for 10.142.0.176 [host down]
+Nmap scan report for 10.142.0.177 [host down]
+Nmap scan report for 10.142.0.178 [host down]
+Nmap scan report for 10.142.0.179 [host down]
+Nmap scan report for 10.142.0.180 [host down]
+Nmap scan report for 10.142.0.181 [host down]
+Nmap scan report for 10.142.0.182 [host down]
+Nmap scan report for 10.142.0.183 [host down]
+Nmap scan report for 10.142.0.184 [host down]
+Nmap scan report for 10.142.0.185 [host down]
+Nmap scan report for 10.142.0.186 [host down]
+Nmap scan report for 10.142.0.187 [host down]
+Nmap scan report for 10.142.0.188 [host down]
+Nmap scan report for 10.142.0.189 [host down]
+Nmap scan report for 10.142.0.190 [host down]
+Nmap scan report for 10.142.0.191 [host down]
+Nmap scan report for 10.142.0.192 [host down]
+Nmap scan report for 10.142.0.193 [host down]
+Nmap scan report for 10.142.0.194 [host down]
+Nmap scan report for 10.142.0.195 [host down]
+Nmap scan report for 10.142.0.196 [host down]
+Nmap scan report for 10.142.0.197 [host down]
+Nmap scan report for 10.142.0.198 [host down]
+Nmap scan report for 10.142.0.199 [host down]
+Nmap scan report for 10.142.0.200 [host down]
+Nmap scan report for 10.142.0.201 [host down]
+Nmap scan report for 10.142.0.202 [host down]
+Nmap scan report for 10.142.0.203 [host down]
+Nmap scan report for 10.142.0.204 [host down]
+Nmap scan report for 10.142.0.205 [host down]
+Nmap scan report for 10.142.0.206 [host down]
+Nmap scan report for 10.142.0.207 [host down]
+Nmap scan report for 10.142.0.208 [host down]
+Nmap scan report for 10.142.0.209 [host down]
+Nmap scan report for 10.142.0.210 [host down]
+Nmap scan report for 10.142.0.211 [host down]
+Nmap scan report for 10.142.0.212 [host down]
+Nmap scan report for 10.142.0.213 [host down]
+Nmap scan report for 10.142.0.214 [host down]
+Nmap scan report for 10.142.0.215 [host down]
+Nmap scan report for 10.142.0.216 [host down]
+Nmap scan report for 10.142.0.217 [host down]
+Nmap scan report for 10.142.0.218 [host down]
+Nmap scan report for 10.142.0.219 [host down]
+Nmap scan report for 10.142.0.220 [host down]
+Nmap scan report for 10.142.0.221 [host down]
+Nmap scan report for 10.142.0.222 [host down]
+Nmap scan report for 10.142.0.223 [host down]
+Nmap scan report for 10.142.0.224 [host down]
+Nmap scan report for 10.142.0.225 [host down]
+Nmap scan report for 10.142.0.226 [host down]
+Nmap scan report for 10.142.0.227 [host down]
+Nmap scan report for 10.142.0.228 [host down]
+Nmap scan report for 10.142.0.229 [host down]
+Nmap scan report for 10.142.0.230 [host down]
+Nmap scan report for 10.142.0.231 [host down]
+Nmap scan report for 10.142.0.232 [host down]
+Nmap scan report for 10.142.0.233 [host down]
+Nmap scan report for 10.142.0.234 [host down]
+Nmap scan report for 10.142.0.235 [host down]
+Nmap scan report for 10.142.0.236 [host down]
+Nmap scan report for 10.142.0.237 [host down]
+Nmap scan report for 10.142.0.238 [host down]
+Nmap scan report for 10.142.0.239 [host down]
+Nmap scan report for 10.142.0.240 [host down]
+Nmap scan report for 10.142.0.241 [host down]
+Nmap scan report for 10.142.0.242 [host down]
+Nmap scan report for 10.142.0.243 [host down]
+Nmap scan report for 10.142.0.244 [host down]
+Nmap scan report for 10.142.0.245 [host down]
+Nmap scan report for 10.142.0.246 [host down]
+Nmap scan report for 10.142.0.247 [host down]
+Nmap scan report for 10.142.0.248 [host down]
+Nmap scan report for 10.142.0.249 [host down]
+Nmap scan report for 10.142.0.250 [host down]
+Nmap scan report for 10.142.0.251 [host down]
+Nmap scan report for 10.142.0.252 [host down]
+Nmap scan report for 10.142.0.253 [host down]
+Nmap scan report for 10.142.0.254 [host down]
+Nmap scan report for 10.142.0.255 [host down]
+Initiating Connect Scan at 02:26
+Scanning 7 hosts [1000 ports/host]
+Discovered open port 443/tcp on 10.142.0.2
+Discovered open port 25/tcp on 10.142.0.5
+Discovered open port 8080/tcp on 10.142.0.6
+Discovered open port 22/tcp on 10.142.0.11
+Discovered open port 22/tcp on 10.142.0.2
+Discovered open port 22/tcp on 10.142.0.3
+Discovered open port 22/tcp on 10.142.0.6
+Discovered open port 80/tcp on 10.142.0.2
+Discovered open port 80/tcp on 10.142.0.3
+Discovered open port 22/tcp on 10.142.0.5
+Discovered open port 80/tcp on 10.142.0.5
+Discovered open port 143/tcp on 10.142.0.5
+Discovered open port 80/tcp on 10.142.0.6
+Discovered open port 80/tcp on 10.142.0.11
+Discovered open port 2222/tcp on 10.142.0.2
+Discovered open port 389/tcp on 10.142.0.6
+Discovered open port 2525/tcp on 10.142.0.5
+Discovered open port 3000/tcp on 10.142.0.5
+Completed Connect Scan against 10.142.0.3 in 0.05s (6 hosts left)
+Completed Connect Scan against 10.142.0.6 in 0.05s (5 hosts left)
+Completed Connect Scan against 10.142.0.11 in 0.05s (4 hosts left)
+Completed Connect Scan against 10.142.0.2 in 0.05s (3 hosts left)
+Completed Connect Scan against 10.142.0.5 in 0.05s (2 hosts left)
+Discovered open port 3389/tcp on 10.142.0.8
+Discovered open port 80/tcp on 10.142.0.8
+Discovered open port 3389/tcp on 10.142.0.13
+Discovered open port 80/tcp on 10.142.0.13
+Completed Connect Scan against 10.142.0.8 in 4.81s (1 host left)
+Completed Connect Scan at 02:26, 4.91s elapsed (7000 total ports)
+Initiating Service scan at 02:26
+Scanning 22 services on 7 hosts
+Completed Service scan at 02:27, 77.26s elapsed (22 services on 7 hosts)
+NSE: Script scanning 7 hosts.
+Initiating NSE at 02:27
+Completed NSE at 02:27, 1.05s elapsed
+Initiating NSE at 02:27
+Completed NSE at 02:27, 0.01s elapsed
+Nmap scan report for hhc17-l2s-proxy.c.holidayhack2017.internal (10.142.0.2)
+Host is up (0.00020s latency).
+Not shown: 996 closed ports
+PORT     STATE SERVICE  VERSION
+22/tcp   open  ssh      OpenSSH 7.4p1 Debian 10+deb9u1 (protocol 2.0)
+| ssh-hostkey: 
+|   2048 81:aa:b0:de:e0:4a:b5:23:7e:e8:cd:14:f3:fa:e2:f3 (RSA)
+|_  256 dc:0b:52:ab:43:87:59:7b:04:88:2d:5c:db:92:4f:ba (ECDSA)
+80/tcp   open  http     nginx 1.10.3
+| http-methods: 
+|_  Supported Methods: GET HEAD POST OPTIONS
+|_http-server-header: nginx/1.10.3
+|_http-title: Did not follow redirect to https://hhc17-l2s-proxy.c.holidayhack2017.internal/
+443/tcp  open  ssl/http nginx 1.10.3
+| http-methods: 
+|_  Supported Methods: GET HEAD
+|_http-server-header: nginx/1.10.3
+|_http-title: Toys List
+| ssl-cert: Subject: commonName=dev.northpolechristmastown.com
+| Subject Alternative Name: DNS:dev.northpolechristmastown.com, DNS:l2s.northpolechristmastown.com
+| Issuer: commonName=Let's Encrypt Authority X3/organizationName=Let's Encrypt/countryName=US
+| Public Key type: rsa
+| Public Key bits: 2048
+| Signature Algorithm: sha256WithRSAEncryption
+| Not valid before: 2017-11-29T12:54:54
+| Not valid after:  2018-02-27T12:54:54
+| MD5:   90b5 5b73 6e21 e00f 0247 b22d a1ec f953
+|_SHA-1: c089 30bf cd61 3a55 ea8f f419 2542 b9b4 9823 8fb1
+|_ssl-date: TLS randomness does not represent time
+| tls-nextprotoneg: 
+|_  http/1.1
+2222/tcp open  ssh      OpenSSH 7.4p1 Debian 10+deb9u1 (protocol 2.0)
+| ssh-hostkey: 
+|   2048 81:aa:b0:de:e0:4a:b5:23:7e:e8:cd:14:f3:fa:e2:f3 (RSA)
+|_  256 dc:0b:52:ab:43:87:59:7b:04:88:2d:5c:db:92:4f:ba (ECDSA)
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Nmap scan report for hhc17-apache-struts1.c.holidayhack2017.internal (10.142.0.3)
+Host is up (0.00017s latency).
+Not shown: 998 closed ports
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 7.4p1 Debian 10+deb9u1 (protocol 2.0)
+| ssh-hostkey: 
+|   2048 81:aa:b0:de:e0:4a:b5:23:7e:e8:cd:14:f3:fa:e2:f3 (RSA)
+|_  256 dc:0b:52:ab:43:87:59:7b:04:88:2d:5c:db:92:4f:ba (ECDSA)
+80/tcp open  http    nginx 1.10.3
+| http-methods: 
+|_  Supported Methods: GET HEAD
+|_http-server-header: nginx/1.10.3
+|_http-title: Toys List
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Nmap scan report for mail.northpolechristmastown.com (10.142.0.5)
+Host is up (0.00021s latency).
+Not shown: 994 closed ports
+PORT     STATE SERVICE VERSION
+22/tcp   open  ssh     OpenSSH 7.2p2 Ubuntu 4ubuntu2.2 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   2048 53:ac:cc:7c:b1:cb:56:0b:bc:cd:05:12:36:e7:24:ca (RSA)
+|_  256 9f:4e:9a:ee:dc:ef:f4:4b:6d:1b:03:58:bb:5d:a2:87 (ECDSA)
+25/tcp   open  smtp    Postfix smtpd
+|_smtp-commands: mail.northpolechristmastown.com, PIPELINING, SIZE 10240000, ETRN, AUTH PLAIN LOGIN, AUTH=PLAIN LOGIN, ENHANCEDSTATUSCODES, 8BITMIME, DSN, 
+80/tcp   open  http    nginx 1.10.3 (Ubuntu)
+| http-methods: 
+|_  Supported Methods: GET HEAD POST OPTIONS
+| http-robots.txt: 1 disallowed entry 
+|_/cookie.txt
+|_http-server-header: nginx/1.10.3 (Ubuntu)
+|_http-title: Site doesn't have a title (text/html; charset=UTF-8).
+143/tcp  open  imap    Dovecot imapd
+|_imap-capabilities: OK ID IDLE LITERAL+ AUTH=PLAIN more have capabilities listed post-login LOGIN-REFERRALS Pre-login AUTH=LOGINA0001 ENABLE SASL-IR IMAP4rev1
+2525/tcp open  smtp    Postfix smtpd
+|_smtp-commands: mail.northpolechristmastown.com, PIPELINING, SIZE 10240000, ETRN, AUTH PLAIN LOGIN, AUTH=PLAIN LOGIN, ENHANCEDSTATUSCODES, 8BITMIME, DSN, 
+3000/tcp open  http    Node.js Express framework
+| http-methods: 
+|_  Supported Methods: GET HEAD POST OPTIONS
+| http-robots.txt: 1 disallowed entry 
+|_/cookie.txt
+|_http-title: Site doesn't have a title (text/html; charset=UTF-8).
+Service Info: Host:  mail.northpolechristmastown.com; OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Nmap scan report for edb.northpolechristmastown.com (10.142.0.6)
+Host is up (0.00017s latency).
+Not shown: 996 closed ports
+PORT     STATE SERVICE VERSION
+22/tcp   open  ssh     OpenSSH 7.4p1 Debian 10+deb9u1 (protocol 2.0)
+| ssh-hostkey: 
+|   2048 33:fb:b7:35:b5:7a:72:6f:06:91:21:ff:e2:3e:86:79 (RSA)
+|_  256 70:71:ea:71:cd:83:d8:47:29:ef:6f:69:f3:8a:ed:a2 (ECDSA)
+80/tcp   open  http    nginx 1.10.3
+| http-methods: 
+|_  Supported Methods: HEAD OPTIONS GET
+| http-robots.txt: 1 disallowed entry 
+|_/dev
+|_http-server-header: nginx/1.10.3
+| http-title: Site doesn't have a title (text/html; charset=utf-8).
+|_Requested resource was http://edb.northpolechristmastown.com/index.html
+389/tcp  open  ldap
+| fingerprint-strings: 
+|   LDAPBindReq: 
+|     Version 2 not supported
+|   LDAPSearchReq: 
+|     supportedLDAPVersion1
+|     namingContexts1
+|     dc=com0/
+|     supportedExtension1
+|_    1.3.6.1.4.1.4203.1.11.10
+8080/tcp open  http    Werkzeug httpd 0.12.2 (Python 2.7.13)
+| http-methods: 
+|_  Supported Methods: HEAD OPTIONS GET
+| http-robots.txt: 1 disallowed entry 
+|_/dev
+|_http-server-header: Werkzeug/0.12.2 Python/2.7.13
+|_http-title: Did not follow redirect to http://edb.northpolechristmastown.com/index.html
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port389-TCP:V=7.40%I=7%D=12/15%Time=5A3332D9%P=x86_64-pc-linux-gnu%r(LD
+SF:APSearchReq,83,"0s\x02\x01\x07dn\x04\x000j0\x1b\x04\x14supportedLDAPVer
+SF:sion1\x03\x04\x0130\x1a\x04\x0enamingContexts1\x08\x04\x06dc=com0/\x04\
+SF:x12supportedExtension1\x19\x04\x171\.3\.6\.1\.4\.1\.4203\.1\.11\.10\x0c
+SF:\x02\x01\x07e\x07\n\x01\0\x04\0\x04\0")%r(LDAPBindReq,25,"0#\x02\x01\x0
+SF:1a\x1e\n\x01\x02\x04\0\x04\x17Version\x202\x20not\x20supported");
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Nmap scan report for hhc17-emi.c.holidayhack2017.internal (10.142.0.8)
+Host is up (0.00081s latency).
+Not shown: 998 filtered ports
+PORT     STATE SERVICE            VERSION
+80/tcp   open  http               Microsoft IIS httpd 10.0
+| http-methods: 
+|   Supported Methods: OPTIONS TRACE GET HEAD POST
+|_  Potentially risky methods: TRACE
+|_http-server-header: Microsoft-IIS/10.0
+|_http-title: IIS Windows Server
+3389/tcp open  ssl/ms-wbt-server?
+| ssl-cert: Subject: commonName=hhc17-smb-server
+| Issuer: commonName=hhc17-smb-server
+| Public Key type: rsa
+| Public Key bits: 2048
+| Signature Algorithm: sha256WithRSAEncryption
+| Not valid before: 2017-11-06T13:46:55
+| Not valid after:  2018-05-08T13:46:55
+| MD5:   092f 018a 083a b87a 8186 ecac da4e 09e2
+|_SHA-1: 0a0d f4e6 765f 1818 cd32 4bf2 5212 e8ca ef51 5c38
+|_ssl-date: 2017-12-15T02:27:40+00:00; 0s from scanner time.
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+
+Nmap scan report for hhc17-apache-struts2.c.holidayhack2017.internal (10.142.0.11)
+Host is up (0.00014s latency).
+Not shown: 998 closed ports
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 7.4p1 Debian 10+deb9u1 (protocol 2.0)
+| ssh-hostkey: 
+|   2048 81:aa:b0:de:e0:4a:b5:23:7e:e8:cd:14:f3:fa:e2:f3 (RSA)
+|_  256 dc:0b:52:ab:43:87:59:7b:04:88:2d:5c:db:92:4f:ba (ECDSA)
+80/tcp open  http    nginx 1.10.3
+| http-methods: 
+|_  Supported Methods: GET HEAD
+|_http-server-header: nginx/1.10.3
+|_http-title: Toys List
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Nmap scan report for eaas.northpolechristmastown.com (10.142.0.13)
+Host is up (0.00089s latency).
+Not shown: 998 filtered ports
+PORT     STATE SERVICE            VERSION
+80/tcp   open  http               Microsoft IIS httpd 10.0
+| http-methods: 
+|   Supported Methods: OPTIONS TRACE GET HEAD POST
+|_  Potentially risky methods: TRACE
+|_http-server-header: Microsoft-IIS/10.0
+|_http-title: Index - North Pole Engineering Presents: EaaS!
+3389/tcp open  ssl/ms-wbt-server?
+| ssl-cert: Subject: commonName=hhc17-elf-manufacturing
+| Issuer: commonName=hhc17-elf-manufacturing
+| Public Key type: rsa
+| Public Key bits: 2048
+| Signature Algorithm: sha256WithRSAEncryption
+| Not valid before: 2017-11-23T20:53:55
+| Not valid after:  2018-05-25T20:53:55
+| MD5:   a711 f240 0c9e a8cd 3be4 81fa fa16 f15a
+|_SHA-1: 5728 6c5d 2ec0 6657 629b f9f4 72aa 0b3d 12d4 b3a5
+|_ssl-date: 2017-12-15T02:27:40+00:00; 0s from scanner time.
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+
+NSE: Script Post-scanning.
+Initiating NSE at 02:27
+Completed NSE at 02:27, 0.00s elapsed
+Initiating NSE at 02:27
+Completed NSE at 02:27, 0.00s elapsed
+Post-scan script results:
+| clock-skew: 
+|   0s: 
+|     10.142.0.13 (eaas.northpolechristmastown.com)
+|_    10.142.0.8 (hhc17-emi.c.holidayhack2017.internal)
+| ssh-hostkey: Possible duplicate hosts
+| Key 2048 81:aa:b0:de:e0:4a:b5:23:7e:e8:cd:14:f3:fa:e2:f3 (RSA) used by:
+|   10.142.0.2
+|   10.142.0.3
+|   10.142.0.11
+| Key 256 dc:0b:52:ab:43:87:59:7b:04:88:2d:5c:db:92:4f:ba (ECDSA) used by:
+|   10.142.0.2
+|   10.142.0.3
+|_  10.142.0.11
+Read data files from: /usr/bin/../share/nmap
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 256 IP addresses (7 hosts up) scanned in 86.82 seconds

