@@ -1,0 +1,17 @@
+ $ john   --format=HMAC-SHA256 jwt.john
+Loaded 1 password hash (HMAC-SHA256 [password is key, SHA256 32/64 OpenSSL])
+Press 'q' or Ctrl-C to abort, almost any other key for status
+0g 0:00:00:14  3/3 0g/s 258622p/s 258622c/s 258622C/s dmoun1
+0g 0:00:00:53  3/3 0g/s 620750p/s 620750c/s 620750C/s 1qazy
+0g 0:00:00:54  3/3 0g/s 625862p/s 625862c/s 625862C/s dethoey
+0g 0:00:01:09  3/3 0g/s 657062p/s 657062c/s 657062C/s joemos5
+0g 0:00:01:16  3/3 0g/s 674993p/s 674993c/s 674993C/s bos350
+0g 0:00:01:24  3/3 0g/s 666046p/s 666046c/s 666046C/s 09212341993
+0g 0:00:01:38  3/3 0g/s 685669p/s 685669c/s 685669C/s socale7
+0g 0:00:05:09  3/3 0g/s 793829p/s 793829c/s 793829C/s lanotch
+0g 0:00:05:48  3/3 0g/s 797215p/s 797215c/s 797215C/s 816005
+0g 0:00:05:54  3/3 0g/s 799057p/s 799057c/s 799057C/s cryon1e
+3lv3s            (?)
+1g 0:00:06:38 DONE 3/3 (2017-12-15 23:42) 0.002510g/s 802217p/s 802217c/s 802217C/s 3lv3s
+Use the "--show" option to display all of the cracked passwords reliably
+Session completed
