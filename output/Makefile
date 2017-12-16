@@ -9,4 +9,4 @@ alabaster.jwt:
 	python3 ../tools/make_jwt.py alabaster.snowball Engineering elf > alabaster.jwt
 
 santa.jwt:
-	python3 ../tools/make_jwt.py alabaster.snowball administrators human > santa.jwt
+	python3 ../tools/make_jwt.py santa.claus administrators human > santa.jwt
