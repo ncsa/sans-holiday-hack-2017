@@ -10,4 +10,4 @@ jwt2john.py:
 	wget https://raw.githubusercontent.com/Sjord/jwtcrack/master/jwt2john.py
 
 jwt.john: jwt2john.py jwt
-	python3 jwt2john.py $(get jwt) > jwt.john
+	python3 jwt2john.py $(cat jwt) > jwt.john
