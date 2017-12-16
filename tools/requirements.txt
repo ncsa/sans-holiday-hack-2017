@@ -1,3 +1,5 @@
 requests
+requests[socks]
+PySocks==1.6.7
 PyJWT==1.5.3
 tqdm==4.19.5
