@@ -340,7 +340,7 @@ elf@c43edd6eda2b:~$
 
 ## I Don't Think We're In Kansas Anymore
 [Game](https://2017.holidayhackchallenge.com/game/5bbfc970-71d2-4c9d-816c-25955536c168)
-[Terminal](https://docker2017.holidayhackchallenge.com/?challenge=595aeb87-d3b2-41a3-b612-fa553a30e822&uid=ee838751-39b4-423a-8d67-6d935c88d650)
+[Terminal](https://docker2017.holidayhackchallenge.com/?challenge=ab13b9fc-6e7c-4477-a8a1-bca7b616b877&uid=ee838751-39b4-423a-8d67-6d935c88d650)
 
 ```
                        *
