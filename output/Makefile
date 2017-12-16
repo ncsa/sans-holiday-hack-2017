@@ -16,3 +16,10 @@ edb.json: ../tools/edb.py
 
 claus.password: edb.json
 	cat edb.json |jq '.[][][]' -c|grep claus | jq '.userPassword[]' -r > claus.password
+
+jwt.john: jwt2john.py jwt
+	python3 ../tools/jwt2john.py $(shell cat jwt) > jwt.john
+
+john.txt: jwt.john
+	john  --format=HMAC-SHA256 jwt.john
+	john  --format=HMAC-SHA256 jwt.john -show > john.txt
