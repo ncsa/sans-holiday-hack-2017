@@ -1,29 +1,56 @@
-elf@5cf3b692a837:~$ sqlite3 christmassongs.db 
-SQLite version 3.11.0 2016-02-15 17:29:24
-Enter ".help" for usage hints.
-sqlite> .mode tabs  
-sqlite> .headers on
-sqlite> .tables
-likes  songs
-sqlite> select * from songs limit 3;
-id      title   artist  year    notes
-1       A' Soalin'      Peter, Paul & Mary      1963    From the album Moving. Written by Paul Stookey, Tracy Batteste & Elaina Mezzetti. Contains an element of "God Res
-t Ye Merry, Gentlemen".
-2       Adeste Fideles (O Come, All Ye Faithful)        Associated Glee Clubs of America        1925    Peaked at No. 5 on the pop singles chart in 1925. This historic r
-ecord was the first electrically recorded disc to create a popular impact, and featured the largest choir popular music has ever known: some 4,800 voices (according to C
-olumbia Records). Bing Crosby also charted with a version of the traditional hymn, which peaked at No. 45 on the Billboard Hot 100 singles chart in December 1960. Over 1
-50 versions of this standard have appeared in Christmas LPs since 1946.
-3       All Alone on Christmas  Darlene Love    1992    Peaked at No. 83 on the Billboard Hot 100 singles chart in January 1993. From the 1992 film Home Alone 2: Lost in
- New York.
-sqlite> select * from likes limit 3;
-id      like    datetime        songid
-1       1       1487102189      250
-2       1       1504354018      119
-3       1       1510169870      283
-sqlite> select title, count(*) from songs s, likes l where s.id=l.songid group by title order by count(*) desc limit 3;
-title   count(*)
-Stairway to Heaven      11325
-Joy to the World        2162
-The Little Boy that Santa Claus Forgot  2140
-sqlite> 
+A db file? what is this?
+
+    elf@0d0185762210:~$ less christmassongs.db 
+    bash: less: command not found
+    elf@0d0185762210:~$ more christmassongs.db 
+    SQLite format 3
+    ...
+
+
+sqlite!  Ok!  Let's start up sqlite and change some output options
+
+    elf@5cf3b692a837:~$ sqlite3 christmassongs.db 
+    SQLite version 3.11.0 2016-02-15 17:29:24
+    Enter ".help" for usage hints.
+    sqlite> .mode tabs  
+    sqlite> .headers on
+
+Now, let's see what we are working with here.
+
+    sqlite> .schema
+    CREATE TABLE songs(
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      title TEXT,
+      artist TEXT,
+      year TEXT,
+      notes TEXT
+    );
+    CREATE TABLE likes(
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      like INTEGER,
+      datetime INTEGER,
+      songid INTEGER,
+      FOREIGN KEY(songid) REFERENCES songs(id)
+    );
+
+As a sanity check, let's see what one record of each looks like.
+
+    sqlite> select * from songs limit 1;
+    id      title   artist  year    notes
+    1       A' Soalin'      Peter, Paul & Mary      1963    From the album Moving. Written by Paul Stookey, Tracy Batteste & Elaina Mezzetti. Contains an element of "God Res
+    t Ye Merry, Gentlemen".
+    sqlite> select * from likes limit 1;
+    id      like    datetime        songid
+    1       1       1487102189      250
+
+Two tables, "songs", and "likes".  `likes.songid` matches up with `songs.id`.
+This means we can join the two tables together on `s.id=l.songid`.  Once that
+is done, the solution requires the count of likes grouped by title:
+
+    sqlite> select title, count(*) from songs s, likes l where s.id=l.songid group by title order by count(*) desc limit 3;
+    title   count(*)
+    Stairway to Heaven      11325
+    Joy to the World        2162
+    The Little Boy that Santa Claus Forgot  2140
+    sqlite> 
 
