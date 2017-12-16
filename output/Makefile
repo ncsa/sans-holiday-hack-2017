@@ -10,3 +10,6 @@ alabaster.jwt:
 
 santa.jwt:
 	python3 ../tools/make_jwt.py santa.claus administrators human > santa.jwt
+
+claus.password: edb.json
+	cat edb.json |jq '.[][][]' -c|grep claus | jq '.userPassword[]' -r > claus.password
