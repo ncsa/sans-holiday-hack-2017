@@ -26,4 +26,4 @@ for r in db:
     print("Downloading:", filename)
     inbox = mail_client.getmail(email)
     with open(filename, 'w') as f:
-        f.write(inbox, indent=True)
+        json.dump(inbox, f, indent=True)
