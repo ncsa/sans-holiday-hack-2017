@@ -3,7 +3,7 @@ mail.text: mail.json
 	cat mail.json | jq '.INBOX[].BODY.body' -r > mail.text
 
 infractions.json: ../tools/nppd.py
-	./tools/nppd.py
+	../tools/nppd.py
 
 infractions_one_per_line.json: infractions.json
 	cat infractions.json | jq '.[]' -c > infractions_one_per_line.json
