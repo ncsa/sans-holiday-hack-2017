@@ -21,5 +21,5 @@ for name, hints in all_hints.items():
     print(name)
     print("=" * 20)
     for h in hints:
-        print("{title}: {body}".format(**h))
+        print("1.", h['body'])
     print()
