@@ -1,11 +1,11 @@
 # Great Pages
 
-[Page 1](https://www.holidayhackchallenge.com/2017/pages/6dda7650725302f59ea42047206bd4ee5f928d19/GreatBookPage1.pdf)
-[Page 2](https://www.holidayhackchallenge.com/2017/pages/aa814d1c25455480942cb4106e6cde84be86fb30/GreatBookPage2.pdf)
-[Page 3](https://www.holidayhackchallenge.com/2017/pages/57737da397cbfda84e88b573cd96d45fcf34a5da/GreatBookPage3.pdf)
-[Page 4](https://www.holidayhackchallenge.com/2017/pages/f192a884f68af24ae55d9d9ad4adf8d3a3995258/GreatBookPage4.pdf)
-[Page 5](https://www.holidayhackchallenge.com/2017/pages/05c0cacc8cfb96bb5531540e9b2b839a0604225f/GreatBookPage5.pdf)
-[Page 6](https://www.holidayhackchallenge.com/2017/pages/8943e0524e1bf0ea8c7968e85b2444323cb237af/GreatBookPage6.pdf)
+* [Page 1](https://www.holidayhackchallenge.com/2017/pages/6dda7650725302f59ea42047206bd4ee5f928d19/GreatBookPage1.pdf)
+* [Page 2](https://www.holidayhackchallenge.com/2017/pages/aa814d1c25455480942cb4106e6cde84be86fb30/GreatBookPage2.pdf)
+* [Page 3](https://www.holidayhackchallenge.com/2017/pages/57737da397cbfda84e88b573cd96d45fcf34a5da/GreatBookPage3.pdf)
+* [Page 4](https://www.holidayhackchallenge.com/2017/pages/f192a884f68af24ae55d9d9ad4adf8d3a3995258/GreatBookPage4.pdf)
+* [Page 5](https://www.holidayhackchallenge.com/2017/pages/05c0cacc8cfb96bb5531540e9b2b839a0604225f/GreatBookPage5.pdf)
+* [Page 6](https://www.holidayhackchallenge.com/2017/pages/8943e0524e1bf0ea8c7968e85b2444323cb237af/GreatBookPage6.pdf)
 
 # Challenge
 
