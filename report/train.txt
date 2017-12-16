@@ -1,0 +1,7 @@
+elf@266a6727f2fc:~$ ./trainstartup 
+bash: ./trainstartup: cannot execute binary file: Exec format error
+elf@266a6727f2fc:~$ file trainstartup 
+trainstartup: ELF 32-bit LSB  executable, ARM, EABI5 version 1 (GNU/Linux), statically linked, for GNU/Linux 3.2.0, BuildID[sha1]=005de4685e8563d10b3de3e0be7d6fdd7ed732e
+b, not stripped
+elf@266a6727f2fc:~$ qemu-arm ./trainstartup 
+Starting up ... 
