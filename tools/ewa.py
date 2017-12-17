@@ -33,4 +33,4 @@ if __name__ == "__main__":
     username = sys.argv[1]
     m = EWA()
     mail = m.getmail(username)
-    print(mail)
+    print(json.dumps(mail, indent=True))
