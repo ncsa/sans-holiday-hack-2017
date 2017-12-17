@@ -32,3 +32,6 @@ john.txt: jwt.john
 
 mail/admin@northpolechristmastown.com.json:
 	../tools/ewa.py admin > mail/admin@northpolechristmastown.com.json
+
+mail/support@northpolechristmastown.com.json:
+	../tools/ewa.py admin > mail/support@northpolechristmastown.com.json
