@@ -29,3 +29,6 @@ jwt.john: ../tools/jwt2john.py jwt
 john.txt: jwt.john
 	john  --format=HMAC-SHA256 jwt.john
 	john  --format=HMAC-SHA256 jwt.john -show > john.txt
+
+mail/admin.json:
+	../tools/ewa.py admin > mail/admin@northpolechristmastown.com.json
