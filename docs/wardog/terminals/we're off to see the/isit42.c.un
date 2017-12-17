@@ -1,0 +1,27 @@
+#include <stdio.h>
+
+// DATA CORRUPTION ERROR
+// MUCH OF THIS CODE HAS BEEN LOST
+// FORTUNATELY, YOU DON'T NEED IT FOR THIS CHALLENGE
+// MAKE THE isit42 BINARY RETURN 42
+// YOU'LL NEED TO WRITE A SEPERATE C SOURCE TO WIN EVERY TIME
+
+int getrand() {
+    srand((unsigned int)time(NULL)); 
+    printf("Calling rand() to select a random number.\n");
+    // The prototype for rand is: int rand(void);
+    return rand() % 4096; // returns a pseudo-random integer between 0 and 4096
+}
+
+int main() {
+    sleep(3);
+
+    int randnum = getrand();
+    if (randnum == 42) {
+        printf("Yay!\n");
+    } else {
+        printf("Boo!\n");
+    }
+
+    return randnum;
+}
