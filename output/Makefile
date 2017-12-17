@@ -30,5 +30,5 @@ john.txt: jwt.john
 	john  --format=HMAC-SHA256 jwt.john
 	john  --format=HMAC-SHA256 jwt.john -show > john.txt
 
-mail/admin.json:
+mail/admin@northpolechristmastown.com.json:
 	../tools/ewa.py admin > mail/admin@northpolechristmastown.com.json
