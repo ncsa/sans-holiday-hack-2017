@@ -310,6 +310,17 @@ alabaster_snowball@l2s:~$ find / -xdev -type f -user alabaster_snowball -size -4
 /opt/apache-tomcat/webapps/ROOT/WEB-INF/classes/org/demo/rest/example/OrderMySql.class:            final String password = "stream_unhappy_buy_loss";
 #+END_SRC
 
+We could have also searched for the username to find intersting files:
+
+#+BEGIN_SRC sh
+    $ time grep alabaster_snowball -r /opt/
+    /opt/apache-tomcat/webapps/ROOT/WEB-INF/classes/org/demo/rest/example/OrderMySql.class:            final String username = "alabaster_snowball";
+
+    real	0m0.355s
+    user	0m0.300s
+    sys	0m0.052s
+#+END_SRC
+
 * Using ripgrep
 
 Ripgrep is a super fast grep replacement written in rust.
@@ -327,7 +338,8 @@ It does a better job at filtering binary files, so we can run this command that 
 #+END_SRC
 
 If we didn't think to only look in our files, it only takes 4 seconds to search
-the entire filesystem:
+the entire filesystem.  After ignoring proc and some debian package info, only
+a few lines are output.
 
 #+BEGIN_SRC sh
     $ time ./ripgrep-0.7.1-x86_64-unknown-linux-musl/rg alabaster / --no-messages |grep -v /proc|grep -v deb.debian.org
