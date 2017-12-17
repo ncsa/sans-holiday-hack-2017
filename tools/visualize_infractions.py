@@ -13,9 +13,10 @@ def main():
     for i in infractions:
         byname[i['name']].add(i['title'])
 
+    print ("Six insider threat moles:")
     for n, titles in byname.items():
-        if len(titles & WANT) > 1:
-            print(n,titles)
+        if len(titles & WANT) >= 2:
+            print("*", n,titles)
 
 if __name__ == "__main__":
    main() 
