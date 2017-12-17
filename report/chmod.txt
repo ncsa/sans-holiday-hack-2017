@@ -75,3 +75,25 @@ FAIL :(  What if make a copy first?
     >>> ^d
     elf@d5823d933b5d:~$ ./c
 
+
+with perl:
+
+    elf@1e6fe4ce3449:~$ cp CandyCaneStriper c
+    elf@1e6fe4ce3449:~$ cat > fix.pl
+    chmod 0755 "c";
+    ^d
+    elf@1e6fe4ce3449:~$ perl fix.pl 
+    String found where operator expected at fix.pl line 1, near "0755 "c""
+            (Missing operator before  "c"?)
+    syntax error at fix.pl line 1, near "0755 "c""
+    Execution of fix.pl aborted due to compilation errors.
+    elf@1e6fe4ce3449:~$ cat > fix.pl
+    chmod 0755, "c";
+    ^d
+    elf@1e6fe4ce3449:~$ perl fix.pl 
+    elf@1e6fe4ce3449:~$ ./c
+
+Or as a perl one liner, now that we figured out the syntax:
+
+    elf@1e6fe4ce3449:~$ cp CandyCaneStriper c
+	elf@1e6fe4ce3449:~$ perl -e 'chmod 0755, "c"'
