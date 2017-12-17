@@ -1,0 +1,2 @@
+#!/bin/sh
+exec ssh -D 32080 alabaster_snowball@dev.northpolechristmastown.com -t bash --norc

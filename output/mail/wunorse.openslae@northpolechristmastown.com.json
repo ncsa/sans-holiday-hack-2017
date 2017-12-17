@@ -1,0 +1,1281 @@
+{
+ "INBOX": [
+  {
+   "HEADERS": {
+    "which": "HEADER",
+    "size": 912,
+    "body": {
+     "return-path": [
+      "<admin@northpolechristmastown.com>"
+     ],
+     "delivered-to": [
+      "wunorse.openslae@northpolechristmastown.com"
+     ],
+     "received": [
+      "from localhost (localhost [127.0.0.1])\tby mail.northpolechristmastown.com (Postfix) with ESMTP id 76AEABD727\tfor <wunorse.openslae@northpolechristmastown.com>; Wed,  8 Nov 2017 15:59:57 +0000 (UTC)",
+      "from mail.northpolechristmastown.com ([127.0.0.1])\tby localhost (mail.northpolechristmastown.com [127.0.0.1]) (amavisd-new, port 10024)\twith ESMTP id roUlsTRG-XZK\tfor <wunorse.openslae@northpolechristmastown.com>;\tWed,  8 Nov 2017 15:59:57 +0000 (UTC)"
+     ],
+     "to": [
+      "wunorse.openslae@northpolechristmastown.com"
+     ],
+     "from": [
+      "admin@northpolechristmastown.com"
+     ],
+     "subject": [
+      "Welcome"
+     ],
+     "mime-version": [
+      "1.0"
+     ],
+     "content-type": [
+      "text/plain; charset=utf-8"
+     ],
+     "content-transfer-encoding": [
+      "8bit"
+     ],
+     "message-id": [
+      "<20171108155957.664E5BD71D@mail.northpolechristmastown.com>"
+     ],
+     "date": [
+      "Wed,  8 Nov 2017 15:59:57 +0000 (UTC)"
+     ]
+    }
+   },
+   "BODY": {
+    "which": "TEXT",
+    "size": 37,
+    "body": "Hi,\r\n\r\nWelcome to your new account.\r\n"
+   }
+  },
+  {
+   "HEADERS": {
+    "which": "HEADER",
+    "size": 1264,
+    "body": {
+     "return-path": [
+      "<admin@northpolechristmastown.com>"
+     ],
+     "delivered-to": [
+      "wunorse.openslae@northpolechristmastown.com"
+     ],
+     "received": [
+      "from localhost (localhost [127.0.0.1])\tby mail.northpolechristmastown.com (Postfix) with ESMTP id C8795C16F0\tfor <wunorse.openslae@northpolechristmastown.com>; Wed, 15 Nov 2017 16:27:18 +0000 (UTC)",
+      "from mail.northpolechristmastown.com ([127.0.0.1])\tby localhost (mail.northpolechristmastown.com [127.0.0.1]) (amavisd-new, port 10024)\twith ESMTP id 15Bg-L6y4fKH\tfor <wunorse.openslae@northpolechristmastown.com>;\tWed, 15 Nov 2017 16:27:18 +0000 (UTC)"
+     ],
+     "subject": [
+      "Re: Welcome"
+     ],
+     "to": [
+      "\"wunorse.openslae@northpolechristmastown.com\" <wunorse.openslae@northpolechristmastown.com>"
+     ],
+     "references": [
+      "<20171108155957.664E5BD71D@mail.northpolechristmastown.com> <c6a45d35-5642-1f39-9baa-957da2f5fcb7@northpolechristmastown.com>"
+     ],
+     "from": [
+      "\"admin@northpolechristmastown.com\" <admin@northpolechristmastown.com>"
+     ],
+     "message-id": [
+      "<0dedc751-43a9-9368-30c0-40eb02b01211@northpolechristmastown.com>"
+     ],
+     "date": [
+      "Wed, 15 Nov 2017 11:27:20 -0500"
+     ],
+     "mime-version": [
+      "1.0"
+     ],
+     "in-reply-to": [
+      "<c6a45d35-5642-1f39-9baa-957da2f5fcb7@northpolechristmastown.com>"
+     ],
+     "content-type": [
+      "text/plain; charset=utf-8; format=flowed"
+     ],
+     "content-transfer-encoding": [
+      "7bit"
+     ],
+     "content-language": [
+      "en-US"
+     ]
+    }
+   },
+   "BODY": {
+    "which": "TEXT",
+    "size": 279,
+    "body": "Yup, checkout l2s.northpolechristmastown.com\r\n\r\n\r\nOn 11/15/2017 11:21 AM, wunorse.openslae@northpolechristmastown.com wrote:\r\n> Finally, no more snail-mail\r\n>\r\n>\r\n> On 11/8/2017 10:59 AM, admin@northpolechristmastown.com wrote:\r\n>> Hi,\r\n>>\r\n>> Welcome to your new account.\r\n>\r\n\r\n"
+   }
+  },
+  {
+   "HEADERS": {
+    "which": "HEADER",
+    "size": 914,
+    "body": {
+     "return-path": [
+      "<alabaster.snowball@northpolechristmastown.com>"
+     ],
+     "delivered-to": [
+      "wunorse.openslae@northpolechristmastown.com"
+     ],
+     "received": [
+      "from localhost (localhost [127.0.0.1])\tby mail.northpolechristmastown.com (Postfix) with ESMTP id 533FEBD6DA;\tWed, 15 Nov 2017 18:10:43 +0000 (UTC)",
+      "from mail.northpolechristmastown.com ([127.0.0.1])\tby localhost (mail.northpolechristmastown.com [127.0.0.1]) (amavisd-new, port 10024)\twith ESMTP id uaGErKRKvuLG; Wed, 15 Nov 2017 18:10:43 +0000 (UTC)"
+     ],
+     "to": [
+      "all@northpolechristmastown.com"
+     ],
+     "from": [
+      "\"alabaster.snowball@northpolechristmastown.com\" <alabaster.snowball@northpolechristmastown.com>"
+     ],
+     "subject": [
+      "COOKIES!"
+     ],
+     "message-id": [
+      "<91a988a9-4a52-9d96-ecd4-5787793d92a2@northpolechristmastown.com>"
+     ],
+     "date": [
+      "Wed, 15 Nov 2017 13:10:42 -0500"
+     ],
+     "mime-version": [
+      "1.0"
+     ],
+     "content-type": [
+      "text/plain; charset=utf-8; format=flowed"
+     ],
+     "content-transfer-encoding": [
+      "7bit"
+     ],
+     "content-language": [
+      "en-US"
+     ]
+    }
+   },
+   "BODY": {
+    "which": "TEXT",
+    "size": 370,
+    "body": "Does anyone have any cookies left over from Mrs Claus cookie stock pile \r\nfrom last year? I'm working on the computer non-stop until Christmas \r\ndoing development and desperately need some of her north pole famous \r\ngingerbread cookies to keep me going.\r\n\r\nI already emailed her but for she is not in the North Pole.\r\n\r\nI NEEEEED MOAR COOKIES!\r\n\r\n-Alabaster Snowball\r\n\r\n"
+   }
+  },
+  {
+   "HEADERS": {
+    "which": "HEADER",
+    "size": 1065,
+    "body": {
+     "return-path": [
+      "<mary.sugerplum@northpolechristmastown.com>"
+     ],
+     "delivered-to": [
+      "wunorse.openslae@northpolechristmastown.com"
+     ],
+     "received": [
+      "from localhost (localhost [127.0.0.1])\tby mail.northpolechristmastown.com (Postfix) with ESMTP id 135AABD6F6;\tWed, 15 Nov 2017 18:13:58 +0000 (UTC)",
+      "from mail.northpolechristmastown.com ([127.0.0.1])\tby localhost (mail.northpolechristmastown.com [127.0.0.1]) (amavisd-new, port 10024)\twith ESMTP id qopvtWInMa9a; Wed, 15 Nov 2017 18:13:58 +0000 (UTC)"
+     ],
+     "subject": [
+      "Re: COOKIES!"
+     ],
+     "to": [
+      "all@northpolechristmastown.com"
+     ],
+     "references": [
+      "<91a988a9-4a52-9d96-ecd4-5787793d92a2@northpolechristmastown.com>"
+     ],
+     "from": [
+      "\"mary.sugerplum@northpolechristmastown.com\" <mary.sugerplum@northpolechristmastown.com>"
+     ],
+     "message-id": [
+      "<76af786e-fabf-0b8e-3aae-cf846c80d40d@northpolechristmastown.com>"
+     ],
+     "date": [
+      "Wed, 15 Nov 2017 13:13:57 -0500"
+     ],
+     "mime-version": [
+      "1.0"
+     ],
+     "in-reply-to": [
+      "<91a988a9-4a52-9d96-ecd4-5787793d92a2@northpolechristmastown.com>"
+     ],
+     "content-type": [
+      "text/plain; charset=utf-8; format=flowed"
+     ],
+     "content-transfer-encoding": [
+      "7bit"
+     ],
+     "content-language": [
+      "en-US"
+     ]
+    }
+   },
+   "BODY": {
+    "which": "TEXT",
+    "size": 521,
+    "body": "Sorry, I dont know that recipe or have any left.\r\n\r\n\r\nOn 11/15/2017 1:10 PM, alabaster.snowball@northpolechristmastown.com wrote:\r\n> Does anyone have any cookies left over from Mrs Claus cookie stock \r\n> pile from last year? I'm working on the computer non-stop until \r\n> Christmas doing development and desperately need some of her north \r\n> pole famous gingerbread cookies to keep me going.\r\n>\r\n> I already emailed her but for she is not in the North Pole.\r\n>\r\n> I NEEEEED MOAR COOKIES!\r\n>\r\n> -Alabaster Snowball\r\n>\r\n\r\n"
+   }
+  },
+  {
+   "HEADERS": {
+    "which": "HEADER",
+    "size": 1139,
+    "body": {
+     "return-path": [
+      "<sparkle.redberry@northpolechristmastown.com>"
+     ],
+     "delivered-to": [
+      "wunorse.openslae@northpolechristmastown.com"
+     ],
+     "received": [
+      "from localhost (localhost [127.0.0.1])\tby mail.northpolechristmastown.com (Postfix) with ESMTP id 50216C16D7;\tWed, 15 Nov 2017 18:14:15 +0000 (UTC)",
+      "from mail.northpolechristmastown.com ([127.0.0.1])\tby localhost (mail.northpolechristmastown.com [127.0.0.1]) (amavisd-new, port 10024)\twith ESMTP id Rk7bK2EAmjsY; Wed, 15 Nov 2017 18:14:15 +0000 (UTC)"
+     ],
+     "subject": [
+      "Re: COOKIES!"
+     ],
+     "to": [
+      "all@northpolechristmastown.com"
+     ],
+     "references": [
+      "<91a988a9-4a52-9d96-ecd4-5787793d92a2@northpolechristmastown.com> <76af786e-fabf-0b8e-3aae-cf846c80d40d@northpolechristmastown.com>"
+     ],
+     "from": [
+      "\"sparkle.redberry@northpolechristmastown.com\" <sparkle.redberry@northpolechristmastown.com>"
+     ],
+     "message-id": [
+      "<000628d8-1903-8dfc-f980-d175cc664e74@northpolechristmastown.com>"
+     ],
+     "date": [
+      "Wed, 15 Nov 2017 13:14:14 -0500"
+     ],
+     "mime-version": [
+      "1.0"
+     ],
+     "in-reply-to": [
+      "<76af786e-fabf-0b8e-3aae-cf846c80d40d@northpolechristmastown.com>"
+     ],
+     "content-type": [
+      "text/plain; charset=utf-8; format=flowed"
+     ],
+     "content-transfer-encoding": [
+      "7bit"
+     ],
+     "content-language": [
+      "en-US"
+     ]
+    }
+   },
+   "BODY": {
+    "which": "TEXT",
+    "size": 642,
+    "body": "Me neither, sorry.\r\n\r\n\r\nOn 11/15/2017 1:13 PM, mary.sugerplum@northpolechristmastown.com wrote:\r\n> Sorry, I dont know that recipe or have any left.\r\n>\r\n>\r\n> On 11/15/2017 1:10 PM, alabaster.snowball@northpolechristmastown.com \r\n> wrote:\r\n>> Does anyone have any cookies left over from Mrs Claus cookie stock \r\n>> pile from last year? I'm working on the computer non-stop until \r\n>> Christmas doing development and desperately need some of her north \r\n>> pole famous gingerbread cookies to keep me going.\r\n>>\r\n>> I already emailed her but for she is not in the North Pole.\r\n>>\r\n>> I NEEEEED MOAR COOKIES!\r\n>>\r\n>> -Alabaster Snowball\r\n>>\r\n>\r\n\r\n"
+   }
+  },
+  {
+   "HEADERS": {
+    "which": "HEADER",
+    "size": 1201,
+    "body": {
+     "return-path": [
+      "<pepper.minstix@northpolechristmastown.com>"
+     ],
+     "delivered-to": [
+      "wunorse.openslae@northpolechristmastown.com"
+     ],
+     "received": [
+      "from localhost (localhost [127.0.0.1])\tby mail.northpolechristmastown.com (Postfix) with ESMTP id B0C3AC1717;\tWed, 15 Nov 2017 18:16:11 +0000 (UTC)",
+      "from mail.northpolechristmastown.com ([127.0.0.1])\tby localhost (mail.northpolechristmastown.com [127.0.0.1]) (amavisd-new, port 10024)\twith ESMTP id tFvyqbIoCEwm; Wed, 15 Nov 2017 18:16:11 +0000 (UTC)"
+     ],
+     "subject": [
+      "Re: COOKIES!"
+     ],
+     "to": [
+      "all@northpolechristmastown.com"
+     ],
+     "references": [
+      "<91a988a9-4a52-9d96-ecd4-5787793d92a2@northpolechristmastown.com> <76af786e-fabf-0b8e-3aae-cf846c80d40d@northpolechristmastown.com> <000628d8-1903-8dfc-f980-d175cc664e74@northpolechristmastown.com>"
+     ],
+     "from": [
+      "\"pepper.minstix@northpolechristmastown.com\" <pepper.minstix@northpolechristmastown.com>"
+     ],
+     "message-id": [
+      "<ce84a847-8263-7450-7fe0-f9fd50a44045@northpolechristmastown.com>"
+     ],
+     "date": [
+      "Wed, 15 Nov 2017 13:16:11 -0500"
+     ],
+     "mime-version": [
+      "1.0"
+     ],
+     "in-reply-to": [
+      "<000628d8-1903-8dfc-f980-d175cc664e74@northpolechristmastown.com>"
+     ],
+     "content-type": [
+      "text/plain; charset=utf-8; format=flowed"
+     ],
+     "content-transfer-encoding": [
+      "7bit"
+     ],
+     "content-language": [
+      "en-US"
+     ]
+    }
+   },
+   "BODY": {
+    "which": "TEXT",
+    "size": 818,
+    "body": "I liked the raisin ones myself. Dont know about the gingerbread ones.\r\n\r\n\r\nOn 11/15/2017 1:14 PM, sparkle.redberry@northpolechristmastown.com wrote:\r\n> Me neither, sorry.\r\n>\r\n>\r\n> On 11/15/2017 1:13 PM, mary.sugerplum@northpolechristmastown.com wrote:\r\n>> Sorry, I dont know that recipe or have any left.\r\n>>\r\n>>\r\n>> On 11/15/2017 1:10 PM, alabaster.snowball@northpolechristmastown.com \r\n>> wrote:\r\n>>> Does anyone have any cookies left over from Mrs Claus cookie stock \r\n>>> pile from last year? I'm working on the computer non-stop until \r\n>>> Christmas doing development and desperately need some of her north \r\n>>> pole famous gingerbread cookies to keep me going.\r\n>>>\r\n>>> I already emailed her but for she is not in the North Pole.\r\n>>>\r\n>>> I NEEEEED MOAR COOKIES!\r\n>>>\r\n>>> -Alabaster Snowball\r\n>>>\r\n>>\r\n>\r\n\r\n"
+   }
+  },
+  {
+   "HEADERS": {
+    "which": "HEADER",
+    "size": 1290,
+    "body": {
+     "return-path": [
+      "<tarpin.mcjinglehauser@northpolechristmastown.com>"
+     ],
+     "delivered-to": [
+      "wunorse.openslae@northpolechristmastown.com"
+     ],
+     "received": [
+      "from localhost (localhost [127.0.0.1])\tby mail.northpolechristmastown.com (Postfix) with ESMTP id 1AE58C1726;\tWed, 15 Nov 2017 18:18:17 +0000 (UTC)",
+      "from mail.northpolechristmastown.com ([127.0.0.1])\tby localhost (mail.northpolechristmastown.com [127.0.0.1]) (amavisd-new, port 10024)\twith ESMTP id ts1ZiWyErPYY; Wed, 15 Nov 2017 18:18:17 +0000 (UTC)"
+     ],
+     "subject": [
+      "Re: COOKIES!"
+     ],
+     "to": [
+      "all@northpolechristmastown.com"
+     ],
+     "references": [
+      "<91a988a9-4a52-9d96-ecd4-5787793d92a2@northpolechristmastown.com> <76af786e-fabf-0b8e-3aae-cf846c80d40d@northpolechristmastown.com> <000628d8-1903-8dfc-f980-d175cc664e74@northpolechristmastown.com> <ce84a847-8263-7450-7fe0-f9fd50a44045@northpolechristmastown.com>"
+     ],
+     "from": [
+      "\"tarpin.mcjinglehauser@northpolechristmastown.com\" <tarpin.mcjinglehauser@northpolechristmastown.com>"
+     ],
+     "message-id": [
+      "<c745232c-93e6-156a-e368-072323aada35@northpolechristmastown.com>"
+     ],
+     "date": [
+      "Wed, 15 Nov 2017 13:18:16 -0500"
+     ],
+     "mime-version": [
+      "1.0"
+     ],
+     "in-reply-to": [
+      "<ce84a847-8263-7450-7fe0-f9fd50a44045@northpolechristmastown.com>"
+     ],
+     "content-type": [
+      "text/plain; charset=utf-8; format=flowed"
+     ],
+     "content-transfer-encoding": [
+      "7bit"
+     ],
+     "content-language": [
+      "en-US"
+     ]
+    }
+   },
+   "BODY": {
+    "which": "TEXT",
+    "size": 1247,
+    "body": "Ewww, raisin. I loved the gingerbread cookies myself. I think that Mrs \r\nClaus gave me the recipe. If I find it, ill send it to you in an email. \r\nI believe it was a a MS Word docx file. So keep an eye out for an email \r\ncontaining the words \"gingerbread\" \"cookie\" \"recipe\" and a link or \r\nattachment to the .docx file.\r\n\r\n\r\nOn 11/15/2017 1:16 PM, pepper.minstix@northpolechristmastown.com wrote:\r\n> I liked the raisin ones myself. Dont know about the gingerbread ones.\r\n>\r\n>\r\n> On 11/15/2017 1:14 PM, sparkle.redberry@northpolechristmastown.com wrote:\r\n>> Me neither, sorry.\r\n>>\r\n>>\r\n>> On 11/15/2017 1:13 PM, mary.sugerplum@northpolechristmastown.com wrote:\r\n>>> Sorry, I dont know that recipe or have any left.\r\n>>>\r\n>>>\r\n>>> On 11/15/2017 1:10 PM, alabaster.snowball@northpolechristmastown.com \r\n>>> wrote:\r\n>>>> Does anyone have any cookies left over from Mrs Claus cookie stock \r\n>>>> pile from last year? I'm working on the computer non-stop until \r\n>>>> Christmas doing development and desperately need some of her north \r\n>>>> pole famous gingerbread cookies to keep me going.\r\n>>>>\r\n>>>> I already emailed her but for she is not in the North Pole.\r\n>>>>\r\n>>>> I NEEEEED MOAR COOKIES!\r\n>>>>\r\n>>>> -Alabaster Snowball\r\n>>>>\r\n>>>\r\n>>\r\n>\r\n\r\n"
+   }
+  },
+  {
+   "HEADERS": {
+    "which": "HEADER",
+    "size": 1349,
+    "body": {
+     "return-path": [
+      "<alabaster.snowball@northpolechristmastown.com>"
+     ],
+     "delivered-to": [
+      "wunorse.openslae@northpolechristmastown.com"
+     ],
+     "received": [
+      "from localhost (localhost [127.0.0.1])\tby mail.northpolechristmastown.com (Postfix) with ESMTP id 3624DC172F;\tWed, 15 Nov 2017 18:19:58 +0000 (UTC)",
+      "from mail.northpolechristmastown.com ([127.0.0.1])\tby localhost (mail.northpolechristmastown.com [127.0.0.1]) (amavisd-new, port 10024)\twith ESMTP id OH0uPKpL0kJf; Wed, 15 Nov 2017 18:19:58 +0000 (UTC)"
+     ],
+     "subject": [
+      "Re: COOKIES!"
+     ],
+     "to": [
+      "all@northpolechristmastown.com"
+     ],
+     "references": [
+      "<91a988a9-4a52-9d96-ecd4-5787793d92a2@northpolechristmastown.com> <76af786e-fabf-0b8e-3aae-cf846c80d40d@northpolechristmastown.com> <000628d8-1903-8dfc-f980-d175cc664e74@northpolechristmastown.com> <ce84a847-8263-7450-7fe0-f9fd50a44045@northpolechristmastown.com> <c745232c-93e6-156a-e368-072323aada35@northpolechristmastown.com>"
+     ],
+     "from": [
+      "\"alabaster.snowball@northpolechristmastown.com\" <alabaster.snowball@northpolechristmastown.com>"
+     ],
+     "message-id": [
+      "<cb30471a-c3d8-4162-567b-23e5a64bf2f0@northpolechristmastown.com>"
+     ],
+     "date": [
+      "Wed, 15 Nov 2017 13:19:57 -0500"
+     ],
+     "mime-version": [
+      "1.0"
+     ],
+     "in-reply-to": [
+      "<c745232c-93e6-156a-e368-072323aada35@northpolechristmastown.com>"
+     ],
+     "content-type": [
+      "text/plain; charset=utf-8; format=flowed"
+     ],
+     "content-transfer-encoding": [
+      "7bit"
+     ],
+     "content-language": [
+      "en-US"
+     ]
+    }
+   },
+   "BODY": {
+    "which": "TEXT",
+    "size": 1684,
+    "body": "Awesome, yea if anyone finds that .docx file containing the recipe for \r\n\"gingerbread cookie recipe\", please send it to me in a docx file. Im \r\ncurrently working on my computer and would totally download that to my \r\nmachine, open it, and click to all the prompts.\r\n\r\n\r\nThanks!\r\n\r\nAlabaster Snowball.\r\n\r\n\r\nOn 11/15/2017 1:18 PM, tarpin.mcjinglehauser@northpolechristmastown.com \r\nwrote:\r\n> Ewww, raisin. I loved the gingerbread cookies myself. I think that Mrs \r\n> Claus gave me the recipe. If I find it, ill send it to you in an \r\n> email. I believe it was a a MS Word docx file. So keep an eye out for \r\n> an email containing the words \"gingerbread\" \"cookie\" \"recipe\" and a \r\n> link or attachment to the .docx file.\r\n>\r\n>\r\n> On 11/15/2017 1:16 PM, pepper.minstix@northpolechristmastown.com wrote:\r\n>> I liked the raisin ones myself. Dont know about the gingerbread ones.\r\n>>\r\n>>\r\n>> On 11/15/2017 1:14 PM, sparkle.redberry@northpolechristmastown.com \r\n>> wrote:\r\n>>> Me neither, sorry.\r\n>>>\r\n>>>\r\n>>> On 11/15/2017 1:13 PM, mary.sugerplum@northpolechristmastown.com wrote:\r\n>>>> Sorry, I dont know that recipe or have any left.\r\n>>>>\r\n>>>>\r\n>>>> On 11/15/2017 1:10 PM, \r\n>>>> alabaster.snowball@northpolechristmastown.com wrote:\r\n>>>>> Does anyone have any cookies left over from Mrs Claus cookie stock \r\n>>>>> pile from last year? I'm working on the computer non-stop until \r\n>>>>> Christmas doing development and desperately need some of her north \r\n>>>>> pole famous gingerbread cookies to keep me going.\r\n>>>>>\r\n>>>>> I already emailed her but for she is not in the North Pole.\r\n>>>>>\r\n>>>>> I NEEEEED MOAR COOKIES!\r\n>>>>>\r\n>>>>> -Alabaster Snowball\r\n>>>>>\r\n>>>>\r\n>>>\r\n>>\r\n>\r\n\r\n"
+   }
+  },
+  {
+   "HEADERS": {
+    "which": "HEADER",
+    "size": 916,
+    "body": {
+     "return-path": [
+      "<sparkle.redberry@northpolechristmastown.com>"
+     ],
+     "delivered-to": [
+      "wunorse.openslae@northpolechristmastown.com"
+     ],
+     "received": [
+      "from localhost (localhost [127.0.0.1])\tby mail.northpolechristmastown.com (Postfix) with ESMTP id C862AC1741;\tWed, 15 Nov 2017 18:58:49 +0000 (UTC)",
+      "from mail.northpolechristmastown.com ([127.0.0.1])\tby localhost (mail.northpolechristmastown.com [127.0.0.1]) (amavisd-new, port 10024)\twith ESMTP id fNfwUUb_cCyB; Wed, 15 Nov 2017 18:58:49 +0000 (UTC)"
+     ],
+     "to": [
+      "all@northpolechristmastown.com"
+     ],
+     "from": [
+      "\"sparkle.redberry@northpolechristmastown.com\" <sparkle.redberry@northpolechristmastown.com>"
+     ],
+     "subject": [
+      "Christmas Party!"
+     ],
+     "message-id": [
+      "<92f1a4eb-d5e2-a151-57a0-582f73271260@northpolechristmastown.com>"
+     ],
+     "date": [
+      "Wed, 15 Nov 2017 13:58:49 -0500"
+     ],
+     "mime-version": [
+      "1.0"
+     ],
+     "content-type": [
+      "text/plain; charset=utf-8; format=flowed"
+     ],
+     "content-transfer-encoding": [
+      "7bit"
+     ],
+     "content-language": [
+      "en-US"
+     ]
+    }
+   },
+   "BODY": {
+    "which": "TEXT",
+    "size": 298,
+    "body": "Hi Everyone!\r\n\r\nJust a Reminder to everyone to mark their Calendars for the annual elf \r\nball bash on December 25th to celebrate all of the hard work we put in \r\nover the past year. Ill be coordinating the party so let me know if you \r\nhave any special requests!\r\n\r\nRegards,\r\n\r\nSparkle Redberry\r\n\r\n"
+   }
+  },
+  {
+   "HEADERS": {
+    "which": "HEADER",
+    "size": 1076,
+    "body": {
+     "return-path": [
+      "<holly.evergreen@northpolechristmastown.com>"
+     ],
+     "delivered-to": [
+      "wunorse.openslae@northpolechristmastown.com"
+     ],
+     "received": [
+      "from localhost (localhost [127.0.0.1])\tby mail.northpolechristmastown.com (Postfix) with ESMTP id CEB30C1750;\tWed, 15 Nov 2017 19:02:12 +0000 (UTC)",
+      "from mail.northpolechristmastown.com ([127.0.0.1])\tby localhost (mail.northpolechristmastown.com [127.0.0.1]) (amavisd-new, port 10024)\twith ESMTP id LwxZHPNIcfUf; Wed, 15 Nov 2017 19:02:12 +0000 (UTC)"
+     ],
+     "subject": [
+      "Re: Christmas Party!"
+     ],
+     "to": [
+      "all@northpolechristmastown.com"
+     ],
+     "references": [
+      "<92f1a4eb-d5e2-a151-57a0-582f73271260@northpolechristmastown.com>"
+     ],
+     "from": [
+      "\"holly.evergreen@northpolechristmastown.com\" <holly.evergreen@northpolechristmastown.com>"
+     ],
+     "message-id": [
+      "<ccef1dc8-a447-a307-d1ef-ef7bf3c35870@northpolechristmastown.com>"
+     ],
+     "date": [
+      "Wed, 15 Nov 2017 14:02:11 -0500"
+     ],
+     "mime-version": [
+      "1.0"
+     ],
+     "in-reply-to": [
+      "<92f1a4eb-d5e2-a151-57a0-582f73271260@northpolechristmastown.com>"
+     ],
+     "content-type": [
+      "text/plain; charset=utf-8; format=flowed"
+     ],
+     "content-transfer-encoding": [
+      "7bit"
+     ],
+     "content-language": [
+      "en-US"
+     ]
+    }
+   },
+   "BODY": {
+    "which": "TEXT",
+    "size": 504,
+    "body": "Yay! I cant wait. I just hope Tarpin Mcjinglehauser doesn't get sick off \r\negg nog long he did last year.\r\n\r\n\r\nOn 11/15/2017 1:58 PM, sparkle.redberry@northpolechristmastown.com wrote:\r\n> Hi Everyone!\r\n>\r\n> Just a Reminder to everyone to mark their Calendars for the annual elf \r\n> ball bash on December 25th to celebrate all of the hard work we put in \r\n> over the past year. Ill be coordinating the party so let me know if \r\n> you have any special requests!\r\n>\r\n> Regards,\r\n>\r\n> Sparkle Redberry\r\n>\r\n\r\n"
+   }
+  },
+  {
+   "HEADERS": {
+    "which": "HEADER",
+    "size": 1162,
+    "body": {
+     "return-path": [
+      "<tarpin.mcjinglehauser@northpolechristmastown.com>"
+     ],
+     "delivered-to": [
+      "wunorse.openslae@northpolechristmastown.com"
+     ],
+     "received": [
+      "from localhost (localhost [127.0.0.1])\tby mail.northpolechristmastown.com (Postfix) with ESMTP id 731F4C175E;\tWed, 15 Nov 2017 19:03:00 +0000 (UTC)",
+      "from mail.northpolechristmastown.com ([127.0.0.1])\tby localhost (mail.northpolechristmastown.com [127.0.0.1]) (amavisd-new, port 10024)\twith ESMTP id ENd3QYl-20l6; Wed, 15 Nov 2017 19:03:00 +0000 (UTC)"
+     ],
+     "subject": [
+      "Re: Christmas Party!"
+     ],
+     "to": [
+      "all@northpolechristmastown.com"
+     ],
+     "references": [
+      "<92f1a4eb-d5e2-a151-57a0-582f73271260@northpolechristmastown.com> <ccef1dc8-a447-a307-d1ef-ef7bf3c35870@northpolechristmastown.com>"
+     ],
+     "from": [
+      "\"tarpin.mcjinglehauser@northpolechristmastown.com\" <tarpin.mcjinglehauser@northpolechristmastown.com>"
+     ],
+     "message-id": [
+      "<4a0f4ef5-176a-74cb-3d60-d0ba1e8f4bbb@northpolechristmastown.com>"
+     ],
+     "date": [
+      "Wed, 15 Nov 2017 14:02:59 -0500"
+     ],
+     "mime-version": [
+      "1.0"
+     ],
+     "in-reply-to": [
+      "<ccef1dc8-a447-a307-d1ef-ef7bf3c35870@northpolechristmastown.com>"
+     ],
+     "content-type": [
+      "text/plain; charset=utf-8; format=flowed"
+     ],
+     "content-transfer-encoding": [
+      "7bit"
+     ],
+     "content-language": [
+      "en-US"
+     ]
+    }
+   },
+   "BODY": {
+    "which": "TEXT",
+    "size": 632,
+    "body": "Yea..... Sorry about that!\r\n\r\n\r\nOn 11/15/2017 2:02 PM, holly.evergreen@northpolechristmastown.com wrote:\r\n> Yay! I cant wait. I just hope Tarpin Mcjinglehauser doesn't get sick \r\n> off egg nog long he did last year.\r\n>\r\n>\r\n> On 11/15/2017 1:58 PM, sparkle.redberry@northpolechristmastown.com wrote:\r\n>> Hi Everyone!\r\n>>\r\n>> Just a Reminder to everyone to mark their Calendars for the annual \r\n>> elf ball bash on December 25th to celebrate all of the hard work we \r\n>> put in over the past year. Ill be coordinating the party so let me \r\n>> know if you have any special requests!\r\n>>\r\n>> Regards,\r\n>>\r\n>> Sparkle Redberry\r\n>>\r\n>\r\n\r\n"
+   }
+  },
+  {
+   "HEADERS": {
+    "which": "HEADER",
+    "size": 1079,
+    "body": {
+     "return-path": [
+      "<sparkle.redberry@northpolechristmastown.com>"
+     ],
+     "delivered-to": [
+      "wunorse.openslae@northpolechristmastown.com"
+     ],
+     "received": [
+      "from localhost (localhost [127.0.0.1])\tby mail.northpolechristmastown.com (Postfix) with ESMTP id 370C1C176C;\tWed, 15 Nov 2017 19:04:12 +0000 (UTC)",
+      "from mail.northpolechristmastown.com ([127.0.0.1])\tby localhost (mail.northpolechristmastown.com [127.0.0.1]) (amavisd-new, port 10024)\twith ESMTP id 108sYq69SO1g; Wed, 15 Nov 2017 19:04:12 +0000 (UTC)"
+     ],
+     "subject": [
+      "Re: Christmas Party!"
+     ],
+     "from": [
+      "\"sparkle.redberry@northpolechristmastown.com\" <sparkle.redberry@northpolechristmastown.com>"
+     ],
+     "to": [
+      "all@northpolechristmastown.com"
+     ],
+     "references": [
+      "<92f1a4eb-d5e2-a151-57a0-582f73271260@northpolechristmastown.com>"
+     ],
+     "message-id": [
+      "<af03c5be-bbcd-a05e-f0c5-cc7d08e74ce5@northpolechristmastown.com>"
+     ],
+     "date": [
+      "Wed, 15 Nov 2017 14:04:11 -0500"
+     ],
+     "mime-version": [
+      "1.0"
+     ],
+     "in-reply-to": [
+      "<92f1a4eb-d5e2-a151-57a0-582f73271260@northpolechristmastown.com>"
+     ],
+     "content-type": [
+      "text/plain; charset=utf-8; format=flowed"
+     ],
+     "content-transfer-encoding": [
+      "7bit"
+     ],
+     "content-language": [
+      "en-US"
+     ]
+    }
+   },
+   "BODY": {
+    "which": "TEXT",
+    "size": 435,
+    "body": "Awesome, this is going to be a blast\r\n\r\n\r\nOn 11/15/2017 1:58 PM, sparkle.redberry@northpolechristmastown.com wrote:\r\n> Hi Everyone!\r\n>\r\n> Just a Reminder to everyone to mark their Calendars for the annual elf \r\n> ball bash on December 25th to celebrate all of the hard work we put in \r\n> over the past year. Ill be coordinating the party so let me know if \r\n> you have any special requests!\r\n>\r\n> Regards,\r\n>\r\n> Sparkle Redberry\r\n>\r\n\r\n"
+   }
+  },
+  {
+   "HEADERS": {
+    "which": "HEADER",
+    "size": 1147,
+    "body": {
+     "return-path": [
+      "<wunorse.openslae@northpolechristmastown.com>"
+     ],
+     "delivered-to": [
+      "wunorse.openslae@northpolechristmastown.com"
+     ],
+     "received": [
+      "from localhost (localhost [127.0.0.1])\tby mail.northpolechristmastown.com (Postfix) with ESMTP id E5955C176C;\tWed, 15 Nov 2017 19:08:30 +0000 (UTC)",
+      "from mail.northpolechristmastown.com ([127.0.0.1])\tby localhost (mail.northpolechristmastown.com [127.0.0.1]) (amavisd-new, port 10024)\twith ESMTP id oTI8JPOCW5oz; Wed, 15 Nov 2017 19:08:30 +0000 (UTC)"
+     ],
+     "subject": [
+      "Re: Christmas Party!"
+     ],
+     "to": [
+      "all@northpolechristmastown.com"
+     ],
+     "references": [
+      "<92f1a4eb-d5e2-a151-57a0-582f73271260@northpolechristmastown.com> <af03c5be-bbcd-a05e-f0c5-cc7d08e74ce5@northpolechristmastown.com>"
+     ],
+     "from": [
+      "\"wunorse.openslae@northpolechristmastown.com\" <wunorse.openslae@northpolechristmastown.com>"
+     ],
+     "message-id": [
+      "<e5c775e7-7209-bb46-aaa7-bf43ab0c770a@northpolechristmastown.com>"
+     ],
+     "date": [
+      "Wed, 15 Nov 2017 14:08:30 -0500"
+     ],
+     "mime-version": [
+      "1.0"
+     ],
+     "in-reply-to": [
+      "<af03c5be-bbcd-a05e-f0c5-cc7d08e74ce5@northpolechristmastown.com>"
+     ],
+     "content-type": [
+      "text/plain; charset=utf-8; format=flowed"
+     ],
+     "content-transfer-encoding": [
+      "7bit"
+     ],
+     "content-language": [
+      "en-US"
+     ]
+    }
+   },
+   "BODY": {
+    "which": "TEXT",
+    "size": 587,
+    "body": "Yea, I cant wait either. Ill be bringing the chips!\r\n\r\n\r\nOn 11/15/2017 2:04 PM, sparkle.redberry@northpolechristmastown.com wrote:\r\n> Awesome, this is going to be a blast\r\n>\r\n>\r\n> On 11/15/2017 1:58 PM, sparkle.redberry@northpolechristmastown.com wrote:\r\n>> Hi Everyone!\r\n>>\r\n>> Just a Reminder to everyone to mark their Calendars for the annual \r\n>> elf ball bash on December 25th to celebrate all of the hard work we \r\n>> put in over the past year. Ill be coordinating the party so let me \r\n>> know if you have any special requests!\r\n>>\r\n>> Regards,\r\n>>\r\n>> Sparkle Redberry\r\n>>\r\n>\r\n\r\n"
+   }
+  },
+  {
+   "HEADERS": {
+    "which": "HEADER",
+    "size": 918,
+    "body": {
+     "return-path": [
+      "<minty.candycane@northpolechristmastown.com>"
+     ],
+     "delivered-to": [
+      "wunorse.openslae@northpolechristmastown.com"
+     ],
+     "received": [
+      "from localhost (localhost [127.0.0.1])\tby mail.northpolechristmastown.com (Postfix) with ESMTP id 7BCF3C176C;\tWed, 15 Nov 2017 19:41:16 +0000 (UTC)",
+      "from mail.northpolechristmastown.com ([127.0.0.1])\tby localhost (mail.northpolechristmastown.com [127.0.0.1]) (amavisd-new, port 10024)\twith ESMTP id XMa3mGgJyhZA; Wed, 15 Nov 2017 19:41:16 +0000 (UTC)"
+     ],
+     "to": [
+      "all@northpolechristmastown.com"
+     ],
+     "from": [
+      "\"minty.candycane@northpolechristmastown.com\" <minty.candycane@northpolechristmastown.com>"
+     ],
+     "subject": [
+      "Should we be worried?"
+     ],
+     "message-id": [
+      "<ea4e3232-07da-d72b-f70e-5187e923c0b0@northpolechristmastown.com>"
+     ],
+     "date": [
+      "Wed, 15 Nov 2017 14:41:15 -0500"
+     ],
+     "mime-version": [
+      "1.0"
+     ],
+     "content-type": [
+      "text/plain; charset=utf-8; format=flowed"
+     ],
+     "content-transfer-encoding": [
+      "7bit"
+     ],
+     "content-language": [
+      "en-US"
+     ]
+    }
+   },
+   "BODY": {
+    "which": "TEXT",
+    "size": 579,
+    "body": "Hey Alabaster,\r\n\r\nYou know I'm a novice security enthusiast, well I saw an article a while \r\nago about regarding DDE exploits that dont need macros for MS word to \r\nget command execution.\r\n\r\nhttps://sensepost.com/blog/2017/macro-less-code-exec-in-msword/\r\n\r\nShould we be worried about this?\r\n\r\nI tried it on my local machine and was able to transfer a file. Here's a \r\npoc:\r\n\r\nhttp://mail.northpolechristmastown.com/attachments/dde_exmaple_minty_candycane.png\r\n\r\nI know your the resident computer engineer here so I wanted to defer to \r\nthe expert.\r\n\r\n:)\r\n\r\n-Minty CandyCane.\r\n\r\n"
+   }
+  },
+  {
+   "HEADERS": {
+    "which": "HEADER",
+    "size": 1090,
+    "body": {
+     "return-path": [
+      "<alabaster.snowball@northpolechristmastown.com>"
+     ],
+     "delivered-to": [
+      "wunorse.openslae@northpolechristmastown.com"
+     ],
+     "received": [
+      "from localhost (localhost [127.0.0.1])\tby mail.northpolechristmastown.com (Postfix) with ESMTP id CAC6DC1793;\tWed, 15 Nov 2017 19:45:19 +0000 (UTC)",
+      "from mail.northpolechristmastown.com ([127.0.0.1])\tby localhost (mail.northpolechristmastown.com [127.0.0.1]) (amavisd-new, port 10024)\twith ESMTP id K9ferlPN31T7; Wed, 15 Nov 2017 19:45:19 +0000 (UTC)"
+     ],
+     "subject": [
+      "Re: Should we be worried?"
+     ],
+     "to": [
+      "all@northpolechristmastown.com"
+     ],
+     "references": [
+      "<ea4e3232-07da-d72b-f70e-5187e923c0b0@northpolechristmastown.com>"
+     ],
+     "from": [
+      "\"alabaster.snowball@northpolechristmastown.com\" <alabaster.snowball@northpolechristmastown.com>"
+     ],
+     "message-id": [
+      "<940ba863-3a1a-d531-b0d7-232d44f79988@northpolechristmastown.com>"
+     ],
+     "date": [
+      "Wed, 15 Nov 2017 14:45:19 -0500"
+     ],
+     "mime-version": [
+      "1.0"
+     ],
+     "in-reply-to": [
+      "<ea4e3232-07da-d72b-f70e-5187e923c0b0@northpolechristmastown.com>"
+     ],
+     "content-type": [
+      "text/plain; charset=utf-8; format=flowed"
+     ],
+     "content-transfer-encoding": [
+      "7bit"
+     ],
+     "content-language": [
+      "en-US"
+     ]
+    }
+   },
+   "BODY": {
+    "which": "TEXT",
+    "size": 948,
+    "body": "Quit worrying Minty,\r\n\r\nYou have nothing to worry about with me around! I have developed most of \r\nthe applications in our network including our network defenses. We are \r\nare completely secure and impenetrable.\r\n\r\nSincerely,\r\n\r\nAlabaster Snowball.\r\n\r\n\r\nOn 11/15/2017 2:41 PM, minty.candycane@northpolechristmastown.com wrote:\r\n> Hey Alabaster,\r\n>\r\n> You know I'm a novice security enthusiast, well I saw an article a \r\n> while ago about regarding DDE exploits that dont need macros for MS \r\n> word to get command execution.\r\n>\r\n> https://sensepost.com/blog/2017/macro-less-code-exec-in-msword/\r\n>\r\n> Should we be worried about this?\r\n>\r\n> I tried it on my local machine and was able to transfer a file. Here's \r\n> a poc:\r\n>\r\n> http://mail.northpolechristmastown.com/attachments/dde_exmaple_minty_candycane.png \r\n>\r\n>\r\n> I know your the resident computer engineer here so I wanted to defer \r\n> to the expert.\r\n>\r\n> :)\r\n>\r\n> -Minty CandyCane.\r\n>\r\n\r\n"
+   }
+  },
+  {
+   "HEADERS": {
+    "which": "HEADER",
+    "size": 1148,
+    "body": {
+     "return-path": [
+      "<minty.candycane@northpolechristmastown.com>"
+     ],
+     "delivered-to": [
+      "wunorse.openslae@northpolechristmastown.com"
+     ],
+     "received": [
+      "from localhost (localhost [127.0.0.1])\tby mail.northpolechristmastown.com (Postfix) with ESMTP id 7C4CDC17A1;\tWed, 15 Nov 2017 19:46:03 +0000 (UTC)",
+      "from mail.northpolechristmastown.com ([127.0.0.1])\tby localhost (mail.northpolechristmastown.com [127.0.0.1]) (amavisd-new, port 10024)\twith ESMTP id 6_UoNgUVYu37; Wed, 15 Nov 2017 19:46:03 +0000 (UTC)"
+     ],
+     "subject": [
+      "Re: Should we be worried?"
+     ],
+     "to": [
+      "all@northpolechristmastown.com"
+     ],
+     "references": [
+      "<ea4e3232-07da-d72b-f70e-5187e923c0b0@northpolechristmastown.com> <940ba863-3a1a-d531-b0d7-232d44f79988@northpolechristmastown.com>"
+     ],
+     "from": [
+      "\"minty.candycane@northpolechristmastown.com\" <minty.candycane@northpolechristmastown.com>"
+     ],
+     "message-id": [
+      "<2c57bda3-543d-d1d8-5809-24af97816769@northpolechristmastown.com>"
+     ],
+     "date": [
+      "Wed, 15 Nov 2017 14:46:02 -0500"
+     ],
+     "mime-version": [
+      "1.0"
+     ],
+     "in-reply-to": [
+      "<940ba863-3a1a-d531-b0d7-232d44f79988@northpolechristmastown.com>"
+     ],
+     "content-type": [
+      "multipart/alternative; boundary=\"------------1BE15AD45E8A2D947D3B4FFE\""
+     ],
+     "content-language": [
+      "en-US"
+     ]
+    }
+   },
+   "BODY": {
+    "which": "TEXT",
+    "size": 5009,
+    "body": "This is a multi-part message in MIME format.\r\n--------------1BE15AD45E8A2D947D3B4FFE\r\nContent-Type: text/plain; charset=utf-8; format=flowed\r\nContent-Transfer-Encoding: 8bit\r\n\r\n\u00af\\_(\u30c4)_/\u00af\r\n\r\nGood enough for me!\r\n\r\n\r\nOn 11/15/2017 2:45 PM, alabaster.snowball@northpolechristmastown.com wrote:\r\n> Quit worrying Minty,\r\n>\r\n> You have nothing to worry about with me around! I have developed most \r\n> of the applications in our network including our network defenses. We \r\n> are are completely secure and impenetrable.\r\n>\r\n> Sincerely,\r\n>\r\n> Alabaster Snowball.\r\n>\r\n>\r\n> On 11/15/2017 2:41 PM, minty.candycane@northpolechristmastown.com wrote:\r\n>> Hey Alabaster,\r\n>>\r\n>> You know I'm a novice security enthusiast, well I saw an article a \r\n>> while ago about regarding DDE exploits that dont need macros for MS \r\n>> word to get command execution.\r\n>>\r\n>> https://sensepost.com/blog/2017/macro-less-code-exec-in-msword/\r\n>>\r\n>> Should we be worried about this?\r\n>>\r\n>> I tried it on my local machine and was able to transfer a file. \r\n>> Here's a poc:\r\n>>\r\n>> http://mail.northpolechristmastown.com/attachments/dde_exmaple_minty_candycane.png \r\n>>\r\n>>\r\n>> I know your the resident computer engineer here so I wanted to defer \r\n>> to the expert.\r\n>>\r\n>> :)\r\n>>\r\n>> -Minty CandyCane.\r\n>>\r\n>\r\n\r\n\r\n--------------1BE15AD45E8A2D947D3B4FFE\r\nContent-Type: text/html; charset=utf-8\r\nContent-Transfer-Encoding: 8bit\r\n\r\n<html>\r\n  <head>\r\n    <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">\r\n  </head>\r\n  <body text=\"#000000\" bgcolor=\"#FFFFFF\">\r\n    <p><span style=\"color: rgb(0, 0, 0); font-family: &quot;Helvetica\r\n        Neue&quot;, Helvetica, Arial, sans-serif; font-size: 16px;\r\n        font-style: normal; font-variant-ligatures: normal;\r\n        font-variant-caps: normal; font-weight: normal; letter-spacing:\r\n        normal; orphans: 2; text-align: start; text-indent: 0px;\r\n        text-transform: none; white-space: normal; widows: 2;\r\n        word-spacing: 0px; -webkit-text-stroke-width: 0px;\r\n        text-decoration-style: initial; text-decoration-color: initial;\r\n        display: inline !important; float: none;\">\u00af\\_(\u30c4)_/\u00af</span></p>\r\n    <p><span style=\"color: rgb(0, 0, 0); font-family: &quot;Helvetica\r\n        Neue&quot;, Helvetica, Arial, sans-serif; font-size: 16px;\r\n        font-style: normal; font-variant-ligatures: normal;\r\n        font-variant-caps: normal; font-weight: normal; letter-spacing:\r\n        normal; orphans: 2; text-align: start; text-indent: 0px;\r\n        text-transform: none; white-space: normal; widows: 2;\r\n        word-spacing: 0px; -webkit-text-stroke-width: 0px;\r\n        text-decoration-style: initial; text-decoration-color: initial;\r\n        display: inline !important; float: none;\">Good enough for me!<br>\r\n      </span></p>\r\n    <br>\r\n    <div class=\"moz-cite-prefix\">On 11/15/2017 2:45 PM,\r\n      <a class=\"moz-txt-link-abbreviated\" href=\"mailto:alabaster.snowball@northpolechristmastown.com\">alabaster.snowball@northpolechristmastown.com</a> wrote:<br>\r\n    </div>\r\n    <blockquote type=\"cite\"\r\ncite=\"mid:940ba863-3a1a-d531-b0d7-232d44f79988@northpolechristmastown.com\">Quit\r\n      worrying Minty,\r\n      <br>\r\n      <br>\r\n      You have nothing to worry about with me around! I have developed\r\n      most of the applications in our network including our network\r\n      defenses. We are are completely secure and impenetrable.\r\n      <br>\r\n      <br>\r\n      Sincerely,\r\n      <br>\r\n      <br>\r\n      Alabaster Snowball.\r\n      <br>\r\n      <br>\r\n      <br>\r\n      On 11/15/2017 2:41 PM, <a class=\"moz-txt-link-abbreviated\" href=\"mailto:minty.candycane@northpolechristmastown.com\">minty.candycane@northpolechristmastown.com</a>\r\n      wrote:\r\n      <br>\r\n      <blockquote type=\"cite\">Hey Alabaster,\r\n        <br>\r\n        <br>\r\n        You know I'm a novice security enthusiast, well I saw an article\r\n        a while ago about regarding DDE exploits that dont need macros\r\n        for MS word to get command execution.\r\n        <br>\r\n        <br>\r\n        <a class=\"moz-txt-link-freetext\" href=\"https://sensepost.com/blog/2017/macro-less-code-exec-in-msword/\">https://sensepost.com/blog/2017/macro-less-code-exec-in-msword/</a>\r\n        <br>\r\n        <br>\r\n        Should we be worried about this?\r\n        <br>\r\n        <br>\r\n        I tried it on my local machine and was able to transfer a file.\r\n        Here's a poc:\r\n        <br>\r\n        <br>\r\n<a class=\"moz-txt-link-freetext\" href=\"http://mail.northpolechristmastown.com/attachments/dde_exmaple_minty_candycane.png\">http://mail.northpolechristmastown.com/attachments/dde_exmaple_minty_candycane.png</a>\r\n        <br>\r\n        <br>\r\n        I know your the resident computer engineer here so I wanted to\r\n        defer to the expert.\r\n        <br>\r\n        <br>\r\n        :)\r\n        <br>\r\n        <br>\r\n        -Minty CandyCane.\r\n        <br>\r\n        <br>\r\n      </blockquote>\r\n      <br>\r\n    </blockquote>\r\n    <br>\r\n  </body>\r\n</html>\r\n\r\n--------------1BE15AD45E8A2D947D3B4FFE--\r\n"
+   }
+  },
+  {
+   "HEADERS": {
+    "which": "HEADER",
+    "size": 910,
+    "body": {
+     "return-path": [
+      "<holly.evergreen@northpolechristmastown.com>"
+     ],
+     "delivered-to": [
+      "wunorse.openslae@northpolechristmastown.com"
+     ],
+     "received": [
+      "from localhost (localhost [127.0.0.1])\tby mail.northpolechristmastown.com (Postfix) with ESMTP id C8053C3A12;\tTue,  5 Dec 2017 14:10:40 +0000 (UTC)",
+      "from mail.northpolechristmastown.com ([127.0.0.1])\tby localhost (mail.northpolechristmastown.com [127.0.0.1]) (amavisd-new, port 10024)\twith ESMTP id hHGF4vyPzOAr; Tue,  5 Dec 2017 14:10:40 +0000 (UTC)"
+     ],
+     "to": [
+      "all@northpolechristmastown.com"
+     ],
+     "from": [
+      "\"holly.evergreen@northpolechristmastown.com\" <holly.evergreen@northpolechristmastown.com>"
+     ],
+     "subject": [
+      "Lost book page"
+     ],
+     "message-id": [
+      "<5f6fc8ca-77dc-1da3-a0aa-0947b9d155bd@northpolechristmastown.com>"
+     ],
+     "date": [
+      "Tue, 5 Dec 2017 09:10:47 -0500"
+     ],
+     "mime-version": [
+      "1.0"
+     ],
+     "content-type": [
+      "text/plain; charset=utf-8; format=flowed"
+     ],
+     "content-transfer-encoding": [
+      "7bit"
+     ],
+     "content-language": [
+      "en-US"
+     ]
+    }
+   },
+   "BODY": {
+    "which": "TEXT",
+    "size": 165,
+    "body": "Hey Santa,\r\n\r\nFound this lying around. Figured you needed it.\r\n\r\nhttp://mail.northpolechristmastown.com/attachments/GreatBookPage4_893jt91md2.pdf\r\n\r\n:)\r\n\r\n-Holly\r\n\r\n"
+   }
+  },
+  {
+   "HEADERS": {
+    "which": "HEADER",
+    "size": 1163,
+    "body": {
+     "return-path": [
+      "<mary.sugerplum@northpolechristmastown.com>"
+     ],
+     "delivered-to": [
+      "wunorse.openslae@northpolechristmastown.com"
+     ],
+     "received": [
+      "from localhost (localhost [127.0.0.1])\tby mail.northpolechristmastown.com (Postfix) with ESMTP id 7687FC19FE;\tTue,  5 Dec 2017 19:31:29 +0000 (UTC)",
+      "from mail.northpolechristmastown.com ([127.0.0.1])\tby localhost (mail.northpolechristmastown.com [127.0.0.1]) (amavisd-new, port 10024)\twith ESMTP id T2eCzyQWAc_y; Tue,  5 Dec 2017 19:31:29 +0000 (UTC)"
+     ],
+     "subject": [
+      "Re: Lost book page"
+     ],
+     "to": [
+      "\"holly.evergreen@northpolechristmastown.com\" <holly.evergreen@northpolechristmastown.com>, all@northpolechristmastown.com"
+     ],
+     "references": [
+      "<5f6fc8ca-77dc-1da3-a0aa-0947b9d155bd@northpolechristmastown.com>"
+     ],
+     "from": [
+      "\"mary.sugerplum@northpolechristmastown.com\" <mary.sugerplum@northpolechristmastown.com>"
+     ],
+     "message-id": [
+      "<12a2ae2d-a978-c843-dfaf-d29507be192a@northpolechristmastown.com>"
+     ],
+     "date": [
+      "Tue, 5 Dec 2017 14:31:28 -0500"
+     ],
+     "mime-version": [
+      "1.0"
+     ],
+     "in-reply-to": [
+      "<5f6fc8ca-77dc-1da3-a0aa-0947b9d155bd@northpolechristmastown.com>"
+     ],
+     "content-type": [
+      "text/plain; charset=utf-8; format=flowed"
+     ],
+     "content-transfer-encoding": [
+      "7bit"
+     ],
+     "content-language": [
+      "en-US"
+     ]
+    }
+   },
+   "BODY": {
+    "which": "TEXT",
+    "size": 382,
+    "body": "Ill save it for Santa along with the other one I have on my computer. \r\nPulling it down now via nc.exe \"like a boss\".\r\n\r\n\r\nOn 12/5/2017 9:10 AM, holly.evergreen@northpolechristmastown.com wrote:\r\n> Hey Santa,\r\n>\r\n> Found this lying around. Figured you needed it.\r\n>\r\n> http://mail.northpolechristmastown.com/attachments/GreatBookPage4_893jt91md2.pdf \r\n>\r\n>\r\n> :)\r\n>\r\n> -Holly\r\n>\r\n\r\n"
+   }
+  },
+  {
+   "HEADERS": {
+    "which": "HEADER",
+    "size": 1218,
+    "body": {
+     "return-path": [
+      "<alabaster.snowball@northpolechristmastown.com>"
+     ],
+     "delivered-to": [
+      "wunorse.openslae@northpolechristmastown.com"
+     ],
+     "received": [
+      "from localhost (localhost [127.0.0.1])\tby mail.northpolechristmastown.com (Postfix) with ESMTP id 2D087C3A2E;\tTue,  5 Dec 2017 19:33:23 +0000 (UTC)",
+      "from mail.northpolechristmastown.com ([127.0.0.1])\tby localhost (mail.northpolechristmastown.com [127.0.0.1]) (amavisd-new, port 10024)\twith ESMTP id 6sjTbOkoj03k; Tue,  5 Dec 2017 19:33:23 +0000 (UTC)"
+     ],
+     "subject": [
+      "Re: Lost book page"
+     ],
+     "to": [
+      "all@northpolechristmastown.com"
+     ],
+     "references": [
+      "<5f6fc8ca-77dc-1da3-a0aa-0947b9d155bd@northpolechristmastown.com> <12a2ae2d-a978-c843-dfaf-d29507be192a@northpolechristmastown.com> <e8388030-342d-1b3a-596f-de914fe11051@northpolechristmastown.com>"
+     ],
+     "from": [
+      "\"alabaster.snowball@northpolechristmastown.com\" <alabaster.snowball@northpolechristmastown.com>"
+     ],
+     "message-id": [
+      "<b0489669-fbd4-0435-392c-cd22d69c3e05@northpolechristmastown.com>"
+     ],
+     "date": [
+      "Tue, 5 Dec 2017 14:33:21 -0500"
+     ],
+     "mime-version": [
+      "1.0"
+     ],
+     "in-reply-to": [
+      "<e8388030-342d-1b3a-596f-de914fe11051@northpolechristmastown.com>"
+     ],
+     "content-type": [
+      "text/plain; charset=utf-8; format=flowed"
+     ],
+     "content-transfer-encoding": [
+      "7bit"
+     ],
+     "content-language": [
+      "en-US"
+     ]
+    }
+   },
+   "BODY": {
+    "which": "TEXT",
+    "size": 717,
+    "body": "Well powershell is my new love but netcat will always hold a special \r\nplace in my heart.\r\n\r\n\r\nOn 12/5/2017 2:32 PM, minty.candycane@northpolechristmastown.com wrote:\r\n> You still use netcat on your windows box?\r\n>\r\n>\r\n> On 12/5/2017 2:31 PM, mary.sugerplum@northpolechristmastown.com wrote:\r\n>> Ill save it for Santa along with the other one I have on my computer. \r\n>> Pulling it down now via nc.exe \"like a boss\".\r\n>>\r\n>>\r\n>> On 12/5/2017 9:10 AM, holly.evergreen@northpolechristmastown.com wrote:\r\n>>> Hey Santa,\r\n>>>\r\n>>> Found this lying around. Figured you needed it.\r\n>>>\r\n>>> http://mail.northpolechristmastown.com/attachments/GreatBookPage4_893jt91md2.pdf \r\n>>>\r\n>>>\r\n>>> :)\r\n>>>\r\n>>> -Holly\r\n>>>\r\n>>\r\n>\r\n\r\n"
+   }
+  },
+  {
+   "HEADERS": {
+    "which": "HEADER",
+    "size": 1235,
+    "body": {
+     "return-path": [
+      "<alabaster.snowball@northpolechristmastown.com>"
+     ],
+     "delivered-to": [
+      "wunorse.openslae@northpolechristmastown.com"
+     ],
+     "received": [
+      "from localhost (localhost [127.0.0.1])\tby mail.northpolechristmastown.com (Postfix) with ESMTP id 63D2BC3574;\tTue, 12 Dec 2017 18:54:53 +0000 (UTC)",
+      "from mail.northpolechristmastown.com ([127.0.0.1])\tby localhost (mail.northpolechristmastown.com [127.0.0.1]) (amavisd-new, port 10024)\twith ESMTP id GEt-6bS42s7W; Tue, 12 Dec 2017 18:54:53 +0000 (UTC)"
+     ],
+     "subject": [
+      "Re: Lost book page"
+     ],
+     "from": [
+      "alabaster.snowball@northpolechristmastown.com"
+     ],
+     "to": [
+      "all@northpolechristmastown.com"
+     ],
+     "references": [
+      "<5f6fc8ca-77dc-1da3-a0aa-0947b9d155bd@northpolechristmastown.com> <12a2ae2d-a978-c843-dfaf-d29507be192a@northpolechristmastown.com> <e8388030-342d-1b3a-596f-de914fe11051@northpolechristmastown.com> <b0489669-fbd4-0435-392c-cd22d69c3e05@northpolechristmastown.com>"
+     ],
+     "message-id": [
+      "<b426ecb5-f79b-bc25-48f5-26f94bffbac7@northpolechristmastown.com>"
+     ],
+     "date": [
+      "Tue, 12 Dec 2017 13:54:51 -0500"
+     ],
+     "mime-version": [
+      "1.0"
+     ],
+     "in-reply-to": [
+      "<b0489669-fbd4-0435-392c-cd22d69c3e05@northpolechristmastown.com>"
+     ],
+     "content-type": [
+      "text/plain; charset=utf-8; format=flowed"
+     ],
+     "content-transfer-encoding": [
+      "7bit"
+     ],
+     "content-language": [
+      "en-US"
+     ]
+    }
+   },
+   "BODY": {
+    "which": "TEXT",
+    "size": 963,
+    "body": "On 12/12/2017 2:20 PM, alabaster.snowball@northpolechristmastown.com wrote:\r\n\r\nI installed nc.exe to path for my computer.\r\n\r\n\r\nOn 12/5/2017 2:33 PM, alabaster.snowball@northpolechristmastown.com wrote:\r\n> Well powershell is my new love but netcat will always hold a special \r\n> place in my heart.\r\n>\r\n>\r\n> On 12/5/2017 2:32 PM, minty.candycane@northpolechristmastown.com wrote:\r\n>> You still use netcat on your windows box?\r\n>>\r\n>>\r\n>> On 12/5/2017 2:31 PM, alabaster_snowball@northpolechristmastown.com \r\n>> wrote:\r\n>>> Ill save it for Santa along with the other one I have on my \r\n>>> computer. Pulling it down now via nc.exe \"like a boss\".\r\n>>>\r\n>>>\r\n>>> On 12/5/2017 9:10 AM, holly.evergreen@northpolechristmastown.com wrote:\r\n>>>> Hey Santa,\r\n>>>>\r\n>>>> Found this lying around. Figured you needed it.\r\n>>>>\r\n>>>> http://mail.northpolechristmastown.com/attachments/GreatBookPage4_893jt91md2.pdf \r\n>>>>\r\n>>>>\r\n>>>> :)\r\n>>>>\r\n>>>> -Holly\r\n>>>>\r\n>>>\r\n>>\r\n>\r\n\r\n"
+   }
+  }
+ ],
+ "SENT": [
+  {
+   "HEADERS": {
+    "which": "HEADER",
+    "size": 656,
+    "body": {
+     "subject": [
+      "Re: Welcome"
+     ],
+     "to": [
+      "admin@northpolechristmastown.com"
+     ],
+     "references": [
+      "<20171108155957.664E5BD71D@mail.northpolechristmastown.com>"
+     ],
+     "from": [
+      "\"wunorse.openslae@northpolechristmastown.com\" <wunorse.openslae@northpolechristmastown.com>"
+     ],
+     "message-id": [
+      "<c6a45d35-5642-1f39-9baa-957da2f5fcb7@northpolechristmastown.com>"
+     ],
+     "date": [
+      "Wed, 15 Nov 2017 11:21:39 -0500"
+     ],
+     "user-agent": [
+      "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101 Thunderbird/52.4.0"
+     ],
+     "mime-version": [
+      "1.0"
+     ],
+     "in-reply-to": [
+      "<20171108155957.664E5BD71D@mail.northpolechristmastown.com>"
+     ],
+     "content-type": [
+      "text/plain; charset=utf-8; format=flowed"
+     ],
+     "content-transfer-encoding": [
+      "7bit"
+     ],
+     "content-language": [
+      "en-US"
+     ]
+    }
+   },
+   "BODY": {
+    "which": "TEXT",
+    "size": 141,
+    "body": "Finally, no more snail-mail\r\n\r\n\r\nOn 11/8/2017 10:59 AM, admin@northpolechristmastown.com wrote:\r\n> Hi,\r\n>\r\n> Welcome to your new account.\r\n\r\n"
+   }
+  },
+  {
+   "HEADERS": {
+    "which": "HEADER",
+    "size": 540,
+    "body": {
+     "to": [
+      "\"admin@northpolechristmastown.com\" <admin@northpolechristmastown.com>"
+     ],
+     "from": [
+      "\"wunorse.openslae@northpolechristmastown.com\" <wunorse.openslae@northpolechristmastown.com>"
+     ],
+     "subject": [
+      "Hi ya"
+     ],
+     "message-id": [
+      "<ebee8f14-6e63-ed7f-809e-e928f0752ab4@northpolechristmastown.com>"
+     ],
+     "date": [
+      "Wed, 15 Nov 2017 12:51:15 -0500"
+     ],
+     "user-agent": [
+      "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101 Thunderbird/52.4.0"
+     ],
+     "mime-version": [
+      "1.0"
+     ],
+     "content-type": [
+      "text/plain; charset=utf-8; format=flowed"
+     ],
+     "content-transfer-encoding": [
+      "7bit"
+     ],
+     "content-language": [
+      "en-US"
+     ]
+    }
+   },
+   "BODY": {
+    "which": "TEXT",
+    "size": 14,
+    "body": "Sup admin?\r\n\r\n"
+   }
+  },
+  {
+   "HEADERS": {
+    "which": "HEADER",
+    "size": 835,
+    "body": {
+     "subject": [
+      "Re: Welcome"
+     ],
+     "to": [
+      "\"admin@northpolechristmastown.com\" <admin@northpolechristmastown.com>"
+     ],
+     "references": [
+      "<20171108155957.664E5BD71D@mail.northpolechristmastown.com> <c6a45d35-5642-1f39-9baa-957da2f5fcb7@northpolechristmastown.com> <0dedc751-43a9-9368-30c0-40eb02b01211@northpolechristmastown.com>"
+     ],
+     "from": [
+      "\"wunorse.openslae@northpolechristmastown.com\" <wunorse.openslae@northpolechristmastown.com>"
+     ],
+     "message-id": [
+      "<b0812524-a000-cc5c-93ae-730a954457f9@northpolechristmastown.com>"
+     ],
+     "date": [
+      "Wed, 15 Nov 2017 13:14:37 -0500"
+     ],
+     "user-agent": [
+      "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101 Thunderbird/52.4.0"
+     ],
+     "mime-version": [
+      "1.0"
+     ],
+     "in-reply-to": [
+      "<0dedc751-43a9-9368-30c0-40eb02b01211@northpolechristmastown.com>"
+     ],
+     "content-type": [
+      "text/plain; charset=utf-8; format=flowed"
+     ],
+     "content-transfer-encoding": [
+      "7bit"
+     ],
+     "content-language": [
+      "en-US"
+     ]
+    }
+   },
+   "BODY": {
+    "which": "TEXT",
+    "size": 426,
+    "body": "Yea, I just ran out too. Find anymore, and let me know!\r\n\r\n\r\nOn 11/15/2017 11:27 AM, admin@northpolechristmastown.com wrote:\r\n> Yup, checkout l2s.northpolechristmastown.com\r\n>\r\n>\r\n> On 11/15/2017 11:21 AM, wunorse.openslae@northpolechristmastown.com \r\n> wrote:\r\n>> Finally, no more snail-mail\r\n>>\r\n>>\r\n>> On 11/8/2017 10:59 AM, admin@northpolechristmastown.com wrote:\r\n>>> Hi,\r\n>>>\r\n>>> Welcome to your new account.\r\n>>\r\n>\r\n\r\n"
+   }
+  },
+  {
+   "HEADERS": {
+    "which": "HEADER",
+    "size": 743,
+    "body": {
+     "subject": [
+      "Re: Christmas Party!"
+     ],
+     "to": [
+      "all@northpolechristmastown.com"
+     ],
+     "references": [
+      "<92f1a4eb-d5e2-a151-57a0-582f73271260@northpolechristmastown.com> <af03c5be-bbcd-a05e-f0c5-cc7d08e74ce5@northpolechristmastown.com>"
+     ],
+     "from": [
+      "\"wunorse.openslae@northpolechristmastown.com\" <wunorse.openslae@northpolechristmastown.com>"
+     ],
+     "message-id": [
+      "<e5c775e7-7209-bb46-aaa7-bf43ab0c770a@northpolechristmastown.com>"
+     ],
+     "date": [
+      "Wed, 15 Nov 2017 14:08:30 -0500"
+     ],
+     "user-agent": [
+      "Mozilla/5.0 (Windows NT 10.0; WOW64; rv:52.0) Gecko/20100101 Thunderbird/52.4.0"
+     ],
+     "mime-version": [
+      "1.0"
+     ],
+     "in-reply-to": [
+      "<af03c5be-bbcd-a05e-f0c5-cc7d08e74ce5@northpolechristmastown.com>"
+     ],
+     "content-type": [
+      "text/plain; charset=utf-8; format=flowed"
+     ],
+     "content-transfer-encoding": [
+      "7bit"
+     ],
+     "content-language": [
+      "en-US"
+     ]
+    }
+   },
+   "BODY": {
+    "which": "TEXT",
+    "size": 587,
+    "body": "Yea, I cant wait either. Ill be bringing the chips!\r\n\r\n\r\nOn 11/15/2017 2:04 PM, sparkle.redberry@northpolechristmastown.com wrote:\r\n> Awesome, this is going to be a blast\r\n>\r\n>\r\n> On 11/15/2017 1:58 PM, sparkle.redberry@northpolechristmastown.com wrote:\r\n>> Hi Everyone!\r\n>>\r\n>> Just a Reminder to everyone to mark their Calendars for the annual \r\n>> elf ball bash on December 25th to celebrate all of the hard work we \r\n>> put in over the past year. Ill be coordinating the party so let me \r\n>> know if you have any special requests!\r\n>>\r\n>> Regards,\r\n>>\r\n>> Sparkle Redberry\r\n>>\r\n>\r\n\r\n"
+   }
+  }
+ ],
+ "USER": "wunorse.openslae@northpolechristmastown.com"
+}

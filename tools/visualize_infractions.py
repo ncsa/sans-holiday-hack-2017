@@ -1,54 +1,39 @@
 #!/usr/bin/env python3
+import csv
 import json
 from operator import itemgetter
+from collections import defaultdict
 
-def chunks(l, n):
-    """Yield successive n-sized chunks from l."""
-    for i in range(0, len(l), n):
-        yield l[i:i + n]
+WANT = set(['Aggravated pulling of hair', 'Throwing rocks (at people)', 'Throwing rocks (non-person target)'])
 
-m = {
-    'closed': 'O',
-    'pending': '.',
-    'open': ' ',
-}
+def get_naughty():
+    with open("../support_files/FileStore/Naughty and Nice List.csv") as f:
+        reader = csv.reader(f)
+        rows = list(reader)
 
-COLOR = '\033[{}m'
-END = '\033[0m'
-def colorify(char):
-    return m[char]
-    n = int(char)
-    color_code = COLOR.format(30+n)
-    char = " X X X"[n]
-    #return color_code + char + END
-    return char
-    #return ("O" * n) + (" " * (5-n))
+    return [name for (name, naughty) in rows if naughty == 'Naughty']
 
-def display(line):
-    print(''.join(colorify(c) for c in line))
-
-def factor(num):
-    return [x for x in range(5, num) if num % x == 0 and num/x > 4]
-    
 def main():
-    with open("infractions.json") as f:
+    byname = defaultdict(set)
+    infraction_count_byname = defaultdict(int)
+    with open("../output/infractions.json") as f:
         infractions = json.load(f)
 
-    deduped_infractions = list({v['date']: v for v in infractions}.values())
-    # Remove Whos
-    if True:
-        deduped_infractions = [x for x in deduped_infractions if 'Who' not in x['name']]
+    for i in infractions:
+        byname[i['name']].add(i['title'])
+        infraction_count_byname[i['name']] += 1
 
-    deduped_infractions.sort(key=itemgetter("date"), reverse=True)
+    print("Six insider threat moles:")
+    for n, titles in byname.items():
+        if len(titles & WANT) >= 2:
+            print("*", n,titles)
 
-    msg = [i['status'] for i in deduped_infractions]
+    #############
 
-    for cs in factor(len(msg)):
-        for chunk in chunks(msg, cs):
-            display(chunk)
-        print()
-        print()
-        print()
+    min_infractions = min(infraction_count_byname[name] for name in get_naughty())
+
+    print()
+    print("How many infractions are required to be marked as naughty on Santa's Naughty and Nice List:", min_infractions)
 
 if __name__ == "__main__":
    main() 

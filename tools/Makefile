@@ -1,7 +1,9 @@
-all: setup infractions.json infractions_one_per_line.json
+all: setup cve-2017-9805.py jwt2john.py
 setup:
 	python3 -m pip install --user -r requirements.txt	
-infractions.json: nppd.py
-	./nppd.py
-infractions_one_per_line.json: infractions.json
-	cat infractions.json | jq '.[]' -c > infractions_one_per_line.json
+
+cve-2017-9805.py:
+	wget https://raw.githubusercontent.com/chrisjd20/cve-2017-9805.py/master/cve-2017-9805.py
+
+jwt2john.py:
+	wget https://raw.githubusercontent.com/Sjord/jwtcrack/master/jwt2john.py

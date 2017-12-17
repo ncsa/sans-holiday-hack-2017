@@ -1,0 +1,16 @@
+elf@266a6727f2fc:~$ ./trainstartup 
+bash: ./trainstartup: cannot execute binary file: Exec format error
+elf@266a6727f2fc:~$ file trainstartup 
+trainstartup: ELF 32-bit LSB  executable, ARM, EABI5 version 1 (GNU/Linux), statically linked, for GNU/Linux 3.2.0, BuildID[sha1]=005de4685e8563d10b3de3e0be7d6fdd7ed732e
+b, not stripped
+elf@266a6727f2fc:~$ qemu-arm ./trainstartup 
+Starting up ... 
+
+
+If you simply google "cannot execute binary file: Exec format error" it will
+lead you down a rabbit hole.  Normally, this error is caused by downloading a
+program for the wrong architecture and the fix is to simply re-download the
+right binary.  In this case, we can't download a version of the binary built
+for the correct architecture.  What we need to do is "Run arm binary on amd64".
+Searching for this points us to the qemu emulator, and running the binary using
+`qemu-arm` gets the train running.

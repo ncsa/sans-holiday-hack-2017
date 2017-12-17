@@ -1,0 +1,2 @@
+#!/bin/sh
+exec sshpass -p stream_unhappy_buy_loss ssh -D 32080 alabaster_snowball@dev.northpolechristmastown.com

