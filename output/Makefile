@@ -1,4 +1,4 @@
-all: mail.text hints.md infractions.json infractions_one_per_line.json alabaster.jwt santa.jwt claus.password jwt.john john.txt
+all: mail.text hints.md infractions.json infractions_one_per_line.json alabaster.jwt santa.jwt claus.password jwt.john john.txt gingerbread\ cookie\ recipe.docx
 mail.text: mail.json
 	cat mail.json | jq '.INBOX[].BODY.body' -r > mail.text
 
@@ -35,3 +35,6 @@ mail/admin@northpolechristmastown.com.json:
 
 mail/support@northpolechristmastown.com.json:
 	../tools/ewa.py admin > mail/support@northpolechristmastown.com.json
+
+gingerbread\ cookie\ recipe.docx: ../tools/repack_word_doc.sh
+	../tools/repack_word_doc.sh

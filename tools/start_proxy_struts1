@@ -1,0 +1,4 @@
+#!/bin/sh
+exec ssh \
+    -o 'Proxycommand=ssh alabaster_snowball@dev.northpolechristmastown.com -W %h:%p' \
+    -D 32080 alabaster_snowball@10.142.0.3
