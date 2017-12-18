@@ -8,7 +8,7 @@ sshpass -p $PASS ssh $USER@$HOST -D 30080 -qMNf
 
 echo "Connection created. To exit, run: ssh -O exit $USER@$HOST"
 
-echo "SOCKS proxy: 30080"
+echo "SOCKS proxy on l2s: 30080"
 
 echo "Port specific-forwardings. General rules are:"
 echo "Each system has a base port determined by the last octet of its IP (e.g. 10.142.0.2 -> 32000)"
@@ -30,6 +30,9 @@ echo "33022 -> apache-struts1:22"
 ssh $USER@$HOST -O forward -L 33022:10.142.0.3:22
 echo "33080 -> apache-struts1:80"
 ssh $USER@$HOST -O forward -L 33080:10.142.0.3:80
+
+sshpass -p $PASS ssh $USER@127.0.0.1 -p 33022 -D 31080 -qMNf
+echo "SOCKS proxy on struts1: 31080"
 
 echo "Port forwarding for l2s-mail (10.142.0.5, base port: 35000)"
 echo "35022 -> mail:22"
@@ -66,6 +69,9 @@ echo "41022 -> apache-struts2:22"
 ssh $USER@$HOST -O forward -L 41022:10.142.0.11:22
 echo "41080 -> apache-struts2:80"
 ssh $USER@$HOST -O forward -L 41080:10.142.0.11:80
+
+sshpass -p $PASS ssh $USER@127.0.0.1 -p 41022 -D 32080 -qMNf
+echo "SOCKS proxy on struts2: 32080"
 
 echo "Port forwarding for l2s-eaas (10.142.0.13, base port: 43000)"
 echo "43080 -> eaas:80"
