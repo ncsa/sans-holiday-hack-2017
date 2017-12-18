@@ -2,7 +2,7 @@
 from ewa import EWA
 
 def phish():
-    f = "jessica.claus@northpolechristmastown.com"
+    f = "wunorse.openslae@northpolechristmastown.com"
     to = "alabaster.snowball@northpolechristmastown.com"
     subject = "Re: gingerbread cookie recipe"
 
