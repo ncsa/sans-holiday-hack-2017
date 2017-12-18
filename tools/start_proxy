@@ -1,2 +1,77 @@
 #!/bin/sh
-exec sshpass -p stream_unhappy_buy_loss ssh -D 32080 alabaster_snowball@dev.northpolechristmastown.com
+USER=alabaster_snowball
+PASS=stream_unhappy_buy_loss
+HOST=dev.northpolechristmastown.com
+
+# Start the master
+sshpass -p $PASS ssh $USER@$HOST -D 30080 -qMNf
+
+echo "Connection created. To exit, run: ssh -O exit $USER@$HOST"
+
+echo "SOCKS proxy: 30080"
+
+echo "Port specific-forwardings. General rules are:"
+echo "Each system has a base port determined by the last octet of its IP (e.g. 10.142.0.2 -> 32000)"
+echo "Each open port on that system is added to the base port (e.g. port 80 on 10.142.0.2 -> 32080)"
+echo "If port > 1000, floor(port/10) is added to the base port (e.g. port 3000 on 10.142.0.2 -> 32300)"
+
+echo "Port forwarding for l2s-proxy (10.142.0.2, base port: 32000)"
+echo "32022 -> proxy:22"
+ssh $USER@$HOST -O forward -L 32022:10.142.0.2:22
+echo "32080 -> proxy:80"
+ssh $USER@$HOST -O forward -L 32080:10.142.0.2:80
+echo "32443 -> proxy:443"
+ssh $USER@$HOST -O forward -L 32443:10.142.0.2:443
+echo "32222 -> proxy:2222"
+ssh $USER@$HOST -O forward -L 32222:10.142.0.2:2222
+
+echo "Port forwarding for l2s-apache-struts1 (10.142.0.3, base port: 33000)"
+echo "33022 -> apache-struts1:22"
+ssh $USER@$HOST -O forward -L 33022:10.142.0.3:22
+echo "33080 -> apache-struts1:80"
+ssh $USER@$HOST -O forward -L 33080:10.142.0.3:80
+
+echo "Port forwarding for l2s-mail (10.142.0.5, base port: 35000)"
+echo "35022 -> mail:22"
+ssh $USER@$HOST -O forward -L 35022:10.142.0.5:22
+echo "35025 -> mail:25"
+ssh $USER@$HOST -O forward -L 35025:10.142.0.5:25
+echo "35080 -> mail:80"
+ssh $USER@$HOST -O forward -L 35080:10.142.0.5:80
+echo "35143 -> mail:143"
+ssh $USER@$HOST -O forward -L 35143:10.142.0.5:143
+echo "35252 -> mail:2525"
+ssh $USER@$HOST -O forward -L 35252:10.142.0.5:2525
+echo "35300 -> mail:3000"
+ssh $USER@$HOST -O forward -L 35300:10.142.0.5:3000
+
+echo "Port forwarding for l2s-edb (10.142.0.6, base port: 36000)"
+echo "35022 -> edb:22"
+ssh $USER@$HOST -O forward -L 36022:10.142.0.6:22
+echo "35080 -> edb:80"
+ssh $USER@$HOST -O forward -L 36080:10.142.0.6:80
+echo "35143 -> edb:389"
+ssh $USER@$HOST -O forward -L 36143:10.142.0.6:143
+echo "35808 -> edb:8080"
+ssh $USER@$HOST -O forward -L 36808:10.142.0.6:8080
+
+echo "Port forwarding for l2s-emi (10.142.0.8, base port: 38000)"
+echo "38080 -> emi:80"
+ssh $USER@$HOST -O forward -L 38080:10.142.0.8:80
+echo "38338 -> emi:3389"
+ssh $USER@$HOST -O forward -L 38338:10.142.0.8:3389
+
+echo "Port forwarding for l2s-apache-struts2 (10.142.0.11, base port: 41000)"
+echo "41022 -> apache-struts2:22"
+ssh $USER@$HOST -O forward -L 41022:10.142.0.11:22
+echo "41080 -> apache-struts2:80"
+ssh $USER@$HOST -O forward -L 41080:10.142.0.11:80
+
+echo "Port forwarding for l2s-eaas (10.142.0.13, base port: 43000)"
+echo "43080 -> eaas:80"
+ssh $USER@$HOST -O forward -L 43080:10.142.0.13:80
+echo "43338 -> eaas:3389"
+ssh $USER@$HOST -O forward -L 43338:10.142.0.13:3389
+
+ssh $USER@$HOST bash --norc
+ssh -O exit $USER@$HOST
