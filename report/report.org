@@ -360,6 +360,24 @@ a few lines are output.
     sys	0m18.808s
 #+END_SRC
 
+Basic hostname enumeration:
+
+#+BEGIN_SRC 
+    $ nmap -sL 10.142.0.*|fgrep '('
+    Starting Nmap 7.40 ( https://nmap.org ) at 2017-12-18 02:20 UTC
+    Nmap scan report for hhc17-l2s-proxy.c.holidayhack2017.internal (10.142.0.2)
+    Nmap scan report for hhc17-apache-struts1.c.holidayhack2017.internal (10.142.0.3)
+    Nmap scan report for mail.northpolechristmastown.com (10.142.0.5)
+    Nmap scan report for edb.northpolechristmastown.com (10.142.0.6)
+    Nmap scan report for hhc17-smb-server.c.holidayhack2017.internal (10.142.0.7)
+    Nmap scan report for hhc17-emi.c.holidayhack2017.internal (10.142.0.8)
+    Nmap scan report for hhc17-apache-struts2.c.holidayhack2017.internal (10.142.0.11)
+    Nmap scan report for eaas.northpolechristmastown.com (10.142.0.13)
+    Nmap done: 256 IP addresses (0 hosts up) scanned in 0.01 seconds
+#+END_SRC
+
+Even without scanning any ports, we can guess what hhc17-smb-server does!
+
 #+BEGIN_SRC sh
 ssh l2s | tee nmap.out
 #+END_SRC
