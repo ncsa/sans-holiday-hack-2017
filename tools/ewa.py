@@ -34,6 +34,18 @@ class EWA:
         resp.raise_for_status()
         return resp.json()
 
+    def upload(self, username, filename):
+        files = {'file': open(filename, 'rb')}
+
+        cookies = self.make_cookies(username)
+        resp = self.ses.post(self.host + "/upload", cookies=cookies, files=files)
+        body = resp.text
+        #body looks like like:
+        #<html><h1 style="text-align: center;">File Uploaded and link Attached!</h1><script>window.setTimeout(function() {window.location.href = '/upload.js'}, 2000);</script><script>localStorage.setItem("file_link", "http://mail.northpolechristmastown.com/attachments/DaM5HE08t7cynFqztM0a4VcVg8CBU2Gs7HprLQWzsdnSCRuj5L__cookies.docx");</script></html>
+        #extract the link.  The link is the one string between quotes that contains http
+        links = [frag for frag in body.split('"') if 'http' in frag]
+        return links[0]
+
     def send_mail(self, from_email, to_email, subject, message):
         message = binascii.hexlify(message.encode('utf-8'))
 
