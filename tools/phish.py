@@ -3,8 +3,8 @@ from ewa import EWA
 
 def phish():
     f = "jessica.claus@northpolechristmastown.com"
-    to = "admin@northpolechristmastown.com"
-    subject = "gingerbread cookie recipe"
+    to = "alabaster.snowball@northpolechristmastown.com"
+    subject = "Re: gingerbread cookie recipe"
 
     body = "hello!"
 
@@ -13,7 +13,7 @@ def phish():
     assert link != ""
     print("File uploaded and available at", link)
 
-    body = "gingerbread cookie recipe\nATTACHED FILE DOWNLOAD HERE: {}".format(link)
+    body = "gingerbread cookie recipe\nATTACHED FILE DOWNLOAD HERE:\n\n{}\n\nEnjoy!".format(link)
     resp = m.send_mail(f, to, subject, body)
     print("Sending:\n", body)
     print()

