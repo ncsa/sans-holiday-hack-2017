@@ -4,7 +4,7 @@ import requests
 def get_external_ip(cache={}):
     if 'ip' in cache:
         return cache['ip']
-    r = requests.get('http://jsonip.com')
+    r = requests.get('https://ipv4.jsonip.com')
     ip = r.json()['ip']
     cache['ip'] = ip
     return ip
