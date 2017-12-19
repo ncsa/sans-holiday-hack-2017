@@ -15,7 +15,7 @@ def phish():
 
     body = "gingerbread cookie recipe\nATTACHED FILE DOWNLOAD HERE:\n\n{}\n\nEnjoy!".format(link)
     resp = m.send_mail(f, to, subject, body)
-    print("Sending:\n", body)
+    print("Sending message...")
     print()
     print(resp)
 
