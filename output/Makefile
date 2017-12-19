@@ -36,5 +36,9 @@ mail/admin@northpolechristmastown.com.json:
 mail/support@northpolechristmastown.com.json:
 	../tools/ewa.py admin > mail/support@northpolechristmastown.com.json
 
+all_emails:
+	cat mail/*|grep -io '[a-z\.][a-z\.][a-z\.]*@northpolechristmastown.com'  |sort -u |tee all_emails
+
+
 gingerbread\ cookie\ recipe.docx: ../tools/repack_word_doc.sh
 	../tools/repack_word_doc.sh
