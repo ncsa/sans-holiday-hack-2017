@@ -9,11 +9,12 @@ def get_external_ip(cache={}):
     cache['ip'] = ip
     return ip
 
-def listen_once(port, connection_timeout=30, read_timeout=5):
+def listen_once(port, connection_timeout=60, read_timeout=5):
     s = socket.socket()
     s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     s.bind(('0.0.0.0', port))
     s.listen()
+    print("Listening on port", port)
     s.settimeout(connection_timeout)
     conn, addr = s.accept()
     s.close()
