@@ -5,7 +5,7 @@ import jwt
 import json
 
 SECRET_KEY='3lv3s'
-PROXY = "socks5h://localhost:32080"
+PROXY = "socks5h://localhost:31080"
 
 class EDB:
     def __init__(self, host='http://edb.northpolechristmastown.com'):

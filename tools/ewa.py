@@ -5,7 +5,7 @@ import sys
 import json
 import os
 
-PROXY = "socks5h://localhost:32080"
+PROXY = "socks5h://localhost:31080"
 
 class EWA:
     def __init__(self, host='http://mail.northpolechristmastown.com'):
