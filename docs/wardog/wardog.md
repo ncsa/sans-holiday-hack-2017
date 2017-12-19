@@ -99,13 +99,23 @@ So lets look at the tomcat server creds. (Need to work out how to find the class
             final String username = "alabaster_snowball";
             final String password = "stream_unhappy_buy_loss";
 ```
+
 Now we have credentials. It looks like we can ssh to the server. If we do we get dropped into a restricted shell. Let's try to avoid that.
 
 ```
 ssh -t alabaster_snowball@dev.northpolechristmastown.com bash
 ```
 
-ANSWER:
+[Another helpful article about restricted bash shell.](https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee/)
+
+We can also download GreatBookPage2.pdf (sha1:aa814d1c25455480942cb4106e6cde84be86fb30)
+
+```
+scp alabaster_snowball@dev.northpolechristmastown.com:/var/www/html/GreatBookPage2.pdf .
+```
+
+ANSWER (Topic): On the Topic of Flying Animals
+ANSWER (Password): stream_unhappy_buy_loss
 
 ## 3) The North Pole engineering team uses a Windows SMB server for sharing documentation and correspondence. Using your access to the Letters to Santa server, identify and enumerate the SMB file-sharing server. What is the file server share name?
 
@@ -134,7 +144,83 @@ Following [Daniel Penolino](https://twitter.com/dpendolino)
 
 ### Work
 
-TBD
+```
+nmap -PS445 10.142.0.0/24
+```
+
+```
+Starting Nmap 7.40 ( https://nmap.org ) at 2017-12-17 19:38 UTC
+Nmap scan report for hhc17-l2s-proxy.c.holidayhack2017.internal (10.142.0.2)
+Host is up (0.00027s latency).
+Not shown: 996 closed ports
+PORT     STATE SERVICE
+22/tcp   open  ssh
+80/tcp   open  http
+443/tcp  open  https
+2222/tcp open  EtherNetIP-1
+
+Nmap scan report for hhc17-apache-struts1.c.holidayhack2017.internal (10.142.0.3)
+Host is up (0.00026s latency).
+Not shown: 997 closed ports
+PORT     STATE SERVICE
+22/tcp   open  ssh
+80/tcp   open  http
+8000/tcp open  http-alt
+
+Nmap scan report for edb.northpolechristmastown.com (10.142.0.6)
+Host is up (0.00023s latency).
+Not shown: 996 closed ports
+PORT     STATE SERVICE
+22/tcp   open  ssh
+80/tcp   open  http
+389/tcp  open  ldap
+8080/tcp open  http-proxy
+
+Nmap scan report for hhc17-smb-server.c.holidayhack2017.internal (10.142.0.7)
+Host is up (0.00067s latency).
+Not shown: 996 filtered ports
+PORT     STATE SERVICE
+135/tcp  open  msrpc
+139/tcp  open  netbios-ssn
+445/tcp  open  microsoft-ds
+3389/tcp open  ms-wbt-server
+
+Nmap scan report for hhc17-apache-struts2.c.holidayhack2017.internal (10.142.0.11)
+Host is up (0.00023s latency).
+Not shown: 998 closed ports
+PORT   STATE SERVICE
+22/tcp open  ssh
+80/tcp open  http
+
+Nmap done: 256 IP addresses (5 hosts up) scanned in 6.57 seconds
+```
+
+It appears the host for this challenge is 10.142.0.7, or hhc17-smb-server.c.holidayhack2017.internal.
+
+The next clue says he reuses his password.
+
+The next clue says to use l2s to proxy through instead of using tools on l2s.
+
+We set up an SSH local port forward:
+
+```
+ssh -L 4444:10.142.0.7:443 -U alabaster_snowball
+```
+
+```
+Domain=[HHC17-EMI] OS=[Windows Server 2016 Datacenter 14393] Server=[Windows Server 2016 Datacenter 6.3]
+
+        Sharename       Type      Comment
+        ---------       ----      -------
+        ADMIN$          Disk      Remote Admin
+        C$              Disk      Default share
+        FileStor        Disk
+        IPC$            IPC       Remote IPC
+Connection to localhost failed (Error NT_STATUS_CONNECTION_REFUSED)
+NetBIOS over TCP disabled -- no workgroup available
+```
+
+ANSWER: Share name is FileStor
 
 ## 4) Elf Web Access (EWA) is the preferred mailer for North Pole elves, available internally at http://mail.northpolechristmastown.com. What can you learn from The Great Book page found in an e-mail on that server?
 
@@ -161,6 +247,25 @@ Is really into pepper and peppermint.
 1. Every year when Santa gets back from delivering presents to the good girls and boys, he tells us stories about all the cookies he receives. I love everything about cookies! Cooking them, eating them, editing them, decorating them, you name it!
 
 ### Work
+
+From previous enumeration we think the mail server is 10.142.0.5.
+
+```
+nmap -sC -p 80 10.142.0.5
+
+Starting Nmap 7.40 ( https://nmap.org ) at 2017-12-18 19:26 UTC
+Nmap scan report for mail.northpolechristmastown.com (10.142.0.5)
+Host is up (0.0012s latency).
+PORT   STATE SERVICE
+80/tcp open  http
+| http-robots.txt: 1 disallowed entry
+|_/cookie.txt
+|_http-title: Site doesn't have a title (text/html; charset=UTF-8).
+
+Nmap done: 1 IP address (1 host up) scanned in 0.44 seconds
+```
+
+
 
 ## 5) How many infractions are required to be marked as naughty on Santa's Naughty and Nice List? What are the names of at least six insider threat moles? Who is throwing the snowballs from the top of the North Pole Mountain and what is your proof?
 
@@ -692,6 +797,7 @@ elf@efe5512c7bd3:~$
 ## We're Off To See The...
 [Game](https://2017.holidayhackchallenge.com/game/30a9c19a-f931-4367-9922-d20b91314eec)
 [Terminal](https://docker2017.holidayhackchallenge.com/?challenge=96452ffb-5153-4473-9fe4-f0ff7921308e&uid=ee838751-39b4-423a-8d67-6d935c88d650)
+Associated Blog Post: [Go To The Head Of The Class: LD_PRELOAD For The Win](https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win)
 
 ```
                  .--._.--.--.__.--.--.__.--.--.__.--.--._.--.
