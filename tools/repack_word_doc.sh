@@ -1,7 +1,7 @@
 #!/bin/sh
 
 INPUT="../support_files/FileStore/MEMO - Calculator Access for Wunorse.docx"
-OUTPUT="gingerbread cookie recipe.docx"
+OUTPUT="../output/gingerbread cookie recipe.docx"
 
 INPUT=$(realpath "$INPUT")
 OUTPUT=$(realpath "$OUTPUT")
