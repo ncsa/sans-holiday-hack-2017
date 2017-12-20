@@ -1,4 +1,4 @@
-all: setup cve-2017-9805.py jwt2john.py
+all: setup cve-2017-9805.py jwt2john.py pw.py
 setup:
 	python3 -m pip install --user -r requirements.txt	
 
@@ -7,3 +7,6 @@ cve-2017-9805.py:
 
 jwt2john.py:
 	wget https://raw.githubusercontent.com/Sjord/jwtcrack/master/jwt2john.py
+
+pw.py:
+	wget https://raw.githubusercontent.com/s4y/pw/master/pw.py
