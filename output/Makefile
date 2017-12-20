@@ -1,4 +1,4 @@
-all: mail.text hints.md infractions.json infractions_one_per_line.json alabaster.jwt santa.jwt claus.password jwt.john john.txt gingerbread\ cookie\ recipe.docx
+all: mail.text hints.md infractions.json infractions_one_per_line.json alabaster.jwt santa.jwt password_hashes.txt jwt.john john.txt gingerbread\ cookie\ recipe.docx password_combos.txt
 mail.text: mail.json
 	cat mail.json | jq '.INBOX[].BODY.body' -r > mail.text
 
@@ -20,8 +20,8 @@ santa.jwt:
 edb.json: ../tools/edb.py
 	../tools/edb.py > edb.json
 
-claus.password: edb.json
-	cat edb.json |jq '.[][][]' -c|grep claus | jq '.userPassword[]' -r > claus.password
+password_hashes.txt: edb.json
+	cat edb.json |jq '.[][][]' -c|grep userPassword | jq '"\(.mail[0]):\(.userPassword[0])"' -r > password_hashes.txt
 
 jwt.john: ../tools/jwt2john.py jwt
 	python3 ../tools/jwt2john.py $(shell cat jwt) > jwt.john
@@ -41,3 +41,11 @@ all_emails:
 
 gingerbread\ cookie\ recipe.docx: ../tools/repack_word_doc.sh
 	../tools/repack_word_doc.sh
+
+password_combos.txt: ../tools/gen_password_combos.py
+	../tools/gen_password_combos.py > password_combos.txt
+	wc -l password_combos.txt
+
+hashcat.txt: password_hashes.txt password_combos.txt
+	hashcat  -m 0  -a 1 password_hashes.txt password_combos.txt  password_combos.txt -j ' ' --username
+	hashcat  -m 0  -a 1 password_hashes.txt password_combos.txt  password_combos.txt -j ' ' --username --show > hashcat.txt
