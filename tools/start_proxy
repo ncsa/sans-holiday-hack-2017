@@ -79,5 +79,5 @@ ssh $USER@$HOST -O forward -L 43080:10.142.0.13:80
 echo "43338 -> eaas:3389"
 ssh $USER@$HOST -O forward -L 43338:10.142.0.13:3389
 
-ssh $USER@$HOST bash --norc
+ssh $USER@$HOST -t bash --norc
 ssh -O exit $USER@$HOST
