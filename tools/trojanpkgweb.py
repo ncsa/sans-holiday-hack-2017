@@ -23,7 +23,7 @@ def run_trojan_server(script, port=8080, max_requests=1):
     #FIXME: overwrites global instance
     GetHandler._script = script
     
-    server = HTTPServer(('localhost', port), GetHandler)
+    server = HTTPServer(('0.0.0.0', port), GetHandler)
     print('Starting server on port {}, use <Ctrl-C> to stop'.format(port))
     for i in range(max_requests):
         print("Serving request {} of {}...".format(i+1, max_requests))
