@@ -21,7 +21,7 @@ edb.json: ../tools/edb.py
 	../tools/edb.py > edb.json
 
 password_hashes.txt: edb.json
-	cat edb.json |jq '.[][][]' -c|grep userPassword | jq '.userPassword[]' -r > password_hashes.txt
+	cat edb.json |jq '.[][][]' -c|grep userPassword | jq '"\(.mail[0]):\(.userPassword[0])"' -r > password_hashes.txt
 
 jwt.john: ../tools/jwt2john.py jwt
 	python3 ../tools/jwt2john.py $(shell cat jwt) > jwt.john
