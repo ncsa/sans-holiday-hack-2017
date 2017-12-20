@@ -19,7 +19,7 @@ class GetHandler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(tar)
 
-def run_trojan_server(script, port=8080, max_requests=1):
+def run_trojan_server(script, port=8888, max_requests=1):
     #FIXME: overwrites global instance
     GetHandler._script = script
     
