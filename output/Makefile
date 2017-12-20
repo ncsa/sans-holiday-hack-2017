@@ -45,3 +45,7 @@ gingerbread\ cookie\ recipe.docx: ../tools/repack_word_doc.sh
 password_combos.txt: ../tools/gen_password_combos.py
 	../tools/gen_password_combos.py > password_combos.txt
 	wc -l password_combos.txt
+
+hashcat.txt: password_hashes.txt password_combos.txt
+	hashcat  -m 0  -a 1 password_hashes.txt password_combos.txt  password_combos.txt -j ' ' --username
+	hashcat  -m 0  -a 1 password_hashes.txt password_combos.txt  password_combos.txt -j ' ' --username --show > hashcat.txt
