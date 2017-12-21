@@ -48,4 +48,4 @@ password_combos.txt: ../tools/gen_password_combos.py
 
 hashcat.txt: password_hashes.txt password_combos.txt
 	hashcat  -m 0  -a 1 password_hashes.txt password_combos.txt  password_combos.txt -j ' ' --username || true
-	hashcat  -m 0  -a 1 password_hashes.txt password_combos.txt  password_combos.txt -j ' ' --username --show > hashcat.txt
+	hashcat  -m 0  -a 1 password_hashes.txt password_combos.txt  password_combos.txt -j ' ' --username --show | tee hashcat.txt
