@@ -134,8 +134,9 @@ elf@a7b52ba8f7bc:~$ cat access.log |cut -d '"' -f 6|cut -d / -f 1|sort|uniq -c|s
 
 Looks like my favorite lightweight browser from 2001 is not very popular these days.
 
-#+BEGIN_SRC sh
 I can also confirm that the log file only has a single entry for this user-agent:
+
+#+BEGIN_SRC sh
 elf@a7b52ba8f7bc:~$ grep Dillo access.log 
 XX.YY.54.139 - - [27/Nov/2017:19:41:49 -0500] "GET /invoker/JMXInvokerServlet HTTP/1.1" 301 185 "-" "Dillo/3.0.5"
 #+END_SRC
