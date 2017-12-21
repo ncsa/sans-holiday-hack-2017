@@ -9,7 +9,7 @@
 #+HTML_HEAD: <script type="text/javascript" src="js/readtheorg.js"></script>
 #+HTML_HEAD: <style>#content{max-width:1200px;}</style>
 
-* TODO
+* Things to be done
 **  Overall approach
 Each question should have:
  - [ ] A reference solution
@@ -67,7 +67,8 @@ to this year's Holiday Hack is to solve the challenges, but also to
 try to offer some insight into Alabaster Snowball's defenses. Where
 possible, we offer some alternatives that he could've used which
 would've been more secure.
-* tl;dr: Quick Answers
+** TODO: Add more content here
+* TODO tl;dr: Quick Answers
 * Pre-contest Reconnaissance
 #+CAPTION: SANS Holiday Hack Challenge December 5th Update
 [[./images/sans_holiday_hack_preview.png]]
@@ -292,6 +293,7 @@ available, it will text us and post a message to our Slack channel.
 Once that happens, the hack is on, and we'll be ready to hit the
 ground running.
 
+** TODO Things changed at some point
 ** Recon Summary
 
 We can use the following indicators to search any clues we're later provided with:
@@ -329,44 +331,44 @@ We can use the following indicators to search any clues we're later provided wit
 | Dr. Who (2016 Hack)                  | Reference | nppd /infractions      |
 
 * Terminals
-** Bumble's Bounce
+** TODO Bumble's Bounce
 #+INCLUDE: "terminals/bounce.org"
-** Cryokinetic Magic
+** TODO Cryokinetic Magic
 #+INCLUDE: "terminals/cryokinetic.org"
-** I Don't Think We're In Kansas Anymore
+** TODO I Don't Think We're In Kansas Anymore
 #+INCLUDE: "terminals/kansas.org"
-** Oh Wait Maybe We Are
+** TODO Oh Wait Maybe We Are
 #+INCLUDE: "terminals/we_are.org"
-** There's No Place Like Home
+** TODO There's No Place Like Home
 #+INCLUDE: "terminals/home.org"
-** We're Off To See The
+** TODO We're Off To See The
 #+INCLUDE: "terminals/off.org"
-** Winconceivable The Cliffs Of Insanity
+** TODO Winconceivable The Cliffs Of Insanity
 #+INCLUDE: "terminals/cliffs.org"
-** Winter Wonder Landing
+** TODO Winter Wonder Landing
 #+INCLUDE: "terminals/landing.org"
 * Answers
-** Question 1
+** TODO Question 1
 #+INCLUDE: "answers/1.org"
-** Question 2
+** TODO Question 2
 #+INCLUDE: "answers/2.org" 
-** Question 3
+** TODO Question 3
 #+INCLUDE: "answers/3.org" 
-** Question 4
+** TODO Question 4
 #+INCLUDE: "answers/4.org" 
-** Question 5
+** TODO Question 5
 #+INCLUDE: "answers/5.org" 
-** Question 6
+** TODO Question 6
 #+INCLUDE: "answers/6.org" 
-** Question 7
+** TODO Question 7
 #+INCLUDE: "answers/7.org" 
-** Question 8
+** TODO Question 8
 #+INCLUDE: "answers/8.org" 
-** Question 9
+** TODO Question 9
 #+INCLUDE: "answers/9.org" 
 * Easter Eggs
 #+INCLUDE: "easter_eggs.org" 
-* Misc/TODO
+* TODO Misc
   Need to add this content elsewhere
 ** Let the Hack Begin!
 *** Gaining Access to L2S
