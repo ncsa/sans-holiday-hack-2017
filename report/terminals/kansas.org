@@ -1,0 +1,143 @@
+* Answer Template
+  :PROPERTIES:
+  :CUSTOM_ID: answer-template
+  :END:
+
+** Question
+   :PROPERTIES:
+   :CUSTOM_ID: question
+   :END:
+
+#+BEGIN_EXAMPLE
+                           *
+                          .~'
+                         O'~..
+                        ~'O'~..
+                       ~'O'~..~'
+                      O'~..~'O'~.
+                     .~'O'~..~'O'~
+                    ..~'O'~..~'O'~.
+                   .~'O'~..~'O'~..~'
+                  O'~..~'O'~..~'O'~..
+                 ~'O'~..~'O'~..~'O'~..
+                ~'O'~..~'O'~..~'O'~..~'
+               O'~..~'O'~..~'O'~..~'O'~.
+              .~'O'~..~'O'~..~'O'~..~'O'~
+             ..~'O'~..~'O'~..~'O'~..~'O'~.
+            .~'O'~..~'O'~..~'O'~..~'O'~..~'
+           O'~..~'O'~..~'O'~..~'O'~..~'O'~..
+          ~'O'~..~'O'~..~'O'~..~'O'~..~'O'~..
+         ~'O'~..~'O'~..~'O'~..~'O'~..~'O'~..~'
+        O'~..~'O'~..~'O'~..~'O'~..~'O'~..~'O'~.
+       .~'O'~..~'O'~..~'O'~..~'O'~..~'O'~..~'O'~
+      ..~'O'~..~'O'~..~'O'~..~'O'~..~'O'~..~'O'~.
+     .~'O'~..~'O'~..~'O'~..~'O'~..~'O'~..~'O'~..~'
+    O'~..~'O'~..~'O'~..~'O'~..~'O'~..~'O'~..~'O'~..
+
+    Sugarplum Mary is in a tizzy, we hope you can assist.
+    Christmas songs abound, with many likes in our midst.
+    The database is populated, ready for you to address.
+    Identify the song whose popularity is the best.
+#+END_EXAMPLE
+
+** How to find the terminal
+   :PROPERTIES:
+   :CUSTOM_ID: how-to-find-the-terminal
+   :END:
+
+Where was the terminal? What's the direct link to it?
+
+** Background Information
+   :PROPERTIES:
+   :CUSTOM_ID: background-information
+   :END:
+
+Do we know anything about this terminal already?
+
+Hints:
+
+List any useful hints here.
+
+Blog Posts:
+
+Are any of these useful?
+
+- Putting My Zero Cents In: Using the Free Tier on Amazon Web Services
+  (EC2)
+  https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2
+  Spinning up an EC2 instance, but also a lot of emphasis on how to use
+  SSH keys.
+- Your Pokemon Guide for Essential SQL Pen Test Commands
+  https://pen-testing.sans.org/blog/2017/12/09/your-pokemon-guide-for-essential-sql-pen-test-commands
+  SQL basics (SELECT, WHERE, wildcards, ORDER BY, GROUP BY, COUNT)
+- Exploiting XXE Vulnerabilities in IIS/.NET
+  https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities
+  Including remote content in XML
+- Why You Need the Skills to Tinker with Publicly Released Exploit Code
+  https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code
+  Mentions Apache struts vulnerabilities, specifically CVE-2017-5638 and
+  CVE-2017-9805 Code: https://github.com/chrisjd20/cve-2017-9805.py
+- Go To The Head Of The Class: LD\_PRELOAD For The Win
+  https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win
+- A Spot of Tee
+  https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee Restricted
+  bash shell, and bypassing the I/O restriction with tee
+- Understanding and Exploiting Web-based LDAP
+  https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap
+  LDAP syntax, LDAP injection
+- Massively Scaling your Scanning
+  https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning
+  masscan
+
+** Goal
+   :PROPERTIES:
+   :CUSTOM_ID: goal
+   :END:
+
+What are we trying to accomplish?
+
+** Approach
+   :PROPERTIES:
+   :CUSTOM_ID: approach
+   :END:
+
+Describe the thought process that we tried here. How were we able to use
+the hints or the blog posts?
+
+** Solution
+   :PROPERTIES:
+   :CUSTOM_ID: solution
+   :END:
+
+Summarize the reference solution that we found.
+
+AsciiCinema video of the solution?
+
+** Alternatives
+   :PROPERTIES:
+   :CUSTOM_ID: alternatives
+   :END:
+
+Any other, easier solutions?
+
+** Common Pitfalls
+   :PROPERTIES:
+   :CUSTOM_ID: common-pitfalls
+   :END:
+
+Do we know what issue(s) people were running into?
+
+** About the Challenge
+   :PROPERTIES:
+   :CUSTOM_ID: about-the-challenge
+   :END:
+
+How was the challenge setup? Was there a better way to secure this
+system?
+
+** Loot
+   :PROPERTIES:
+   :CUSTOM_ID: loot
+   :END:
+
+Anything interesting hidden on the system?
