@@ -364,6 +364,8 @@ We can use the following indicators to search any clues we're later provided wit
 #+INCLUDE: "answers/8.org" 
 ** Question 9
 #+INCLUDE: "answers/9.org" 
+* Easter Eggs
+#+INCLUDE: "easter_eggs.org" 
 * Misc/TODO
   Need to add this content elsewhere
 ** Let the Hack Begin!

