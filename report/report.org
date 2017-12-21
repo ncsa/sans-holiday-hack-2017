@@ -8,7 +8,65 @@
 #+HTML_HEAD: <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 #+HTML_HEAD: <script type="text/javascript" src="js/readtheorg.js"></script>
 #+HTML_HEAD: <style>#content{max-width:1200px;}</style>
+
+* TODO
+**  Overall approach
+Each question should have:
+*** A reference solution 
+*** An overview of the thought process and what we tried that led to that solution, *and what we tried that didn't work*
+*** Some other ways that we could've solved it
+*** A peak behind the curtain of how the challenge worked, and perhaps a better defense that would've mitigated the attack
+** Introduction
+- [ ] Write a paragraph about our approach to the challenge, what everyone did, etc.
+- [ ] Write a paragraph about the outline and presentation of the report ("We first lay out the solutions, then we show some other ways that we solved it, then we try to peak behind the curtain of how the challenges worked...")
+** Answers
+- [ ] Write short answers to each of the questions
+- [ ] Link to where they can read more about the answers (maybe link to the "reference solution," and the "going further solution" for each)
+** Pre-contest Reconnaissance
+- [ ] Update the recon to talk about the changes that they made (hid some stuff in DNS, etc.)
+** Terminals and Servers
+- [ ] Reference solutions for solving each challenge
+- [ ] Thought process for solving each challenge
+- [ ] Alternative ways to solve each challenge
+  - [ ] EWA Server: Downloaded all the e-mails
+  - [ ] EMI Server: Got Meterpreter working
+  - [ ] Terminals: Reverse the binaries?
+- [ ] Discuss how each challenge was setup
+  - [ ] EMI Server: Discuss the alabaster_snowball.py Python script
+- [ ] AsciiCinema solution to each terminal?
+** Easter Eggs
+- [ ] List references and any hidden data we found
+  - [ ] The example Hash
+  - [ ] nppd robots.txt
+  - [ ] LDAP passwords
+** Snowball Game
+- [ ] Videos to solving each level?
+- [ ] Hacking the game?
+
 * Introduction
+We're the Security team at the National Center for Supercomputing
+Applications, and we worked together on yet another fun SANS Holiday
+Hack, like we did last year. Over the past year, we've been surprised
+to see how many skills and tricks from the 2016 Holiday Hack we used
+for our jobs.
+
+We've done "red-team" work such as code reviews and pen-tests, where
+we encountered insufficient PHP input sanitization, development files
+being left in production, and services being unintentionally
+exposed. Our role in these instances is to find these issues before
+someone malicious does, and to help and educate our users to
+understand and prevent this from reoccuring. Other work we do is in
+architecting defenses and mitigations. How do we secure systems and
+services, while being as transparent as possible to end-users?
+
+As we do red-team work, it's useful to try to think like a defender:
+"How would *I* have secured this system, and are there any ways around
+that?" Similarly, as we do blue-team work, we need to know the methods
+and tools that an attacker would use. With that in mind, our approach
+to this year's Holiday Hack is to solve the challenges, but also to
+try to offer some insight into Alabaster Snowball's defenses. Where
+possible, we offer some alternatives that he could've used which
+would've been more secure.
 * Answers
 * Pre-contest Reconnaissance
 #+CAPTION: SANS Holiday Hack Challenge December 5th Update
