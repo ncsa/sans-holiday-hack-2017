@@ -1,0 +1,49 @@
+brute force approach:
+
+    while true;do ./isit42 &sleep 1;done
+
+An hour later:
+
+    Calling rand() to select a random number.
+    [855]   Exit 215                ./isit42
+    [860] 1859
+    Starting up ... 2497 is not 42.
+    done.
+    Calling rand() to select a random number.
+    [856]   Exit 168                ./isit42
+    [861] 1861
+    Starting up ... 85 is not 42.
+    done.
+    Calling rand() to select a random number.
+    [857]   Exit 193                ./isit42
+    [862] 1863
+    Starting up ... 683 is not 42.
+    done.
+    Calling rand() to select a random number.
+    [858]   Exit 85                 ./isit42
+    [863] 1865
+    Starting up ... 3621 is not 42.
+    done.
+    Calling rand() to select a random number.
+    [859]   Exit 171                ./isit42
+    [864] 1867
+    Starting up ... 1223 is not 42.
+    done.
+    Calling rand() to select a random number.
+    [860]   Exit 37                 ./isit42
+    [865] 1869
+    Starting up ... 3566 is not 42.
+    done.
+    Calling rand() to select a random number.
+    [861]   Exit 199                ./isit42
+    [866] 1871
+    Starting up ...                  .-. 
+                    .;;\ ||           _______  __   __  _______    _______  __    _  _______  _     _  _______  ______ 
+                   /::::\|/          |       ||  | |  ||       |  |   _   ||  |  | ||       || | _ | ||       ||    _ |
+                  /::::'();          |_     _||  |_|  ||    ___|  |  |_|  ||   |_| ||  _____|| || || ||    ___||   | ||
+                |\/`\:_/`\/|           |   |  |       ||   |___   |       ||       || |_____ |       ||   |___ |   |_||_ 
+            ,__ |0_..().._0| __,       |   |  |       ||    ___|  |       ||  _    ||_____  ||       ||    ___||    __  |
+             \,`////""""\\\\`,/        |   |  |   _   ||   |___   |   _   || | |   | _____| ||   _   ||   |___ |   |  | |
+             | )//_ o  o _\\( |        |___|  |__| |__||_______|  |__| |__||_|  |__||_______||__| |__||_______||___|  |_|
+              \/|(_) () (_)|\/ 
+                \   '()'   /            ______    _______  _______  ___      ___      __   __    ___   _______ 
