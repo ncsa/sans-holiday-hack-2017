@@ -67,7 +67,7 @@ to this year's Holiday Hack is to solve the challenges, but also to
 try to offer some insight into Alabaster Snowball's defenses. Where
 possible, we offer some alternatives that he could've used which
 would've been more secure.
-** TODO: Add more content here
+** TODO Add more content here
 * TODO tl;dr: Quick Answers
 * Pre-contest Reconnaissance
 #+CAPTION: SANS Holiday Hack Challenge December 5th Update
