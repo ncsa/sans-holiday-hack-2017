@@ -12,10 +12,10 @@
 * TODO
 **  Overall approach
 Each question should have:
-*** A reference solution 
-*** An overview of the thought process and what we tried that led to that solution, *and what we tried that didn't work*
-*** Some other ways that we could've solved it
-*** A peak behind the curtain of how the challenge worked, and perhaps a better defense that would've mitigated the attack
+ - [ ] A reference solution
+ - [ ] An overview of the thought process and what we tried that led to that solution, *and what we tried that didn't work*
+ - [ ] Some other ways that we could've solved it
+ - [ ] A peak behind the curtain of how the challenge worked, and perhaps a better defense that would've mitigated the attack
 ** Introduction
 - [ ] Write a paragraph about our approach to the challenge, what everyone did, etc.
 - [ ] Write a paragraph about the outline and presentation of the report ("We first lay out the solutions, then we show some other ways that we solved it, then we try to peak behind the curtain of how the challenges worked...")
