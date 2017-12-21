@@ -6,11 +6,6 @@ Question
 
 What is the question or the terminal poem?
 
-Goal
-----
-
-What are we trying to accomplish?
-
 Background Information
 ----------------------
 
@@ -49,10 +44,15 @@ Are any of these useful?
    https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning
    masscan
 
+Goal
+----
+
+What are we trying to accomplish?
+
 Approach
 --------
 
-Describe the thought process that we tried here.
+Describe the thought process that we tried here. How were we able to use the hints or the blog posts?
 
 Solution
 --------
@@ -63,6 +63,11 @@ Alternatives
 ------------
 
 Any other, easier solutions?
+
+Common Pitfalls
+---------------
+
+Do we know what issue(s) people were running into?
 
 About the Challenge
 -------------------
