@@ -2424,51 +2424,36 @@ Where was the terminal?
 
 <li><a id="background-information" name="background-information"></a><a id="sec-5-7-1-3" name="sec-5-7-1-3"></a>Background Information<br  /><div class="outline-text-5" id="text-background-information">
 
-<p>
-#+BEGIN_SRC sh
-elf@d0b100094698:~$ D="<b><b>**</b></b>"; echo "$D System info:"; uname -a; cat /etc/issue; echo "$D Differences from skeleton home directory:"; diff -r /etc/skel .; echo "$D Who am I?"; id; echo "$D Running procs:"; ps axf
-</p>
-</div>
-<ul class="org-ul"><li><a id="sec-5-7-1-3-0-0-0-1" name="sec-5-7-1-3-0-0-0-1"></a>System info:<br  /><div class="outline-text-9" id="text-5-7-1-3-0-0-0-1">
-<p>
-Linux d0b100094698 4.9.0-4-amd64 #1 SMP Debian 4.9.65-3 (2017-12-03) x86_64 x86_64 x86_64 GNU/Linux
+<div class="org-src-container">
+
+<pre class="src src-sh">elf@d0b100094698:~$ <span style="font-weight: bold; font-style: italic;">D</span>=<span style="font-style: italic;">"------"</span>; <span style="font-weight: bold;">echo</span> <span style="font-style: italic;">"$D System info:"</span>; uname -a; cat /etc/issue; <span style="font-weight: bold;">echo</span> <span style="font-style: italic;">"$D Differences from skeleton home directory:"</span>; diff -r /etc/skel .; <span style="font-weight: bold;">echo</span> <span style="font-style: italic;">"$D Who am I?"</span>; id; <span style="font-weight: bold;">echo</span> <span style="font-style: italic;">"$D Running procs:"</span>; ps axf
+------ System info:
+Linux d0b100094698 4.9.0-4-amd64 <span style="font-weight: bold; font-style: italic;">#</span><span style="font-weight: bold; font-style: italic;">1 SMP Debian 4.9.65-3 (2017-12-03) x86_64 x86_64 x86_64 GNU/Linux</span>
 Ubuntu 16.04.3 LTS \n \l
-</p>
-</div>
-</li>
-<li><a id="sec-5-7-1-3-0-0-0-2" name="sec-5-7-1-3-0-0-0-2"></a>Differences from skeleton home directory:<br  /><div class="outline-text-9" id="text-5-7-1-3-0-0-0-2">
-<p>
-diff -r <i>etc/skel</i>.bashrc ./.bashrc
+------ Differences from skeleton home directory:
+diff -r /etc/skel/.bashrc ./.bashrc
 81c81,84
 &lt; 
-&#x2014;
-&gt;     alias kill='true'
-&gt;     alias killall='true'
-&gt;     alias pkill='true'
-&gt;     alias skill='true'
+---
+&gt;     alias <span style="font-weight: bold; font-style: italic;">kill</span>=<span style="font-style: italic;">'true'</span>
+&gt;     alias <span style="font-weight: bold; font-style: italic;">killall</span>=<span style="font-style: italic;">'true'</span>
+&gt;     alias <span style="font-weight: bold; font-style: italic;">pkill</span>=<span style="font-style: italic;">'true'</span>
+&gt;     alias <span style="font-weight: bold; font-style: italic;">skill</span>=<span style="font-style: italic;">'true'</span>
 117a121,122
-&gt; PATH=$PATH:/usr/games
+&gt; <span style="font-weight: bold; font-style: italic;">PATH</span>=$<span style="font-weight: bold; font-style: italic;">PATH</span>:/usr/games
 &gt; cat /etc/motd
-</p>
-</div>
-</li>
-<li><a id="sec-5-7-1-3-0-0-0-3" name="sec-5-7-1-3-0-0-0-3"></a>Who am I?<br  /><div class="outline-text-9" id="text-5-7-1-3-0-0-0-3">
-<p>
-uid=1000(elf) gid=1000(elf) groups=1000(elf)
-</p>
-</div>
-</li>
-<li><a id="sec-5-7-1-3-0-0-0-4" name="sec-5-7-1-3-0-0-0-4"></a>Running procs:<br  /><div class="outline-text-9" id="text-5-7-1-3-0-0-0-4">
-<p>
+------ Who am I?
+<span style="font-weight: bold; font-style: italic;">uid</span>=1000(elf) <span style="font-weight: bold; font-style: italic;">gid</span>=1000(elf) <span style="font-weight: bold; font-style: italic;">groups</span>=1000(elf)
+------ Running procs:
   PID TTY      STAT   TIME COMMAND
     1 pts/0    Ss     0:00 /bin/bash /sbin/init
     8 pts/0    S      0:00 /usr/bin/santaslittlehelperd
    11 pts/0    S      0:00 /sbin/kworker
-   18 pts/0    S      0:01  \_ /sbin/kworker
+   18 pts/0    S      0:01  <span style="font-style: italic;">\_</span> /sbin/kworker
    12 pts/0    S      0:00 /bin/bash
-  994 pts/0    R+     0:00  \_ ps axf
-#+END_SRC
-</p>
+  994 pts/0    R+     0:00  <span style="font-style: italic;">\_</span> ps axf
+</pre>
+</div>
 
 <p>
 We see that <code>/usr/bin/santaslittlehelperd</code> is running, and we're told
@@ -2476,7 +2461,6 @@ that we need to kill it. However, we see that in our <code>.bashrc</code> file,
 <code>kill</code> and its variants are aliased to <code>true</code>, which has no effect.
 </p>
 </div>
-</li></ul>
 </li>
 
 <li><a id="goal" name="goal"></a><a id="sec-5-7-1-4" name="sec-5-7-1-4"></a>Goal<br  /><div class="outline-text-5" id="text-goal">

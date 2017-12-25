@@ -50,11 +50,11 @@ https://docker2017.holidayhackchallenge.com/?challenge=82c16868-a96e-4e4c-955e-5
    :END:
 
 #+BEGIN_SRC sh
-elf@d0b100094698:~$ D="******"; echo "$D System info:"; uname -a; cat /etc/issue; echo "$D Differences from skeleton home directory:"; diff -r /etc/skel .; echo "$D Who am I?"; id; echo "$D Running procs:"; ps axf
-****** System info:
+elf@d0b100094698:~$ D="------"; echo "$D System info:"; uname -a; cat /etc/issue; echo "$D Differences from skeleton home directory:"; diff -r /etc/skel .; echo "$D Who am I?"; id; echo "$D Running procs:"; ps axf
+------ System info:
 Linux d0b100094698 4.9.0-4-amd64 #1 SMP Debian 4.9.65-3 (2017-12-03) x86_64 x86_64 x86_64 GNU/Linux
 Ubuntu 16.04.3 LTS \n \l
-****** Differences from skeleton home directory:
+------ Differences from skeleton home directory:
 diff -r /etc/skel/.bashrc ./.bashrc
 81c81,84
 < 
@@ -66,9 +66,9 @@ diff -r /etc/skel/.bashrc ./.bashrc
 117a121,122
 > PATH=$PATH:/usr/games
 > cat /etc/motd
-****** Who am I?
+------ Who am I?
 uid=1000(elf) gid=1000(elf) groups=1000(elf)
-****** Running procs:
+------ Running procs:
   PID TTY      STAT   TIME COMMAND
     1 pts/0    Ss     0:00 /bin/bash /sbin/init
     8 pts/0    S      0:00 /usr/bin/santaslittlehelperd
