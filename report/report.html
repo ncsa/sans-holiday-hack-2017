@@ -2413,7 +2413,11 @@ Kill the "santaslittlehelperd" process to complete this challenge.
 <li><a id="how-to-find-the-terminal" name="how-to-find-the-terminal"></a><a id="sec-5-7-1-2" name="sec-5-7-1-2"></a>How to find the terminal<br  /><div class="outline-text-5" id="text-how-to-find-the-terminal">
 
 <p>
-Where was the terminal? What's the direct link to it?
+Where was the terminal?
+</p>
+
+<p>
+<a href="https://docker2017.holidayhackchallenge.com/?challenge=82c16868-a96e-4e4c-955e-5b41f7c5809a&uid=USER_ID">https://docker2017.holidayhackchallenge.com/?challenge=82c16868-a96e-4e4c-955e-5b41f7c5809a&uid=USER_ID</a>
 </p>
 </div>
 </li>
@@ -2421,68 +2425,64 @@ Where was the terminal? What's the direct link to it?
 <li><a id="background-information" name="background-information"></a><a id="sec-5-7-1-3" name="sec-5-7-1-3"></a>Background Information<br  /><div class="outline-text-5" id="text-background-information">
 
 <p>
-Do we know anything about this terminal already?
+#+BEGIN_SRC sh
+elf@d0b100094698:~$ D="<b><b>**</b></b>"; echo "$D System info:"; uname -a; cat /etc/issue; echo "$D Differences from skeleton home directory:"; diff -r /etc/skel .; echo "$D Who am I?"; id; echo "$D Running procs:"; ps axf
 </p>
-
-<p>
-Hints:
-</p>
-
-<p>
-List any useful hints here.
-</p>
-
-<p>
-Blog Posts:
-</p>
-
-<p>
-Are any of these useful?
-</p>
-
-<ul class="org-ul">
-<li>Putting My Zero Cents In: Using the Free Tier on Amazon Web Services
-(EC2)
-<a href="https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2">https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2</a>
-Spinning up an EC2 instance, but also a lot of emphasis on how to use
-SSH keys.
-</li>
-<li>Your Pokemon Guide for Essential SQL Pen Test Commands
-<a href="https://pen-testing.sans.org/blog/2017/12/09/your-pokemon-guide-for-essential-sql-pen-test-commands">https://pen-testing.sans.org/blog/2017/12/09/your-pokemon-guide-for-essential-sql-pen-test-commands</a>
-SQL basics (SELECT, WHERE, wildcards, ORDER BY, GROUP BY, COUNT)
-</li>
-<li>Exploiting XXE Vulnerabilities in IIS/.NET
-<a href="https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities">https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities</a>
-Including remote content in XML
-</li>
-<li>Why You Need the Skills to Tinker with Publicly Released Exploit Code
-<a href="https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code">https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code</a>
-Mentions Apache struts vulnerabilities, specifically CVE-2017-5638 and
-CVE-2017-9805 Code: <a href="https://github.com/chrisjd20/cve-2017-9805.py">https://github.com/chrisjd20/cve-2017-9805.py</a>
-</li>
-<li>Go To The Head Of The Class: LD\_PRELOAD For The Win
-<a href="https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win">https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win</a>
-</li>
-<li>A Spot of Tee
-<a href="https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee">https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee</a> Restricted
-bash shell, and bypassing the I/O restriction with tee
-</li>
-<li>Understanding and Exploiting Web-based LDAP
-<a href="https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap">https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap</a>
-LDAP syntax, LDAP injection
-</li>
-<li>Massively Scaling your Scanning
-<a href="https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning">https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning</a>
-masscan
-</li>
-</ul>
 </div>
+<ul class="org-ul"><li><a id="sec-5-7-1-3-0-0-0-1" name="sec-5-7-1-3-0-0-0-1"></a>System info:<br  /><div class="outline-text-9" id="text-5-7-1-3-0-0-0-1">
+<p>
+Linux d0b100094698 4.9.0-4-amd64 #1 SMP Debian 4.9.65-3 (2017-12-03) x86_64 x86_64 x86_64 GNU/Linux
+Ubuntu 16.04.3 LTS \n \l
+</p>
+</div>
+</li>
+<li><a id="sec-5-7-1-3-0-0-0-2" name="sec-5-7-1-3-0-0-0-2"></a>Differences from skeleton home directory:<br  /><div class="outline-text-9" id="text-5-7-1-3-0-0-0-2">
+<p>
+diff -r <i>etc/skel</i>.bashrc ./.bashrc
+81c81,84
+&lt; 
+&#x2014;
+&gt;     alias kill='true'
+&gt;     alias killall='true'
+&gt;     alias pkill='true'
+&gt;     alias skill='true'
+117a121,122
+&gt; PATH=$PATH:/usr/games
+&gt; cat /etc/motd
+</p>
+</div>
+</li>
+<li><a id="sec-5-7-1-3-0-0-0-3" name="sec-5-7-1-3-0-0-0-3"></a>Who am I?<br  /><div class="outline-text-9" id="text-5-7-1-3-0-0-0-3">
+<p>
+uid=1000(elf) gid=1000(elf) groups=1000(elf)
+</p>
+</div>
+</li>
+<li><a id="sec-5-7-1-3-0-0-0-4" name="sec-5-7-1-3-0-0-0-4"></a>Running procs:<br  /><div class="outline-text-9" id="text-5-7-1-3-0-0-0-4">
+<p>
+  PID TTY      STAT   TIME COMMAND
+    1 pts/0    Ss     0:00 /bin/bash /sbin/init
+    8 pts/0    S      0:00 /usr/bin/santaslittlehelperd
+   11 pts/0    S      0:00 /sbin/kworker
+   18 pts/0    S      0:01  \_ /sbin/kworker
+   12 pts/0    S      0:00 /bin/bash
+  994 pts/0    R+     0:00  \_ ps axf
+#+END_SRC
+</p>
+
+<p>
+We see that <code>/usr/bin/santaslittlehelperd</code> is running, and we're told
+that we need to kill it. However, we see that in our <code>.bashrc</code> file,
+<code>kill</code> and its variants are aliased to <code>true</code>, which has no effect.
+</p>
+</div>
+</li></ul>
 </li>
 
 <li><a id="goal" name="goal"></a><a id="sec-5-7-1-4" name="sec-5-7-1-4"></a>Goal<br  /><div class="outline-text-5" id="text-goal">
 
 <p>
-What are we trying to accomplish?
+We need to <code>kill santaslittlehelperd</code>, but our <code>kill</code> has been turned ineffective.
 </p>
 </div>
 </li>
@@ -2490,8 +2490,70 @@ What are we trying to accomplish?
 <li><a id="approach" name="approach"></a><a id="sec-5-7-1-5" name="sec-5-7-1-5"></a>Approach<br  /><div class="outline-text-5" id="text-approach">
 
 <p>
-Describe the thought process that we tried here. How were we able to use
-the hints or the blog posts?
+From the <a href="http://tldp.org/LDP/abs/html/aliases.html">Bash documentation</a>:
+</p>
+
+<blockquote>
+<p>
+A Bash alias is essentially nothing more than a keyboard shortcut, an abbreviation, a means of avoiding typing a long command sequence.
+</p>
+</blockquote>
+
+<p>
+Here, however, aliases have been used to effectively disable <code>kill</code>
+and its brethren. We need to figure out a way to run the real version
+of <code>kill</code> instead of the aliased version. One way to do this is to use the <code>which</code> command:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">elf@ce55bdd020e3:~$ which kill
+/bin/kill
+</pre>
+</div>
+
+<p>
+Using the full path to the binary will bypass the alias, and allow us to actually run <code>kill</code>.
+</p>
+
+<pre class="example">
+elf@ce55bdd020e3:~$ /bin/kill -h
+Usage:
+ kill [options] &lt;pid&gt; [...]
+Options:
+ &lt;pid&gt; [...]            send signal to every &lt;pid&gt; listed
+ -&lt;signal&gt;, -s, --signal &lt;signal&gt;
+                        specify the &lt;signal&gt; to be sent
+ -l, --list=[&lt;signal&gt;]  list all signal names, or convert one to a name
+ -L, --table            list all signal names in a nice table
+ -h, --help     display this help and exit
+ -V, --version  output version information and exit
+For more details see kill(1).
+</pre>
+
+<p>
+All that's left is to determine the process ID (<code>pid</code>) of the process to be killed. We can use the <code>ps</code> command to determine this:
+</p>
+
+<pre class="example">
+elf@ce55bdd020e3:~$ ps axf
+  PID TTY      STAT   TIME COMMAND
+    1 pts/0    Ss     0:00 /bin/bash /sbin/init
+    8 pts/0    S      0:00 /usr/bin/santaslittlehelperd
+   11 pts/0    S      0:00 /sbin/kworker
+   18 pts/0    S      0:01  \_ /sbin/kworker
+   12 pts/0    S      0:00 /bin/bash
+  649 pts/0    R+     0:00  \_ ps axf
+elf@ce55bdd020e3:~$ /bin/kill 8
+elf@ce55bdd020e3:~$ ps axf
+  PID TTY      STAT   TIME COMMAND
+    1 pts/0    Ss     0:00 /bin/bash /sbin/init
+   12 pts/0    S      0:00 /bin/bash
+  658 pts/0    R+     0:00  \_ ps axf
+</pre>
+
+<p>
+Santa's little helper is no more.
 </p>
 </div>
 </li>
@@ -2499,7 +2561,9 @@ the hints or the blog posts?
 <li><a id="solution" name="solution"></a><a id="sec-5-7-1-6" name="sec-5-7-1-6"></a>Solution<br  /><div class="outline-text-5" id="text-solution">
 
 <p>
-Summarize the reference solution that we found.
+A one-liner is: <code>/usr/bin/pkill -f santaslittlehelperd</code>. <code>pkill</code> can
+kill a process by name, and the <code>-f</code> argument will have it match
+against the full name of the process.
 </p>
 
 <p>
@@ -2511,7 +2575,33 @@ AsciiCinema video of the solution?
 <li><a id="alternatives" name="alternatives"></a><a id="sec-5-7-1-7" name="sec-5-7-1-7"></a>Alternatives<br  /><div class="outline-text-5" id="text-alternatives">
 
 <p>
-Any other, easier solutions?
+Another approach is simply to remove the alias, by using the unalias command:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">elf@12952b040888:~$ unalias kill
+elf@12952b040888:~$ ps axf
+  PID TTY      STAT   TIME COMMAND
+    1 pts/0    Ss     0:00 /bin/bash /sbin/init
+    8 pts/0    S      0:00 /usr/bin/santaslittlehelperd
+   11 pts/0    S      0:00 /sbin/kworker
+   18 pts/0    S      0:00  <span style="font-style: italic;">\_</span> /sbin/kworker
+   12 pts/0    S      0:00 /bin/bash
+   31 pts/0    R+     0:00  <span style="font-style: italic;">\_</span> ps axf
+elf@12952b040888:~$ kill 8
+elf@12952b040888:~$ ps axf
+  PID TTY      STAT   TIME COMMAND
+    1 pts/0    Ss     0:00 /bin/bash /sbin/init
+   12 pts/0    S      0:00 /bin/bash
+   36 pts/0    R+     0:00  <span style="font-style: italic;">\_</span> ps axf
+</pre>
+</div>
+
+<p>
+Alternatively, you could run <code>bash</code> with the <code>--norc</code> flag, which
+prevents it from reading and executing the <code>~/.bashrc</code> file where the
+aliases are added.
 </p>
 </div>
 </li>
@@ -2519,24 +2609,11 @@ Any other, easier solutions?
 <li><a id="common-pitfalls" name="common-pitfalls"></a><a id="sec-5-7-1-8" name="sec-5-7-1-8"></a>Common Pitfalls<br  /><div class="outline-text-5" id="text-common-pitfalls">
 
 <p>
-Do we know what issue(s) people were running into?
-</p>
-</div>
-</li>
-
-<li><a id="about-the-challenge" name="about-the-challenge"></a><a id="sec-5-7-1-9" name="sec-5-7-1-9"></a>About the Challenge<br  /><div class="outline-text-5" id="text-about-the-challenge">
-
-<p>
-How was the challenge setup? Was there a better way to secure this
-system?
-</p>
-</div>
-</li>
-
-<li><a id="loot" name="loot"></a><a id="sec-5-7-1-10" name="sec-5-7-1-10"></a>Loot<br  /><div class="outline-text-5" id="text-loot">
-
-<p>
-Anything interesting hidden on the system?
+The fact that <code>kill</code> was aliased to <code>true</code> was problematic, because
+<code>true</code> never returns any output. Thus, it would look like the <code>kill</code>
+command worked, but the process would still be running. Running
+something like <code>kill -h</code> would reveal that <code>kill</code> was not being run
+correctly, since the help output would not be displayed.
 </p>
 </div>
 </li></ul>

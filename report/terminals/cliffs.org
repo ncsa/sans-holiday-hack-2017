@@ -40,71 +40,121 @@
    :CUSTOM_ID: how-to-find-the-terminal
    :END:
 
-Where was the terminal? What's the direct link to it?
+Where was the terminal?
+
+https://docker2017.holidayhackchallenge.com/?challenge=82c16868-a96e-4e4c-955e-5b41f7c5809a&uid=USER_ID
 
 ** Background Information
    :PROPERTIES:
    :CUSTOM_ID: background-information
    :END:
 
-Do we know anything about this terminal already?
+#+BEGIN_SRC sh
+elf@d0b100094698:~$ D="******"; echo "$D System info:"; uname -a; cat /etc/issue; echo "$D Differences from skeleton home directory:"; diff -r /etc/skel .; echo "$D Who am I?"; id; echo "$D Running procs:"; ps axf
+****** System info:
+Linux d0b100094698 4.9.0-4-amd64 #1 SMP Debian 4.9.65-3 (2017-12-03) x86_64 x86_64 x86_64 GNU/Linux
+Ubuntu 16.04.3 LTS \n \l
+****** Differences from skeleton home directory:
+diff -r /etc/skel/.bashrc ./.bashrc
+81c81,84
+< 
+---
+>     alias kill='true'
+>     alias killall='true'
+>     alias pkill='true'
+>     alias skill='true'
+117a121,122
+> PATH=$PATH:/usr/games
+> cat /etc/motd
+****** Who am I?
+uid=1000(elf) gid=1000(elf) groups=1000(elf)
+****** Running procs:
+  PID TTY      STAT   TIME COMMAND
+    1 pts/0    Ss     0:00 /bin/bash /sbin/init
+    8 pts/0    S      0:00 /usr/bin/santaslittlehelperd
+   11 pts/0    S      0:00 /sbin/kworker
+   18 pts/0    S      0:01  \_ /sbin/kworker
+   12 pts/0    S      0:00 /bin/bash
+  994 pts/0    R+     0:00  \_ ps axf
+#+END_SRC
 
-Hints:
-
-List any useful hints here.
-
-Blog Posts:
-
-Are any of these useful?
-
-- Putting My Zero Cents In: Using the Free Tier on Amazon Web Services
-  (EC2)
-  https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2
-  Spinning up an EC2 instance, but also a lot of emphasis on how to use
-  SSH keys.
-- Your Pokemon Guide for Essential SQL Pen Test Commands
-  https://pen-testing.sans.org/blog/2017/12/09/your-pokemon-guide-for-essential-sql-pen-test-commands
-  SQL basics (SELECT, WHERE, wildcards, ORDER BY, GROUP BY, COUNT)
-- Exploiting XXE Vulnerabilities in IIS/.NET
-  https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities
-  Including remote content in XML
-- Why You Need the Skills to Tinker with Publicly Released Exploit Code
-  https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code
-  Mentions Apache struts vulnerabilities, specifically CVE-2017-5638 and
-  CVE-2017-9805 Code: https://github.com/chrisjd20/cve-2017-9805.py
-- Go To The Head Of The Class: LD\_PRELOAD For The Win
-  https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win
-- A Spot of Tee
-  https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee Restricted
-  bash shell, and bypassing the I/O restriction with tee
-- Understanding and Exploiting Web-based LDAP
-  https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap
-  LDAP syntax, LDAP injection
-- Massively Scaling your Scanning
-  https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning
-  masscan
+We see that =/usr/bin/santaslittlehelperd= is running, and we're told
+that we need to kill it. However, we see that in our =.bashrc= file,
+=kill= and its variants are aliased to =true=, which has no effect.
 
 ** Goal
    :PROPERTIES:
    :CUSTOM_ID: goal
    :END:
 
-What are we trying to accomplish?
+We need to =kill santaslittlehelperd=, but our =kill= has been turned ineffective.
 
 ** Approach
    :PROPERTIES:
    :CUSTOM_ID: approach
    :END:
 
-Describe the thought process that we tried here. How were we able to use
-the hints or the blog posts?
+From the [[http://tldp.org/LDP/abs/html/aliases.html][Bash documentation]]:
+
+#+BEGIN_QUOTE
+A Bash alias is essentially nothing more than a keyboard shortcut, an abbreviation, a means of avoiding typing a long command sequence.
+#+END_QUOTE
+
+Here, however, aliases have been used to effectively disable =kill=
+and its brethren. We need to figure out a way to run the real version
+of =kill= instead of the aliased version. One way to do this is to use the =which= command:
+
+#+BEGIN_SRC sh
+elf@ce55bdd020e3:~$ which kill
+/bin/kill
+#+END_SRC
+
+Using the full path to the binary will bypass the alias, and allow us to actually run =kill=.
+
+#+BEGIN_SRC 
+elf@ce55bdd020e3:~$ /bin/kill -h
+Usage:
+ kill [options] <pid> [...]
+Options:
+ <pid> [...]            send signal to every <pid> listed
+ -<signal>, -s, --signal <signal>
+                        specify the <signal> to be sent
+ -l, --list=[<signal>]  list all signal names, or convert one to a name
+ -L, --table            list all signal names in a nice table
+ -h, --help     display this help and exit
+ -V, --version  output version information and exit
+For more details see kill(1).
+#+END_SRC
+
+All that's left is to determine the process ID (=pid=) of the process to be killed. We can use the =ps= command to determine this:
+
+#+BEGIN_SRC 
+elf@ce55bdd020e3:~$ ps axf
+  PID TTY      STAT   TIME COMMAND
+    1 pts/0    Ss     0:00 /bin/bash /sbin/init
+    8 pts/0    S      0:00 /usr/bin/santaslittlehelperd
+   11 pts/0    S      0:00 /sbin/kworker
+   18 pts/0    S      0:01  \_ /sbin/kworker
+   12 pts/0    S      0:00 /bin/bash
+  649 pts/0    R+     0:00  \_ ps axf
+elf@ce55bdd020e3:~$ /bin/kill 8
+elf@ce55bdd020e3:~$ ps axf
+  PID TTY      STAT   TIME COMMAND
+    1 pts/0    Ss     0:00 /bin/bash /sbin/init
+   12 pts/0    S      0:00 /bin/bash
+  658 pts/0    R+     0:00  \_ ps axf
+#+END_SRC
+
+Santa's little helper is no more.
 
 ** Solution
    :PROPERTIES:
    :CUSTOM_ID: solution
    :END:
 
-Summarize the reference solution that we found.
+A one-liner is: ~/usr/bin/pkill -f santaslittlehelperd~. =pkill= can
+kill a process by name, and the =-f= argument will have it match
+against the full name of the process.
 
 AsciiCinema video of the solution?
 
@@ -113,26 +163,38 @@ AsciiCinema video of the solution?
    :CUSTOM_ID: alternatives
    :END:
 
-Any other, easier solutions?
+Another approach is simply to remove the alias, by using the unalias command:
+
+#+BEGIN_SRC sh
+elf@12952b040888:~$ unalias kill
+elf@12952b040888:~$ ps axf
+  PID TTY      STAT   TIME COMMAND
+    1 pts/0    Ss     0:00 /bin/bash /sbin/init
+    8 pts/0    S      0:00 /usr/bin/santaslittlehelperd
+   11 pts/0    S      0:00 /sbin/kworker
+   18 pts/0    S      0:00  \_ /sbin/kworker
+   12 pts/0    S      0:00 /bin/bash
+   31 pts/0    R+     0:00  \_ ps axf
+elf@12952b040888:~$ kill 8
+elf@12952b040888:~$ ps axf
+  PID TTY      STAT   TIME COMMAND
+    1 pts/0    Ss     0:00 /bin/bash /sbin/init
+   12 pts/0    S      0:00 /bin/bash
+   36 pts/0    R+     0:00  \_ ps axf
+#+END_SRC
+
+Alternatively, you could run =bash= with the =--norc= flag, which
+prevents it from reading and executing the =~/.bashrc= file where the
+aliases are added.
 
 ** Common Pitfalls
    :PROPERTIES:
    :CUSTOM_ID: common-pitfalls
    :END:
 
-Do we know what issue(s) people were running into?
+The fact that =kill= was aliased to =true= was problematic, because
+=true= never returns any output. Thus, it would look like the =kill=
+command worked, but the process would still be running. Running
+something like =kill -h= would reveal that =kill= was not being run
+correctly, since the help output would not be displayed.
 
-** About the Challenge
-   :PROPERTIES:
-   :CUSTOM_ID: about-the-challenge
-   :END:
-
-How was the challenge setup? Was there a better way to secure this
-system?
-
-** Loot
-   :PROPERTIES:
-   :CUSTOM_ID: loot
-   :END:
-
-Anything interesting hidden on the system?
