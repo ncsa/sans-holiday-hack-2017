@@ -1685,6 +1685,10 @@ The system MOTD gives us a hint:
 What commands can you run with sudo?
 </p>
 </blockquote>
+
+<p>
+We also know that <code>sudo</code> is a program that allows us to run commands with the privileges of other users and/or groups.
+</p>
 </div>
 </li>
 
@@ -1693,8 +1697,15 @@ What commands can you run with sudo?
 <p>
 We need to overwrite /etc/shadow with /etc/shadow.bak. Basically we
 need to <code>cp /etc/shadow.bak /etc/shadow</code>, except that we don't have
-permissions to do that.
+permissions to do that directly:
 </p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">elf@40a64f5e12a2:~$ cp /etc/shadow.bak /etc/shadow
+cp: cannot create regular file <span style="font-style: italic;">'/etc/shadow'</span>: Permission denied
+</pre>
+</div>
 </div>
 </li>
 
@@ -1970,7 +1981,11 @@ If you can get it running again, I will reward you with a gift of delight.
 <li><a id="how-to-find-the-terminal" name="how-to-find-the-terminal"></a><a id="sec-5-5-1-2" name="sec-5-5-1-2"></a>How to find the terminal<br  /><div class="outline-text-5" id="text-how-to-find-the-terminal">
 
 <p>
-Where was the terminal? What's the direct link to it?
+Where was the terminal?
+</p>
+
+<p>
+<a href="https://docker2017.holidayhackchallenge.com/?challenge=4050467e-9cde-44cd-aa63-1a0b8b210bb7&uid=USER_ID">https://docker2017.holidayhackchallenge.com/?challenge=4050467e-9cde-44cd-aa63-1a0b8b210bb7&uid=USER_ID</a>
 </p>
 </div>
 </li>
@@ -1978,77 +1993,111 @@ Where was the terminal? What's the direct link to it?
 <li><a id="background-information" name="background-information"></a><a id="sec-5-5-1-3" name="sec-5-5-1-3"></a>Background Information<br  /><div class="outline-text-5" id="text-background-information">
 
 <p>
-Do we know anything about this terminal already?
+We're logged in as the user elf. There's a file called <code>trainstartup</code> in our home directory.
 </p>
 
 <p>
-Hints:
+This is a 64-bit x86 system:
 </p>
 
-<p>
-List any useful hints here.
-</p>
+<div class="org-src-container">
 
-<p>
-Blog Posts:
-</p>
-
-<p>
-Are any of these useful?
-</p>
-
-<ul class="org-ul">
-<li>Putting My Zero Cents In: Using the Free Tier on Amazon Web Services
-(EC2)
-<a href="https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2">https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2</a>
-Spinning up an EC2 instance, but also a lot of emphasis on how to use
-SSH keys.
-</li>
-<li>Your Pokemon Guide for Essential SQL Pen Test Commands
-<a href="https://pen-testing.sans.org/blog/2017/12/09/your-pokemon-guide-for-essential-sql-pen-test-commands">https://pen-testing.sans.org/blog/2017/12/09/your-pokemon-guide-for-essential-sql-pen-test-commands</a>
-SQL basics (SELECT, WHERE, wildcards, ORDER BY, GROUP BY, COUNT)
-</li>
-<li>Exploiting XXE Vulnerabilities in IIS/.NET
-<a href="https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities">https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities</a>
-Including remote content in XML
-</li>
-<li>Why You Need the Skills to Tinker with Publicly Released Exploit Code
-<a href="https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code">https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code</a>
-Mentions Apache struts vulnerabilities, specifically CVE-2017-5638 and
-CVE-2017-9805 Code: <a href="https://github.com/chrisjd20/cve-2017-9805.py">https://github.com/chrisjd20/cve-2017-9805.py</a>
-</li>
-<li>Go To The Head Of The Class: LD\_PRELOAD For The Win
-<a href="https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win">https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win</a>
-</li>
-<li>A Spot of Tee
-<a href="https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee">https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee</a> Restricted
-bash shell, and bypassing the I/O restriction with tee
-</li>
-<li>Understanding and Exploiting Web-based LDAP
-<a href="https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap">https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap</a>
-LDAP syntax, LDAP injection
-</li>
-<li>Massively Scaling your Scanning
-<a href="https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning">https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning</a>
-masscan
-</li>
-</ul>
+<pre class="src src-sh">elf@5e0a9637e4c6:~$ uname -a
+Linux 5e0a9637e4c6 4.9.0-4-amd64 <span style="font-weight: bold; font-style: italic;">#</span><span style="font-weight: bold; font-style: italic;">1 SMP Debian 4.9.65-3 (2017-12-03) x86_64 x86_64 x86_64 GNU/Linux</span>
+</pre>
+</div>
 </div>
 </li>
 
 <li><a id="goal" name="goal"></a><a id="sec-5-5-1-4" name="sec-5-5-1-4"></a>Goal<br  /><div class="outline-text-5" id="text-goal">
 
 <p>
-What are we trying to accomplish?
+It looks like we just want to run the <code>trainstartup</code> file, but if we try that, we get an exec error:
 </p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">elf@5e0a9637e4c6:~$ ./trainstartup 
+bash: ./trainstartup: cannot execute binary file: Exec format error
+</pre>
+</div>
 </div>
 </li>
 
 <li><a id="approach" name="approach"></a><a id="sec-5-5-1-5" name="sec-5-5-1-5"></a>Approach<br  /><div class="outline-text-5" id="text-approach">
 
 <p>
-Describe the thought process that we tried here. How were we able to use
-the hints or the blog posts?
+There's really not much to go on here. We'll first use <code>file</code> to identify the <code>trainstartup</code> binary:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">elf@5e0a9637e4c6:~$ file trainstartup 
+trainstartup: ELF 32-bit LSB  executable, ARM, EABI5 version 1 (GNU/Linux), statically linked, for GNU/Linux 3.2.0, <span style="font-weight: bold; font-style: italic;">BuildID</span>[sha1]=005de4685e8563d10b3de3e0be7d6fdd7ed732eb, not stripped
+</pre>
+</div>
+
+<p>
+So the file is a Linux ELF binary, but it's for the ARM processor, and not for the x86_64 system that we're on. Let's see if there are any programs in our path that have <code>arm</code> in the file name:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">elf@5e0a9637e4c6:~$ compgen -c | grep arm
+qemu-arm
+qemu-armeb
+</pre>
+</div>
+
+<p>
+Running it with the help option gives us:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">elf@5e0a9637e4c6:~$ qemu-arm -h
+usage: qemu-arm [options] program [arguments...]
+Linux CPU emulator (compiled for arm emulation)
+...
+</pre>
+</div>
+
+<p>
+This looks like exactly what we need. <code>qemu-arm</code> provides us with an ARM emulator, and we just need to run it with our program as the single argument. Let's give it a shot:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">elf@5e0a9637e4c6:~$ qemu-arm ./trainstartup 
+Starting up ... 
+
+    Merry Christmas
+    Merry Christmas
+v
+&gt;*&lt;
+^
+/o<span style="font-style: italic;">\</span>
+/   <span style="font-style: italic;">\ </span>              @.&#183;
+/~~   <span style="font-style: italic;">\ </span>               .
+/ &#176; ~~  <span style="font-style: italic;">\ </span>        &#183;      
+/      ~~ <span style="font-style: italic;">\ </span>      &#9670;       
+/     &#176;   ~~<span style="font-style: italic;">\ </span>     .   0
+/~~           <span style="font-style: italic;">\ </span>   &#9472;&#183; &#9472; &#183; o
+    &#9484;&#9488;       /&#176; &#183;~~  .*&#183;   . <span style="font-style: italic;">\</span>
+     &#9618;&#9618;&#9618;<span style="font-style: italic;">\ </span>    &#9474;  &#9472;&#9472;&#9516;&#9472;&#176;&#9472;&#9516;&#9472;&#176;&#9472;&#176;&#9472;&#176;&#9472;
+&#8800;==&#8800;&#176;=&#8800;&#176;=&#8800;==&#9472;&#9472;&#9532;&#9472;&#9472;=&#8800;     &#8800;==&#8800;==&#8800;==&#8800;==&#8800;==&#8800;==&#8800;==&#8800;==&#8800;==&#8800;==&#8800;==&#8800;==&#8800;==&#8800;==&#8800;==&#8800;==&#8800;==&#8800;==&#8800;
+              &#9474;   /&#9492;&#9472;&#9472;&#9472;&#9496;<span style="font-style: italic;">\&#9484;</span>&#9472;&#9472;&#9472;&#9488;                                                 
+                         &#9492;&#9472;&#9472;&#9472;&#9496;                                                 
+&#8800;==&#8800;==&#8800;==&#8800;==&#8800;==&#8800;==&#8800;==&#8800;==&#8800;==&#8800;==&#8800;==&#8800;==&#8800;==&#8800;==&#8800;==&#8800;==&#8800;==&#8800;==&#8800;==&#8800;==&#8800;==&#8800;==&#8800;==&#8800;==&#8800;==&#8800;==&#8800;
+
+
+
+You did it! Thank you!
+</pre>
+</div>
+
+<p>
+Success!
 </p>
 </div>
 </li>
@@ -2056,7 +2105,7 @@ the hints or the blog posts?
 <li><a id="solution" name="solution"></a><a id="sec-5-5-1-6" name="sec-5-5-1-6"></a>Solution<br  /><div class="outline-text-5" id="text-solution">
 
 <p>
-Summarize the reference solution that we found.
+You need to use <code>qemu-arm</code> to run the ARM binary: <code>qemu-arm ./trainstartup</code>
 </p>
 
 <p>
@@ -2068,32 +2117,94 @@ AsciiCinema video of the solution?
 <li><a id="alternatives" name="alternatives"></a><a id="sec-5-5-1-7" name="sec-5-5-1-7"></a>Alternatives<br  /><div class="outline-text-5" id="text-alternatives">
 
 <p>
-Any other, easier solutions?
+The real difficulty of this terminal was in discovering that you
+needed to use <code>qemu-arm</code>. <code>compgen -c</code> is a handy trick in CTFs to
+figure out what special programs are installed on a certain
+system. Another useful trick is using find to see what changes were
+made to the system after it was installed. Let's take a quick look at
+<code>qemu=arm</code> and at another file we know was changed, <code>trainstartup</code>:
 </p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">elf@5e0a9637e4c6:~$ stat /usr/bin/qemu-arm trainstartup 
+  File: <span style="font-style: italic;">'/usr/bin/qemu-arm'</span>
+  Size: 1725888         Blocks: 3376       IO Block: 4096   regular file
+Device: 801h/2049d      Inode: 1049395     Links: 1
+Access: (0755/-rwxr-xr-x)  Uid: (    0/    root)   Gid: (    0/    root)
+Access: 2017-09-20 14:01:57.000000000 +0000
+Modify: 2017-09-20 14:01:57.000000000 +0000
+Change: 2017-12-06 20:01:07.719592650 +0000
+ Birth: -
+  File: <span style="font-style: italic;">'trainstartup'</span>
+  Size: 454636          Blocks: 888        IO Block: 4096   regular file
+Device: 801h/2049d      Inode: 1049511     Links: 1
+Access: (0755/-rwxr-xr-x)  Uid: (    0/    root)   Gid: (    0/    root)
+Access: 2017-12-07 18:43:55.000000000 +0000
+Modify: 2017-12-07 18:43:55.000000000 +0000
+Change: 2017-12-07 18:43:58.191037092 +0000
+ Birth: -
+</pre>
+</div>
+
+<p>
+If we look at the change time (or <code>ctime</code>), we can see that this
+system was setup around December 6th, with the status of
+<code>trainstartup</code> being changed the next day. An important thing to
+remember with <code>ctime</code> is that the file contents didn't change, but
+some data in the file inode did (permissions, creation,
+etc.). Normally, we might use something like the modification time,
+but that doesn't work well for files installed from packages.
+</p>
+
+<p>
+A common way to setup a system is to first add sources to the package
+manager, then install any necessary packages, and make any additional
+modifications to a system. Let's use <code>find</code> to see what files were
+modified after <code>/etc/apt</code> was changed, and we'll look for files with
+<code>arm</code> in the name:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">elf@5e0a9637e4c6:~$ find / -xdev -cnewer /etc/apt/sources.list | grep -w arm
+/usr/bin/qemu-arm
+/usr/share/man/man1/qemu-arm.1.gz
+</pre>
+</div>
+
+<p>
+In this case, I'm using <code>-xdev</code> to restrict the <code>find</code> to files on the
+same device (thus excluding <code>/sys</code>, <code>/proc</code>, etc.).
+</p>
+
+<p>
+If that still didn't work, here's a one-liner to sort the files on the
+system according to when their <code>ctime</code> was modified. This would enable
+you to see a complete timeline of changes to files:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">elf@5e0a9637e4c6:~$ find / -xdev -printf <span style="font-style: italic;">"%C+\t%p\n"</span> | sort | head
+2017-12-04+14:36:51.7363603170  /bin/bash
+2017-12-04+14:36:51.7363603170  /bin/bunzip2
+2017-12-04+14:36:51.7363603170  /bin/bzcat
+2017-12-04+14:36:51.7363603170  /bin/bzcmp
+2017-12-04+14:36:51.7363603170  /bin/bzdiff
+2017-12-04+14:36:51.7363603170  /bin/bzegrep
+...
+</pre>
+</div>
 </div>
 </li>
 
 <li><a id="common-pitfalls" name="common-pitfalls"></a><a id="sec-5-5-1-8" name="sec-5-5-1-8"></a>Common Pitfalls<br  /><div class="outline-text-5" id="text-common-pitfalls">
 
 <p>
-Do we know what issue(s) people were running into?
-</p>
-</div>
-</li>
-
-<li><a id="about-the-challenge" name="about-the-challenge"></a><a id="sec-5-5-1-9" name="sec-5-5-1-9"></a>About the Challenge<br  /><div class="outline-text-5" id="text-about-the-challenge">
-
-<p>
-How was the challenge setup? Was there a better way to secure this
-system?
-</p>
-</div>
-</li>
-
-<li><a id="loot" name="loot"></a><a id="sec-5-5-1-10" name="sec-5-5-1-10"></a>Loot<br  /><div class="outline-text-5" id="text-loot">
-
-<p>
-Anything interesting hidden on the system?
+This terminal was tricky because almost no information was
+given. Knowing how to use <code>file</code> to identify that <code>trainstartup</code> was
+an ARM binary, and knowing how to find <code>qemu-arm</code> was key.
 </p>
 </div>
 </li></ul>

@@ -57,6 +57,8 @@ The system MOTD gives us a hint:
 What commands can you run with sudo?
 #+END_QUOTE
 
+We also know that =sudo= is a program that allows us to run commands with the privileges of other users and/or groups.
+
 ** Goal
    :PROPERTIES:
    :CUSTOM_ID: goal
@@ -64,7 +66,12 @@ What commands can you run with sudo?
 
 We need to overwrite /etc/shadow with /etc/shadow.bak. Basically we
 need to ~cp /etc/shadow.bak /etc/shadow~, except that we don't have
-permissions to do that.
+permissions to do that directly:
+
+#+BEGIN_SRC sh
+elf@40a64f5e12a2:~$ cp /etc/shadow.bak /etc/shadow
+cp: cannot create regular file '/etc/shadow': Permission denied
+#+END_SRC
 
 ** Approach
    :PROPERTIES:
