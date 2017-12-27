@@ -55,8 +55,17 @@ https://docker2017.holidayhackchallenge.com/?challenge=595aeb87-d3b2-41a3-b612-f
    :CUSTOM_ID: goal
    :END:
 
-
 The goal is to analyze a 'log file' and determine what the least popular browser.
+
+** Hints
+   :PROPERTIES:
+   :CUSTOM_ID: hints
+   :END:
+
+[[https://twitter.com/SirMintsALot][Minty Candycane on Twitter has some hints]]
+  * [[https://twitter.com/SirMintsALot/status/938187811869487104][The more I live my life as a Linux command-line user, the more I see problems waiting to be solved with cut, sort, uniq, head, and tail.]]
+  * [[https://twitter.com/SirMintsALot/status/938188406546251777][Oh wow, @Sw4mp_f0x and @bluscreenofjeff did a great job on this Parsing for Pentesters series!]]
+  * [[https://twitter.com/SirMintsALot/status/938574395240366080][he only thing that last article didn't really help me with was *counting* unique lines. This post looks super helpful for that! https://unix.stackexchange.com/questions/170043/sort-and-count-number-of-occurrence-of-lines/263849 … (it's even against web server logs, just the wrong field)]]
 
 ** Approach
    :PROPERTIES:
