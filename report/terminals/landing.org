@@ -48,6 +48,9 @@ From this game: https://2017.holidayhackchallenge.com/game/7e48d6aa-4b73-4027-b2
 
 Direct Link: https://docker2017.holidayhackchallenge.com/?challenge=eb5282de-5e43-4813-8ada-5aee3cdb101e&uid=USER_ID
 
+#+CAPTION: The terminal is right on top of the tower.
+[[../images/terminal-location-landing.png]]
+
 ** Background Information
    :PROPERTIES:
    :CUSTOM_ID: background-information
