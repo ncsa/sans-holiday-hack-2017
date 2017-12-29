@@ -1,6 +1,5 @@
-* Answer Template
+* There's Snow Place Like Home
   :PROPERTIES:
-  :CUSTOM_ID: answer-template
   :END:
 
 ** Question
@@ -38,7 +37,8 @@
 
 Where was the terminal?
 
-https://docker2017.holidayhackchallenge.com/?challenge=4050467e-9cde-44cd-aa63-1a0b8b210bb7&uid=USER_ID
+From this game: https://2017.holidayhackchallenge.com/game/41a1e6bb-60c3-4695-ad04-514fbcc76afa
+Direct link: https://docker2017.holidayhackchallenge.com/?challenge=4050467e-9cde-44cd-aa63-1a0b8b210bb7&uid=USER_ID
 
 ** Background Information
    :PROPERTIES:
@@ -65,6 +65,14 @@ It looks like we just want to run the =trainstartup= file, but if we try that, w
 elf@5e0a9637e4c6:~$ ./trainstartup 
 bash: ./trainstartup: cannot execute binary file: Exec format error
 #+END_SRC
+
+** Hints
+   :PROPERTIES:
+   :CUSTOM_ID: hints
+   :END:
+
+[[https://twitter.com/PepperyGoodness][Pepper Minstix on Twitter has a hint]]
+  * [[https://twitter.com/PepperyGoodness/status/938545233624678400][Actually, @GreenesterElf , you're better at prompt commands than I am. Why can't I get this model train thing working? I'm in the right directory like you taught me, but this system is still saying "No such file or directory"]]
 
 ** Approach
    :PROPERTIES:

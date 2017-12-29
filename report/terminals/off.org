@@ -1,6 +1,5 @@
-* Answer Template
+* We're Off To See The...
   :PROPERTIES:
-  :CUSTOM_ID: answer-template
   :END:
 
 ** Question
@@ -31,7 +30,8 @@
    :CUSTOM_ID: how-to-find-the-terminal
    :END:
 
-Where was the terminal? What's the direct link to it?
+From this game: https://2017.holidayhackchallenge.com/game/30a9c19a-f931-4367-9922-d20b91314eec
+Direct link: https://docker2017.holidayhackchallenge.com/?challenge=96452ffb-5153-4473-9fe4-f0ff7921308e&uid=USER_ID
 
 ** Background Information
    :PROPERTIES:
@@ -81,6 +81,14 @@ Are any of these useful?
    :END:
 
 What are we trying to accomplish?
+
+** Hints
+   :PROPERTIES:
+   :CUSTOM_ID: hints
+   :END:
+
+[[https://twitter.com/1Horse1OSSleigh][Wunorse Openslae (that's a stretch) on Twitter actually has no useful hints]]
+This blog post, [[https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win][Go To The Head Of The Class: LD_PRELOAD For The Win]], by Jeff McJunkin was useful.
 
 ** Approach
    :PROPERTIES:

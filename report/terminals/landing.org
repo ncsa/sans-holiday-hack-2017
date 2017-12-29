@@ -1,6 +1,5 @@
-* Answer Template
+* Winter Wonder Landing
   :PROPERTIES:
-  :CUSTOM_ID: answer-template
   :END:
 
 ** Question
@@ -44,7 +43,8 @@
    :CUSTOM_ID: how-to-find-the-terminal
    :END:
 
-Where was the terminal? What's the direct link to it?
+From this game: https://2017.holidayhackchallenge.com/game/7e48d6aa-4b73-4027-b23b-a6a1a3460d54
+Direct Link: https://docker2017.holidayhackchallenge.com/?challenge=eb5282de-5e43-4813-8ada-5aee3cdb101e&uid=USER_ID
 
 ** Background Information
    :PROPERTIES:
@@ -94,6 +94,14 @@ Are any of these useful?
    :END:
 
 What are we trying to accomplish?
+
+** Goal
+   :PROPERTIES:
+   :CUSTOM_ID: goal
+   :END:
+
+[[https://twitter.com/GreenestElf][Bushy Evergreen on Twitter has a hint]]
+  * [[https://twitter.com/GreenestElf/status/938165130906365952][Ugh, somebody copied over the wrong `find` executable to my system today. How am I supposed to know where find normally is?!]]
 
 ** Approach
    :PROPERTIES:

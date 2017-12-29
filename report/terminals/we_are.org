@@ -1,6 +1,5 @@
-* Answer Template
+* Oh Wait! Maybe WE Are...
   :PROPERTIES:
-  :CUSTOM_ID: answer-template
   :END:
 
 ** Question
@@ -38,9 +37,8 @@
    :CUSTOM_ID: how-to-find-the-terminal
    :END:
 
-Where was the terminal?
-
-https://docker2017.holidayhackchallenge.com/?challenge=a9d07a00-55bc-4391-a02b-71f3c4f1ec44&uid=USER_ID
+From this game: https://2017.holidayhackchallenge.com/game/f09180b7-43e4-406c-83ac-924539e7b8f5
+Direct link: https://docker2017.holidayhackchallenge.com/?challenge=a9d07a00-55bc-4391-a02b-71f3c4f1ec44&uid=USER_ID
 
 ** Background Information
    :PROPERTIES:
@@ -72,6 +70,19 @@ permissions to do that directly:
 elf@40a64f5e12a2:~$ cp /etc/shadow.bak /etc/shadow
 cp: cannot create regular file '/etc/shadow': Permission denied
 #+END_SRC
+
+** Hints
+   :PROPERTIES:
+   :CUSTOM_ID: approach
+   :END:
+
+[[https://twitter.com/ClimbALLdaTrees][Shinny Upatree on Twitter has a few hints]]
+  * [[https://twitter.com/ClimbALLdaTrees/status/938578034113765376][You know that feeling when something horrible has happened? So I was editing /etc/shadow manually, and... well:
+$ ls -l /etc/shadow
+-rw-rw---- 1 root shadow 0 Dec  7 01:13 /etc/shadow
+
+@1Horse1OSSleigh tells me the "Non-default shadow group permissions" might help.... okay?]
+  * [[https://twitter.com/ClimbALLdaTrees/status/938578359860174848][I think I have some pseudo (sp?) permissions on this Unix server, but I don't know what that means. @GreenesterElf said this was a "learning opportunity" and won't give me the answer :'(]]
 
 ** Approach
    :PROPERTIES:

@@ -1,6 +1,5 @@
-* Answer Template
+* Cryokinetic Magic
   :PROPERTIES:
-  :CUSTOM_ID: answer-template
   :END:
 
 ** Question
@@ -38,7 +37,8 @@
    :CUSTOM_ID: how-to-find-the-terminal
    :END:
 
-Where was the terminal? What's the direct link to it?
+From this game: https://2017.holidayhackchallenge.com/game/3e813a9c-cb34-492e-a317-0dd99c8ca2e7
+Direct link: https://docker2017.holidayhackchallenge.com/?challenge=82c16868-a96e-4e4c-955e-5b41f7c5809a&uid=USER_ID
 
 ** Background Information
    :PROPERTIES:
@@ -46,10 +46,6 @@ Where was the terminal? What's the direct link to it?
    :END:
 
 Do we know anything about this terminal already?
-
-Hints:
-
-List any useful hints here.
 
 Blog Posts:
 
@@ -88,6 +84,15 @@ Are any of these useful?
    :END:
 
 What are we trying to accomplish?
+
+** Hints
+   :PROPERTIES:
+   :CUSTOM_ID: hints
+   :END:
+   
+[[https://twitter.com/GreenesterElf][Holly Evergreen on Twitter has some hints]]
+  * [[https://twitter.com/GreenesterElf/status/938542480487677952][Alright, who chmod -x'd and then removed chmod from my system? Not funny! I really need to run a program on this server, for serious. Was it you, @PepperyGoodness ? Weren't you mucking about with ARM64 recently?]]
+  * [[https://twitter.com/GreenesterElf/status/938552050253643777][I still can't figure out Pepper Minstix's issue. It looks like the binary is compiled for another architecture. I think qemu can help, but I don't want to run the entire OS :\ https://doc.opensuse.org/documentation/… helps, but I just want one binary, not the whole system!] [[https://doc.opensuse.org/documentation/leap/virtualization/html/book.virt/cha.qemu.running.html]]
 
 ** Approach
    :PROPERTIES:
