@@ -1,6 +1,7 @@
 * Winconceivable: The Cliffs of Winsanity
-  :PROPERTIES:
-  :END:
+   :PROPERTIES:
+   :CUSTOM_ID: title
+   :END:
 
 ** Question
    :PROPERTIES:

@@ -1,6 +1,7 @@
 * There's Snow Place Like Home
-  :PROPERTIES:
-  :END:
+   :PROPERTIES:
+   :CUSTOM_ID: title
+   :END:
 
 ** Question
    :PROPERTIES:

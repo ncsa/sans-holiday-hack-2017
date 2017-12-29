@@ -1,6 +1,7 @@
 * Cryokinetic Magic
-  :PROPERTIES:
-  :END:
+   :PROPERTIES:
+   :CUSTOM_ID: title
+   :END:
 
 ** Question
    :PROPERTIES:
