@@ -77,6 +77,134 @@ the hints or the blog posts?
 
 Summarize the reference solution that we found
 
+*** How to forge a session cookie
+
+The js code they use is a variation of a challenge response algorithm, but it
+is flawed in that the client is providing both the challenge and the response.
+It is also flawed in that it does not use MAC https://en.wikipedia.org/wiki/Authenticated_encryption#MAC-then-Encrypt_(MtE)
+meaning that the encrypted contents themselves are never verified.
+
+Since we can control both the ciphertext and the expected plaintext, we can
+just set the challenge the empty string "" and the response then just needs to
+be ANY message that decrypts to "".
+
+A completly empty ciphertext throws an error:
+
+#+BEGIN_SRC js
+> var aes256 = require('aes256');
+> aes256.decrypt('key does not matter', '')
+TypeError: Provided "encrypted" must be a non-empty string
+    at Object.decrypt (/Users/user/node_modules/aes256/index.js:68:13)
+#+END_SRC
+
+A larger ciphertext works, but gives us a random string, which is not what we want.. but 
+we can see that a fairly long cipher text only gives us a few bytes of plaintext...
+
+#+BEGIN_SRC js
+> aes256.decrypt('key does not matter', 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')
+'F..%=X..'
+#+END_SRC
+
+The difference in the length of the two strings is 24:
+
+#+BEGIN_SRC js
+> x='aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+> x.length - aes256.decrypt('key does not matter',x).length
+24
+#+END_SRC
+
+From the hints, we learn that some of the bytes are used for the IV.
+
+The aes library won't let us encrypt an empty string, but we can encrypt a single char:
+
+#+BEGIN_SRC js
+> aes256.encrypt('key does not matter', '')
+TypeError: Provided "plaintext" must be a non-empty string
+    at Object.encrypt (/Users/user/node_modules/aes256/index.js:39:13)
+> aes256.encrypt('key does not matter', 'x')
+'L7rwNMwISl2chavT6lILlNM='
+> aes256.encrypt('key does not matter', 'x').length
+24
+#+END_SRC
+
+This gives a ciphertext of length 24 with one byte of = for padding.  This
+means that 22 bytes are used for the IV and one byte is used to encrypt the 'x'
+itself.
+
+So, at this point it is clear that something interesting happens around 22-24 chars.
+
+Trying different lengths approaching a length of 22 continues to throw an error
+for a while...
+
+#+BEGIN_SRC js
+> aes256.decrypt('key does not matter', 'aaaaaaaaaaaaaaaa')
+TypeError: Provided "encrypted" must be a non-empty string
+    at Object.decrypt (/Users/user/node_modules/aes256/index.js:68:13)
+#+END_SRC
+
+Until the error changes:
+
+#+BEGIN_SRC js
+> aes256.decrypt('key does not matter', 'aaaaaaaaaaaaaaaaa')
+Error: Invalid IV length
+    at new Decipheriv (internal/crypto/cipher.js:186:16)
+    at Object.createDecipheriv (crypto.js:106:10)
+    at Object.decrypt (/Users/user/node_modules/aes256/index.js:78:27)
+> aes256.decrypt('key does not matter', 'aaaaaaaaaaaaaaaaaa')
+Error: Invalid IV length
+    at new Decipheriv (internal/crypto/cipher.js:186:16)
+    at Object.createDecipheriv (crypto.js:106:10)
+    at Object.decrypt (/Users/user/node_modules/aes256/index.js:78:27)
+> aes256.decrypt('key does not matter', 'aaaaaaaaaaaaaaaaaaa')
+Error: Invalid IV length
+    at new Decipheriv (internal/crypto/cipher.js:186:16)
+    at Object.createDecipheriv (crypto.js:106:10)
+    at Object.decrypt (/Users/user/node_modules/aes256/index.js:78:27)
+> aes256.decrypt('key does not matter', 'aaaaaaaaaaaaaaaaaaaa')
+Error: Invalid IV length
+    at new Decipheriv (internal/crypto/cipher.js:186:16)
+    at Object.createDecipheriv (crypto.js:106:10)
+    at Object.decrypt (/Users/user/node_modules/aes256/index.js:78:27)
+> aes256.decrypt('key does not matter', 'aaaaaaaaaaaaaaaaaaaaa')
+Error: Invalid IV length
+    at new Decipheriv (internal/crypto/cipher.js:186:16)
+    at Object.createDecipheriv (crypto.js:106:10)
+    at Object.decrypt (/Users/user/node_modules/aes256/index.js:78:27)
+> aes256.decrypt('key does not matter', 'aaaaaaaaaaaaaaaaaaaaaa')
+''
+> 'aaaaaaaaaaaaaaaaaaaaaa'.length
+22
+> aes256.decrypt('key really does not matter', 'aaaaaaaaaaaaaaaaaaaaaa')
+''
+#+END_SRC
+
+Success!  A string of any 22 chars will decrypt to the empty string.
+
+An alternative approach would be to edit the aes library and comment out this block:
+
+#+BEGIN_SRC js
+if (typeof plaintext !== 'string' || !plaintext) {
+  throw new TypeError('Provided "plaintext" must be a non-empty string');
+}
+#+END_SRC
+
+With the throw commented out, we can encrypt an empty string:
+
+#+BEGIN_SRC js
+> var aes256 = require('aes256');
+> aes256.encrypt('whatever', '')
+'SStLU1QxLjmtG/Ea8hMH0Q=='
+> ct=aes256.encrypt('whatever', '')
+'tYcVb4PRsdq4JWl5XMSNgw=='
+> aes256.decrypt('a different key entirely', ct)
+''
+> ct.length
+24
+#+END_SRC
+
+The length is different(24 instead of 22), but only because it is padded with 2
+bytes of == for base64 purposes.
+
 ** Alternatives
    :PROPERTIES:
    :CUSTOM_ID: alternatives
