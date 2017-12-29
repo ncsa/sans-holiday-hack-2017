@@ -53,9 +53,9 @@ Direct link: https://docker2017.holidayhackchallenge.com/?challenge=82c16868-a96
    :END:
 
 #+BEGIN_SRC sh
-elf@d0b100094698:~$ D="------"; echo "$D System info:"; uname -a; cat /etc/issue; echo "$D Differences from skeleton home directory:"; diff -r /etc/skel .; echo "$D Who am I?"; id; echo "$D Running procs:"; ps axf
+elf@784e43534178:~$ D="------"; echo "$D System info:"; uname -a; cat /etc/issue; echo "$D Differences from skeleton home directory:"; diff -r /etc/skel .; echo "$D Who am I?"; id; echo "$D Running procs:"; ps axf
 ------ System info:
-Linux d0b100094698 4.9.0-4-amd64 #1 SMP Debian 4.9.65-3 (2017-12-03) x86_64 x86_64 x86_64 GNU/Linux
+Linux 784e43534178 4.9.0-4-amd64 #1 SMP Debian 4.9.65-3 (2017-12-03) x86_64 x86_64 x86_64 GNU/Linux
 Ubuntu 16.04.3 LTS \n \l
 ------ Differences from skeleton home directory:
 diff -r /etc/skel/.bashrc ./.bashrc
@@ -118,14 +118,14 @@ and its brethren. We need to figure out a way to run the real version
 of =kill= instead of the aliased version. One way to do this is to use the =which= command:
 
 #+BEGIN_SRC sh
-elf@ce55bdd020e3:~$ which kill
+elf@784e43534178:~$ which kill
 /bin/kill
 #+END_SRC
 
 Using the full path to the binary will bypass the alias, and allow us to actually run =kill=.
 
 #+BEGIN_SRC 
-elf@ce55bdd020e3:~$ /bin/kill -h
+elf@784e43534178:~$ /bin/kill -h
 Usage:
  kill [options] <pid> [...]
 Options:
@@ -142,7 +142,7 @@ For more details see kill(1).
 All that's left is to determine the process ID (=pid=) of the process to be killed. We can use the =ps= command to determine this:
 
 #+BEGIN_SRC 
-elf@ce55bdd020e3:~$ ps axf
+elf@784e43534178:~$ ps axf
   PID TTY      STAT   TIME COMMAND
     1 pts/0    Ss     0:00 /bin/bash /sbin/init
     8 pts/0    S      0:00 /usr/bin/santaslittlehelperd
@@ -150,8 +150,8 @@ elf@ce55bdd020e3:~$ ps axf
    18 pts/0    S      0:01  \_ /sbin/kworker
    12 pts/0    S      0:00 /bin/bash
   649 pts/0    R+     0:00  \_ ps axf
-elf@ce55bdd020e3:~$ /bin/kill 8
-elf@ce55bdd020e3:~$ ps axf
+elf@784e43534178:~$ /bin/kill 8
+elf@784e43534178:~$ ps axf
   PID TTY      STAT   TIME COMMAND
     1 pts/0    Ss     0:00 /bin/bash /sbin/init
    12 pts/0    S      0:00 /bin/bash
@@ -179,8 +179,8 @@ AsciiCinema video of the solution?
 Another approach is simply to remove the alias, by using the unalias command:
 
 #+BEGIN_SRC sh
-elf@12952b040888:~$ unalias kill
-elf@12952b040888:~$ ps axf
+elf@784e43534178:~$ unalias kill
+elf@784e43534178:~$ ps axf
   PID TTY      STAT   TIME COMMAND
     1 pts/0    Ss     0:00 /bin/bash /sbin/init
     8 pts/0    S      0:00 /usr/bin/santaslittlehelperd
@@ -188,8 +188,8 @@ elf@12952b040888:~$ ps axf
    18 pts/0    S      0:00  \_ /sbin/kworker
    12 pts/0    S      0:00 /bin/bash
    31 pts/0    R+     0:00  \_ ps axf
-elf@12952b040888:~$ kill 8
-elf@12952b040888:~$ ps axf
+elf@784e43534178:~$ kill 8
+elf@784e43534178:~$ ps axf
   PID TTY      STAT   TIME COMMAND
     1 pts/0    Ss     0:00 /bin/bash /sbin/init
    12 pts/0    S      0:00 /bin/bash

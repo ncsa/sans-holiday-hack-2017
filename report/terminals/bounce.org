@@ -1,7 +1,7 @@
 * Bumbles Bounce
-  :PROPERTIES:
+   :PROPERTIES:
    :CUSTOM_ID: title
-  :END:
+   :END:
 
 ** Question
    :PROPERTIES:
@@ -83,14 +83,14 @@ A directory listing shows that terminal contains a binary called 'runtoanswer',
 as well as fairly large 'access.log' file:
 
 #+BEGIN_SRC sh
-elf@a7b52ba8f7bc:~$ ls -lh
+elf@784e43534178:~$ ls -lh
 total 29M
 -rw-r--r-- 1 root root  24M Dec  4 17:11 access.log
 -rwxr-xr-x 1 root root 5.0M Dec 11 17:31 runtoanswer
-elf@a7b52ba8f7bc:~$ wc -l access.log 
+elf@784e43534178:~$ wc -l access.log 
 98655 access.log
 
-elf@a7b52ba8f7bc:~$ head -n1 access.log 
+elf@784e43534178:~$ head -n1 access.log 
 XX.YY.66.201 - - [19/Nov/2017:06:50:30 -0500] "GET /robots.txt HTTP/1.1" 301 185 "-" "Mozilla/5.0 (compatible; DotBot/1.1; http://www.opensiteexplorer.org/dotbot, help@moz.com)"
 #+END_SRC
 
@@ -112,11 +112,11 @@ cut is very limited compared to tools like awk or sed, but it is often simpler
 to use.  We just need to grab the right field.
 
 #+BEGIN_SRC sh
-elf@a7b52ba8f7bc:~$ head -n 1 access.log |cut -d '"' -f 4
+elf@784e43534178:~$ head -n 1 access.log |cut -d '"' -f 4
 -
-elf@a7b52ba8f7bc:~$ head -n 1 access.log |cut -d '"' -f 5
+elf@784e43534178:~$ head -n 1 access.log |cut -d '"' -f 5
  
-elf@a7b52ba8f7bc:~$ head -n 1 access.log |cut -d '"' -f 6
+elf@784e43534178:~$ head -n 1 access.log |cut -d '"' -f 6
 Mozilla/5.0 (compatible; DotBot/1.1; http://www.opensiteexplorer.org/dotbot, help@moz.com)
 #+END_SRC
 
@@ -124,7 +124,7 @@ The 6th field is the user agent.  We also only want everything to the left of th
 different versions of the same browser are merged:
 
 #+BEGIN_SRC sh
-elf@a7b52ba8f7bc:~$ head -n 1 access.log |cut -d '"' -f 6|cut -d / -f 1
+elf@784e43534178:~$ head -n 1 access.log |cut -d '"' -f 6|cut -d / -f 1
 Mozilla
 #+END_SRC
 
@@ -132,7 +132,7 @@ Now that the browser is isolated, we can switch head with cat, and use the
 standard `sort | uniq -c | sort -n` to grab a frequency
 
 #+BEGIN_SRC sh
-elf@a7b52ba8f7bc:~$ cat access.log |cut -d '"' -f 6|cut -d / -f 1|sort|uniq -c|sort -n|tail -n 5
+elf@784e43534178:~$ cat access.log |cut -d '"' -f 6|cut -d / -f 1|sort|uniq -c|sort -n|tail -n 5
      33 slack
      34 Googlebot-Image
     143 -
@@ -143,7 +143,7 @@ elf@a7b52ba8f7bc:~$ cat access.log |cut -d '"' -f 6|cut -d / -f 1|sort|uniq -c|s
 Oops.. I mixed up the ordering, need the first 5, not the last 5:
 
 #+BEGIN_SRC sh
-elf@a7b52ba8f7bc:~$ cat access.log |cut -d '"' -f 6|cut -d / -f 1|sort|uniq -c|sort -n|head -n 5
+elf@784e43534178:~$ cat access.log |cut -d '"' -f 6|cut -d / -f 1|sort|uniq -c|sort -n|head -n 5
       1 Dillo
       2 (KHTML, like Gecko) Chrome
       2 Slackbot-LinkExpanding 1.0 (+https:
@@ -156,7 +156,7 @@ Looks like my favorite lightweight browser from 2001 is not very popular these d
 I can also confirm that the log file only has a single entry for this user-agent:
 
 #+BEGIN_SRC sh
-elf@a7b52ba8f7bc:~$ grep Dillo access.log 
+elf@784e43534178:~$ grep Dillo access.log 
 XX.YY.54.139 - - [27/Nov/2017:19:41:49 -0500] "GET /invoker/JMXInvokerServlet HTTP/1.1" 301 185 "-" "Dillo/3.0.5"
 #+END_SRC
 
@@ -180,7 +180,7 @@ The most common issue appeared to be the result of not normalizing the different
 If you count each VERSION of a browser as a separate program, you will get a result like:
 
 #+BEGIN_SRC sh
-elf@7ee187d61270:~$ cat access.log |cut -d '"' -f 6|sort|uniq  -c|sort -n|head -n 5
+elf@784e43534178:~$ cat access.log |cut -d '"' -f 6|sort|uniq  -c|sort -n|head -n 5
       1 Dillo/3.0.5
       1 Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36
       1 Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_1) AppleWebKit/604.3.5 (KHTML, like Gecko)
@@ -191,7 +191,7 @@ elf@7ee187d61270:~$ cat access.log |cut -d '"' -f 6|sort|uniq  -c|sort -n|head -
 or like:
 
 #+BEGIN_SRC sh
-elf@7ee187d61270:~$ cat access.log |cut -d '"' -f 6|cut -d ' ' -f 1|sort|uniq  -c|sort -n
+elf@784e43534178:~$ cat access.log |cut -d '"' -f 6|cut -d ' ' -f 1|sort|uniq  -c|sort -n
       1 Dillo/3.0.5
       1 curl/7.35.0
 #+END_SRC
