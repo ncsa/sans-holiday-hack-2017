@@ -72,3 +72,7 @@ and then look up what the title for that song is
     Stairway to Heaven
     sqlite> 
 
+This can also be done in a single query as long as we don't care about the like count:
+
+    sqlite> select title from songs where id in (select songid from likes group by songid order by count(*) desc limit 1);
+    Stairway to Heaven
