@@ -46,6 +46,7 @@
    :END:
 
 From this game: https://2017.holidayhackchallenge.com/game/5bbfc970-71d2-4c9d-816c-25955536c168
+
 Direct link: https://docker2017.holidayhackchallenge.com/?challenge=ab13b9fc-6e7c-4477-a8a1-bca7b616b877&uid=USER_ID
 
 ** Background Information
