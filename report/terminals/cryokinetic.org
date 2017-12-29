@@ -94,7 +94,7 @@ What are we trying to accomplish?
    
 [[https://twitter.com/GreenesterElf][Holly Evergreen on Twitter has some hints]]
   * [[https://twitter.com/GreenesterElf/status/938542480487677952][Alright, who chmod -x'd and then removed chmod from my system? Not funny! I really need to run a program on this server, for serious. Was it you, @PepperyGoodness ? Weren't you mucking about with ARM64 recently?]]
-  * [[https://twitter.com/GreenesterElf/status/938552050253643777][I still can't figure out Pepper Minstix's issue. It looks like the binary is compiled for another architecture. I think qemu can help, but I don't want to run the entire OS :\ https://doc.opensuse.org/documentation/… helps, but I just want one binary, not the whole system!] [[https://doc.opensuse.org/documentation/leap/virtualization/html/book.virt/cha.qemu.running.html]]
+  * [[https://twitter.com/GreenesterElf/status/938552050253643777][I still can't figure out Pepper Minstix's issue. It looks like the binary is compiled for another architecture. I think qemu can help, but I don't want to run the entire OS :\ https://doc.opensuse.org/documentation/… helps, but I just want one binary, not the whole system!]] [[https://doc.opensuse.org/documentation/leap/virtualization/html/book.virt/cha.qemu.running.html]]
 
 ** Approach
    :PROPERTIES:
