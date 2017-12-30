@@ -60,7 +60,6 @@ Two files are provided
 -rw-r--r-- 1 root root   654 Dec 15 19:59 isit42.c.un
 #+END_SRC
 
-
 ** Goal
    :PROPERTIES:
    :CUSTOM_ID: goal
