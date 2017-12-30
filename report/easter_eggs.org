@@ -1,1 +1,19 @@
-* TODO List Easter Eggs here
+* Easter Eggs
+   :PROPERTIES:
+   :CUSTOM_ID: title
+   :END:
+
+** Story Page
+
+* Wintered logo is based on the Wicked stage musical poster.
+* Short video is based on video intro to Rudolph the Red-Nosed Reindeer
+
+** North Pole and Beyond
+
+*** Games
+
+*** Scoreboard
+
+*** Stocking
+
+The text field for entering the SHA1 hashes of the great book pages appears to have some placeholder text in it, =686579212121202d436f756e746572204861636b=. This is in hex and can be converted to ascii, =hey!!! -Counter Hack=.
