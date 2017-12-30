@@ -90,14 +90,14 @@ First we need to test what's wrong with =find=.
 #+BEGIN_SRC sh
 elf@784e43534178:~$ find
 bash: /usr/local/bin/find: cannot execute binary file: Exec format error
-#+END+SRC
+#+END_SRC
 
 It looks like =find= is located in =/usr/local/bin/find=. Let's look at our PATH variable that identifies the order that executables are located in.
 
 #+BEGIN_SRC sh
 elf@784e43534178:~$ echo $PATH
 /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
-#+END+SRC
+#+END_SRC
 
 =/usr/local/bin= is prioritized before =/usr/bin=. Let's see if find exists in =/usr/bin=.
 
