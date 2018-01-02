@@ -1,7 +1,7 @@
-* Answer Template
-  :PROPERTIES:
-  :CUSTOM_ID: answer-template
-  :END:
+* There's Snow Place Like Home
+   :PROPERTIES:
+   :CUSTOM_ID: title
+   :END:
 
 ** Question
    :PROPERTIES:
@@ -36,9 +36,12 @@
    :CUSTOM_ID: how-to-find-the-terminal
    :END:
 
-Where was the terminal?
+From this game: https://2017.holidayhackchallenge.com/game/41a1e6bb-60c3-4695-ad04-514fbcc76afa
 
-https://docker2017.holidayhackchallenge.com/?challenge=4050467e-9cde-44cd-aa63-1a0b8b210bb7&uid=USER_ID
+Direct link: https://docker2017.holidayhackchallenge.com/?challenge=4050467e-9cde-44cd-aa63-1a0b8b210bb7&uid=USER_ID
+
+#+CAPTION: The terminal is on the side of the center building.
+[[../images/terminal-location-home.png]]
 
 ** Background Information
    :PROPERTIES:
@@ -50,8 +53,8 @@ We're logged in as the user elf. There's a file called =trainstartup= in our hom
 This is a 64-bit x86 system:
 
 #+BEGIN_SRC sh
-elf@5e0a9637e4c6:~$ uname -a
-Linux 5e0a9637e4c6 4.9.0-4-amd64 #1 SMP Debian 4.9.65-3 (2017-12-03) x86_64 x86_64 x86_64 GNU/Linux
+elf@784e43534178:~$ uname -a
+Linux 784e43534178 4.9.0-4-amd64 #1 SMP Debian 4.9.65-3 (2017-12-03) x86_64 x86_64 x86_64 GNU/Linux
 #+END_SRC
 
 ** Goal
@@ -62,9 +65,21 @@ Linux 5e0a9637e4c6 4.9.0-4-amd64 #1 SMP Debian 4.9.65-3 (2017-12-03) x86_64 x86_
 It looks like we just want to run the =trainstartup= file, but if we try that, we get an exec error:
 
 #+BEGIN_SRC sh
-elf@5e0a9637e4c6:~$ ./trainstartup 
+elf@784e43534178:~$ ./trainstartup 
 bash: ./trainstartup: cannot execute binary file: Exec format error
 #+END_SRC
+
+** Hints
+   :PROPERTIES:
+   :CUSTOM_ID: hints
+   :END:
+
+[[https://twitter.com/PepperyGoodness][Pepper Minstix on Twitter has a hint]]
+  * [[https://twitter.com/PepperyGoodness/status/938545233624678400][Actually, @GreenesterElf , you're better at prompt commands than I am. Why can't I get this model train thing working? I'm in the right directory like you taught me, but this system is still saying "No such file or directory"]]
+
+[[https://twitter.com/GreenesterElf][Holly Evergreen on Twitter has a hint for this as well]]
+  * [[https://twitter.com/GreenesterElf/status/938552050253643777][I still can't figure out Pepper Minstix's issue. It looks like the binary is compiled for another architecture. I think qemu can help, but I don't want to run the entire OS :\ https://doc.opensuse.org/documentation/… helps, but I just want one binary, not the whole system!]] [[https://doc.opensuse.org/documentation/leap/virtualization/html/book.virt/cha.qemu.running.html]]
+
 
 ** Approach
    :PROPERTIES:
@@ -74,14 +89,14 @@ bash: ./trainstartup: cannot execute binary file: Exec format error
 There's really not much to go on here. We'll first use =file= to identify the =trainstartup= binary:
 
 #+BEGIN_SRC sh
-elf@5e0a9637e4c6:~$ file trainstartup 
+elf@784e43534178:~$ file trainstartup 
 trainstartup: ELF 32-bit LSB  executable, ARM, EABI5 version 1 (GNU/Linux), statically linked, for GNU/Linux 3.2.0, BuildID[sha1]=005de4685e8563d10b3de3e0be7d6fdd7ed732eb, not stripped
 #+END_SRC
 
 So the file is a Linux ELF binary, but it's for the ARM processor, and not for the x86_64 system that we're on. Let's see if there are any programs in our path that have =arm= in the file name:
 
 #+BEGIN_SRC sh
-elf@5e0a9637e4c6:~$ compgen -c | grep arm
+elf@784e43534178:~$ compgen -c | grep arm
 qemu-arm
 qemu-armeb
 #+END_SRC
@@ -89,7 +104,7 @@ qemu-armeb
 Running it with the help option gives us:
 
 #+BEGIN_SRC sh
-elf@5e0a9637e4c6:~$ qemu-arm -h
+elf@784e43534178:~$ qemu-arm -h
 usage: qemu-arm [options] program [arguments...]
 Linux CPU emulator (compiled for arm emulation)
 ...
@@ -98,7 +113,7 @@ Linux CPU emulator (compiled for arm emulation)
 This looks like exactly what we need. =qemu-arm= provides us with an ARM emulator, and we just need to run it with our program as the single argument. Let's give it a shot:
 
 #+BEGIN_SRC sh
-elf@5e0a9637e4c6:~$ qemu-arm ./trainstartup 
+elf@784e43534178:~$ qemu-arm ./trainstartup 
 Starting up ... 
 
     Merry Christmas
@@ -149,7 +164,7 @@ made to the system after it was installed. Let's take a quick look at
 =qemu=arm= and at another file we know was changed, =trainstartup=:
 
 #+BEGIN_SRC sh
-elf@5e0a9637e4c6:~$ stat /usr/bin/qemu-arm trainstartup 
+elf@784e43534178:~$ stat /usr/bin/qemu-arm trainstartup 
   File: '/usr/bin/qemu-arm'
   Size: 1725888         Blocks: 3376       IO Block: 4096   regular file
 Device: 801h/2049d      Inode: 1049395     Links: 1
@@ -183,7 +198,7 @@ modified after =/etc/apt= was changed, and we'll look for files with
 =arm= in the name:
 
 #+BEGIN_SRC sh
-elf@5e0a9637e4c6:~$ find / -xdev -cnewer /etc/apt/sources.list | grep -w arm
+elf@784e43534178:~$ find / -xdev -cnewer /etc/apt/sources.list | grep -w arm
 /usr/bin/qemu-arm
 /usr/share/man/man1/qemu-arm.1.gz
 #+END_SRC
@@ -196,7 +211,7 @@ system according to when their =ctime= was modified. This would enable
 you to see a complete timeline of changes to files:
 
 #+BEGIN_SRC sh
-elf@5e0a9637e4c6:~$ find / -xdev -printf "%C+\t%p\n" | sort | head
+elf@784e43534178:~$ find / -xdev -printf "%C+\t%p\n" | sort | head
 2017-12-04+14:36:51.7363603170  /bin/bash
 2017-12-04+14:36:51.7363603170  /bin/bunzip2
 2017-12-04+14:36:51.7363603170  /bin/bzcat

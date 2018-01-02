@@ -1,7 +1,7 @@
-* Answer Template
-  :PROPERTIES:
-  :CUSTOM_ID: answer-template
-  :END:
+* I Don't Think We're In Kansas Anymore
+   :PROPERTIES:
+   :CUSTOM_ID: title
+   :END:
 
 ** Question
    :PROPERTIES:
@@ -45,9 +45,12 @@
    :CUSTOM_ID: how-to-find-the-terminal
    :END:
 
-Where was the terminal?
+From this game: https://2017.holidayhackchallenge.com/game/5bbfc970-71d2-4c9d-816c-25955536c168
 
-https://docker2017.holidayhackchallenge.com/?challenge=ab13b9fc-6e7c-4477-a8a1-bca7b616b877&uid=USER_ID
+Direct link: https://docker2017.holidayhackchallenge.com/?challenge=ab13b9fc-6e7c-4477-a8a1-bca7b616b877&uid=USER_ID
+
+#+CAPTION: If you take away the poppies the terminal can easily be seen on the left hand side of the field.
+[[../images/terminal-location-kansas.png]]
 
 ** Background Information
    :PROPERTIES:
@@ -97,6 +100,14 @@ Are any of these useful?
    :END:
 
 What are we trying to accomplish?
+
+** Hints
+   :PROPERTIES:
+   :CUSTOM_ID: hints
+   :END:
+
+[[https://twitter.com/ThePlumSweetest][Sugarplum Mary on Twitter has a hint]]
+  * [[https://twitter.com/ThePlumSweetest/status/941067133898833921][Hey @PepperyGoodness, can you help me with an SQL problem I've seen? I think I need to do GROUP BY, but I'm not quite sure of the syntax.]]
 
 ** Approach
    :PROPERTIES:
