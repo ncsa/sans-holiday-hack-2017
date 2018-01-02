@@ -45,7 +45,9 @@
    :CUSTOM_ID: how-to-find-the-terminal
    :END:
 
-Where was the terminal? What's the direct link to it?
+Where was the terminal?
+
+https://docker2017.holidayhackchallenge.com/?challenge=ab13b9fc-6e7c-4477-a8a1-bca7b616b877&uid=USER_ID
 
 ** Background Information
    :PROPERTIES:

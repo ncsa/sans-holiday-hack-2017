@@ -47,8 +47,7 @@
 
 https://docker2017.holidayhackchallenge.com/?challenge=595aeb87-d3b2-41a3-b612-fa553a30e822&uid=<UID>
 #+CAPTION: In-game location of terminal
-[[../images/terminal-location-bounce.png]]
-
+[[./images/terminal-location-bounce.png]]
 
 ** Goal
    :PROPERTIES:
