@@ -58,6 +58,10 @@ ssh $USER@$HOST -O forward -L 36143:10.142.0.6:143
 echo "35808 -> edb:8080"
 ssh $USER@$HOST -O forward -L 36808:10.142.0.6:8080
 
+echo "Port forwarding for l2s-smb-server (10.142.0.7, base port: 37000)"
+echo "37445 -> smb-server:445"
+ssh $USER@$HOST -O forward -L 37445:10.142.0.7:445
+
 echo "Port forwarding for l2s-emi (10.142.0.8, base port: 38000)"
 echo "38080 -> emi:80"
 ssh $USER@$HOST -O forward -L 38080:10.142.0.8:80

