@@ -141,8 +141,8 @@ Overwrite an executable file with the existing binary:
 #+BEGIN_SRC sh
 elf@2798541ad158:~$ ls -l /bin/chmod
 -rwxr-xr-x 1 root root 0 Dec 15 20:00 /bin/chmod
-elf@2798541ad158:~$ cp /bin/new .
-elf@2798541ad158:~$ cat CandyCaneStriper  >> new
+elf@2798541ad158:~$ cp /bin/ls new
+elf@2798541ad158:~$ cat CandyCaneStriper  > new
 elf@2798541ad158:~$ ls -l
 total 96
 -rw-r--r-- 1 root root 45224 Dec 15 19:59 CandyCaneStriper
