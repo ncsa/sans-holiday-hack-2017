@@ -79,14 +79,24 @@ Summarize the reference solution that we found
 
 *** How to forge a session cookie
 
+#+BEGIN_QUOTE
+Happy families are all alike; every unhappy family is unhappy in its own way. --   Leo Tolstoy
+#+END_QUOTE
+
+#+BEGIN_QUOTE
+Empty plaintext encrypted without using HMAC are all alike; Rolling your own crypto makes all cryptographers unhappy. -- Justin Azoff
+#+END_QUOTE
+
 The js code they use is a variation of a challenge response algorithm, but it
 is flawed in that the client is providing both the challenge and the response.
 It is also flawed in that it does not use MAC https://en.wikipedia.org/wiki/Authenticated_encryption#MAC-then-Encrypt_(MtE)
 meaning that the encrypted contents themselves are never verified.
 
 Since we can control both the ciphertext and the expected plaintext, we can
-just set the challenge the empty string "" and the response then just needs to
-be ANY message that decrypts to "".
+just set the challenge to the empty string "" and the response then just needs
+to be ANY message that decrypts to "".  Since the message is empty, the key is
+irrelevant, we just need to work out how to properly generate a ciphertext that
+will decrypt to nothing.
 
 A completly empty ciphertext throws an error:
 
