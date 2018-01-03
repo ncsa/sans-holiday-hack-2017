@@ -43,7 +43,7 @@ From this game: https://2017.holidayhackchallenge.com/game/a1f7ac49-8210-436b-9e
 Direct link: https://docker2017.holidayhackchallenge.com/?challenge=da6d34d1-012b-420b-a7d5-369914353578&uid=USER_ID
 
 #+CAPTION: The terminal is on top of the ice shanty.
-[[../images/terminal-location-cryokinetic.png]]
+[[./images/terminal-location-cryokinetic.png]]
 
 ** Background Information
    :PROPERTIES:
@@ -70,8 +70,43 @@ We need to run the =CandyCaneStriper= program. Upon initial inspection we discov
    :CUSTOM_ID: approach
    :END:
 
-Describe the thought process that we tried here. How were we able to use
-the hints or the blog posts?
+Let's take a look at the executable we're dealing with:
+
+#+BEGIN_SRC sh
+elf@f76931683b1e:~$ ls -l CandyCaneStriper 
+-rw-r--r-- 1 root root 45224 Dec 15 19:59 CandyCaneStriper
+elf@f76931683b1e:~$ file CandyCaneStriper 
+CandyCaneStriper: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 2.6.32, BuildID[sha1]=bfe4ffd88f30e6970feb7e3341ddbe579e9ab4b3, stripped
+#+END_SRC
+
+Much like how Python and Perl scripts have interpreters, ELF binaries also have interpreters. For our target, =file= tells us that our interpreter is =/lib64/ld-linux-x86-64.so.2=.
+
+#+BEGIN_SRC sh
+elf@d5823d933b5d:~$ /lib64/ld-linux-x86-64.so.2
+Usage: ld.so [OPTION]... EXECUTABLE-FILE [ARGS-FOR-PROGRAM...]
+You have invoked `ld.so', the helper program for shared library executables.
+This program usually lives in the file `/lib/ld.so', and special directives
+in executable files using ELF shared libraries tell the system's program
+loader to load the helper program from this file.  This helper program loads
+the shared libraries needed by the program executable, prepares the program
+to run, and runs it.  You may invoke this helper program directly from the
+command line to load and run an ELF executable file; this is like executing
+that file itself, but always uses this helper program from the file you
+specified, instead of the helper program file specified in the executable
+file you run.  This is mostly of use for maintainers to test new versions
+of this helper program; chances are you did not intend to run this program.
+  --list                list all dependencies and how they are resolved
+  --verify              verify that given object really is a dynamically linked
+                        object we can handle
+  --inhibit-cache       Do not use /etc/ld.so.cache
+  --library-path PATH   use given PATH instead of content of the environment
+                        variable LD_LIBRARY_PATH
+  --inhibit-rpath LIST  ignore RUNPATH and RPATH information in object names
+                        in LIST
+  --audit LIST          use objects named in LIST as auditors
+
+elf@d5823d933b5d:~$ /lib64/ld-linux-x86-64.so.2 ./CandyCaneStriper 
+#+END_SRC
 
 ** Solution
    :PROPERTIES:
@@ -101,26 +136,69 @@ The candy cane striping machine is up and running!
    :CUSTOM_ID: alternatives
    :END:
 
-Any other, easier solutions?
+Overwrite an executable file with the existing binary:
 
-** Common Pitfalls
-   :PROPERTIES:
-   :CUSTOM_ID: common-pitfalls
-   :END:
+#+BEGIN_SRC sh
+elf@2798541ad158:~$ ls -l /bin/chmod
+-rwxr-xr-x 1 root root 0 Dec 15 20:00 /bin/chmod
+elf@2798541ad158:~$ cp /bin/new .
+elf@2798541ad158:~$ cat CandyCaneStriper  >> new
+elf@2798541ad158:~$ ls -l
+total 96
+-rw-r--r-- 1 root root 45224 Dec 15 19:59 CandyCaneStriper
+-rwxr-xr-x 1 elf  elf  45224 Dec 17 00:15 new
+elf@2798541ad158:~$ ./new
+#+END_SRC
 
-Do we know what issue(s) people were running into?
+Use python to chmod.  The chmod binary is just a wrapper around the
+chmod libc function.  Any programming language will have this
+available:
 
-** About the Challenge
-   :PROPERTIES:
-   :CUSTOM_ID: about-the-challenge
-   :END:
+#+BEGIN_SRC sh
+>>> import os
+>>> os.chmod("CandyCaneStriper", 0755)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+OSError: [Errno 1] Operation not permitted: 'CandyCaneStriper'
+#+END_SRC
 
-How was the challenge setup? Was there a better way to secure this
-system?
+FAIL :(  What if make a copy first?
 
-** Loot
-   :PROPERTIES:
-   :CUSTOM_ID: loot
-   :END:
+#+BEGIN_SRC sh
+elf@d5823d933b5d:~$ cp CandyCaneStriper c
+elf@d5823d933b5d:~$ python
+Python 2.7.12 (default, Nov 20 2017, 18:23:56) 
+[GCC 5.4.0 20160609] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import os
+>>> os.chmod("c", 0755)
+>>> ^d
+elf@d5823d933b5d:~$ ./c
+#+END_SRC
 
-Anything interesting hidden on the system?
+With perl:
+
+#+BEGIN_SRC sh
+elf@1e6fe4ce3449:~$ cp CandyCaneStriper c
+elf@1e6fe4ce3449:~$ cat > fix.pl
+chmod 0755 "c";
+^d
+elf@1e6fe4ce3449:~$ perl fix.pl 
+String found where operator expected at fix.pl line 1, near "0755 "c""
+        (Missing operator before  "c"?)
+syntax error at fix.pl line 1, near "0755 "c""
+Execution of fix.pl aborted due to compilation errors.
+elf@1e6fe4ce3449:~$ cat > fix.pl
+chmod 0755, "c";
+^d
+elf@1e6fe4ce3449:~$ perl fix.pl 
+elf@1e6fe4ce3449:~$ ./c
+#+END_SRC
+
+Or as a perl one liner, now that we figured out the syntax:
+
+#+BEGIN_SRC sh
+elf@1e6fe4ce3449:~$ cp CandyCaneStriper c
+elf@1e6fe4ce3449:~$ perl -e 'chmod 0755, "c"'
+#+END_SRC
+

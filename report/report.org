@@ -7,6 +7,7 @@
 #+HTML_HEAD: <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 #+HTML_HEAD: <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 #+HTML_HEAD: <script type="text/javascript" src="js/readtheorg.js"></script>
+#+HTML_HEAD: <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+HTML_HEAD: <style>#content{max-width:1200px;}</style>
 
 * Things to be done
@@ -331,21 +332,21 @@ We can use the following indicators to search any clues we're later provided wit
 | Dr. Who (2016 Hack)                  | Reference | nppd /infractions      |
 
 * Terminals
-** TODO Bumble's Bounce
+** Bumble's Bounce
 #+INCLUDE: "terminals/bounce.org"
-** TODO Cryokinetic Magic
+** Cryokinetic Magic
 #+INCLUDE: "terminals/cryokinetic.org"
-** TODO I Don't Think We're In Kansas Anymore
+** I Don't Think We're In Kansas Anymore
 #+INCLUDE: "terminals/kansas.org"
-** TODO Oh Wait Maybe We Are
+** Oh Wait Maybe We Are
 #+INCLUDE: "terminals/we_are.org"
-** TODO There's No Place Like Home
+** There's No Place Like Home
 #+INCLUDE: "terminals/home.org"
-** TODO We're Off To See The
+** We're Off To See The
 #+INCLUDE: "terminals/off.org"
-** TODO Winconceivable The Cliffs Of Insanity
+** Winconceivable The Cliffs Of Insanity
 #+INCLUDE: "terminals/cliffs.org"
-** TODO Winter Wonder Landing
+** Winter Wonder Landing
 #+INCLUDE: "terminals/landing.org"
 * Answers
 ** TODO Question 1

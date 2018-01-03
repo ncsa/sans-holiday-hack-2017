@@ -50,7 +50,7 @@ From this game: https://2017.holidayhackchallenge.com/game/5bbfc970-71d2-4c9d-81
 Direct link: https://docker2017.holidayhackchallenge.com/?challenge=ab13b9fc-6e7c-4477-a8a1-bca7b616b877&uid=USER_ID
 
 #+CAPTION: If you take away the poppies the terminal can easily be seen on the left hand side of the field.
-[[../images/terminal-location-kansas.png]]
+[[./images/terminal-location-kansas.png]]
 
 ** Background Information
    :PROPERTIES:

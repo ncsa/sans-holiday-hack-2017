@@ -92,6 +92,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/readtheorg.js"></script>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 <style>#content{max-width:1200px;}</style>
 <script type="text/javascript">
 /*
@@ -218,14 +219,14 @@ for the JavaScript code in this tag.
 </li>
 <li><a href="#sec-5">Terminals</a>
 <ul>
-<li><a href="#sec-5-1"><span class="todo TODO">TODO</span> Bumble's Bounce</a></li>
-<li><a href="#sec-5-2"><span class="todo TODO">TODO</span> Cryokinetic Magic</a></li>
-<li><a href="#sec-5-3"><span class="todo TODO">TODO</span> I Don't Think We're In Kansas Anymore</a></li>
-<li><a href="#sec-5-4"><span class="todo TODO">TODO</span> Oh Wait Maybe We Are</a></li>
-<li><a href="#sec-5-5"><span class="todo TODO">TODO</span> There's No Place Like Home</a></li>
-<li><a href="#sec-5-6"><span class="todo TODO">TODO</span> We're Off To See The</a></li>
-<li><a href="#sec-5-7"><span class="todo TODO">TODO</span> Winconceivable The Cliffs Of Insanity</a></li>
-<li><a href="#sec-5-8"><span class="todo TODO">TODO</span> Winter Wonder Landing</a></li>
+<li><a href="#sec-5-1">Bumble's Bounce</a></li>
+<li><a href="#sec-5-2">Cryokinetic Magic</a></li>
+<li><a href="#sec-5-3">I Don't Think We're In Kansas Anymore</a></li>
+<li><a href="#sec-5-4">Oh Wait Maybe We Are</a></li>
+<li><a href="#sec-5-5">There's No Place Like Home</a></li>
+<li><a href="#sec-5-6">We're Off To See The</a></li>
+<li><a href="#sec-5-7">Winconceivable The Cliffs Of Insanity</a></li>
+<li><a href="#sec-5-8">Winter Wonder Landing</a></li>
 </ul>
 </li>
 <li><a href="#sec-6">Answers</a>
@@ -1046,7 +1047,7 @@ We can use the following indicators to search any clues we're later provided wit
 <h2 id="sec-5">Terminals</h2>
 <div class="outline-text-2" id="text-5">
 </div><div id="outline-container-sec-5-1" class="outline-3">
-<h3 id="sec-5-1"><span class="todo TODO">TODO</span> Bumble's Bounce</h3>
+<h3 id="sec-5-1">Bumble's Bounce</h3>
 <div class="outline-text-3" id="text-5-1">
 </div><div id="outline-container-title" class="outline-4">
 <h4 id="title"><a id="sec-5-1-1" name="sec-5-1-1"></a>Bumbles Bounce</h4>
@@ -1101,7 +1102,7 @@ Direct link: <a href="https://docker2017.holidayhackchallenge.com/?challenge=595
 
 
 <div class="figure">
-<p><img src="../images/terminal-location-bounce.png" alt="terminal-location-bounce.png" />
+<p><img src="./images/terminal-location-bounce.png" alt="terminal-location-bounce.png" />
 </p>
 <p><span class="figure-number">Figure 4:</span> The terminal is located at the top of the right hand hill.</p>
 </div>
@@ -1307,7 +1308,7 @@ TODO: not that i know of
 </div>
 </div>
 <div id="outline-container-sec-5-2" class="outline-3">
-<h3 id="sec-5-2"><span class="todo TODO">TODO</span> Cryokinetic Magic</h3>
+<h3 id="sec-5-2">Cryokinetic Magic</h3>
 <div class="outline-text-3" id="text-5-2">
 </div><div id="outline-container-title" class="outline-4">
 <h4 id="title"><a id="sec-5-2-1" name="sec-5-2-1"></a>Cryokinetic Magic</h4>
@@ -1355,7 +1356,7 @@ Direct link: <a href="https://docker2017.holidayhackchallenge.com/?challenge=da6
 
 
 <div class="figure">
-<p><img src="../images/terminal-location-cryokinetic.png" alt="terminal-location-cryokinetic.png" />
+<p><img src="./images/terminal-location-cryokinetic.png" alt="terminal-location-cryokinetic.png" />
 </p>
 <p><span class="figure-number">Figure 5:</span> The terminal is on top of the ice shanty.</p>
 </div>
@@ -1389,9 +1390,50 @@ We need to run the <code>CandyCaneStriper</code> program. Upon initial inspectio
 <li><a id="approach" name="approach"></a><a id="sec-5-2-1-6" name="sec-5-2-1-6"></a>Approach<br  /><div class="outline-text-5" id="text-approach">
 
 <p>
-Describe the thought process that we tried here. How were we able to use
-the hints or the blog posts?
+Let's take a look at the executable we're dealing with:
 </p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">elf@f76931683b1e:~$ ls -l CandyCaneStriper 
+-rw-r--r-- 1 root root 45224 Dec 15 19:59 CandyCaneStriper
+elf@f76931683b1e:~$ file CandyCaneStriper 
+CandyCaneStriper: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 2.6.32, <span style="font-weight: bold; font-style: italic;">BuildID</span>[sha1]=bfe4ffd88f30e6970feb7e3341ddbe579e9ab4b3, stripped
+</pre>
+</div>
+
+<p>
+Much like how Python and Perl scripts have interpreters, ELF binaries also have interpreters. For our target, <code>file</code> tells us that our interpreter is <code>/lib64/ld-linux-x86-64.so.2</code>.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">elf@d5823d933b5d:~$ /lib64/ld-linux-x86-64.so.2
+Usage: ld.so [OPTION]... EXECUTABLE-FILE [ARGS-FOR-PROGRAM...]
+You have invoked <span style="font-weight: bold;">`ld.so', the helper program for shared library executables.</span>
+<span style="font-weight: bold;">This program usually lives in the file `</span>/lib/ld.so<span style="font-style: italic;">', and special directives</span>
+<span style="font-style: italic;">in executable files using ELF shared libraries tell the system'</span>s program
+loader to load the helper program from this file.  This helper program loads
+the shared libraries needed by the program executable, prepares the program
+to run, and runs it.  You may invoke this helper program directly from the
+<span style="font-weight: bold;">command</span> line to load and run an ELF executable file; this is like executing
+that file itself, but always uses this helper program from the file you
+specified, instead of the helper program file specified<span style="font-weight: bold;"> in</span> the executable
+file you run.  This is mostly of use for maintainers to test new versions
+of this helper program; chances are you did not intend to run this program.
+  --list                list all dependencies and how they are resolved
+  --verify              verify that given object really is a dynamically linked
+                        object we can handle
+  --inhibit-cache       Do not use /etc/ld.so.cache
+  --library-path PATH   use given PATH instead of content of the environment
+                        variable LD_LIBRARY_PATH
+  --inhibit-rpath LIST  ignore RUNPATH and RPATH information<span style="font-weight: bold;"> in</span> object names
+                        <span style="font-weight: bold;">in</span> LIST
+  --audit LIST          use objects named<span style="font-weight: bold;"> in</span> LIST as auditors
+
+elf@d5823d933b5d:~$ /lib64/ld-linux-x86-64.so.2 ./CandyCaneStriper
+</pre>
+</div>
 </div>
 </li>
 
@@ -1422,39 +1464,96 @@ the hints or the blog posts?
 <li><a id="alternatives" name="alternatives"></a><a id="sec-5-2-1-8" name="sec-5-2-1-8"></a>Alternatives<br  /><div class="outline-text-5" id="text-alternatives">
 
 <p>
-Any other, easier solutions?
+Overwrite an executable file with the existing binary:
 </p>
-</div>
-</li>
 
-<li><a id="common-pitfalls" name="common-pitfalls"></a><a id="sec-5-2-1-9" name="sec-5-2-1-9"></a>Common Pitfalls<br  /><div class="outline-text-5" id="text-common-pitfalls">
+<div class="org-src-container">
+
+<pre class="src src-sh">elf@2798541ad158:~$ ls -l /bin/chmod
+-rwxr-xr-x 1 root root 0 Dec 15 20:00 /bin/chmod
+elf@2798541ad158:~$ cp /bin/new .
+elf@2798541ad158:~$ cat CandyCaneStriper  &gt;&gt; new
+elf@2798541ad158:~$ ls -l
+total 96
+-rw-r--r-- 1 root root 45224 Dec 15 19:59 CandyCaneStriper
+-rwxr-xr-x 1 elf  elf  45224 Dec 17 00:15 new
+elf@2798541ad158:~$ ./new
+</pre>
+</div>
 
 <p>
-Do we know what issue(s) people were running into?
+Use python to chmod.  The chmod binary is just a wrapper around the
+chmod libc function.  Any programming language will have this
+available:
 </p>
-</div>
-</li>
 
-<li><a id="about-the-challenge" name="about-the-challenge"></a><a id="sec-5-2-1-10" name="sec-5-2-1-10"></a>About the Challenge<br  /><div class="outline-text-5" id="text-about-the-challenge">
+<div class="org-src-container">
+
+<pre class="src src-sh">&gt;&gt;&gt; import os
+&gt;&gt;&gt; os.chmod(<span style="font-style: italic;">"CandyCaneStriper"</span>, 0755)
+<span style="font-weight: bold;">Traceback</span> (most recent call last):
+  File <span style="font-style: italic;">"&lt;stdin&gt;"</span>, line 1,<span style="font-weight: bold;"> in</span> &lt;module&gt;
+OSError: [Errno 1] Operation not permitted: <span style="font-style: italic;">'CandyCaneStriper'</span>
+</pre>
+</div>
 
 <p>
-How was the challenge setup? Was there a better way to secure this
-system?
+FAIL :(  What if make a copy first?
 </p>
-</div>
-</li>
 
-<li><a id="loot" name="loot"></a><a id="sec-5-2-1-11" name="sec-5-2-1-11"></a>Loot<br  /><div class="outline-text-5" id="text-loot">
+<div class="org-src-container">
+
+<pre class="src src-sh">elf@d5823d933b5d:~$ cp CandyCaneStriper c
+elf@d5823d933b5d:~$ python
+Python 2.7.12 (default, Nov 20 2017, 18:23:56) 
+[GCC 5.4.0 20160609] on linux2
+Type <span style="font-style: italic;">"help"</span>, <span style="font-style: italic;">"copyright"</span>, <span style="font-style: italic;">"credits"</span> or <span style="font-style: italic;">"license"</span> for more information.
+&gt;&gt;&gt; import os
+&gt;&gt;&gt; os.chmod(<span style="font-style: italic;">"c"</span>, 0755)
+&gt;&gt;&gt; ^d
+elf@d5823d933b5d:~$ ./c
+</pre>
+</div>
 
 <p>
-Anything interesting hidden on the system?
+With perl:
 </p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">elf@1e6fe4ce3449:~$ cp CandyCaneStriper c
+elf@1e6fe4ce3449:~$ cat &gt; fix.pl
+chmod 0755 <span style="font-style: italic;">"c"</span>;
+^d
+elf@1e6fe4ce3449:~$ perl fix.pl 
+String found where operator expected at fix.pl line 1, near <span style="font-style: italic;">"0755 "</span>c<span style="font-style: italic;">""</span>
+        (Missing operator before  <span style="font-style: italic;">"c"</span>?)
+syntax error at fix.pl line 1, near <span style="font-style: italic;">"0755 "</span>c<span style="font-style: italic;">""</span>
+Execution of fix.pl aborted due to compilation errors.
+elf@1e6fe4ce3449:~$ cat &gt; fix.pl
+chmod 0755, <span style="font-style: italic;">"c"</span>;
+^d
+elf@1e6fe4ce3449:~$ perl fix.pl 
+elf@1e6fe4ce3449:~$ ./c
+</pre>
+</div>
+
+<p>
+Or as a perl one liner, now that we figured out the syntax:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">elf@1e6fe4ce3449:~$ cp CandyCaneStriper c
+elf@1e6fe4ce3449:~$ perl -e <span style="font-style: italic;">'chmod 0755, "c"'</span>
+</pre>
+</div>
 </div>
 </li></ul>
 </div>
 </div>
 <div id="outline-container-sec-5-3" class="outline-3">
-<h3 id="sec-5-3"><span class="todo TODO">TODO</span> I Don't Think We're In Kansas Anymore</h3>
+<h3 id="sec-5-3">I Don't Think We're In Kansas Anymore</h3>
 <div class="outline-text-3" id="text-5-3">
 </div><div id="outline-container-title" class="outline-4">
 <h4 id="title"><a id="sec-5-3-1" name="sec-5-3-1"></a>I Don't Think We're In Kansas Anymore</h4>
@@ -1509,7 +1608,7 @@ Direct link: <a href="https://docker2017.holidayhackchallenge.com/?challenge=ab1
 
 
 <div class="figure">
-<p><img src="../images/terminal-location-kansas.png" alt="terminal-location-kansas.png" />
+<p><img src="./images/terminal-location-kansas.png" alt="terminal-location-kansas.png" />
 </p>
 <p><span class="figure-number">Figure 6:</span> If you take away the poppies the terminal can easily be seen on the left hand side of the field.</p>
 </div>
@@ -1713,7 +1812,7 @@ Stairway to Heaven
 </div>
 </div>
 <div id="outline-container-sec-5-4" class="outline-3">
-<h3 id="sec-5-4"><span class="todo TODO">TODO</span> Oh Wait Maybe We Are</h3>
+<h3 id="sec-5-4">Oh Wait Maybe We Are</h3>
 <div class="outline-text-3" id="text-5-4">
 </div><div id="outline-container-title" class="outline-4">
 <h4 id="title"><a id="sec-5-4-1" name="sec-5-4-1"></a>Oh Wait! Maybe WE Are&#x2026;</h4>
@@ -1761,7 +1860,7 @@ Direct link: <a href="https://docker2017.holidayhackchallenge.com/?challenge=a9d
 
 
 <div class="figure">
-<p><img src="../images/terminal-location-we_are.png" alt="terminal-location-we_are.png" />
+<p><img src="./images/terminal-location-we_are.png" alt="terminal-location-we_are.png" />
 </p>
 <p><span class="figure-number">Figure 7:</span> The terminal is just behind the starting ramp on the main platform.</p>
 </div>
@@ -2069,7 +2168,7 @@ root@784e43534178:/home/elf# id
 </div>
 </div>
 <div id="outline-container-sec-5-5" class="outline-3">
-<h3 id="sec-5-5"><span class="todo TODO">TODO</span> There's No Place Like Home</h3>
+<h3 id="sec-5-5">There's No Place Like Home</h3>
 <div class="outline-text-3" id="text-5-5">
 </div><div id="outline-container-title" class="outline-4">
 <h4 id="title"><a id="sec-5-5-1" name="sec-5-5-1"></a>There's Snow Place Like Home</h4>
@@ -2114,7 +2213,7 @@ Direct link: <a href="https://docker2017.holidayhackchallenge.com/?challenge=405
 
 
 <div class="figure">
-<p><img src="../images/terminal-location-home.png" alt="terminal-location-home.png" />
+<p><img src="./images/terminal-location-home.png" alt="terminal-location-home.png" />
 </p>
 <p><span class="figure-number">Figure 8:</span> The terminal is on the side of the center building.</p>
 </div>
@@ -2363,7 +2462,7 @@ an ARM binary, and knowing how to find <code>qemu-arm</code> was key.
 </div>
 </div>
 <div id="outline-container-sec-5-6" class="outline-3">
-<h3 id="sec-5-6"><span class="todo TODO">TODO</span> We're Off To See The</h3>
+<h3 id="sec-5-6">We're Off To See The</h3>
 <div class="outline-text-3" id="text-5-6">
 </div><div id="outline-container-title" class="outline-4">
 <h4 id="title"><a id="sec-5-6-1" name="sec-5-6-1"></a>We're Off To See The&#x2026;</h4>
@@ -2403,7 +2502,7 @@ Direct link: <a href="https://docker2017.holidayhackchallenge.com/?challenge=964
 
 
 <div class="figure">
-<p><img src="../images/terminal-location-off.png" alt="terminal-location-off.png" />
+<p><img src="./images/terminal-location-off.png" alt="terminal-location-off.png" />
 </p>
 <p><span class="figure-number">Figure 9:</span> The terminal is on a peak off to the side.</p>
 </div>
@@ -2599,7 +2698,7 @@ Anything interesting hidden on the system?
 </div>
 </div>
 <div id="outline-container-sec-5-7" class="outline-3">
-<h3 id="sec-5-7"><span class="todo TODO">TODO</span> Winconceivable The Cliffs Of Insanity</h3>
+<h3 id="sec-5-7">Winconceivable The Cliffs Of Insanity</h3>
 <div class="outline-text-3" id="text-5-7">
 </div><div id="outline-container-title" class="outline-4">
 <h4 id="title"><a id="sec-5-7-1" name="sec-5-7-1"></a>Winconceivable: The Cliffs of Winsanity</h4>
@@ -2649,7 +2748,7 @@ Direct link: <a href="https://docker2017.holidayhackchallenge.com/?challenge=82c
 
 
 <div class="figure">
-<p><img src="../images/terminal-location-cliffs.png" alt="terminal-location-cliffs.png" />
+<p><img src="./images/terminal-location-cliffs.png" alt="terminal-location-cliffs.png" />
 </p>
 <p><span class="figure-number">Figure 10:</span> The terminal is on top of the building on the floating island right up front.</p>
 </div>
@@ -2884,7 +2983,7 @@ correctly, since the help output would not be displayed.
 </div>
 </div>
 <div id="outline-container-sec-5-8" class="outline-3">
-<h3 id="sec-5-8"><span class="todo TODO">TODO</span> Winter Wonder Landing</h3>
+<h3 id="sec-5-8">Winter Wonder Landing</h3>
 <div class="outline-text-3" id="text-5-8">
 </div><div id="outline-container-title" class="outline-4">
 <h4 id="title"><a id="sec-5-8-1" name="sec-5-8-1"></a>Winter Wonder Landing</h4>
@@ -2938,7 +3037,7 @@ Direct Link: <a href="https://docker2017.holidayhackchallenge.com/?challenge=eb5
 
 
 <div class="figure">
-<p><img src="../images/terminal-location-landing.png" alt="terminal-location-landing.png" />
+<p><img src="./images/terminal-location-landing.png" alt="terminal-location-landing.png" />
 </p>
 <p><span class="figure-number">Figure 11:</span> The terminal is right on top of the tower.</p>
 </div>
