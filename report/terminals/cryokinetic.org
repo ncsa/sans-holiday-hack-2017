@@ -63,7 +63,10 @@ We need to run the =CandyCaneStriper= program. Upon initial inspection we discov
    :END:
    
 [[https://twitter.com/GreenesterElf][Holly Evergreen on Twitter has a hint]]
-  * [[https://twitter.com/GreenesterElf/status/938542480487677952][Alright, who chmod -x'd and then removed chmod from my system? Not funny! I really need to run a program on this server, for serious. Was it you, @PepperyGoodness ? Weren't you mucking about with ARM64 recently?]]
+#+BEGIN_EXPORT html
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Update: LD_PRELOAD is awesome, but it doesn&#39;t help in this situation. <a href="https://t.co/gkF690pdAJ">https://t.co/gkF690pdAJ</a> looks like the right approach, but it&#39;s not working on this system for some reason. Ugh, I step away from this for a bit and check with others. I&#39;m too frustrated.</p>&mdash; Holly Evergreen (@GreenesterElf) <a href="https://twitter.com/GreenesterElf/status/938544194070634496?ref_src=twsrc%5Etfw">December 6, 2017</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+#+END_EXPORT
 
 ** Approach
    :PROPERTIES:
