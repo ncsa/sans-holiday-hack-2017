@@ -229,3 +229,10 @@ elf@784e43534178:~$ find / -xdev -printf "%C+\t%p\n" | sort | head
 This terminal was tricky because almost no information was
 given. Knowing how to use =file= to identify that =trainstartup= was
 an ARM binary, and knowing how to find =qemu-arm= was key.
+
+If you simply google "cannot execute binary file: Exec format error" it will
+lead you down a rabbit hole.  Normally, this error is caused by downloading a
+binary for the wrong architecture and the fix is to simply re-download the
+right binary.  In this case, we can't download a version of the binary built
+for the correct architecture.  What we need to do is "Run arm binary on amd64".
+Searching for this points us to using qemu as an emulator.
