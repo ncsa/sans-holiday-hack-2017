@@ -158,10 +158,69 @@ Congratulations! You've won, and have successfully completed this challenge.
    :CUSTOM_ID: alternatives
    :END:
 
-Another option is to just brute force it.
+Another option is to just brute force it.  The sample code shows that the program is using
+
+
+#+BEGIN_SRC c
+    return rand() % 4096; // returns a pseudo-random integer between 0 and 4096
+#+END_SRC
+
+This means we should only need to run the program a few thousand times for the
+result to be 42.  However, if we try to run the program too quickly, we notice
+we get the same output each time:
+
+#+BEGIN_SRC sh
+elf@5f015af49eab:~$ ./isit42 & ./isit42 &
+[1] 31
+[2] 32
+elf@5f015af49eab:~$ Starting up ... Starting up ... done.
+Calling rand() to select a random number.
+done.
+Calling rand() to select a random number.
+945 is not 42.
+945 is not 42.
+[1]-  Exit 177                ./isit42
+[2]+  Exit 177                ./isit42
+#+END_SRC
+
+
+This is because the program uses the current timestamp in seconds as a random
+seed. Running the program more than once a second will not help us.
+
+If we run this:
+#+BEGIN_SRC sh
+elf@784e43534178:~$ while true;do ./isit42 ; done
+#+END_SRC
+
+We will get a different answer ever time, but since the program contains a
+sleep(3) that will only run one attempt every 3 seconds instead of one attempt
+per second.  To fix this, we can run each attempt in the background using &,
+sleeping 1 second between attempts:
+
 
 #+BEGIN_SRC sh
 elf@784e43534178:~$ while true;do ./isit42 &sleep 1;done
+#+END_SRC
+
+After a short wait, it succeeds:
+
+#+BEGIN_SRC sh
+Calling rand() to select a random number.
+[860]   Exit 37                 ./isit42
+[865] 1869
+Starting up ... 3566 is not 42.
+done.
+Calling rand() to select a random number.
+[861]   Exit 199                ./isit42
+[866] 1871
+Starting up ...                  .-.
+                .;;\ ||           _______  __   __  _______    _______  __    _  _______  _     _  _______  ______
+               /::::\|/          |       ||  | |  ||       |  |   _   ||  |  | ||       || | _ | ||       ||    _ |
+              /::::'();          |_     _||  |_|  ||    ___|  |  |_|  ||   |_| ||  _____|| || || ||    ___||   | ||
+            |\/`\:_/`\/|           |   |  |       ||   |___   |       ||       || |_____ |       ||   |___ |   |_||_
+        ,__ |0_..().._0| __,       |   |  |       ||    ___|  |       ||  _    ||_____  ||       ||    ___||    __  |
+         \,`////""""\\\\`,/        |   |  |   _   ||   |___   |   _   || | |   | _____| ||   _   ||   |___ |   |  | |
+         | )//_ o  o _\\( |        |___|  |__| |__||_______|  |__| |__||_|  |__||_______||__| |__||_______||___|  |_|
 #+END_SRC
 
 ** Common Pitfalls
