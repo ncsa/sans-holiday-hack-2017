@@ -104,7 +104,7 @@ elf@784e43534178:~$ echo $PATH
 #+BEGIN_SRC sh
 elf@784e43534178:~$ ls -al /usr/bin/find
 -rwxr-xr-x 1 root root 221768 Feb  7  2016 /usr/bin/find
-#+END_SRC sh
+#+END_SRC
 
 The original =find= is still there. We can use it to find the =elftalkd= binary and execute it.
 
@@ -145,7 +145,7 @@ Timezone=UTC
 
 Commencing Elf Talk Daemon (pid=6021)... done!
 Background daemon...
-#+END_SRC sh
+#+END_SRC
 
 ** Alternatives
    :PROPERTIES:
@@ -190,26 +190,4 @@ Timezone=UTC
 
 Commencing Elf Talk Daemon (pid=6021)... done!
 Background daemon...
-#+END_SRC sh
-
-** Common Pitfalls
-   :PROPERTIES:
-   :CUSTOM_ID: common-pitfalls
-   :END:
-
-Do we know what issue(s) people were running into?
-
-** About the Challenge
-   :PROPERTIES:
-   :CUSTOM_ID: about-the-challenge
-   :END:
-
-How was the challenge setup? Was there a better way to secure this
-system?
-
-** Loot
-   :PROPERTIES:
-   :CUSTOM_ID: loot
-   :END:
-
-Anything interesting hidden on the system?
+#+END_SRC

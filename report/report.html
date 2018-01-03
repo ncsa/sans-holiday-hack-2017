@@ -3009,143 +3009,57 @@ It looks like <code>find</code> is located in <code>/usr/local/bin/find</code>. 
 <code>/usr/local/bin</code> is prioritized before <code>/usr/bin</code>. Let's see if find exists in <code>/usr/bin</code>.
 </p>
 
-<p>
-#+BEGIN_SRC sh
-elf@784e43534178:~$ ls -al /usr/bin/find
+<div class="org-src-container">
+
+<pre class="src src-sh">elf@784e43534178:~$ ls -al /usr/bin/find
 -rwxr-xr-x 1 root root 221768 Feb  7  2016 /usr/bin/find
-#+END_SRC sh
-</p>
+</pre>
+</div>
 
 <p>
 The original <code>find</code> is still there. We can use it to find the <code>elftalkd</code> binary and execute it.
 </p>
 
-<p>
-#+BEGIN_SRC sh
-elf@784e43534178:~$ /usr/bin/find / -iname elftalkd            
-/usr/bin/find: '/var/cache/ldconfig': Permission denied
-/usr/bin/find: '/var/cache/apt/archives/partial': Permission denied
-/usr/bin/find: '/var/lib/apt/lists/partial': Permission denied
+<div class="org-src-container">
+
+<pre class="src src-sh">elf@784e43534178:~$ /usr/bin/find / -iname elftalkd            
+/usr/bin/find: <span style="font-style: italic;">'/var/cache/ldconfig'</span>: Permission denied
+/usr/bin/find: <span style="font-style: italic;">'/var/cache/apt/archives/partial'</span>: Permission denied
+/usr/bin/find: <span style="font-style: italic;">'/var/lib/apt/lists/partial'</span>: Permission denied
 /run/elftalk/bin/elftalkd
-/usr/bin/find: '/proc/tty/driver': Permission denied
-/usr/bin/find: '/root': Permission denied
+/usr/bin/find: <span style="font-style: italic;">'/proc/tty/driver'</span>: Permission denied
+/usr/bin/find: <span style="font-style: italic;">'/root'</span>: Permission denied
 elf@784e43534178:~$ /run/elftalk/bin/elftalkd
-</p>
 
-<p>
-Running in interactive mode
-</p>
+        Running<span style="font-weight: bold;"> in</span> interactive mode
 
-<p>
-        &#x2013;== Initializing elftalkd ==&#x2013;
+        --== Initializing elftalkd ==--
 Initializing Messaging System!
 Nice-O-Meter configured to 0.90 sensitivity.
-Acquiring messages from local networks&#x2026;
-</p>
+Acquiring messages from local networks...
 
 
-<p>
-&#x2013;== Initialization Complete ==&#x2013;
-</p>
+--== Initialization Complete ==--
 
-<p>
-_  __ _        _ _       _ 
-</p>
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+      _  __ _        _ _       _ 
+     | |/ _| |      | | |     | |
+  ___| | |_| |_ __ _| | | ____| |
+ / _ <span style="font-style: italic;">\ </span>|  _| __/ _<span style="font-weight: bold;">` | | |/ / _`</span> |
+|  __/ | | | || (_| | |   &lt; (_| |
+ <span style="font-style: italic;">\_</span>__|_|_|  <span style="font-style: italic;">\_</span>_<span style="font-style: italic;">\_</span>_,_|_|_|<span style="font-style: italic;">\_\_</span>_,_|
 
-
-<colgroup>
-<col  class="left" />
-
-<col  class="left" />
-
-<col  class="left" />
-
-<col  class="left" />
-
-<col  class="left" />
-
-<col  class="left" />
-
-<col  class="left" />
-
-<col  class="left" />
-</colgroup>
-<tbody>
-<tr>
-<td class="left">&#xa0;</td>
-<td class="left">/ _</td>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-</tr>
-</tbody>
-</table>
-<p>
- <span class="underline">__| | |_| |</span> __ _| | | ____| |
-/ _ \ |  _| __/ _` | | |/ / _` |
-</p>
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-
-
-<colgroup>
-<col  class="left" />
-
-<col  class="left" />
-
-<col  class="left" />
-
-<col  class="left" />
-
-<col  class="left" />
-
-<col  class="left" />
-
-<col  class="left" />
-
-<col  class="left" />
-
-<col  class="left" />
-
-<col  class="left" />
-</colgroup>
-<tbody>
-<tr>
-<td class="left">__/</td>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-<td class="left">(_</td>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-<td class="left">&lt; (_</td>
-<td class="left">&#xa0;</td>
-</tr>
-</tbody>
-</table>
-<p>
-\___|_|_|  \__\__,_|_|_|\_\__,_|
-</p>
-
-<p>
 -*&gt; elftalkd! &lt;*-
 Version 9000.1 (Build 31337) 
 By Santa Claus &amp; The Elf Team
-Copyright (C) 2017 NotActuallyCopyrighted. No actual rights reserved.
+<span style="font-weight: bold;">Copyright</span> (C) 2017 NotActuallyCopyrighted. No actual rights reserved.
 Using libc6 version 2.23-0ubuntu9
-LANG=en_US.UTF-8
-Timezone=UTC
-</p>
+<span style="font-weight: bold; font-style: italic;">LANG</span>=en_US.UTF-8
+<span style="font-weight: bold; font-style: italic;">Timezone</span>=UTC
 
-<p>
-Commencing Elf Talk Daemon (pid=6021)&#x2026; done!
-Background daemon&#x2026;
-#+END_SRC sh
-</p>
+Commencing Elf Talk Daemon (<span style="font-weight: bold; font-style: italic;">pid</span>=6021)... done!
+Background daemon...
+</pre>
+</div>
 </div>
 </li>
 
@@ -3155,156 +3069,45 @@ Background daemon&#x2026;
 The quick method is to iterate through using wildcards to execute the binary.
 </p>
 
-<p>
-#+BEGIN_SRC sh
-elf@784e43534178:~$ /elftalkd
+<div class="org-src-container">
+
+<pre class="src src-sh">elf@784e43534178:~$ /elftalkd
 bash: /elftalkd: No such file or directory
 elf@784e43534178:~$ /*/elftalkd
 bash: /*/elftalkd: No such file or directory
 elf@784e43534178:~$ /*/*/elftalkd
 bash: /*/*/elftalkd: No such file or directory
 elf@784e43534178:~$ /*/*/*/elftalkd
-</p>
 
-<p>
-Running in interactive mode
-</p>
+        Running<span style="font-weight: bold;"> in</span> interactive mode
 
-<p>
-        &#x2013;== Initializing elftalkd ==&#x2013;
+        --== Initializing elftalkd ==--
 Initializing Messaging System!
 Nice-O-Meter configured to 0.90 sensitivity.
-Acquiring messages from local networks&#x2026;
-</p>
+Acquiring messages from local networks...
 
 
-<p>
-&#x2013;== Initialization Complete ==&#x2013;
-</p>
+--== Initialization Complete ==--
 
-<p>
-_  __ _        _ _       _ 
-</p>
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+      _  __ _        _ _       _ 
+     | |/ _| |      | | |     | |
+  ___| | |_| |_ __ _| | | ____| |
+ / _ <span style="font-style: italic;">\ </span>|  _| __/ _<span style="font-weight: bold;">` | | |/ / _`</span> |
+|  __/ | | | || (_| | |   &lt; (_| |
+ <span style="font-style: italic;">\_</span>__|_|_|  <span style="font-style: italic;">\_</span>_<span style="font-style: italic;">\_</span>_,_|_|_|<span style="font-style: italic;">\_\_</span>_,_|
 
-
-<colgroup>
-<col  class="left" />
-
-<col  class="left" />
-
-<col  class="left" />
-
-<col  class="left" />
-
-<col  class="left" />
-
-<col  class="left" />
-
-<col  class="left" />
-
-<col  class="left" />
-</colgroup>
-<tbody>
-<tr>
-<td class="left">&#xa0;</td>
-<td class="left">/ _</td>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-</tr>
-</tbody>
-</table>
-<p>
- <span class="underline">__| | |_| |</span> __ _| | | ____| |
-/ _ \ |  _| __/ _` | | |/ / _` |
-</p>
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-
-
-<colgroup>
-<col  class="left" />
-
-<col  class="left" />
-
-<col  class="left" />
-
-<col  class="left" />
-
-<col  class="left" />
-
-<col  class="left" />
-
-<col  class="left" />
-
-<col  class="left" />
-
-<col  class="left" />
-
-<col  class="left" />
-</colgroup>
-<tbody>
-<tr>
-<td class="left">__/</td>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-<td class="left">(_</td>
-<td class="left">&#xa0;</td>
-<td class="left">&#xa0;</td>
-<td class="left">&lt; (_</td>
-<td class="left">&#xa0;</td>
-</tr>
-</tbody>
-</table>
-<p>
-\___|_|_|  \__\__,_|_|_|\_\__,_|
-</p>
-
-<p>
 -*&gt; elftalkd! &lt;*-
 Version 9000.1 (Build 31337) 
 By Santa Claus &amp; The Elf Team
-Copyright (C) 2017 NotActuallyCopyrighted. No actual rights reserved.
+<span style="font-weight: bold;">Copyright</span> (C) 2017 NotActuallyCopyrighted. No actual rights reserved.
 Using libc6 version 2.23-0ubuntu9
-LANG=en_US.UTF-8
-Timezone=UTC
-</p>
+<span style="font-weight: bold; font-style: italic;">LANG</span>=en_US.UTF-8
+<span style="font-weight: bold; font-style: italic;">Timezone</span>=UTC
 
-<p>
-Commencing Elf Talk Daemon (pid=6021)&#x2026; done!
-Background daemon&#x2026;
-#+END_SRC sh
-</p>
+Commencing Elf Talk Daemon (<span style="font-weight: bold; font-style: italic;">pid</span>=6021)... done!
+Background daemon...
+</pre>
 </div>
-</li>
-
-<li><a id="common-pitfalls" name="common-pitfalls"></a><a id="sec-5-8-1-9" name="sec-5-8-1-9"></a>Common Pitfalls<br  /><div class="outline-text-5" id="text-common-pitfalls">
-
-<p>
-Do we know what issue(s) people were running into?
-</p>
-</div>
-</li>
-
-<li><a id="about-the-challenge" name="about-the-challenge"></a><a id="sec-5-8-1-10" name="sec-5-8-1-10"></a>About the Challenge<br  /><div class="outline-text-5" id="text-about-the-challenge">
-
-<p>
-How was the challenge setup? Was there a better way to secure this
-system?
-</p>
-</div>
-</li>
-
-<li><a id="loot" name="loot"></a><a id="sec-5-8-1-11" name="sec-5-8-1-11"></a>Loot<br  /><div class="outline-text-5" id="text-loot">
-
-<p>
-Anything interesting hidden on the system?
-</p>
 </div>
 </li></ul>
 </div>
