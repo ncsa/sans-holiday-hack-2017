@@ -65,6 +65,9 @@ We need to run the =CandyCaneStriper= program. Upon initial inspection we discov
 [[https://twitter.com/GreenesterElf][Holly Evergreen on Twitter has a hint]]
 #+HTML: <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Update: LD_PRELOAD is awesome, but it doesn&#39;t help in this situation. <a href="https://t.co/gkF690pdAJ">https://t.co/gkF690pdAJ</a> looks like the right approach, but it&#39;s not working on this system for some reason. Ugh, I step away from this for a bit and check with others. I&#39;m too frustrated.</p>&mdash; Holly Evergreen (@GreenesterElf) <a href="https://twitter.com/GreenesterElf/status/938544194070634496?ref_src=twsrc%5Etfw">December 6, 2017</a></blockquote>
 
+Following the link describes a familiar situation:
+
+
 ** Approach
    :PROPERTIES:
    :CUSTOM_ID: approach
