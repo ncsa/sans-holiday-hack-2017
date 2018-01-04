@@ -1380,10 +1380,7 @@ We need to run the <code>CandyCaneStriper</code> program. Upon initial inspectio
 <p>
 <a href="https://twitter.com/GreenesterElf">Holly Evergreen on Twitter has a hint</a>
 </p>
-<ul class="org-ul">
-<li><a href="https://twitter.com/GreenesterElf/status/938542480487677952">Alright, who chmod -x'd and then removed chmod from my system? Not funny! I really need to run a program on this server, for serious. Was it you, @PepperyGoodness ? Weren't you mucking about with ARM64 recently?</a>
-</li>
-</ul>
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Update: LD_PRELOAD is awesome, but it doesn&#39;t help in this situation. <a href="https://t.co/gkF690pdAJ">https://t.co/gkF690pdAJ</a> looks like the right approach, but it&#39;s not working on this system for some reason. Ugh, I step away from this for a bit and check with others. I&#39;m too frustrated.</p>&mdash; Holly Evergreen (@GreenesterElf) <a href="https://twitter.com/GreenesterElf/status/938544194070634496?ref_src=twsrc%5Etfw">December 6, 2017</a></blockquote>
 </div>
 </li>
 
@@ -1471,8 +1468,8 @@ Overwrite an executable file with the existing binary:
 
 <pre class="src src-sh">elf@2798541ad158:~$ ls -l /bin/chmod
 -rwxr-xr-x 1 root root 0 Dec 15 20:00 /bin/chmod
-elf@2798541ad158:~$ cp /bin/new .
-elf@2798541ad158:~$ cat CandyCaneStriper  &gt;&gt; new
+elf@2798541ad158:~$ cp /bin/ls new
+elf@2798541ad158:~$ cat CandyCaneStriper  &gt; new
 elf@2798541ad158:~$ ls -l
 total 96
 -rw-r--r-- 1 root root 45224 Dec 15 19:59 CandyCaneStriper
@@ -2457,6 +2454,15 @@ This terminal was tricky because almost no information was
 given. Knowing how to use <code>file</code> to identify that <code>trainstartup</code> was
 an ARM binary, and knowing how to find <code>qemu-arm</code> was key.
 </p>
+
+<p>
+If you simply google "cannot execute binary file: Exec format error" it will
+lead you down a rabbit hole.  Normally, this error is caused by downloading a
+binary for the wrong architecture and the fix is to simply re-download the
+right binary.  In this case, we can't download a version of the binary built
+for the correct architecture.  What we need to do is "Run arm binary on amd64".
+Searching for this points us to using qemu as an emulator.
+</p>
 </div>
 </li></ul>
 </div>
@@ -2660,12 +2666,89 @@ Congratulations! You<span style="font-style: italic;">'ve won, and have successf
 <li><a id="alternatives" name="alternatives"></a><a id="sec-5-6-1-8" name="sec-5-6-1-8"></a>Alternatives<br  /><div class="outline-text-5" id="text-alternatives">
 
 <p>
-Another option is to just brute force it.
+Another option is to just brute force it.  The sample code shows that the program is using
+</p>
+
+
+<div class="org-src-container">
+
+<pre class="src src-c"><span style="font-weight: bold;">return</span> rand() % 4096; <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">returns a pseudo-random integer between 0 and 4096</span>
+</pre>
+</div>
+
+<p>
+This means we should only need to run the program a few thousand times for the
+result to be 42.  However, if we try to run the program too quickly, we notice
+we get the same output each time:
 </p>
 
 <div class="org-src-container">
 
+<pre class="src src-sh">elf@5f015af49eab:~$ ./isit42 &amp; ./isit42 &amp;
+[1] 31
+[2] 32
+elf@5f015af49eab:~$ Starting up ... Starting up ... done.
+Calling rand() to select a random number.
+done.
+Calling rand() to select a random number.
+945 is not 42.
+945 is not 42.
+[1]-  Exit 177                ./isit42
+[2]+  Exit 177                ./isit42
+</pre>
+</div>
+
+
+<p>
+This is because the program uses the current timestamp in seconds as a random
+seed. Running the program more than once a second will not help us.
+</p>
+
+<p>
+If we run this:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">elf@784e43534178:~$ while true;<span style="font-weight: bold;">do</span> ./isit42 ; <span style="font-weight: bold;">done</span>
+</pre>
+</div>
+
+<p>
+We will get a different answer ever time, but since the program contains a
+sleep(3) that will only run one attempt every 3 seconds instead of one attempt
+per second.  To fix this, we can run each attempt in the background using &amp;,
+sleeping 1 second between attempts:
+</p>
+
+
+<div class="org-src-container">
+
 <pre class="src src-sh">elf@784e43534178:~$ while true;<span style="font-weight: bold;">do</span> ./isit42 &amp;sleep 1;<span style="font-weight: bold;">done</span>
+</pre>
+</div>
+
+<p>
+After a short wait, it succeeds:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">Calling rand() to select a random number.
+[860]   Exit 37                 ./isit42
+[865] 1869
+Starting up ... 3566 is not 42.
+done.
+Calling rand() to select a random number.
+[861]   Exit 199                ./isit42
+[866] 1871
+Starting up ...                  .-.
+                <span style="font-weight: bold;">.</span>;;<span style="font-style: italic;">\ </span>||           _______  __   __  _______    _______  __    _  _______  _     _  _______  ______
+               /::::<span style="font-style: italic;">\|</span>/          |       ||  | |  ||       |  |   _   ||  |  | ||       || | _ | ||       ||    _ |
+              /::::<span style="font-style: italic;">'();          |_     _||  |_|  ||    ___|  |  |_|  ||   |_| ||  _____|| || || ||    ___||   | ||</span>
+<span style="font-style: italic;">            |\/`\:_/`\/|           |   |  |       ||   |___   |       ||       || |_____ |       ||   |___ |   |_||_</span>
+<span style="font-style: italic;">        ,__ |0_..().._0| __,       |   |  |       ||    ___|  |       ||  _    ||_____  ||       ||    ___||    __  |</span>
+<span style="font-style: italic;">         \,`////""""\\\\`,/        |   |  |   _   ||   |___   |   _   || | |   | _____| ||   _   ||   |___ |   |  | |</span>
+<span style="font-style: italic;">         | )//_ o  o _\\( |        |___|  |__| |__||_______|  |__| |__||_|  |__||_______||__| |__||_______||___|  |_|</span>
 </pre>
 </div>
 </div>
@@ -3237,68 +3320,18 @@ is the title of that page?
 <li><a id="background-information" name="background-information"></a><a id="sec-6-1-1-2" name="sec-6-1-1-2"></a>Background Information<br  /><div class="outline-text-5" id="text-background-information">
 
 <p>
-Do we know anything about this system already?
+This question simply requires playing the
+<a href="https://2017.holidayhackchallenge.com/game/7e48d6aa-4b73-4027-b23b-a6a1a3460d54">Winter Wonder Landing</a>
+game level.
 </p>
-
-<p>
-Hints:
-</p>
-
-<p>
-List any useful hints here.
-</p>
-
-<p>
-Blog Posts:
-</p>
-
-<p>
-Are any of these useful?
-</p>
-
-<ul class="org-ul">
-<li>Putting My Zero Cents In: Using the Free Tier on Amazon Web Services
-(EC2)
-<a href="https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2">https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2</a>
-Spinning up an EC2 instance, but also a lot of emphasis on how to use
-SSH keys.
-</li>
-<li>Your Pokemon Guide for Essential SQL Pen Test Commands
-<a href="https://pen-testing.sans.org/blog/2017/12/09/your-pokemon-guide-for-essential-sql-pen-test-commands">https://pen-testing.sans.org/blog/2017/12/09/your-pokemon-guide-for-essential-sql-pen-test-commands</a>
-SQL basics (SELECT, WHERE, wildcards, ORDER BY, GROUP BY, COUNT)
-</li>
-<li>Exploiting XXE Vulnerabilities in IIS/.NET
-<a href="https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities">https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities</a>
-Including remote content in XML
-</li>
-<li>Why You Need the Skills to Tinker with Publicly Released Exploit Code
-<a href="https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code">https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code</a>
-Mentions Apache struts vulnerabilities, specifically CVE-2017-5638 and
-CVE-2017-9805 Code: <a href="https://github.com/chrisjd20/cve-2017-9805.py">https://github.com/chrisjd20/cve-2017-9805.py</a>
-</li>
-<li>Go To The Head Of The Class: LD\_PRELOAD For The Win
-<a href="https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win">https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win</a>
-</li>
-<li>A Spot of Tee
-<a href="https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee">https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee</a> Restricted
-bash shell, and bypassing the I/O restriction with tee
-</li>
-<li>Understanding and Exploiting Web-based LDAP
-<a href="https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap">https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap</a>
-LDAP syntax, LDAP injection
-</li>
-<li>Massively Scaling your Scanning
-<a href="https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning">https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning</a>
-masscan
-</li>
-</ul>
 </div>
 </li>
 
 <li><a id="goal" name="goal"></a><a id="sec-6-1-1-3" name="sec-6-1-1-3"></a>Goal<br  /><div class="outline-text-5" id="text-goal">
 
 <p>
-What are we trying to accomplish?
+In this game we need to guide the snowball to collect the
+<a href="https://www.holidayhackchallenge.com/2017/pages/6dda7650725302f59ea42047206bd4ee5f928d19/GreatBookPage1.pdf">first Great Book page</a>.
 </p>
 </div>
 </li>
@@ -3306,41 +3339,23 @@ What are we trying to accomplish?
 <li><a id="approach" name="approach"></a><a id="sec-6-1-1-4" name="sec-6-1-1-4"></a>Approach<br  /><div class="outline-text-5" id="text-approach">
 
 <p>
-Describe the thought process that we tried here. How were we able to use
-the hints or the blog posts?
+You just need to redirect the snowball to roll over the page.
 </p>
 </div>
 </li>
 
 <li><a id="solution" name="solution"></a><a id="sec-6-1-1-5" name="sec-6-1-1-5"></a>Solution<br  /><div class="outline-text-5" id="text-solution">
-
-<p>
-Summarize the reference solution that we found
-</p>
 </div>
-</li>
-
-<li><a id="alternatives" name="alternatives"></a><a id="sec-6-1-1-6" name="sec-6-1-1-6"></a>Alternatives<br  /><div class="outline-text-5" id="text-alternatives">
-
-<p>
-Any other, easier solutions?
-</p>
+</li></ul>
 </div>
-</li>
 
-<li><a id="common-pitfalls" name="common-pitfalls"></a><a id="sec-6-1-1-7" name="sec-6-1-1-7"></a>Common Pitfalls<br  /><div class="outline-text-5" id="text-common-pitfalls">
-
-<p>
-Do we know what issue(s) people were running into?
-</p>
-</div>
-</li>
-
-<li><a id="about-the-challenge" name="about-the-challenge"></a><a id="sec-6-1-1-8" name="sec-6-1-1-8"></a>About the Challenge<br  /><div class="outline-text-5" id="text-about-the-challenge">
+<div id="outline-container-sec-6-1-2" class="outline-4">
+<h4 id="sec-6-1-2"><span class="todo TODO">TODO</span> Add visuals to this page</h4>
+<div class="outline-text-4" id="text-6-1-2">
+</div><ul class="org-ul"><li><a id="about-the-challenge" name="about-the-challenge"></a><a id="sec-6-1-2-1" name="sec-6-1-2-1"></a>About the Challenge<br  /><div class="outline-text-5" id="text-about-the-challenge">
 
 <p>
-How was the challenge setup? Was there a better way to secure this
-system?
+This challenge was primarily to get players introduced to the game aspect of the Holiday Hack.
 </p>
 </div>
 </li></ul>
@@ -3369,8 +3384,16 @@ Alabaster Snowball's password?
 <li><a id="background-information" name="background-information"></a><a id="sec-6-2-1-2" name="sec-6-2-1-2"></a>Background Information<br  /><div class="outline-text-5" id="text-background-information">
 
 <p>
-Do we know anything about this system already?
+The IP address of <code>l2s.northpolechristmastown.com</code> is <code>35.185.84.51</code>. Visiting in
+reveals a simple web page for sending a very basic letter to Santa. If we look at
+the ssl certificate for the host we can see it's actually a certificate for
+<code>dev.northpolechristmastown.com</code>.
 </p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh"></pre>
+</div>
 
 <p>
 Hints:
@@ -3384,44 +3407,15 @@ List any useful hints here.
 Blog Posts:
 </p>
 
-<p>
-Are any of these useful?
-</p>
-
 <ul class="org-ul">
-<li>Putting My Zero Cents In: Using the Free Tier on Amazon Web Services
-(EC2)
-<a href="https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2">https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2</a>
-Spinning up an EC2 instance, but also a lot of emphasis on how to use
-SSH keys.
-</li>
-<li>Your Pokemon Guide for Essential SQL Pen Test Commands
-<a href="https://pen-testing.sans.org/blog/2017/12/09/your-pokemon-guide-for-essential-sql-pen-test-commands">https://pen-testing.sans.org/blog/2017/12/09/your-pokemon-guide-for-essential-sql-pen-test-commands</a>
-SQL basics (SELECT, WHERE, wildcards, ORDER BY, GROUP BY, COUNT)
-</li>
-<li>Exploiting XXE Vulnerabilities in IIS/.NET
-<a href="https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities">https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities</a>
-Including remote content in XML
-</li>
 <li>Why You Need the Skills to Tinker with Publicly Released Exploit Code
 <a href="https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code">https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code</a>
 Mentions Apache struts vulnerabilities, specifically CVE-2017-5638 and
 CVE-2017-9805 Code: <a href="https://github.com/chrisjd20/cve-2017-9805.py">https://github.com/chrisjd20/cve-2017-9805.py</a>
 </li>
-<li>Go To The Head Of The Class: LD\_PRELOAD For The Win
-<a href="https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win">https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win</a>
-</li>
 <li>A Spot of Tee
 <a href="https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee">https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee</a> Restricted
 bash shell, and bypassing the I/O restriction with tee
-</li>
-<li>Understanding and Exploiting Web-based LDAP
-<a href="https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap">https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap</a>
-LDAP syntax, LDAP injection
-</li>
-<li>Massively Scaling your Scanning
-<a href="https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning">https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning</a>
-masscan
 </li>
 </ul>
 </div>
@@ -3716,6 +3710,18 @@ Summarize the reference solution that we found
 </div>
 
 <ul class="org-ul"><li><a id="sec-6-4-1-5-1" name="sec-6-4-1-5-1"></a>How to forge a session cookie<br  /><div class="outline-text-6" id="text-6-4-1-5-1">
+<blockquote>
+<p>
+Happy families are all alike; every unhappy family is unhappy in its own way. &#x2013;   Leo Tolstoy
+</p>
+</blockquote>
+
+<blockquote>
+<p>
+Empty plaintext encrypted without using HMAC are all alike; Rolling your own crypto makes all cryptographers unhappy. &#x2013; Justin Azoff
+</p>
+</blockquote>
+
 <p>
 The js code they use is a variation of a challenge response algorithm, but it
 is flawed in that the client is providing both the challenge and the response.
@@ -3725,8 +3731,10 @@ meaning that the encrypted contents themselves are never verified.
 
 <p>
 Since we can control both the ciphertext and the expected plaintext, we can
-just set the challenge the empty string "" and the response then just needs to
-be ANY message that decrypts to "".
+just set the challenge to the empty string "" and the response then just needs
+to be ANY message that decrypts to "".  Since the message is empty, the key is
+irrelevant, we just need to work out how to properly generate a ciphertext that
+will decrypt to nothing.
 </p>
 
 <p>
@@ -4684,7 +4692,10 @@ system?
 <div id="outline-container-sec-7-3" class="outline-3">
 <h3 id="sec-7-3">Short video is based on video intro to Rudolph the Red-Nosed Reindeer</h3>
 <div class="outline-text-3" id="text-7-3">
-</div><div id="outline-container-sec-7-3-1" class="outline-4">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/g9ByiEGfAXk?rel=0&amp;start=99" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+</div>
+
+<div id="outline-container-sec-7-3-1" class="outline-4">
 <h4 id="sec-7-3-1">North Pole and Beyond</h4>
 <div class="outline-text-4" id="text-7-3-1">
 </div><ul class="org-ul"><li><a id="sec-7-3-1-1" name="sec-7-3-1-1"></a>Games<br  /></li>
