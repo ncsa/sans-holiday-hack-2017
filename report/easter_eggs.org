@@ -7,6 +7,7 @@
 
 * Wintered logo is based on the Wicked stage musical poster.
 * Short video is based on video intro to Rudolph the Red-Nosed Reindeer
+#+HTML: <iframe width="560" height="315" src="https://www.youtube.com/embed/g9ByiEGfAXk?rel=0&amp;start=99" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
 
 ** North Pole and Beyond
 
