@@ -332,22 +332,22 @@ We can use the following indicators to search any clues we're later provided wit
 | Dr. Who (2016 Hack)                  | Reference | nppd /infractions      |
 
 * Terminals
-** Bumble's Bounce
-#+INCLUDE: "terminals/bounce.org"
+** Winter Wonder Landing
+#+INCLUDE: "terminals/landing.org"
+** Winconceivable The Cliffs Of Insanity
+#+INCLUDE: "terminals/cliffs.org"
 ** Cryokinetic Magic
 #+INCLUDE: "terminals/cryokinetic.org"
+** There's No Place Like Home
+#+INCLUDE: "terminals/home.org"
+** Bumble's Bounce
+#+INCLUDE: "terminals/bounce.org"
 ** I Don't Think We're In Kansas Anymore
 #+INCLUDE: "terminals/kansas.org"
 ** Oh Wait Maybe We Are
 #+INCLUDE: "terminals/we_are.org"
-** There's No Place Like Home
-#+INCLUDE: "terminals/home.org"
 ** We're Off To See The
 #+INCLUDE: "terminals/off.org"
-** Winconceivable The Cliffs Of Insanity
-#+INCLUDE: "terminals/cliffs.org"
-** Winter Wonder Landing
-#+INCLUDE: "terminals/landing.org"
 * Answers
 ** TODO Question 1
 #+INCLUDE: "answers/1.org"
