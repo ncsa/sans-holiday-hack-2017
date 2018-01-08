@@ -1,17 +1,12 @@
-* Answer Template
-  :PROPERTIES:
-  :CUSTOM_ID: answer-template
-  :END:
-
 ** Question
    :PROPERTIES:
    :CUSTOM_ID: question
    :END:
 
-3) The North Pole engineering team uses a Windows SMB server for sharing
-   documentation and correspondence. Using your access to the Letters to
-   Santa server, identify and enumerate the SMB file-sharing server.
-   What is the file server share name?
+The North Pole engineering team uses a Windows SMB server for sharing
+documentation and correspondence. Using your access to the Letters to
+Santa server, identify and enumerate the SMB file-sharing server.
+What is the file server share name?
 
 ** Background Information
    :PROPERTIES:
@@ -180,7 +175,7 @@ Now we can access port 445 on =hhc17-smb-server= via port 4445 on =localhost=:
 #+BEGIN_SRC sh
 user@vps $ smbclient -L localhost -p 4445 -U alabaster_snowball
 WARNING: The "syslog" option is deprecated
-Enter alabaster_snowball's password:
+Enter alabaster_snowball's password: 
 Domain=[HHC17-EMI] OS=[Windows Server 2016 Datacenter 14393] Server=[Windows Server 2016 Datacenter 6.3]
 
         Sharename       Type      Comment

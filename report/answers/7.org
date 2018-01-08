@@ -1,20 +1,15 @@
-* Answer Template
-  :PROPERTIES:
-  :CUSTOM_ID: answer-template
-  :END:
-
 ** Question
    :PROPERTIES:
    :CUSTOM_ID: question
    :END:
 
-7) Like any other complex SCADA systems, the North Pole uses Elf-Machine
-   Interfaces (EMI) to monitor and control critical infrastructure
-   assets. These systems serve many uses, including email access and web
-   browsing. Gain access to the EMI server through the use of a phishing
-   attack with your access to the EWA server. Retrieve The Great Book
-   page from C:\GreatBookPage7.pdf. What does The Great Book page
-   describe?
+Like any other complex SCADA systems, the North Pole uses Elf-Machine
+Interfaces (EMI) to monitor and control critical infrastructure
+assets. These systems serve many uses, including email access and web
+browsing. Gain access to the EMI server through the use of a phishing
+attack with your access to the EWA server. Retrieve The Great Book
+page from C:\GreatBookPage7.pdf. What does The Great Book page
+describe?
 
 ** Background Information
    :PROPERTIES:

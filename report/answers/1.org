@@ -1,16 +1,11 @@
-* Answer Template
-  :PROPERTIES:
-  :CUSTOM_ID: answer-template
-  :END:
-
 ** Question
    :PROPERTIES:
    :CUSTOM_ID: question
    :END:
 
-1) Visit the North Pole and Beyond at the Winter Wonder Landing Level to
-   collect the first page of The Great Book using a giant snowball. What
-   is the title of that page?
+Visit the North Pole and Beyond at the Winter Wonder Landing Level to
+collect the first page of The Great Book using a giant snowball. What
+is the title of that page?
 
 ** Background Information
    :PROPERTIES:

@@ -1,17 +1,12 @@
-* Answer Template
-  :PROPERTIES:
-  :CUSTOM_ID: answer-template
-  :END:
-
 ** Question
    :PROPERTIES:
    :CUSTOM_ID: question
    :END:
 
-2) Investigate the Letters to Santa application at
-   https://l2s.northpolechristmastown.com. What is the topic of The
-   Great Book page available in the web root of the server? What is
-   Alabaster Snowball's password?
+Investigate the Letters to Santa application at
+https://l2s.northpolechristmastown.com. What is the topic of The
+Great Book page available in the web root of the server? What is
+Alabaster Snowball's password?
 
 ** Background Information
    :PROPERTIES:

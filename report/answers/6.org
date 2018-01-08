@@ -1,20 +1,15 @@
-* Answer Template
-  :PROPERTIES:
-  :CUSTOM_ID: answer-template
-  :END:
-
 ** Question
    :PROPERTIES:
    :CUSTOM_ID: question
    :END:
 
-6) The North Pole engineering team has introduced an Elf as a Service
-   (EaaS) platform to optimize resource allocation for mission-critical
-   Christmas engineering projects at
-   http://eaas.northpolechristmastown.com. Visit the system and retrieve
-   instructions for accessing The Great Book page from C:\greatbook.txt.
-   Then retrieve The Great Book PDF file by following those directions.
-   What is the title of The Great Book page?
+The North Pole engineering team has introduced an Elf as a Service
+(EaaS) platform to optimize resource allocation for mission-critical
+Christmas engineering projects at
+http://eaas.northpolechristmastown.com. Visit the system and retrieve
+instructions for accessing The Great Book page from C:\greatbook.txt.
+Then retrieve The Great Book PDF file by following those directions.
+What is the title of The Great Book page?
 
 ** Background Information
    :PROPERTIES:

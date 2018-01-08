@@ -1,15 +1,10 @@
-* Answer Template
-  :PROPERTIES:
-  :CUSTOM_ID: answer-template
-  :END:
-
 ** Question
    :PROPERTIES:
    :CUSTOM_ID: question
    :END:
 
-8) Fetch the letter to Santa from the North Pole Elf Database at
-   http://edb.northpolechristmastown.com. Who wrote the letter?
+Fetch the letter to Santa from the North Pole Elf Database at
+http://edb.northpolechristmastown.com. Who wrote the letter?
 
 ** Background Information
    :PROPERTIES:

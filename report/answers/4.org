@@ -1,17 +1,12 @@
-* Answer Template
-  :PROPERTIES:
-  :CUSTOM_ID: answer-template
-  :END:
-
 ** Question
    :PROPERTIES:
    :CUSTOM_ID: question
    :END:
 
-4) Elf Web Access (EWA) is the preferred mailer for North Pole elves,
-   available internally at http://mail.northpolechristmastown.com. What
-   can you learn from The Great Book page found in an e-mail on that
-   server?
+Elf Web Access (EWA) is the preferred mailer for North Pole elves,
+available internally at http://mail.northpolechristmastown.com. What
+can you learn from The Great Book page found in an e-mail on that
+server?
 
 ** Background Information
    :PROPERTIES:

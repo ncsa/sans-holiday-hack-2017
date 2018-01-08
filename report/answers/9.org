@@ -1,15 +1,10 @@
-* Answer Template
-  :PROPERTIES:
-  :CUSTOM_ID: answer-template
-  :END:
-
 ** Question
    :PROPERTIES:
    :CUSTOM_ID: question
    :END:
 
-9) Which character is ultimately the villain causing the giant snowball
-   problem. What is the villain's motive?
+Which character is ultimately the villain causing the giant snowball
+problem. What is the villain's motive?
 
 ** Background Information
    :PROPERTIES:

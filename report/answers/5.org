@@ -1,17 +1,12 @@
-* Answer Template
-  :PROPERTIES:
-  :CUSTOM_ID: answer-template
-  :END:
-
 ** Question
    :PROPERTIES:
    :CUSTOM_ID: question
    :END:
 
-5) How many infractions are required to be marked as naughty on Santa's
-   Naughty and Nice List? What are the names of at least six insider
-   threat moles? Who is throwing the snowballs from the top of the North
-   Pole Mountain and what is your proof?
+How many infractions are required to be marked as naughty on Santa's
+Naughty and Nice List? What are the names of at least six insider
+threat moles? Who is throwing the snowballs from the top of the North
+Pole Mountain and what is your proof?
 
 ** Background Information
    :PROPERTIES:

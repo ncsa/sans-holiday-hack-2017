@@ -10,41 +10,7 @@
 #+HTML_HEAD: <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+HTML_HEAD: <style>#content{max-width:1200px;}</style>
 
-* Things to be done
-**  Overall approach
-Each question should have:
- - [ ] A reference solution
- - [ ] An overview of the thought process and what we tried that led to that solution, *and what we tried that didn't work*
- - [ ] Some other ways that we could've solved it
- - [ ] A peak behind the curtain of how the challenge worked, and perhaps a better defense that would've mitigated the attack
-** Introduction
-- [ ] Write a paragraph about our approach to the challenge, what everyone did, etc.
-- [ ] Write a paragraph about the outline and presentation of the report ("We first lay out the solutions, then we show some other ways that we solved it, then we try to peak behind the curtain of how the challenges worked...")
-** Answers
-- [ ] Write short answers to each of the questions
-- [ ] Link to where they can read more about the answers (maybe link to the "reference solution," and the "going further solution" for each)
-** Pre-contest Reconnaissance
-- [ ] Update the recon to talk about the changes that they made (hid some stuff in DNS, etc.)
-** Terminals and Servers
-- [ ] Reference solutions for solving each challenge
-- [ ] Thought process for solving each challenge
-- [ ] Alternative ways to solve each challenge
-  - [ ] EWA Server: Downloaded all the e-mails
-  - [ ] EMI Server: Got Meterpreter working
-  - [ ] Terminals: Reverse the binaries?
-- [ ] Discuss how each challenge was setup
-  - [ ] EMI Server: Discuss the alabaster_snowball.py Python script
-- [ ] AsciiCinema solution to each terminal?
-** Easter Eggs
-- [ ] List references and any hidden data we found
-  - [ ] The example Hash
-  - [ ] nppd robots.txt
-  - [ ] LDAP passwords
-** Snowball Game
-- [ ] Videos to solving each level?
-- [ ] Hacking the game?
-
-* Introduction
+* TODO Introduction
 We're the Security team at the National Center for Supercomputing
 Applications, and we worked together on yet another fun SANS Holiday
 Hack, like we did last year. Over the past year, we've been surprised
@@ -69,7 +35,18 @@ try to offer some insight into Alabaster Snowball's defenses. Where
 possible, we offer some alternatives that he could've used which
 would've been more secure.
 ** TODO Add more content here
-* TODO tl;dr: Quick Answers
+* tl;dr: Quick Answers
+1. What is the title of the first page? *About This Book...*
+2. What is the topic of The Great Book page available in the web root of the server? *On the Topic of Flying Animals*
+
+   What is Alabaster Snowball's password? *stream_unhappy_buy_loss*
+3. What is the file server share name? *FileStor*
+4. What can you learn from The Great Book page found in an e-mail on EWA? *The behavior of the Abominable Snowman ("Bumble") has recently become erratic. Rumor has it that there must've been some magic in something he ate.*
+5. TODO
+6. What is the title of The Great Book page on EAAS? *The Dreaded Inter-Dimensional Tornadoes*
+7. What does The Great Book page on EMI describe? *The Witches of Oz*
+8. Who wrote the letter to Santa on edb? *The Wizard of Oz*
+9. Which character is the villain, and what is the motive? *Glinda, the Good Witch. To stir up elf-munchkin hostilities and sell her magic to both sides.*
 * Pre-contest Reconnaissance
 #+CAPTION: SANS Holiday Hack Challenge December 5th Update
 [[./images/sans_holiday_hack_preview.png]]
@@ -348,12 +325,12 @@ We can use the following indicators to search any clues we're later provided wit
 #+INCLUDE: "terminals/we_are.org"
 ** We're Off To See The
 #+INCLUDE: "terminals/off.org"
-* Answers
+* TODO Answers
 ** TODO Question 1
 #+INCLUDE: "answers/1.org"
 ** TODO Question 2
 #+INCLUDE: "answers/2.org" 
-** TODO Question 3
+** Question 3
 #+INCLUDE: "answers/3.org" 
 ** TODO Question 4
 #+INCLUDE: "answers/4.org" 
