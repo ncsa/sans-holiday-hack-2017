@@ -18,83 +18,245 @@
    :CUSTOM_ID: background-information
    :END:
 
-Do we know anything about this system already?
+The scope statement calls out systems on 10.142.0.0/24 as being in scope:
 
-Hints:
+#+BEGIN_QUOTE
+SCOPE: For this entire challenge, you are authorized to attack ONLY
+the Letters to Santa system at l2s.northpolechristmastown.com AND
+other systems on the internal 10.142.0.0/24 network that you access
+through the Letters to Santa system.
+#+END_QUOTE
 
-List any useful hints here.
+The question mentions pivoting through the Letters to Santa server (=l2s=). A commonly used tool for network discovery is =nmap=, and we can check that it's available on =l2s=:
+
+#+BEGIN_SRC sh
+alabaster_snowball@hhc17-apache-struts1:/tmp/asnow.VmaV55tqZi5rteO9fXHB3kjM$ nmap -V
+
+Nmap version 7.40 ( https://nmap.org )
+Platform: x86_64-pc-linux-gnu
+Compiled with: liblua-5.3.3 openssl-1.1.0c libpcre-8.39 libpcap-1.8.1 nmap-libdnet-1.12 ipv6
+Compiled without:
+Available nsock engines: epoll poll select
+#+END_SRC
+
+There's a great =nmap= overview available here: https://nmap.org/book/nmap-overview-and-demos.html
+
+We also know that the SMB suite of protocols uses a lot of ports, but 445 is one of the main ones.
 
 Blog Posts:
 
-Are any of these useful?
+This post on the SANS Pen Testing Blog seems relevant, but masscan isn't installed on =l2s=:
 
-- Putting My Zero Cents In: Using the Free Tier on Amazon Web Services
-  (EC2)
-  https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2
-  Spinning up an EC2 instance, but also a lot of emphasis on how to use
-  SSH keys.
-- Your Pokemon Guide for Essential SQL Pen Test Commands
-  https://pen-testing.sans.org/blog/2017/12/09/your-pokemon-guide-for-essential-sql-pen-test-commands
-  SQL basics (SELECT, WHERE, wildcards, ORDER BY, GROUP BY, COUNT)
-- Exploiting XXE Vulnerabilities in IIS/.NET
-  https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities
-  Including remote content in XML
-- Why You Need the Skills to Tinker with Publicly Released Exploit Code
-  https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code
-  Mentions Apache struts vulnerabilities, specifically CVE-2017-5638 and
-  CVE-2017-9805 Code: https://github.com/chrisjd20/cve-2017-9805.py
-- Go To The Head Of The Class: LD\_PRELOAD For The Win
-  https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win
-- A Spot of Tee
-  https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee Restricted
-  bash shell, and bypassing the I/O restriction with tee
-- Understanding and Exploiting Web-based LDAP
-  https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap
-  LDAP syntax, LDAP injection
 - Massively Scaling your Scanning
   https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning
-  masscan
 
 ** Goal
    :PROPERTIES:
    :CUSTOM_ID: goal
    :END:
 
-What are we trying to accomplish?
+Three separate things:
+
+1. Identify the SMB server,
+2. Enumerate the shares on it,
+3. Name the file server share.
 
 ** Approach
    :PROPERTIES:
    :CUSTOM_ID: approach
    :END:
 
-Describe the thought process that we tried here. How were we able to use
-the hints or the blog posts?
+Let's follow the =nmap= overview.
+
+#+BEGIN_QUOTE
+Being the careful type, Felix first starts out with what is known as
+an Nmap list scan (-sL option). This feature simply enumerates every
+IP address in the given target netblock(s) and does a reverse-DNS
+lookup (unless -n was specified) on each. One reason to do this first
+is stealth. The names of the hosts can hint at potential
+vulnerabilities and allow for a better understanding of the target
+network, all without raising alarm bells.
+#+END_QUOTE
+
+#+BEGIN_SRC sh
+alabaster_snowball@hhc17-apache-struts1:/tmp/asnow.sjKK74OSjKfIxlr5otQil8yd$ nmap -sL 10.142.0.0/24
+
+Starting Nmap 7.40 ( https://nmap.org ) at 2018-01-08 02:40 UTC
+Nmap scan report for 10.142.0.0
+Nmap scan report for 10.142.0.1
+Nmap scan report for hhc17-l2s-proxy.c.holidayhack2017.internal (10.142.0.2)
+Nmap scan report for hhc17-apache-struts1.c.holidayhack2017.internal (10.142.0.3)
+Nmap scan report for 10.142.0.4
+Nmap scan report for mail.northpolechristmastown.com (10.142.0.5)
+Nmap scan report for edb.northpolechristmastown.com (10.142.0.6)
+Nmap scan report for hhc17-smb-server.c.holidayhack2017.internal (10.142.0.7)
+Nmap scan report for hhc17-emi.c.holidayhack2017.internal (10.142.0.8)
+Nmap scan report for 10.142.0.9
+Nmap scan report for 10.142.0.10
+Nmap scan report for hhc17-apache-struts2.c.holidayhack2017.internal (10.142.0.11)
+Nmap scan report for 10.142.0.12
+Nmap scan report for eaas.northpolechristmastown.com (10.142.0.13)
+Nmap scan report for 10.142.0.14
+Nmap scan report for 10.142.0.15
+...
+#+END_SRC
+
+Parsing the results a bit:
+
+| Hostname             |          IP |
+|----------------------+-------------|
+| hhc17-l2s-proxy      |  10.142.0.2 |
+| hhc17-apache-struts1 |  10.142.0.3 |
+| mail                 |  10.142.0.5 |
+| edb                  |  10.142.0.6 |
+| hhc17-smb-server     |  10.142.0.7 |
+| hhc17-emi            |  10.142.0.8 |
+| hhc17-apache-struts2 | 10.142.0.11 |
+| eaas                 | 10.142.0.13 |
+
+One of the systems is named =hhc17-smb-server=. 
+
+Continuing with the overview, we can now narrow in on a single IP:
+
+#+BEGIN_SRC sh
+alabaster_snowball@hhc17-apache-struts1:/tmp/asnow.sjKK74OSjKfIxlr5otQil8yd$ nmap -p- -PS445 -A -T4 -oA avatartcpscan-%D 10.142.0.7
+
+Starting Nmap 7.40 ( https://nmap.org ) at 2018-01-08 02:51 UTC
+Nmap scan report for hhc17-smb-server.c.holidayhack2017.internal (10.142.0.7)
+Host is up (0.00040s latency).
+Not shown: 65527 filtered ports
+PORT      STATE SERVICE            VERSION
+135/tcp   open  msrpc              Microsoft Windows RPC
+139/tcp   open  netbios-ssn        Microsoft Windows netbios-ssn
+445/tcp   open  microsoft-ds       Microsoft Windows Server 2008 R2 - 2012 microsoft-ds
+3389/tcp  open  ssl/ms-wbt-server?
+| ssl-cert: Subject: commonName=hhc17-emi
+| Not valid before: 2017-11-06T13:51:23
+|_Not valid after:  2018-05-08T13:51:23
+|_ssl-date: 2018-01-08T02:54:30+00:00; 0s from scanner time.
+5985/tcp  open  http               Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-server-header: Microsoft-HTTPAPI/2.0
+|_http-title: Not Found
+5986/tcp  open  ssl/http           Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)
+|_http-server-header: Microsoft-HTTPAPI/2.0
+|_http-title: Not Found
+| ssl-cert: Subject: commonName=hhc17-emi
+| Subject Alternative Name: DNS:hhc17-emi
+| Not valid before: 2017-11-07T13:52:11
+|_Not valid after:  2018-11-07T13:52:11
+|_ssl-date: 2018-01-08T02:54:30+00:00; 0s from scanner time.
+49666/tcp open  msrpc              Microsoft Windows RPC
+49668/tcp open  msrpc              Microsoft Windows RPC
+Service Info: OSs: Windows, Windows Server 2008 R2 - 2012; CPE: cpe:/o:microsoft:windows
+
+Host script results:
+|_nbstat: NetBIOS name: HHC17-EMI, NetBIOS user: <unknown>, NetBIOS MAC: 42:01:0a:8e:00:07 (unknown)
+| smb-security-mode:
+|   account_used: guest
+|   authentication_level: user
+|   challenge_response: supported
+|_  message_signing: disabled (dangerous, but default)
+|_smbv2-enabled: Server supports SMBv2 protocol
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 205.99 seconds
+#+END_SRC
+
+So it does indeed seem to be an SMB server. A command-line tool to access it is =smbclient=:
+
+#+BEGIN_SRC sh
+alabaster_snowball@hhc17-apache-struts1:/tmp/asnow.sjKK74OSjKfIxlr5otQil8yd$ smbclient -L 10.142.0.7 -U alabaster_snowball
+rbash: smbclient: command not found
+#+END_SRC
+
+It's not available on =l2s=. Another option is forwarding a port through SSH:
+
+#+BEGIN_SRC sh
+user@vps $ ssh alabaster_snowball@l2s.northpolechristmastown.com -O forward -L 4445:10.142.0.7:445
+#+END_SRC
+
+Now we can access port 445 on =hhc17-smb-server= via port 4445 on =localhost=:
+
+#+BEGIN_SRC sh
+user@vps $ smbclient -L localhost -p 4445 -U alabaster_snowball
+WARNING: The "syslog" option is deprecated
+Enter alabaster_snowball's password:
+Domain=[HHC17-EMI] OS=[Windows Server 2016 Datacenter 14393] Server=[Windows Server 2016 Datacenter 6.3]
+
+        Sharename       Type      Comment
+        ---------       ----      -------
+        ADMIN$          Disk      Remote Admin
+        C$              Disk      Default share
+        FileStor        Disk
+        IPC$            IPC       Remote IPC
+Connection to localhost failed (Error NT_STATUS_CONNECTION_REFUSED)
+NetBIOS over TCP disabled -- no workgroup available
+#+END_SRC
+
+=FileStor= looks interesting. Let's see what's on it:
+
+#+BEGIN_SRC sh
+user@vps $ smbclient //localhost/FileStor -p 4445 -U alabaster_snowball
+WARNING: The "syslog" option is deprecated
+Enter alabaster_snowball's password:
+Domain=[HHC17-EMI] OS=[Windows Server 2016 Datacenter 14393] Server=[Windows Server 2016 Datacenter 6.3]
+smb: \> ls
+  .                                   D        0  Wed Dec  6 16:51:46 2017
+  ..                                  D        0  Wed Dec  6 16:51:46 2017
+  BOLO - Munchkin Mole Report.docx      A   255520  Wed Dec  6 16:44:17 2017
+  GreatBookPage3.pdf                  A  1275756  Mon Dec  4 14:21:44 2017
+  MEMO - Calculator Access for Wunorse.docx      A   111852  Mon Nov 27 14:01:36 2017
+  MEMO - Password Policy Reminder.docx      A   133295  Wed Dec  6 16:47:28 2017
+  Naughty and Nice List.csv           A    10245  Thu Nov 30 14:42:00 2017
+  Naughty and Nice List.docx          A    60344  Wed Dec  6 16:51:25 2017
+
+                13106687 blocks of size 4096. 9624115 blocks available
+smb: \> mget *
+getting file \BOLO - Munchkin Mole Report.docx of size 255520 as BOLO - Munchkin Mole Report.docx (1094.4 KiloBytes/sec) (average 1094.4 KiloBytes/sec)
+getting file \GreatBookPage3.pdf of size 1275756 as GreatBookPage3.pdf (2818.7 KiloBytes/sec) (average 2231.9 KiloBytes/sec)
+getting file \MEMO - Calculator Access for Wunorse.docx of size 111852 as MEMO - Calculator Access for Wunorse.docx (666.0 KiloBytes/sec) (average 1924.0 KiloBytes/sec)
+getting file \MEMO - Password Policy Reminder.docx of size 133295 as MEMO - Password Policy Reminder.docx (834.4 KiloBytes/sec) (average 1752.3 KiloBytes/sec)
+getting file \Naughty and Nice List.csv of size 10245 as Naughty and Nice List.csv (99.1 KiloBytes/sec) (average 1599.3 KiloBytes/sec)
+getting file \Naughty and Nice List.docx of size 60344 as Naughty and Nice List.docx (390.3 KiloBytes/sec) (average 1452.3 KiloBytes/sec)
+#+END_SRC
 
 ** Solution
    :PROPERTIES:
    :CUSTOM_ID: solution
    :END:
 
-Summarize the reference solution that we found
-
-** Alternatives
-   :PROPERTIES:
-   :CUSTOM_ID: alternatives
-   :END:
-
-Any other, easier solutions?
+We used =nmap= to list our targets, and found =hhc17-smb-server=. We
+used SSH forwarding to connect to it with =smbclient=. We used the
+credentials we found for question 2 to connect.
 
 ** Common Pitfalls
    :PROPERTIES:
    :CUSTOM_ID: common-pitfalls
    :END:
 
-Do we know what issue(s) people were running into?
+It looks like =hhc17-smb-server= blocks pings. By default, =nmap= uses
+pings to determine which hosts are up, and which it should scan
+further. We used the "list scan," which just did reverse DNS queries,
+and were able to identify the system quickly. If, however, someone
+just tried to run =nmap -p 445 10.142.0.0/24=, they wouldn't find the system.
 
-** About the Challenge
-   :PROPERTIES:
-   :CUSTOM_ID: about-the-challenge
-   :END:
+It also looked like two systems were mixed up in NetBIOS and RDP SSL cert names:
 
-How was the challenge setup? Was there a better way to secure this
-system?
+#+BEGIN_SRC 
+Nmap scan report for hhc17-smb-server.c.holidayhack2017.internal (10.142.0.7)
+...
+3389/tcp  open  ssl/ms-wbt-server?
+| ssl-cert: Subject: commonName=hhc17-emi
+...
+Host script results:
+| nbstat: NetBIOS name: HHC17-EMI, NetBIOS user: <unknown>, NetBIOS MAC: 42:01:0a:8e:00:07 (unknown)
+...
+Nmap scan report for hhc17-emi.c.holidayhack2017.internal (10.142.0.8)
+...
+3389/tcp  open  ssl/ms-wbt-server?
+| ssl-cert: Subject: commonName=hhc17-smb-server
+...
+Host script results:
+| nbstat: NetBIOS name: HHC17-SMB-SERVE, NetBIOS user: <unknown>, NetBIOS MAC: 42:01:0a:8e:00:08 (unknown)
+#+END_SRC
+
