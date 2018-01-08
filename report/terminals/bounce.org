@@ -69,10 +69,10 @@ The goal is to analyze a 'log file' and determine what the least popular browser
    :CUSTOM_ID: hints
    :END:
 
-[[https://twitter.com/SirMintsALot][Minty Candycane on Twitter has some hints]]
-  * [[https://twitter.com/SirMintsALot/status/938187811869487104][The more I live my life as a Linux command-line user, the more I see problems waiting to be solved with cut, sort, uniq, head, and tail.]]
-  * [[https://twitter.com/SirMintsALot/status/938188406546251777][Oh wow, @Sw4mp_f0x and @bluscreenofjeff did a great job on this Parsing for Pentesters series!]]
-  * [[https://twitter.com/SirMintsALot/status/938574395240366080][The only thing that last article didn't really help me with was *counting* unique lines. This post looks super helpful for that! https://unix.stackexchange.com/questions/170043/sort-and-count-number-of-occurrence-of-lines/263849 … (it's even against web server logs, just the wrong field)]]
+Minty Candycane on Twitter has some hints
+
+#+HTML: <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Oh wow, <a href="https://twitter.com/Sw4mp_f0x?ref_src=twsrc%5Etfw">@Sw4mp_f0x</a> and <a href="https://twitter.com/bluscreenofjeff?ref_src=twsrc%5Etfw">@bluscreenofjeff</a> did a great job on this Parsing for Pentesters series! <a href="https://t.co/g1LcCWjH4Q">https://t.co/g1LcCWjH4Q</a></p>&mdash; Minty Candycane (@SirMintsALot) <a href="https://twitter.com/SirMintsALot/status/938188406546251777?ref_src=twsrc%5Etfw">December 5, 2017</a></blockquote>
+#+HTML: <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">The only thing that last article didn&#39;t really help me with was *counting* unique lines. This post looks super helpful for that! <a href="https://t.co/QaPQ4Ml0JD">https://t.co/QaPQ4Ml0JD</a> (it&#39;s even against web server logs, just the wrong field)</p>&mdash; Minty Candycane (@SirMintsALot) <a href="https://twitter.com/SirMintsALot/status/938574395240366080?ref_src=twsrc%5Etfw">December 7, 2017</a></blockquote>
 
 ** Approach
    :PROPERTIES:

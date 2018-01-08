@@ -89,8 +89,8 @@ Determine which song in =christmassongs.db= has the most likes.
    :CUSTOM_ID: hints
    :END:
 
-[[https://twitter.com/ThePlumSweetest][Sugarplum Mary on Twitter has a hint]]
-  * [[https://twitter.com/ThePlumSweetest/status/941067133898833921][Hey @PepperyGoodness, can you help me with an SQL problem I've seen? I think I need to do GROUP BY, but I'm not quite sure of the syntax.]]
+Sugarplum Mary on Twitter has a hint: 
+#+HTML: <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Hey <a href="https://twitter.com/PepperyGoodness?ref_src=twsrc%5Etfw">@PepperyGoodness</a>, can you help me with an SQL problem I&#39;ve seen? I think I need to do GROUP BY, but I&#39;m not quite sure of the syntax.</p>&mdash; SugerPlum Mary (@ThePlumSweetest) <a href="https://twitter.com/ThePlumSweetest/status/941067133898833921?ref_src=twsrc%5Etfw">December 13, 2017</a></blockquote>
 
 ** Approach
    :PROPERTIES:

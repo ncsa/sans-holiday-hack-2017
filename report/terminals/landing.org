@@ -70,8 +70,9 @@ According to the motd we need to find and run the elftalkd binary.
    :CUSTOM_ID: hints
    :END:
 
-[[https://twitter.com/GreenestElf][Bushy Evergreen on Twitter has a hint]]
-  * [[https://twitter.com/GreenestElf/status/938165130906365952][Ugh, somebody copied over the wrong `find` executable to my system today. How am I supposed to know where find normally is?!]]
+Bushy Evergreen on Twitter has a hint:
+
+#+HTML: <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Ugh, somebody copied over the wrong `find` executable to my system today. How am I supposed to know where find normally is?!</p>&mdash; Bushy Evergreen (@GreenestElf) <a href="https://twitter.com/GreenestElf/status/938165130906365952?ref_src=twsrc%5Etfw">December 5, 2017</a></blockquote>
 
 ** Approach
    :PROPERTIES:

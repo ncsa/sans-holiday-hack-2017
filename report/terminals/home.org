@@ -74,12 +74,11 @@ bash: ./trainstartup: cannot execute binary file: Exec format error
    :CUSTOM_ID: hints
    :END:
 
-[[https://twitter.com/PepperyGoodness][Pepper Minstix on Twitter has a hint]]
-  * [[https://twitter.com/PepperyGoodness/status/938545233624678400][Actually, @GreenesterElf , you're better at prompt commands than I am. Why can't I get this model train thing working? I'm in the right directory like you taught me, but this system is still saying "No such file or directory"]]
+Pepper Minstix on Twitter has a hint:
+#+HTML: <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Actually, <a href="https://twitter.com/GreenesterElf?ref_src=twsrc%5Etfw">@GreenesterElf</a> , you&#39;re better at prompt commands than I am. Why can&#39;t I get this model train thing working? I&#39;m in the right directory like you taught me, but this system is still saying &quot;No such file or directory&quot;</p>&mdash; Pepper Minstix (@PepperyGoodness) <a href="https://twitter.com/PepperyGoodness/status/938545233624678400?ref_src=twsrc%5Etfw">December 6, 2017</a></blockquote>
 
-[[https://twitter.com/GreenesterElf][Holly Evergreen on Twitter has a hint for this as well]]
-  * [[https://twitter.com/GreenesterElf/status/938552050253643777][I still can't figure out Pepper Minstix's issue. It looks like the binary is compiled for another architecture. I think qemu can help, but I don't want to run the entire OS :\ https://doc.opensuse.org/documentation/… helps, but I just want one binary, not the whole system!]] [[https://doc.opensuse.org/documentation/leap/virtualization/html/book.virt/cha.qemu.running.html]]
-
+Holly Evergreen on Twitter has a hint for this as well:
+#+HTML: <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">I still can&#39;t figure out Pepper Minstix&#39;s issue. It looks like the binary is compiled for another architecture. I think qemu can help, but I don&#39;t want to run the entire OS :\ <a href="https://t.co/pikSOOkyZe">https://t.co/pikSOOkyZe</a> helps, but I just want one binary, not the whole system!</p>&mdash; Holly Evergreen (@GreenesterElf) <a href="https://twitter.com/GreenesterElf/status/938552050253643777?ref_src=twsrc%5Etfw">December 6, 2017</a></blockquote>
 
 ** Approach
    :PROPERTIES:

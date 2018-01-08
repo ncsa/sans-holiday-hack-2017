@@ -81,13 +81,9 @@ cp: cannot create regular file '/etc/shadow': Permission denied
    :CUSTOM_ID: approach
    :END:
 
-[[https://twitter.com/ClimbALLdaTrees][Shinny Upatree on Twitter has a few hints]]
-  * [[https://twitter.com/ClimbALLdaTrees/status/938578034113765376][You know that feeling when something horrible has happened? So I was editing /etc/shadow manually, and... well:
-$ ls -l /etc/shadow
--rw-rw---- 1 root shadow 0 Dec  7 01:13 /etc/shadow
+Shinny Upatree on Twitter has a few hints:
 
-@1Horse1OSSleigh tells me the "Non-default shadow group permissions" might help.... okay?]
-  * [[https://twitter.com/ClimbALLdaTrees/status/938578359860174848][I think I have some pseudo (sp?) permissions on this Unix server, but I don't know what that means. @GreenesterElf said this was a "learning opportunity" and won't give me the answer :'(]]
+#+HTML: <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">I think I have some pseudo (sp?) permissions on this Unix server, but I don&#39;t know what that means. <a href="https://twitter.com/GreenesterElf?ref_src=twsrc%5Etfw">@GreenesterElf</a> said this was a &quot;learning opportunity&quot; and won&#39;t give me the answer :&#39;(</p>&mdash; Shinny Upatree (@ClimbALLdaTrees) <a href="https://twitter.com/ClimbALLdaTrees/status/938578359860174848?ref_src=twsrc%5Etfw">December 7, 2017</a></blockquote>
 
 ** Approach
    :PROPERTIES:
