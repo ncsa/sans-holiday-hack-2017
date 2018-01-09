@@ -62,7 +62,7 @@ directory: =christmassongs.db= and =runtoanswer=.
 
 If we try running =runtoanswer=, we see:
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
 elf@197ceebbd305:~$ ./runtoanswer 
 Starting up, please wait......
 Enter the name of the song with the most likes:
@@ -99,7 +99,7 @@ Sugarplum Mary on Twitter has a hint:
 
 Let's see exactly what this "db" file is:
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
 elf@0d0185762210:~$ less christmassongs.db 
 bash: less: command not found
 elf@0d0185762210:~$ more christmassongs.db 
@@ -109,7 +109,7 @@ SQLite format 3
 
 sqlite!  Ok!  Let's start up sqlite and change some output options
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
 elf@5cf3b692a837:~$ sqlite3 christmassongs.db 
 SQLite version 3.11.0 2016-02-15 17:29:24
 Enter ".help" for usage hints.
@@ -169,12 +169,10 @@ sqlite>
 
 A one-liner is:
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
 elf@1dea81eaaac4:~$ sqlite3 christmassongs.db "select title from songs, likes where songs.id=likes.songid group by title order by count(*) desc limit 1;"
 Stairway to Heaven
 #+END_SRC
-
-AsciiCinema video of the solution?
 
 ** Alternatives
    :PROPERTIES:
@@ -204,7 +202,10 @@ sqlite>
 This can also be done in a single query as long as we don't care about the like count:
 
 #+BEGIN_SRC 
-sqlite> select title from songs where id in (select songid from likes group by songid order by count(*) desc limit 1);
+sqlite> select title from songs where id = (select songid from likes group by songid order by count(*) desc limit 1);
 Stairway to Heaven
 #+END_SRC
 
+This method even outperforms the join, taking about half the time to run!  This
+is because the join has to examine all of the song titles, but the subquery
+method only has to look at one.
