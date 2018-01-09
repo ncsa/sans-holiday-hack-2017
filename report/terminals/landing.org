@@ -88,28 +88,30 @@ To solve this challenge we need to find a valid version of =find= on the system 
 
 First we need to test what's wrong with =find=.
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
 elf@784e43534178:~$ find
 bash: /usr/local/bin/find: cannot execute binary file: Exec format error
 #+END_SRC
 
-It looks like =find= is located in =/usr/local/bin/find=. Let's look at our PATH variable that identifies the order that executables are located in.
+It looks like =find= is located in =/usr/local/bin/find=.
+=find= is a standard UNIX utility and is not normally located in /usr/local so this output is unexpected.
+Let's look at our PATH variable that identifies the order that executables are located in.
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
 elf@784e43534178:~$ echo $PATH
 /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
 #+END_SRC
 
-=/usr/local/bin= is prioritized before =/usr/bin=. Let's see if find exists in =/usr/bin=.
+=/usr/local/bin= is prioritized before =/usr/bin=. Let's see if find exists in the normal =/usr/bin= location.
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
 elf@784e43534178:~$ ls -al /usr/bin/find
 -rwxr-xr-x 1 root root 221768 Feb  7  2016 /usr/bin/find
 #+END_SRC
 
 The original =find= is still there. We can use it to find the =elftalkd= binary and execute it.
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
 elf@784e43534178:~$ /usr/bin/find / -iname elftalkd            
 /usr/bin/find: '/var/cache/ldconfig': Permission denied
 /usr/bin/find: '/var/cache/apt/archives/partial': Permission denied
@@ -155,7 +157,7 @@ Background daemon...
 
 The quick method is to iterate through using wildcards to execute the binary.
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
 elf@784e43534178:~$ /elftalkd
 bash: /elftalkd: No such file or directory
 elf@784e43534178:~$ /*/elftalkd
@@ -168,27 +170,21 @@ elf@784e43534178:~$ /*/*/*/elftalkd
 
         --== Initializing elftalkd ==--
 Initializing Messaging System!
-Nice-O-Meter configured to 0.90 sensitivity.
-Acquiring messages from local networks...
+...
+#+END_SRC
 
+This can also be further simplified by using the relatively new bash option =globstar=.
+According to the documentation, "If set, the pattern '**' used in a filename
+expansion context will match all files and zero or more directories and
+subdirectories. If the pattern is followed by a ‘/’, only directories and
+subdirectories match."  With this option enabled, we only need a single attempt to find
+and execute the binary:
 
---== Initialization Complete ==--
-
-      _  __ _        _ _       _ 
-     | |/ _| |      | | |     | |
-  ___| | |_| |_ __ _| | | ____| |
- / _ \ |  _| __/ _` | | |/ / _` |
-|  __/ | | | || (_| | |   < (_| |
- \___|_|_|  \__\__,_|_|_|\_\__,_|
-
--*> elftalkd! <*-
-Version 9000.1 (Build 31337) 
-By Santa Claus & The Elf Team
-Copyright (C) 2017 NotActuallyCopyrighted. No actual rights reserved.
-Using libc6 version 2.23-0ubuntu9
-LANG=en_US.UTF-8
-Timezone=UTC
-
-Commencing Elf Talk Daemon (pid=6021)... done!
-Background daemon...
+#+BEGIN_SRC
+elf@784e43534178:~$ shopt -s globstar
+elf@784e43534178:~$ /**/elftalkd
+        Running in interactive mode
+        --== Initializing elftalkd ==--
+Initializing Messaging System!
+...
 #+END_SRC
