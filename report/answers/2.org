@@ -241,8 +241,8 @@ On the Topic of Flying Animals
    :CUSTOM_ID: alternatives
    :END:
 
-* TODO ripgrep
-* TODO SSH key method
+  * TODO ripgrep
+  * TODO SSH key method
 
 ** Common Pitfalls
    :PROPERTIES:

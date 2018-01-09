@@ -1,7 +1,4 @@
-all: mail.text hints.md infractions.json infractions_one_per_line.json alabaster.jwt santa.jwt password_hashes.txt jwt.john john.txt gingerbread\ cookie\ recipe.docx password_combos.txt
-mail.text: mail.json
-	cat mail.json | jq '.INBOX[].BODY.body' -r > mail.text
-
+all: mail/all.txt hints.md infractions.json infractions_one_per_line.json alabaster.jwt santa.jwt password_hashes.txt jwt.john john.txt gingerbread\ cookie\ recipe.docx password_combos.txt
 infractions.json: ../tools/nppd.py
 	../tools/nppd.py
 
@@ -29,6 +26,12 @@ jwt.john: ../tools/jwt2john.py jwt
 john.txt: jwt.john
 	john  --format=HMAC-SHA256 jwt.john
 	john  --format=HMAC-SHA256 jwt.john -show > john.txt
+
+mail/alabaster.snowball@northpolechristmastown.com.json: edb.json
+	../tools/export_all_email.py edb.json
+
+mail/all.txt: mail.json
+	for x in  mail/*.json ;do cat $$x | jq '.INBOX[].BODY.body' -r ;done > mail/all.txt
 
 mail/admin@northpolechristmastown.com.json:
 	../tools/ewa.py admin > mail/admin@northpolechristmastown.com.json
