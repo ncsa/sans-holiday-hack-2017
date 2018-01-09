@@ -52,7 +52,7 @@ We're logged in as the user elf. There's a file called =trainstartup= in our hom
 
 This is a 64-bit x86 system:
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
 elf@784e43534178:~$ uname -a
 Linux 784e43534178 4.9.0-4-amd64 #1 SMP Debian 4.9.65-3 (2017-12-03) x86_64 x86_64 x86_64 GNU/Linux
 #+END_SRC
@@ -64,7 +64,7 @@ Linux 784e43534178 4.9.0-4-amd64 #1 SMP Debian 4.9.65-3 (2017-12-03) x86_64 x86_
 
 It looks like we just want to run the =trainstartup= file, but if we try that, we get an exec error:
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
 elf@784e43534178:~$ ./trainstartup 
 bash: ./trainstartup: cannot execute binary file: Exec format error
 #+END_SRC
@@ -87,14 +87,14 @@ Holly Evergreen on Twitter has a hint for this as well:
 
 There's really not much to go on here. We'll first use =file= to identify the =trainstartup= binary:
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
 elf@784e43534178:~$ file trainstartup 
 trainstartup: ELF 32-bit LSB  executable, ARM, EABI5 version 1 (GNU/Linux), statically linked, for GNU/Linux 3.2.0, BuildID[sha1]=005de4685e8563d10b3de3e0be7d6fdd7ed732eb, not stripped
 #+END_SRC
 
 So the file is a Linux ELF binary, but it's for the ARM processor, and not for the x86_64 system that we're on. Let's see if there are any programs in our path that have =arm= in the file name:
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
 elf@784e43534178:~$ compgen -c | grep arm
 qemu-arm
 qemu-armeb
@@ -102,7 +102,7 @@ qemu-armeb
 
 Running it with the help option gives us:
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
 elf@784e43534178:~$ qemu-arm -h
 usage: qemu-arm [options] program [arguments...]
 Linux CPU emulator (compiled for arm emulation)
@@ -111,7 +111,7 @@ Linux CPU emulator (compiled for arm emulation)
 
 This looks like exactly what we need. =qemu-arm= provides us with an ARM emulator, and we just need to run it with our program as the single argument. Let's give it a shot:
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
 elf@784e43534178:~$ qemu-arm ./trainstartup 
 Starting up ... 
 
@@ -160,7 +160,7 @@ system. Another useful trick is using find to see what changes were
 made to the system after it was installed. Let's take a quick look at
 =qemu=arm= and at another file we know was changed, =trainstartup=:
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
 elf@784e43534178:~$ stat /usr/bin/qemu-arm trainstartup 
   File: '/usr/bin/qemu-arm'
   Size: 1725888         Blocks: 3376       IO Block: 4096   regular file
@@ -194,7 +194,7 @@ modifications to a system. Let's use =find= to see what files were
 modified after =/etc/apt= was changed, and we'll look for files with
 =arm= in the name:
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
 elf@784e43534178:~$ find / -xdev -cnewer /etc/apt/sources.list | grep -w arm
 /usr/bin/qemu-arm
 /usr/share/man/man1/qemu-arm.1.gz
@@ -207,7 +207,7 @@ If that still didn't work, here's a one-liner to sort the files on the
 system according to when their =ctime= was modified. This would enable
 you to see a complete timeline of changes to files:
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
 elf@784e43534178:~$ find / -xdev -printf "%C+\t%p\n" | sort | head
 2017-12-04+14:36:51.7363603170  /bin/bash
 2017-12-04+14:36:51.7363603170  /bin/bunzip2
