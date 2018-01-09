@@ -13,64 +13,153 @@ Pole Mountain and what is your proof?
    :CUSTOM_ID: background-information
    :END:
 
-Do we know anything about this system already?
+We need to answer 3 questions involving infractions, insider moles and who is throwing snowballs. We need 4 things to answer these questions.
 
-Hints:
-
-List any useful hints here.
-
-Blog Posts:
-
-Are any of these useful?
-
-- Putting My Zero Cents In: Using the Free Tier on Amazon Web Services
-  (EC2)
-  https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2
-  Spinning up an EC2 instance, but also a lot of emphasis on how to use
-  SSH keys.
-- Your Pokemon Guide for Essential SQL Pen Test Commands
-  https://pen-testing.sans.org/blog/2017/12/09/your-pokemon-guide-for-essential-sql-pen-test-commands
-  SQL basics (SELECT, WHERE, wildcards, ORDER BY, GROUP BY, COUNT)
-- Exploiting XXE Vulnerabilities in IIS/.NET
-  https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities
-  Including remote content in XML
-- Why You Need the Skills to Tinker with Publicly Released Exploit Code
-  https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code
-  Mentions Apache struts vulnerabilities, specifically CVE-2017-5638 and
-  CVE-2017-9805 Code: https://github.com/chrisjd20/cve-2017-9805.py
-- Go To The Head Of The Class: LD\_PRELOAD For The Win
-  https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win
-- A Spot of Tee
-  https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee Restricted
-  bash shell, and bypassing the I/O restriction with tee
-- Understanding and Exploiting Web-based LDAP
-  https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap
-  LDAP syntax, LDAP injection
-- Massively Scaling your Scanning
-  https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning
-  masscan
+  * We need data from the [[http://nppd.northpolechristmastown.com/][North Pole Police Department]]'s [[http://nppd.northpolechristmastown.com/infractions][infractions]] page.
+  * We need the naughty and nice list from the SMB server that we accessed from question 3.
+  * We need the Munchkin Mole Report BOLO also on the SMB server.
+  * We need to complete the "Bumble's Bounce" level on the WebGL game in order to unlock a chat from Sam.
 
 ** Goal
    :PROPERTIES:
    :CUSTOM_ID: goal
    :END:
 
-What are we trying to accomplish?
+  * We need to identify what factors trigger a 'naughty' flag.
+  * We need to identify the six insider threat moles.
+  * We need to identify who is throwing snow balls.
 
 ** Approach
    :PROPERTIES:
    :CUSTOM_ID: approach
    :END:
 
-Describe the thought process that we tried here. How were we able to use
-the hints or the blog posts?
+Playing around with the infractions page we can see that once you do a search a Download option becomes available to download all the search results in json format. Let's automate this to create a local copy of all the data. We can do this searching for all results before and during a specific date, and all results after that date. We then combine those results into a single file. We can automate this with a script we'll call =nppd.py=.
+
+#+BEGIN_SRC python
+#!/usr/bin/env python3
+import requests
+import json
+
+BASE = "http://nppd.northpolechristmastown.com/"
+
+def search_infractions(query):
+    url = BASE + "infractions"
+
+    params = {
+        "json": "1",
+        "query": query,
+    }
+    resp = requests.get(url, params=params).json()
+    return resp['infractions']
+
+
+def download_infractions():
+    old = search_infractions("date <= 2017-12-10")
+    recent = search_infractions("date > 2017-12-10")
+    all_infractions = old+recent
+
+    print("Old infractions", len(old))
+    print("Recent infractions", len(recent))
+    print("Total infractions", len(all_infractions))
+
+    with open("infractions.json", 'w') as f:
+        json.dump(all_infractions, f, indent=4)
+
+if __name__ == "__main__":
+    download_infractions()
+#+END_SRC
+
+Calling =nppd.py= creates a file 'infractions.json'. Now that we have the NPPD's infractions database we need compare it to the Naughty and Nice file we found on the SMB server. We can automate this process scriptomagically. While we're at it we should also script identifying the 6 insider threat moles as well. For finding the moles it appears their characteristics are pulling hair and throwing rocks. We'll try to identify people on the infractions list that do both.
+
+To get the number of infractions needed to get onto the naughty list we take the names on the Naughty and Nice List that have been marked as =Naughty= and count the total number of infractions for those people and we identify the lowest number of infractions per person amongst all of them.
+
+So to automate all this we'll create script we'll call =visualize_infractions.py= to correlate our data.
+
+#+BEGIN_SRC python
+#!/usr/bin/env python3
+import csv
+import json
+from operator import itemgetter
+from collections import defaultdict
+
+WANT = set(['Aggravated pulling of hair', 'Throwing rocks (at people)', 'Throwing rocks (non-person target)'])
+
+def get_naughty():
+    with open("Naughty and Nice List.csv") as f:
+        reader = csv.reader(f)
+        rows = list(reader)
+
+    return [name for (name, naughty) in rows if naughty == 'Naughty']
+
+def main():
+    byname = defaultdict(set)
+    infraction_count_byname = defaultdict(int)
+    with open("infractions.json") as f:
+        infractions = json.load(f)
+
+    for i in infractions:
+        byname[i['name']].add(i['title'])
+        infraction_count_byname[i['name']] += 1
+
+    print("Six insider threat moles:")
+    for n, titles in byname.items():
+        if len(titles & WANT) >= 2:
+            print("*", n,titles)
+
+    min_infractions = min(infraction_count_byname[name] for name in get_naughty())
+
+    print()
+    print("How many infractions are required to be marked as naughty on Santa's Naughty and Nice List:", min_infractions)
+
+if __name__ == "__main__":
+   main()
+#+END_SRC
+
+After we run our script we get these results:
+
+#+BEGIN_SRC
+Six insider threat moles:
+* Isabel Mehta {'Tantrum in a private facility', 'Aggravated pulling of hair', 'Throwing rocks (non-person target)'}
+* Nina Fitzgerald {'Giving super atomic wedgies', 'Aggravated pulling of hair', 'Throwing rocks (at people)', 'Possession of unlicensed slingshot', 'Bedtime violation'}
+* Kirsty Evans {'Giving super atomic wedgies', 'Aggravated pulling of hair', 'Throwing rocks (at people)', 'Crayon on walls'}
+* Sheri Lewis {'Throwing rocks (at people)', 'Aggravated pulling of hair', 'Possession of unlicensed slingshot', 'Naughty words'}
+* Beverly Khalil {'Aggravated pulling of hair', 'Throwing rocks (at people)', 'Playing with matches', 'Possession of unlicensed slingshot', 'General sassing'}
+* Christy Srivastava {'Tantrum in a private facility', 'Aggravated pulling of hair', 'Tantrum in public', 'Throwing rocks (non-person target)'}
+
+How many infractions are required to be marked as naughty on Santa's Naughty and Nice List: 4
+#+END_SRC
+
+Finally, once we play through the Bumbles Bounce level and get all achievements this chat gets unlocked and we have our answer for who is throwing snowballs.
+
+#+BEGIN_QUOTE
+Arrrrrrrrgh! Grrrrrrrr! ROOOOOOOAR!
+
+You've done it! You found out who was throwing the giant snowballs! It was the Abominable Snow Monster. We should have known. Thank you for your great work!
+
+But, you know, he doesn't seem quite himself. Look into his eyes. It almost looks like he has been hypnotized. Something's not right with him.
+
+In fact, he seems to be under someone else's control. We've got to find out who is pulling his strings, or else the real villain will remain on the loose and will likely strike again.
+
+It means, buckle your seatbelt, dear player, because the North Pole is going bye-bye
+#+END_QUOTE
 
 ** Solution
    :PROPERTIES:
    :CUSTOM_ID: solution
    :END:
 
-Summarize the reference solution that we found
+It appears we need =4= infractions to make the Naughty list.
+
+Our six insider moles appear to be:
+  * Isabel Mehta
+  * Nina Fitzgerald
+  * Kirsty Evans
+  * Sheri Lewis
+  * Beverly Khalil
+  * Christy Srivastava
+
+According to the unlocked chat with Sam, the person throwing snowballs is =the Abominable Snow Monster=, but maybe under someone else's control.
 
 ** Alternatives
    :PROPERTIES:
