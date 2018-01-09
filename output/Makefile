@@ -49,6 +49,6 @@ password_combos.txt: ../tools/gen_password_combos.py
 	../tools/gen_password_combos.py > password_combos.txt
 	wc -l password_combos.txt
 
-hashcat.txt: password_hashes.txt password_combos.txt
+ldap_hashcat.txt: password_hashes.txt password_combos.txt
 	hashcat -m 0  -a 1 password_hashes.txt password_combos.txt  password_combos.txt -j ' ' --username || true
-	hashcat -m 0  -a 1 password_hashes.txt password_combos.txt  password_combos.txt -j ' ' --username --show | tee hashcat.txt
+	hashcat -m 0  -a 1 password_hashes.txt password_combos.txt  password_combos.txt -j ' ' --username --show | tee ldap_hashcat.txt
