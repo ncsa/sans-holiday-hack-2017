@@ -88,7 +88,9 @@ PORT     STATE  SERVICE
 Nmap done: 1 IP address (1 host up) scanned in 7.04 seconds
 #+END_SRC
 
-There appears to be another name on the certificate of the host. Let's let nmap's scripts scan that as well.
+In addition to the hidden link for dev.northpolechristmastown.com, it is also
+present as an alternate name on the certificate of the host. Let's let nmap's
+scripts scan that as well.
 
 #+BEGIN_SRC sh
 nmap -sC dev.northpolechristmastown.com
