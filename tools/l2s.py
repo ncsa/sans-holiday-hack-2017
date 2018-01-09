@@ -42,7 +42,7 @@ def interactive():
     setup()
     while True:
         try:
-            cmd = raw_input("albaster_snowball@l2s:$ ")
+            cmd = raw_input("www-data@l2s:$ ")
         except EOFError:
             print()
             return
