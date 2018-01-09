@@ -342,7 +342,7 @@ uid=33(www-data) gid=33(www-data) groups=33(www-data)
 holiday@hack:~$ ./l2s.py uname -a
 Linux hhc17-apache-struts1 4.9.0-5-amd64 #1 SMP Debian 4.9.65-3+deb9u2 (2018-01-04) x86_64 GNU/Linux
 
-holiday@hack:~$./l2s.py
+holiday@hack:~$ ./l2s.py
 www-data@l2s:$ id
 uid=33(www-data) gid=33(www-data) groups=33(www-data)
 
@@ -382,3 +382,150 @@ Initially the host has a couple of noticeable holes.
   * Easy bypass of rbash by adding the '-t' flag and executing bash on ssh login (eventually rbash was forced through sshd_config)
 
 The server itself housed two virtual web hosts, the Letter's to Santa application which ran PHP in nginx and the Development site which was run by apache struts on a high port being redirected by nginx.
+
+** Moving Foward
+
+Now that we have a script to automate access to l2s let's run nmap to scan the internal network.
+
+#+BEGIN_SRC sh
+holiday@hack:~$ ./l2s.py "nmap -sC 10.142.0.*"
+
+Starting Nmap 7.40 ( https://nmap.org ) at 2018-01-09 20:51 UTC
+Nmap scan report for hhc17-l2s-proxy.c.holidayhack2017.internal (10.142.0.2)
+Host is up (0.00018s latency).
+Not shown: 996 closed ports
+PORT     STATE SERVICE
+22/tcp   open  ssh
+| ssh-hostkey:
+|   2048 81:aa:b0:de:e0:4a:b5:23:7e:e8:cd:14:f3:fa:e2:f3 (RSA)
+|_  256 dc:0b:52:ab:43:87:59:7b:04:88:2d:5c:db:92:4f:ba (ECDSA)
+80/tcp   open  http
+|_http-title: Did not follow redirect to https://hhc17-l2s-proxy.c.holidayhack2017.internal/
+443/tcp  open  https
+|_http-title: Toys List
+| ssl-cert: Subject: commonName=dev.northpolechristmastown.com
+| Subject Alternative Name: DNS:dev.northpolechristmastown.com, DNS:l2s.northpolechristmastown.com
+| Not valid before: 2017-11-29T12:54:54
+|_Not valid after:  2018-02-27T12:54:54
+|_ssl-date: TLS randomness does not represent time
+| tls-nextprotoneg:
+|_  http/1.1
+2222/tcp open  EtherNetIP-1
+
+Nmap scan report for hhc17-apache-struts1.c.holidayhack2017.internal (10.142.0.3)
+Host is up (0.00017s latency).
+Not shown: 998 closed ports
+PORT   STATE SERVICE
+22/tcp open  ssh
+| ssh-hostkey:
+|   2048 81:aa:b0:de:e0:4a:b5:23:7e:e8:cd:14:f3:fa:e2:f3 (RSA)
+|_  256 dc:0b:52:ab:43:87:59:7b:04:88:2d:5c:db:92:4f:ba (ECDSA)
+80/tcp open  http
+|_http-title: Toys List
+
+Nmap scan report for mail.northpolechristmastown.com (10.142.0.5)
+Host is up (0.00018s latency).
+Not shown: 994 closed ports
+PORT     STATE SERVICE
+22/tcp   open  ssh
+| ssh-hostkey:
+|   2048 a2:c4:67:fe:a2:d9:df:47:02:55:35:1a:f4:1b:b6:02 (RSA)
+|_  256 9e:d4:01:d1:71:be:95:90:68:6e:ee:87:28:42:49:8e (ECDSA)
+25/tcp   open  smtp
+|_smtp-commands: mail.northpolechristmastown.com, PIPELINING, SIZE 10240000, ETRN, AUTH PLAIN LOGIN, AUTH=PLAIN LOGIN, ENHANCEDSTATUSCODES, 8BITMIME, DSN,
+80/tcp   open  http
+| http-robots.txt: 1 disallowed entry
+|_/cookie.txt
+|_http-title: Site doesn't have a title (text/html; charset=UTF-8).
+143/tcp  open  imap
+|_imap-capabilities: more AUTH=PLAIN capabilities have OK Pre-login AUTH=LOGINA0001 ENABLE listed SASL-IR IDLE post-login LITERAL+ IMAP4rev1 LOGIN-REFERRALS ID
+2525/tcp open  ms-v-worlds
+3000/tcp open  ppp
+
+Nmap scan report for edb.northpolechristmastown.com (10.142.0.6)
+Host is up (0.00014s latency).
+Not shown: 996 closed ports
+PORT     STATE    SERVICE
+22/tcp   open     ssh
+| ssh-hostkey:
+|   2048 73:de:22:15:7b:53:13:85:a7:a5:8f:10:3a:5d:3b:3f (RSA)
+|_  256 f5:d7:f3:5d:dc:7c:73:10:cc:f7:a4:c7:f0:d9:61:0c (ECDSA)
+80/tcp   open     http
+| http-robots.txt: 1 disallowed entry
+|_/dev
+| http-title: Site doesn't have a title (text/html; charset=utf-8).
+|_Requested resource was http://edb.northpolechristmastown.com/index.html
+389/tcp  filtered ldap
+8080/tcp open     http-proxy
+| http-robots.txt: 1 disallowed entry
+|_/dev
+|_http-title: Did not follow redirect to http://edb.northpolechristmastown.com/index.html
+
+Nmap scan report for hhc17-emi.c.holidayhack2017.internal (10.142.0.8)
+Host is up (0.00021s latency).
+Not shown: 995 closed ports
+PORT     STATE SERVICE
+80/tcp   open  http
+| http-methods:
+|_  Potentially risky methods: TRACE
+|_http-title: IIS Windows Server
+135/tcp  open  msrpc
+139/tcp  open  netbios-ssn
+445/tcp  open  microsoft-ds
+3389/tcp open  ms-wbt-server
+| ssl-cert: Subject: commonName=hhc17-smb-server
+| Not valid before: 2017-11-06T13:46:55
+|_Not valid after:  2018-05-08T13:46:55
+|_ssl-date: 2018-01-09T20:51:47+00:00; 0s from scanner time.
+
+Host script results:
+|_nbstat: NetBIOS name: HHC17-SMB-SERVE, NetBIOS user: <unknown>, NetBIOS MAC: 42:01:0a:8e:00:08 (unknown)
+| smb-security-mode:
+|   account_used: <blank>
+|   authentication_level: user
+|   challenge_response: supported
+|_  message_signing: disabled (dangerous, but default)
+|_smbv2-enabled: Server supports SMBv2 protocol
+
+Nmap scan report for hhc17-apache-struts2.c.holidayhack2017.internal (10.142.0.11)
+Host is up (0.00021s latency).
+Not shown: 997 closed ports
+PORT     STATE SERVICE
+22/tcp   open  ssh
+| ssh-hostkey:
+|   2048 81:aa:b0:de:e0:4a:b5:23:7e:e8:cd:14:f3:fa:e2:f3 (RSA)
+|_  256 dc:0b:52:ab:43:87:59:7b:04:88:2d:5c:db:92:4f:ba (ECDSA)
+80/tcp   open  http
+|_http-title: Toys List
+4444/tcp open  krb524
+
+Nmap scan report for eaas.northpolechristmastown.com (10.142.0.13)
+Host is up (0.00078s latency).
+Not shown: 998 filtered ports
+PORT     STATE SERVICE
+80/tcp   open  http
+| http-methods:
+|_  Potentially risky methods: TRACE
+|_http-title: Index - North Pole Engineering Presents: EaaS!
+3389/tcp open  ms-wbt-server
+| ssl-cert: Subject: commonName=hhc17-elf-manufacturing
+| Not valid before: 2017-11-23T20:53:55
+|_Not valid after:  2018-05-25T20:53:55
+|_ssl-date: 2018-01-09T20:51:47+00:00; 0s from scanner time.
+
+Post-scan script results:
+| clock-skew:
+|   0s:
+|     10.142.0.13 (eaas.northpolechristmastown.com)
+|_    10.142.0.8 (hhc17-emi.c.holidayhack2017.internal)
+| ssh-hostkey: Possible duplicate hosts
+| Key 256 dc:0b:52:ab:43:87:59:7b:04:88:2d:5c:db:92:4f:ba (ECDSA) used by:
+|   10.142.0.2
+|   10.142.0.3
+|   10.142.0.11
+| Key 2048 81:aa:b0:de:e0:4a:b5:23:7e:e8:cd:14:f3:fa:e2:f3 (RSA) used by:
+|   10.142.0.2
+|   10.142.0.3
+|_  10.142.0.11
+Nmap done: 256 IP addresses (7 hosts up) scanned in 14.86 seconds
+#+END_SRC
