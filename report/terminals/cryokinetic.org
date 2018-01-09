@@ -139,6 +139,8 @@ The candy cane striping machine is up and running!
    :CUSTOM_ID: alternatives
    :END:
 
+There are *many* different ways to solve this challenge.
+
 Overwrite an executable file with the existing binary:
 
 #+BEGIN_SRC
@@ -157,7 +159,7 @@ Use python to chmod.  The chmod binary is just a wrapper around the
 chmod libc function.  Any programming language will have this
 available:
 
-#+BEGIN_SRC
+#+BEGIN_SRC python
 >>> import os
 >>> os.chmod("CandyCaneStriper", 0755)
 Traceback (most recent call last):
@@ -165,7 +167,7 @@ Traceback (most recent call last):
 OSError: [Errno 1] Operation not permitted: 'CandyCaneStriper'
 #+END_SRC
 
-FAIL :(  What if make a copy first?
+FAIL :(  For some reason we can't modify CandyCaneStriper.  What if make a copy first?
 
 #+BEGIN_SRC
 elf@d5823d933b5d:~$ cp CandyCaneStriper c
