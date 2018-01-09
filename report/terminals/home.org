@@ -148,8 +148,6 @@ Success!
 
 You need to use =qemu-arm= to run the ARM binary: ~qemu-arm ./trainstartup~
 
-AsciiCinema video of the solution?
-
 ** Alternatives
    :PROPERTIES:
    :CUSTOM_ID: alternatives
