@@ -53,8 +53,8 @@ According to the second hint there might be development code left in the product
 If we look at the source of =l2s= the following code pops out.
 
 #+BEGIN_SRC html
-    <!-- Development version -->
-    <a href="http://dev.northpolechristmastown.com" style="display: none;">Access Development Version</a>
+<!-- Development version -->
+<a href="http://dev.northpolechristmastown.com" style="display: none;">Access Development Version</a>
 #+END_SRC
 
 Let's do some recon on the hosts:
@@ -174,7 +174,7 @@ vmlinuz.old
 
 It looks like we've been dropped into the root directory. Let's look for
 where the web root is. Normally, the default is /var/www/html on most
-linux+apache based hosts. We'll try again with the command =ls -al /var/ww/html=.
+linux+apache based hosts. We'll try again with the command =ls -al /var/www/html=.
 
 #+BEGIN_SRC sh
 total 1772
@@ -206,22 +206,21 @@ Now we can access [[https://l2s.northpolechristmastown.com/4beadb1e-5ddb-4636-98
 Let's run =find= to see if we can find the password in our webshell.
 
 #+BEGIN_SRC sh
-find / -xdev -type f -user alabaster_snowball 2>/dev/null |xargs grep password
+find / -xdev -type f -user alabaster_snowball 2>/dev/null | xargs grep password
 #+END_SRC
 
 Within the page full of results we see this:
 
 #+BEGIN_SRC sh
-/opt/apache-tomcat/webapps/ROOT/WEB-INF/classes/org/demo/rest/example/OrderMySql.class:            final String password = "stream_unhappy_buy_loss";
+/opt/apache-tomcat/webapps/ROOT/WEB-INF/classes/org/demo/rest/example/OrderMySql.class: final String password = "stream_unhappy_buy_loss";
 #+END_SRC
 
 A closer look at =OrderMySql.class= using =cat /opt/apache-tomcat/webapps/ROOT/WEB-INF/classes/org/demo/rest/example/OrderMySql.class= we find:
 
-#+BEGIN_SRC sh
-            final String username = "alabaster_snowball";
-            final String password = "stream_unhappy_buy_loss";
+#+BEGIN_SRC java
+final String username = "alabaster_snowball";
+final String password = "stream_unhappy_buy_loss";
 #+END_SRC
-
 
 ** Solution
    :PROPERTIES:
@@ -230,11 +229,19 @@ A closer look at =OrderMySql.class= using =cat /opt/apache-tomcat/webapps/ROOT/W
 
 *** What is the topic of The Great Book page available in the web root of the server?
 
+Leveraging the Apache Struts vulnerability, we can run =ls= on the common web root of =/var/www/html=, and get the filename of the page, then download it via the web server. Opening it up, we see that the topic is:
+
+#+BEGIN_QUOTE
 On the Topic of Flying Animals
+#+END_QUOTE
 
 *** What is Alabaster Snowball’s password?
 
+The trick here is just finding the right file, and the password is in cleartext in that file. We used =find= to =grep= all the files for "password".
+
+#+BEGIN_QUOTE
 =stream_unhappy_buy_loss=
+#+END_QUOTE
 
 ** Alternatives
    :PROPERTIES:
