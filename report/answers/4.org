@@ -398,7 +398,8 @@ us to archive and search e-mails, which was useful for future
 questions.
 
 #+BEGIN_SRC 
-$ ./ewa.py alabaster.snowball | jq '.INBOX[].HEADERS.body.subject' -c
+$ ./ewa.py alabaster.snowball > alabaster_inbox.json
+$ cat alabaster_inbox.json | jq '.INBOX[].HEADERS.body.subject' -c
 ["Welcome"]
 ["Re: Welcome"]
 ["Re: gingerbread cookie recipe"]
