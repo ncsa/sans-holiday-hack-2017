@@ -359,3 +359,12 @@ We can use the following indicators to search any clues we're later provided wit
 #+INCLUDE: "answers/9.org" 
 * Easter Eggs
 #+INCLUDE: "easter_eggs.org" 
+* Appendices
+** Command Execution with pip
+#+INCLUDE: "pip.org" 
+** Cracking Passphrases
+#+INCLUDE: "passphrases.org" 
+** Command Reference
+#+INCLUDE: "commands.org" 
+** External Resources
+#+INCLUDE: "resources.org" 
