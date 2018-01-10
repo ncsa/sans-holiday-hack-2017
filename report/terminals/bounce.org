@@ -82,7 +82,7 @@ Minty Candycane on Twitter has some hints
 A directory listing shows that terminal contains a binary called 'runtoanswer',
 as well as fairly large 'access.log' file:
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
 elf@784e43534178:~$ ls -lh
 total 29M
 -rw-r--r-- 1 root root  24M Dec  4 17:11 access.log
@@ -107,11 +107,12 @@ since we just want the user-agents, we can split the log lines on the double quo
    :CUSTOM_ID: solution
    :END:
 
-My solution is to use the cut tool, along with sort and uniq to find the least popular browser.
-cut is very limited compared to tools like awk or sed, but it is often simpler
-to use.  We just need to grab the right field.
+My solution is to use the =cut= tool, along with =sort= and =uniq= to find the least popular browser.
+=cut= is very limited compared to tools like =awk= or =sed=, but it is often simpler
+to use.  We just need to grab the right field.  We can experiment on just the
+first line using =head= and figure this out using trial and error:
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
 elf@784e43534178:~$ head -n 1 access.log |cut -d '"' -f 4
 -
 elf@784e43534178:~$ head -n 1 access.log |cut -d '"' -f 5
@@ -123,15 +124,15 @@ Mozilla/5.0 (compatible; DotBot/1.1; http://www.opensiteexplorer.org/dotbot, hel
 The 6th field is the user agent.  We also only want everything to the left of the first slash, so
 different versions of the same browser are merged:
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
 elf@784e43534178:~$ head -n 1 access.log |cut -d '"' -f 6|cut -d / -f 1
 Mozilla
 #+END_SRC
 
-Now that the browser is isolated, we can switch head with cat, and use the
-standard `sort | uniq -c | sort -n` to grab a frequency
+Now that the browser is isolated, we can switch =head -n 1= with =cat=, and use the
+standard =sort | uniq -c | sort -n= to grab a frequency:
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
 elf@784e43534178:~$ cat access.log |cut -d '"' -f 6|cut -d / -f 1|sort|uniq -c|sort -n|tail -n 5
      33 slack
      34 Googlebot-Image
@@ -142,7 +143,7 @@ elf@784e43534178:~$ cat access.log |cut -d '"' -f 6|cut -d / -f 1|sort|uniq -c|s
 
 Oops.. I mixed up the ordering, need the first 5, not the last 5:
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
 elf@784e43534178:~$ cat access.log |cut -d '"' -f 6|cut -d / -f 1|sort|uniq -c|sort -n|head -n 5
       1 Dillo
       2 (KHTML, like Gecko) Chrome
@@ -155,21 +156,15 @@ Looks like my favorite lightweight browser from 2001 is not very popular these d
 
 I can also confirm that the log file only has a single entry for this user-agent:
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
 elf@784e43534178:~$ grep Dillo access.log 
 XX.YY.54.139 - - [27/Nov/2017:19:41:49 -0500] "GET /invoker/JMXInvokerServlet HTTP/1.1" 301 185 "-" "Dillo/3.0.5"
 #+END_SRC
-
-TODO: AsciiCinema video of the solution?
 
 ** Alternatives
    :PROPERTIES:
    :CUSTOM_ID: alternatives
    :END:
-
-TODO: Any other, easier solutions?
-
-We can RE the binary.
 
 ** Common Pitfalls
    :PROPERTIES:
@@ -179,7 +174,7 @@ We can RE the binary.
 The most common issue appeared to be the result of not normalizing the different browser versions.
 If you count each VERSION of a browser as a separate program, you will get a result like:
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
 elf@784e43534178:~$ cat access.log |cut -d '"' -f 6|sort|uniq  -c|sort -n|head -n 5
       1 Dillo/3.0.5
       1 Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/42.0.2311.90 Safari/537.36
@@ -190,16 +185,8 @@ elf@784e43534178:~$ cat access.log |cut -d '"' -f 6|sort|uniq  -c|sort -n|head -
 
 or like:
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
 elf@784e43534178:~$ cat access.log |cut -d '"' -f 6|cut -d ' ' -f 1|sort|uniq  -c|sort -n
       1 Dillo/3.0.5
       1 curl/7.35.0
 #+END_SRC
-
-** Loot
-   :PROPERTIES:
-   :CUSTOM_ID: loot
-   :END:
-
-Anything interesting hidden on the system?
-TODO: not that i know of

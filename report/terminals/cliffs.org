@@ -52,7 +52,7 @@ Direct link: https://docker2017.holidayhackchallenge.com/?challenge=82c16868-a96
    :CUSTOM_ID: background-information
    :END:
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
 elf@784e43534178:~$ D="------"; echo "$D System info:"; uname -a; cat /etc/issue; echo "$D Differences from skeleton home directory:"; diff -r /etc/skel .; echo "$D Who am I?"; id; echo "$D Running procs:"; ps axf
 ------ System info:
 Linux 784e43534178 4.9.0-4-amd64 #1 SMP Debian 4.9.65-3 (2017-12-03) x86_64 x86_64 x86_64 GNU/Linux
@@ -118,7 +118,7 @@ Here, however, aliases have been used to effectively disable =kill=
 and its brethren. We need to figure out a way to run the real version
 of =kill= instead of the aliased version. One way to do this is to use the =which= command:
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
 elf@784e43534178:~$ which kill
 /bin/kill
 #+END_SRC
@@ -170,8 +170,6 @@ A one-liner is: ~/usr/bin/pkill -f santaslittlehelperd~. =pkill= can
 kill a process by name, and the =-f= argument will have it match
 against the full name of the process.
 
-AsciiCinema video of the solution?
-
 ** Alternatives
    :PROPERTIES:
    :CUSTOM_ID: alternatives
@@ -179,7 +177,7 @@ AsciiCinema video of the solution?
 
 Another approach is simply to remove the alias, by using the unalias command:
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
 elf@784e43534178:~$ unalias kill
 elf@784e43534178:~$ ps axf
   PID TTY      STAT   TIME COMMAND
@@ -203,7 +201,7 @@ aliases are added.
 
 One more approach is to call the command you want with a backslash.
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
 elf@784e43534178:~$ \kill 8
 elf@784e43534178:~$ ps axf
   PID TTY      STAT   TIME COMMAND
@@ -214,7 +212,7 @@ elf@784e43534178:~$ ps axf
 
 Or call the command in quotes.
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
 elf@784e43534178:~$ "kill" 8
 elf@784e43534178:~$ ps axf
   PID TTY      STAT   TIME COMMAND

@@ -75,7 +75,7 @@ Following the link describes a familiar situation:
 
 Let's take a look at the executable we're dealing with:
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
 elf@f76931683b1e:~$ ls -l CandyCaneStriper 
 -rw-r--r-- 1 root root 45224 Dec 15 19:59 CandyCaneStriper
 elf@f76931683b1e:~$ file CandyCaneStriper 
@@ -84,7 +84,7 @@ CandyCaneStriper: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamical
 
 Much like how Python and Perl scripts have interpreters, ELF binaries also have interpreters. For our target, =file= tells us that our interpreter is =/lib64/ld-linux-x86-64.so.2=.
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
 elf@d5823d933b5d:~$ /lib64/ld-linux-x86-64.so.2
 Usage: ld.so [OPTION]... EXECUTABLE-FILE [ARGS-FOR-PROGRAM...]
 You have invoked `ld.so', the helper program for shared library executables.
@@ -116,7 +116,7 @@ elf@d5823d933b5d:~$ /lib64/ld-linux-x86-64.so.2 ./CandyCaneStriper
    :CUSTOM_ID: solution
    :END:
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
 elf@784e43534178:~$ /lib64/ld-linux-x86-64.so.2 ./CandyCaneStriper
                    _..._
                  .'\\ //`,      
@@ -139,9 +139,11 @@ The candy cane striping machine is up and running!
    :CUSTOM_ID: alternatives
    :END:
 
+There are *many* different ways to solve this challenge.
+
 Overwrite an executable file with the existing binary:
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
 elf@2798541ad158:~$ ls -l /bin/chmod
 -rwxr-xr-x 1 root root 0 Dec 15 20:00 /bin/chmod
 elf@2798541ad158:~$ cp /bin/ls new
@@ -157,7 +159,7 @@ Use python to chmod.  The chmod binary is just a wrapper around the
 chmod libc function.  Any programming language will have this
 available:
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC python
 >>> import os
 >>> os.chmod("CandyCaneStriper", 0755)
 Traceback (most recent call last):
@@ -165,9 +167,9 @@ Traceback (most recent call last):
 OSError: [Errno 1] Operation not permitted: 'CandyCaneStriper'
 #+END_SRC
 
-FAIL :(  What if make a copy first?
+FAIL :(  For some reason we can't modify CandyCaneStriper.  What if make a copy first?
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
 elf@d5823d933b5d:~$ cp CandyCaneStriper c
 elf@d5823d933b5d:~$ python
 Python 2.7.12 (default, Nov 20 2017, 18:23:56) 
@@ -181,7 +183,7 @@ elf@d5823d933b5d:~$ ./c
 
 With perl:
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
 elf@1e6fe4ce3449:~$ cp CandyCaneStriper c
 elf@1e6fe4ce3449:~$ cat > fix.pl
 chmod 0755 "c";
@@ -200,7 +202,7 @@ elf@1e6fe4ce3449:~$ ./c
 
 Or as a perl one liner, now that we figured out the syntax:
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
 elf@1e6fe4ce3449:~$ cp CandyCaneStriper c
 elf@1e6fe4ce3449:~$ perl -e 'chmod 0755, "c"'
 #+END_SRC

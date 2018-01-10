@@ -55,7 +55,7 @@ You will need to write your own code, but only a line or two.
 
 Two files are provided
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
 -rwxr-xr-x 1 root root 84824 Dec 16 16:47 isit42
 -rw-r--r-- 1 root root   654 Dec 15 19:59 isit42.c.un
 #+END_SRC
@@ -81,11 +81,11 @@ This blog post, [[https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of
    :CUSTOM_ID: approach
    :END:
 
-[[https://ncsa.github.io/sans-holiday-hack-2016/#org42386a9][Our team actually did this exact thing last year in order to derandomize =wumpus=.
+[[https://ncsa.github.io/sans-holiday-hack-2016/#org42386a9][Our team actually did this exact thing last year in order to derandomize =wumpus=.]
 
 In this case looking at the source code we can identify the exact code that is being used to randomize the program:
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC  c
 int getrand() {
     srand((unsigned int)time(NULL)); 
     printf("Calling rand() to select a random number.\n");
@@ -105,7 +105,7 @@ As mentioned in the hints section above, we can use [[https://pen-testing.sans.o
 
 First we'll need to create our own library. We can call it 'rand.c'.
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC c
 int rand(unsigned int *seed) {
     return 42;
 }
@@ -113,13 +113,13 @@ int rand(unsigned int *seed) {
 
 Then we compile it using the suggested flags in the article.
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
 elf@784e43534178:~$ gcc -o rand -ldl -shared -fPIC rand.c
 #+END_SRC
 
 Once compiled we can then use LD_PRELOAD to load our library.
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
 elf@784e43534178:~$ LD_PRELOAD=`pwd`/rand ./isit42
 Starting up ... done.
 Calling rand() to select a random number.
@@ -160,7 +160,6 @@ Congratulations! You've won, and have successfully completed this challenge.
 
 Another option is to just brute force it.  The sample code shows that the program is using
 
-
 #+BEGIN_SRC c
     return rand() % 4096; // returns a pseudo-random integer between 0 and 4096
 #+END_SRC
@@ -169,7 +168,7 @@ This means we should only need to run the program a few thousand times for the
 result to be 42.  However, if we try to run the program too quickly, we notice
 we get the same output each time:
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
 elf@5f015af49eab:~$ ./isit42 & ./isit42 &
 [1] 31
 [2] 32
@@ -188,7 +187,7 @@ This is because the program uses the current timestamp in seconds as a random
 seed. Running the program more than once a second will not help us.
 
 If we run this:
-#+BEGIN_SRC sh
+#+BEGIN_SRC
 elf@784e43534178:~$ while true;do ./isit42 ; done
 #+END_SRC
 
@@ -198,13 +197,13 @@ per second.  To fix this, we can run each attempt in the background using &,
 sleeping 1 second between attempts:
 
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
 elf@784e43534178:~$ while true;do ./isit42 &sleep 1;done
 #+END_SRC
 
 After a short wait, it succeeds:
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
 Calling rand() to select a random number.
 [860]   Exit 37                 ./isit42
 [865] 1869
@@ -222,25 +221,3 @@ Starting up ...                  .-.
          \,`////""""\\\\`,/        |   |  |   _   ||   |___   |   _   || | |   | _____| ||   _   ||   |___ |   |  | |
          | )//_ o  o _\\( |        |___|  |__| |__||_______|  |__| |__||_|  |__||_______||__| |__||_______||___|  |_|
 #+END_SRC
-
-** Common Pitfalls
-   :PROPERTIES:
-   :CUSTOM_ID: common-pitfalls
-   :END:
-
-Do we know what issue(s) people were running into?
-
-** About the Challenge
-   :PROPERTIES:
-   :CUSTOM_ID: about-the-challenge
-   :END:
-
-How was the challenge setup? Was there a better way to secure this
-system?
-
-** Loot
-   :PROPERTIES:
-   :CUSTOM_ID: loot
-   :END:
-
-Anything interesting hidden on the system?
