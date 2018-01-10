@@ -1,6 +1,6 @@
-** Question
+* Question
    :PROPERTIES:
-   :CUSTOM_ID: question
+   :CUSTOM_ID: q3_question
    :END:
 
 The North Pole engineering team uses a Windows SMB server for sharing
@@ -8,9 +8,9 @@ documentation and correspondence. Using your access to the Letters to
 Santa server, identify and enumerate the SMB file-sharing server.
 What is the file server share name?
 
-** Background Information
+* Background Information
    :PROPERTIES:
-   :CUSTOM_ID: background-information
+   :CUSTOM_ID: q3_background-information
    :END:
 
 The scope statement calls out systems on 10.142.0.0/24 as being in scope:
@@ -45,9 +45,9 @@ This post on the SANS Pen Testing Blog seems relevant, but masscan isn't install
 - Massively Scaling your Scanning
   https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning
 
-** Goal
+* Goal
    :PROPERTIES:
-   :CUSTOM_ID: goal
+   :CUSTOM_ID: q3_goal
    :END:
 
 Three separate things:
@@ -56,9 +56,9 @@ Three separate things:
 2. Enumerate the shares on it,
 3. Name the file server share.
 
-** Approach
+* Approach
    :PROPERTIES:
-   :CUSTOM_ID: approach
+   :CUSTOM_ID: q3_approach
    :END:
 
 Let's follow the =nmap= overview.
@@ -215,18 +215,18 @@ getting file \Naughty and Nice List.csv of size 10245 as Naughty and Nice List.c
 getting file \Naughty and Nice List.docx of size 60344 as Naughty and Nice List.docx (390.3 KiloBytes/sec) (average 1452.3 KiloBytes/sec)
 #+END_SRC
 
-** Solution
+* Solution
    :PROPERTIES:
-   :CUSTOM_ID: solution
+   :CUSTOM_ID: q3_solution
    :END:
 
 We used =nmap= to list our targets, and found =hhc17-smb-server=. We
 used SSH forwarding to connect to it with =smbclient=. We used the
 credentials we found for question 2 to connect.
 
-** Common Pitfalls
+* Common Pitfalls
    :PROPERTIES:
-   :CUSTOM_ID: common-pitfalls
+   :CUSTOM_ID: q3_common-pitfalls
    :END:
 
 It looks like =hhc17-smb-server= blocks pings. By default, =nmap= uses

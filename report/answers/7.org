@@ -1,6 +1,6 @@
-** Question
+* Question
    :PROPERTIES:
-   :CUSTOM_ID: question
+   :CUSTOM_ID: q7_question
    :END:
 
 Like any other complex SCADA systems, the North Pole uses Elf-Machine
@@ -11,9 +11,9 @@ attack with your access to the EWA server. Retrieve The Great Book
 page from C:\GreatBookPage7.pdf. What does The Great Book page
 describe?
 
-** Background Information
+* Background Information
    :PROPERTIES:
-   :CUSTOM_ID: background-information
+   :CUSTOM_ID: q7_background-information
    :END:
 
 Hints:
@@ -106,9 +106,9 @@ Alabaster Snowball.
 #+CAPTION: Artist's Rendering of Alabaster Snowball
 [[./images/cookies.jpg]]
 
-** Goal
+* Goal
    :PROPERTIES:
-   :CUSTOM_ID: goal
+   :CUSTOM_ID: q7_goal
    :END:
 
 We're trying to craft a malicious .docx file which we'll e-mail to
@@ -116,9 +116,9 @@ alabaster.snowball@northpolechristmastown.com via the EWA system. When
 Alabaster opens the e-mail on the EMI system, the command that we
 embed in the file should get us access to =C:\GreatBookPage7.pdf=.
 
-** Approach
+* Approach
    :PROPERTIES:
-   :CUSTOM_ID: approach
+   :CUSTOM_ID: q7_approach
    :END:
 
 At this point, we have a pretty good idea of what we need to do. The
@@ -149,14 +149,14 @@ told us that that's what he'll click on.
 
 After we send the message, we wait a few minutes, and soon the file shows up!
 
-** Solution
+* Solution
    :PROPERTIES:
-   :CUSTOM_ID: solution
+   :CUSTOM_ID: q7_solution
    :END:
 
 We modified =MEMO - Calculator Access for Wunorse.docx= to copy the PDF into the IIS webroot, e-mailed that to Alabaster, then downloaded the copy of the file once it showed up.
 
-** Going Deeper -- Command Execution
+* Going Deeper -- Command Execution
 
 Getting the PDF is cool, but what else can we find on this system? Some of the other e-mails harp on Alabaster having installed =netcat=, and having it in his path. Let's run a command, and pipe the result to =netcat=, which will send it back to our system:
 
@@ -208,7 +208,7 @@ The end result was writing a complete end-to-end script, which will
 build a malicious Word document, e-mail it, create a malicious Python
 module, and use it to download the PDF.
 
-** Level 2 -- Meterpreter Shell
+* Level 2 -- Meterpreter Shell
 
 #+begin_note
 Originally, the system had Windows Defender enabled, which would block some default Meterpreter payloads
@@ -289,7 +289,7 @@ System Language : en_US
 Meterpreter     : python/windows
 #+END_SRC
 
-** Getting Alabaster's Password
+* Getting Alabaster's Password
 
 Being able to use Meterpreter is nice, but it sure would be cool if we
 could Remote Desktop, or see if Alabaster's password is in use
@@ -414,7 +414,7 @@ Woot! We're hand-waving some of this for now, as there will be a
 longer discussion about how we cracked passwords. TODO link to that
 discussion.
 
-** Next up -- Privilege Escalation!
+* Next up -- Privilege Escalation!
 
 Unfortunately, our commands only run as Alabaster, who is just a
 regular user on the EMI system. We can do better than that.

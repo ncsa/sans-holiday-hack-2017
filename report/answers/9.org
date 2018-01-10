@@ -1,12 +1,15 @@
-** Question
+* Question
    :PROPERTIES:
-   :CUSTOM_ID: question
+   :CUSTOM_ID: q9_question
    :END:
 
 Which character is ultimately the villain causing the giant snowball
 problem. What is the villain's motive?
 
-** Solution
+* Solution
+   :PROPERTIES:
+   :CUSTOM_ID: q9_solution
+   :END:
 
 This answer comes straight from the game. Once we've found at least 5 pages, and completed all the levels, we see the following message:
 

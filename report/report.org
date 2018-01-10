@@ -340,23 +340,23 @@ We can use the following indicators to search any clues we're later provided wit
 ** We're Off To See The
 #+INCLUDE: "terminals/off.org"
 * TODO Answers
-** This Page Fell off a Truck
+** Game: This Page Fell off a Truck
 #+INCLUDE: answers/1.org
-** Letters to Santa
+** L2S: Letters to Santa
 #+INCLUDE: "answers/2.org" 
-** Windows Fileshare 
+** SMB: Windows Fileshare 
 #+INCLUDE: "answers/3.org" 
-** Elf Web Access
+** EWA: Elf Web Access
 #+INCLUDE: "answers/4.org" 
-** Naughty Moles
+** NPPD: Naughty Moles
 #+INCLUDE: "answers/5.org" 
-** TODO Question 6
+** EaaS: TODO Question 6
 #+INCLUDE: "answers/6.org" 
-** Going Deep on EMI
+** EMI: Going Deep
 #+INCLUDE: "answers/7.org" 
-** TODO Question 8
+** TODO EDB: Question 8
 #+INCLUDE: "answers/8.org" 
-** The Evil Good Witch
+** Fin: The Evil Good Witch
 #+INCLUDE: "answers/9.org" 
 * Easter Eggs
 #+INCLUDE: "easter_eggs.org" 

@@ -1,6 +1,6 @@
-** Question
+* Question
    :PROPERTIES:
-   :CUSTOM_ID: question
+   :CUSTOM_ID: q5_question
    :END:
 
 How many infractions are required to be marked as naughty on Santa's
@@ -8,9 +8,9 @@ Naughty and Nice List? What are the names of at least six insider
 threat moles? Who is throwing the snowballs from the top of the North
 Pole Mountain and what is your proof?
 
-** Background Information
+* Background Information
    :PROPERTIES:
-   :CUSTOM_ID: background-information
+   :CUSTOM_ID: q5_background-information
    :END:
 
 We need to answer 3 questions involving infractions, insider moles and who is throwing snowballs. We need 4 things to answer these questions.
@@ -20,18 +20,18 @@ We need to answer 3 questions involving infractions, insider moles and who is th
   * We need the Munchkin Mole Report BOLO also on the SMB server.
   * We need to complete the "Bumble's Bounce" level on the WebGL game in order to unlock a chat from Sam.
 
-** Goal
+* Goal
    :PROPERTIES:
-   :CUSTOM_ID: goal
+   :CUSTOM_ID: q5_goal
    :END:
 
   * We need to identify what factors trigger a 'naughty' flag.
   * We need to identify the six insider threat moles.
   * We need to identify who is throwing snow balls.
 
-** Approach
+* Approach
    :PROPERTIES:
-   :CUSTOM_ID: approach
+   :CUSTOM_ID: q5_approach
    :END:
 
 Playing around with the infractions page we can see that once you do a search a Download option becomes available to download all the search results in json format. Let's automate this to create a local copy of all the data. We can do this searching for all results before and during a specific date, and all results after that date. We then combine those results into a single file. We can automate this with a script we'll call =nppd.py=.
@@ -113,9 +113,9 @@ In fact, he seems to be under someone else's control. We've got to find out who 
 It means, buckle your seatbelt, dear player, because the North Pole is going bye-bye
 #+END_QUOTE
 
-** Solution
+* Solution
    :PROPERTIES:
-   :CUSTOM_ID: solution
+   :CUSTOM_ID: q5_solution
    :END:
 
 It appears we need =4= infractions to make the Naughty list.

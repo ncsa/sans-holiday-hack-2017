@@ -1,46 +1,18 @@
 ** Question
    :PROPERTIES:
-   :CUSTOM_ID: question
+   :CUSTOM_ID: q1_question
    :END:
 
 Visit the North Pole and Beyond at the Winter Wonder Landing Level to
 collect the first page of The Great Book using a giant snowball. What
 is the title of that page?
 
-** Background Information
-   :PROPERTIES:
-   :CUSTOM_ID: background-information
-   :END:
-
-This question simply requires playing the
-[[https://2017.holidayhackchallenge.com/game/7e48d6aa-4b73-4027-b23b-a6a1a3460d54][Winter Wonder Landing]]
-game level.
-
-** Goal
-   :PROPERTIES:
-   :CUSTOM_ID: goal
-   :END:
-
-In this game we need to guide the snowball to collect the
-[[https://www.holidayhackchallenge.com/2017/pages/6dda7650725302f59ea42047206bd4ee5f928d19/GreatBookPage1.pdf][first Great Book page]].
-
-** Approach
-   :PROPERTIES:
-   :CUSTOM_ID: approach
-   :END:
-
-You just need to redirect the snowball to roll over the page.
-
 ** Solution
    :PROPERTIES:
-   :CUSTOM_ID: solution
+   :CUSTOM_ID: q2_solution
    :END:
 
-* TODO Add visuals to this page
-
-** About the Challenge
-   :PROPERTIES:
-   :CUSTOM_ID: about-the-challenge
-   :END:
+This question simply requires playing the [[https://2017.holidayhackchallenge.com/game/7e48d6aa-4b73-4027-b23b-a6a1a3460d54][Winter Wonder Landing]] game
+level, and redirecting the snowball to collect the [[https://www.holidayhackchallenge.com/2017/pages/6dda7650725302f59ea42047206bd4ee5f928d19/GreatBookPage1.pdf][first Great Book page]].
 
 This challenge was primarily to get players introduced to the game aspect of the Holiday Hack.

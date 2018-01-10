@@ -1,6 +1,6 @@
-** Question
+* Question
    :PROPERTIES:
-   :CUSTOM_ID: question
+   :CUSTOM_ID: q4_question
    :END:
 
 Elf Web Access (EWA) is the preferred mailer for North Pole elves,
@@ -8,9 +8,9 @@ available internally at http://mail.northpolechristmastown.com. What
 can you learn from The Great Book page found in an e-mail on that
 server?
 
-** Background Information
+* Background Information
    :PROPERTIES:
-   :CUSTOM_ID: background-information
+   :CUSTOM_ID: q4_background-information
    :END:
 
 Hints:
@@ -23,16 +23,16 @@ Pepper Minstix gives us the following hints:
   4. Hmmm. That's a good question, I'm not sure what would happen if the encrypted string was only 16 bytes long.
   5. Every year when Santa gets back from delivering presents to the good girls and boys, he tells us stories about all the cookies he receives. I love everything about cookies! Cooking them, eating them, editing them, decorating them, you name it!
 
-** Goal
+* Goal
    :PROPERTIES:
-   :CUSTOM_ID: goal
+   :CUSTOM_ID: q4_goal
    :END:
 
 The question tells us that the page we're looking for is in an e-mail. So, we need to figure out some way to login to the mail system and find the crucial message.
 
-** Approach
+* Approach
    :PROPERTIES:
-   :CUSTOM_ID: approach
+   :CUSTOM_ID: q4_approach
    :END:
 
 First off, let's pull up the website in our web browser. SSH can run a
@@ -429,9 +429,9 @@ $ cat alabaster_inbox.json | jq '.INBOX[].HEADERS.body.subject' -c
 ["Re: Lost book page"]
 #+END_SRC
 
-** Solution
+* Solution
    :PROPERTIES:
-   :CUSTOM_ID: solution
+   :CUSTOM_ID: q4_solution
    :END:
 
 Alabaster Snowball had a vulnerability in his cookie validation code,
@@ -441,17 +441,17 @@ without needing to know the key. With this forged cookie, we can login
 to Alabaster's e-mail, and find an e-mail with a link to the page
 we're looking for.
 
-** Alternatives
+* Alternatives
    :PROPERTIES:
-   :CUSTOM_ID: alternatives
+   :CUSTOM_ID: q4_alternatives
    :END:
 
 If only we could crack Alabaster's password, we wouldn't need to forge
 any cookies. But more on that later...
 
-** Common Pitfalls
+* Common Pitfalls
    :PROPERTIES:
-   :CUSTOM_ID: common-pitfalls
+   :CUSTOM_ID: q4_common-pitfalls
    :END:
 
 As previously mentioned, this seemed to be one of the most-discussed
