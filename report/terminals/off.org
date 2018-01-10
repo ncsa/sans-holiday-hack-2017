@@ -1,12 +1,7 @@
-* We're Off To See The...
-   :PROPERTIES:
-   :CUSTOM_ID: title
-   :END:
-
-** Question
-   :PROPERTIES:
-   :CUSTOM_ID: question
-   :END:
+* Question
+  :PROPERTIES:
+  :CUSTOM_ID: off_question
+  :END:
 
 #+BEGIN_EXAMPLE
 
@@ -26,10 +21,10 @@
     You will need to write your own code, but only a line or two.
 #+END_EXAMPLE
 
-** How to find the terminal
-   :PROPERTIES:
-   :CUSTOM_ID: how-to-find-the-terminal
-   :END:
+* How to find the terminal
+  :PROPERTIES:
+  :CUSTOM_ID: off_how-to-find-the-terminal
+  :END:
 
 From this game: https://2017.holidayhackchallenge.com/game/30a9c19a-f931-4367-9922-d20b91314eec
 
@@ -38,10 +33,10 @@ Direct link: https://docker2017.holidayhackchallenge.com/?challenge=96452ffb-515
 #+CAPTION: The terminal is on a peak off to the side.
 [[./images/terminal-location-off.png]]
 
-** Background Information
-   :PROPERTIES:
-   :CUSTOM_ID: background-information
-   :END:
+* Background Information
+  :PROPERTIES:
+  :CUSTOM_ID: off_background-information
+  :END:
 
 We are logged in as the user =elf=.
 
@@ -60,26 +55,26 @@ Two files are provided
 -rw-r--r-- 1 root root   654 Dec 15 19:59 isit42.c.un
 #+END_SRC
 
-** Goal
-   :PROPERTIES:
-   :CUSTOM_ID: goal
-   :END:
+* Goal
+  :PROPERTIES:
+  :CUSTOM_ID: off_goal
+  :END:
 
 For this challenge we need to write our own code in order to make the provided binary =isit42= return 42.
 
-** Hints
-   :PROPERTIES:
-   :CUSTOM_ID: hints
-   :END:
+* Hints
+  :PROPERTIES:
+  :CUSTOM_ID: off_hints
+  :END:
 
 [[https://twitter.com/1Horse1OSSleigh][Wunorse Openslae (that's a stretch) on Twitter actually has no useful hints]]
 
 This blog post, [[https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win][Go To The Head Of The Class: LD_PRELOAD For The Win]], by Jeff McJunkin was useful.
 
-** Approach
-   :PROPERTIES:
-   :CUSTOM_ID: approach
-   :END:
+* Approach
+  :PROPERTIES:
+  :CUSTOM_ID: off_approach
+  :END:
 
 [[https://ncsa.github.io/sans-holiday-hack-2016/#org42386a9][Our team actually did this exact thing last year in order to derandomize =wumpus=.]
 
@@ -96,10 +91,10 @@ int getrand() {
 
 If we create our own library file to define =rand()= we can remove the randomness.
 
-** Solution
-   :PROPERTIES:
-   :CUSTOM_ID: solution
-   :END:
+* Solution
+  :PROPERTIES:
+  :CUSTOM_ID: off_solution
+  :END:
 
 As mentioned in the hints section above, we can use [[https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win][Jeff McJunkin's]] blog post for guidance on how to complete this challenge.
 
@@ -152,11 +147,10 @@ Calling rand() to select a random number.
 Congratulations! You've won, and have successfully completed this challenge.
 #+END_SRC
 
-
-** Alternatives
-   :PROPERTIES:
-   :CUSTOM_ID: alternatives
-   :END:
+* Alternatives
+  :PROPERTIES:
+  :CUSTOM_ID: off_alternatives
+  :END:
 
 Another option is to just brute force it.  The sample code shows that the program is using
 

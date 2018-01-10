@@ -1,7 +1,7 @@
 #+TITLE: SANS 2017 Holiday Hack Writeup
 #+AUTHOR: NCSA Security Team
 #+EMAIL: vladg@illinois.edu
-#+OPTIONS: timestamp:nil num:nil ^:nil toc:2 exports:both
+#+OPTIONS: timestamp:nil num:nil ^:nil toc:3 exports:both
 
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="css/htmlize.css"/>
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/htmlize.css"/>
@@ -14,6 +14,8 @@
 
 #+HTML_HEAD: <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+HTML_HEAD: <style>#content{max-width:1200px;}</style>
+
+#+MACRO: abbr @@html:<abbr title="$1">$2</abbr>@@
 
 * Introduction
 We are the Security team at the National Center for Supercomputing
@@ -327,7 +329,7 @@ We can use the following indicators to search any clues we're later provided wit
 #+INCLUDE: "terminals/cliffs.org"
 ** Cryokinetic Magic
 #+INCLUDE: "terminals/cryokinetic.org"
-** There's No Place Like Home
+** There's Snow Place Like Home
 #+INCLUDE: "terminals/home.org"
 ** Bumble's Bounce
 #+INCLUDE: "terminals/bounce.org"
@@ -338,7 +340,7 @@ We can use the following indicators to search any clues we're later provided wit
 ** We're Off To See The
 #+INCLUDE: "terminals/off.org"
 * TODO Answers
-** This Page Fell of a Truck
+** This Page Fell off a Truck
 #+INCLUDE: answers/1.org
 ** Command Execution on Letters to Santa
 #+INCLUDE: "answers/2.org" 
@@ -354,8 +356,7 @@ We can use the following indicators to search any clues we're later provided wit
 #+INCLUDE: "answers/7.org" 
 ** TODO Question 8
 #+INCLUDE: "answers/8.org" 
-** The Evil Good WitchT
+** The Evil Good Witch
 #+INCLUDE: "answers/9.org" 
 * Easter Eggs
 #+INCLUDE: "easter_eggs.org" 
-* TODO Misc

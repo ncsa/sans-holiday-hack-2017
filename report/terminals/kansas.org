@@ -1,12 +1,7 @@
-* I Don't Think We're In Kansas Anymore
-   :PROPERTIES:
-   :CUSTOM_ID: title
-   :END:
-
-** Question
-   :PROPERTIES:
-   :CUSTOM_ID: question
-   :END:
+* Question
+  :PROPERTIES:
+  :CUSTOM_ID: kansas_question
+  :END:
 
 #+BEGIN_EXAMPLE
                            *
@@ -40,10 +35,10 @@
     Identify the song whose popularity is the best.
 #+END_EXAMPLE
 
-** How to find the terminal
-   :PROPERTIES:
-   :CUSTOM_ID: how-to-find-the-terminal
-   :END:
+* How to find the terminal
+  :PROPERTIES:
+  :CUSTOM_ID: kansas_how-to-find-the-terminal
+  :END:
 
 From this game: https://2017.holidayhackchallenge.com/game/5bbfc970-71d2-4c9d-816c-25955536c168
 
@@ -52,10 +47,10 @@ Direct link: https://docker2017.holidayhackchallenge.com/?challenge=ab13b9fc-6e7
 #+CAPTION: If you take away the poppies the terminal can easily be seen on the left hand side of the field.
 [[./images/terminal-location-kansas.png]]
 
-** Background Information
-   :PROPERTIES:
-   :CUSTOM_ID: background-information
-   :END:
+* Background Information
+  :PROPERTIES:
+  :CUSTOM_ID: kansas_background-information
+  :END:
 
 When we login, we see we have two files of interest in our current
 directory: =christmassongs.db= and =runtoanswer=.
@@ -77,25 +72,25 @@ Your Pokemon Guide for Essential SQL Pen Test Commands
   https://pen-testing.sans.org/blog/2017/12/09/your-pokemon-guide-for-essential-sql-pen-test-commands
 #+END_QUOTE
 
-** Goal
-   :PROPERTIES:
-   :CUSTOM_ID: goal
-   :END:
+* Goal
+  :PROPERTIES:
+  :CUSTOM_ID: kansas_goal
+  :END:
 
 Determine which song in =christmassongs.db= has the most likes.
 
-** Hints
-   :PROPERTIES:
-   :CUSTOM_ID: hints
-   :END:
+* Hints
+  :PROPERTIES:
+  :CUSTOM_ID: kansas_hints
+  :END:
 
 Sugarplum Mary on Twitter has a hint: 
 #+HTML: <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Hey <a href="https://twitter.com/PepperyGoodness?ref_src=twsrc%5Etfw">@PepperyGoodness</a>, can you help me with an SQL problem I&#39;ve seen? I think I need to do GROUP BY, but I&#39;m not quite sure of the syntax.</p>&mdash; SugerPlum Mary (@ThePlumSweetest) <a href="https://twitter.com/ThePlumSweetest/status/941067133898833921?ref_src=twsrc%5Etfw">December 13, 2017</a></blockquote>
 
-** Approach
-   :PROPERTIES:
-   :CUSTOM_ID: approach
-   :END:
+* Approach
+  :PROPERTIES:
+  :CUSTOM_ID: kansas_approach
+  :END:
 
 Let's see exactly what this "db" file is:
 
@@ -162,10 +157,10 @@ The Little Boy that Santa Claus Forgot  2140
 sqlite> 
 #+END_SRC
 
-** Solution
-   :PROPERTIES:
-   :CUSTOM_ID: solution
-   :END:
+* Solution
+  :PROPERTIES:
+  :CUSTOM_ID: kansas_solution
+  :END:
 
 A one-liner is:
 
@@ -174,10 +169,10 @@ elf@1dea81eaaac4:~$ sqlite3 christmassongs.db "select title from songs, likes wh
 Stairway to Heaven
 #+END_SRC
 
-** Alternatives
-   :PROPERTIES:
-   :CUSTOM_ID: alternatives
-   :END:
+* Alternatives
+  :PROPERTIES:
+  :CUSTOM_ID: kansas_alternatives
+  :END:
 
 Instead of joining the tables, we can first find what the most popular songid is:
 
