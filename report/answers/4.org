@@ -397,6 +397,31 @@ worked, and duplicated portions of it in Python. This script allowed
 us to archive and search e-mails, which was useful for future
 questions.
 
+#+BEGIN_SRC 
+$ ./ewa.py alabaster.snowball | jq '.INBOX[].HEADERS.body.subject' -c
+["Welcome"]
+["Re: Welcome"]
+["Re: gingerbread cookie recipe"]
+["COOKIES!"]
+["Re: COOKIES!"]
+["Re: COOKIES!"]
+["Re: COOKIES!"]
+["Re: COOKIES!"]
+["Re: COOKIES!"]
+["Christmas Party!"]
+["Re: Christmas Party!"]
+["Re: Christmas Party!"]
+["Re: Christmas Party!"]
+["Re: Christmas Party!"]
+["Should we be worried?"]
+["Re: Should we be worried?"]
+["Re: Should we be worried?"]
+["Lost book page"]
+["Re: Lost book page"]
+["Re: Lost book page"]
+["Re: Lost book page"]
+#+END_SRC
+
 ** Solution
    :PROPERTIES:
    :CUSTOM_ID: solution
