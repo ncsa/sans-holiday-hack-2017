@@ -321,8 +321,6 @@ We can use the following indicators to search any clues we're later provided wit
 | North Pole Police Department         | Reference | nppd /infractions      |
 | Cindy Lou Who (2015 Hack)            | Reference | nppd /infractions      |
 | Dr. Who (2016 Hack)                  | Reference | nppd /infractions      |
-
-
 * Terminals
 ** Winter Wonder Landing
 #+INCLUDE: "terminals/landing.org"
@@ -349,11 +347,11 @@ We can use the following indicators to search any clues we're later provided wit
 #+INCLUDE: "answers/3.org" 
 ** AES Bypass
 #+INCLUDE: "answers/4.org" 
-** Naughty Moles N
+** Naughty Moles
 #+INCLUDE: "answers/5.org" 
 ** TODO Question 6
 #+INCLUDE: "answers/6.org" 
-** TODO Question 7
+** Going Deep on EMI
 #+INCLUDE: "answers/7.org" 
 ** TODO Question 8
 #+INCLUDE: "answers/8.org" 

