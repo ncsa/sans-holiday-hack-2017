@@ -139,7 +139,7 @@ We'll open up =MEMO - Calculator Access for Wunorse.docx=, and edit the command 
 
 #+BEGIN_SRC 
 DDEAUTO c:\\windows\\system32\\cmd.exe "/k copy C:\\GreatBookPage7.pdf 
-C:\\inetpub\\wwwroot\4beadb1e-5ddb-4636-98a4-c2dac0f79ab3.pdf"
+C:\\inetpub\\wwwroot\\4beadb1e-5ddb-4636-98a4-c2dac0f79ab3.pdf"
 #+END_SRC
 
 Then, we use the EWA web interface to send an e-mail to Alabaster,
