@@ -220,7 +220,8 @@ U2VjdXJpdHkgYXQgTkNTQQ==
 We're using the =-n= flag of =echo= to not have a newline at the end, which would give us a 17 character length cookie.
 
 #+BEGIN_SRC 
-$ http --proxy=http:socks5://@localhost:31080 'http://mail.northpolechristmastown.com/' $'Cookie:EWA={"name":"alabaster.snowball@northpolechristmastown.com","ciphertext":"U2VjdXJpdHkgYXQgTkNTQQ==","plaintext":""}'
+$ http --proxy=http:socks5://@localhost:31080 'http://mail.northpolechristmastown.com/' 
+  'Cookie:EWA={"name":"alabaster.snowball@northpolechristmastown.com","ciphertext":"U2VjdXJpdHkgYXQgTkNTQQ==","plaintext":""}'
 HTTP/1.1 200 OK
 ...
 X-Powered-By: Express
@@ -239,6 +240,12 @@ Now we just reload the page, and we're in!
 #+CAPTION: Logging in with our forged cookie
 #+attr_html: :width 500px
 [[./images/ewa_loggedin.png]]
+
+At this point, we can start digging through Alabaster's e-mail. Soon, we find this:
+
+#+CAPTION: Page 4 E-mail
+#+attr_html: :width 500px
+[[./images/page4_email.png]]
 
 *** An Alternative Solution: Black Box Cracking
 
@@ -380,31 +387,43 @@ With the throw commented out, we can encrypt an empty string:
 The length is different(24 instead of 22), but only because it is padded with 2
 bytes of == for base64 purposes.
 
+*** Tool Development
+
+We created a script, TODO LINK TO EWA SCRIPT, which will forge a
+cookie to login as a user, and then dump all the e-mails as JSON. In
+order to do this, we relied heavily on
+http://mail.northpolechristmastown.com/js/custom.js to see how the API
+worked, and duplicated portions of it in Python. This script allowed
+us to archive and search e-mails, which was useful for future
+questions.
+
 ** Solution
    :PROPERTIES:
    :CUSTOM_ID: solution
    :END:
 
-
+Alabaster Snowball had a vulnerability in his cookie validation code,
+where he wasn't verifying the length of the decrypted text. AES will
+encrypt an empty string as an empty string, so we can forge a cookie
+without needing to know the key. With this forged cookie, we can login
+to Alabaster's e-mail, and find an e-mail with a link to the page
+we're looking for.
 
 ** Alternatives
    :PROPERTIES:
    :CUSTOM_ID: alternatives
    :END:
 
-Any other, easier solutions?
+If only we could crack Alabaster's password, we wouldn't need to forge
+any cookies. But more on that later...
 
 ** Common Pitfalls
    :PROPERTIES:
    :CUSTOM_ID: common-pitfalls
    :END:
 
-Do we know what issue(s) people were running into?
+As previously mentioned, this seemed to be one of the most-discussed
+questions in chat. We saw people trying to brute-force the AES key,
+focus on the encryption of the message, or just try to bypass the web
+application completely.
 
-** About the Challenge
-   :PROPERTIES:
-   :CUSTOM_ID: about-the-challenge
-   :END:
-
-How was the challenge setup? Was there a better way to secure this
-system?
