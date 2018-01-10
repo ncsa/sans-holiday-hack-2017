@@ -35,6 +35,8 @@ From this game: https://2017.holidayhackchallenge.com/game/30a9c19a-f931-4367-99
 
 Direct link: https://docker2017.holidayhackchallenge.com/?challenge=96452ffb-5153-4473-9fe4-f0ff7921308e&uid=USER_ID
 
+#+HTML: <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/NaNbpX8H03I?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
 #+CAPTION: The terminal is on a peak off to the side.
 [[./images/terminal-location-off.png]]
 

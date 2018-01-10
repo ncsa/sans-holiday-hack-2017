@@ -44,6 +44,8 @@ From this game: https://2017.holidayhackchallenge.com/game/3e813a9c-cb34-492e-a3
 
 Direct link: https://docker2017.holidayhackchallenge.com/?challenge=82c16868-a96e-4e4c-955e-5b41f7c5809a&uid=USER_ID
 
+#+HTML: <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/LLCUtyC1p2A?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
 #+CAPTION: The terminal is on top of the building on the floating island right up front.
 [[./images/terminal-location-cliffs.png]]
 

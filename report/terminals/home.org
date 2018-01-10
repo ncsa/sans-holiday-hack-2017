@@ -40,6 +40,8 @@ From this game: https://2017.holidayhackchallenge.com/game/41a1e6bb-60c3-4695-ad
 
 Direct link: https://docker2017.holidayhackchallenge.com/?challenge=4050467e-9cde-44cd-aa63-1a0b8b210bb7&uid=USER_ID
 
+#+HTML: <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/jdnzTyzyAPY?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
 #+CAPTION: The terminal is on the side of the center building.
 [[./images/terminal-location-home.png]]
 
