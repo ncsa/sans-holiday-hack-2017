@@ -13,66 +13,129 @@ server?
    :CUSTOM_ID: background-information
    :END:
 
-Do we know anything about this system already?
-
 Hints:
 
-List any useful hints here.
+Pepper Minstix gives us the following hints:
 
-Blog Posts:
-
-Are any of these useful?
-
-- Putting My Zero Cents In: Using the Free Tier on Amazon Web Services
-  (EC2)
-  https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2
-  Spinning up an EC2 instance, but also a lot of emphasis on how to use
-  SSH keys.
-- Your Pokemon Guide for Essential SQL Pen Test Commands
-  https://pen-testing.sans.org/blog/2017/12/09/your-pokemon-guide-for-essential-sql-pen-test-commands
-  SQL basics (SELECT, WHERE, wildcards, ORDER BY, GROUP BY, COUNT)
-- Exploiting XXE Vulnerabilities in IIS/.NET
-  https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities
-  Including remote content in XML
-- Why You Need the Skills to Tinker with Publicly Released Exploit Code
-  https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code
-  Mentions Apache struts vulnerabilities, specifically CVE-2017-5638 and
-  CVE-2017-9805 Code: https://github.com/chrisjd20/cve-2017-9805.py
-- Go To The Head Of The Class: LD\_PRELOAD For The Win
-  https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win
-- A Spot of Tee
-  https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee Restricted
-  bash shell, and bypassing the I/O restriction with tee
-- Understanding and Exploiting Web-based LDAP
-  https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap
-  LDAP syntax, LDAP injection
-- Massively Scaling your Scanning
-  https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning
-  masscan
+  1. I'm so excited for the new email system that Alabaster Snowball set up for us. He spent a lot of time working on it. Should make it very easy for us to share cookie recipes. I just hope that he cleared up all his dev files. I know he was working on keeping the dev files from search engine indexers.
+  2. The new email system's authentication should be impenetrable. Alabaster was telling me that he came up with his own encryption scheme using AES256, so you know it's secure.
+  3. AES256? Honestly, I don't know much about it, but Alabaster explained the basic idea and it sounded easy. During decryption, the first 16 bytes are removed and used as the initialization vector or "IV." Then the IV + the secret key are used with AES256 to decrypt the remaining bytes of the encrypted string.
+  4. Hmmm. That's a good question, I'm not sure what would happen if the encrypted string was only 16 bytes long.
+  5. Every year when Santa gets back from delivering presents to the good girls and boys, he tells us stories about all the cookies he receives. I love everything about cookies! Cooking them, eating them, editing them, decorating them, you name it!
 
 ** Goal
    :PROPERTIES:
    :CUSTOM_ID: goal
    :END:
 
-What are we trying to accomplish?
+The question tells us that the page we're looking for is in an e-mail. So, we need to figure out some way to login to the mail system and find the crucial message.
 
 ** Approach
    :PROPERTIES:
    :CUSTOM_ID: approach
    :END:
 
-Describe the thought process that we tried here. How were we able to use
-the hints or the blog posts?
+First off, let's pull up the website in our web browser. SSH can run a
+SOCKS proxy for us, which we can use to tunnel our traffic through
+l2s. We use the access we got in Question 2 to SSH in:
 
-** Solution
-   :PROPERTIES:
-   :CUSTOM_ID: solution
-   :END:
+#+BEGIN_SRC sh
+ssh -D 31080 alabaster_snowball@l2s.northpolechristmastown.com
+#+END_SRC
 
-Summarize the reference solution that we found
+I like to use Firefox for this, since, unlike Chrome, we can configure proxy settings different from the system-wide settings:
 
-*** How to forge a session cookie
+#+CAPTION: Elf Web Access
+#+attr_html: :width 500px
+[[./images/firefox_proxy.png]]
+
+Now we can just navigate to http://mail.northpolechristmastown.com:
+
+#+CAPTION: Elf Web Access
+#+attr_html: :width 350px
+[[./images/ewa.png]]
+
+Luckily, we got Alabaster's password in Question 2, so let's login!
+
+#+CAPTION: Logging in as alabaster_snowball/stream_unhappy_buy_loss
+#+attr_html: :width 500px
+[[./images/bad_email.png]]
+
+Of course! We need an e-mail address:
+
+#+CAPTION: Logging in as alabaster_snowball@northpolechristmastown.com/stream_unhappy_buy_loss
+#+attr_html: :width 500px
+[[./images/bad_username.png]]
+
+Luckily, the error message tells us how we need to format the e-mail address:
+
+#+CAPTION: Logging in as alabaster_snowball@northpolechristmastown.com/stream_unhappy_buy_loss
+#+attr_html: :width 500px
+[[./images/bad_password.png]]
+
+Curses! Looks like Alabaster is at least smart enough to not reuse credentials. Let's review some of the hints that Pepper gave us:
+
+#+BEGIN_QUOTE
+I just hope that he cleared up all his dev files. I know he was working on keeping the dev files from search engine indexers.
+#+END_QUOTE
+
+We scanned this EWA system with =nmap= before, and one of the =nmap= scripts did find a reference in ~robots.txt~:
+
+#+BEGIN_SRC 
+80/tcp   open  http
+| http-robots.txt: 1 disallowed entry
+|_/cookie.txt
+|_http-title: Site doesn't have a title (text/html; charset=UTF-8).
+#+END_SRC
+
+Given how much Pepper harps on cookies, perhaps this file is worth investigating. When we view it, we see:
+
+#+BEGIN_SRC javascript
+//FOUND THESE FOR creating and validating cookies. Going to use this in node js
+function cookie_maker(username, callback){
+    var key = 'need to put any length key in here';
+    //randomly generates a string of 5 characters
+    var plaintext = rando_string(5)
+    //makes the string into cipher text .... in base64. When decoded this 21 bytes in total length. 16 bytes for IV and 5 byte of random characters
+    //Removes equals from output so as not to mess up cookie. decrypt function can account for this without erroring out.
+    var ciphertext = aes256.encrypt(key, plaintext).replace(/\=/g,'');
+    //Setting the values of the cookie.
+    var acookie = ['IOTECHWEBMAIL',JSON.stringify({"name":username, "plaintext":plaintext,  "ciphertext":ciphertext}), { maxAge: 86400000, httpOnly: true, encode: String }]
+    return callback(acookie);
+};
+function cookie_checker(req, callback){
+    try{
+        var key = 'need to put any length key in here';
+        //Retrieving the cookie from the request headers and parsing it as JSON
+        var thecookie = JSON.parse(req.cookies.IOTECHWEBMAIL);
+        //Retrieving the cipher text 
+        var ciphertext = thecookie.ciphertext;
+        //Retrievingin the username
+        var username = thecookie.name
+        //retrieving the plaintext
+        var plaintext = aes256.decrypt(key, ciphertext);
+        //If the plaintext and ciphertext are the same, then it means the data was encrypted with the same key
+        if (plaintext === thecookie.plaintext) {
+            return callback(true, username);
+        } else {
+            return callback(false, '');
+        }
+    } catch (e) {
+        console.log(e);
+        return callback(false, '');
+    }
+};
+#+END_SRC
+
+There's a lot to parse here, but given the number of times AES and IVs are mentioned in the hints, this looks like we're on the right path.
+
+Our next hint is:
+
+#+BEGIN_QUOTE
+The new email system's authentication should be impenetrable. Alabaster was telling me that he came up with his own encryption scheme using AES256, so you know it's secure.
+#+END_QUOTE
+
+Uh-oh... Coming up with your own cryptography scheme should send up all the red flags.
 
 #+BEGIN_QUOTE
 Happy families are all alike; every unhappy family is unhappy in its own way. --   Leo Tolstoy
@@ -82,9 +145,116 @@ Happy families are all alike; every unhappy family is unhappy in its own way. --
 Empty plaintext encrypted without using HMAC are all alike; Rolling your own crypto makes all cryptographers unhappy. -- Justin Azoff
 #+END_QUOTE
 
-The js code they use is a variation of a challenge response algorithm, but it
-is flawed in that the client is providing both the challenge and the response.
-It is also flawed in that it does not use MAC https://en.wikipedia.org/wiki/Authenticated_encryption#MAC-then-Encrypt_(MtE)
+At this point, we suspect that there's some kind of vulnerability in the cryptography being used. Reading on:
+
+#+BEGIN_QUOTE
+AES256? Honestly, I don't know much about it, but Alabaster explained
+the basic idea and it sounded easy. During decryption, the first 16
+bytes are removed and used as the initialization vector or "IV." Then
+the IV + the secret key are used with AES256 to decrypt the remaining
+bytes of the encrypted string.
+#+END_QUOTE
+
+Let's pause for a moment to review what we know so far. The e-mail application uses cookies for authentication.
+
+#+BEGIN_SRC js
+  var acookie = ['IOTECHWEBMAIL',JSON.stringify({"name":username, "plaintext":plaintext,  "ciphertext":ciphertext}), 
+		 { maxAge: 86400000, httpOnly: true, encode: String }]
+#+END_SRC
+
+As we can see from the line above, the cookie contains a username,
+some plaintext, and some ciphertext. The ~cookie_checker~ function
+takes the encrypted ciphertext, and attempts to decrypt it with a
+secret key that only the application has. If the result matches the
+plaintext from the cookie, the cookie is authentic:
+
+#+BEGIN_SRC js
+var plaintext = aes256.decrypt(key, ciphertext);
+//If the plaintext and ciphertext are the same, then it means the data was encrypted with the same key
+if (plaintext === thecookie.plaintext) {
+    return callback(true, username);
+} else {
+    return callback(false, '');
+}
+#+END_SRC
+
+The code, as well as Pepper's hints, tell us something about the structure of the ciphertext:
+
+#+BEGIN_SRC js
+//makes the string into cipher text .... in base64. 
+// When decoded this 21 bytes in total length. 16 bytes for IV and 5 byte of random characters
+#+END_SRC
+
+Finally, Pepper gives us this tantalizing hint:
+
+#+BEGIN_QUOTE
+Hmmm. That's a good question, I'm not sure what would happen if the encrypted string was only 16 bytes long.
+#+END_QUOTE
+
+By reading the code closely we can see that when the application *creates* a cookie, the plaintext is 5 random characters. However, nothing in the verification logic requires this. The only check is:
+
+#+BEGIN_SRC js
+aes256.decrypt(key, ciphertext) === thecookie.plaintext
+#+END_SRC
+
+Let's see what a valid cookie looks like:
+
+#+BEGIN_SRC 
+$ http --proxy=http:socks5://@localhost:31080 'http://mail.northpolechristmastown.com/'
+HTTP/1.1 200 OK
+...
+Server: nginx/1.10.3 (Ubuntu)
+Set-Cookie: EWA={"name":"GUEST","plaintext":"","ciphertext":""}; Max-Age=86400; Path=/; Expires=Wed, 10 Jan 2018 23:37:29 GMT; HttpOnly
+...
+#+END_SRC
+
+Let's try what Pepper Minstix suggests: setting our ciphertext to only
+be 16 characters long. We know that this is base64 encoded, so we'll
+run:
+
+#+BEGIN_SRC 
+$ echo -n "Security at NCSA" | base64
+U2VjdXJpdHkgYXQgTkNTQQ==
+#+END_SRC
+
+We're using the =-n= flag of =echo= to not have a newline at the end, which would give us a 17 character length cookie.
+
+#+BEGIN_SRC 
+$ http --proxy=http:socks5://@localhost:31080 'http://mail.northpolechristmastown.com/' $'Cookie:EWA={"name":"alabaster.snowball@northpolechristmastown.com","ciphertext":"U2VjdXJpdHkgYXQgTkNTQQ==","plaintext":""}'
+HTTP/1.1 200 OK
+...
+X-Powered-By: Express
+
+<script>window.location.href='/account.html'</script>
+#+END_SRC
+
+That looks promising! Let's move from the command line back to Firefox. One easy way to edit cookies in Firefox is to go to Tools => Web Developer => Storage Inspector. We should see an =EWA= cookie in there already, and we can simply double-click the value field and paste in our forged cookie:
+
+#+BEGIN_SRC
+{"name":"alabaster.snowball@northpolechristmastown.com","ciphertext":"U2VjdXJpdHkgYXQgTkNTQQ==","plaintext":""}
+#+END_SRC
+
+Now we just reload the page, and we're in!
+
+#+CAPTION: Logging in with our forged cookie
+#+attr_html: :width 500px
+[[./images/ewa_loggedin.png]]
+
+*** An Alternative Solution: Black Box Cracking
+
+Given some of the discussion in the chat, this was one of the hardest
+questions. This section goes deeper into the cookie creation and
+validation code, and it offers an alternative solution. Finding
+=cookie.txt= from the =robots.txt= file made this question much
+easier, but this version lays out the approach to solve this question
+without that file. Independently, one of our team members used the
+previous solution, and one used this solution.
+
+The Javascript code used is a variation of a challenge response
+algorithm, but it is flawed in that the client is providing both the
+challenge and the response.  It is also flawed in that it does not use
+MAC
+https://en.wikipedia.org/wiki/Authenticated_encryption#MAC-then-Encrypt_(MtE)
 meaning that the encrypted contents themselves are never verified.
 
 Since we can control both the ciphertext and the expected plaintext, we can
@@ -93,7 +263,7 @@ to be ANY message that decrypts to "".  Since the message is empty, the key is
 irrelevant, we just need to work out how to properly generate a ciphertext that
 will decrypt to nothing.
 
-A completly empty ciphertext throws an error:
+A completely empty ciphertext throws an error:
 
 #+BEGIN_SRC js
 > var aes256 = require('aes256');
@@ -120,7 +290,7 @@ The difference in the length of the two strings is 24:
 
 From the hints, we learn that some of the bytes are used for the IV.
 
-The aes library won't let us encrypt an empty string, but we can encrypt a single char:
+The AES library won't let us encrypt an empty string, but we can encrypt a single char:
 
 #+BEGIN_SRC js
 > aes256.encrypt('key does not matter', '')
@@ -209,6 +379,13 @@ With the throw commented out, we can encrypt an empty string:
 
 The length is different(24 instead of 22), but only because it is padded with 2
 bytes of == for base64 purposes.
+
+** Solution
+   :PROPERTIES:
+   :CUSTOM_ID: solution
+   :END:
+
+
 
 ** Alternatives
    :PROPERTIES:

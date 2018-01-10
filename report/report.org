@@ -2,11 +2,16 @@
 #+AUTHOR: NCSA Security Team
 #+EMAIL: vladg@illinois.edu
 #+OPTIONS: timestamp:nil num:nil ^:nil toc:2 exports:both
+
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="css/htmlize.css"/>
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/htmlize.css"/>
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/readtheorg.css"/>
+
 #+HTML_HEAD: <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 #+HTML_HEAD: <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-#+HTML_HEAD: <script type="text/javascript" src="js/readtheorg.js"></script>
+#+HTML_HEAD: <script type="text/javascript" src="js/jquery.stickytableheaders.min.js"></script>
+#+HTML_HEAD: <script type="text/javascript" src="http://www.pirilampo.org/styles/readtheorg/js/readtheorg.js"></script>
+
 #+HTML_HEAD: <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+HTML_HEAD: <style>#content{max-width:1200px;}</style>
 
@@ -336,13 +341,13 @@ We can use the following indicators to search any clues we're later provided wit
 ** We're Off To See The
 #+INCLUDE: "terminals/off.org"
 * TODO Answers
-** TODO Question 1
-#+INCLUDE: "answers/1.org"
-** TODO Question 2
+** TODO This Page Fell of a Truck
+#+INCLUDE: answers/1.org
+** Command Execution on Letters to Santa
 #+INCLUDE: "answers/2.org" 
-** Question 3
+** Windows Fileshare 
 #+INCLUDE: "answers/3.org" 
-** TODO Question 4
+** AES Bypass
 #+INCLUDE: "answers/4.org" 
 ** TODO Question 5
 #+INCLUDE: "answers/5.org" 

