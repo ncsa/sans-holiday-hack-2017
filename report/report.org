@@ -364,6 +364,8 @@ We can use the following indicators to search any clues we're later provided wit
 #+INCLUDE: "pip.org" 
 ** Cracking Passphrases
 #+INCLUDE: "passphrases.org" 
+** Collaboration
+#+INCLUDE: "collab.org" 
 ** Command Reference
 #+INCLUDE: "commands.org" 
 ** External Resources
