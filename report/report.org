@@ -338,18 +338,18 @@ We can use the following indicators to search any clues we're later provided wit
 #+INCLUDE: "terminals/we_are.org"
 ** We're Off To See The
 #+INCLUDE: "terminals/off.org"
-* TODO Answers
+* Answers
 ** Game: This Page Fell off a Truck
 #+INCLUDE: answers/1.org
 ** L2S: Letters to Santa
 #+INCLUDE: "answers/2.org" 
 ** SMB: Windows Fileshare 
 #+INCLUDE: "answers/3.org" 
-** EWA: Elf Web Access
+** EWA: JWT All the Way
 #+INCLUDE: "answers/4.org" 
 ** NPPD: Naughty Moles
 #+INCLUDE: "answers/5.org" 
-** TODO EaaS: Question 6
+** EaaS: XML, XXE, and DTD -- Oh My!
 #+INCLUDE: "answers/6.org" 
 ** EMI: Going Deep
 #+INCLUDE: "answers/7.org" 
