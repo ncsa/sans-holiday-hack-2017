@@ -21,4 +21,12 @@ The text field for entering the SHA1 hashes of the great book pages appears to h
 
 *** Exploration
 
-In the Munchin BOLO, the munchkins disappeared after speaking something that sounded like 'puuurzgexgull'. This is most likely a reference to the word 'pyrzqxgl' which was a word described in the book 'The Magic of Oz'. A munchkin, incidentally named 'Bini Aru', like the munchkin in the BOLO, wrote down how to pronounce the word. The word was magical and could be used to transform a being into a different creature.
+**** Star Wars robots references in http://nppd.northpolechristmastown.com/robots.txt
+
+The robots.txt page for the nppd site has a number of robot references as user-agents.
+  * hk-47, a hunter-killer assassin droid
+  * threepio, an obvious reference to C3PO. There's a sand-crawler-delay variable set to '421' which could be a reference to the storm trooper, TK-421, who was abushed on the Millenium Falcon, and incidentally is also the only named Storm Trooper in the original trilogy.
+  * artoo, an obvious reference to R2D2. There's a sand-craler-delay variable set to '2187' which is likely a reference to the cell that Princess Leia was in on the Death Star.
+
+**** Munchkins
+In the Munchin BOLO, the munchkins disappeared after speaking something that sounded like 'puuurzgexgull'. This is most likely a reference to the word 'pyrzqxgl' which was a word described in the book 'The Magic of Oz'. A munchkin, incidentally named 'Bini Aru', like the munchkin in the BOLO, wrote down how to pronounce the word. The word was magical and could be used to transform a being into a different creature. Also, Boq is another munchkin named in the Land of Oz book series.
