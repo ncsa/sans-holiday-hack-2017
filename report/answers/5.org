@@ -74,46 +74,9 @@ Calling =nppd.py= creates a file 'infractions.json'. Now that we have the NPPD's
 
 To get the number of infractions needed to get onto the naughty list we take the names on the Naughty and Nice List that have been marked as =Naughty= and count the total number of infractions for those people and we identify the lowest number of infractions per person amongst all of them.
 
-So to automate all this we'll create script we'll call =visualize_infractions.py= to correlate our data.
+So to automate all this we'll create script we'll call =analyze_infractions.py= to correlate our data.
 
-#+BEGIN_SRC python
-#!/usr/bin/env python3
-import csv
-import json
-from operator import itemgetter
-from collections import defaultdict
-
-WANT = set(['Aggravated pulling of hair', 'Throwing rocks (at people)', 'Throwing rocks (non-person target)'])
-
-def get_naughty():
-    with open("Naughty and Nice List.csv") as f:
-        reader = csv.reader(f)
-        rows = list(reader)
-
-    return [name for (name, naughty) in rows if naughty == 'Naughty']
-
-def main():
-    byname = defaultdict(set)
-    infraction_count_byname = defaultdict(int)
-    with open("infractions.json") as f:
-        infractions = json.load(f)
-
-    for i in infractions:
-        byname[i['name']].add(i['title'])
-        infraction_count_byname[i['name']] += 1
-
-    print("Six insider threat moles:")
-    for n, titles in byname.items():
-        if len(titles & WANT) >= 2:
-            print("*", n,titles)
-
-    min_infractions = min(infraction_count_byname[name] for name in get_naughty())
-
-    print()
-    print("How many infractions are required to be marked as naughty on Santa's Naughty and Nice List:", min_infractions)
-
-if __name__ == "__main__":
-   main()
+#+INCLUDE: "../../tools/analyze_infractions.py"
 #+END_SRC
 
 After we run our script we get these results:
@@ -165,8 +128,6 @@ According to the unlocked chat with Sam, the person throwing snowballs is =the A
    :PROPERTIES:
    :CUSTOM_ID: alternatives
    :END:
-
-Any other, easier solutions?
 
 ** Common Pitfalls
    :PROPERTIES:
