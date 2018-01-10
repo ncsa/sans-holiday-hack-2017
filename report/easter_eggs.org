@@ -18,3 +18,7 @@
 *** Stocking
 
 The text field for entering the SHA1 hashes of the great book pages appears to have some placeholder text in it, =686579212121202d436f756e746572204861636b=. This is in hex and can be converted to ascii, =hey!!! -Counter Hack=.
+
+*** Exploration
+
+In the Munchin BOLO, the munchkins disappeared after speaking something that sounded like 'puuurzgexgull'. This is most likely a reference to the word 'pyrzqxgl' which was a word described in the book 'The Magic of Oz'. A munchkin, incidentally named 'Bini Aru', like the munchkin in the BOLO, wrote down how to pronounce the word. The word was magical and could be used to transform a being into a different creature.
