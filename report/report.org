@@ -341,7 +341,7 @@ We can use the following indicators to search any clues we're later provided wit
 ** We're Off To See The
 #+INCLUDE: "terminals/off.org"
 * TODO Answers
-** TODO This Page Fell of a Truck
+** This Page Fell of a Truck
 #+INCLUDE: answers/1.org
 ** Command Execution on Letters to Santa
 #+INCLUDE: "answers/2.org" 
@@ -349,7 +349,7 @@ We can use the following indicators to search any clues we're later provided wit
 #+INCLUDE: "answers/3.org" 
 ** AES Bypass
 #+INCLUDE: "answers/4.org" 
-** TODO Question 5
+** Naughty Moles N
 #+INCLUDE: "answers/5.org" 
 ** TODO Question 6
 #+INCLUDE: "answers/6.org" 
