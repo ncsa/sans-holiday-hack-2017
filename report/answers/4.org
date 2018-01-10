@@ -73,7 +73,13 @@ Luckily, the error message tells us how we need to format the e-mail address:
 #+attr_html: :width 500px
 [[./images/bad_password.png]]
 
-Curses! Looks like Alabaster is at least smart enough to not reuse credentials. Let's review some of the hints that Pepper gave us:
+Curses! Looks like Alabaster is at least smart enough to not reuse credentials. At least he's following the password policy:
+
+#+CAPTION: MEMO - Password Policy Reminder.docx from the SMB FileStor
+#+attr_html: :width 500px
+[[./images/password_policy.png]]
+
+Let's review some of the hints that Pepper gave us:
 
 #+BEGIN_QUOTE
 I just hope that he cleared up all his dev files. I know he was working on keeping the dev files from search engine indexers.
