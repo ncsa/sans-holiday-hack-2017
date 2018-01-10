@@ -44,6 +44,8 @@ From this game: https://2017.holidayhackchallenge.com/game/dbb44df8-af5e-4136-b7
 
 Direct link: https://docker2017.holidayhackchallenge.com/?challenge=595aeb87-d3b2-41a3-b612-fa553a30e822&uid=USER_ID
 
+#+HTML: <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/YbWnc5Wb0T8?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
 #+CAPTION: The terminal is located at the top of the right hand hill.
 [[./images/terminal-location-bounce.png]]
 
