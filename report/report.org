@@ -1,7 +1,7 @@
 #+TITLE: SANS 2017 Holiday Hack Writeup
 #+AUTHOR: NCSA Security Team
 #+EMAIL: vladg@illinois.edu
-#+OPTIONS: timestamp:nil num:nil ^:nil toc:2 exports:both
+#+OPTIONS: timestamp:nil num:nil ^:nil toc:3 exports:both
 
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="css/htmlize.css"/>
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="http://www.pirilampo.org/styles/readtheorg/css/htmlize.css"/>
@@ -15,8 +15,10 @@
 #+HTML_HEAD: <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+HTML_HEAD: <style>#content{max-width:1200px;}</style>
 
+#+MACRO: abbr @@html:<abbr title="$1">$2</abbr>@@
+
 * Introduction
-We're the Security team at the National Center for Supercomputing
+We are the Security team at the National Center for Supercomputing
 Applications, and we worked together on yet another fun SANS Holiday
 Hack, like we did last year. Over the past year, we've been surprised
 to see how many skills and tricks from the 2016 Holiday Hack we used
@@ -44,8 +46,7 @@ scope of the challenge. We also tried to automate as much of our work
 as possible, and we make these tools publicly available.
 * tl;dr: Quick Answers
 1. What is the title of the first page? *About This Book...*
-2. What is the topic of The Great Book page available in the web root of the server? *On the Topic of Flying Animals*
-
+2. What is the topic of The Great Book page available in the web root of the server? *On the Topic of Flying Animals*\\
    What is Alabaster Snowball's password? *stream_unhappy_buy_loss*
 3. What is the file server share name? *FileStor*
 4. What can you learn from The Great Book page found in an e-mail on EWA? *The behavior of the Abominable Snowman ("Bumble") has recently become erratic. Rumor has it that there must've been some magic in something he ate.*
@@ -214,7 +215,7 @@ some clues.
      "query": "name:Who"
  #+END_EXAMPLE
 
- Going back to DNS< we can try to enumerate some hosts under the top
+ Going back to DNS, we can try to enumerate some hosts under the top
  level domain. FuzzDB has a nice list of common DNS name, and we can
  use an nmap script to try to query those:
 
@@ -321,8 +322,6 @@ We can use the following indicators to search any clues we're later provided wit
 | North Pole Police Department         | Reference | nppd /infractions      |
 | Cindy Lou Who (2015 Hack)            | Reference | nppd /infractions      |
 | Dr. Who (2016 Hack)                  | Reference | nppd /infractions      |
-
-
 * Terminals
 ** Winter Wonder Landing
 #+INCLUDE: "terminals/landing.org"
@@ -330,7 +329,7 @@ We can use the following indicators to search any clues we're later provided wit
 #+INCLUDE: "terminals/cliffs.org"
 ** Cryokinetic Magic
 #+INCLUDE: "terminals/cryokinetic.org"
-** There's No Place Like Home
+** There's Snow Place Like Home
 #+INCLUDE: "terminals/home.org"
 ** Bumble's Bounce
 #+INCLUDE: "terminals/bounce.org"
@@ -341,24 +340,23 @@ We can use the following indicators to search any clues we're later provided wit
 ** We're Off To See The
 #+INCLUDE: "terminals/off.org"
 * TODO Answers
-** TODO This Page Fell of a Truck
+** Game: This Page Fell off a Truck
 #+INCLUDE: answers/1.org
-** Command Execution on Letters to Santa
+** L2S: Letters to Santa
 #+INCLUDE: "answers/2.org" 
-** Windows Fileshare 
+** SMB: Windows Fileshare 
 #+INCLUDE: "answers/3.org" 
-** AES Bypass
+** EWA: Elf Web Access
 #+INCLUDE: "answers/4.org" 
-** TODO Question 5
+** NPPD: Naughty Moles
 #+INCLUDE: "answers/5.org" 
-** TODO Question 6
+** EaaS: TODO Question 6
 #+INCLUDE: "answers/6.org" 
-** TODO Question 7
+** EMI: Going Deep
 #+INCLUDE: "answers/7.org" 
-** TODO Question 8
+** TODO EDB: Question 8
 #+INCLUDE: "answers/8.org" 
-** TODO Question 9
+** Fin: The Evil Good Witch
 #+INCLUDE: "answers/9.org" 
 * Easter Eggs
 #+INCLUDE: "easter_eggs.org" 
-* TODO Misc

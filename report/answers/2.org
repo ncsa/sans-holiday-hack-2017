@@ -1,6 +1,6 @@
-** Question
+* Question
    :PROPERTIES:
-   :CUSTOM_ID: question
+   :CUSTOM_ID: q2_question
    :END:
 
 Investigate the Letters to Santa application at
@@ -8,9 +8,9 @@ https://l2s.northpolechristmastown.com. What is the topic of The
 Great Book page available in the web root of the server? What is
 Alabaster Snowball's password?
 
-** Background Information
+* Background Information
    :PROPERTIES:
-   :CUSTOM_ID: background-information
+   :CUSTOM_ID: q2_background-information
    :END:
 
 We know that there is an application on =https://l2s.northpolechristmastown.com= that we need to investigate.
@@ -36,18 +36,18 @@ The following SANS Pentest Blog posts were also very helpful for this challenge:
 - [[https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee Restricted][A Spot of Tee]]
   bash shell, and bypassing the I/O restriction with tee
 
-** Goal
+* Goal
    :PROPERTIES:
-   :CUSTOM_ID: goal
+   :CUSTOM_ID: q2_goal
    :END:
 
 There are two goals for this challenge. The first is to determine the topic of
 the Great Book Page that is sitting on the web root of this server. The second
 is to determine what Alabaster's password is.
 
-** Approach
+* Approach
    :PROPERTIES:
-   :CUSTOM_ID: approach
+   :CUSTOM_ID: q2_approach
    :END:
 
 According to the second hint there might be development code left in the production code.
@@ -258,9 +258,9 @@ $ find / -name *.pdf
  final String password = "stream_unhappy_buy_loss";
  #+END_SRC
 
-** Solution
+* Solution
    :PROPERTIES:
-   :CUSTOM_ID: solution
+   :CUSTOM_ID: q2_solution
    :END:
 
 *** What is the topic of The Great Book page available in the web root of the server?
@@ -284,9 +284,9 @@ cleartext in that file. We used =find= to =grep= all the files for
 =stream_unhappy_buy_loss=
 #+END_QUOTE
 
-** Alternatives
+* Alternatives
    :PROPERTIES:
-   :CUSTOM_ID: alternatives
+   :CUSTOM_ID: q2_alternatives
    :END:
 
 *** Add an authorized_key
@@ -457,9 +457,9 @@ www-data@l2s:$ find / -type f -xdev -user alabaster_snowball 2>/dev/null |
 /opt/apache-tomcat/webapps/ROOT/WEB-INF/classes/org/demo/rest/example/OrderMySql.class- final String password = "stream_unhappy_buy_loss";
 #+END_SRC
 
-** Common Pitfalls
+* Common Pitfalls
    :PROPERTIES:
-   :CUSTOM_ID: common-pitfalls
+   :CUSTOM_ID: q2_common-pitfalls
    :END:
 
 A common pitfall is the blind injection aspect of the Apache Struts exploit. There were a couple of ways around this:
@@ -473,9 +473,9 @@ files on this system, so we could just =grep= everything, but another
 option would've been to look for files that had been modified around
 the time the system was installed.
 
-** About the Challenge
+* About the Challenge
    :PROPERTIES:
-   :CUSTOM_ID: about-the-challenge
+   :CUSTOM_ID: q2_about-the-challenge
    :END:
 
 Initially the host has a couple of noticeable holes.
@@ -485,7 +485,7 @@ Initially the host has a couple of noticeable holes.
 
 The server itself housed two virtual web hosts, the Letter's to Santa application which ran PHP in nginx and the Development site which was run by Apache struts on a high port being redirected by nginx.
 
-** Moving Foward
+* Moving Foward
 
 Now that we have a script to automate access to l2s let's run nmap to scan the internal network.
 

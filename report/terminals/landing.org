@@ -1,12 +1,7 @@
-* Winter Wonder Landing
-   :PROPERTIES:
-   :CUSTOM_ID: title
-   :END:
-
-** Question
-   :PROPERTIES:
-   :CUSTOM_ID: question
-   :END:
+* Question
+  :PROPERTIES:
+  :CUSTOM_ID: landing_question
+  :END:
 
 #+BEGIN_EXAMPLE
                                      |
@@ -39,10 +34,10 @@
     Find and run the elftalkd binary to complete this challenge.
 #+END_EXAMPLE
 
-** How to find the terminal
-   :PROPERTIES:
-   :CUSTOM_ID: how-to-find-the-terminal
-   :END:
+* How to find the terminal
+  :PROPERTIES:
+  :CUSTOM_ID: landing_how-to-find-the-terminal
+  :END:
 
 From this game: https://2017.holidayhackchallenge.com/game/7e48d6aa-4b73-4027-b23b-a6a1a3460d54
 
@@ -53,40 +48,40 @@ Direct Link: https://docker2017.holidayhackchallenge.com/?challenge=eb5282de-5e4
 #+CAPTION: The terminal is right on top of the tower.
 [[./images/terminal-location-landing.png]]
 
-** Background Information
-   :PROPERTIES:
-   :CUSTOM_ID: background-information
-   :END:
+* Background Information
+  :PROPERTIES:
+  :CUSTOM_ID: landing_background-information
+  :END:
 
-We are logged in as the user =elf=. According to Bushy Green's Twitter account someone copied the wrong 'find' executable onto his system.
+We are logged in as the user =elf=. According to Bushy Green's Twitter account someone copied the wrong =find= executable onto his system.
 
-** Goal
-   :PROPERTIES:
-   :CUSTOM_ID: goal
-   :END:
+* Goal
+  :PROPERTIES:
+  :CUSTOM_ID: landing_goal
+  :END:
 
-According to the motd we need to find and run the elftalkd binary.
+According to the Message of the Day (MOTD) we need to find and run the =elftalkd= binary.
 
-** Hints
-   :PROPERTIES:
-   :CUSTOM_ID: hints
-   :END:
+* Hints
+  :PROPERTIES:
+  :CUSTOM_ID: landing_hints
+  :END:
 
 Bushy Evergreen on Twitter has a hint:
 
 #+HTML: <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Ugh, somebody copied over the wrong `find` executable to my system today. How am I supposed to know where find normally is?!</p>&mdash; Bushy Evergreen (@GreenestElf) <a href="https://twitter.com/GreenestElf/status/938165130906365952?ref_src=twsrc%5Etfw">December 5, 2017</a></blockquote>
 
-** Approach
-   :PROPERTIES:
-   :CUSTOM_ID: approach
-   :END:
+* Approach
+  :PROPERTIES:
+  :CUSTOM_ID: landing_approach
+  :END:
 
 To solve this challenge we need to find a valid version of =find= on the system or some other viable version to find the =elftalkd= binary.
 
-** Solution
-   :PROPERTIES:
-   :CUSTOM_ID: solution
-   :END:
+* Solution
+  :PROPERTIES:
+  :CUSTOM_ID: landing_solution
+  :END:
 
 First we need to test what's wrong with =find=.
 
@@ -152,10 +147,10 @@ Commencing Elf Talk Daemon (pid=6021)... done!
 Background daemon...
 #+END_SRC
 
-** Alternatives
-   :PROPERTIES:
-   :CUSTOM_ID: alternatives
-   :END:
+* Alternatives
+  :PROPERTIES:
+  :CUSTOM_ID: landing_alternatives
+  :END:
 
 The quick method is to iterate through using wildcards to execute the binary.
 

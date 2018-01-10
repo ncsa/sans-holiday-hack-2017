@@ -1,12 +1,7 @@
-* Oh Wait! Maybe WE Are...
-   :PROPERTIES:
-   :CUSTOM_ID: title
-   :END:
-
-** Question
-   :PROPERTIES:
-   :CUSTOM_ID: question
-   :END:
+* Question
+  :PROPERTIES:
+  :CUSTOM_ID: we_are_question
+  :END:
 
 #+BEGIN_EXAMPLE
                 -->*<--
@@ -33,10 +28,10 @@
     Hint: What commands can you run with sudo?
 #+END_EXAMPLE
 
-** How to find the terminal
-   :PROPERTIES:
-   :CUSTOM_ID: how-to-find-the-terminal
-   :END:
+* How to find the terminal
+  :PROPERTIES:
+  :CUSTOM_ID: we_are_how-to-find-the-terminal
+  :END:
 
 From this game: https://2017.holidayhackchallenge.com/game/f09180b7-43e4-406c-83ac-924539e7b8f5
 
@@ -47,16 +42,16 @@ Direct link: https://docker2017.holidayhackchallenge.com/?challenge=a9d07a00-55b
 #+CAPTION: The terminal is just behind the starting ramp on the main platform.
 [[./images/terminal-location-we_are.png]]
 
-** Background Information
-   :PROPERTIES:
-   :CUSTOM_ID: background-information
-   :END:
+* Background Information
+  :PROPERTIES:
+  :CUSTOM_ID: we_are_background-information
+  :END:
 
 We're logged in as the user =elf=. We happen to know that
 =/etc/shadow= is where *NIX systems store the password hashes for
 their users.
 
-The system MOTD gives us a hint:
+The system {{{abbr(Message of the Day, MOTD)}}} gives us a hint:
 
 #+BEGIN_QUOTE
 What commands can you run with sudo?
@@ -64,10 +59,10 @@ What commands can you run with sudo?
 
 We also know that =sudo= is a program that allows us to run commands with the privileges of other users and/or groups.
 
-** Goal
-   :PROPERTIES:
-   :CUSTOM_ID: goal
-   :END:
+* Goal
+  :PROPERTIES:
+  :CUSTOM_ID: we_are_goal
+  :END:
 
 We need to overwrite /etc/shadow with /etc/shadow.bak. Basically we
 need to ~cp /etc/shadow.bak /etc/shadow~, except that we don't have
@@ -78,19 +73,19 @@ elf@784e43534178:~$ cp /etc/shadow.bak /etc/shadow
 cp: cannot create regular file '/etc/shadow': Permission denied
 #+END_SRC
 
-** Hints
-   :PROPERTIES:
-   :CUSTOM_ID: approach
-   :END:
+* Hints
+  :PROPERTIES:
+  :CUSTOM_ID: we_are_approach
+  :END:
 
 Shinny Upatree on Twitter has a few hints:
 
 #+HTML: <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">I think I have some pseudo (sp?) permissions on this Unix server, but I don&#39;t know what that means. <a href="https://twitter.com/GreenesterElf?ref_src=twsrc%5Etfw">@GreenesterElf</a> said this was a &quot;learning opportunity&quot; and won&#39;t give me the answer :&#39;(</p>&mdash; Shinny Upatree (@ClimbALLdaTrees) <a href="https://twitter.com/ClimbALLdaTrees/status/938578359860174848?ref_src=twsrc%5Etfw">December 7, 2017</a></blockquote>
 
-** Approach
-   :PROPERTIES:
-   :CUSTOM_ID: approach
-   :END:
+* Approach
+  :PROPERTIES:
+  :CUSTOM_ID: we_are_approach
+  :END:
 
 If we follow the hint, we should try to figure out what commands we can run with sudo. Let's run ~sudo -h~ to view the help documentation:
 
@@ -198,10 +193,10 @@ elf@784e43534178:~$ inspect_da_box
 /etc/shadow has been successfully restored!
 #+END_SRC
 
-** Solution
-   :PROPERTIES:
-   :CUSTOM_ID: solution
-   :END:
+* Solution
+  :PROPERTIES:
+  :CUSTOM_ID: we_are_solution
+  :END:
 
 A one-liner is:
 
@@ -209,10 +204,10 @@ A one-liner is:
 sudo -g shadow find -exec cp /etc/shadow.bak /etc/shadow \; && inspect_da_box
 #+END_SRC
 
-** Alternatives
-   :PROPERTIES:
-   :CUSTOM_ID: alternatives
-   :END:
+* Alternatives
+  :PROPERTIES:
+  :CUSTOM_ID: we_are_alternatives
+  :END:
 
 Instead of using =find= to directly copy the file, we can just use it to start an elevated shell:
 
@@ -227,10 +222,10 @@ uid=1000(elf) gid=42(shadow) groups=42(shadow),1000(elf)
 
 This shows how we can use =sudo= + =find= as a general privilege escalation mechanism.
 
-** Common Pitfalls
-   :PROPERTIES:
-   :CUSTOM_ID: common-pitfalls
-   :END:
+* Common Pitfalls
+  :PROPERTIES:
+  :CUSTOM_ID: we_are_common-pitfalls
+  :END:
 
 =find='s exec syntax is a little weird, and a common mistake is forgetting to escape the semicolon at the end:
 
@@ -243,7 +238,7 @@ Another issue is just the fact that sudo is often set up for user
 permissions, and not group permissions, so the =-g= flag is less well
 known.
 
-** Going Further - Privilege Escalation
+* Going Further - Privilege Escalation
 
 This is neat, but let's elevate privileges to root on this
 terminal. Our approach will be to put in a modified shadow file

@@ -1,12 +1,7 @@
-* Bumbles Bounce
-   :PROPERTIES:
-   :CUSTOM_ID: title
-   :END:
-
-** Question
-   :PROPERTIES:
-   :CUSTOM_ID: question
-   :END:
+* Question
+  :PROPERTIES:
+  :CUSTOM_ID: bounce_question
+  :END:
 
 #+BEGIN_EXAMPLE
                                ._    _.
@@ -40,10 +35,10 @@
     Identifying the least-popular browser is your noteworthy goal.
 #+END_EXAMPLE
 
-** How to find the terminal
-   :PROPERTIES:
-   :CUSTOM_ID: how-to-find-the-terminal
-   :END:
+* How to find the terminal
+  :PROPERTIES:
+  :CUSTOM_ID: bounce_how-to-find-the-terminal
+  :END:
 
 From this game: https://2017.holidayhackchallenge.com/game/dbb44df8-af5e-4136-b72e-ebd9dfb32b4a
 
@@ -54,32 +49,32 @@ Direct link: https://docker2017.holidayhackchallenge.com/?challenge=595aeb87-d3b
 #+CAPTION: The terminal is located at the top of the right hand hill.
 [[./images/terminal-location-bounce.png]]
 
-** Background Information
-   :PROPERTIES:
-   :CUSTOM_ID: background-information
-   :END:
+* Background Information
+  :PROPERTIES:
+  :CUSTOM_ID: bounce_background-information
+  :END:
 
-** Goal
-   :PROPERTIES:
-   :CUSTOM_ID: goal
-   :END:
+* Goal
+  :PROPERTIES:
+  :CUSTOM_ID: bounce_goal
+  :END:
 
 The goal is to analyze a 'log file' and determine what the least popular browser.
 
-** Hints
-   :PROPERTIES:
-   :CUSTOM_ID: hints
-   :END:
+* Hints
+  :PROPERTIES:
+  :CUSTOM_ID: bounce_hints
+  :END:
 
 Minty Candycane on Twitter has some hints
 
 #+HTML: <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Oh wow, <a href="https://twitter.com/Sw4mp_f0x?ref_src=twsrc%5Etfw">@Sw4mp_f0x</a> and <a href="https://twitter.com/bluscreenofjeff?ref_src=twsrc%5Etfw">@bluscreenofjeff</a> did a great job on this Parsing for Pentesters series! <a href="https://t.co/g1LcCWjH4Q">https://t.co/g1LcCWjH4Q</a></p>&mdash; Minty Candycane (@SirMintsALot) <a href="https://twitter.com/SirMintsALot/status/938188406546251777?ref_src=twsrc%5Etfw">December 5, 2017</a></blockquote>
 #+HTML: <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">The only thing that last article didn&#39;t really help me with was *counting* unique lines. This post looks super helpful for that! <a href="https://t.co/QaPQ4Ml0JD">https://t.co/QaPQ4Ml0JD</a> (it&#39;s even against web server logs, just the wrong field)</p>&mdash; Minty Candycane (@SirMintsALot) <a href="https://twitter.com/SirMintsALot/status/938574395240366080?ref_src=twsrc%5Etfw">December 7, 2017</a></blockquote>
 
-** Approach
-   :PROPERTIES:
-   :CUSTOM_ID: approach
-   :END:
+* Approach
+  :PROPERTIES:
+  :CUSTOM_ID: bounce_approach
+  :END:
 
 A directory listing shows that terminal contains a binary called 'runtoanswer',
 as well as fairly large 'access.log' file:
@@ -104,10 +99,10 @@ brackets.  Also except for the request which has the "method uri protocol"
 quoted, and the user agent quoted as well.  Some fields are also hex encoded.  Anyway,
 since we just want the user-agents, we can split the log lines on the double quote char.
 
-** Solution
-   :PROPERTIES:
-   :CUSTOM_ID: solution
-   :END:
+* Solution
+  :PROPERTIES:
+  :CUSTOM_ID: bounce_solution
+  :END:
 
 My solution is to use the =cut= tool, along with =sort= and =uniq= to find the least popular browser.
 =cut= is very limited compared to tools like =awk= or =sed=, but it is often simpler
@@ -163,15 +158,15 @@ elf@784e43534178:~$ grep Dillo access.log
 XX.YY.54.139 - - [27/Nov/2017:19:41:49 -0500] "GET /invoker/JMXInvokerServlet HTTP/1.1" 301 185 "-" "Dillo/3.0.5"
 #+END_SRC
 
-** Alternatives
-   :PROPERTIES:
-   :CUSTOM_ID: alternatives
-   :END:
+* Alternatives
+  :PROPERTIES:
+  :CUSTOM_ID: bounce_alternatives
+  :END:
 
-** Common Pitfalls
-   :PROPERTIES:
-   :CUSTOM_ID: common-pitfalls
-   :END:
+* Common Pitfalls
+  :PROPERTIES:
+  :CUSTOM_ID: bounce_common-pitfalls
+  :END:
 
 The most common issue appeared to be the result of not normalizing the different browser versions.
 If you count each VERSION of a browser as a separate program, you will get a result like:

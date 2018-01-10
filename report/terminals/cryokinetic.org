@@ -1,12 +1,7 @@
-* Cryokinetic Magic
-   :PROPERTIES:
-   :CUSTOM_ID: title
-   :END:
-
-** Question
-   :PROPERTIES:
-   :CUSTOM_ID: question
-   :END:
+* Question
+  :PROPERTIES:
+  :CUSTOM_ID: cryokinetic_question
+  :END:
 
 #+BEGIN_EXAMPLE
                          ___
@@ -33,10 +28,10 @@
     Run the CandyCaneStriper executable to complete this challenge.
 #+END_EXAMPLE
 
-** How to find the terminal
-   :PROPERTIES:
-   :CUSTOM_ID: how-to-find-the-terminal
-   :END:
+* How to find the terminal
+  :PROPERTIES:
+  :CUSTOM_ID: cryokinetic_how-to-find-the-terminal
+  :END:
 
 From this game: https://2017.holidayhackchallenge.com/game/a1f7ac49-8210-436b-9e25-0c19f9ebfe02
 
@@ -45,33 +40,37 @@ Direct link: https://docker2017.holidayhackchallenge.com/?challenge=da6d34d1-012
 #+CAPTION: The terminal is on top of the ice shanty.
 [[./images/terminal-location-cryokinetic.png]]
 
-** Background Information
-   :PROPERTIES:
-   :CUSTOM_ID: background-information
-   :END:
+* Background Information
+  :PROPERTIES:
+  :CUSTOM_ID: cryokinetic_background-information
+  :END:
 
-** Goal
-   :PROPERTIES:
-   :CUSTOM_ID: goal
-   :END:
+TODO
+
+* Goal
+  :PROPERTIES:
+  :CUSTOM_ID: cryokinetic_goal
+  :END:
 
 We need to run the =CandyCaneStriper= program. Upon initial inspection we discover that =/usr/bin/chmod= is empty and =CandyCaneStriper= has no execution flags set.
 
-** Hints
-   :PROPERTIES:
-   :CUSTOM_ID: hints
-   :END:
+* Hints
+  :PROPERTIES:
+  :CUSTOM_ID: cryokinetic_hints
+  :END:
    
 [[https://twitter.com/GreenesterElf][Holly Evergreen on Twitter has a hint]]
 #+HTML: <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Update: LD_PRELOAD is awesome, but it doesn&#39;t help in this situation. <a href="https://t.co/gkF690pdAJ">https://t.co/gkF690pdAJ</a> looks like the right approach, but it&#39;s not working on this system for some reason. Ugh, I step away from this for a bit and check with others. I&#39;m too frustrated.</p>&mdash; Holly Evergreen (@GreenesterElf) <a href="https://twitter.com/GreenesterElf/status/938544194070634496?ref_src=twsrc%5Etfw">December 6, 2017</a></blockquote>
 
 Following the link describes a familiar situation:
 
-
-** Approach
-   :PROPERTIES:
-   :CUSTOM_ID: approach
-   :END:
+#+BEGIN_QUOTE
+Is there a way to run an executable binary file under Linux which does not have the execute bit set?  chmod +x is not an option.
+#+END_QUOTE
+* Approach
+  :PROPERTIES:
+  :CUSTOM_ID: cryokinetic_approach
+  :END:
 
 Let's take a look at the executable we're dealing with:
 
@@ -111,10 +110,10 @@ of this helper program; chances are you did not intend to run this program.
 elf@d5823d933b5d:~$ /lib64/ld-linux-x86-64.so.2 ./CandyCaneStriper 
 #+END_SRC
 
-** Solution
-   :PROPERTIES:
-   :CUSTOM_ID: solution
-   :END:
+* Solution
+  :PROPERTIES:
+  :CUSTOM_ID: cryokinetic_solution
+  :END:
 
 #+BEGIN_SRC
 elf@784e43534178:~$ /lib64/ld-linux-x86-64.so.2 ./CandyCaneStriper
@@ -134,10 +133,10 @@ elf@784e43534178:~$ /lib64/ld-linux-x86-64.so.2 ./CandyCaneStriper
 The candy cane striping machine is up and running!
 #+END_SRC
 
-** Alternatives
-   :PROPERTIES:
-   :CUSTOM_ID: alternatives
-   :END:
+* Alternatives
+  :PROPERTIES:
+  :CUSTOM_ID: cryokinetic_alternatives
+  :END:
 
 There are *many* different ways to solve this challenge.
 

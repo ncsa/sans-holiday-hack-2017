@@ -1,12 +1,7 @@
-* There's Snow Place Like Home
-   :PROPERTIES:
-   :CUSTOM_ID: title
-   :END:
-
-** Question
-   :PROPERTIES:
-   :CUSTOM_ID: question
-   :END:
+* Question
+  :PROPERTIES:
+  :CUSTOM_ID: home_question
+  :END:
 
 #+BEGIN_EXAMPLE
 
@@ -31,10 +26,10 @@
     If you can get it running again, I will reward you with a gift of delight.
 #+END_EXAMPLE
 
-** How to find the terminal
-   :PROPERTIES:
-   :CUSTOM_ID: how-to-find-the-terminal
-   :END:
+* How to find the terminal
+  :PROPERTIES:
+  :CUSTOM_ID: home_how-to-find-the-terminal
+  :END:
 
 From this game: https://2017.holidayhackchallenge.com/game/41a1e6bb-60c3-4695-ad04-514fbcc76afa
 
@@ -45,10 +40,10 @@ Direct link: https://docker2017.holidayhackchallenge.com/?challenge=4050467e-9cd
 #+CAPTION: The terminal is on the side of the center building.
 [[./images/terminal-location-home.png]]
 
-** Background Information
-   :PROPERTIES:
-   :CUSTOM_ID: background-information
-   :END:
+* Background Information
+  :PROPERTIES:
+  :CUSTOM_ID: home_background-information
+  :END:
 
 We're logged in as the user elf. There's a file called =trainstartup= in our home directory.
 
@@ -59,10 +54,10 @@ elf@784e43534178:~$ uname -a
 Linux 784e43534178 4.9.0-4-amd64 #1 SMP Debian 4.9.65-3 (2017-12-03) x86_64 x86_64 x86_64 GNU/Linux
 #+END_SRC
 
-** Goal
-   :PROPERTIES:
-   :CUSTOM_ID: goal
-   :END:
+* Goal
+  :PROPERTIES:
+  :CUSTOM_ID: home_goal
+  :END:
 
 It looks like we just want to run the =trainstartup= file, but if we try that, we get an exec error:
 
@@ -71,10 +66,10 @@ elf@784e43534178:~$ ./trainstartup
 bash: ./trainstartup: cannot execute binary file: Exec format error
 #+END_SRC
 
-** Hints
-   :PROPERTIES:
-   :CUSTOM_ID: hints
-   :END:
+* Hints
+  :PROPERTIES:
+  :CUSTOM_ID: home_hints
+  :END:
 
 Pepper Minstix on Twitter has a hint:
 #+HTML: <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Actually, <a href="https://twitter.com/GreenesterElf?ref_src=twsrc%5Etfw">@GreenesterElf</a> , you&#39;re better at prompt commands than I am. Why can&#39;t I get this model train thing working? I&#39;m in the right directory like you taught me, but this system is still saying &quot;No such file or directory&quot;</p>&mdash; Pepper Minstix (@PepperyGoodness) <a href="https://twitter.com/PepperyGoodness/status/938545233624678400?ref_src=twsrc%5Etfw">December 6, 2017</a></blockquote>
@@ -82,10 +77,10 @@ Pepper Minstix on Twitter has a hint:
 Holly Evergreen on Twitter has a hint for this as well:
 #+HTML: <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">I still can&#39;t figure out Pepper Minstix&#39;s issue. It looks like the binary is compiled for another architecture. I think qemu can help, but I don&#39;t want to run the entire OS :\ <a href="https://t.co/pikSOOkyZe">https://t.co/pikSOOkyZe</a> helps, but I just want one binary, not the whole system!</p>&mdash; Holly Evergreen (@GreenesterElf) <a href="https://twitter.com/GreenesterElf/status/938552050253643777?ref_src=twsrc%5Etfw">December 6, 2017</a></blockquote>
 
-** Approach
-   :PROPERTIES:
-   :CUSTOM_ID: approach
-   :END:
+* Approach
+  :PROPERTIES:
+  :CUSTOM_ID: home_approach
+  :END:
 
 There's really not much to go on here. We'll first use =file= to identify the =trainstartup= binary:
 
@@ -143,17 +138,17 @@ You did it! Thank you!
 
 Success!
 
-** Solution
-   :PROPERTIES:
-   :CUSTOM_ID: solution
-   :END:
+* Solution
+  :PROPERTIES:
+  :CUSTOM_ID: home_solution
+  :END:
 
 You need to use =qemu-arm= to run the ARM binary: ~qemu-arm ./trainstartup~
 
-** Alternatives
-   :PROPERTIES:
-   :CUSTOM_ID: alternatives
-   :END:
+* Alternatives
+  :PROPERTIES:
+  :CUSTOM_ID: home_alternatives
+  :END:
 
 The real difficulty of this terminal was in discovering that you
 needed to use =qemu-arm=. ~compgen -c~ is a handy trick in CTFs to
@@ -220,10 +215,10 @@ elf@784e43534178:~$ find / -xdev -printf "%C+\t%p\n" | sort | head
 ...
 #+END_SRC
 
-** Common Pitfalls
-   :PROPERTIES:
-   :CUSTOM_ID: common-pitfalls
-   :END:
+* Common Pitfalls
+  :PROPERTIES:
+  :CUSTOM_ID: home_common-pitfalls
+  :END:
 
 This terminal was tricky because almost no information was
 given. Knowing how to use =file= to identify that =trainstartup= was

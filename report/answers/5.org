@@ -1,6 +1,6 @@
-** Question
+* Question
    :PROPERTIES:
-   :CUSTOM_ID: question
+   :CUSTOM_ID: q5_question
    :END:
 
 How many infractions are required to be marked as naughty on Santa's
@@ -8,9 +8,9 @@ Naughty and Nice List? What are the names of at least six insider
 threat moles? Who is throwing the snowballs from the top of the North
 Pole Mountain and what is your proof?
 
-** Background Information
+* Background Information
    :PROPERTIES:
-   :CUSTOM_ID: background-information
+   :CUSTOM_ID: q5_background-information
    :END:
 
 We need to answer 3 questions involving infractions, insider moles and who is throwing snowballs. We need 4 things to answer these questions.
@@ -20,18 +20,18 @@ We need to answer 3 questions involving infractions, insider moles and who is th
   * We need the Munchkin Mole Report BOLO also on the SMB server.
   * We need to complete the "Bumble's Bounce" level on the WebGL game in order to unlock a chat from Sam.
 
-** Goal
+* Goal
    :PROPERTIES:
-   :CUSTOM_ID: goal
+   :CUSTOM_ID: q5_goal
    :END:
 
   * We need to identify what factors trigger a 'naughty' flag.
   * We need to identify the six insider threat moles.
   * We need to identify who is throwing snow balls.
 
-** Approach
+* Approach
    :PROPERTIES:
-   :CUSTOM_ID: approach
+   :CUSTOM_ID: q5_approach
    :END:
 
 Playing around with the infractions page we can see that once you do a search a Download option becomes available to download all the search results in json format. Let's automate this to create a local copy of all the data. We can do this searching for all results before and during a specific date, and all results after that date. We then combine those results into a single file. We can automate this with a script we'll call =nppd.py=.
@@ -70,28 +70,34 @@ if __name__ == "__main__":
     download_infractions()
 #+END_SRC
 
-Calling =nppd.py= creates a file 'infractions.json'. Now that we have the NPPD's infractions database we need compare it to the Naughty and Nice file we found on the SMB server. We can automate this process scriptomagically. While we're at it we should also script identifying the 6 insider threat moles as well. For finding the moles it appears their characteristics are pulling hair and throwing rocks. We'll try to identify people on the infractions list that do both.
+Calling =nppd.py= creates a file 'infractions.json'. Now that we have
+the NPPD's infractions database we need compare it to the Naughty and
+Nice file we found on the SMB server. We can automate this process
+scriptomagically. While we're at it we should also script identifying
+the 6 insider threat moles as well. For finding the moles it appears
+their characteristics are pulling hair and throwing rocks. We'll try
+to identify people on the infractions list that do both.
 
 To get the number of infractions needed to get onto the naughty list we take the names on the Naughty and Nice List that have been marked as =Naughty= and count the total number of infractions for those people and we identify the lowest number of infractions per person amongst all of them.
 
 So to automate all this we'll create script we'll call =analyze_infractions.py= to correlate our data.
 
-#+INCLUDE: "../../tools/analyze_infractions.py"
-#+END_SRC
+#+INCLUDE: "../../tools/analyze_infractions.py" src python
 
 After we run our script we get these results:
 
-#+BEGIN_SRC
+#+BEGIN_SRC 
 Six insider threat moles:
-* Isabel Mehta {'Tantrum in a private facility', 'Aggravated pulling of hair', 'Throwing rocks (non-person target)'}
-* Nina Fitzgerald {'Giving super atomic wedgies', 'Aggravated pulling of hair', 'Throwing rocks (at people)', 'Possession of unlicensed slingshot', 'Bedtime violation'}
-* Kirsty Evans {'Giving super atomic wedgies', 'Aggravated pulling of hair', 'Throwing rocks (at people)', 'Crayon on walls'}
-* Sheri Lewis {'Throwing rocks (at people)', 'Aggravated pulling of hair', 'Possession of unlicensed slingshot', 'Naughty words'}
-* Beverly Khalil {'Aggravated pulling of hair', 'Throwing rocks (at people)', 'Playing with matches', 'Possession of unlicensed slingshot', 'General sassing'}
-* Christy Srivastava {'Tantrum in a private facility', 'Aggravated pulling of hair', 'Tantrum in public', 'Throwing rocks (non-person target)'}
+ Isabel Mehta {'Tantrum in a private facility', 'Aggravated pulling of hair', 'Throwing rocks (non-person target)'}
+ Nina Fitzgerald {'Giving super atomic wedgies', 'Aggravated pulling of hair', 'Throwing rocks (at people)', 'Possession of unlicensed slingshot', 'Bedtime violation'}
+ Kirsty Evans {'Giving super atomic wedgies', 'Aggravated pulling of hair', 'Throwing rocks (at people)', 'Crayon on walls'}
+ Sheri Lewis {'Throwing rocks (at people)', 'Aggravated pulling of hair', 'Possession of unlicensed slingshot', 'Naughty words'}
+ Beverly Khalil {'Aggravated pulling of hair', 'Throwing rocks (at people)', 'Playing with matches', 'Possession of unlicensed slingshot', 'General sassing'}
+ Christy Srivastava {'Tantrum in a private facility', 'Aggravated pulling of hair', 'Tantrum in public', 'Throwing rocks (non-person target)'}
 
 How many infractions are required to be marked as naughty on Santa's Naughty and Nice List: 4
 #+END_SRC
+
 
 Finally, once we play through the Bumbles Bounce level and get all achievements this chat gets unlocked and we have our answer for who is throwing snowballs.
 
@@ -107,9 +113,9 @@ In fact, he seems to be under someone else's control. We've got to find out who 
 It means, buckle your seatbelt, dear player, because the North Pole is going bye-bye
 #+END_QUOTE
 
-** Solution
+* Solution
    :PROPERTIES:
-   :CUSTOM_ID: solution
+   :CUSTOM_ID: q5_solution
    :END:
 
 It appears we need =4= infractions to make the Naughty list.
@@ -124,22 +130,3 @@ Our six insider moles appear to be:
 
 According to the unlocked chat with Sam, the person throwing snowballs is =the Abominable Snow Monster=, but maybe under someone else's control.
 
-** Alternatives
-   :PROPERTIES:
-   :CUSTOM_ID: alternatives
-   :END:
-
-** Common Pitfalls
-   :PROPERTIES:
-   :CUSTOM_ID: common-pitfalls
-   :END:
-
-Do we know what issue(s) people were running into?
-
-** About the Challenge
-   :PROPERTIES:
-   :CUSTOM_ID: about-the-challenge
-   :END:
-
-How was the challenge setup? Was there a better way to secure this
-system?
