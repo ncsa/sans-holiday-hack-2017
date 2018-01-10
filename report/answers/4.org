@@ -247,7 +247,7 @@ Now we just reload the page, and we're in!
 #+attr_html: :width 500px
 [[./images/ewa_loggedin.png]]
 
-At this point, we can start digging through Alabaster's e-mail. Soon, we find this:
+At this point, we can start digging through Alabaster's e-mail. Soon, we find this email leading us to [[https://www.holidayhackchallenge.com/2017/pages/f192a884f68af24ae55d9d9ad4adf8d3a3995258/GreatBookPage4.pdf][http://mail.northpolechristmastown.com/attachments/GreatBookPage4_893jt91md2.pdf]]:
 
 #+CAPTION: Page 4 E-mail
 #+attr_html: :width 500px
