@@ -46,7 +46,7 @@ Direct link: https://docker2017.holidayhackchallenge.com/?challenge=595aeb87-d3b
 
 #+HTML: <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/YbWnc5Wb0T8?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
-#+CAPTION: The terminal is located at the top of the right hand hill.
+#+CAPTION: The terminal is located at the top of the right hand hill in the red circle. [[https://www.holidayhackchallenge.com/2017/pages/05c0cacc8cfb96bb5531540e9b2b839a0604225f/GreatBookPage5.pdf][GreatBookPage5.pdf]] is on the same hill identified by the blue circle.
 [[./images/terminal-location-bounce.png]]
 
 * Background Information
