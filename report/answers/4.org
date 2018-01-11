@@ -278,7 +278,13 @@ algorithm, but it is flawed in that the client is providing both the
 challenge and the response.  It is also flawed in that it does not use
 MAC
 https://en.wikipedia.org/wiki/Authenticated_encryption#MAC-then-Encrypt_(MtE)
-meaning that the encrypted contents themselves are never verified.
+meaning that the encrypted contents themselves are never verified.  An additional flaw
+is that the plaintext and ciphertext are not related to the username, meaning any user
+with a valid cookie could impersonate any other user.
+[[http://cryto.net/~joepie91/blog/2016/06/19/stop-using-jwt-for-sessions-part-2-why-your-solution-doesnt-work/][JSON
+Web Tokens]] are not without
+[[https://auth0.com/blog/critical-vulnerabilities-in-json-web-token-libraries/][flaws]],
+but they avoid all of these issues.
 
 Since we can control both the ciphertext and the expected plaintext, we can
 just set the challenge to the empty string "" and the response then just needs
