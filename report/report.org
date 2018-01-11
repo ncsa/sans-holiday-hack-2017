@@ -61,14 +61,17 @@ and tools an attacker would use.
  We end our report with various Easter Eggs that we found, and a couple
  of appendices that go into more detail on certain topics.
 
-Our approach for this year's Holiday Hack was to stick as closely as
-possible to the hints, blog posts, and tools provided ...and then to
-try to elevate privileges, crack passwords, and see what other
-information we could find --- all while taking care to stay within the
-scope of the challenge. We also tried to automate as much of our work
-as possible, and we make these tools publicly available.
+For our solutions, we review the information that we were given, lay
+out how we solved it, and what led us to the solution, and when
+possible, show some other ways that we could've approached the
+challenge. Overall, we tried to stick as closely as possible to the
+hints, blog posts, and tools provided ...and then to try to elevate
+privileges, crack passwords, and see what other information we could
+find --- all while taking care to stay within the scope of the
+challenge. We also tried to automate as much of our work as possible,
+and we make these tools [[https://github.com/ncsa/sans-holiday-hack-2017][publicly available]].
 
- We hope you enjoy our report.
+ We hope you enjoy our report. We certainly enjoyed writing it.
 
 * tl;dr: Quick Answers
 1. What is the title of the first page? *About This Book...*
