@@ -49,7 +49,9 @@ as possible, and we make these tools publicly available.
    What is Alabaster Snowball's password? *stream_unhappy_buy_loss*
 3. What is the file server share name? *FileStor*
 4. What can you learn from The Great Book page found in an e-mail on EWA? *The behavior of the Abominable Snowman ("Bumble") has recently become erratic. Rumor has it that there must've been some magic in something he ate.*
-5. TODO
+5. How many infractions are required to be marked as naughty? *4*\\
+   What are the names of at least six insider threat moles? *Isabel Mehta, Nina Fitzgerald, Kirsty Evans, Sheri Lewis, Beverly Khalil, Christy Srivastava*\\
+   Who is throwing the snowballs from the top of the North Pole Mountain and what is your proof? *The Abominable Snow Monster, Bumble*. Based on a chat with Sam the Snowman.
 6. What is the title of The Great Book page on EAAS? *The Dreaded Inter-Dimensional Tornadoes*
 7. What does The Great Book page on EMI describe? *The Witches of Oz*
 8. Who wrote the letter to Santa on edb? *The Wizard of Oz*
