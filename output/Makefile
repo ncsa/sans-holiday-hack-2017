@@ -55,3 +55,9 @@ ldap_hashcat.txt: password_hashes.txt password_combos.txt
 
 humans.txt:
 	http  --proxy=http:socks5://@localhost:31080  http://nppd.northpolechristmastown.com/humans.txt --download
+
+punchcard.txt:
+	../tools/humans.py
+
+decode_punchcard: punchcard.txt
+	php show_punchard.php
