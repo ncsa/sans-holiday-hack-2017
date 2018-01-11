@@ -18,6 +18,16 @@ The text field for entering the SHA1 hashes of the great book pages appears to h
 
 ** Exploration
 
+*** NPPD Siren
+
+#+ATTR_HTML: :controls controls
+#+BEGIN_video
+#+HTML: <source src="images/nppd_help.mov" type="video/mov">
+Your browser does not support the video tag.
+#+END_video
+
+According to [[http://nppd.northpolechristmastown.com/needhelp][the need help page on the NPPD site]], "In the event of an emergency, summon the NPPD by moving your mouse cursor back and forth over the menu bar of the website. Doing this from the infractions page gives optimal results." Doing so results in the video above where it looks like a siren.
+
 *** Star Wars robots references in http://nppd.northpolechristmastown.com/robots.txt
 
 The robots.txt page for the nppd site has a number of robot references as user-agents.
