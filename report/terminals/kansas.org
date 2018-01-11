@@ -65,7 +65,7 @@ directory: =christmassongs.db= and =runtoanswer=.
 If we try running =runtoanswer=, we see:
 
 #+BEGIN_SRC
-elf@197ceebbd305:~$ ./runtoanswer 
+elf@784e43534178:~$ ./runtoanswer 
 Starting up, please wait......
 Enter the name of the song with the most likes:
 #+END_SRC
@@ -102,9 +102,9 @@ Sugarplum Mary on Twitter has a hint:
 Let's see exactly what this "db" file is:
 
 #+BEGIN_SRC
-elf@0d0185762210:~$ less christmassongs.db 
+elf@784e43534178:~$ less christmassongs.db 
 bash: less: command not found
-elf@0d0185762210:~$ more christmassongs.db 
+elf@784e43534178:~$ more christmassongs.db 
 SQLite format 3
 ...
 #+END_SRC
@@ -112,7 +112,7 @@ SQLite format 3
 sqlite!  Ok!  Let's start up sqlite and change some output options
 
 #+BEGIN_SRC
-elf@5cf3b692a837:~$ sqlite3 christmassongs.db 
+elf@784e43534178:~$ sqlite3 christmassongs.db 
 SQLite version 3.11.0 2016-02-15 17:29:24
 Enter ".help" for usage hints.
 sqlite> .mode tabs  
@@ -172,7 +172,7 @@ sqlite>
 A one-liner is:
 
 #+BEGIN_SRC
-elf@1dea81eaaac4:~$ sqlite3 christmassongs.db "select title from songs, likes where songs.id=likes.songid group by title order by count(*) desc limit 1;"
+elf@784e43534178:~$ sqlite3 christmassongs.db "select title from songs, likes where songs.id=likes.songid group by title order by count(*) desc limit 1;"
 Stairway to Heaven
 #+END_SRC
 

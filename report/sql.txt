@@ -1,15 +1,15 @@
 A db file? what is this?
 
-    elf@0d0185762210:~$ less christmassongs.db 
+    elf@784e43534178:~$ less christmassongs.db 
     bash: less: command not found
-    elf@0d0185762210:~$ more christmassongs.db 
+    elf@784e43534178:~$ more christmassongs.db 
     SQLite format 3
     ...
 
 
 sqlite!  Ok!  Let's start up sqlite and change some output options
 
-    elf@5cf3b692a837:~$ sqlite3 christmassongs.db 
+    elf@784e43534178:~$ sqlite3 christmassongs.db 
     SQLite version 3.11.0 2016-02-15 17:29:24
     Enter ".help" for usage hints.
     sqlite> .mode tabs  
