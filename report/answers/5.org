@@ -108,17 +108,7 @@ How many infractions are required to be marked as naughty on Santa's Naughty and
 
 Finally, once we play through the Bumbles Bounce level and get all achievements this chat gets unlocked and we have our answer for who is throwing snowballs.
 
-#+BEGIN_QUOTE
-Arrrrrrrrgh! Grrrrrrrr! ROOOOOOOAR!
-
-You've done it! You found out who was throwing the giant snowballs! It was the Abominable Snow Monster. We should have known. Thank you for your great work!
-
-But, you know, he doesn't seem quite himself. Look into his eyes. It almost looks like he has been hypnotized. Something's not right with him.
-
-In fact, he seems to be under someone else's control. We've got to find out who is pulling his strings, or else the real villain will remain on the loose and will likely strike again.
-
-It means, buckle your seatbelt, dear player, because the North Pole is going bye-bye
-#+END_QUOTE
+[[./images/chat_bumble_sam.png]]
 
 * Solution
    :PROPERTIES:

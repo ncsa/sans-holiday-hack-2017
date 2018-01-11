@@ -50,7 +50,7 @@ as possible, and we make these tools publicly available.
 3. What is the file server share name? *FileStor*
 4. What can you learn from The Great Book page found in an e-mail on EWA? *The behavior of the Abominable Snowman ("Bumble") has recently become erratic. Rumor has it that there must've been some magic in something he ate.*
 5. How many infractions are required to be marked as naughty? *4*\\
-   What are the names of at least six insider threat moles? *Isabel Mehta, Nina Fitzgerald, Kirsty Evans, Sheri Lewis, Beverly Khalil, Christy Srivastava*\\
+   What are the names of at least six insider threat moles? *Isabel Mehta, Nina Fitzgerald, Kirsty Evans, Sheri Lewis, Beverly Khalil, Christy Srivastava* as well as the two in the BOLO, *Bini Aru and Boq Questrian*\\
    Who is throwing the snowballs from the top of the North Pole Mountain and what is your proof? *The Abominable Snow Monster, Bumble*. Based on a chat with Sam the Snowman.
 6. What is the title of The Great Book page on EAAS? *The Dreaded Inter-Dimensional Tornadoes*
 7. What does The Great Book page on EMI describe? *The Witches of Oz*

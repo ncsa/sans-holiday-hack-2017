@@ -16,6 +16,6 @@ problem. What is the villain's motive?
 This answer comes straight from the game. Once we've found at least 5 pages, and completed all the levels, we see the following message:
 
 #+CAPTION: The Villain Revealed
-[[./images/glinda.png]]
+[[./images/chat_glinda.png]]
 
 It's always about the money...
