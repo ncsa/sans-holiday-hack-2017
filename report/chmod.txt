@@ -2,7 +2,7 @@ Multiple solutions:
 
 Use the linker to run the binary:
 
-    elf@d5823d933b5d:~$ ldd CandyCaneStriper 
+    elf@784e43534178:~$ ldd CandyCaneStriper 
     linux-vdso.so.1 =>  (0x00007ffe4047d000)
     libpython2.7.so.1.0 => /usr/lib/x86_64-linux-gnu/libpython2.7.so.1.0 (0x00007f50ee532000)
     libc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007f50ee168000)
@@ -15,7 +15,7 @@ Use the linker to run the binary:
 
 that ld-blahblah.so is like the 'perl' or 'python' equivalent for binaries:
 
-    elf@d5823d933b5d:~$ /lib64/ld-linux-x86-64.so.2
+    elf@784e43534178:~$ /lib64/ld-linux-x86-64.so.2
     Usage: ld.so [OPTION]... EXECUTABLE-FILE [ARGS-FOR-PROGRAM...]
     You have invoked `ld.so', the helper program for shared library executables.
     This program usually lives in the file `/lib/ld.so', and special directives
@@ -38,20 +38,20 @@ that ld-blahblah.so is like the 'perl' or 'python' equivalent for binaries:
                             in LIST
       --audit LIST          use objects named in LIST as auditors
 
-    elf@d5823d933b5d:~$ /lib64/ld-linux-x86-64.so.2 ./CandyCaneStriper 
+    elf@784e43534178:~$ /lib64/ld-linux-x86-64.so.2 ./CandyCaneStriper 
 
 
 overwrite an executable file with the existing binary.
 
-    elf@2798541ad158:~$ ls -l /bin/chmod
+    elf@784e43534178:~$ ls -l /bin/chmod
     -rwxr-xr-x 1 root root 0 Dec 15 20:00 /bin/chmod
-    elf@2798541ad158:~$ cp /bin/new .
-    elf@2798541ad158:~$ cat CandyCaneStriper  >> new
-    elf@2798541ad158:~$ ls -l
+    elf@784e43534178:~$ cp /bin/new .
+    elf@784e43534178:~$ cat CandyCaneStriper  >> new
+    elf@784e43534178:~$ ls -l
     total 96
     -rw-r--r-- 1 root root 45224 Dec 15 19:59 CandyCaneStriper
     -rwxr-xr-x 1 elf  elf  45224 Dec 17 00:15 new
-    elf@2798541ad158:~$ ./new
+    elf@784e43534178:~$ ./new
 
 
 Use python to chmod.  The chmod binary is just a wrapper around the chmod libc
@@ -65,35 +65,35 @@ function.  Any programming language will have this available:
 
 FAIL :(  What if make a copy first?
 
-    elf@d5823d933b5d:~$ cp CandyCaneStriper c
-    elf@d5823d933b5d:~$ python
+    elf@784e43534178:~$ cp CandyCaneStriper c
+    elf@784e43534178:~$ python
     Python 2.7.12 (default, Nov 20 2017, 18:23:56) 
     [GCC 5.4.0 20160609] on linux2
     Type "help", "copyright", "credits" or "license" for more information.
     >>> import os
     >>> os.chmod("c", 0755)
     >>> ^d
-    elf@d5823d933b5d:~$ ./c
+    elf@784e43534178:~$ ./c
 
 
 with perl:
 
-    elf@1e6fe4ce3449:~$ cp CandyCaneStriper c
-    elf@1e6fe4ce3449:~$ cat > fix.pl
+    elf@784e43534178:~$ cp CandyCaneStriper c
+    elf@784e43534178:~$ cat > fix.pl
     chmod 0755 "c";
     ^d
-    elf@1e6fe4ce3449:~$ perl fix.pl 
+    elf@784e43534178:~$ perl fix.pl 
     String found where operator expected at fix.pl line 1, near "0755 "c""
             (Missing operator before  "c"?)
     syntax error at fix.pl line 1, near "0755 "c""
     Execution of fix.pl aborted due to compilation errors.
-    elf@1e6fe4ce3449:~$ cat > fix.pl
+    elf@784e43534178:~$ cat > fix.pl
     chmod 0755, "c";
     ^d
-    elf@1e6fe4ce3449:~$ perl fix.pl 
-    elf@1e6fe4ce3449:~$ ./c
+    elf@784e43534178:~$ perl fix.pl 
+    elf@784e43534178:~$ ./c
 
 Or as a perl one liner, now that we figured out the syntax:
 
-    elf@1e6fe4ce3449:~$ cp CandyCaneStriper c
-	elf@1e6fe4ce3449:~$ perl -e 'chmod 0755, "c"'
+    elf@784e43534178:~$ cp CandyCaneStriper c
+	elf@784e43534178:~$ perl -e 'chmod 0755, "c"'

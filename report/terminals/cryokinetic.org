@@ -37,6 +37,8 @@ From this game: https://2017.holidayhackchallenge.com/game/a1f7ac49-8210-436b-9e
 
 Direct link: https://docker2017.holidayhackchallenge.com/?challenge=da6d34d1-012b-420b-a7d5-369914353578&uid=USER_ID
 
+#+HTML: <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/p6m3N1SVvNs?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
 #+CAPTION: The terminal is on top of the ice shanty.
 [[./images/terminal-location-cryokinetic.png]]
 
@@ -75,16 +77,16 @@ Is there a way to run an executable binary file under Linux which does not have 
 Let's take a look at the executable we're dealing with:
 
 #+BEGIN_SRC
-elf@f76931683b1e:~$ ls -l CandyCaneStriper 
+elf@784e43534178:~$ ls -l CandyCaneStriper 
 -rw-r--r-- 1 root root 45224 Dec 15 19:59 CandyCaneStriper
-elf@f76931683b1e:~$ file CandyCaneStriper 
+elf@784e43534178:~$ file CandyCaneStriper 
 CandyCaneStriper: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, for GNU/Linux 2.6.32, BuildID[sha1]=bfe4ffd88f30e6970feb7e3341ddbe579e9ab4b3, stripped
 #+END_SRC
 
 Much like how Python and Perl scripts have interpreters, ELF binaries also have interpreters. For our target, =file= tells us that our interpreter is =/lib64/ld-linux-x86-64.so.2=.
 
 #+BEGIN_SRC
-elf@d5823d933b5d:~$ /lib64/ld-linux-x86-64.so.2
+elf@784e43534178:~$ /lib64/ld-linux-x86-64.so.2
 Usage: ld.so [OPTION]... EXECUTABLE-FILE [ARGS-FOR-PROGRAM...]
 You have invoked `ld.so', the helper program for shared library executables.
 This program usually lives in the file `/lib/ld.so', and special directives
@@ -107,7 +109,7 @@ of this helper program; chances are you did not intend to run this program.
                         in LIST
   --audit LIST          use objects named in LIST as auditors
 
-elf@d5823d933b5d:~$ /lib64/ld-linux-x86-64.so.2 ./CandyCaneStriper 
+elf@784e43534178:~$ /lib64/ld-linux-x86-64.so.2 ./CandyCaneStriper 
 #+END_SRC
 
 * Solution
@@ -143,15 +145,15 @@ There are *many* different ways to solve this challenge.
 Overwrite an executable file with the existing binary:
 
 #+BEGIN_SRC
-elf@2798541ad158:~$ ls -l /bin/chmod
+elf@784e43534178:~$ ls -l /bin/chmod
 -rwxr-xr-x 1 root root 0 Dec 15 20:00 /bin/chmod
-elf@2798541ad158:~$ cp /bin/ls new
-elf@2798541ad158:~$ cat CandyCaneStriper  > new
-elf@2798541ad158:~$ ls -l
+elf@784e43534178:~$ cp /bin/ls new
+elf@784e43534178:~$ cat CandyCaneStriper  > new
+elf@784e43534178:~$ ls -l
 total 96
 -rw-r--r-- 1 root root 45224 Dec 15 19:59 CandyCaneStriper
 -rwxr-xr-x 1 elf  elf  45224 Dec 17 00:15 new
-elf@2798541ad158:~$ ./new
+elf@784e43534178:~$ ./new
 #+END_SRC
 
 Use python to chmod.  The chmod binary is just a wrapper around the
@@ -169,40 +171,40 @@ OSError: [Errno 1] Operation not permitted: 'CandyCaneStriper'
 FAIL :(  For some reason we can't modify CandyCaneStriper.  What if make a copy first?
 
 #+BEGIN_SRC
-elf@d5823d933b5d:~$ cp CandyCaneStriper c
-elf@d5823d933b5d:~$ python
+elf@784e43534178:~$ cp CandyCaneStriper c
+elf@784e43534178:~$ python
 Python 2.7.12 (default, Nov 20 2017, 18:23:56) 
 [GCC 5.4.0 20160609] on linux2
 Type "help", "copyright", "credits" or "license" for more information.
 >>> import os
 >>> os.chmod("c", 0755)
 >>> ^d
-elf@d5823d933b5d:~$ ./c
+elf@784e43534178:~$ ./c
 #+END_SRC
 
 With perl:
 
 #+BEGIN_SRC
-elf@1e6fe4ce3449:~$ cp CandyCaneStriper c
-elf@1e6fe4ce3449:~$ cat > fix.pl
+elf@784e43534178:~$ cp CandyCaneStriper c
+elf@784e43534178:~$ cat > fix.pl
 chmod 0755 "c";
 ^d
-elf@1e6fe4ce3449:~$ perl fix.pl 
+elf@784e43534178:~$ perl fix.pl 
 String found where operator expected at fix.pl line 1, near "0755 "c""
         (Missing operator before  "c"?)
 syntax error at fix.pl line 1, near "0755 "c""
 Execution of fix.pl aborted due to compilation errors.
-elf@1e6fe4ce3449:~$ cat > fix.pl
+elf@784e43534178:~$ cat > fix.pl
 chmod 0755, "c";
 ^d
-elf@1e6fe4ce3449:~$ perl fix.pl 
-elf@1e6fe4ce3449:~$ ./c
+elf@784e43534178:~$ perl fix.pl 
+elf@784e43534178:~$ ./c
 #+END_SRC
 
 Or as a perl one liner, now that we figured out the syntax:
 
 #+BEGIN_SRC
-elf@1e6fe4ce3449:~$ cp CandyCaneStriper c
-elf@1e6fe4ce3449:~$ perl -e 'chmod 0755, "c"'
+elf@784e43534178:~$ cp CandyCaneStriper c
+elf@784e43534178:~$ perl -e 'chmod 0755, "c"'
 #+END_SRC
 

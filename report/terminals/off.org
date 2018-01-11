@@ -165,10 +165,10 @@ result to be 42.  However, if we try to run the program too quickly, we notice
 we get the same output each time:
 
 #+BEGIN_SRC
-elf@5f015af49eab:~$ ./isit42 & ./isit42 &
+elf@784e43534178:~$ ./isit42 & ./isit42 &
 [1] 31
 [2] 32
-elf@5f015af49eab:~$ Starting up ... Starting up ... done.
+elf@784e43534178:~$ Starting up ... Starting up ... done.
 Calling rand() to select a random number.
 done.
 Calling rand() to select a random number.
