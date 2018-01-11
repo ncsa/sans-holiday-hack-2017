@@ -43,6 +43,31 @@ try to elevate privileges, crack passwords, and see what other
 information we could find, all while taking care to stay within the
 scope of the challenge. We also tried to automate as much of our work
 as possible, and we make these tools publicly available.
+** Overview
+ If you're unfamiliar with the [[https://holidayhackchallenge.com/2017/][SANS Holiday Hack]], please check that out
+ first! We encourage you to give it a shot before reading this
+ solution. It's a great learning opportunity, and it stays up all year,
+ and into the future. Huge shout-out to SANS for putting on this event.
+
+ We kick things off with some very short answers to the 9 questions we
+ were posed. Something different that we did this year was to do some
+ reconnaissance before the Hack even began. The 2017 Challenge
+ consisted of two parts, with the first being The North Pole and Beyond
+ world -- an in-browser WebGL-based game, where players could earn
+ points and hints by manuevering giant snowballs around an obstacle
+ course. Hidden in this game were "Cranberry Pi" terminals, which had
+ simple challenges to be solved, as we helped the elves fix their
+ broken systems.
+
+ The second part of the challenge was gaining access to North Pole
+ systems, and recovering lost pages from the Great Book. These
+ challenges required finding and exploiting vulnerabilities, and often
+ chaining different attacks together. Once we had all the pages, we
+ could determine who the villain was.
+
+ We end our report with various Easter Eggs that we found, and a couple
+ of appendices that go into more detail on certain topics. We hope you
+ enjoy it.
 * tl;dr: Quick Answers
 1. What is the title of the first page? *About This Book...*
 2. What is the topic of The Great Book page available in the web root of the server? *On the Topic of Flying Animals*\\
@@ -328,7 +353,6 @@ We can use the following indicators to search any clues we're later provided wit
 #+attr_html: :width 600px
 [[./images/game_is_live.png]]
 
-
 * Terminals
 ** Winter Wonder Landing
 #+INCLUDE: "terminals/landing.org"
@@ -353,7 +377,7 @@ We can use the following indicators to search any clues we're later provided wit
 #+INCLUDE: "answers/2.org" 
 ** SMB: Windows Fileshare 
 #+INCLUDE: "answers/3.org" 
-** EWA: JWT All the Way
+** EWA: AES Bypass
 #+INCLUDE: "answers/4.org" 
 ** NPPD: Naughty Moles
 #+INCLUDE: "answers/5.org" 
@@ -374,7 +398,3 @@ We can use the following indicators to search any clues we're later provided wit
 #+INCLUDE: "passphrases.org" 
 ** Collaboration
 #+INCLUDE: "collab.org" 
-** Command Reference
-#+INCLUDE: "commands.org" 
-** External Resources
-#+INCLUDE: "resources.org" 

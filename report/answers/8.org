@@ -51,7 +51,7 @@ This blog post is explicitly called out:
    :END:
 
 The hints lay out a pretty clear path: we can use {{{abbr(Cross-site Scripting, XSS)}}} to send a malicious request to one of the elves or
-reindeer, and then steal their JWT token and access the directory.
+reindeer, and then steal their {{{abbr(JSON Web Token, JWT)}}} token and access the directory.
 
 * Approach
    :PROPERTIES:

