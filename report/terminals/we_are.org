@@ -37,7 +37,9 @@ From this game: https://2017.holidayhackchallenge.com/game/f09180b7-43e4-406c-83
 
 Direct link: https://docker2017.holidayhackchallenge.com/?challenge=a9d07a00-55bc-4391-a02b-71f3c4f1ec44&uid=USER_ID
 
+#+BEGIN_CENTER
 #+HTML: <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/kVKmTwQ7nNg?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+#+END_CENTER
 
 #+CAPTION: The terminal is just behind the starting ramp on the main platform.
 [[./images/terminal-location-we_are.png]]

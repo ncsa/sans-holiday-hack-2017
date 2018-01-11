@@ -1,7 +1,15 @@
 * Story Page
 ** Wintered logo is based on the Wicked stage musical poster.
+
+[[./images/HHC_banner.png]]
+
+#+attr_html: :width 350px
+[[./images/wicked_poster.jpg]]
+
 ** Short video is based on video intro to Rudolph the Red-Nosed Reindeer
- #+HTML: <iframe width="560" height="315" src="https://www.youtube.com/embed/g9ByiEGfAXk?rel=0&amp;start=99" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+#+BEGIN_CENTER
+#+HTML: <iframe width="560" height="315" src="https://www.youtube.com/embed/g9ByiEGfAXk?rel=0&amp;start=99" frameborder="0" gesture="media" allow="encrypted-media" allowfullscreen></iframe>
+#+END_CENTER
 
 * North Pole and Beyond
 ** Stocking
@@ -51,3 +59,6 @@ On 11/15/2017 11:18 AM, admin@northpolechristmastown.com wrote:
 #+END_SRC
 
 The reindeer appear to be speaking. Or randomly typing.
+
+#+attr_html: :width 300px
+[[./images/54ffe5266025c-dog1.jpg]]
