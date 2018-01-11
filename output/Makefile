@@ -60,4 +60,4 @@ punchcard.txt:
 	../tools/humans.py
 
 decode_punchcard: punchcard.txt
-	php show_punchard.php
+	php ../tools/show_punchard.php
