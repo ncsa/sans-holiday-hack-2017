@@ -8,6 +8,8 @@ documentation and correspondence. Using your access to the Letters to
 Santa server, identify and enumerate the SMB file-sharing server.
 What is the file server share name?
 
+/For hints, please see Holly Evergreen in the Cryokinetic Magic Level./
+
 * Background Information
    :PROPERTIES:
    :CUSTOM_ID: q3_background-information

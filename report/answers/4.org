@@ -8,6 +8,8 @@ available internally at http://mail.northpolechristmastown.com. What
 can you learn from The Great Book page found in an e-mail on that
 server?
 
+/Pepper Minstix provides some hints for this challenge on the There's Snow Place Like Home Level./
+
 * Background Information
    :PROPERTIES:
    :CUSTOM_ID: q4_background-information

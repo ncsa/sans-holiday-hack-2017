@@ -6,6 +6,8 @@
 Fetch the letter to Santa from the North Pole Elf Database at
 http://edb.northpolechristmastown.com. Who wrote the letter?
 
+/For hints on solving this challenge, please locate Wunorse Openslae in the North Pole and Beyond./
+
 * Background Information
    :PROPERTIES:
    :CUSTOM_ID: q8_background-information

@@ -11,6 +11,8 @@ attack with your access to the EWA server. Retrieve The Great Book
 page from C:\GreatBookPage7.pdf. What does The Great Book page
 describe?
 
+/Shinny Upatree offers hints for this challenge inside the North Pole and Beyond./
+
 * Background Information
    :PROPERTIES:
    :CUSTOM_ID: q7_background-information

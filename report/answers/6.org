@@ -11,6 +11,8 @@ instructions for accessing The Great Book page from C:\greatbook.txt.
 Then retrieve The Great Book PDF file by following those directions.
 What is the title of The Great Book page?
 
+/For hints on this challenge, please consult with Sugarplum Mary in the North Pole and Beyond./
+
 * Background Information
    :PROPERTIES:
    :CUSTOM_ID: q6_background-information

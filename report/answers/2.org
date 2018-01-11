@@ -8,6 +8,8 @@ https://l2s.northpolechristmastown.com. What is the topic of The
 Great Book page available in the web root of the server? What is
 Alabaster Snowball's password?
 
+/For hints associated with this challenge, Sparkle Redberry in the Winconceivable: The Cliffs of Winsanity Level can provide some tips./
+
 * Background Information
    :PROPERTIES:
    :CUSTOM_ID: q2_background-information

@@ -80,7 +80,7 @@ This blog post, [[https://pen-testing.sans.org/blog/2017/12/06/go-to-the-head-of
   :CUSTOM_ID: off_approach
   :END:
 
-[[https://ncsa.github.io/sans-holiday-hack-2016/#org42386a9][Our team actually did this exact thing last year in order to derandomize =wumpus=.]
+[[https://ncsa.github.io/sans-holiday-hack-2016/#org42386a9][Our team actually did this exact thing last year in order to derandomize =wumpus=.]]
 
 In this case looking at the source code we can identify the exact code that is being used to randomize the program:
 
