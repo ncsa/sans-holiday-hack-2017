@@ -1,0 +1,128 @@
+* Finding a Wordlist
+
+In question 2, we found Alabaster's password, which was pretty strong:
+=stream_unhappy_buy_loss=. During the course of the Hack, we found
+some other passwords, but were only able to crack Santa's password
+with a simple wordlist. Let's do some digging and see if we can't
+figure out how Alabaster's password was generated.
+
+Googling doesn't help too much, but a GitHub code search does. Searching for =stream unhappy buy loss passphrase=, the 8th result is pw.py:
+
+#+BEGIN_SRC python
+#!/usr/bin/env python3
+# coding=utf-8
+
+# Thanks to http://passphra.se/
+words = [
+"ability","able","aboard","about","above","accept","accident","according",
+"account","accurate","acres","across","act","action","active","activity",
+"actual","actually","add","addition","additional","adjective","adult","adventure",
+"advice","affect","afraid","after","afternoon","again","against","age",
+"ago","agree","ahead","aid","air","airplane","alike","alive",
+"all","allow","almost","alone","along","aloud","alphabet","already",
+...
+#+END_SRC
+
+We can verify that all 4 of the words are in that list. The code is
+even nice enough to link us to http://passphra.se, which seems like
+it'd be a handy service for anyone wanting to create some quick
+passwords.
+
+In question 8, we recovered some LDAP password hashes. Let's see if we
+can't crack more of those. Hashcat is our password cracker of choice,
+but it can't do passphrases from a word list. We only have 1,949
+words, and his password had 4 words chosen, so we can create a file
+with all the two-word combinations, then use Hashcat's combinator mode
+to try all combinations of two words on the left half and two words on
+the right half.
+
+We'll start by downloading the pw.py file that we found, and then a quick script will create our 2-word combos:
+
+#+BEGIN_SRC python
+#!/usr/bin/env python3
+import itertools
+
+import pw
+
+for x in itertools.permutations(pw.words, 2):
+    print(' '.join(x))
+#+END_SRC
+
+Some Makefile targets to help:
+
+#+BEGIN_SRC 
+password_hashes.txt: edb.json
+	cat edb.json |jq '.[][][]' -c|grep userPassword | jq '"\(.mail[0]):\(.userPassword[0])"' -r > password_hashes.txt
+
+password_combos.txt: ../tools/gen_password_combos.py
+	../tools/gen_password_combos.py > password_combos.txt
+	ls -lh password_combos.txt
+	wc -l password_combos.txt
+
+ldap_hashcat.txt: password_hashes.txt password_combos.txt
+	hashcat -m 0  -a 1 password_hashes.txt password_combos.txt  password_combos.txt -j ' ' --username || true
+	hashcat -m 0  -a 1 password_hashes.txt password_combos.txt  password_combos.txt -j ' ' --username --show | tee ldap_hashcat.txt
+#+END_SRC
+
+And then we can create our combos:
+
+#+BEGIN_SRC 
+$ make password_combos.txt
+../tools/gen_password_combos.py > password_combos.txt
+ls -lh password_combos.txt
+-rw-r--r--  1 vladg  staff    48M Jan 10 17:29 password_combos.txt
+wc -l password_combos.txt
+ 3796652 password_combos.txt
+#+END_SRC
+
+A 50 MB file is quite reasonable. Next up, we'll fire up Hashcat:
+
+#+BEGIN_SRC 
+$ make ldap_hashcat.txt
+hashcat -m 0 -a 1 password_hashes.txt password_combos.txt  password_combos.txt -j ' ' --username || true
+#+END_SRC
+
+On a laptop, performance isn't great. So we got an AWS GPU cracking rig.
+
+#+BEGIN_SRC 
+Session..........: hashcat
+Status...........: Cracked
+Hash.Type........: NTLM
+Hash.Target......: emi.hashes
+Time.Started.....: Wed Jan 10 14:15:06 2018 (1 minute 8 secs)
+Time.Estimated...: Wed Jan 10 14:16:14 2018 (0 secs)
+Guess.Base.......: File (password_combos_left_underscore.txt), Left Side
+Guess.Mod........: File (password_combos_right_underscore.txt), Right Side
+Speed.Dev.#1.....: 27490.8 MH/s (15.27ms)
+Speed.Dev.#2.....: 27306.9 MH/s (15.27ms)
+Speed.Dev.#3.....: 27213.1 MH/s (15.31ms)
+Speed.Dev.#4.....: 27282.2 MH/s (15.28ms)
+Speed.Dev.#5.....: 27210.4 MH/s (15.26ms)
+Speed.Dev.#6.....: 27154.5 MH/s (15.29ms)
+Speed.Dev.#7.....: 27160.6 MH/s (15.29ms)
+Speed.Dev.#8.....: 27380.2 MH/s (15.31ms)
+Speed.Dev.#*.....:   218.2 GH/s
+#+END_SRC
+
+This behemoth can run through all 4-word password combinations for NTLM using the wordlist in about a minute. And running it for a minute costs less than a dollar!
+
+#+begin_tip
+When spinning up expensive AWS instances, don't go to sleep with them idling.
+#+end_tip
+
+Here are the passwords we were able to crack this way:
+
+| User                  | Hash                             | Password                        | Source   | Type |
+|-----------------------+----------------------------------+---------------------------------+----------+------|
+| alabaster.snowball    | 17e22cc100b1806cdc3cf3b99a3480b5 | power instrument gasoline film  | EDB LDAP | MD5  |
+| bushy.evergreen       | 3d32700ab024645237e879d272ebc428 | reason fight carried pack       | EDB LDAP | MD5  |
+| holly.evergreen       | 031ef087617c17157bd8024f13bd9086 | research accept cent did        | EDB LDAP | MD5  |
+| jessica.claus         | 16268da802de6a2efe9c672ca79a7071 | in attention court daughter     | EDB LDAP | MD5  |
+| mary.sugerplum        | b9c124f223cdc64ee2ae6abaeffbcbfe | mark poem doll subject          | EDB LDAP | MD5  |
+| minty.candycane       | bcf38b6e70b907d51d9fa4154954f992 | tight mass season may           | EDB LDAP | MD5  |
+| pepper.minstix        | d0930efed8e75d7c8ed2e7d8e1d04e81 | wolf how policeman dance        | EDB LDAP | MD5  |
+| shimmy.upatree        | d0930efed8e75d7c8ed2e7d8e1d04e81 | wolf how policeman dance        | EDB LDAP | MD5  |
+| sparkle.redberry      | 82161cf4b4c1d94320200dfe46f0db4c | receive couple late copy        | EDB LDAP | MD5  |
+| tarpin.mcjinglehauser | f259e9a289c4633fc1e3ab11b4368254 | dozen age nation blind          | EDB LDAP | MD5  |
+| wunorse.openslae      | 9fd69465699288ddd36a13b5b383e937 | comfortable world yellow jungle | EDB LDAP | MD5  |
+| alabaster_snowball    | 10e2fa00c44d10ca05d399f47ed13351 | Carried_mass_it_reader1         | EMI      | NTLM |
