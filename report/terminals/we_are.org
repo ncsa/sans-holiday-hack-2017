@@ -222,29 +222,9 @@ elf@784e43534178:~$ id
 uid=1000(elf) gid=42(shadow) groups=42(shadow),1000(elf)
 #+END_SRC
 
-This shows how we can use =sudo= + =find= as a general privilege escalation mechanism.
+This shows how we can use =sudo= and =find= as a general privilege escalation mechanism.
 
-* Common Pitfalls
-  :PROPERTIES:
-  :CUSTOM_ID: we_are_common-pitfalls
-  :END:
-
-=find='s exec syntax is a little weird, and a common mistake is forgetting to escape the semicolon at the end:
-
-#+BEGIN_SRC
-elf@784e43534178:~$ sudo -g shadow find -exec cp /etc/shadow.bak /etc/shadow ;
-find: missing argument to `-exec'
-#+END_SRC
-
-Another issue is just the fact that sudo is often set up for user
-permissions, and not group permissions, so the =-g= flag is less well
-known.
-
-* Going Further - Privilege Escalation
-
-This is neat, but let's elevate privileges to root on this
-terminal. Our approach will be to put in a modified shadow file
-instead, which will have a password we know for the root user.
+Another way of doing this is by putting in a modified shadow file instead, which will have a password that we know for the root user.
 
 First, let's generate the password hash in the right format:
 
@@ -277,3 +257,21 @@ Password:
 root@784e43534178:/home/elf# id  
 uid=0(root) gid=0(root) groups=0(root)
 #+END_SRC
+
+* Common Pitfalls
+  :PROPERTIES:
+  :CUSTOM_ID: we_are_common-pitfalls
+  :END:
+
+=find='s exec syntax is a little weird, and a common mistake is forgetting to escape the semicolon at the end:
+
+#+BEGIN_SRC
+elf@784e43534178:~$ sudo -g shadow find -exec cp /etc/shadow.bak /etc/shadow ;
+find: missing argument to `-exec'
+#+END_SRC
+
+Another issue is just the fact that sudo is often set up for user
+permissions, and not group permissions, so the =-g= flag is less well
+known.
+
+
