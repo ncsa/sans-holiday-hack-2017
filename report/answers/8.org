@@ -106,7 +106,9 @@ Host: 10.142.0.11:4444
 
 ** JWT Token
 
-With the success of the XSS attack, the stolen token was stored in output/jwt TODO add a real link here.
+With the success of the XSS attack, we now know the token:
+
+#+INCLUDE: "../../output/jwt" src
 
 Great! Now we just need to modify our local storage, similar to how we
 added our cookie for EWA, and refresh the page! ...and nothing
@@ -253,7 +255,13 @@ There was a lot of stuff going on in this question. First, we needed to use {{{a
 
 Once we logged into the system, we found it was vulnerable to LDAP injection, and were able to dump all the users, and their passwords. Cracking Santa's password allowed us to access the letter from the Wizard of Oz.
 
-We automated this attack with tools/edb.py TODO ADD LINK HERE, which dumps the LDAP database:
+We automated this attack with =edb.py=, which dumps the LDAP database.
+
+Here is =edb.py=:
+
+#+INCLUDE: "../../tools/edb.py" src python
+
+And this is =edb.py= in action:
 
 #+BEGIN_SRC 
 $ ./edb.py | head

@@ -397,13 +397,19 @@ bytes of == for base64 purposes.
 
 *** Tool Development
 
-We created a script, TODO LINK TO EWA SCRIPT, which will forge a
+We created a script, =ewa.py=, which will forge a
 cookie to login as a user, and then dump all the e-mails as JSON. In
 order to do this, we relied heavily on
 http://mail.northpolechristmastown.com/js/custom.js to see how the API
 worked, and duplicated portions of it in Python. This script allowed
 us to archive and search e-mails, which was useful for future
 questions.
+
+Here is the script:
+
+#+INCLUDE: "../../tools/ewa.py" src python
+
+And the script in action:
 
 #+BEGIN_SRC 
 $ ./ewa.py alabaster.snowball > alabaster_inbox.json
