@@ -237,7 +237,7 @@ X-Powered-By: Express
 <script>window.location.href='/account.html'</script>
 #+END_SRC
 
-That looks promising! Let's move from the command line back to Firefox. One easy way to edit cookies in Firefox is to go to Tools => Web Developer => Storage Inspector. We should see an =EWA= cookie in there already, and we can simply double-click the value field and paste in our forged cookie:
+That looks promising! Let's move from the command line back to Firefox. One easy way to edit cookies in Firefox is to go to Tools \=> Web Developer \=> Storage Inspector. We should see an =EWA= cookie in there already, and we can simply double-click the value field and paste in our forged cookie:
 
 #+BEGIN_SRC
 {"name":"alabaster.snowball@northpolechristmastown.com","ciphertext":"U2VjdXJpdHkgYXQgTkNTQQ==","plaintext":""}
@@ -275,7 +275,7 @@ meaning that the encrypted contents themselves are never verified.
 Since we can control both the ciphertext and the expected plaintext, we can
 just set the challenge to the empty string "" and the response then just needs
 to be ANY message that decrypts to "".  Since the message is empty, the key is
-irrelevant, we just need to work out how to properly generate a ciphertext that
+irrelevant; we just need to work out how to properly generate a ciphertext that
 will decrypt to nothing.
 
 A completely empty ciphertext throws an error:
@@ -287,7 +287,7 @@ TypeError: Provided "encrypted" must be a non-empty string
     at Object.decrypt (/Users/user/node_modules/aes256/index.js:68:13)
 #+END_SRC
 
-A larger ciphertext works, but gives us a random string, which is not what we want.. but 
+A larger ciphertext works, but gives us a random string, which is not what we want. but 
 we can see that a fairly long cipher text only gives us a few bytes of plaintext...
 
 #+BEGIN_SRC js
@@ -370,7 +370,7 @@ Error: Invalid IV length
 
 Success!  A string of any 22 chars will decrypt to the empty string.
 
-An alternative approach would be to edit the aes library and comment out this block:
+An alternative approach would be to edit the AES library and comment out this block:
 
 #+BEGIN_SRC js
 if (typeof plaintext !== 'string' || !plaintext) {
@@ -392,7 +392,7 @@ With the throw commented out, we can encrypt an empty string:
 24
 #+END_SRC
 
-The length is different(24 instead of 22), but only because it is padded with 2
+The length is different (24 instead of 22), but only because it is padded with 2
 bytes of == for base64 purposes.
 
 *** Tool Development

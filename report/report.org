@@ -18,36 +18,29 @@
 
 * Introduction
 We are the Security team at the National Center for Supercomputing
-Applications, and we worked together on yet another fun SANS Holiday
-Hack, like we did last year. Over the past year, we've been surprised
-to see how many skills and tricks from the 2016 Holiday Hack we used
-for our jobs.
+Applications, and like last year, we worked together on a fun SANS
+Holiday Hack. Over the past year, we've been surprised to see how many
+skills and tricks from the 2016 Holiday Hack we have used for our
+jobs.
 
 We've done "red-team" work such as code reviews and pen-tests, where
-we encountered insufficient PHP input sanitization, development files
-being left in production, and services being unintentionally
-exposed. Our role in these instances is to find these issues before
-someone malicious does, and to help and educate our users to
-understand and prevent this from reoccuring. Other work we do is in
-architecting defenses and mitigations. How do we secure systems and
-services, while being as transparent as possible to end-users?
+we encountered issues such as insufficient PHP input sanitization,
+development files being left in production, and services being
+unintentionally exposed. Our role in such instances is to find these
+issues before someone malicious does, and to help and educate our
+users to better understand and prevent this from reoccuring. Other
+work we do is architecting defenses and mitigations: how do we
+secure systems and services, while being as transparent as possible to
+end-users?
 
 As we do red-team work, it's useful to try to think like a defender:
 "How would *I* have secured this system, and are there any ways around
 that?" Similarly, as we do blue-team work, we need to know the methods
-and tools that an attacker would use.
-
-Our approach for this year's Holiday Hack was to stick as closely as
-possible to the hints, blog posts, and tools provided. ...and then to
-try to elevate privileges, crack passwords, and see what other
-information we could find, all while taking care to stay within the
-scope of the challenge. We also tried to automate as much of our work
-as possible, and we make these tools publicly available.
+and tools an attacker would use.
 ** Overview
  If you're unfamiliar with the [[https://holidayhackchallenge.com/2017/][SANS Holiday Hack]], please check that out
  first! We encourage you to give it a shot before reading this
- solution. It's a great learning opportunity, and it stays up all year,
- and into the future. Huge shout-out to SANS for putting on this event.
+ solution. It's a great learning opportunity, and it stays up all year and into the future. Huge shout-out to SANS for putting on this event.
 
  We kick things off with some very short answers to the 9 questions we
  were posed. Something different that we did this year was to do some
@@ -56,18 +49,27 @@ as possible, and we make these tools publicly available.
  world -- an in-browser WebGL-based game, where players could earn
  points and hints by manuevering giant snowballs around an obstacle
  course. Hidden in this game were "Cranberry Pi" terminals, which had
- simple challenges to be solved, as we helped the elves fix their
+ simple challenges to be solved as we helped the elves fix their
  broken systems.
 
  The second part of the challenge was gaining access to North Pole
- systems, and recovering lost pages from the Great Book. These
+ systems and recovering lost pages from the Great Book. These
  challenges required finding and exploiting vulnerabilities, and often
  chaining different attacks together. Once we had all the pages, we
  could determine who the villain was.
 
  We end our report with various Easter Eggs that we found, and a couple
- of appendices that go into more detail on certain topics. We hope you
- enjoy it.
+ of appendices that go into more detail on certain topics.
+
+Our approach for this year's Holiday Hack was to stick as closely as
+possible to the hints, blog posts, and tools provided ...and then to
+try to elevate privileges, crack passwords, and see what other
+information we could find --- all while taking care to stay within the
+scope of the challenge. We also tried to automate as much of our work
+as possible, and we make these tools publicly available.
+
+ We hope you enjoy our report.
+
 * tl;dr: Quick Answers
 1. What is the title of the first page? *About This Book...*
 2. What is the topic of The Great Book page available in the web root of the server? *On the Topic of Flying Animals*\\
