@@ -37,7 +37,9 @@ From this game: https://2017.holidayhackchallenge.com/game/a1f7ac49-8210-436b-9e
 
 Direct link: https://docker2017.holidayhackchallenge.com/?challenge=da6d34d1-012b-420b-a7d5-369914353578&uid=USER_ID
 
+#+BEGIN_CENTER
 #+HTML: <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/p6m3N1SVvNs?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+#+END_CENTER
 
 #+CAPTION: The terminal is on top of the ice shanty.
 [[./images/terminal-location-cryokinetic.png]]
@@ -47,14 +49,14 @@ Direct link: https://docker2017.holidayhackchallenge.com/?challenge=da6d34d1-012
   :CUSTOM_ID: cryokinetic_background-information
   :END:
 
-TODO
+Upon initial inspection we discover that =/usr/bin/chmod= is empty and =CandyCaneStriper= has no execution flags set.
 
 * Goal
   :PROPERTIES:
   :CUSTOM_ID: cryokinetic_goal
   :END:
 
-We need to run the =CandyCaneStriper= program. Upon initial inspection we discover that =/usr/bin/chmod= is empty and =CandyCaneStriper= has no execution flags set.
+We need to run the =CandyCaneStriper= program, but we can't use the =chmod= binary.
 
 * Hints
   :PROPERTIES:

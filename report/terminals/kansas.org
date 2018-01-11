@@ -48,8 +48,13 @@ Direct link: https://docker2017.holidayhackchallenge.com/?challenge=ab13b9fc-6e7
 #+HTML: <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/Ex6NJiCcJe0?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 #+END_CENTER
 
-#+CAPTION: This solution strips out the poppy field so you can see better
+#+begin_tip
+This one's tricky. You can strip out the poppies in your browser, and then the terminal can easily be seen on the left side
+#+end_tip
+
+#+BEGIN_CENTER
 #+HTML: <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/THNIj3Z14lE?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+#+END_CENTER
 
 #+CAPTION: If you take away the poppies the terminal can easily be seen on the left hand side of the field.
 [[./images/terminal-location-kansas.png]]
