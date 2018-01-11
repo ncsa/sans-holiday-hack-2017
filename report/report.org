@@ -406,5 +406,3 @@ We can use the following indicators to search any clues we're later provided wit
    :CUSTOM_ID: passphrases
    :END:
 #+INCLUDE: "passphrases.org" 
-** Collaboration
-#+INCLUDE: "collab.org" 
