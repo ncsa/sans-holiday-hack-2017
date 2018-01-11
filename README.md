@@ -1,6 +1,6 @@
 # NCSA's SANS Holiday Hack Challenge 2017
 
-Here is our teams repository for all tools and reports from this years [SANS Holiday Hack Challenge](https://www.holidayhackchallenge.com/2017/). If you're looking for the 2016 report that's available [here](https://ncsa.github.io/sans-holiday-hack-2016/).
+Here is our team's repository for all tools and reports from this years [SANS Holiday Hack Challenge](https://www.holidayhackchallenge.com/2017/). If you're looking for the 2016 report that's available [here](https://ncsa.github.io/sans-holiday-hack-2016/).
 
 The full readable online report is available at (https://ncsa.github.io/sans-holiday-hack-2017/).
 
