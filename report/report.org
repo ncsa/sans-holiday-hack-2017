@@ -323,6 +323,12 @@ We can use the following indicators to search any clues we're later provided wit
 | North Pole Police Department         | Reference | nppd /infractions      |
 | Cindy Lou Who (2015 Hack)            | Reference | nppd /infractions      |
 | Dr. Who (2016 Hack)                  | Reference | nppd /infractions      |
+
+#+CAPTION: Slack Notification that the Game is Live!
+#+attr_html: :width 600px
+[[./images/game_is_live.png]]
+
+
 * Terminals
 ** Winter Wonder Landing
 #+INCLUDE: "terminals/landing.org"
