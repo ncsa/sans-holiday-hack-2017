@@ -212,6 +212,8 @@ When pip installs a module, it will run the =setup.py= file. By adding
 arbitrary Python code to this file, we can execute commands without
 needing to worry about encoding them in a Word document, etc.
 
+For a more in-depth discussion about why we used pip here, see [[#pip][the appendix]].
+
 The end result was writing a complete end-to-end script, which will
 build a malicious Word document, e-mail it, create a malicious Python
 module, and use it to download the PDF.

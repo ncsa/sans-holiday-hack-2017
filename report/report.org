@@ -16,6 +16,11 @@
 
 #+MACRO: abbr @@html:<abbr title="$1">$2</abbr>@@
 
+
+#+begin_note
+This report has been slightly modiifed from [[https://ncsa.github.io/sans-holiday-hack-2017/submission.html][our official submitted version]].
+#+end_note
+
 * Introduction
 We are the [[https://security.ncsa.illinois.edu][Security team]] at
 the [[https://www.ncsa.illinois.edu][National Center for Supercomputing
@@ -39,172 +44,172 @@ that?" Similarly, as we do blue-team work, we need to know the methods
 and tools an attacker would use.
 
 ** Overview
- If you're unfamiliar with the [[https://holidayhackchallenge.com/2017/][SANS Holiday Hack]], please check that out
- first! We encourage you to give it a shot before reading this
- solution. It's a great learning opportunity, and it stays up all year and into the future. Huge shout-out to SANS for putting on this event.
+   If you're unfamiliar with the [[https://holidayhackchallenge.com/2017/][SANS Holiday Hack]], please check that out
+   first! We encourage you to give it a shot before reading this
+   solution. It's a great learning opportunity, and it stays up all year and into the future. Huge shout-out to SANS for putting on this event.
 
- We kick things off with some very short answers to the 9 questions we
- were posed. Something different that we did this year was to do some
- reconnaissance before the Hack even began. The 2017 Challenge
- consisted of two parts, with the first being The North Pole and Beyond
- world -- an in-browser WebGL-based game, where players could earn
- points and hints by manuevering giant snowballs around an obstacle
- course. Hidden in this game were "Cranberry Pi" terminals, which had
- simple challenges to be solved as we helped the elves fix their
- broken systems.
+   We kick things off with some very short answers to the 9 questions we
+   were posed. Something different that we did this year was to do some
+   reconnaissance before the Hack even began. The 2017 Challenge
+   consisted of two parts, with the first being The North Pole and Beyond
+   world -- an in-browser WebGL-based game, where players could earn
+   points and hints by manuevering giant snowballs around an obstacle
+   course. Hidden in this game were "Cranberry Pi" terminals, which had
+   simple challenges to be solved as we helped the elves fix their
+   broken systems.
 
- The second part of the challenge was gaining access to North Pole
- systems and recovering lost pages from the Great Book. These
- challenges required finding and exploiting vulnerabilities, and often
- chaining different attacks together. Once we had all the pages, we
- could determine who the villain was.
+   The second part of the challenge was gaining access to North Pole
+   systems and recovering lost pages from the Great Book. These
+   challenges required finding and exploiting vulnerabilities, and often
+   chaining different attacks together. Once we had all the pages, we
+   could determine who the villain was.
 
- We end our report with various Easter Eggs that we found, and a couple
- of appendices that go into more detail on certain topics.
+   We end our report with various Easter Eggs that we found, and a couple
+   of appendices that go into more detail on certain topics.
 
-For our solutions, we review the information that we were given, lay
-out how we solved it, and what led us to the solution, and when
-possible, show some other ways that we could've approached the
-challenge. Overall, we tried to stick as closely as possible to the
-hints, blog posts, and tools provided ...and then to try to elevate
-privileges, crack passwords, and see what other information we could
-find --- all while taking care to stay within the scope of the
-challenge. We also tried to automate as much of our work as possible,
-and we make these tools [[https://github.com/ncsa/sans-holiday-hack-2017][publicly available]].
+   For our solutions, we review the information that we were given, lay
+   out how we solved it, and what led us to the solution, and when
+   possible, show some other ways that we could've approached the
+   challenge. Overall, we tried to stick as closely as possible to the
+   hints, blog posts, and tools provided ...and then to try to elevate
+   privileges, crack passwords, and see what other information we could
+   find --- all while taking care to stay within the scope of the
+   challenge. We also tried to automate as much of our work as possible,
+   and we make these tools [[https://github.com/ncsa/sans-holiday-hack-2017][publicly available]].
 
- We hope you enjoy our report. We certainly enjoyed writing it.
+   We hope you enjoy our report. We certainly enjoyed writing it.
 
 * tl;dr: Quick Answers
-1. What is the title of the first page? *About This Book...*
-2. What is the topic of The Great Book page available in the web root of the server? *On the Topic of Flying Animals*\\
-   What is Alabaster Snowball's password? *stream_unhappy_buy_loss*
-3. What is the file server share name? *FileStor*
-4. What can you learn from The Great Book page found in an e-mail on EWA? *The behavior of the Abominable Snowman ("Bumble") has recently become erratic. Rumor has it that there must've been some magic in something he ate.*
-5. How many infractions are required to be marked as naughty? *4*\\
-   What are the names of at least six insider threat moles? *Isabel Mehta, Nina Fitzgerald, Kirsty Evans, Sheri Lewis, Beverly Khalil, Christy Srivastava* as well as the two in the BOLO, *Bini Aru and Boq Questrian*\\
-   Who is throwing the snowballs from the top of the North Pole Mountain and what is your proof? *The Abominable Snow Monster, Bumble*. Based on a chat with Sam the Snowman.
-6. What is the title of The Great Book page on EAAS? *The Dreaded Inter-Dimensional Tornadoes*
-7. What does The Great Book page on EMI describe? *The Witches of Oz*
-8. Who wrote the letter to Santa on edb? *The Wizard of Oz*
-9. Which character is the villain, and what is the motive? *Glinda, the Good Witch. To stir up elf-munchkin hostilities and sell her magic to both sides.*
+  1. What is the title of the first page? *About This Book...*
+  2. What is the topic of The Great Book page available in the web root of the server? *On the Topic of Flying Animals*\\
+     What is Alabaster Snowball's password? *stream_unhappy_buy_loss*
+  3. What is the file server share name? *FileStor*
+  4. What can you learn from The Great Book page found in an e-mail on EWA? *The behavior of the Abominable Snowman ("Bumble") has recently become erratic. Rumor has it that there must've been some magic in something he ate.*
+  5. How many infractions are required to be marked as naughty? *4*\\
+     What are the names of at least six insider threat moles? *Isabel Mehta, Nina Fitzgerald, Kirsty Evans, Sheri Lewis, Beverly Khalil, Christy Srivastava* as well as the two in the BOLO, *Bini Aru and Boq Questrian*\\
+     Who is throwing the snowballs from the top of the North Pole Mountain and what is your proof? *The Abominable Snow Monster, Bumble*. Based on a chat with Sam the Snowman.
+  6. What is the title of The Great Book page on EAAS? *The Dreaded Inter-Dimensional Tornadoes*
+  7. What does The Great Book page on EMI describe? *The Witches of Oz*
+  8. Who wrote the letter to Santa on edb? *The Wizard of Oz*
+  9. Which character is the villain, and what is the motive? *Glinda, the Good Witch. To stir up elf-munchkin hostilities and sell her magic to both sides.*
 * Pre-contest Reconnaissance
-#+CAPTION: SANS Holiday Hack Challenge December 5th Update
-[[./images/sans_holiday_hack_preview.png]]
+  #+CAPTION: SANS Holiday Hack Challenge December 5th Update
+  [[./images/sans_holiday_hack_preview.png]]
 
-On December 5th, the SANS Holiday Hack Challenge was updated to tell
-us that the 2017 Hack was coming soon, and encouraging us to catch up
-on past challenges. The next day, we started doing just that. In
-addition to reviewing previous challenges, we also began some
-reconnaissance for the 2017 challenge.
+  On December 5th, the SANS Holiday Hack Challenge was updated to tell
+  us that the 2017 Hack was coming soon, and encouraging us to catch up
+  on past challenges. The next day, we started doing just that. In
+  addition to reviewing previous challenges, we also began some
+  reconnaissance for the 2017 challenge.
 
-Recon is a crucial step of any good penetration test, and is one that
-often gets skipped in a "Capture the Flag" type of competition, since
-most of the information is provided. Nevertheless, let's see what we
-can find. The more information we have ahead of time, the better
-prepared we'll be, and the less work we'll have to do during the
-actual contest.
+  Recon is a crucial step of any good penetration test, and is one that
+  often gets skipped in a "Capture the Flag" type of competition, since
+  most of the information is provided. Nevertheless, let's see what we
+  can find. The more information we have ahead of time, the better
+  prepared we'll be, and the less work we'll have to do during the
+  actual contest.
 
-Much like how attackers will have indicators of compromise (IOCs)
-which allow us to track and follow an individual attacker, the Counter
-Hack team also does similar things every year, and will leave behind
-some clues.
+  Much like how attackers will have indicators of compromise (IOCs)
+  which allow us to track and follow an individual attacker, the Counter
+  Hack team also does similar things every year, and will leave behind
+  some clues.
 
 ** Whois Searching
- For example, the 2016 contest made use of the domain
- www.northpolewonderland.com. We can look at publicly available WHOIS
- data for that domain:
+   For example, the 2016 contest made use of the domain
+   www.northpolewonderland.com. We can look at publicly available WHOIS
+   data for that domain:
 
- #+BEGIN_SRC sh
- whois northpolewonderland.com | grep Registrant
- #+END_SRC
+   #+BEGIN_SRC sh
+     whois northpolewonderland.com | grep Registrant
+   #+END_SRC
 
- #+BEGIN_EXAMPLE
- Registrant Name: Edward Skoudis
- Registrant Organization: Counter Hack
- Registrant Street: 2402 Alexandra Court
- Registrant City: Howell
- Registrant State/Province: New Jersey
- Registrant Postal Code: 07731
- Registrant Country: US
- Registrant Phone: +1.7327511024
- Registrant Phone Ext:
- Registrant Fax: +1.7327511024
- Registrant Fax Ext:
- Registrant Email: edskoudis@yahoo.com
- #+END_EXAMPLE
+   #+BEGIN_EXAMPLE
+   Registrant Name: Edward Skoudis
+   Registrant Organization: Counter Hack
+   Registrant Street: 2402 Alexandra Court
+   Registrant City: Howell
+   Registrant State/Province: New Jersey
+   Registrant Postal Code: 07731
+   Registrant Country: US
+   Registrant Phone: +1.7327511024
+   Registrant Phone Ext:
+   Registrant Fax: +1.7327511024
+   Registrant Fax Ext:
+   Registrant Email: edskoudis@yahoo.com
+   #+END_EXAMPLE
 
- There are a few services that allow you to do a "reverse WHOIS"
- search, to search for domains by WHOIS data. For instance to search
- for other domains where "edskoudis@yahoo.com" shows up in the contact
- info: 
+   There are a few services that allow you to do a "reverse WHOIS"
+   search, to search for domains by WHOIS data. For instance to search
+   for other domains where "edskoudis@yahoo.com" shows up in the contact
+   info: 
 
- | Domain Name                      | Creation Date | Registrar               |
- |----------------------------------+---------------+-------------------------|
- | northpolechristmastown.com       |    2017-10-19 | GODADDY.COM, LLC        |
- | 1hrctf.com                       |    2016-04-08 | GODADDY.COM, LLC        |
- | 1hrctf.org                       |    2016-04-08 | GODADDY.COM, LLC        |
- | cranbian.org                     |    2016-11-22 | GODADDY.COM, LLC        |
- | hackfestchallenge.com            |    2016-10-20 | GODADDY.COM, LLC        |
- | onehourctf.org                   |    2016-04-08 | GODADDY.COM, LLC        |
- | atnascorp.com                    |    2015-11-10 | GODADDY.COM, LLC        |
- | ginormouselectronicssupplier.com |    2015-12-09 | GODADDY.COM, LLC        |
- | holidayhackchallenge.com         |    2015-11-02 | GODADDY.COM, LLC        |
- | holidayhackchallenge.org         |    2015-11-02 | GODADDY.COM, LLC        |
- | digimeme.org                     |    2013-11-18 | GODADDY.COM, LLC        |
- | syn-pi.org                       |    2013-11-18 | GODADDY.COM, LLC        |
- | pseudovision.net                 |    2010-09-09 | GODADDY.COM, LLC        |
- | counterhack.net                  |    2001-06-22 | NETWORK SOLUTIONS, LLC. |
- | skoudis.com                      |    2001-06-22 | NETWORK SOLUTIONS, LLC. |
- | counterhack.com                  |    2000-05-30 | GODADDY.COM, LLC        |
+   | Domain Name                      | Creation Date | Registrar               |
+   |----------------------------------+---------------+-------------------------|
+   | northpolechristmastown.com       |    2017-10-19 | GODADDY.COM, LLC        |
+   | 1hrctf.com                       |    2016-04-08 | GODADDY.COM, LLC        |
+   | 1hrctf.org                       |    2016-04-08 | GODADDY.COM, LLC        |
+   | cranbian.org                     |    2016-11-22 | GODADDY.COM, LLC        |
+   | hackfestchallenge.com            |    2016-10-20 | GODADDY.COM, LLC        |
+   | onehourctf.org                   |    2016-04-08 | GODADDY.COM, LLC        |
+   | atnascorp.com                    |    2015-11-10 | GODADDY.COM, LLC        |
+   | ginormouselectronicssupplier.com |    2015-12-09 | GODADDY.COM, LLC        |
+   | holidayhackchallenge.com         |    2015-11-02 | GODADDY.COM, LLC        |
+   | holidayhackchallenge.org         |    2015-11-02 | GODADDY.COM, LLC        |
+   | digimeme.org                     |    2013-11-18 | GODADDY.COM, LLC        |
+   | syn-pi.org                       |    2013-11-18 | GODADDY.COM, LLC        |
+   | pseudovision.net                 |    2010-09-09 | GODADDY.COM, LLC        |
+   | counterhack.net                  |    2001-06-22 | NETWORK SOLUTIONS, LLC. |
+   | skoudis.com                      |    2001-06-22 | NETWORK SOLUTIONS, LLC. |
+   | counterhack.com                  |    2000-05-30 | GODADDY.COM, LLC        |
 
- This isn't comprehensive, since northpolewonderland.com didn't show up
- in the results, but cranbian.org was another domain from 2016 that
- does show up.
+   This isn't comprehensive, since northpolewonderland.com didn't show up
+   in the results, but cranbian.org was another domain from 2016 that
+   does show up.
 
- There are a couple of new entries since the 2016 contest, 1hrctf and
- northpolechristmastown.com. 1hrctf seems unrelated, but it's a good
- bet that northpolechristmastown.com will show up in the 2017
- challenge.
+   There are a couple of new entries since the 2016 contest, 1hrctf and
+   northpolechristmastown.com. 1hrctf seems unrelated, but it's a good
+   bet that northpolechristmastown.com will show up in the 2017
+   challenge.
 
- At this point, we have to proceed with extreme caution. Since the
- contest hasn't started, nothing is in scope yet. Any further digging
- should be as unintrusive as possible.
+   At this point, we have to proceed with extreme caution. Since the
+   contest hasn't started, nothing is in scope yet. Any further digging
+   should be as unintrusive as possible.
 
 ** DNS Brute Forcing
- Now that we have a domain we're interested in, let's look at DNS:
+   Now that we have a domain we're interested in, let's look at DNS:
 
- #+BEGIN_SRC sh
- dig ANY northpolechristmastown.com
- #+END_SRC
+   #+BEGIN_SRC sh
+     dig ANY northpolechristmastown.com
+   #+END_SRC
 
- #+BEGIN_EXAMPLE
- ;; ANSWER SECTION:
- northpolechristmastown.com. 5	IN	TXT	"v=spf1 include:_spf.google.com -all"
- northpolechristmastown.com. 5	IN	MX	30 ALT2.ASPMX.L.GOOGLE.com.
- northpolechristmastown.com. 5	IN	MX	40 ASPMX2.GOOGLEMAIL.com.
- northpolechristmastown.com. 5	IN	MX	20 ALT1.ASPMX.L.GOOGLE.com.
- northpolechristmastown.com. 5	IN	MX	50 ASPMX3.GOOGLEMAIL.com.
- northpolechristmastown.com. 5	IN	MX	10 ASPMX.L.GOOGLE.com.
- northpolechristmastown.com. 5	IN	SOA	ns53.domaincontrol.com. dns.jomax.net. 2017120112 28800 7200 604800 600
- northpolechristmastown.com. 5	IN	NS	ns54.domaincontrol.com.
- northpolechristmastown.com. 5	IN	NS	ns53.domaincontrol.com.
- #+END_EXAMPLE
+   #+BEGIN_EXAMPLE
+   ;; ANSWER SECTION:
+   northpolechristmastown.com. 5	IN	TXT	"v=spf1 include:_spf.google.com -all"
+   northpolechristmastown.com. 5	IN	MX	30 ALT2.ASPMX.L.GOOGLE.com.
+   northpolechristmastown.com. 5	IN	MX	40 ASPMX2.GOOGLEMAIL.com.
+   northpolechristmastown.com. 5	IN	MX	20 ALT1.ASPMX.L.GOOGLE.com.
+   northpolechristmastown.com. 5	IN	MX	50 ASPMX3.GOOGLEMAIL.com.
+   northpolechristmastown.com. 5	IN	MX	10 ASPMX.L.GOOGLE.com.
+   northpolechristmastown.com. 5	IN	SOA	ns53.domaincontrol.com. dns.jomax.net. 2017120112 28800 7200 604800 600
+   northpolechristmastown.com. 5	IN	NS	ns54.domaincontrol.com.
+   northpolechristmastown.com. 5	IN	NS	ns53.domaincontrol.com.
+   #+END_EXAMPLE
 
- From this, we can tell that GMail provides the e-mail for the domain,
- and GoDaddy provides the DNS service. Of note, however, is that there
- are no A or AAAA records, so northpolechristmastown.com does not
- resolve to anything.
+   From this, we can tell that GMail provides the e-mail for the domain,
+   and GoDaddy provides the DNS service. Of note, however, is that there
+   are no A or AAAA records, so northpolechristmastown.com does not
+   resolve to anything.
 
- Next, we'll try some Google dorking. Googling for
- site:northpolechristmastown.com reveals
- nppd.northpolechristmastown.com, which is a Sign In page for the
- North Pole Police Department. It looks like nppd uses Google OAuth
- for authentication, and most pages are forbidden with a regular GMail
- account.
+   Next, we'll try some Google dorking. Googling for
+   site:northpolechristmastown.com reveals
+   nppd.northpolechristmastown.com, which is a Sign In page for the
+   North Pole Police Department. It looks like nppd uses Google OAuth
+   for authentication, and most pages are forbidden with a regular GMail
+   account.
 
- Checking a few other common URLs on nppd, we can find some resources
- that are available, including favicon.ico and robots.txt:
- #+BEGIN_SRC
+   Checking a few other common URLs on nppd, we can find some resources
+   that are available, including favicon.ico and robots.txt:
+   #+BEGIN_SRC
  User-agent: hk-47
  Disallow: /
  Disallow: /needhelp
@@ -217,41 +222,41 @@ some clues.
 
  User-agent: artoo
  Sand-Crawler-delay: 2187
- #+END_SRC
+   #+END_SRC
 
-#+CAPTION: North Pole Police Department Logo
-[[./images/nppd_star.png]]
+   #+CAPTION: North Pole Police Department Logo
+   [[./images/nppd_star.png]]
 
- Everything here but /infractions is forbidden. Looking at that page
- returns a list of infractions, such as "Unauthorized access to cookie
- jar" or "Computer infraction: Accessing siblings files without
- permission." We also see some interesting infractions that refer to
- previous Holiday Hacks:
+   Everything here but /infractions is forbidden. Looking at that page
+   returns a list of infractions, such as "Unauthorized access to cookie
+   jar" or "Computer infraction: Accessing siblings files without
+   permission." We also see some interesting infractions that refer to
+   previous Holiday Hacks:
 
- #+BEGIN_EXAMPLE
-	 {
-             "date": "2016-12-25T00:00:00",
-             "name": "Dr. Who",
-             "severity": 5.0,
-             "status": "closed",
-             "title": "Trying to ruin Christmas"
-         },
-	 {
-             "date": "2015-12-25T00:00:00",
-             "name": "Cindy Lou Who",
-             "severity": 5.0,
-             "status": "closed",
-             "title": "Trying to ruin Christmas"
-         }
-     ],
-     "query": "name:Who"
- #+END_EXAMPLE
+   #+BEGIN_EXAMPLE
+	   {
+	       "date": "2016-12-25T00:00:00",
+	       "name": "Dr. Who",
+	       "severity": 5.0,
+	       "status": "closed",
+	       "title": "Trying to ruin Christmas"
+	   },
+	   {
+	       "date": "2015-12-25T00:00:00",
+	       "name": "Cindy Lou Who",
+	       "severity": 5.0,
+	       "status": "closed",
+	       "title": "Trying to ruin Christmas"
+	   }
+       ],
+       "query": "name:Who"
+   #+END_EXAMPLE
 
- Going back to DNS, we can try to enumerate some hosts under the top
- level domain. FuzzDB has a nice list of common DNS name, and we can
- use an nmap script to try to query those:
+   Going back to DNS, we can try to enumerate some hosts under the top
+   level domain. FuzzDB has a nice list of common DNS name, and we can
+   use an nmap script to try to query those:
 
- #+BEGIN_SRC sh
+   #+BEGIN_SRC sh
  $ nmap --script dns-brute --script-args dns-brute.domain=northpolechristmastown.com,dns-brute.threads=1,dns-brute.hostlist=fuzzdb/discovery/dns/dnsmapCommonSubdomains.txt
  #+END_SRC
 
@@ -399,6 +404,9 @@ We can use the following indicators to search any clues we're later provided wit
 #+INCLUDE: "easter_eggs.org" 
 * Appendices
 ** Command Execution with pip
+   :PROPERTIES:
+   :CUSTOM_ID: pip
+   :END:
 #+INCLUDE: "pip.org" 
 ** Cracking Passphrases
    :PROPERTIES:
