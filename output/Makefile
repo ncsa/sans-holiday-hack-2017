@@ -52,3 +52,12 @@ password_combos.txt: ../tools/gen_password_combos.py
 ldap_hashcat.txt: password_hashes.txt password_combos.txt
 	hashcat -m 0  -a 1 password_hashes.txt password_combos.txt  password_combos.txt -j ' ' --username || true
 	hashcat -m 0  -a 1 password_hashes.txt password_combos.txt  password_combos.txt -j ' ' --username --show | tee ldap_hashcat.txt
+
+humans.txt:
+	http  --proxy=http:socks5://@localhost:31080  http://nppd.northpolechristmastown.com/humans.txt --download
+
+punchcard.txt:
+	../tools/humans.py
+
+decode_punchcard: punchcard.txt
+	php ../tools/show_punchard.php
