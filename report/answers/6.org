@@ -180,7 +180,7 @@ Host: 10.142.0.11:8272
 Connection: Keep-Alive
 #+END_SRC
 
-Success! In the =GET= request, the text after =?= is the contents of C:\greatbook.txt. If we pull up that URL, we get page 6.
+Success! In the =GET= request, the text after =?= is the contents of C:\greatbook.txt. If we pull up that URL, we get GreatBookPage6.pdf.
 
 * Solution
    :PROPERTIES:
