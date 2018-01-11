@@ -74,7 +74,7 @@ The reindeer appear to be speaking. Or randomly typing.
 [[http://nppd.northpolechristmastown.com/humans.txt]] contains a message from
 the challenge creators as well as.. something else!
 
-#+INCLUDE: "../../output/humans.txt" src
+#+INCLUDE: "../output/humans.txt" src
 
 The blob looks a lot like hex encoded ascii, we can decode that using python:
 
@@ -182,7 +182,7 @@ The resulting matrix is
 Using a small php script, we can use the existing code to decode this:
 
 
-#+INCLUDE: "../../tools/show_punchard.php" src php
+#+INCLUDE: "../tools/show_punchard.php" src php
 
 This outputs =MADEWITHLOVEBYMADEYEMOODYPROFDEFENSEAGAINSTTHEDARKARTSBFE4EVA=
 
