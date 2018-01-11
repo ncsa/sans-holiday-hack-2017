@@ -93,20 +93,24 @@ elf@784e43534178:~$ head -n1 access.log
 XX.YY.66.201 - - [19/Nov/2017:06:50:30 -0500] "GET /robots.txt HTTP/1.1" 301 185 "-" "Mozilla/5.0 (compatible; DotBot/1.1; http://www.opensiteexplorer.org/dotbot, help@moz.com)"
 #+END_SRC
 
-Seems we have a web log in the "Common Log Format", which as it turns out, used
-to be called the "NCSA Common log format" when it was output by NCSA HTTPd in 1993
-before that became apache.  It always struck me as an arbitrary log format..
-Fields are separated by spaces, except for the date/time which is wrapped in
-brackets.  Also except for the request which has the "method uri protocol"
-quoted, and the user agent quoted as well.  Some fields are also hex encoded.  Anyway,
-since we just want the user-agents, we can split the log lines on the double quote char.
+This log format should should seem familiar to sysadmins. The "Common
+Log Format" actually used to be called the "NCSA Common Log Format"
+when it was used by NCSA HTTPd in 1993 (before that became
+Apache). Please don't blame us for how bad this format is! The fact
+that a challenge is simply to parse this format should be indication
+enough that somewhere along the way, mistakes were made.  Fields are
+separated by spaces. ...except for the timestamp, which is wrapped in
+brackets. ...and the request, which is the "method uri protocol."
+...and of course the user-agent. Some fields are hex-encoded, too!
+
+All we want is the user-agent strings, so we can split the log lines on the double quote char.
 
 * Solution
   :PROPERTIES:
   :CUSTOM_ID: bounce_solution
   :END:
 
-My solution is to use the =cut= tool, along with =sort= and =uniq= to find the least popular browser.
+Our solution is to use the =cut= tool, along with =sort= and =uniq= to find the least popular browser.
 =cut= is very limited compared to tools like =awk= or =sed=, but it is often simpler
 to use.  We just need to grab the right field.  We can experiment on just the
 first line using =head= and figure this out using trial and error:
@@ -140,7 +144,7 @@ elf@784e43534178:~$ cat access.log |cut -d '"' -f 6|cut -d / -f 1|sort|uniq -c|s
   97896 Mozilla
 #+END_SRC
 
-Oops.. I mixed up the ordering, need the first 5, not the last 5:
+Oops. Mixed up the ordering, need the first 5, not the last 5:
 
 #+BEGIN_SRC
 elf@784e43534178:~$ cat access.log |cut -d '"' -f 6|cut -d / -f 1|sort|uniq -c|sort -n|head -n 5
@@ -151,9 +155,9 @@ elf@784e43534178:~$ cat access.log |cut -d '"' -f 6|cut -d / -f 1|sort|uniq -c|s
       2 Twitter
 #+END_SRC
 
-Looks like my favorite lightweight browser from 2001 is not very popular these days.
+Looks like Justin's favorite lightweight browser from 2001 is not very popular these days.
 
-I can also confirm that the log file only has a single entry for this user-agent:
+We can also confirm that the log file only has a single entry for this user-agent:
 
 #+BEGIN_SRC
 elf@784e43534178:~$ grep Dillo access.log 
