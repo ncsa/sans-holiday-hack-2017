@@ -87,8 +87,8 @@ On a laptop, performance isn't great. So we got an AWS GPU cracking rig.
 #+BEGIN_SRC 
 Session..........: hashcat
 Status...........: Cracked
-Hash.Type........: NTLM
-Hash.Target......: emi.hashes
+Hash.Type........: MD5
+Hash.Target......: password_hashes.txt
 Time.Started.....: Wed Jan 10 14:15:06 2018 (1 minute 8 secs)
 Time.Estimated...: Wed Jan 10 14:16:14 2018 (0 secs)
 Guess.Base.......: File (password_combos_left_underscore.txt), Left Side
