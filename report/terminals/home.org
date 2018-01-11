@@ -157,7 +157,7 @@ needed to use =qemu-arm=. ~compgen -c~ is a handy trick in CTFs to
 figure out what special programs are installed on a certain
 system. Another useful trick is using find to see what changes were
 made to the system after it was installed. Let's take a quick look at
-=qemu=arm= and at another file we know was changed, =trainstartup=:
+=qemu-arm= and at another file we know was changed, =trainstartup=:
 
 #+BEGIN_SRC
 elf@784e43534178:~$ stat /usr/bin/qemu-arm trainstartup 

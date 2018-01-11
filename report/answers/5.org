@@ -77,8 +77,13 @@ the NPPD's infractions database we need compare it to the Naughty and
 Nice file we found on the SMB server. We can automate this process
 scriptomagically. While we're at it we should also script identifying
 the 6 insider threat moles as well. For finding the moles it appears
-their characteristics are pulling hair and throwing rocks. We'll try
-to identify people on the infractions list that do both.
+their characteristics are pulling hair and throwing rocks. One caveat
+here is that there are two separate infractions for throwing rocks:
+"Throwing rocks (non-person target)" and "Throwing rocks (at
+people)". We'll include both, since we'd rather have a false positive
+than a false negative at this point in our investigation.  We'll try
+to identify people on the infractions list that pull hair, and throw
+rocks, regardless of their target.
 
 To get the number of infractions needed to get onto the naughty list we take the names on the Naughty and Nice List that have been marked as =Naughty= and count the total number of infractions for those people and we identify the lowest number of infractions per person amongst all of them.
 
