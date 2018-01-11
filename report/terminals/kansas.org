@@ -75,8 +75,6 @@ Starting up, please wait......
 Enter the name of the song with the most likes:
 #+END_SRC
 
-Blog Posts:
-
 The SANS Pen-Test Blog had a post about essential SQL commands, which might be useful:
 
 #+BEGIN_QUOTE
