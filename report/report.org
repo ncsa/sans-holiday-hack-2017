@@ -17,11 +17,12 @@
 #+MACRO: abbr @@html:<abbr title="$1">$2</abbr>@@
 
 * Introduction
-We are the Security team at the National Center for Supercomputing
-Applications, and like last year, we worked together on a fun SANS
-Holiday Hack. Over the past year, we've been surprised to see how many
-skills and tricks from the 2016 Holiday Hack we have used for our
-jobs.
+We are the [[https://security.ncsa.illinois.edu][Security team]] at
+the [[https://www.ncsa.illinois.edu][National Center for Supercomputing
+Applications]], and [[https://ncsa.github.io/sans-holiday-hack-2016/]
+[like last year], we worked together on a fun SANS Holiday Hack. Over
+the past year, we've been surprised to see how many skills and tricks
+from the 2016 Holiday Hack we have used for our jobs.
 
 We've done "red-team" work such as code reviews and pen-tests, where
 we encountered issues such as insufficient PHP input sanitization,
@@ -37,6 +38,7 @@ As we do red-team work, it's useful to try to think like a defender:
 "How would *I* have secured this system, and are there any ways around
 that?" Similarly, as we do blue-team work, we need to know the methods
 and tools an attacker would use.
+
 ** Overview
  If you're unfamiliar with the [[https://holidayhackchallenge.com/2017/][SANS Holiday Hack]], please check that out
  first! We encourage you to give it a shot before reading this
@@ -377,7 +379,7 @@ We can use the following indicators to search any clues we're later provided wit
 #+INCLUDE: "terminals/off.org"
 * Answers
 ** Game: This Page Fell off a Truck
-#+INCLUDE: answers/1.org
+#+INCLUDE: "answers/1.org"
 ** L2S: Letters to Santa
 #+INCLUDE: "answers/2.org" 
 ** SMB: Windows Fileshare 
