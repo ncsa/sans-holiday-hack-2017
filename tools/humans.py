@@ -33,4 +33,5 @@ def convert(line):
 with open("punchcard.txt", 'w') as f:
     for line in lines:
         l = (convert(line));
+        print(l)
         f.write(l)
