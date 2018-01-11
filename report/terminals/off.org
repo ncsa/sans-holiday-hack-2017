@@ -180,7 +180,6 @@ Calling rand() to select a random number.
 [2]+  Exit 177                ./isit42
 #+END_SRC
 
-
 This is because the program uses the current timestamp in seconds as a random
 seed. Running the program more than once a second will not help us.
 
@@ -193,7 +192,6 @@ We will get a different answer ever time, but since the program contains a
 sleep(3) that will only run one attempt every 3 seconds instead of one attempt
 per second.  To fix this, we can run each attempt in the background using &,
 sleeping 1 second between attempts:
-
 
 #+BEGIN_SRC
 elf@784e43534178:~$ while true;do ./isit42 &sleep 1;done

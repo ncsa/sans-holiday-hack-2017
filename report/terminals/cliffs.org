@@ -194,9 +194,13 @@ elf@784e43534178:~$ ps axf
    36 pts/0    R+     0:00  \_ ps axf
 #+END_SRC
 
+-----
+
 Alternatively, you could run =bash= with the =--norc= flag, which
 prevents it from reading and executing the =~/.bashrc= file where the
 aliases are added.
+
+-----
 
 One more approach is to call the command you want with a backslash.
 
@@ -208,6 +212,8 @@ elf@784e43534178:~$ ps axf
    12 pts/0    S      0:00 /bin/bash
    36 pts/0    R+     0:00  \_ ps axf
 #+END_SRC
+
+-----
 
 Or call the command in quotes.
 

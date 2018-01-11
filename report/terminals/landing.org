@@ -172,6 +172,8 @@ Initializing Messaging System!
 ...
 #+END_SRC
 
+-----
+
 This can also be further simplified by using the relatively new bash option =globstar=.
 According to the documentation, "If set, the pattern '**' used in a filename
 expansion context will match all files and zero or more directories and

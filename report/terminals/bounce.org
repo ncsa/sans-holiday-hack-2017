@@ -160,11 +160,6 @@ elf@784e43534178:~$ grep Dillo access.log
 XX.YY.54.139 - - [27/Nov/2017:19:41:49 -0500] "GET /invoker/JMXInvokerServlet HTTP/1.1" 301 185 "-" "Dillo/3.0.5"
 #+END_SRC
 
-* Alternatives
-  :PROPERTIES:
-  :CUSTOM_ID: bounce_alternatives
-  :END:
-
 * Common Pitfalls
   :PROPERTIES:
   :CUSTOM_ID: bounce_common-pitfalls

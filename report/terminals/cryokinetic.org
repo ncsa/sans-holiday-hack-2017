@@ -158,6 +158,8 @@ total 96
 elf@784e43534178:~$ ./new
 #+END_SRC
 
+-----
+
 Use python to chmod.  The chmod binary is just a wrapper around the
 chmod libc function.  Any programming language will have this
 available:
@@ -184,6 +186,8 @@ Type "help", "copyright", "credits" or "license" for more information.
 elf@784e43534178:~$ ./c
 #+END_SRC
 
+-----
+
 With perl:
 
 #+BEGIN_SRC
@@ -202,6 +206,8 @@ chmod 0755, "c";
 elf@784e43534178:~$ perl fix.pl 
 elf@784e43534178:~$ ./c
 #+END_SRC
+
+-----
 
 Or as a perl one liner, now that we figured out the syntax:
 

@@ -224,6 +224,8 @@ uid=1000(elf) gid=42(shadow) groups=42(shadow),1000(elf)
 
 This shows how we can use =sudo= and =find= as a general privilege escalation mechanism.
 
+-----
+
 Another way of doing this is by putting in a modified shadow file instead, which will have a password that we know for the root user.
 
 First, let's generate the password hash in the right format:
