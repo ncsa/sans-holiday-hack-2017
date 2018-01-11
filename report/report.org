@@ -19,8 +19,7 @@
 * Introduction
 We are the [[https://security.ncsa.illinois.edu][Security team]] at
 the [[https://www.ncsa.illinois.edu][National Center for Supercomputing
-Applications]], and [[https://ncsa.github.io/sans-holiday-hack-2016/]
-[like last year], we worked together on a fun SANS Holiday Hack. Over
+Applications]], and [[https://ncsa.github.io/sans-holiday-hack-2016/][like last year]], we worked together on a fun SANS Holiday Hack. Over
 the past year, we've been surprised to see how many skills and tricks
 from the 2016 Holiday Hack we have used for our jobs.
 

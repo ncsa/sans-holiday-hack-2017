@@ -277,6 +277,8 @@ $ find / -name *.pdf
  final String password = "stream_unhappy_buy_loss";
  #+END_SRC
 
+We can use Alabaster's account to login to the l2s system, which we'll need to use to pivot to other systems.
+
 * Solution
    :PROPERTIES:
    :CUSTOM_ID: q2_solution

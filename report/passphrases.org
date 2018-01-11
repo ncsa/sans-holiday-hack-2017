@@ -28,6 +28,8 @@ even nice enough to link us to http://passphra.se, which seems like
 it'd be a handy service for anyone wanting to create some quick
 passwords.
 
+* Cracking the Passwords
+
 In question 8, we recovered some LDAP password hashes. Let's see if we
 can't crack more of those. Hashcat is our password cracker of choice,
 but it can't do passphrases from a word list. We only have 1,949
@@ -70,7 +72,7 @@ And then we can create our combos:
 $ make password_combos.txt
 ../tools/gen_password_combos.py > password_combos.txt
 ls -lh password_combos.txt
--rw-r--r--  1 vladg  staff    48M Jan 10 17:29 password_combos.txt
+-rw-r--r--  1 holiday staff    48M Jan 10 17:29 password_combos.txt
 wc -l password_combos.txt
  3796652 password_combos.txt
 #+END_SRC
@@ -126,3 +128,27 @@ Here are the passwords we were able to crack this way:
 | tarpin.mcjinglehauser | f259e9a289c4633fc1e3ab11b4368254 | dozen age nation blind          | EDB LDAP | MD5  |
 | wunorse.openslae      | 9fd69465699288ddd36a13b5b383e937 | comfortable world yellow jungle | EDB LDAP | MD5  |
 | alabaster_snowball    | 10e2fa00c44d10ca05d399f47ed13351 | Carried_mass_it_reader1         | EMI      | NTLM |
+
+* Why Are These Passwords Insecure?
+
+http://passphra.se is based off of this XKCD comic:
+
+[[./images/password_strength.png]]
+
+This comic explicitly mentions that these passwords are intended to
+keep you safe via online attacks, and not the offline attacks we were
+performing. With our GPU cracking rig, we were testing over 200
+billion passwords per second, and these were designed to be resistant
+for 1,000 per second.
+
+What's more, the wordlist was supposed to be 2,048 words, but only
+used 1,949, calling it "close enough." This seems like a small
+difference, but when you consider 4 word combinations, there are only
+82% as many combinations with 1,949 words as with 2,048.
+
+Would adding more words help? Yes, but a 5 word combination would
+still be crackable in less than a day and a half, and even a 6 word
+combination isn't out of reach for a determined (and well-funded)
+adversary.
+
+Another solution is using better hashes, which are more computationally expensive to compute. 
