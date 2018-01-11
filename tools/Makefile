@@ -12,3 +12,12 @@ jwt2john.py:
 
 pw.py:
 	wget https://raw.githubusercontent.com/s4y/pw/master/pw.py
+
+punchcard.php:
+	wget -O punchcard.php https://gist.githubusercontent.com/Pozo/1004284/raw/fa449480786be7af5e814e63e2a5a66e83d14aef/gistfile1.php
+
+punchcard.txt:
+	../tools/humans.py
+
+decode_punchcard: punchcard.txt
+	php show_punchard.php
