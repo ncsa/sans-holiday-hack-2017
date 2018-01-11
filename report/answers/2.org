@@ -473,6 +473,19 @@ files on this system, so we could just =grep= everything, but another
 option would've been to look for files that had been modified around
 the time the system was installed.
 
+Trying to compromise the l2s app itself was a dead end.  Once we have command
+execution we can see that the process.php script is simply:
+
+#+BEGIN_SRC php
+<?php
+if ($_POST["first_name"] && $_POST["age"] && $_POST["state"] && $_POST["city"] && $_POST["toy"] && $_POST["message"] && $_POST["sex"]) {
+	echo "Letter has been sent to Santa!";
+} else {
+	echo "Error missing parameters";
+}
+?>
+#+END_SRC
+
 * About the Challenge
    :PROPERTIES:
    :CUSTOM_ID: q2_about-the-challenge

