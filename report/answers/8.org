@@ -51,7 +51,7 @@ This blog post is explicitly called out:
    :END:
 
 The hints lay out a pretty clear path: we can use {{{abbr(Cross-site Scripting, XSS)}}} to send a malicious request to one of the elves or
-reindeer, and then steal their {{{abbr(JSON Web Token, JWT)}}} token and access the directory.
+reindeer, and then steal their {{{abbr(JSON Web Token, JWT)}}} credential and access the directory.
 
 * Approach
    :PROPERTIES:
@@ -167,7 +167,7 @@ $ cat john.txt
 ?:3lv3s
 #+END_SRC
 
-Cracking the jwt token took 6 minutes and found that the secret key was =3lv3s=. Now we can use =pyjwt= again to create a spoofed token:
+Cracking the {{{abbr(JSON Web Token, JWT)}}} token took 6 minutes and found that the secret key was *3lv3s*. Now we can use =pyjwt= again to create a spoofed token:
 
 #+INCLUDE: "../../tools/make_jwt.py" src python
 
@@ -251,7 +251,7 @@ Armed with that password, we can access the Santa Panel, where we find:
    :CUSTOM_ID: q8_solution
    :END:
 
-There was a lot of stuff going on in this question. First, we needed to use {{{abbr(Cross-site Scripting, XSS)}}} to grab a copy of the JWT token, then we had to recover the secret and forge a new token.
+There was a lot of stuff going on in this question. First, we needed to use {{{abbr(Cross-site Scripting, XSS)}}} to grab a copy of the {{{abbr(JSON Web Token, JWT)}}} token, then we had to recover the secret and forge a new token.
 
 Once we logged into the system, we found it was vulnerable to LDAP injection, and were able to dump all the users, and their passwords. Cracking Santa's password allowed us to access the letter from the Wizard of Oz.
 
