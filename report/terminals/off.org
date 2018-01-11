@@ -44,7 +44,7 @@ Direct link: https://docker2017.holidayhackchallenge.com/?challenge=96452ffb-515
 
 We are logged in as the user =elf=.
 
-The system motd tells us:
+The {{{abbr(Message of the Day, MOTD)}}} tells us:
 
 #+BEGIN_QUOTE
 Run the given binary, make it return 42.

@@ -126,7 +126,7 @@ sqlite> .headers on
 
 Now, let's see what we are working with here.
 
-#+BEGIN_SRC
+#+BEGIN_SRC sqlite
 sqlite> .schema
 CREATE TABLE songs(
   id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -146,28 +146,34 @@ CREATE TABLE likes(
 
 As a sanity check, let's see what one record of each looks like.
 
-#+BEGIN_SRC
+#+BEGIN_SRC sqlite
 sqlite> select * from songs limit 1;
-id      title   artist  year    notes
-1       A' Soalin'      Peter, Paul & Mary      1963    From the album Moving. Written by Paul Stookey, Tracy Batteste & Elaina Mezzetti. Contains an element of "God Res
-t Ye Merry, Gentlemen".
-sqlite> select * from likes limit 1;
-id      like    datetime        songid
-1       1       1487102189      250
 #+END_SRC
+| id | title      | artist             | year | notes                                                                             |
+|----+------------+--------------------+------+-----------------------------------------------------------------------------------|
+|  1 | A' Soalin' | Peter, Paul & Mary | 1963 | From the album Moving. Written by Paul Stookey, Tracy Batteste & Elaina Mezzetti. |
+
+#+BEGIN_SRC sqlite
+sqlite> select * from likes limit 1;
+#+END_SRC
+
+| id | like |   datetime | songid |
+|----+------+------------+--------|
+|  1 |    1 | 1487102189 |    250 |
 
 Two tables, "songs", and "likes".  =likes.songid= matches up with =songs.id=.
 This means we can join the two tables together on =songs.id=likes.songid=.  Once that
 is done, the solution requires the count of likes grouped by title:
 
-#+BEGIN_SRC
+#+BEGIN_SRC sqlite
 sqlite> select title, count(*) from songs, likes where songs.id=likes.songid group by title order by count(*) desc limit 3;
-title   count(*)
-Stairway to Heaven      11325
-Joy to the World        2162
-The Little Boy that Santa Claus Forgot  2140
-sqlite> 
 #+END_SRC
+
+| title                                  | count(*) |
+|----------------------------------------+----------|
+| Stairway to Heaven                     |    11325 |
+| Joy to the World                       |     2162 |
+| The Little Boy that Santa Claus Forgot |     2140 |
 
 * Solution
   :PROPERTIES:
@@ -188,30 +194,34 @@ Stairway to Heaven
 
 Instead of joining the tables, we can first find what the most popular songid is:
 
-#+BEGIN_SRC 
+#+BEGIN_SRC sqlite
 sqlite> select songid, count(*) from likes group by songid order by count(*) desc limit 3;
-songid  count(*)
-392     11325
-245     2162
-265     2140
 #+END_SRC
+
+| songid | count(*) |
+|--------+----------|
+|    392 |    11325 |
+|    245 |     2162 |
+|    265 |     2140 |
+
 
 and then look up what the title for that song is
 
-#+BEGIN_SRC 
+#+BEGIN_SRC sqlite
 sqlite> select title from songs where id=392;
-title
-Stairway to Heaven
-sqlite> 
 #+END_SRC
 
+| title              |
+|--------------------|
+| Stairway to Heaven |
 
 This can also be done in a single query as long as we don't care about the like count:
 
-#+BEGIN_SRC 
+#+BEGIN_SRC sqlite
 sqlite> select title from songs where id = (select songid from likes group by songid order by count(*) desc limit 1);
-Stairway to Heaven
 #+END_SRC
+
+| Stairway to Heaven |
 
 This method even outperforms the join, taking about half the time to run!  This
 is because the join has to examine all of the song titles, but the subquery

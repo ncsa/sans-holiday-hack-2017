@@ -62,7 +62,7 @@ We are logged in as the user =elf=. According to Bushy Green's Twitter account s
   :CUSTOM_ID: landing_goal
   :END:
 
-According to the Message of the Day (MOTD) we need to find and run the =elftalkd= binary.
+According to the {{{abbr(Message of the Day, MOTD)}}} we need to find and run the =elftalkd= binary.
 
 * Hints
   :PROPERTIES:
