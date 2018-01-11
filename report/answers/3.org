@@ -64,8 +64,6 @@ There's a great =nmap= overview available here: https://nmap.org/book/nmap-overv
 
 We also know that the SMB suite of protocols uses a lot of ports, but 445 is one of the main ones.
 
-Blog Posts:
-
 This post on the SANS Pen Testing Blog seems relevant, but masscan isn't installed on =l2s=:
 
 - Massively Scaling your Scanning
