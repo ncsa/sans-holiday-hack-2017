@@ -8,12 +8,36 @@ documentation and correspondence. Using your access to the Letters to
 Santa server, identify and enumerate the SMB file-sharing server.
 What is the file server share name?
 
-/For hints, please see Holly Evergreen in the Cryokinetic Magic Level./
+/For hints, please see Holly Evergreen in the Cryokinetic Magic Level.
 
 * Background Information
    :PROPERTIES:
    :CUSTOM_ID: q3_background-information
    :END:
+
+Holly's hints are:
+
+#+begin_hint
+Nmap has default host discovery checks that may not discover all hosts.  To customize which ports Nmap looks for during host discovery, use `-PS` with a port number, such as `-PS123` to check TCP port 123 to determine if a host is up.
+#+end_hint
+#+begin_hint
+Alabaster likes to keep life simple. He chooses a strong password, and sticks with it.
+#+end_hint
+#+begin_hint
+The Letters to Santa server is limited in what commands are available. Fortunately, SSH has enough flexibility to make access through the Letters server a fruitcake-walk.
+#+end_hint
+#+begin_hint
+Have you used port forwarding with SSH before? It's pretty amazing! [Here is a quick guide](https://help.ubuntu.com/community/SSH/OpenSSH/PortForwarding).
+#+end_hint
+#+begin_hint
+Windows users can use SSH port forwarding too, using PuTTY! [Here is a quick guide for Windows users](https://blog.devolutions.net/2017/04/how-to-configure-an-ssh-tunnel-on-putty.html).
+#+end_hint
+#+begin_hint
+Sometimes it's better to use a Linux system as the SSH port forwarder, and interact with a Linux system from a Windows box. For example, running `ssh -L :445:SMBSERVERIP:445 username@sshserver` will allow you to access your Linux server's IP, which will forward directly to the SMB server over SSH.
+#+end_hint
+#+begin_hint
+Linux systems can also interact with a Windows server using the smbclient utility: `smbclient -L smbserverorforwarder -U username`.
+#+end_hint
 
 The scope statement calls out systems on 10.142.0.0/24 as being in scope:
 
@@ -113,7 +137,7 @@ Parsing the results a bit:
 
 One of the systems is named =hhc17-smb-server=. 
 
-Continuing with the overview, we can now narrow in on a single IP:
+Continuing with the overview, we can now narrow in on a single IP. This is the same technique suggested in one of the hints:
 
 #+BEGIN_SRC
 alabaster_snowball@hhc17-apache-struts1:/tmp/asnow.sjKK74OSjKfIxlr5otQil8yd$ nmap -p- -PS445 -A -T4 -oA avatartcpscan-%D 10.142.0.7

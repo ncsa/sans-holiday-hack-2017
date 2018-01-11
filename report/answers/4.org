@@ -15,15 +15,23 @@ server?
    :CUSTOM_ID: q4_background-information
    :END:
 
-Hints:
-
 Pepper Minstix gives us the following hints:
 
-  1. I'm so excited for the new email system that Alabaster Snowball set up for us. He spent a lot of time working on it. Should make it very easy for us to share cookie recipes. I just hope that he cleared up all his dev files. I know he was working on keeping the dev files from search engine indexers.
-  2. The new email system's authentication should be impenetrable. Alabaster was telling me that he came up with his own encryption scheme using AES256, so you know it's secure.
-  3. AES256? Honestly, I don't know much about it, but Alabaster explained the basic idea and it sounded easy. During decryption, the first 16 bytes are removed and used as the initialization vector or "IV." Then the IV + the secret key are used with AES256 to decrypt the remaining bytes of the encrypted string.
-  4. Hmmm. That's a good question, I'm not sure what would happen if the encrypted string was only 16 bytes long.
-  5. Every year when Santa gets back from delivering presents to the good girls and boys, he tells us stories about all the cookies he receives. I love everything about cookies! Cooking them, eating them, editing them, decorating them, you name it!
+#+begin_hint
+I'm so excited for the new email system that Alabaster Snowball set up for us. He spent a lot of time working on it. Should make it very easy for us to share cookie recipes. I just hope that he cleared up all his dev files. I know he was working on keeping the dev files from search engine indexers.
+#+end_hint
+#+begin_hint
+The new email system's authentication should be impenetrable. Alabaster was telling me that he came up with his own encryption scheme using AES256, so you know it's secure.
+#+end_hint
+#+begin_hint
+AES256? Honestly, I don't know much about it, but Alabaster explained the basic idea and it sounded easy. During decryption, the first 16 bytes are removed and used as the initialization vector or "IV." Then the IV + the secret key are used with AES256 to decrypt the remaining bytes of the encrypted string.
+#+end_hint
+#+begin_hint
+Hmmm. That's a good question, I'm not sure what would happen if the encrypted string was only 16 bytes long.
+#+end_hint
+#+begin_hint
+Every year when Santa gets back from delivering presents to the good girls and boys, he tells us stories about all the cookies he receives. I love everything about cookies! Cooking them, eating them, editing them, decorating them, you name it!
+#+end_hint
 
 * Goal
    :PROPERTIES:

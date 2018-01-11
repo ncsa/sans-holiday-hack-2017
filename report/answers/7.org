@@ -413,8 +413,7 @@ Armed with a password, we can remote desktop:
 [[./images/alabaster_rdp.png]]
 
 Woot! We're hand-waving some of this for now, as there will be a
-longer discussion about how we cracked passwords. TODO link to that
-discussion.
+longer discussion about [[#passphrases][how we cracked passwords]].
 
 * Next up -- Privilege Escalation!
 

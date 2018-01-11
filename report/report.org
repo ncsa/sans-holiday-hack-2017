@@ -397,6 +397,9 @@ We can use the following indicators to search any clues we're later provided wit
 ** Command Execution with pip
 #+INCLUDE: "pip.org" 
 ** Cracking Passphrases
+   :PROPERTIES:
+   :CUSTOM_ID: passphrases
+   :END:
 #+INCLUDE: "passphrases.org" 
 ** Collaboration
 #+INCLUDE: "collab.org" 

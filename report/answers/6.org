@@ -43,12 +43,12 @@ This post is called out in the hints:
  Exploiting XXE Vulnerabilities in IIS.NET
  https://pen-testing.sans.org/blog/2017/12/08/entity-inception-exploiting-iis-net-with-xxe-vulnerabilities
 
-To pull off this attack, we'll need to host a file somewhere that the EaaS system can reach. We can either host it on l2s, in which case we'll use this blog post for creating a file on that system, which is locked down with =rbash=:
+To pull off this attack, we'll need to host a file somewhere that the EaaS system can reach. We can either host it on l2s, in which case we'll use the following blog post for creating a file on that system, which is locked down with =rbash=:
 
  A Spot of Tee
  https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee
 
-Alternatively, we could spin up an AWS VM using the instructions in this blog post:
+Alternatively, we could spin up an AWS VM using the instructions in:
 
  Putting My Zero Cents In: Using the Free Tier on Amazon Web Services (EC2)
  https://pen-testing.sans.org/blog/2017/12/10/putting-my-zero-cents-in-using-the-free-tier-on-amazon-web-services-ec2

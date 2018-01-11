@@ -15,6 +15,27 @@ Pole Mountain and what is your proof?
    :CUSTOM_ID: q5_background-information
    :END:
 
+
+#+begin_hint
+I have a very important job at the North Pole: GDPR compliance officer. Mostly I handle data privacy requests relating to Santa's naughty and nice list. I maintain the documents for compliance on the North Pole file store server.
+#+end_hint
+
+#+begin_hint
+The North Pole Police Department works closely with Santa on the naughty and nice list infractions. Mild naughty events are "1 coal" infractions, but can reach as high as "5 coal" level.
+#+end_hint
+
+#+begin_hint
+I'm still a little shaken up from when I had to call them in the other day. Two elves started fighting, pulling hair, and throwing rocks. There was even a super atomic wedgie involved! Later we were told that they were Munchkin Moles, though I'm still not sure I can believe that.
+#+end_hint
+
+#+begin_hint
+Unrelated, but: have you had the pleasure of working with JSON before? It's an easy way to programmatically send data back and forth over a network. There are simple JSON import/export features for almost every programming language!
+#+end_hint
+
+#+begin_hint
+One of the conveniences of working with JSON is that you can edit the data files easily with any text editor. There are lots of online services to convert JSON to other formats too, such as CSV data. Sometimes the JSON files need a little coaxing to get the data in the right format for conversion, though.
+#+end_hint
+
 We need to answer 3 questions involving infractions, insider moles and who is throwing snowballs. We need 4 things to answer these questions.
 
   * We need data from the [[http://nppd.northpolechristmastown.com/][North Pole Police Department]]'s [[http://nppd.northpolechristmastown.com/infractions][infractions]] page.
@@ -27,16 +48,16 @@ We need to answer 3 questions involving infractions, insider moles and who is th
    :CUSTOM_ID: q5_goal
    :END:
 
-  * We need to identify what factors trigger a 'naughty' flag.
-  * We need to identify the six insider threat moles.
-  * We need to identify who is throwing snow balls.
+  * To identify what factors trigger a 'naughty' flag.
+  * To identify the six insider threat moles.
+  * To identify who is throwing snow balls.
 
 * Approach
    :PROPERTIES:
    :CUSTOM_ID: q5_approach
    :END:
 
-Playing around with the infractions page we can see that once you do a search a Download option becomes available to download all the search results in json format. Let's automate this to create a local copy of all the data. We can do this searching for all results before and during a specific date, and all results after that date. We then combine those results into a single file. We can automate this with a script we'll call =nppd.py=.
+Playing around with the infractions page we can see that once you do a search a "Download" option becomes available to download all the search results in JSON format. Let's automate this to create a local copy of all the data. We can do this searching for all results before and during a specific date, and all results after that date. We then combine those results into a single file. We can automate this with a script we'll call =nppd.py=.
 
 #+BEGIN_SRC python
 #!/usr/bin/env python3
@@ -85,9 +106,9 @@ than a false negative at this point in our investigation.  We'll try
 to identify people on the infractions list that pull hair, and throw
 rocks, regardless of their target.
 
-To get the number of infractions needed to get onto the naughty list we take the names on the Naughty and Nice List that have been marked as =Naughty= and count the total number of infractions for those people and we identify the lowest number of infractions per person amongst all of them.
+To get the number of infractions needed to get onto the naughty list we take the names on the Naughty and Nice List that have been marked as "Naughty" and count the total number of infractions for those people and we identify the lowest number of infractions per person amongst all of them.
 
-So to automate all this we'll create script we'll call =analyze_infractions.py= to correlate our data.
+So to automate all this we'll create a script which we'll call =analyze_infractions.py= to correlate our data.
 
 #+INCLUDE: "../../tools/analyze_infractions.py" src python
 
@@ -106,7 +127,7 @@ How many infractions are required to be marked as naughty on Santa's Naughty and
 #+END_SRC
 
 
-Finally, once we play through the Bumbles Bounce level and get all achievements this chat gets unlocked and we have our answer for who is throwing snowballs.
+Finally, once we play through the Bumble's Bounce level and get all achievements this chat gets unlocked and we have our answer for who is throwing snowballs.
 
 [[./images/chat_bumble_sam.png]]
 
@@ -125,5 +146,10 @@ Our six insider moles appear to be:
   * Beverly Khalil
   * Christy Srivastava
 
-According to the unlocked chat with Sam, the person throwing snowballs is =the Abominable Snow Monster=, but maybe under someone else's control.
+In addition, we've already caught:
+
+  * Bini Aru
+  * Boq Questrian
+
+According to the unlocked chat with Sam, the person throwing snowballs is *the Abominable Snow Monster*, but maybe under someone else's control.
 

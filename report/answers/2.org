@@ -22,14 +22,31 @@ web service is running on the host.
 
 The following hints were provided by Sparkle Redberry from completing the level
 [[https://2017.holidayhackchallenge.com/game/3e813a9c-cb34-492e-a317-0dd99c8ca2e7][Winconceivable: The Cliffs of Winsanity]]:
-  1. We're excited to debut the new Letters to Santa site this year. Alabaster worked hard on that project for over a year. I got to work with the development version of the site early on in the project lifecycle.
-  2. Near the end of the development we had to rush a few things to get the new site moved to production. Some development content on the letter page should probably have been removed, but ended up marked as hidden to avoid added change control paperwork.
-  3. Alabaster's primary backend experience is with Apache Struts. I love Apache and have a local instance set up on my home computer with a web shell. Web shells are great as a backdoor for me to access my system remotely. I just choose a really long complex file name so that no one else knows how to access it.
-  4. A simple web shell is to create a PHP file in the web root with ~<?php echo "<pre>" . shell_exec($_GET['e']) . "</pre>"; ?>~. Then, I visit the URL with my commands. For example, =http://server/complexFileName.php?e=ls=.
-  5. There are lots of different web shell tools available. [[https://gist.github.com/joswr1ght/22f40787de19d80d110b37fb79ac3985][You can get a simple PHP web shell that is easy to use here]].
-  6. That business with Equal-Facts Inc was really unfortunate. I understand there are a lot of different exploits available for those vulnerable systems. Fortunately, Alabaster said he tested for CVE-2017-5638 and it was NOT vulnerable. Hope he checked the others too.
-  7. Apache Struts uses XML. I always had problems making proper XML formatting because of special characters. I either had to encode my data or escape the characters properly so the XML wouldn't break. I actually just checked and there are lots of different exploits out there for vulnerable systems. [[https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code][Here is a useful article]].
-  8. Pro developer tip: Sometimes developers hard code credentials into their development files. Never do this, or at least make sure you take them out before publishing them or putting them into production. You also should avoid reusing credentials for different services, even on the same system.
+
+#+begin_hint
+We're excited to debut the new Letters to Santa site this year. Alabaster worked hard on that project for over a year. I got to work with the development version of the site early on in the project lifecycle.
+#+end_hint
+#+begin_hint
+Near the end of the development we had to rush a few things to get the new site moved to production. Some development content on the letter page should probably have been removed, but ended up marked as hidden to avoid added change control paperwork.
+#+end_hint
+#+begin_hint
+Alabaster's primary backend experience is with Apache Struts. I love Apache and have a local instance set up on my home computer with a web shell. Web shells are great as a backdoor for me to access my system remotely. I just choose a really long complex file name so that no one else knows how to access it.
+#+end_hint
+#+begin_hint
+A simple web shell is to create a PHP file in the web root with ~<?php echo "<pre>" . shell_exec($_GET['e']) . "</pre>"; ?>~. Then, I visit the URL with my commands. For example, =http://server/complexFileName.php?e=ls=.
+#+end_hint
+#+begin_hint
+There are lots of different web shell tools available. [[https://gist.github.com/joswr1ght/22f40787de19d80d110b37fb79ac3985][You can get a simple PHP web shell that is easy to use here]].
+#+end_hint
+#+begin_hint
+That business with Equal-Facts Inc was really unfortunate. I understand there are a lot of different exploits available for those vulnerable systems. Fortunately, Alabaster said he tested for CVE-2017-5638 and it was NOT vulnerable. Hope he checked the others too.
+#+end_hint
+#+begin_hint
+Apache Struts uses XML. I always had problems making proper XML formatting because of special characters. I either had to encode my data or escape the characters properly so the XML wouldn't break. I actually just checked and there are lots of different exploits out there for vulnerable systems. [[https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code][Here is a useful article]].
+#+end_hint
+#+begin_hint
+Pro developer tip: Sometimes developers hard code credentials into their development files. Never do this, or at least make sure you take them out before publishing them or putting them into production. You also should avoid reusing credentials for different services, even on the same system.
+#+end_hint
 
 The following SANS Pentest Blog posts were also very helpful for this challenge:
 - [[https://pen-testing.sans.org/blog/2017/12/05/why-you-need-the-skills-to-tinker-with-publicly-released-exploit-code][Why You Need the Skills to Tinker with Publicly Released Exploit Code]]
