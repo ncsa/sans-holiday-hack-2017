@@ -1,6 +1,6 @@
 Full phish run:
 
-    justin@dovm1:~/projects/sans-holiday-hack-2017/tools$ ./env/bin/python full_phish.py
+    holiday@hack:~/projects/sans-holiday-hack-2017/tools$ ./env/bin/python full_phish.py
     Using 1.2.3.4 as external IP
     Found word/document.xml, rewriting 50793 bytes
     Before:
