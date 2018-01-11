@@ -12,7 +12,11 @@ This directory contains all the command line tools we created for this challenge
 
 ## Output
 
-This folder is for outputs from the tools and are reused to answer subsequent challenges.
+This folder is for outputs from the tools and are reused to answer subsequent challenges. The Makefile in here executes a number of the tools from the tools folder and dumps the output here.
+
+## Support Files
+
+This folder has a few files collected from the challenge that we use in some of the scripts.
 
 ## Report
 
