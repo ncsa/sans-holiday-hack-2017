@@ -18,11 +18,17 @@ describe?
    :CUSTOM_ID: q7_background-information
    :END:
 
-Hints:
+#+begin_hint
+I'm still a little angry with Alabaster for reprimanding me for a security violation. He still checks his email from the EMI system!
+#+end_hint
 
-  1. I'm still a little angry with Alabaster for reprimanding me for a security violation. He still checks his email from the EMI system!
-  2. He tells us not to install unnecessary software on systems, but he's running IIS with ASPX services on the EMI server, and Microsoft Office!
-  3. Personally, I don't use Microsoft Word. I'll take vim and LaTeX any day. Word does have its advantages though, including some of the Dynamic Data Exchange features for transferring data between applications and obtaining data from external data sources, including executables.
+#+begin_hint
+He tells us not to install unnecessary software on systems, but he's running IIS with ASPX services on the EMI server, and Microsoft Office!
+#+end_hint
+
+#+begin_hint
+Personally, I don't use Microsoft Word. I'll take vim and LaTeX any day. Word does have its advantages though, including some of the Dynamic Data Exchange features for transferring data between applications and obtaining data from external data sources, including executables.
+#+end_hint
 
 The question gives us a place to start. As we were reviewing the e-mails for Question 4, a few intriguing ones stood out:
 
