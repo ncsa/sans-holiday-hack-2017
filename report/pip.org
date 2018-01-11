@@ -4,7 +4,7 @@ Any attempt to run a more complicated command would fail.
 
 I wasn't sure if my commands were failing due to quoting or escapting issues or
 even how to tell.  Eventually it was determined that even a previously known
-working =dir | nc host port= command was failing almsot every time.  Any
+working =dir | nc host port= command was failing almost every time.  Any
 experiment I could come up with was tainted by the lack of reliability on the
 backend.  Not only was it a blind command injection exploit, but if an attempt
 failed I had no way of knowing why.  I needed to run something I KNEW would
