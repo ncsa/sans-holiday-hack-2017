@@ -49,7 +49,7 @@ Direct link: https://docker2017.holidayhackchallenge.com/?challenge=ab13b9fc-6e7
 #+END_CENTER
 
 #+begin_tip
-This one's tricky. You can strip out the poppies in your browser, and then the terminal can easily be seen on the left side
+This one's tricky. You can strip out the poppies in your browser, and then the terminal can easily be seen on the left side.
 #+end_tip
 
 #+BEGIN_CENTER
