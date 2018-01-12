@@ -32,7 +32,16 @@ The robots.txt page for the nppd site has a number of robot references as user-a
   * artoo, an obvious reference to R2D2. There's a =sand-crawler-delay= variable set to '2187' which is likely a reference to the cell that Princess Leia was in on the Death Star.
 
 *** Munchkins
+
 In the Munchin BOLO, the munchkins disappeared after speaking something that sounded like 'puuurzgexgull'. This is most likely a reference to the word 'pyrzqxgl' which was a word described in the book 'The Magic of Oz'. A munchkin, incidentally named 'Bini Aru', like the munchkin in the BOLO, wrote down how to pronounce the word. The word was magical and could be used to transform a being into a different creature. Also, Boq is another munchkin named in the Land of Oz book series.
+
+*** Konami Code
+
+When exploring the game an interesting word popped up in the javascript, =konami= and =konami-code=. It's in this code [[https://2017.holidayhackchallenge.com/assets/hhc17-core-frontend.js]]. So what happens when we run it?
+
+#+HTML: <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/ScDh_7961bY?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+An interesting script called [[https://2017.holidayhackchallenge.com/assets/js/fontbomb.js][fontBomb]] gets called. This was written by [[twitter.com/plehoux][Phil Lehoux]]. Thanks Phil!
 
 *** Reindeer Speak
 
