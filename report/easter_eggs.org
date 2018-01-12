@@ -16,9 +16,8 @@
 
 The text field for entering the SHA1 hashes of the great book pages appears to have some placeholder text in it, =686579212121202d436f756e746572204861636b=. This is in hex and can be converted to ascii, =hey!!! -Counter Hack=.
 
-** Exploration
 
-*** NPPD Find the Message in the Stars
+** NPPD Find the Message in the Stars
 
 #+BEGIN_CENTER
 #+HTML: <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">I have not seen anyone who unlocked the achievement for “Find The Message in the Stars” for <a href="https://twitter.com/hashtag/SANSHolidayHack?src=hash&amp;ref_src=twsrc%5Etfw">#SANSHolidayHack</a></p>&mdash; Madeye Moody (@madeye_c3t) <a href="https://twitter.com/madeye_c3t/status/951542090026110977?ref_src=twsrc%5Etfw">January 11, 2018</a></blockquote>
@@ -59,24 +58,24 @@ Keep the change, you filthy animal
 
 We now see that the favicon.ico was holding onto a little secret phrase, "Keep the change, you filthy animal", which was a phrase spoken by John "Johnny" Valentine in the movie "Angels with Filthy Souls". That, of course, was a fictional movie in the iconic classic Christmas movie, "Home Alone" where Kevin McAllister somehow avoids killing two robbers despite use of lethal force.
 
-*** NPPD Siren
+** NPPD Siren
 
 [[./images/siren.gif]]
 
 According to [[http://nppd.northpolechristmastown.com/needhelp][the need help page on the NPPD site]], "In the event of an emergency, summon the NPPD by moving your mouse cursor back and forth over the menu bar of the website. Doing this from the infractions page gives optimal results." Doing so results in the video above where it looks like a siren.
 
-*** Star Wars robots references in http://nppd.northpolechristmastown.com/robots.txt
+** robots.txt
 
 The robots.txt page for the nppd site has a number of robot references as user-agents.
   * hk-47, a hunter-killer assassin droid
   * threepio, an obvious reference to C3PO. There's a =sand-crawler-delay= variable set to '421' which could be a reference to the storm trooper, TK-421, who was ambushed on the Millenium Falcon, and incidentally is also the only named Storm Trooper in the original trilogy.
   * artoo, an obvious reference to R2D2. There's a =sand-crawler-delay= variable set to '2187' which is likely a reference to the cell that Princess Leia was in on the Death Star.
 
-*** Munchkins
+** Munchkins
 
 In the Munchin BOLO, the munchkins disappeared after speaking something that sounded like 'puuurzgexgull'. This is most likely a reference to the word 'pyrzqxgl' which was a word described in the book 'The Magic of Oz'. A munchkin, incidentally named 'Bini Aru', like the munchkin in the BOLO, wrote down how to pronounce the word. The word was magical and could be used to transform a being into a different creature. Also, Boq is another munchkin named in the Land of Oz book series.
 
-*** Konami Code
+** Konami Code
 
 When exploring the game an interesting word popped up in the javascript, =konami= and =konami-code=. It's in this code [[https://2017.holidayhackchallenge.com/assets/hhc17-core-frontend.js]]. So what happens when we run it?
 
@@ -84,7 +83,7 @@ When exploring the game an interesting word popped up in the javascript, =konami
 
 An interesting script called [[https://2017.holidayhackchallenge.com/assets/js/fontbomb.js][fontBomb]] gets called. This was written by [[https://twitter.com/plehoux][Phil Lehoux]]. Thanks Phil!
 
-*** Reindeer Speak
+** Reindeer Speak
 
 #+BEGIN_SRC
 hhhhhhhhhhhhhh723yhmn03z2784mn1
