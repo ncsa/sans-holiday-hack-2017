@@ -1,4 +1,4 @@
-all: mail/all.txt hints.md infractions.json infractions_one_per_line.json alabaster.jwt santa.jwt password_hashes.txt jwt.john john.txt gingerbread\ cookie\ recipe.docx password_combos.txt
+all: mail/all.txt hints.md infractions.json infractions_one_per_line.json alabaster.jwt santa.jwt password_hashes.txt jwt.john john.txt gingerbread\ cookie\ recipe.docx password_combos.txt ldap_hashcat.txt humans.txt punchcard.txt decode_punchcard favicon_secret
 infractions.json: ../tools/nppd.py
 	../tools/nppd.py
 
@@ -54,10 +54,13 @@ ldap_hashcat.txt: password_hashes.txt password_combos.txt
 	hashcat -m 0  -a 1 password_hashes.txt password_combos.txt  password_combos.txt -j ' ' --username --show | tee ldap_hashcat.txt
 
 humans.txt:
-	http  --proxy=http:socks5://@localhost:31080  http://nppd.northpolechristmastown.com/humans.txt --download
+	http http://nppd.northpolechristmastown.com/humans.txt --download
 
 punchcard.txt:
 	../tools/humans.py
 
 decode_punchcard: punchcard.txt
 	php ../tools/show_punchard.php
+
+favicon_secret:
+	python ../toosl/LSBSteg.py decode -i favicon.ico -o favicon_secret
