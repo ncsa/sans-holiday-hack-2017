@@ -59,11 +59,6 @@ Keep the change, you filthy animal
 
 We now see that the favicon.ico was holding onto a little secret phrase, "Keep the change, you filthy animal", which was a phrase spoken by John "Johnny" Valentine in the movie "Angels with Filthy Souls". That, of course, was a fictional movie in the iconic classic Christmas movie, "Home Alone" where Kevin McAllister somehow avoids killing two robbers despite use of lethal force.
 
-
-#+BEGIN_SRC
-
-#+END_SRC
-
 *** NPPD Siren
 
 [[./images/siren.gif]]
@@ -190,8 +185,7 @@ print(result)
 |___________________________________________________________________________________________________________________________________________________________________|
 #+END_SRC
 
-
-This can be decoded by hand, but who has time for that.  We found
+This can be decoded by hand, but who has time for that these days!?  We found
 [[https://gist.githubusercontent.com/Pozo/1004284/raw/fa449480786be7af5e814e63e2a5a66e83d14aef/gistfile1.php][a decoder written in php]]
 
 This decoder wants a binary matrix, so we have some cleaning up to do.   We
@@ -250,3 +244,8 @@ adding an extra line:
 Gives us the intended result: =MADE WITH LOVE BY MADEYE MOODY PROF DEFENSE AGAINST THE DARK ARTS BFE 4EVA=
 
 Incidentally, Professor Moody is [[https://twitter.com/madeye_c3t][@madeye_c3t]] and BFE refers to [[https://www.bitsforeveryone.com/][BitsForEveryone]].
+
+[[http://www.masswerk.at/keypunch/][The Virtual Keypunch]] is a neat site that allows us to convert this punchcard to a more realistic image:
+
+#+attr_html: :width 500px
+[[./images/moody_punch.png]]
