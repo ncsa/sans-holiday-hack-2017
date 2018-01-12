@@ -248,4 +248,4 @@ Incidentally, Professor Moody is [[https://twitter.com/madeye_c3t][@madeye_c3t]]
 [[http://www.masswerk.at/keypunch/][The Virtual Keypunch]] is a neat site that allows us to convert this punchcard to a more realistic image:
 
 #+attr_html: :width 500px
-[[./images/moody punch.png]]
+[[./images/moody_punch.png]]
