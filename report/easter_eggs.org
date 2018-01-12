@@ -41,7 +41,7 @@ When exploring the game an interesting word popped up in the javascript, =konami
 
 #+HTML: <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/aijC07KlKXQ?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
-An interesting script called [[https://2017.holidayhackchallenge.com/assets/js/fontbomb.js][fontBomb]] gets called. This was written by [[twitter.com/plehoux][Phil Lehoux]]. Thanks Phil!
+An interesting script called [[https://2017.holidayhackchallenge.com/assets/js/fontbomb.js][fontBomb]] gets called. This was written by [[https://twitter.com/plehoux][Phil Lehoux]]. Thanks Phil!
 
 *** Reindeer Speak
 
@@ -146,8 +146,7 @@ print(result)
 
 
 This can be decoded by hand, but who has time for that.  We found
-[[https://gist.githubusercontent.com/Pozo/1004284/raw/fa449480786be7af5e814e63e2a5a66e83d14aef/gistfile1.php][a
-decoder written in php]]
+[[https://gist.githubusercontent.com/Pozo/1004284/raw/fa449480786be7af5e814e63e2a5a66e83d14aef/gistfile1.php][a decoder written in php]]
 
 This decoder wants a binary matrix, so we have some cleaning up to do.   We
 need to remove the border, remove empty lines, and convert the hash marks to 1,
@@ -204,4 +203,4 @@ adding an extra line:
 
 Gives us the intended result: =MADE WITH LOVE BY MADEYE MOODY PROF DEFENSE AGAINST THE DARK ARTS BFE 4EVA=
 
-Incidentally, Professor Moody is [[https://twitter.com/madeye_c3t]][@madeye_c3t]] and BFE refers to [[https://www.bitsforeveryone.com/][BitsForEveryone]].
+Incidentally, Professor Moody is [[https://twitter.com/madeye_c3t][@madeye_c3t]] and BFE refers to [[https://www.bitsforeveryone.com/][BitsForEveryone]].
