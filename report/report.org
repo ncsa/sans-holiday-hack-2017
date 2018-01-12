@@ -22,11 +22,11 @@ This report has been slightly modiifed from [[https://ncsa.github.io/sans-holida
 #+end_note
 
 * Introduction
-We are the [[https://security.ncsa.illinois.edu][Security team]] at
-the [[https://www.ncsa.illinois.edu][National Center for Supercomputing
-Applications]], and [[https://ncsa.github.io/sans-holiday-hack-2016/][like last year]], we worked together on a fun SANS Holiday Hack. Over
-the past year, we've been surprised to see how many skills and tricks
-from the 2016 Holiday Hack we have used for our jobs.
+We are the [[https://security.ncsa.illinois.edu][Security team]] at the [[https://www.ncsa.illinois.edu][National Center for Supercomputing
+Applications]], and [[https://ncsa.github.io/sans-holiday-hack-2016/][like last year]], we worked together on a fun SANS
+Holiday Hack. Over the past year, we've been surprised to see how many
+skills and tricks from the 2016 Holiday Hack we have used for our
+jobs.
 
 We've done "red-team" work such as code reviews and pen-tests, where
 we encountered issues such as insufficient PHP input sanitization,
@@ -48,24 +48,24 @@ and tools an attacker would use.
    first! We encourage you to give it a shot before reading this
    solution. It's a great learning opportunity, and it stays up all year and into the future. Huge shout-out to SANS for putting on this event.
 
-   We kick things off with some very short answers to the 9 questions we
+   We kick things off with [[#tldr][some very short answers to the 9 questions]] we
    were posed. Something different that we did this year was to do some
-   reconnaissance before the Hack even began. The 2017 Challenge
+   [[#recon][reconnaissance]] before the Hack even began. The 2017 Challenge
    consisted of two parts, with the first being The North Pole and Beyond
    world -- an in-browser WebGL-based game, where players could earn
    points and hints by manuevering giant snowballs around an obstacle
    course. Hidden in this game were "Cranberry Pi" terminals, which had
-   simple challenges to be solved as we helped the elves fix their
+   simple [[#terminals][challenges to be solved]] as we helped the elves fix their
    broken systems.
 
    The second part of the challenge was gaining access to North Pole
    systems and recovering lost pages from the Great Book. These
-   challenges required finding and exploiting vulnerabilities, and often
+   challenges required [[#answers][finding and exploiting vulnerabilities]], and often
    chaining different attacks together. Once we had all the pages, we
    could determine who the villain was.
 
-   We end our report with various Easter Eggs that we found, and a couple
-   of appendices that go into more detail on certain topics.
+   We end our report with various [[#easter_eggs][Easter Eggs]] that we found, and a couple
+   of [[#appendices][appendices]] that go into more detail on certain topics.
 
    For our solutions, we review the information that we were given, lay
    out how we solved it, and what led us to the solution, and when
@@ -80,6 +80,9 @@ and tools an attacker would use.
    We hope you enjoy our report. We certainly enjoyed writing it.
 
 * tl;dr: Quick Answers
+   :PROPERTIES:
+   :CUSTOM_ID: tldr
+   :END:
   1. What is the title of the first page? *About This Book...*
   2. What is the topic of The Great Book page available in the web root of the server? *On the Topic of Flying Animals*\\
      What is Alabaster Snowball's password? *stream_unhappy_buy_loss*
@@ -93,6 +96,9 @@ and tools an attacker would use.
   8. Who wrote the letter to Santa on edb? *The Wizard of Oz*
   9. Which character is the villain, and what is the motive? *Glinda, the Good Witch. To stir up elf-munchkin hostilities and sell her magic to both sides.*
 * Pre-contest Reconnaissance
+   :PROPERTIES:
+   :CUSTOM_ID: recon
+   :END:
   #+CAPTION: SANS Holiday Hack Challenge December 5th Update
   [[./images/sans_holiday_hack_preview.png]]
 
@@ -365,6 +371,9 @@ We can use the following indicators to search any clues we're later provided wit
 [[./images/game_is_live.png]]
 
 * Terminals
+   :PROPERTIES:
+   :CUSTOM_ID: terminals
+   :END:
 ** Winter Wonder Landing
 #+INCLUDE: "terminals/landing.org"
 ** Winconceivable The Cliffs Of Insanity
@@ -382,6 +391,9 @@ We can use the following indicators to search any clues we're later provided wit
 ** We're Off To See The
 #+INCLUDE: "terminals/off.org"
 * Answers
+   :PROPERTIES:
+   :CUSTOM_ID: answers
+   :END:
 ** Game: This Page Fell off a Truck
 #+INCLUDE: "answers/1.org"
 ** L2S: Letters to Santa
@@ -401,8 +413,14 @@ We can use the following indicators to search any clues we're later provided wit
 ** Fin: The Evil Good Witch
 #+INCLUDE: "answers/9.org" 
 * Easter Eggs
+   :PROPERTIES:
+   :CUSTOM_ID: easter_eggs
+   :END:
 #+INCLUDE: "easter_eggs.org" 
 * Appendices
+   :PROPERTIES:
+   :CUSTOM_ID: appendices
+   :END:
 ** Command Execution with pip
    :PROPERTIES:
    :CUSTOM_ID: pip

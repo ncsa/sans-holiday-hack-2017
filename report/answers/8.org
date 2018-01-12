@@ -155,7 +155,7 @@ With the success of the XSS attack, we now know the token:
 #+INCLUDE: "../../output/jwt" src
 
 Great! Now we just need to modify our local storage, similar to how we
-added our cookie for EWA, and refresh the page! ...and nothing
+[[#q4_approach][added our cookie for EWA]], and refresh the page! ...and nothing
 happens. If we look at the Network tab of the Developer Tools, we'll
 see that there was a request to =/login=, but it returned false:
 

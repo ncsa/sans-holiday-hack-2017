@@ -48,7 +48,7 @@ other systems on the internal 10.142.0.0/24 network that you access
 through the Letters to Santa system.
 #+END_QUOTE
 
-The question mentions pivoting through the Letters to Santa server (=l2s=). A commonly used tool for network discovery is =nmap=, and we can check that it's available on =l2s=:
+The question mentions pivoting through the [[#q2_approach][Letters to Santa server]] (=l2s=). A commonly used tool for network discovery is =nmap=, and we can check that it's available on =l2s=:
 
 #+BEGIN_SRC
 alabaster_snowball@hhc17-apache-struts1:/tmp/asnow.VmaV55tqZi5rteO9fXHB3kjM$ nmap -V

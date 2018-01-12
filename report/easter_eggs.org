@@ -29,7 +29,7 @@ The text field for entering the SHA1 hashes of the great book pages appears to h
 Let me tell you right now. Working in teams is critical for finding things like this. The favicon.ico you want to look at is on the UNENCRYTPED site (http), not the SSL site (https). I was thinking I was crazy when I couldn't find what my teammates were looking at.
 #+end_caution
 
-If we take a close look we notice something using 'strings'.
+If we take a close look we notice something using =strings=.
 
 #+BEGIN_SRC
 holiday@hack:~$ strings favicon.ico
@@ -66,24 +66,35 @@ According to [[http://nppd.northpolechristmastown.com/needhelp][the need help pa
 
 ** robots.txt
 
-The robots.txt page for the nppd site has a number of robot references as user-agents.
+The [[https://nppd.northpolechristmastown.com/robots.txt][robots.txt]] page for the NPPD site has a number of robot references as user-agents.
   * hk-47, a hunter-killer assassin droid
   * threepio, an obvious reference to C3PO. There's a =sand-crawler-delay= variable set to '421' which could be a reference to the storm trooper, TK-421, who was ambushed on the Millenium Falcon, and incidentally is also the only named Storm Trooper in the original trilogy.
   * artoo, an obvious reference to R2D2. There's a =sand-crawler-delay= variable set to '2187' which is likely a reference to the cell that Princess Leia was in on the Death Star.
 
 ** Munchkins
 
-In the Munchin BOLO, the munchkins disappeared after speaking something that sounded like 'puuurzgexgull'. This is most likely a reference to the word 'pyrzqxgl' which was a word described in the book 'The Magic of Oz'. A munchkin, incidentally named 'Bini Aru', like the munchkin in the BOLO, wrote down how to pronounce the word. The word was magical and could be used to transform a being into a different creature. Also, Boq is another munchkin named in the Land of Oz book series.
+In the [[#q3_approach][Munchin BOLO]], the munchkins disappeared after speaking
+something that sounded like 'puuurzgexgull'. This is most likely a
+reference to the word 'pyrzqxgl' which was a word described in the
+book 'The Magic of Oz'. A munchkin, incidentally named 'Bini Aru',
+like the munchkin in the BOLO, wrote down how to pronounce the
+word. The word was magical and could be used to transform a being into
+a different creature. Also, Boq is another munchkin named in the Land
+of Oz book series.
 
 ** Konami Code
 
 When exploring the game an interesting word popped up in the javascript, =konami= and =konami-code=. It's in this code [[https://2017.holidayhackchallenge.com/assets/hhc17-core-frontend.js]]. So what happens when we run it?
 
+#+BEGIN_CENTER
 #+HTML: <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/aijC07KlKXQ?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+#+END_CENTER
 
 An interesting script called [[https://2017.holidayhackchallenge.com/assets/js/fontbomb.js][fontBomb]] gets called. This was written by [[https://twitter.com/plehoux][Phil Lehoux]]. Thanks Phil!
 
 ** Reindeer Speak
+
+This e-mail exchange was discovered on the [[#q4_approach][EWA system]]:
 
 #+BEGIN_SRC
 hhhhhhhhhhhhhh723yhmn03z2784mn1
@@ -113,7 +124,7 @@ On 11/15/2017 11:18 AM, admin@northpolechristmastown.com wrote:
 >
 #+END_SRC
 
-The reindeer appear to be speaking. Or randomly typing.
+The reindeer appear to be speaking. Or randomly typing. The linked image is:
 
 #+attr_html: :width 300px
 [[./images/54ffe5266025c-dog1.jpg]]
@@ -125,7 +136,7 @@ the challenge creators as well as.. something else!
 
 #+INCLUDE: "../output/humans.txt" src
 
-The blob looks a lot like hex encoded ascii, we can decode that using python:
+The blob looks a lot like hex encoded ASCII, we can decode that using Python:
 
 
 #+BEGIN_SRC python
@@ -149,13 +160,16 @@ shows:
 humans.dat: zlib compressed data
 #+END_SRC
 
-decompressing it, and decoding the resulting base64 encoded data gives a punch card!
+Decompressing it, and decoding the resulting base64 encoded data gives a punch card!
 
-#+BEGIN_SRC
+#+BEGIN_SRC python
 decompressed = zlib.decompress(decoded)
 result = base64.decodestring(decompressed).decode('ascii')
 
 print(result)
+#+END_SRC
+
+#+BEGIN_SRC
    __________________________________________________________________________________________________________________________________________________________________
   /                                                                                                                                                                 |
  /   # # #     #   #         #   #       # # #   #         #           #   # # # #     #   # # # #           # #   # #       #         # # #     #   #              |
@@ -190,7 +204,6 @@ This can be decoded by hand, but who has time for that these days!?  We found
 This decoder wants a binary matrix, so we have some cleaning up to do.   We
 need to remove the border, remove empty lines, and convert the hash marks to 1,
 and everything else to zero.
-
 
 #+BEGIN_SRC python
 card = result.splitlines()
@@ -227,7 +240,6 @@ The resulting matrix is
 #+END_SRC
 
 Using a small php script, we can use the existing code to decode this:
-
 
 #+INCLUDE: "../tools/show_punchard.php" src php
 

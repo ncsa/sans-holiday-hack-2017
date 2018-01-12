@@ -95,7 +95,7 @@ if __name__ == "__main__":
 
 Calling =nppd.py= creates a file 'infractions.json'. Now that we have
 the NPPD's infractions database we need compare it to the Naughty and
-Nice file we found on the SMB server. We can automate this process
+Nice file we found on the [[#q3_approach][SMB server]]. We can automate this process
 scriptomagically. While we're at it we should also script identifying
 the 6 insider threat moles as well. For finding the moles it appears
 their characteristics are pulling hair and throwing rocks. One caveat
@@ -127,7 +127,7 @@ How many infractions are required to be marked as naughty on Santa's Naughty and
 #+END_SRC
 
 
-Finally, once we play through the Bumble's Bounce level and get all achievements this chat gets unlocked and we have our answer for who is throwing snowballs.
+Finally, once we play through the [[#bounce_how-to-find-the-terminal][Bumble's Bounce level]] and get all achievements this chat gets unlocked and we have our answer for who is throwing snowballs.
 
 [[./images/chat_bumble_sam.png]]
 

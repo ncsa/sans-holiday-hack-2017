@@ -15,9 +15,9 @@ Alabaster Snowball's password?
    :CUSTOM_ID: q2_background-information
    :END:
 
-We know that there is an application on =https://l2s.northpolechristmastown.com= that we need to investigate.
+We know that there is an application on https://l2s.northpolechristmastown.com that we need to investigate.
 This webpage is publically accessible from the Internet and not appear to require any special measures to
-access it. We do not know Alabaster password or username at the start of this challenge nor what type of
+access it. We do not know Alabaster' password or username at the start of this challenge nor what type of
 web service is running on the host.
 
 The following hints were provided by Sparkle Redberry from completing the level
@@ -53,7 +53,6 @@ The following SANS Pentest Blog posts were also very helpful for this challenge:
   
   Code: [[https://github.com/chrisjd20/cve-2017-9805.py]]
 - [[https://pen-testing.sans.org/blog/2017/12/06/a-spot-of-tee Restricted][A Spot of Tee]]
-  bash shell, and bypassing the I/O restriction with tee
 
 * Goal
    :PROPERTIES:
@@ -516,13 +515,11 @@ Trying to compromise the l2s app itself was a dead end.  Once we have command
 execution we can see that the process.php script is simply:
 
 #+BEGIN_SRC php
-<?php
 if ($_POST["first_name"] && $_POST["age"] && $_POST["state"] && $_POST["city"] && $_POST["toy"] && $_POST["message"] && $_POST["sex"]) {
 	echo "Letter has been sent to Santa!";
 } else {
 	echo "Error missing parameters";
 }
-?>
 #+END_SRC
 
 * About the Challenge
@@ -533,7 +530,7 @@ if ($_POST["first_name"] && $_POST["age"] && $_POST["state"] && $_POST["city"] &
 Initially the host had a couple of noticeable holes.
 
   * Apache server running as =alabaster_snowball= (eventually changed to =www-data= user)
-  * Easy bypass of rbash by adding the '-t' flag and executing =bash= on SSH login (eventually =rbash= was forced through =/etc/ssh/sshd_config=)
+  * Easy bypass of rbash by adding the =-t= flag and executing =bash= on SSH login (eventually =rbash= was forced through =/etc/ssh/sshd_config=)
 
 The server itself housed two virtual web hosts, the Letters to Santa application which ran PHP in =nginx= and the Development site which was run by Apache Struts on a high port being redirected by =nginx=.
 

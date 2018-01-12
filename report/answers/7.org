@@ -30,7 +30,7 @@ He tells us not to install unnecessary software on systems, but he's running IIS
 Personally, I don't use Microsoft Word. I'll take vim and LaTeX any day. Word does have its advantages though, including some of the Dynamic Data Exchange features for transferring data between applications and obtaining data from external data sources, including executables.
 #+end_hint
 
-The question gives us a place to start. As we were reviewing the e-mails for Question 4, a few intriguing ones stood out:
+The question gives us a place to start. As we were reviewing the e-mails for [[#q4_question][Question 4]], a few intriguing ones stood out:
 
 #+BEGIN_QUOTE
 *From*: minty.candycane@northpolechristmastown.com
@@ -81,7 +81,7 @@ Sincerely,
 Alabaster Snowball.
 #+END_QUOTE
 
-The other e-mails that seemed intriguging were these two, also from Alabaster:
+The other e-mails that seemed intriguing were these two, also from Alabaster:
 
 #+BEGIN_QUOTE
 *Subject*: gingerbread cookie recipe
@@ -120,7 +120,7 @@ Alabaster Snowball.
    :END:
 
 We're trying to craft a malicious .docx file which we'll e-mail to
-alabaster.snowball@northpolechristmastown.com via the EWA system. When
+alabaster.snowball@northpolechristmastown.com via the [[#q4_question][EWA system]]. When
 Alabaster opens the e-mail on the EMI system, the command that we
 embed in the file should get us access to =C:\GreatBookPage7.pdf=.
 
@@ -134,7 +134,7 @@ sensepost blog post gives us some good instructions at how to
 construct a malicious docx, and we know how to get Alabaster to click
 on it.
 
-However, there's a slightly easier way. On the SMB FileStor, we found
+However, there's a slightly easier way. On the [[#q3_question][SMB FileStor]], we found
 a docx that Shinny created for Wunorse. If we show the fields (Alt+F9
 on Windows, Option+F9 on Mac), we see that this document has a DDE
 field we can just modify.
@@ -435,7 +435,7 @@ if it was all a big charade.
 
 We found that the system was running a service, called
 =WindowsGrabber= which would download new e-mails, try to parse out
-their DDE payloads, and execute them. It did this via =C:\Program Files\WindowsGrabber\alabaster_snowball.py=. That file also had credentials for the EWA system:
+their DDE payloads, and execute them. It did this via =C:\Program Files\WindowsGrabber\alabaster_snowball.py=. That file also had credentials for the [[#q4_question][EWA system]]:
 
 #+BEGIN_SRC python
 srverAddress = '10.142.0.5'
@@ -445,10 +445,10 @@ passw = 'power instrument gasoline film'
 #+END_SRC
 
 (As an aside, this code snippet also confirmed our theory about the
-systems moving from the public IPs we found during the Recon stage, to
+systems moving from the public IPs we found during the [[#recon][Recon stage]], to
 private ones).
 
-This service was running as the alabaster_snowball user that we could
+This service was running as the =alabaster_snowball= user that we could
 already run commands as, so it wasn't a target for privilege
 elevation.
 
@@ -504,13 +504,13 @@ itself. By prefixing our filename with =../../../..= we can write
 anywhere on the system, as the LocalSystem account.
 
 With unrestricted write access, how can we turn that into code
-execution? We could a number of techniques, such as DLL hijacking, but
+execution? We could use a number of techniques, such as DLL hijacking, but
 many are made more difficult by the fact that we can't *read* files
 with our privileged access, only write to them.
 
 Once again, we turned to Python. We targetted the
 =alabaster_snowball.py= script itself, with Python module
-injection. An import command such as:
+injection. An import command in =alabaster_snowball.py=, such as:
 
 #+BEGIN_SRC python
 import glob
@@ -537,6 +537,7 @@ locals().update(vars(get_mod(__name__)))
 try:
     if not os.path.isfile("C:/Windows/Temp/have_run"):
         os.system('nssm install zGrabber C:\\Users\\ALABAS~1\\AppData\\Local\\Temp\\2\\4445.exe')
+        os.system('nssm set zGrabber AppExit Default Restart')
         open("C:/Windows/Temp/have_run", 'a').close()
     os.system('nssm start zGrabber')
 except:
@@ -805,7 +806,7 @@ msf post(lsa_secrets) > run
 We can verify this with our hash, or via RDP: alabaster's password is
 =Carried_mass_it_reader1=, which matches what we got before.
 
-At this point, the system is pretty well compromised. We were unable to crack the sysadmin user's hash, or pivot from this system to other systems using our privileged access.
+At this point, the system is pretty well compromised. We were unable to +crack the sysadmin user's hash, or+ pivot from this system to other systems using our privileged access.
 
 We did, however, find some neat things in the Firefox browsing history of the sysadmin user:
 
@@ -832,7 +833,7 @@ We did, however, find some neat things in the Firefox browsing history of the sy
 'http://localhost/ok.txt'
 #+END_SRC
 
-* Update -- Cracking sysadmin's Password
+* Update -- Cracking sysadmin's Password!
 After doing a bit more digging around on this after the submission
 deadline had passed, we were able to crack sysadmin's password, thanks
 to [[https://github.com/gentilkiwi/mimikatz][Mimikatz]].

@@ -56,7 +56,7 @@ The hints are all pretty strongly pointing us towards an {{{abbr(XML External En
    :CUSTOM_ID: q6_goal
    :END:
 
-We want to access C:\greatbook.txt, and then follow those instructions to retrieve a page of the Great Book.
+We want to access =C:\greatbook.txt=, and then follow those instructions to retrieve a page of the Great Book.
 
 * Approach
    :PROPERTIES:
@@ -112,9 +112,9 @@ This example in the blog post had a typo, where the last character was a =<= ins
 >
 #+END_SRC
 
-This will load our evil.dtd file, then instantiate the necessary
+This will load our =evil.dtd= file, then instantiate the necessary
 entities. To finish off the attack, we'll need two HTTP services
-running. The first will need to serve the evil.dtd file. Python's
+running. The first will need to serve the =evil.dtd= file. Python's
 =SimpleHTTPServer= is the easiest way to do this, and in fact, that's
 provided on l2s. We'll create our file, with tee, then start a
 server. Ports 8080 and 4444 are very contentious on l2s, so we'll use
@@ -178,7 +178,7 @@ Host: 10.142.0.11:8272
 Connection: Keep-Alive
 #+END_SRC
 
-Success! In the =GET= request, the text after =?= is the contents of C:\greatbook.txt. If we pull up that URL, we get GreatBookPage6.pdf.
+Success! In the =GET= request, the text after =?= is the contents of C:\greatbook.txt. If we pull up that URL, we get [[https://www.holidayhackchallenge.com/2017/pages/8943e0524e1bf0ea8c7968e85b2444323cb237af/GreatBookPage6.pdf][GreatBookPage6.pdf]].
 
 * Solution
    :PROPERTIES:
