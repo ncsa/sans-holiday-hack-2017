@@ -39,7 +39,7 @@ In the Munchin BOLO, the munchkins disappeared after speaking something that sou
 
 When exploring the game an interesting word popped up in the javascript, =konami= and =konami-code=. It's in this code [[https://2017.holidayhackchallenge.com/assets/hhc17-core-frontend.js]]. So what happens when we run it?
 
-#+HTML: <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/ScDh_7961bY?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+#+HTML: <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/aijC07KlKXQ?rel=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
 
 An interesting script called [[https://2017.holidayhackchallenge.com/assets/js/fontbomb.js][fontBomb]] gets called. This was written by [[twitter.com/plehoux][Phil Lehoux]]. Thanks Phil!
 
