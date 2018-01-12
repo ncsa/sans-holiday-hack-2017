@@ -1,4 +1,4 @@
-all: setup cve_2017_9805.py jwt2john.py pw.py
+all: setup cve_2017_9805.py jwt2john.py pw.py punchcard.php LSBSteg.py
 setup:
 	python3 -m pip install --user -r requirements.txt	
 
