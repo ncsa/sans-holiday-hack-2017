@@ -63,4 +63,4 @@ decode_punchcard: punchcard.txt
 	php ../tools/show_punchard.php
 
 favicon_secret:
-	python ../toosl/LSBSteg.py decode -i favicon.ico -o favicon_secret
+	python ../tools/LSBSteg.py decode -i favicon.ico -o favicon_secret
