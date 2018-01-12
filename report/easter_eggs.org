@@ -22,13 +22,12 @@ The text field for entering the SHA1 hashes of the great book pages appears to h
 
 #+BEGIN_CENTER
 #+HTML: <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">I have not seen anyone who unlocked the achievement for “Find The Message in the Stars” for <a href="https://twitter.com/hashtag/SANSHolidayHack?src=hash&amp;ref_src=twsrc%5Etfw">#SANSHolidayHack</a></p>&mdash; Madeye Moody (@madeye_c3t) <a href="https://twitter.com/madeye_c3t/status/951542090026110977?ref_src=twsrc%5Etfw">January 11, 2018</a></blockquote>
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 #+END_CENTER
 
 [[https://twitter.com/madeye_c3t/][@madeye_c3t]] mentioned something about a hidden easter egg called "Find The Message in the Stars". The only stars we see are a few on the NPPD website and the [[http://nppd.northpolechristmastown.com/favicon.ico][favicon.ico]] image.
 
 #+begin_caution
-Let me tell you right now. Working in teams is critical for finding things like this. The favicon.ico you want to look at is on the UNENCRYTPED site (http), not the SSL site (https). I was thinking I was crazy I couldn't find what my teammates were looking at.
+Let me tell you right now. Working in teams is critical for finding things like this. The favicon.ico you want to look at is on the UNENCRYTPED site (http), not the SSL site (https). I was thinking I was crazy when I couldn't find what my teammates were looking at.
 #+end_caution
 
 If we take a close look we notice something using 'strings'.
@@ -59,11 +58,6 @@ Keep the change, you filthy animal
 #+END_SRC
 
 We now see that the favicon.ico was holding onto a little secret phrase, "Keep the change, you filthy animal", which was a phrase spoken by John "Johnny" Valentine in the movie "Angels with Filthy Souls". That, of course, was a fictional movie in the iconic classic Christmas movie, "Home Alone" where Kevin McAllister somehow avoids killing two robbers despite use of lethal force.
-
-
-#+BEGIN_SRC
-
-#+END_SRC
 
 *** NPPD Siren
 
@@ -191,8 +185,7 @@ print(result)
 |___________________________________________________________________________________________________________________________________________________________________|
 #+END_SRC
 
-
-This can be decoded by hand, but who has time for that.  We found
+This can be decoded by hand, but who has time for that these days!?  We found
 [[https://gist.githubusercontent.com/Pozo/1004284/raw/fa449480786be7af5e814e63e2a5a66e83d14aef/gistfile1.php][a decoder written in php]]
 
 This decoder wants a binary matrix, so we have some cleaning up to do.   We
@@ -251,3 +244,8 @@ adding an extra line:
 Gives us the intended result: =MADE WITH LOVE BY MADEYE MOODY PROF DEFENSE AGAINST THE DARK ARTS BFE 4EVA=
 
 Incidentally, Professor Moody is [[https://twitter.com/madeye_c3t][@madeye_c3t]] and BFE refers to [[https://www.bitsforeveryone.com/][BitsForEveryone]].
+
+[[http://www.masswerk.at/keypunch/][The Virtual Keypunch]] is a neat site that allows us to convert this punchcard to a more realistic image:
+
+#+attr_html: :width 500px
+[[./images/moody_punch.png]]
