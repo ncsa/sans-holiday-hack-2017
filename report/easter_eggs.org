@@ -248,3 +248,20 @@ Incidentally, Professor Moody is [[https://twitter.com/madeye_c3t][@madeye_c3t]]
 
 #+attr_html: :width 500px
 [[./images/moody_punch.png]]
+
+## Emails
+
+Just throwing this in for fun but when we looked at the emails, something odd jumped out from the email headers. If we look at the message-ids of all the email the email from the admin that welcomed everyone to their email account, the admin one was formatted differently.
+
+#+BEGIN_SRC
+<20171108160102.324F5BD73B@mail.northpolechristmastown.com>
+<33f01a00-c8e1-92f1-3ac0-aacc21e68208@northpolechristmastown.com>
+<af2235d2-dc5f-512c-d65e-1354eb32a69c@northpolechristmastown.com>
+<91a988a9-4a52-9d96-ecd4-5787793d92a2@northpolechristmastown.com>
+...
+<cb30471a-c3d8-4162-567b-23e5a64bf2f0@northpolechristmastown.com>
+<940ba863-3a1a-d531-b0d7-232d44f79988@northpolechristmastown.com>
+<b426ecb5-f79b-bc25-48f5-26f94bffbac7@northpolechristmastown.com>
+#+END_SRC
+
+The admin one is based on date. The rest *look* like [[https://en.wikipedia.org/wiki/Universally_unique_identifier][UUIDs]] but they're not [[https://tools.ietf.org/html/rfc4122][RFC 4122]] compliant. Just something interesting we found.
