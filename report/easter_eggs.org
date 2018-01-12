@@ -203,3 +203,5 @@ adding an extra line:
 #+END_SRC
 
 Gives us the intended result: =MADE WITH LOVE BY MADEYE MOODY PROF DEFENSE AGAINST THE DARK ARTS BFE 4EVA=
+
+Incidentally, Professor Moody is [[https://twitter.com/madeye_c3t]][@madeye_c3t]] and BFE refers to [[https://www.bitsforeveryone.com/][BitsForEveryone]].
