@@ -18,6 +18,53 @@ The text field for entering the SHA1 hashes of the great book pages appears to h
 
 ** Exploration
 
+*** NPPD Find the Message in the Stars
+
+#+BEGIN_CENTER
+#+HTML: <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">I have not seen anyone who unlocked the achievement for “Find The Message in the Stars” for <a href="https://twitter.com/hashtag/SANSHolidayHack?src=hash&amp;ref_src=twsrc%5Etfw">#SANSHolidayHack</a></p>&mdash; Madeye Moody (@madeye_c3t) <a href="https://twitter.com/madeye_c3t/status/951542090026110977?ref_src=twsrc%5Etfw">January 11, 2018</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+#+END_CENTER
+
+[[https://twitter.com/madeye_c3t/][@madeye_c3t]] mentioned something about a hidden easter egg called "Find The Message in the Stars". The only stars we see are a few on the NPPD website and the [[http://nppd.northpolechristmastown.com/favicon.ico][favicon.ico]] image.
+
+#+begin_caution
+Let me tell you right now. Working in teams is critical for finding things like this. The favicon.ico you want to look at is on the UNENCRYTPED site (http), not the SSL site (https). I was thinking I was crazy I couldn't find what my teammates were looking at.
+#+end_caution
+
+If we take a close look we notice something using 'strings'.
+
+#+BEGIN_SRC
+holiday@hack:~$ strings favicon.ico
+<V{<
+tq$km
+&       c2
+]```/
+
+...
+
+Jovr
+gc7{`
+7j&_(
+        #'v'
+-7Z-M
+https://github.com/RobinDavid/LSB-Steganography
+#+END_SRC
+
+Interesting. The link [[https://github.com/RobinDavid/LSB-Steganography]] points to a repo that does stegonography with different data types using least significant bits. Let's use this against our favicon.ico file. If we clone the repo and copy our favicon.ico file over:
+
+#+BEGIN_SRC
+holiday@hack:~$ python LSBSteg.py decode -i favicon.ico -o secret
+holiday@hack:~$ cat secret
+Keep the change, you filthy animal
+#+END_SRC
+
+We now see that the favicon.ico was holding onto a little secret phrase, "Keep the change, you filthy animal", which was a phrase spoken by John "Johnny" Valentine in the movie "Angels with Filthy Souls". That, of course, was a fictional movie in the iconic classic Christmas movie, "Home Alone" where Kevin McAllister somehow avoids killing two robbers despite use of lethal force.
+
+
+#+BEGIN_SRC
+
+#+END_SRC
+
 *** NPPD Siren
 
 [[./images/siren.gif]]
